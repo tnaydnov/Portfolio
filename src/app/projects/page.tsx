@@ -9,7 +9,6 @@ export default function ProjectsPage() {
     <main className="flex flex-col min-h-screen">
       <NavBar />
       <div className="relative flex-grow">
-        {/* Enhanced background with animated elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-teal-900/20"></div>
         <div className="absolute inset-0 opacity-20">
           <div className="w-full h-full bg-[length:60px_60px] bg-[position:0_0,30px_30px] bg-repeat" style={{
