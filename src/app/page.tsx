@@ -23,7 +23,7 @@ export default function HomePage() {
         {/* Hero */}
         <section className="px-6 md:px-10 lg:px-16 py-24 md:py-28 relative">
           <div className="max-w-5xl mx-auto relative z-10">
-            <p className="text-sm uppercase tracking-widest text-[var(--text-muted)]">Hello, I'm</p>
+            <p className="text-sm uppercase tracking-widest text-[var(--text-muted)]">Hello, I&apos;m</p>
             <h1 className="mt-2 text-4xl md:text-6xl font-bold gradient-text">Tomer Naydnov</h1>
             <p className="mt-6 text-lg md:text-xl text-[var(--text-secondary)] max-w-3xl">
               Software Engineering graduate seeking entry-level opportunities. Proficient in Python & Java with a passion for problem-solving and building reliable solutions.
