@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+
+/* --- Brand tokens + utilities ------------------------------------------ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #030712;
+    --foreground: #f9fafb;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* --- Brand tokens + utilities ------------------------------------------ */
+:root {
+  /* neutrals */
+  --bg: #0a0a0a;
+  --surface: rgba(39, 39, 42, 0.5); /* zinc-800 with 50% opacity */
+  --text: #f4f4f5; /* zinc-100 */
+  --text-primary: #f4f4f5; /* zinc-100 */
+  --text-secondary: #a1a1aa; /* zinc-400 */
+  --muted: #a1a1aa; /* zinc-400 */
+  --border: rgba(255, 255, 255, 0.1);
+  --surface-hover: rgba(63, 63, 70, 0.5);
+
+  /* accent */
+  --accent: #2dd4bf; /* teal-400 */
+  --accent-primary: #2dd4bf;
+  --accent-primary-hover: #5eead4;
+  --accent-hover: #5eead4; /* teal-300 */
+  --accent-soft: rgba(45, 212, 191, 0.1);
+}
+
+/* page background + text */
+body {
+  background: var(--bg);
+  color: var(--text);
+  background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 0
+    ),
+    radial-gradient(
+      circle at 25px 25px,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 0
+    );
+  background-size: 50px 50px;
+}
+
+/* Add this for the glassmorphism effect */
+.glass-card {
+  background: rgba(15, 23, 42, 0.7); /* slate-900 with opacity */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-text {
+  background: linear-gradient(to right, var(--accent), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+/* primitives you can reuse in components */
+.card {
+  @apply rounded-2xl border p-5 shadow-sm hover:shadow-md transition;
+  border-color: var(--border);
+  background: var(--surface);
+}
+.chip {
+  @apply text-xs rounded-full px-2 py-1;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: var(--accent-soft);
+}
+.btn-primary {
+  @apply rounded-xl px-5 py-3 font-medium text-gray-900 shadow-sm;
+  background: var(--accent);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+.btn-ghost {
+  @apply rounded-xl px-5 py-3 border;
+  border-color: var(--border);
+}
+.link-accent {
+  color: var(--accent);
+}
+.text-muted {
+  color: var(--muted);
+}
+
+/* palette presets (set one of these classes on <body>) */
+.theme-teal {
+  --accent: #14b8a6;        /* teal-500 */
+  --accent-hover: #0d9488;  /* teal-600 */
+  --accent-soft: rgba(20, 184, 166, 0.1);   /* teal with opacity */
+  --accent-gradient: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+}
+.theme-indigo {
+  --accent: #6366f1;        /* indigo-500 */
+  --accent-hover: #4f46e5;  /* indigo-600 */
+  --accent-soft: rgba(99, 102, 241, 0.1);   /* indigo with opacity */
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+.theme-coral {
+  --accent: #f97316;        /* orange-500 */
+  --accent-hover: #ea580c;  /* orange-600 */
+  --accent-soft: rgba(249, 115, 22, 0.1);   /* orange with opacity */
+  --accent-gradient: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+}
+
+/* primitives you can reuse in components */
+.card { @apply rounded-2xl border p-5 shadow-sm hover:shadow-md transition; border-color: var(--border); background: var(--surface); }
+.chip { @apply text-xs rounded-full px-2 py-1; border: 1px solid var(--border); color: var(--muted); background: var(--accent-soft); }
+.btn-primary { @apply rounded-xl px-5 py-3 font-medium text-white shadow-sm; background: var(--accent); }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-ghost { @apply rounded-xl px-5 py-3 border; border-color: var(--border); }
+.link-accent { color: var(--accent); }
+.text-muted { color: var(--muted); }
+
+/* page background + text */
+body { background: var(--bg); color: var(--text); }
+
+/* Animations for projects page */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.navbar-aurora {
+  position: relative;
+  background: rgba(15, 23, 42, 0.7); /* slate-900 with opacity */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.navbar-aurora::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.navbar-aurora:hover::before {
+  opacity: 1;
+}
