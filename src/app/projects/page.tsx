@@ -61,7 +61,7 @@ export default function ProjectsPage() {
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-[var(--accent-primary)]">
-                      {new Date().getFullYear() - 2023}+
+                      {new Date().getFullYear() - 2021}+
                     </div>
                     <div className="text-xs text-[var(--text-muted)]">Years</div>
                   </div>
