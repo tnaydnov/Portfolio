@@ -1,4 +1,5 @@
 import NavBar from '@/components/NavBar';
+import Link from 'next/link';
 import ProjectCard from '@/components/ProjectCard';
 import { projects } from '@/data/projects';
 
@@ -95,15 +96,15 @@ export default function HomePage() {
                 </div>
                 
                 <div className="mt-8">
-                  <a 
+                  <Link 
                     href="/contact" 
                     className="inline-flex items-center gap-2 bg-gradient-to-r from-[var(--accent-primary)] to-blue-500 text-white px-8 py-4 rounded-2xl font-medium hover:shadow-2xl hover:shadow-[var(--accent-primary)]/25 transition-all duration-300 group"
                   >
-                    <span>Let's Connect</span>
+                    <span>Let&apos;s Connect</span>
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -115,12 +116,12 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl md:text-3xl font-semibold text-[var(--text-primary)]">Featured Projects</h2>
-              <a 
-                href="/projects" 
+              <Link
+                href="/projects"
                 className="text-sm font-medium text-[var(--accent-primary)] hover:text-[var(--accent-primary-hover)] underline transition-colors"
               >
                 View all
-              </a>
+              </Link>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
               {projects.filter(p => p.featured).slice(0, 2).map((p) => (

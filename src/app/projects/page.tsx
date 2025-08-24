@@ -4,7 +4,6 @@ import { projects } from '@/data/projects';
 
 export default function ProjectsPage() {
   const featuredProjects = projects.filter(p => p.featured);
-  const otherProjects = projects.filter(p => !p.featured);
 
   return (
     <main className="flex flex-col min-h-screen">

@@ -20,7 +20,7 @@ export default function ContactPage() {
           <div className="max-w-4xl mx-auto">
             <h1 className="text-3xl font-semibold text-[var(--text-primary)] mb-3">Contact</h1>
             <p className="text-[var(--text-secondary)] mb-12">
-              Let's connect! I'm always open to discussing new opportunities, collaborations, or just having a chat about technology.
+                Let&apos;s connect! I&apos;m always open to discussing new opportunities, collaborations, or just having a chat about technology.
             </p>
 
             <div className="grid md:grid-cols-2 gap-8">
@@ -97,7 +97,7 @@ export default function ContactPage() {
 
             {/* Additional Info */}
             <div className="mt-12 glass-card p-6">
-              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">Let's Talk About</h3>
+                <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">Let&apos;s Talk About</h3>
               <div className="grid md:grid-cols-3 gap-4">
                 <div className="text-center p-4">
                   <div className="w-8 h-8 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
