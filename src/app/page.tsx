@@ -48,11 +48,6 @@ export default function HomePage() {
                   <div className="w-12 h-1 bg-gradient-to-r from-transparent via-[var(--accent-primary)] to-transparent"></div>
                 </div>
                 
-                                    <p className="text-sm text-[var(--text-secondary)] mt-3 leading-relaxed">
-                      🎯 <span className="font-medium text-[var(--text-primary)]">My strengths:</span> Strong foundation in Java & Python, algorithmic thinking and problem-solving skills, 
-                      and eagerness to tackle new challenges and technologies.
-                    </p>
-                
                 <div className="grid md:grid-cols-4 gap-6">
                   <div className="group">
                     <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
