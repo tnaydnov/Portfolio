@@ -15,15 +15,15 @@ export default function ContactPage() {
           }}></div>
         </div>
         <section className="px-6 md:px-10 lg:px-16 py-24 flex flex-col items-center justify-center min-h-[80vh]">
-          <div className="max-w-2xl w-full mx-auto text-center relative z-10">
-            <div className="glass-card p-10 md:p-14 rounded-3xl shadow-2xl backdrop-blur-lg bg-white/10 border border-[var(--border)] mb-10 animate-fade-in">
+          <div className="max-w-2xl w-full mx-auto text-center relative z-10 flex items-center justify-center h-full">
+            <div className="glass-card p-10 md:p-14 rounded-3xl shadow-2xl backdrop-blur-lg bg-white/10 border border-[var(--border)] mb-10 animate-fade-in w-full flex flex-col items-center justify-center">
               <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-6">Let&apos;s Connect</h1>
               <p className="text-lg text-[var(--text-secondary)] mb-8">I&apos;m always open to new opportunities, collaborations, and tech discussions. Reach out anytime!</p>
               <div className="mb-8">
                   <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Why connect?</h2>
                   <p className="text-base text-[var(--text-secondary)]">I&apos;m actively seeking new job opportunities! If you&apos;re hiring, want to collaborate, or just want to connect, I&apos;d love to hear from you.</p>
               </div>
-              <div className="flex flex-col md:flex-row items-center justify-center gap-10 mb-8">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 mb-8">
                 {/* Email */}
                 <a href="mailto:tnaydnov@gmail.com" className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform">
                   <div className="bg-gradient-to-br from-blue-500 to-purple-500 rounded-full p-6 shadow-lg group-hover:shadow-[var(--accent-primary)]/40 animate-bounce">
