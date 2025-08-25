@@ -57,15 +57,15 @@ export default function AboutPage() {
                   <div>
                     <h3 className="text-lg font-bold text-purple-400 mb-4 tracking-wide">Software Engineering & AI</h3>
                     <div className="flex flex-wrap gap-3 mb-6">
-                      {['OOP', 'Algorithms', 'Data Structures', 'System Design', 'Multithreading', 'Unit Testing', 'Integration Testing', 'JUnit', 'Mockito', 'PyTest', 'YOLO', 'OpenCV', 'OCR (PaddleOCR, Tesseract)'].map(skill => (
+                      {['OOP', 'Algorithms', 'Data Structures', 'System Design', 'Multithreading', 'Unit Testing', 'Integration Testing', 'JUnit', 'Mockito', 'PyTest', 'YOLO', 'OpenCV', 'OCR (PaddleOCR, Tesseract)', 'Godot (GDScript)'].map(skill => (
                         <span key={skill} className="text-xs font-semibold rounded-full border border-purple-400 bg-gradient-to-r from-purple-900/40 to-blue-900/40 px-3 py-1 text-purple-300 shadow">
                           {skill}
                         </span>
                       ))}
                     </div>
-                    <h3 className="text-lg font-bold text-yellow-400 mb-4 tracking-wide">Other Domains</h3>
+                    <h3 className="text-lg font-bold text-yellow-400 mb-4 tracking-wide">Python Instruction & Development</h3>
                     <div className="flex flex-wrap gap-3 mb-6">
-                      {['Godot (GDScript)', 'Curriculum Development', 'Content Design', 'Classroom & Online Instruction'].map(skill => (
+                      {['Curriculum Development', 'Content Design', 'Classroom & Online Instruction'].map(skill => (
                         <span key={skill} className="text-xs font-semibold rounded-full border border-yellow-400 bg-gradient-to-r from-yellow-900/40 to-purple-900/40 px-3 py-1 text-yellow-300 shadow">
                           {skill}
                         </span>
