@@ -33,33 +33,101 @@ export default function AboutPage() {
 
             {/* Skills */}
             <div className="mt-12">
-              <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4">Technical Skills</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <h3 className="text-sm font-medium text-[var(--accent-primary)] mb-3">Programming Languages</h3>
+              <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4 tracking-wide">Tech Stack & Skills</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Programming Languages */}
+                <div className="glass-card p-6 border-l-4 border-[var(--accent-primary)] bg-gradient-to-br from-[var(--accent-primary)]/10 to-transparent shadow-xl">
+                  <h3 className="text-base font-bold text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 17l-4 4m0 0l-4-4m4 4V3" /></svg>
+                    Programming Languages
+                  </h3>
                   <div className="flex flex-wrap gap-2">
-                    {['Python', 'Java', 'JavaScript', 'C++', 'C#'].map(skill => (
-                      <span key={skill} className="text-xs rounded-full border border-[var(--border)] bg-[var(--surface-hover)] px-2 py-1 text-[var(--text-secondary)]">
+                    {['Python', 'Java', 'SQL'].map(skill => (
+                      <span key={skill} className="text-xs font-semibold rounded-full border border-[var(--accent-primary)] bg-gradient-to-r from-purple-900/40 to-blue-900/40 px-3 py-1 text-[var(--accent-primary)] shadow">
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-sm font-medium text-[var(--accent-primary)] mb-3">Frameworks & Tools</h3>
+                {/* Backend & Web Development */}
+                <div className="glass-card p-6 border-l-4 border-blue-500 bg-gradient-to-br from-blue-500/10 to-transparent shadow-xl">
+                  <h3 className="text-base font-bold text-blue-500 mb-4 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v4a1 1 0 001 1h3m10-5h2a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h2" /></svg>
+                    Backend & Web Development
+                  </h3>
                   <div className="flex flex-wrap gap-2">
-                    {['FastAPI', 'Next.js', 'Docker', 'Redis', 'PyQt5'].map(skill => (
-                      <span key={skill} className="text-xs rounded-full border border-[var(--border)] bg-[var(--surface-hover)] px-2 py-1 text-[var(--text-secondary)]">
+                    {['FastAPI', 'Flask', 'Spring Boot', 'REST APIs', 'WebSockets', 'Authentication', 'Redis'].map(skill => (
+                      <span key={skill} className="text-xs font-semibold rounded-full border border-blue-500 bg-gradient-to-r from-blue-900/40 to-teal-900/40 px-3 py-1 text-blue-400 shadow">
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-sm font-medium text-[var(--accent-primary)] mb-3">Specializations</h3>
+                {/* DevOps & Tools */}
+                <div className="glass-card p-6 border-l-4 border-teal-400 bg-gradient-to-br from-teal-400/10 to-transparent shadow-xl">
+                  <h3 className="text-base font-bold text-teal-400 mb-4 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6" /></svg>
+                    DevOps & Tools
+                  </h3>
                   <div className="flex flex-wrap gap-2">
-                    {['Computer Vision', 'AI/ML', 'Web Development', 'Game Development', 'Teaching'].map(skill => (
-                      <span key={skill} className="text-xs rounded-full border border-[var(--border)] bg-[var(--surface-hover)] px-2 py-1 text-[var(--text-secondary)]">
+                    {['Docker', 'Docker Compose', 'Kubernetes', 'Git', 'GitHub', 'VS Code', 'PyCharm', 'IntelliJ IDEA', 'Eclipse'].map(skill => (
+                      <span key={skill} className="text-xs font-semibold rounded-full border border-teal-400 bg-gradient-to-r from-teal-900/40 to-blue-900/40 px-3 py-1 text-teal-300 shadow">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                {/* Software Engineering */}
+                <div className="glass-card p-6 border-l-4 border-purple-400 bg-gradient-to-br from-purple-400/10 to-transparent shadow-xl">
+                  <h3 className="text-base font-bold text-purple-400 mb-4 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3" /></svg>
+                    Software Engineering
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {['OOP', 'Algorithms', 'Data Structures', 'System Design', 'Multithreading', 'Unit Testing', 'Integration Testing', 'JUnit', 'Mockito', 'PyTest'].map(skill => (
+                      <span key={skill} className="text-xs font-semibold rounded-full border border-purple-400 bg-gradient-to-r from-purple-900/40 to-blue-900/40 px-3 py-1 text-purple-300 shadow">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                {/* Computer Vision & AI */}
+                <div className="glass-card p-6 border-l-4 border-pink-500 bg-gradient-to-br from-pink-500/10 to-transparent shadow-xl">
+                  <h3 className="text-base font-bold text-pink-500 mb-4 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A2 2 0 0020 6.382V5a2 2 0 00-2-2H6a2 2 0 00-2 2v1.382a2 2 0 00.447 1.342L9 10m6 0v4m0 0l-3 3m3-3l3 3" /></svg>
+                    Computer Vision & AI
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {['YOLO', 'OpenCV', 'OCR (PaddleOCR, Tesseract)'].map(skill => (
+                      <span key={skill} className="text-xs font-semibold rounded-full border border-pink-500 bg-gradient-to-r from-pink-900/40 to-purple-900/40 px-3 py-1 text-pink-300 shadow">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                {/* Game Development */}
+                <div className="glass-card p-6 border-l-4 border-yellow-400 bg-gradient-to-br from-yellow-400/10 to-transparent shadow-xl">
+                  <h3 className="text-base font-bold text-yellow-400 mb-4 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    Game Development
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {['Godot (GDScript)'].map(skill => (
+                      <span key={skill} className="text-xs font-semibold rounded-full border border-yellow-400 bg-gradient-to-r from-yellow-900/40 to-purple-900/40 px-3 py-1 text-yellow-300 shadow">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                {/* Education & Training */}
+                <div className="glass-card p-6 border-l-4 border-green-400 bg-gradient-to-br from-green-400/10 to-transparent shadow-xl">
+                  <h3 className="text-base font-bold text-green-400 mb-4 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20h9" /></svg>
+                    Education & Training
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {['Curriculum Development', 'Content Design', 'Classroom & Online Instruction'].map(skill => (
+                      <span key={skill} className="text-xs font-semibold rounded-full border border-green-400 bg-gradient-to-r from-green-900/40 to-blue-900/40 px-3 py-1 text-green-300 shadow">
                         {skill}
                       </span>
                     ))}
