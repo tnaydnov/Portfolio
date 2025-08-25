@@ -21,14 +21,28 @@ export default function AboutPage() {
             
             {/* About Me */}
             <div className="mt-8">
-              <p className="text-[var(--text-secondary)] leading-relaxed">
-                Software Engineering graduate passionate about building innovative solutions and teaching the next generation of developers. 
-                Currently working as a Python Instructor and Content Developer in the Nitzanim program, where I design curriculum and teach high school students programming fundamentals.
-              </p>
-              <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
-                I have experience in technical support, full-stack development, and AI-powered systems. My background includes help desk support roles where I developed strong problem-solving skills and customer service expertise, 
-                which now complement my technical development work. I enjoy tackling complex challenges and turning ideas into practical solutions.
-              </p>
+              <div className="glass-card p-8 md:p-10 rounded-2xl shadow-xl border border-[var(--border)] bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-teal-900/30">
+                <h2 className="text-2xl font-bold text-[var(--accent-primary)] mb-4 tracking-wide">Who I Am</h2>
+                <p className="text-[var(--text-primary)] text-lg leading-relaxed mb-4">
+                  Hi, I&apos;m Tomer, a 25-year-old Software Engineering graduate from Ben-Gurion University. My journey in tech started with hands-on help desk roles—supporting users in the army and the private sector—where I learned to solve problems fast, communicate clearly, and keep systems running smoothly under pressure.
+                </p>
+                <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-4">
+                  For the past three years, I&apos;ve been part of the Nitzanim program, first as a Python Instructor and now as a Content Developer. I design and build programming curriculum and projects for high school students, including new initiatives from the Ministry of Education. My work demands not just technical depth, but the ability to simplify complex ideas—making tough fundamentals accessible and engaging for young learners.
+                </p>
+                <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-4">
+                  My dual experience—solving real-world problems as a help desk technician and shaping the next generation of developers—has made me a versatile engineer. I excel at breaking down complexity, communicating with clarity, and building solutions that work for everyone, not just experts.
+                </p>
+                <div className="mt-6">
+                  <h3 className="text-lg font-semibold text-blue-400 mb-2">Why Hire Me?</h3>
+                  <ul className="list-disc pl-6 text-base text-[var(--text-secondary)] space-y-2">
+                    <li><span className="font-bold text-[var(--accent-primary)]">Proven Problem Solver:</span> Years of help desk experience taught me to troubleshoot, adapt, and deliver under pressure.</li>
+                    <li><span className="font-bold text-[var(--accent-primary)]">Technical Educator:</span> I&apos;ve built and taught programming fundamentals for hundreds of students, mastering the art of clarity and simplicity.</li>
+                    <li><span className="font-bold text-[var(--accent-primary)]">Content Creator:</span> Developed curriculum and projects for national education programs, collaborating with the Ministry of Education.</li>
+                    <li><span className="font-bold text-[var(--accent-primary)]">Versatile Engineer:</span> From support to development, I bridge the gap between users and technology, making solutions practical and user-friendly.</li>
+                    <li><span className="font-bold text-[var(--accent-primary)]">Ready to Grow:</span> Eager to bring my skills, energy, and creativity to a forward-thinking team.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
 
             {/* Skills */}
