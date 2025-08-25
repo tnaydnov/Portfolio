@@ -49,7 +49,8 @@ export const projects: Project[] = [
     tech: ['Java', 'Game Development', 'Algorithms'],
     repo: 'https://github.com/tnaydnov/Set_Card_Game',
     year: '2022',
-    image: '/images/set-game-preview.png'
+    image: '/images/set-game-preview.png',
+    video: '/videos/set-game-demo.mp4'
   },
   {
     id: 'coalition-race',
@@ -67,7 +68,8 @@ export const projects: Project[] = [
     tech: ['C#', 'Project Management', 'Desktop Development'],
     repo: 'https://github.com/tnaydnov/Kanban',
     year: '2022',
-    image: '/images/kanban-preview.png'
+    image: '/images/kanban-preview.png',
+    video: '/videos/kanban-demo.mp4'
   },
   {
     id: 'dungeons-dragons',
@@ -76,6 +78,7 @@ export const projects: Project[] = [
     tech: ['Java', 'Game Development', 'OOP'],
     repo: 'https://github.com/tnaydnov/Dungeons_and_Dragons',
     year: '2022',
-    image: '/images/dnd-preview.png'
+    image: '/images/dnd-preview.png',
+    video: '/videos/dnd-demo.mp4'
   }
 ];
