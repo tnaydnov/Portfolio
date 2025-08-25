@@ -75,30 +75,7 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-
-            {/* Highlights */}
-            <div className="mt-12">
-              <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4">Key Achievements</h2>
-              <ul className="space-y-3 text-[var(--text-secondary)]">
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-[var(--accent-primary)] rounded-full mt-2 flex-shrink-0"></span>
-                  <span>Developed an AI-powered License Plate Recognition system using YOLOv11 and OCR with microservices architecture</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-[var(--accent-primary)] rounded-full mt-2 flex-shrink-0"></span>
-                  <span>Built a comprehensive E-Commerce Trading System with payment integration and supplier management</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-[var(--accent-primary)] rounded-full mt-2 flex-shrink-0"></span>
-                  <span>Teaching Python programming and developing educational content for high school students in the Nitzanim program</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-[var(--accent-primary)] rounded-full mt-2 flex-shrink-0"></span>
-                  <span>Created multiple game projects including Set Card Game and Dungeons & Dragons implementations</span>
-                </li>
-              </ul>
-            </div>
-
+            
             {/* Professional Journey */}
             <div className="mt-12">
               <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-6">Professional Journey</h2>
