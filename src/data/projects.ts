@@ -6,6 +6,7 @@ export type Project = {
   repo: string;
   year?: string;
   image?: string;
+  video?: string;
   featured?: boolean;
 };
 
@@ -18,6 +19,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/tnaydnov/License_Plate_Recognition',
     year: '2025',
     image: '/images/lpr-preview.png',
+    video: '/videos/lpr-demo.mp4',
     featured: true
   },
   {
@@ -28,6 +30,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/tnaydnov/Trading_System',
     year: '2024',
     image: '/images/trading-preview.png',
+    video: '/videos/trading-demo.mp4',
     featured: true
   },
   {
