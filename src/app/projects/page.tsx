@@ -20,15 +20,15 @@ export default function ProjectsPage() {
         </div>
         
         {/* Floating code elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 text-[var(--accent-primary)]/20 text-sm font-mono animate-pulse">
-            {'<Portfolio />'}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10 select-none">
+          <div className="absolute top-20 left-10 text-[var(--accent-primary)] text-sm font-mono animate-pulse">
+            &lt;Portfolio /&gt;
           </div>
-          <div className="absolute top-40 right-20 text-purple-400/20 text-sm font-mono animate-pulse delay-1000">
-            {'{ projects.map() }'}
+          <div className="absolute top-40 right-20 text-purple-400 text-sm font-mono animate-pulse delay-1000">
+            &#123; projects.map() &#125;
           </div>
-          <div className="absolute bottom-40 left-20 text-blue-400/20 text-sm font-mono animate-pulse delay-2000">
-            {'git commit -m "awesome"'}
+          <div className="absolute bottom-40 left-20 text-blue-400 text-sm font-mono animate-pulse delay-2000">
+            git commit -m &quot;awesome&quot;
           </div>
         </div>
 
