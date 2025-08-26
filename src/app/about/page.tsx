@@ -28,10 +28,10 @@ function ReadMoreSection() {
             </button>
           </div>
           <p className="mb-3">
-            Over the past three years, I've designed and delivered programming courses for high school students, collaborating with the Ministry of Education to launch new initiatives. My background also includes hands-on IT support and teaching computer science at the high school level, where I developed strong problem-solving and communication skills.
+            Over the past three years, I&apos;ve designed and delivered programming courses for high school students, collaborating with the Ministry of Education to launch new initiatives. My background also includes hands-on IT support and teaching computer science at the high school level, where I developed strong problem-solving and communication skills.
           </p>
           <p>
-            These experiences have shaped my ability to adapt, learn quickly, and contribute effectively in dynamic environments. From troubleshooting complex technical issues to breaking down programming concepts for students, I've honed my skills in clear communication and practical problem-solving.
+            These experiences have shaped my ability to adapt, learn quickly, and contribute effectively in dynamic environments. From troubleshooting complex technical issues to breaking down programming concepts for students, I&apos;ve honed my skills in clear communication and practical problem-solving.
           </p>
         </div>
       )}
@@ -63,7 +63,7 @@ export default function AboutPage() {
               <div className="glass-card p-8 md:p-10 rounded-2xl shadow-xl border border-[var(--border)] bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-teal-900/30">
                 <h2 className="text-2xl font-bold text-[var(--accent-primary)] mb-4 tracking-wide">Who I Am</h2>
                 <p className="text-[var(--text-primary)] text-lg leading-relaxed mb-4">
-                  Hi, I'm Tomer, a passionate Software Engineering graduate from Ben-Gurion University. My experience as a lead instructor and content developer in the Nitzanim program has honed my skills in building curriculum, teaching programming, and making complex concepts accessible. I'm eager to take my next step in the software development industry, bringing my technical expertise, creativity, and drive to a forward-thinking team.
+                  Hi, I&apos;m Tomer, a passionate Software Engineering graduate from Ben-Gurion University. My experience as a lead instructor and content developer in the Nitzanim program has honed my skills in building curriculum, teaching programming, and making complex concepts accessible. I&apos;m eager to take my next step in the software development industry, bringing my technical expertise, creativity, and drive to a forward-thinking team.
                 </p>
                 
                 {/* Read More Section */}
