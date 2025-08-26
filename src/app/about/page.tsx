@@ -1,4 +1,43 @@
+"use client";
+
 import NavBar from '@/components/NavBar';
+import { useState } from 'react';
+
+function ReadMoreSection() {
+  const [showMore, setShowMore] = useState(false);
+
+  return (
+    <>
+      {!showMore && (
+        <button
+          className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors text-sm underline underline-offset-2 mb-4"
+          onClick={() => setShowMore(true)}
+        >
+          Read more about my background →
+        </button>
+      )}
+      {showMore && (
+        <div className="text-[var(--text-secondary)] text-base leading-relaxed mb-4 bg-[var(--surface-hover)]/50 p-4 rounded border-l-2 border-[var(--accent-primary)]/30">
+          <div className="flex justify-between items-start mb-3">
+            <span className="text-xs text-[var(--text-muted)] uppercase tracking-wide">Background Details</span>
+            <button
+              className="text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors text-xs"
+              onClick={() => setShowMore(false)}
+            >
+              ✕ Close
+            </button>
+          </div>
+          <p className="mb-3">
+            Over the past three years, I've designed and delivered programming courses for high school students, collaborating with the Ministry of Education to launch new initiatives. My background also includes hands-on IT support and teaching computer science at the high school level, where I developed strong problem-solving and communication skills.
+          </p>
+          <p>
+            These experiences have shaped my ability to adapt, learn quickly, and contribute effectively in dynamic environments. From troubleshooting complex technical issues to breaking down programming concepts for students, I've honed my skills in clear communication and practical problem-solving.
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
 
 export default function AboutPage() {
   return (
@@ -24,14 +63,12 @@ export default function AboutPage() {
               <div className="glass-card p-8 md:p-10 rounded-2xl shadow-xl border border-[var(--border)] bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-teal-900/30">
                 <h2 className="text-2xl font-bold text-[var(--accent-primary)] mb-4 tracking-wide">Who I Am</h2>
                 <p className="text-[var(--text-primary)] text-lg leading-relaxed mb-4">
-                  Hi, I&apos;m Tomer, a 25-year-old Software Engineering graduate from Ben-Gurion University. My journey in tech started with hands-on help desk roles—supporting users in the army and the private sector—where I learned to solve problems fast, communicate clearly, and keep systems running smoothly under pressure.
+                  Hi, I'm Tomer, a passionate Software Engineering graduate from Ben-Gurion University. My experience as a lead instructor and content developer in the Nitzanim program has honed my skills in building curriculum, teaching programming, and making complex concepts accessible. I'm eager to take my next step in the software development industry, bringing my technical expertise, creativity, and drive to a forward-thinking team.
                 </p>
-                <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-4">
-                  For the past three years, I&apos;ve been part of the Nitzanim program, first as a Python Instructor and now as a Content Developer. I design and build programming curriculum and projects for high school students, including new initiatives from the Ministry of Education. My work demands not just technical depth, but the ability to simplify complex ideas—making tough fundamentals accessible and engaging for young learners.
-                </p>
-                <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-4">
-                  My dual experience—solving real-world problems as a help desk technician and shaping the next generation of developers—has made me a versatile engineer. I excel at breaking down complexity, communicating with clarity, and building solutions that work for everyone, not just experts.
-                </p>
+                
+                {/* Read More Section */}
+                <ReadMoreSection />
+
                 <div className="mt-6">
                   <h3 className="text-lg font-semibold text-blue-400 mb-2">Why Hire Me?</h3>
                   <ul className="list-disc pl-6 text-base text-[var(--text-secondary)] space-y-2">
@@ -115,10 +152,16 @@ export default function AboutPage() {
                         </div>
                         <h3 className="text-lg font-semibold text-[var(--text-primary)]">Content Developer</h3>
                         <p className="text-sm text-[var(--accent-primary)] mt-1 font-medium">Nitzanim Program</p>
-                        <p className="text-sm text-[var(--text-secondary)] mt-3 leading-relaxed">
-                          Developing comprehensive educational content and curriculum for programming courses. Creating engaging learning materials, 
-                          assessment tools, and hands-on projects to enhance student understanding of software development concepts.
-                        </p>
+                        <ul className="list-disc pl-6 text-sm text-[var(--text-secondary)] mt-3 space-y-1">
+                          <li>Developed comprehensive educational content and curriculum for programming courses.</li>
+                          <li>Created engaging learning materials, assessment tools, and hands-on projects to enhance student understanding of software development concepts.</li>
+                        </ul>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          <span className="text-xs font-semibold rounded-full border border-blue-400 bg-blue-900/20 px-3 py-1 text-blue-400 shadow">Curriculum Development</span>
+                          <span className="text-xs font-semibold rounded-full border border-purple-400 bg-purple-900/20 px-3 py-1 text-purple-400 shadow">Content Creation</span>
+                          <span className="text-xs font-semibold rounded-full border border-teal-400 bg-teal-900/20 px-3 py-1 text-teal-400 shadow">Project Design</span>
+                          <span className="text-xs font-semibold rounded-full border border-yellow-400 bg-yellow-900/20 px-3 py-1 text-yellow-400 shadow">Educational Assessment</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -140,10 +183,17 @@ export default function AboutPage() {
                         </div>
                         <h3 className="text-lg font-semibold text-[var(--text-primary)]">Python Instructor</h3>
                         <p className="text-sm text-purple-400 mt-1 font-medium">Nitzanim Program</p>
-                        <p className="text-sm text-[var(--text-secondary)] mt-3 leading-relaxed">
-                          Teaching Python programming fundamentals to advanced topics including algorithms, data structures, and object-oriented programming. 
-                          Training over 650 students in Python programming, preparing them for technological units in the IDF.
-                        </p>
+                        <ul className="list-disc pl-6 text-sm text-[var(--text-secondary)] mt-3 space-y-1">
+                          <li>Taught Python programming fundamentals and advanced topics including algorithms, data structures, and OOP.</li>
+                          <li>Trained over 650 students in Python programming, preparing them for technological units in the IDF.</li>
+                        </ul>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          <span className="text-xs font-semibold rounded-full border border-blue-400 bg-blue-900/20 px-3 py-1 text-blue-400 shadow">Python</span>
+                          <span className="text-xs font-semibold rounded-full border border-purple-400 bg-purple-900/20 px-3 py-1 text-purple-400 shadow">Algorithms</span>
+                          <span className="text-xs font-semibold rounded-full border border-teal-400 bg-teal-900/20 px-3 py-1 text-teal-400 shadow">Data Structures</span>
+                          <span className="text-xs font-semibold rounded-full border border-yellow-400 bg-yellow-900/20 px-3 py-1 text-yellow-400 shadow">Object-Oriented Programming</span>
+                          <span className="text-xs font-semibold rounded-full border border-green-400 bg-green-900/20 px-3 py-1 text-green-400 shadow">Teaching</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -162,10 +212,17 @@ export default function AboutPage() {
                           </span>
                         </div>
                         <p className="text-sm text-[var(--accent-primary)] mt-1">Leyman High School</p>
-                        <p className="text-sm text-[var(--text-secondary)] mt-2">
-                          Taught Java programming concepts including recursion, data structures, and object-oriented programming (OOP). 
-                          Prepared over 50 students for national Bagrut exams, focusing on practical programming skills and theoretical foundations.
-                        </p>
+                        <ul className="list-disc pl-6 text-sm text-[var(--text-secondary)] mt-2 space-y-1">
+                          <li>Taught Java programming concepts including recursion, data structures, and OOP.</li>
+                          <li>Prepared over 50 students for national Bagrut exams, focusing on practical programming skills and theoretical foundations.</li>
+                        </ul>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          <span className="text-xs font-semibold rounded-full border border-blue-400 bg-blue-900/20 px-3 py-1 text-blue-400 shadow">Java</span>
+                          <span className="text-xs font-semibold rounded-full border border-purple-400 bg-purple-900/20 px-3 py-1 text-purple-400 shadow">Recursion</span>
+                          <span className="text-xs font-semibold rounded-full border border-teal-400 bg-teal-900/20 px-3 py-1 text-teal-400 shadow">Data Structures</span>
+                          <span className="text-xs font-semibold rounded-full border border-yellow-400 bg-yellow-900/20 px-3 py-1 text-yellow-400 shadow">Object-Oriented Programming</span>
+                          <span className="text-xs font-semibold rounded-full border border-green-400 bg-green-900/20 px-3 py-1 text-green-400 shadow">Teaching</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -184,15 +241,22 @@ export default function AboutPage() {
                           </span>
                         </div>
                         <p className="text-sm text-[var(--accent-primary)] mt-1">Isracard • Bnei Brak, Tel Aviv District, Israel</p>
-                        <p className="text-sm text-[var(--text-secondary)] mt-2">
-                          Provided comprehensive technical support for hardware and software issues. Specialized in troubleshooting 
-                          and resolving complex technical problems for internal users.
-                        </p>
+                        <ul className="list-disc pl-6 text-sm text-[var(--text-secondary)] mt-2 space-y-1">
+                          <li>Provided comprehensive technical support for hardware and software issues.</li>
+                          <li>Specialized in troubleshooting and resolving complex technical problems for internal users.</li>
+                        </ul>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          <span className="text-xs font-semibold rounded-full border border-blue-400 bg-blue-900/20 px-3 py-1 text-blue-400 shadow">Technical Support</span>
+                          <span className="text-xs font-semibold rounded-full border border-purple-400 bg-purple-900/20 px-3 py-1 text-purple-400 shadow">Troubleshooting</span>
+                          <span className="text-xs font-semibold rounded-full border border-teal-400 bg-teal-900/20 px-3 py-1 text-teal-400 shadow">Hardware</span>
+                          <span className="text-xs font-semibold rounded-full border border-yellow-400 bg-yellow-900/20 px-3 py-1 text-yellow-400 shadow">Software</span>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Help Desk Technician - IEC Electronics Corp */}
+
+                  {/* Merged Help Desk Technician - IEC Electronics Corp */}
                   <div className="relative flex items-start gap-6">
                     <div className="w-8 h-8 bg-[var(--surface)] border-2 border-[var(--border)] rounded-full flex items-center justify-center flex-shrink-0 relative z-10">
                       <div className="w-2 h-2 bg-[var(--text-muted)] rounded-full"></div>
@@ -202,36 +266,23 @@ export default function AboutPage() {
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                           <h3 className="font-semibold text-[var(--text-primary)]">Help Desk Technician</h3>
                           <span className="text-xs text-[var(--text-muted)] bg-[var(--surface-hover)] px-2 py-1 rounded-full w-fit">
-                            Jul 2022 - Sep 2022
+                            Apr 2021 - Aug 2021, Jul 2022 - Sep 2022
                           </span>
                         </div>
                         <p className="text-sm text-[var(--accent-primary)] mt-1">IEC Electronics Corp.</p>
-                        <p className="text-sm text-[var(--text-secondary)] mt-2">
-                          Delivered Tier 2 technical support for over 1,000 employees, resolving complex issues involving Active Directory, 
-                          Citrix, and network troubleshooting. Enhanced system performance by optimizing remote connection configurations and reducing ticket resolution times.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Previous Help Desk Role - IEC Electronics Corp */}
-                  <div className="relative flex items-start gap-6">
-                    <div className="w-8 h-8 bg-[var(--surface)] border-2 border-[var(--border)] rounded-full flex items-center justify-center flex-shrink-0 relative z-10">
-                      <div className="w-2 h-2 bg-[var(--text-muted)] rounded-full"></div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="glass-card p-4">
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                          <h3 className="font-semibold text-[var(--text-primary)]">Help Desk Technician</h3>
-                          <span className="text-xs text-[var(--text-muted)] bg-[var(--surface-hover)] px-2 py-1 rounded-full w-fit">
-                            Apr 2021 - Aug 2021
-                          </span>
+                        <ul className="list-disc pl-6 text-sm text-[var(--text-secondary)] mt-2 space-y-1">
+                          <li>Delivered Tier 2 technical support for over 1,000 employees, resolving complex issues involving Active Directory, Citrix, and network troubleshooting.</li>
+                          <li>Optimized remote connection configurations and reduced ticket resolution times.</li>
+                          <li>Provided technical support for Network Administration and general IT troubleshooting.</li>
+                          <li>Gained foundational experience in enterprise IT support and system administration.</li>
+                        </ul>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          <span className="text-xs font-semibold rounded-full border border-blue-400 bg-blue-900/20 px-3 py-1 text-blue-400 shadow">Active Directory</span>
+                          <span className="text-xs font-semibold rounded-full border border-purple-400 bg-purple-900/20 px-3 py-1 text-purple-400 shadow">Citrix</span>
+                          <span className="text-xs font-semibold rounded-full border border-teal-400 bg-teal-900/20 px-3 py-1 text-teal-400 shadow">Network Troubleshooting</span>
+                          <span className="text-xs font-semibold rounded-full border border-yellow-400 bg-yellow-900/20 px-3 py-1 text-yellow-400 shadow">IT Support</span>
+                          <span className="text-xs font-semibold rounded-full border border-gray-400 bg-gray-900/20 px-3 py-1 text-gray-400 shadow">System Administration</span>
                         </div>
-                        <p className="text-sm text-[var(--accent-primary)] mt-1">IEC Electronics Corp.</p>
-                        <p className="text-sm text-[var(--text-secondary)] mt-2">
-                          Provided technical support for Active Directory, Network Administration, and general IT troubleshooting. 
-                          Gained foundational experience in enterprise IT support and system administration.
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -250,10 +301,16 @@ export default function AboutPage() {
                           </span>
                         </div>
                         <p className="text-sm text-[var(--accent-primary)] mt-1">Israel Defense Forces</p>
-                        <p className="text-sm text-[var(--text-secondary)] mt-2">
-                          Provided network support and technical assistance in a military environment. 
-                          Developed strong problem-solving skills and gained experience in network administration and system troubleshooting.
-                        </p>
+                        <ul className="list-disc pl-6 text-sm text-[var(--text-secondary)] mt-2 space-y-1">
+                          <li>Provided network support and technical assistance in a military environment.</li>
+                          <li>Developed strong problem-solving skills and gained experience in network administration and system troubleshooting.</li>
+                        </ul>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          <span className="text-xs font-semibold rounded-full border border-blue-400 bg-blue-900/20 px-3 py-1 text-blue-400 shadow">Network Support</span>
+                          <span className="text-xs font-semibold rounded-full border border-purple-400 bg-purple-900/20 px-3 py-1 text-purple-400 shadow">System Troubleshooting</span>
+                          <span className="text-xs font-semibold rounded-full border border-teal-400 bg-teal-900/20 px-3 py-1 text-teal-400 shadow">Network Administration</span>
+                          <span className="text-xs font-semibold rounded-full border border-yellow-400 bg-yellow-900/20 px-3 py-1 text-yellow-400 shadow">Problem Solving</span>
+                        </div>
                       </div>
                     </div>
                   </div>

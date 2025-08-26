@@ -18,7 +18,13 @@ export default function NavBar() {
           <Link className="hover:text-[var(--accent-primary)] transition-colors" href="/projects">Projects</Link>
           <Link className="hover:text-[var(--accent-primary)] transition-colors" href="/about">About</Link>
           <Link className="hover:text-[var(--accent-primary)] transition-colors" href="/contact">Contact</Link>
-          <a className="hover:text-[var(--accent-primary)] transition-colors" href="/resume.docx" target="_blank" rel="noreferrer">Resume</a>
+          <div className="relative group">
+            <button className="hover:text-[var(--accent-primary)] transition-colors focus:outline-none">Resume ▾</button>
+            <div className="absolute left-0 mt-2 w-40 bg-[var(--surface)] border border-[var(--border)] rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity z-50">
+              <a className="block px-4 py-2 hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]" href="/resume.docx" download>Download DOCX</a>
+              <a className="block px-4 py-2 hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]" href="/resume.pdf" download>Download PDF</a>
+            </div>
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -58,15 +64,21 @@ export default function NavBar() {
             >
               Contact
             </Link>
-            <a 
-              className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors py-2"
-              href="/resume.docx"
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Resume
-            </a>
+            <div className="relative">
+              <button
+                className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors py-2 w-full text-left"
+                onClick={e => {
+                  e.stopPropagation();
+                  setIsMenuOpen(is => !is);
+                }}
+              >
+                Resume ▾
+              </button>
+              <div className="absolute left-0 mt-2 w-40 bg-[var(--surface)] border border-[var(--border)] rounded shadow-lg z-50">
+                <a className="block px-4 py-2 hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]" href="/resume.docx" download onClick={() => setIsMenuOpen(false)}>Download DOCX</a>
+                <a className="block px-4 py-2 hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]" href="/resume.pdf" download onClick={() => setIsMenuOpen(false)}>Download PDF</a>
+              </div>
+            </div>
           </nav>
         </div>
       )}
