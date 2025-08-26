@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isResumeDropdownOpen, setIsResumeDropdownOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 navbar-aurora">
@@ -30,7 +31,10 @@ export default function NavBar() {
         {/* Mobile Menu Button */}
         <button
           className="md:hidden flex flex-col gap-1 p-2"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={() => {
+            setIsMenuOpen(!isMenuOpen);
+            setIsResumeDropdownOpen(false); // Close resume dropdown when menu toggles
+          }}
           aria-label="Toggle menu"
         >
           <span className={`w-5 h-0.5 bg-[var(--text-primary)] transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
@@ -46,38 +50,67 @@ export default function NavBar() {
             <Link 
               className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors py-2"
               href="/projects"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                setIsMenuOpen(false);
+                setIsResumeDropdownOpen(false);
+              }}
             >
               Projects
             </Link>
             <Link 
               className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors py-2"
               href="/about"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                setIsMenuOpen(false);
+                setIsResumeDropdownOpen(false);
+              }}
             >
               About
             </Link>
             <Link 
               className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors py-2"
               href="/contact"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                setIsMenuOpen(false);
+                setIsResumeDropdownOpen(false);
+              }}
             >
               Contact
             </Link>
             <div className="relative">
               <button
-                className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors py-2 w-full text-left"
-                onClick={e => {
-                  e.stopPropagation();
-                  setIsMenuOpen(is => !is);
-                }}
+                className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors py-2 w-full text-left flex items-center justify-between"
+                onClick={() => setIsResumeDropdownOpen(!isResumeDropdownOpen)}
               >
-                Resume ▾
+                <span>Resume</span>
+                <span className={`transition-transform duration-200 ${isResumeDropdownOpen ? 'rotate-180' : ''}`}>▾</span>
               </button>
-              <div className="absolute left-0 mt-2 w-40 bg-[var(--surface)] border border-[var(--border)] rounded shadow-lg z-50">
-                <a className="block px-4 py-2 hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]" href="/resume.docx" download onClick={() => setIsMenuOpen(false)}>Download DOCX</a>
-                <a className="block px-4 py-2 hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]" href="/resume.pdf" download onClick={() => setIsMenuOpen(false)}>Download PDF</a>
-              </div>
+              {isResumeDropdownOpen && (
+                <div className="mt-2 ml-4 space-y-2">
+                  <a 
+                    className="block px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors rounded bg-[var(--surface-hover)]" 
+                    href="/resume.docx" 
+                    download 
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsResumeDropdownOpen(false);
+                    }}
+                  >
+                    Download DOCX
+                  </a>
+                  <a 
+                    className="block px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors rounded bg-[var(--surface-hover)]" 
+                    href="/resume.pdf" 
+                    download 
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsResumeDropdownOpen(false);
+                    }}
+                  >
+                    Download PDF
+                  </a>
+                </div>
+              )}
             </div>
           </nav>
         </div>
