@@ -35,8 +35,8 @@ export const projects: Project[] = [
   },
   {
     id: 'hr-organization',
-    title: 'HR Management System',
-    description: 'Enterprise-level HR management application designed to help stores manage employees, deliveries, and shift scheduling. Built with robust database integration and comprehensive business logic.',
+    title: 'HRIS',
+    description: 'Enterprise-level HR information system designed to help stores manage employees, deliveries, and shift scheduling. Built with robust database integration and comprehensive business logic.',
     tech: ['Java', 'Database Management', 'Enterprise Software'],
     repo: 'https://github.com/tnaydnov/HR_Organization',
     year: '2023',

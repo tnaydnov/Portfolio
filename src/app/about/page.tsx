@@ -325,9 +325,6 @@ export default function AboutPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                   <div className="flex items-center gap-3">
                     <h3 className="font-semibold text-[var(--text-primary)]">B.Sc. Software Engineering</h3>
-                    <span className="text-xs bg-gradient-to-r from-[var(--accent-primary)] to-blue-500 text-white px-2 py-1 rounded-full font-medium">
-                      Grade: 82
-                    </span>
                   </div>
                   <span className="text-xs text-[var(--text-muted)] bg-[var(--surface-hover)] px-2 py-1 rounded-full w-fit">
                     2021 - 2025
