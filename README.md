@@ -1,4 +1,4 @@
-# � Portfolio Website - Technical Documentation
+# Portfolio Website - Technical Documentation
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.5.0-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.1.0-blue?style=flat-square&logo=react)](https://reactjs.org/)
