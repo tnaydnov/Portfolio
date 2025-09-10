@@ -89,7 +89,7 @@ export default function NavBar() {
                 <div className="mt-2 ml-4 space-y-2">
                   <a 
                     className="block px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors rounded bg-[var(--surface-hover)]" 
-                    href="/Tomer Naydnov.docx" 
+                    href="/Tomer%20Naydnov.docx" 
                     download 
                     onClick={() => {
                       setIsMenuOpen(false);
@@ -100,7 +100,7 @@ export default function NavBar() {
                   </a>
                   <a 
                     className="block px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors rounded bg-[var(--surface-hover)]" 
-                    href="/Tomer Naydnov.pdf" 
+                    href="/Tomer%20Naydnov.pdf" 
                     download 
                     onClick={() => {
                       setIsMenuOpen(false);
