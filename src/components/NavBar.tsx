@@ -7,8 +7,8 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isResumeDropdownOpen, setIsResumeDropdownOpen] = useState(false);
 
-  const resumeDocxPath = "/Tomer_Naydnov.docx";
-  const resumePdfPath = "/Tomer_Naydnov.pdf";
+  const resumeDocxPath = "/Tomer%20Naydnov.docx";
+  const resumePdfPath = "/Tomer%20Naydnov.pdf";
 
   return (
     <header className="sticky top-0 z-40 navbar-aurora">
