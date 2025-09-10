@@ -7,6 +7,9 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isResumeDropdownOpen, setIsResumeDropdownOpen] = useState(false);
 
+  const resumeDocxPath = "/Tomer_Naydnov.docx";
+  const resumePdfPath = "/Tomer_Naydnov.pdf";
+
   return (
     <header className="sticky top-0 z-40 navbar-aurora">
       <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 h-16 flex items-center justify-between">
@@ -22,8 +25,8 @@ export default function NavBar() {
           <div className="relative group">
             <button className="hover:text-[var(--accent-primary)] transition-colors focus:outline-none">Resume ▾</button>
             <div className="absolute left-0 mt-2 w-40 bg-[var(--surface)] border border-[var(--border)] rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity z-50">
-              <a className="block px-4 py-2 hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]" href="/resume.docx" download>Download DOCX</a>
-              <a className="block px-4 py-2 hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]" href="/resume.pdf" download>Download PDF</a>
+              <a className="block px-4 py-2 hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]" href={resumeDocxPath} download>Download DOCX</a>
+              <a className="block px-4 py-2 hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]" href={resumePdfPath} download>Download PDF</a>
             </div>
           </div>
         </nav>
@@ -89,7 +92,7 @@ export default function NavBar() {
                 <div className="mt-2 ml-4 space-y-2">
                   <a 
                     className="block px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors rounded bg-[var(--surface-hover)]" 
-                    href="/Tomer%20Naydnov.docx" 
+                    href={resumeDocxPath}
                     download 
                     onClick={() => {
                       setIsMenuOpen(false);
@@ -100,7 +103,7 @@ export default function NavBar() {
                   </a>
                   <a 
                     className="block px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors rounded bg-[var(--surface-hover)]" 
-                    href="/Tomer%20Naydnov.pdf" 
+                    href={resumePdfPath}
                     download 
                     onClick={() => {
                       setIsMenuOpen(false);
