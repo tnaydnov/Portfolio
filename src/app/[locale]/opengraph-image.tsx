@@ -1,11 +1,24 @@
 import { ImageResponse } from "next/og";
+import { LOCALES, isLocale, t } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
-export const alt = `${site.name} — ${site.role}`;
+export const alt = "Tomer Naydnov";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function OpengraphImage() {
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
+
+export default async function OpengraphImage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: raw } = await params;
+  const locale = isLocale(raw) ? raw : "en";
+  const tagline = `${t(site.description, locale).split(". ")[0]}.`;
+
   return new ImageResponse(
     (
       <div
@@ -44,18 +57,18 @@ export default async function OpengraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           <div style={{ fontSize: 104, lineHeight: 1, letterSpacing: -4 }}>
-            {site.name}
+            {t(site.name, "en")}
           </div>
           <div
             style={{
-              fontSize: 34,
+              display: "flex",
+              fontSize: 32,
               lineHeight: 1.3,
               color: "#9299a2",
-              maxWidth: 900,
+              maxWidth: 940,
             }}
           >
-            I find the need, define the shape, plan the path, build the thing,
-            prove it works, and fix what the field says is wrong.
+            {tagline}
           </div>
         </div>
 
@@ -69,7 +82,7 @@ export default async function OpengraphImage() {
             paddingTop: 24,
           }}
         >
-          <span>Technical product · end-to-end delivery</span>
+          <span>{t(site.role, "en")}</span>
           <span style={{ color: "#ff4d17" }}>מכלול</span>
         </div>
       </div>

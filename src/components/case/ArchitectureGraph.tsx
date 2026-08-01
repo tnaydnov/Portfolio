@@ -10,6 +10,8 @@ import {
   type NodeMouseHandler,
 } from "@xyflow/react";
 import "@xyflow/react/dist/base.css";
+import { t, type Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui";
 import type { Architecture } from "@/lib/types";
 
 const KIND_ACCENT: Record<string, string> = {
@@ -19,7 +21,13 @@ const KIND_ACCENT: Record<string, string> = {
   client: "var(--ok)",
 };
 
-export function ArchitectureGraph({ architecture }: { architecture: Architecture }) {
+export function ArchitectureGraph({
+  architecture,
+  locale,
+}: {
+  architecture: Architecture;
+  locale: Locale;
+}) {
   const [selected, setSelected] = useState(architecture.nodes[0].id);
 
   const nodes: Node[] = useMemo(
@@ -42,7 +50,7 @@ export function ArchitectureGraph({ architecture }: { architecture: Architecture
         },
         data: {
           label: (
-            <div className="px-3 py-2.5 text-left">
+            <div className="px-3 py-2.5 text-left" dir="ltr">
               <span
                 aria-hidden
                 className="mb-2 block h-0.5 w-6"
@@ -95,7 +103,7 @@ export function ArchitectureGraph({ architecture }: { architecture: Architecture
 
   return (
     <figure className="border border-rule bg-surface">
-      <div className="h-[26rem] border-b border-rule md:h-[30rem]">
+      <div className="h-[26rem] border-b border-rule md:h-[30rem]" dir="ltr">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -123,19 +131,19 @@ export function ArchitectureGraph({ architecture }: { architecture: Architecture
 
       <div className="grid gap-6 p-6 md:grid-cols-[1fr_1.4fr] md:p-8">
         <div>
-          <p className="label">Selected</p>
+          <p className="label">{t(ui.common.selected, locale)}</p>
           <p className="mt-3 font-display text-xl tracking-tight">
             {detail.label}
           </p>
           {detail.sub && <p className="label mt-2">{detail.sub}</p>}
         </div>
         <p className="max-w-[58ch] text-[0.95rem] leading-relaxed text-muted">
-          {detail.note}
+          {t(detail.note, locale)}
         </p>
       </div>
 
       <figcaption className="border-t border-rule px-6 py-4 text-sm text-faint md:px-8">
-        {architecture.caption}
+        {t(architecture.caption, locale)}
       </figcaption>
     </figure>
   );

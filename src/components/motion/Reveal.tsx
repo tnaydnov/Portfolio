@@ -4,15 +4,14 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  /** Seconds, to match the rest of the motion tokens. */
+  /** Seconds, to match the motion tokens. */
   delay?: number;
   className?: string;
 }
 
 /**
  * Scroll-in reveal via IntersectionObserver + CSS. Deliberately not a library:
- * this is the only scroll effect on most pages and it is 20 lines.
- * The `.reveal` keyframe is disabled under prefers-reduced-motion in globals.css.
+ * the `.reveal` keyframe is disabled under prefers-reduced-motion in globals.css.
  */
 export function Reveal({ children, delay = 0, className = "" }: Props) {
   const ref = useRef<HTMLDivElement>(null);

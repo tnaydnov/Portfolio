@@ -106,6 +106,40 @@ h4 {
   text-wrap: balance;
 }
 
+/* ------------------------------------------------------------- hebrew --- */
+
+[lang="he"] {
+  --font-display: var(--font-he-display);
+  --font-body: var(--font-he);
+}
+
+/* JetBrains Mono has no Hebrew glyphs; keep the instrument feel with tracking. */
+[lang="he"] .label {
+  font-family: var(--font-he), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+}
+
+[lang="he"] h1,
+[lang="he"] h2,
+[lang="he"] h3,
+[lang="he"] h4 {
+  letter-spacing: 0;
+}
+
+[lang="he"] .t-hero {
+  letter-spacing: -0.01em;
+}
+
+[lang="he"] .t-section {
+  letter-spacing: -0.005em;
+}
+
+/* Latin runs inside Hebrew prose keep their own face. */
+[lang="he"] code,
+[lang="he"] .lat {
+  font-family: var(--font-mono), monospace;
+}
+
 /* Metrics must not jitter when values change or animate. */
 .tnum,
 time,
@@ -248,9 +282,67 @@ time,
   }
 }
 
+@keyframes travel {
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes ticker {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
 .reveal {
   animation: rise 0.8s var(--ease-out-expo) both;
   animation-delay: var(--d, 0ms);
+}
+
+/* A token travelling the loop path — the carrier. */
+.carrier {
+  offset-path: var(--path);
+  offset-rotate: 0deg;
+  animation: travel var(--travel, 26s) linear infinite;
+}
+
+/* Corner registration brackets that draw in on hover. */
+.bracket {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--signal);
+  opacity: 0;
+  transition:
+    opacity 0.4s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo);
+  pointer-events: none;
+}
+
+.group:hover .bracket,
+.group:focus-within .bracket {
+  opacity: 1;
+  transform: none;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker var(--speed, 46s) linear infinite;
+}
+
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
 }
 
 /* ---------------------------------------------------- reduced-motion mode --- */
@@ -272,6 +364,15 @@ time,
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  .carrier,
+  .ticker-track {
+    animation: none !important;
+  }
+
+  .carrier {
+    display: none;
   }
 }
 

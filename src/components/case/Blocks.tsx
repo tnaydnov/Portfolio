@@ -1,21 +1,29 @@
-import type { Feedback, Metric } from "@/lib/types";
+import { t, type Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui";
+import type { Decision, Feedback, Metric } from "@/lib/types";
+import { CountUp } from "@/components/motion/CountUp";
 
-export function MetricBlock({ metrics }: { metrics: Metric[] }) {
+export function MetricBlock({
+  metrics,
+  locale,
+}: {
+  metrics: Metric[];
+  locale: Locale;
+}) {
   if (metrics.length === 0) return null;
 
   return (
     <dl className="grid grid-cols-2 gap-px border border-rule bg-rule md:grid-cols-4">
       {metrics.map((m) => (
-        <div key={m.label} className="bg-ink p-5 md:p-6">
-          <dd
-            data-metric
-            className="font-display text-[clamp(1.75rem,3.5vw,2.75rem)] leading-none tracking-tight"
-          >
-            {m.value}
+        <div key={t(m.label, locale)} className="bg-ink p-5 md:p-6">
+          <dd className="font-display text-[clamp(1.75rem,3.5vw,2.75rem)] leading-none tracking-tight">
+            <CountUp value={t(m.value, locale)} />
           </dd>
-          <dt className="label mt-3">{m.label}</dt>
+          <dt className="label mt-3">{t(m.label, locale)}</dt>
           {m.note && (
-            <p className="mt-2 text-xs leading-relaxed text-faint">{m.note}</p>
+            <p className="mt-2 text-xs leading-relaxed text-faint">
+              {t(m.note, locale)}
+            </p>
           )}
         </div>
       ))}
@@ -23,22 +31,81 @@ export function MetricBlock({ metrics }: { metrics: Metric[] }) {
   );
 }
 
-export function FieldFeedback({ items }: { items: Feedback[] }) {
+export function DecisionLog({
+  decisions,
+  locale,
+}: {
+  decisions: Decision[];
+  locale: Locale;
+}) {
+  return (
+    <ol className="grid gap-px bg-rule">
+      {decisions.map((d) => (
+        <li key={d.id} className="bg-ink">
+          <article className="grid gap-6 py-8 md:grid-cols-[7rem_1fr] md:gap-10 md:py-10">
+            <div className="flex items-baseline gap-3 md:flex-col md:gap-2">
+              <p className="font-mono text-sm tracking-[0.12em] text-signal">
+                {d.id}
+              </p>
+              <p className="label">{d.date}</p>
+            </div>
+
+            <div>
+              <h3 className="max-w-[46ch] font-display text-xl leading-snug tracking-tight md:text-2xl">
+                {t(d.title, locale)}
+              </h3>
+
+              <dl className="mt-6 grid gap-5">
+                {(
+                  [
+                    [ui.common.why, d.why],
+                    [ui.common.tradeoff, d.tradeoff],
+                    [ui.common.revisitIf, d.revisit],
+                  ] as const
+                ).map(([term, def]) => (
+                  <div
+                    key={t(term, locale)}
+                    className="grid gap-1.5 md:grid-cols-[7rem_1fr] md:gap-6"
+                  >
+                    <dt className="label pt-1">{t(term, locale)}</dt>
+                    <dd className="max-w-[62ch] text-[0.95rem] leading-relaxed text-muted">
+                      {t(def, locale)}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </article>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+export function FieldFeedback({
+  items,
+  locale,
+}: {
+  items: Feedback[];
+  locale: Locale;
+}) {
   return (
     <ul className="grid gap-px bg-rule">
       {items.map((f) => (
-        <li key={f.quote} className="bg-ink py-8">
+        <li key={t(f.quote, locale)} className="bg-ink py-8">
           <figure className="grid gap-6 md:grid-cols-2 md:gap-12">
             <div>
               <blockquote className="max-w-[38ch] font-display text-lg leading-snug tracking-tight md:text-xl">
-                &ldquo;{f.quote}&rdquo;
+                &ldquo;{t(f.quote, locale)}&rdquo;
               </blockquote>
-              <figcaption className="label mt-4">{f.source}</figcaption>
+              <figcaption className="label mt-4">
+                {t(f.source, locale)}
+              </figcaption>
             </div>
-            <div className="border-l-2 border-signal pl-5">
-              <p className="label">What changed</p>
+            <div className="border-s-2 border-signal ps-5">
+              <p className="label">{t(ui.common.whatChanged, locale)}</p>
               <p className="mt-3 max-w-[46ch] text-[0.95rem] leading-relaxed text-muted">
-                {f.change}
+                {t(f.change, locale)}
               </p>
             </div>
           </figure>

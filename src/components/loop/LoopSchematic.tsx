@@ -1,12 +1,25 @@
 import { STAGES } from "@/lib/stages";
+import { t, type Locale } from "@/lib/i18n";
 
 const STATION_X = [140, 324, 508, 692, 876, 1060];
 
+const LOOP_PATH =
+  "M 140 110 H 1060 A 90 90 0 0 1 1060 290 H 140 A 90 90 0 0 1 140 110 Z";
+
 /**
- * The delivery loop as a technical drawing. Self-draws once on load, then holds.
- * Purely decorative — the same information is in the text beside it.
+ * The delivery loop as a technical drawing. Self-draws once on load, then a
+ * carrier token circles it continuously. Decorative — the same information is
+ * in the text beside it.
  */
-export function LoopSchematic({ className = "" }: { className?: string }) {
+export function LoopSchematic({
+  className = "",
+  locale,
+  carrier = true,
+}: {
+  className?: string;
+  locale: Locale;
+  carrier?: boolean;
+}) {
   return (
     <svg
       aria-hidden
@@ -16,7 +29,7 @@ export function LoopSchematic({ className = "" }: { className?: string }) {
       preserveAspectRatio="xMidYMid meet"
     >
       <path
-        d="M 140 110 H 1060 A 90 90 0 0 1 1060 290 H 140 A 90 90 0 0 1 140 110 Z"
+        d={LOOP_PATH}
         stroke="currentColor"
         strokeWidth={1.25}
         pathLength={1}
@@ -57,20 +70,71 @@ export function LoopSchematic({ className = "" }: { className?: string }) {
         </g>
       ))}
 
+      {carrier && (
+        <g
+          className="carrier"
+          style={{
+            ["--path" as string]: `path("${LOOP_PATH}")`,
+            ["--travel" as string]: "26s",
+          }}
+        >
+          <circle r={13} fill="var(--signal)" opacity={0.14} />
+          <circle r={4.5} fill="var(--signal)" />
+        </g>
+      )}
+
       <text
         x={600}
-        y={330}
+        y={332}
         textAnchor="middle"
         fill="currentColor"
         style={{
           fontFamily: "var(--font-mono)",
-          fontSize: 14,
+          fontSize: 13,
           letterSpacing: "0.22em",
         }}
         className="reveal"
       >
-        FEEDBACK CLOSES THE LOOP
+        {locale === "he"
+          ? "המשוב סוגר את הלולאה"
+          : "FEEDBACK CLOSES THE LOOP"}
       </text>
     </svg>
+  );
+}
+
+/** A scrolling band of the six stage names. Section divider, not navigation. */
+export function StageTicker({ locale }: { locale: Locale }) {
+  const items = STAGES.map((s) => ({
+    index: s.index,
+    name: t(s.name, locale),
+  }));
+  const run = [...items, ...items];
+
+  return (
+    <div
+      aria-hidden
+      className="ticker overflow-hidden border-y border-rule py-3.5"
+    >
+      <div className="ticker-track" style={{ ["--speed" as string]: "46s" }}>
+        {[0, 1].map((copy) => (
+          <div key={copy} className="flex shrink-0">
+            {run.map((item, i) => (
+              <span
+                key={`${copy}-${i}`}
+                className="label flex items-center whitespace-nowrap px-6"
+              >
+                <span className="text-signal">{item.index}</span>
+                <span className="mx-2.5 opacity-30">/</span>
+                {item.name}
+                <span aria-hidden className="ms-6 opacity-30">
+                  ·
+                </span>
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

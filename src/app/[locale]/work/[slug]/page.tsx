@@ -7,40 +7,48 @@ import { STAGE_BY_ID } from "@/lib/stages";
 import { DOMAIN_LABEL, STATUS_LABEL, formatSpan } from "@/lib/types";
 import { SectionMark } from "@/components/chrome/SectionMark";
 import { Reveal } from "@/components/motion/Reveal";
-import { DecisionLog } from "@/components/case/DecisionLog";
 import { ConstraintDial } from "@/components/case/ConstraintDial";
 import { ArchitectureGraphLazy } from "@/components/case/ArchitectureGraphLazy";
 import {
+  DecisionLog,
   FieldFeedback,
   MetricBlock,
   RebuildList,
 } from "@/components/case/Blocks";
+import { LOCALES, isLocale, t, type Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui";
+import { href } from "@/lib/site";
 
 export function generateStaticParams() {
-  return CASE_STUDIES.map((p) => ({ slug: p.slug }));
+  return LOCALES.flatMap((locale) =>
+    CASE_STUDIES.map((p) => ({ locale, slug: p.slug })),
+  );
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const p = getProject(slug);
-  if (!p) return {};
+  if (!p || !isLocale(locale)) return {};
   return {
     title: p.title,
-    description: p.oneLiner,
-    openGraph: { title: p.title, description: p.hook || p.oneLiner },
+    description: t(p.oneLiner, locale),
+    openGraph: { title: p.title, description: t(p.hook, locale) },
   };
 }
 
 export default async function CaseStudyPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { locale: raw, slug } = await params;
+  if (!isLocale(raw)) notFound();
+  const locale = raw as Locale;
+
   const p = getProject(slug);
   if (!p || p.tier === "rep") notFound();
 
@@ -55,35 +63,38 @@ export default async function CaseStudyPage({
         index="00"
         title={p.title}
         aside={
-          <Link href="/work" className="hover:text-text">
-            ← All work
+          <Link href={href("/work", locale)} className="hover:text-text">
+            ← {t(ui.common.allWork, locale)}
           </Link>
         }
       />
 
       <header className="py-14 md:py-20">
         <p className="label">
-          {p.domain.map((d) => DOMAIN_LABEL[d]).join(" · ")}
+          {p.domain.map((d) => t(DOMAIN_LABEL[d], locale)).join(" · ")}
         </p>
         <h1 className="mt-6 t-hero max-w-[12ch]">{p.title}</h1>
         <p className="mt-8 max-w-[34ch] font-display text-[clamp(1.35rem,2.8vw,2rem)] leading-[1.2] tracking-tight text-signal">
-          {p.hook}
+          {t(p.hook, locale)}
         </p>
         <p className="mt-6 max-w-[58ch] text-[1.05rem] leading-relaxed text-muted">
-          {p.oneLiner}
+          {t(p.oneLiner, locale)}
         </p>
 
         <dl className="mt-12 grid gap-x-10 gap-y-6 border-t border-rule pt-6 sm:grid-cols-2 lg:grid-cols-4">
           {(
             [
-              ["Role", p.role],
-              ["Span", formatSpan(p)],
-              ["Status", STATUS_LABEL[p.status]],
-              ["Team", p.team ?? "Solo"],
+              [ui.common.role, t(p.role, locale)],
+              [ui.common.span, formatSpan(p, locale)],
+              [ui.common.status, t(STATUS_LABEL[p.status], locale)],
+              [
+                ui.common.team,
+                p.team ? t(p.team, locale) : t(ui.common.solo, locale),
+              ],
             ] as const
           ).map(([term, def]) => (
-            <div key={term}>
-              <dt className="label">{term}</dt>
+            <div key={t(term, locale)}>
+              <dt className="label">{t(term, locale)}</dt>
               <dd className="mt-2 text-sm leading-relaxed">{def}</dd>
             </div>
           ))}
@@ -96,10 +107,10 @@ export default async function CaseStudyPage({
             rel="noopener noreferrer"
             className="group mt-8 inline-flex h-11 items-center gap-2.5 border border-rule-strong px-5 text-sm transition-colors hover:border-signal hover:text-signal"
           >
-            Source
+            {t(ui.common.source, locale)}
             <span
               aria-hidden
-              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              className="transition-transform duration-300 group-hover:-translate-y-0.5"
             >
               ↗
             </span>
@@ -109,7 +120,7 @@ export default async function CaseStudyPage({
 
       {p.metrics.length > 0 && (
         <Reveal>
-          <MetricBlock metrics={p.metrics} />
+          <MetricBlock metrics={p.metrics} locale={locale} />
         </Reveal>
       )}
 
@@ -119,16 +130,16 @@ export default async function CaseStudyPage({
           <section key={section.stage} className="pt-24 md:pt-32">
             <SectionMark
               index={mark()}
-              title={stage.name}
-              aside={stage.kicker}
+              title={t(stage.name, locale)}
+              aside={t(stage.kicker, locale)}
             />
             <Reveal>
               <div className="grid gap-8 py-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
                 <h2 className="t-section max-w-[16ch] lg:sticky lg:top-28 lg:self-start">
-                  {section.heading}
+                  {t(section.heading, locale)}
                 </h2>
                 <div className="prose">
-                  {section.body.map((para) => (
+                  {t(section.body, locale).map((para) => (
                     <p key={para.slice(0, 40)}>{para}</p>
                   ))}
                 </div>
@@ -140,13 +151,16 @@ export default async function CaseStudyPage({
 
       {p.architecture && (
         <section className="pt-24 md:pt-32">
-          <SectionMark index={mark()} title="Architecture" aside="Interactive" />
+          <SectionMark
+            index={mark()}
+            title={t(ui.common.architecture, locale)}
+            aside={t(ui.common.interactive, locale)}
+          />
           <div className="py-12">
-            <p className="mb-8 max-w-[52ch] text-[0.95rem] leading-relaxed text-muted">
-              Select any node to read why it exists and what it would take to
-              delete it.
-            </p>
-            <ArchitectureGraphLazy architecture={p.architecture} />
+            <ArchitectureGraphLazy
+              architecture={p.architecture}
+              locale={locale}
+            />
           </div>
         </section>
       )}
@@ -155,51 +169,56 @@ export default async function CaseStudyPage({
         <section className="pt-24 md:pt-32">
           <SectionMark
             index={mark()}
-            title="Decision log"
-            aside={`${p.decisions.length} entries`}
+            title={t(ui.common.decisionLog, locale)}
+            aside={`${p.decisions.length} ${t(ui.common.entries, locale)}`}
           />
           <div className="py-12">
-            <p className="mb-10 max-w-[52ch] text-[0.95rem] leading-relaxed text-muted">
-              Every entry records the tradeoff I accepted and the condition that
-              would make me reverse it. A decision without a cost attached is
-              usually not a decision.
-            </p>
-            <DecisionLog decisions={p.decisions} />
+            <DecisionLog decisions={p.decisions} locale={locale} />
           </div>
         </section>
       )}
 
       {p.constraints && (
         <section className="pt-24 md:pt-32">
-          <SectionMark index={mark()} title="Tradeoff" aside="Interactive" />
+          <SectionMark
+            index={mark()}
+            title={t(ui.common.tradeoff, locale)}
+            aside={t(ui.common.interactive, locale)}
+          />
           <div className="py-12">
-            <ConstraintDial study={p.constraints} />
+            <ConstraintDial study={p.constraints} locale={locale} />
           </div>
         </section>
       )}
 
       {p.feedback && p.feedback.length > 0 && (
         <section className="pt-24 md:pt-32">
-          <SectionMark index={mark()} title="From the field" />
+          <SectionMark
+            index={mark()}
+            title={t(ui.common.fromTheField, locale)}
+          />
           <div className="py-12">
-            <FieldFeedback items={p.feedback} />
+            <FieldFeedback items={p.feedback} locale={locale} />
           </div>
         </section>
       )}
 
-      {p.rebuild && p.rebuild.length > 0 && (
+      {p.rebuild && (
         <section className="pt-24 md:pt-32">
-          <SectionMark index={mark()} title="If I rebuilt it today" />
+          <SectionMark
+            index={mark()}
+            title={t(ui.common.rebuildToday, locale)}
+          />
           <div className="py-12">
-            <RebuildList items={p.rebuild} />
+            <RebuildList items={t(p.rebuild, locale)} />
           </div>
         </section>
       )}
 
       <nav className="mt-28 border-t border-rule pt-8">
-        <p className="label">Next case</p>
+        <p className="label">{t(ui.common.nextCase, locale)}</p>
         <Link
-          href={`/work/${next.slug}`}
+          href={href(`/work/${next.slug}`, locale)}
           className="group mt-4 flex flex-wrap items-baseline justify-between gap-4"
         >
           <span className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-none tracking-tight transition-colors group-hover:text-signal">
@@ -207,12 +226,14 @@ export default async function CaseStudyPage({
           </span>
           <span
             aria-hidden
-            className="text-signal transition-transform duration-300 group-hover:translate-x-2"
+            className="text-signal transition-transform duration-300 group-hover:translate-x-2 rtl:rotate-180 rtl:group-hover:-translate-x-2"
           >
             →
           </span>
         </Link>
-        <p className="mt-4 max-w-[46ch] text-sm text-muted">{next.hook}</p>
+        <p className="mt-4 max-w-[46ch] text-sm text-muted">
+          {t(next.hook, locale)}
+        </p>
       </nav>
     </article>
   );

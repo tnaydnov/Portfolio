@@ -1,27 +1,56 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
-import { STAGES, type StageId } from "@/lib/stages";
-import { CASE_STUDIES } from "@/content/work";
-import { ProjectCard } from "./ProjectCard";
+import type { StageId } from "@/lib/stages";
 
-export function WorkFilter() {
+export interface FilterChip {
+  id: StageId;
+  index: string;
+  name: string;
+  kicker: string;
+  line: string;
+}
+
+export interface FilterItem {
+  slug: string;
+  stages: StageId[];
+  node: ReactNode;
+}
+
+interface Props {
+  chips: FilterChip[];
+  items: FilterItem[];
+  allLabel: string;
+  defaultNote: string;
+  emptyNote: string;
+}
+
+/**
+ * Filtering only. Cards arrive pre-rendered from the server so the bilingual
+ * content layer never reaches the client bundle.
+ */
+export function WorkFilter({
+  chips,
+  items,
+  allLabel,
+  defaultNote,
+  emptyNote,
+}: Props) {
   const params = useSearchParams();
   const requested = params.get("stage");
-  const initial = STAGES.some((s) => s.id === requested)
+  const initial = chips.some((c) => c.id === requested)
     ? (requested as StageId)
     : null;
 
   const [stage, setStage] = useState<StageId | null>(initial);
 
   const shown = useMemo(
-    () =>
-      stage ? CASE_STUDIES.filter((p) => p.stages.includes(stage)) : CASE_STUDIES,
-    [stage],
+    () => (stage ? items.filter((i) => i.stages.includes(stage)) : items),
+    [stage, items],
   );
 
-  const active = stage ? STAGES.find((s) => s.id === stage) : null;
+  const active = stage ? chips.find((c) => c.id === stage) : null;
 
   return (
     <>
@@ -36,15 +65,15 @@ export function WorkFilter() {
               : "border-rule hover:border-rule-strong hover:text-text"
           }`}
         >
-          All
+          {allLabel}
         </button>
-        {STAGES.map((s) => {
-          const on = stage === s.id;
+        {chips.map((c) => {
+          const on = stage === c.id;
           return (
             <button
-              key={s.id}
+              key={c.id}
               type="button"
-              onClick={() => setStage(on ? null : s.id)}
+              onClick={() => setStage(on ? null : c.id)}
               aria-pressed={on}
               className={`label h-9 border px-3.5 transition-colors ${
                 on
@@ -52,8 +81,8 @@ export function WorkFilter() {
                   : "border-rule hover:border-rule-strong hover:text-text"
               }`}
             >
-              <span className="opacity-50">{s.index}</span>
-              <span className="ml-2">{s.name}</span>
+              <span className="opacity-50">{c.index}</span>
+              <span className="ms-2">{c.name}</span>
             </button>
           );
         })}
@@ -65,10 +94,7 @@ export function WorkFilter() {
             <span className="text-text">{active.kicker}.</span> {active.line}
           </>
         ) : (
-          <>
-            Filtered by stage of delivery, not by technology — because the stack
-            is the least interesting thing about any of these.
-          </>
+          defaultNote
         )}
       </p>
 
@@ -77,24 +103,23 @@ export function WorkFilter() {
         key={stage ?? "all"}
         className="mt-10 grid gap-px bg-rule md:grid-cols-2"
       >
-        {shown.map((p, i) => (
+        {shown.map((item, i) => (
           <div
-            key={p.slug}
-            className={`reveal ${i === 0 ? "md:col-span-2" : ""}`}
+            key={item.slug}
+            className="reveal"
             style={{
               ["--d" as string]: `${i * 55}ms`,
               ["--rise-from" as string]: "12px",
             }}
           >
-            <ProjectCard project={p} featured={i === 0} />
+            {item.node}
           </div>
         ))}
       </div>
 
       {shown.length === 0 && (
         <p className="mt-10 border border-dashed border-rule p-10 text-center text-sm text-muted">
-          Nothing at this stage yet. That is the honest answer rather than a
-          padded one.
+          {emptyNote}
         </p>
       )}
     </>

@@ -1,24 +1,26 @@
 import type { MetadataRoute } from "next";
 import { CASE_STUDIES } from "@/content/work";
+import { LOCALES } from "@/lib/i18n";
 import { site } from "@/lib/site";
+
+const ROUTES = ["", "/work", "/system", "/about", "/contact", "/colophon"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const staticRoutes = ["", "/work", "/system", "/about", "/contact", "/budget"];
+  const entry = (path: string, priority: number) => ({
+    url: `${site.url}${path}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority,
+  });
 
-  return [
-    ...staticRoutes.map((route) => ({
-      url: `${site.url}${route}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: route === "" ? 1 : 0.8,
-    })),
-    ...CASE_STUDIES.map((p) => ({
-      url: `${site.url}/work/${p.slug}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: p.tier === "flagship" ? 0.9 : 0.6,
-    })),
-  ];
+  return LOCALES.flatMap((locale) => [
+    ...ROUTES.map((route) =>
+      entry(`/${locale}${route}`, route === "" ? 1 : 0.8),
+    ),
+    ...CASE_STUDIES.map((p) =>
+      entry(`/${locale}/work/${p.slug}`, p.tier === "flagship" ? 0.9 : 0.6),
+    ),
+  ]);
 }

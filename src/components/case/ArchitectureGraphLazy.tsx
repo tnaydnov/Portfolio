@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import type { Locale } from "@/lib/i18n";
 import type { Architecture } from "@/lib/types";
 
 // Keeps @xyflow out of the server render and out of the route's first-load JS.
@@ -19,8 +20,10 @@ const Graph = dynamic(
 
 export function ArchitectureGraphLazy({
   architecture,
+  locale,
 }: {
   architecture: Architecture;
+  locale: Locale;
 }) {
-  return <Graph architecture={architecture} />;
+  return <Graph architecture={architecture} locale={locale} />;
 }

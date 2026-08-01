@@ -387,10 +387,11 @@ Not a resume. A thesis in ~400 words: *why* a software engineer chose Industrial
 
 ## 9. Technical architecture
 
-> **As built (2026-08-01).** Phases 1–6 are implemented. Three deliberate deviations from the plan below, each made to hold the §10 budget:
-> 1. **No GSAP, no `motion`.** Both were installed, then removed. The site needed exactly three effects — scroll reveal, a pinned horizontal track, and a keyed fade. Those are ~60 lines of `IntersectionObserver`, a rAF scroll handler writing a CSS custom property, and a CSS keyframe. Shipping two animation libraries for that cost **~74 kB gz on the homepage** (202 → 152 kB) and ~108 kB on case studies (238 → 130 kB). The libraries were the wrong tool at this scale.
-> 2. **Typed TS content instead of MDX.** The case-study format is a strict schema (stage sections, decision log, metrics, architecture graph, constraint dial). Typed content files make that schema enforced at compile time and let each block be a first-class component. MDX would have made it prose with escape hatches.
-> 3. **No i18n in v1.** English ships complete; Hebrew is still Phase 7, per the plan's own risk mitigation. The Hebrew hero word is hard-coded with a proper `lang`/`dir`.
+> **As built (2026-08-01).** Phases 1–7 are implemented, including bilingual EN/HE. Two deliberate deviations from the plan below, each made to hold the §10 budget:
+> 1. **No GSAP, no `motion`.** Both were installed, then removed. The site needed exactly three effects — scroll reveal, a pinned horizontal track, and a keyed fade. Those are ~60 lines of `IntersectionObserver`, a rAF scroll handler writing a CSS custom property, and a CSS keyframe. Shipping two animation libraries for that cost **~74 kB gz on the homepage** and ~108 kB on case studies. The libraries were the wrong tool at this scale.
+> 2. **Typed TS content instead of MDX.** The case-study format is a strict schema (stage sections, decision log, metrics, architecture graph, constraint dial). Typed content enforces it at compile time — and once localised, a missing translation became a compile error rather than a hole in the page. MDX would have made it prose with escape hatches.
+>
+> **Shipped beyond the plan:** `/colophon` (the site as a seventh case study, absorbing `/budget`), the hiring brief on `/contact`, a classroom section on the home page, a `Now` block in the footer, a stage ticker, a scroll-progress hairline, metric count-ups, a carrier token travelling the loop path, and hover registration brackets on cards.
 
 ### 9.1 Stack
 
@@ -402,25 +403,27 @@ Not a resume. A thesis in ~400 words: *why* a software engineer chose Industrial
 | Smooth scroll | **`lenis`** | ~4 kB, never mounted under `prefers-reduced-motion` |
 | Diagrams | **`@xyflow/react`** v12 | Interactive architecture graphs, orthogonal routing, MIT |
 | 3D / shaders | **None** | An SVG schematic + CSS grain delivers the cinematic register at 0 kB |
-| Content | **Typed TS modules** under `src/content` | See deviation 2 above |
-| Fonts | `next/font` — Bricolage Grotesque, Inter Tight, JetBrains Mono, Heebo | Zero CLS, Hebrew subset for the hero |
-| OG images | `next/og` (Satori) | Generated at build |
+| Content | **Typed TS modules** under `src/content` | Localised records; a missing translation is a compile error |
+| i18n | **Hand-rolled** `[locale]` routing + middleware | EN/HE, full RTL via logical properties. ~90 lines, zero dependencies |
+| Fonts | `next/font` — Bricolage Grotesque, Inter Tight, JetBrains Mono, Heebo, Rubik | Zero CLS; Hebrew display and body faces |
+| OG images | `next/og` (Satori) | Generated at build, per locale |
 | Analytics | `@vercel/analytics` + `@vercel/speed-insights` | Web Vitals |
 
 ```bash
 npm i lenis @xyflow/react @vercel/analytics @vercel/speed-insights
 ```
 
-### 9.1b Measured first-load JS (production build)
+### 9.1b Measured first-load JS (production build, bilingual)
 
 | Route | First load |
 |---|---|
-| `/` | **152 kB** |
-| `/work` | **152 kB** |
-| `/work/[slug]` | **130 kB** |
-| `/about`, `/system`, `/contact`, `/budget` | **128 kB** |
+| `/[locale]` | **143 kB** |
+| `/[locale]/work` | **142 kB** |
+| `/[locale]/work/[slug]` | **140 kB** |
+| `/about`, `/system`, `/contact`, `/colophon` | **137 kB** |
+| Shared baseline | 123 kB |
 
-Budget was < 180 kB per route. Met on every route with headroom.
+Budget was < 180 kB per route. Met on every route, in both languages, with headroom — the bilingual build is *smaller* than the English-only one was, because case-study rendering was moved back to the server.
 
 ### 9.2 Structure
 

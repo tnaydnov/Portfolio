@@ -2,7 +2,7 @@
 
 import { ReactLenis } from "lenis/react";
 import type { ReactNode } from "react";
-import { useReducedMotion } from "@/components/motion/useReducedMotion";
+import { useReducedMotion } from "@/components/motion/hooks";
 
 /** Lenis is opt-in: never mounted when the user asked for reduced motion. */
 export function SmoothScroll({ children }: { children: ReactNode }) {
