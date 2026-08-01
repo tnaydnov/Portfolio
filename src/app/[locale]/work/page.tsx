@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { SectionMark } from "@/components/chrome/SectionMark";
 import { WorkFilter } from "@/components/work/WorkFilter";
 import { ProjectCard } from "@/components/work/ProjectCard";
 import { RepsLedger } from "@/components/work/RepsLedger";
 import { CASE_STUDIES } from "@/content/work";
-import { STAGES } from "@/lib/stages";
+import { STAGES, type StageId } from "@/lib/stages";
 import { isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
+import { routeMetadata } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -17,20 +17,29 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  return {
+  return routeMetadata({
+    path: "/work",
+    locale,
     title: t(ui.work.title, locale),
     description: t(ui.work.intro, locale),
-  };
+  });
 }
 
 export default async function WorkPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ stage?: string | string[] }>;
 }) {
   const { locale: raw } = await params;
+  const query = await searchParams;
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
+  const requested = typeof query.stage === "string" ? query.stage : null;
+  const initialStage = STAGES.some((stage) => stage.id === requested)
+    ? (requested as StageId)
+    : null;
 
   const chips = STAGES.map((s) => ({
     id: s.id,
@@ -44,7 +53,14 @@ export default async function WorkPage({
   const items = CASE_STUDIES.map((p) => ({
     slug: p.slug,
     stages: p.stages,
-    node: <ProjectCard project={p} locale={locale} />,
+    tier: p.tier === "flagship" ? ("flagship" as const) : ("system" as const),
+    node: (
+      <ProjectCard
+        project={p}
+        locale={locale}
+        featured={p.tier === "flagship"}
+      />
+    ),
   }));
 
   return (
@@ -58,15 +74,15 @@ export default async function WorkPage({
         </p>
       </header>
 
-      <Suspense fallback={<div className="h-9" />}>
-        <WorkFilter
-          chips={chips}
-          items={items}
-          allLabel={t(ui.common.all, locale)}
-          defaultNote={t(ui.work.filterNote, locale)}
-          emptyNote={t(ui.work.empty, locale)}
-        />
-      </Suspense>
+      <WorkFilter
+        key={initialStage ?? "all"}
+        chips={chips}
+        items={items}
+        initialStage={initialStage}
+        allLabel={t(ui.common.all, locale)}
+        defaultNote={t(ui.work.filterNote, locale)}
+        emptyNote={t(ui.work.empty, locale)}
+      />
 
       <section className="pt-28 md:pt-36">
         <SectionMark

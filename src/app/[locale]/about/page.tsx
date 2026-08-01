@@ -3,11 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionMark } from "@/components/chrome/SectionMark";
 import { Reveal } from "@/components/motion/Reveal";
-import { CountUp } from "@/components/motion/CountUp";
 import { numbers, timeline } from "@/content/site";
 import { isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
-import { href, site } from "@/lib/site";
+import { href, routeMetadata, site } from "@/lib/site";
 
 /** Renders **bold** spans without pulling in a markdown runtime. */
 function Rich({ text }: { text: string }) {
@@ -32,10 +31,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  return {
+  return routeMetadata({
+    path: "/about",
+    locale,
     title: t(ui.about.title, locale),
     description: t(ui.about.lede, locale),
-  };
+  });
 }
 
 export default async function AboutPage({
@@ -65,40 +66,17 @@ export default async function AboutPage({
       </header>
 
       <section>
-        {essays.map((e, i) => (
-          <Reveal key={t(e.label, locale)}>
-            <div className="grid gap-10 border-t border-rule py-14 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-              <h2 className="label lg:sticky lg:top-28 lg:self-start">
-                {t(e.label, locale)}
-              </h2>
-              <div className="prose">
-                {t(e.body, locale).map((para) => (
-                  <p key={para.slice(0, 40)}>
-                    <Rich text={para} />
-                  </p>
-                ))}
-                {i === essays.length - 1 && (
-                  <p>
-                    <Link href={href("/contact", locale)}>
-                      {t(ui.about.getInTouch, locale)}
-                    </Link>
-                  </p>
-                )}
-              </div>
-            </div>
-          </Reveal>
-        ))}
-      </section>
-
-      <section className="pt-16">
         <SectionMark index="01" title={t(ui.about.numbersTitle, locale)} />
         <dl className="mt-8 grid grid-cols-2 gap-px border border-rule bg-rule md:grid-cols-4">
           {numbers.map((m) => (
-            <div key={t(m.label, locale)} className="bg-ink p-6 md:p-8">
-              <dd className="font-display text-[clamp(1.9rem,4vw,3rem)] leading-none tracking-tight">
-                <CountUp value={t(m.value, locale)} />
-              </dd>
+            <div key={t(m.label, locale)} className="flex flex-col bg-ink p-6 md:p-8">
               <dt className="label mt-3">{t(m.label, locale)}</dt>
+              <dd
+                data-metric
+                className="-order-1 font-display text-[clamp(1.9rem,4vw,3rem)] leading-none tracking-tight"
+              >
+                {t(m.value, locale)}
+              </dd>
             </div>
           ))}
         </dl>
@@ -156,6 +134,36 @@ export default async function AboutPage({
             {t(ui.about.howIWork, locale)}
           </Link>
         </div>
+      </section>
+
+      <section className="pt-24 md:pt-32">
+        <SectionMark
+          index="03"
+          title={locale === "he" ? "הערות עבודה" : "Working notes"}
+        />
+        {essays.map((e, i) => (
+          <Reveal key={t(e.label, locale)}>
+            <div className="grid gap-10 border-t border-rule py-14 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
+              <h2 className="label lg:sticky lg:top-28 lg:self-start">
+                {t(e.label, locale)}
+              </h2>
+              <div className="prose">
+                {t(e.body, locale).map((para) => (
+                  <p key={para.slice(0, 40)}>
+                    <Rich text={para} />
+                  </p>
+                ))}
+                {i === essays.length - 1 && (
+                  <p>
+                    <Link href={href("/contact", locale)}>
+                      {t(ui.about.getInTouch, locale)}
+                    </Link>
+                  </p>
+                )}
+              </div>
+            </div>
+          </Reveal>
+        ))}
       </section>
     </div>
   );

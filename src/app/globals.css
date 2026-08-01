@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-padding-top: 5rem;
+}
+
 /* ============================================================================
    TECHNICAL EDITORIAL — design tokens
    Two first-class themes: `draft` (paper, default) and `blueprint` (ink).
@@ -15,8 +19,8 @@
   --rule-strong: rgba(20, 22, 26, 0.3);
   --text: #14161a;
   --text-muted: #565b63;
-  --text-faint: #83888f;
-  --signal: #d93a05;
+  --text-faint: #646970;
+  --signal: #bd3100;
   --signal-ink: #ffffff;
   --trace: #3e5f80;
   --ok: #4f7942;
@@ -33,7 +37,7 @@
   --rule-strong: rgba(255, 255, 255, 0.26);
   --text: #ecebe8;
   --text-muted: #9299a2;
-  --text-faint: #666d76;
+  --text-faint: #a0a6af;
   --signal: #ff4d17;
   --signal-ink: #0a0a0a;
   --trace: #5b7fa6;
@@ -343,6 +347,23 @@ time,
 
 .ticker:hover .ticker-track {
   animation-play-state: paused;
+}
+
+/* The documentary layer: real project records framed like contact sheets. */
+.project-visual {
+  isolation: isolate;
+}
+
+.project-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 12%, transparent 88%, rgba(0, 0, 0, 0.1)),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.14), transparent 28%);
+  mix-blend-mode: soft-light;
 }
 
 /* ---------------------------------------------------- reduced-motion mode --- */

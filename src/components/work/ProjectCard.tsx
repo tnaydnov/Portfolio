@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { t, type Locale } from "@/lib/i18n";
 import { href } from "@/lib/site";
 import {
@@ -9,6 +8,7 @@ import {
   type Project,
 } from "@/lib/types";
 import { Brackets } from "@/components/chrome/SectionMark";
+import { ProjectVisual } from "./ProjectVisual";
 
 export function ProjectCard({
   project,
@@ -26,17 +26,13 @@ export function ProjectCard({
         href={href(`/work/${project.slug}`, locale)}
         className="flex h-full flex-col outline-offset-4"
       >
-        {project.media ? (
-          <div className="relative aspect-[16/9] overflow-hidden border-b border-rule bg-surface-2">
-            <Image
-              src={project.media.poster}
-              alt={t(project.media.alt, locale)}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-            />
-          </div>
-        ) : null}
+        <div className="border-b border-rule">
+          <ProjectVisual
+            project={project}
+            locale={locale}
+            className={featured ? "aspect-[16/8]" : "aspect-[16/10]"}
+          />
+        </div>
 
         <div className="flex flex-1 flex-col p-6 md:p-8">
           <div className="flex items-center justify-between gap-4">
@@ -56,7 +52,7 @@ export function ProjectCard({
             </p>
           </div>
 
-          <h3
+          <h2
             className={`mt-5 font-display tracking-tight transition-colors duration-300 group-hover:text-signal ${
               featured
                 ? "text-[clamp(1.9rem,4vw,3rem)] leading-[1.02]"
@@ -64,7 +60,7 @@ export function ProjectCard({
             }`}
           >
             {project.title}
-          </h3>
+          </h2>
 
           <p
             className={`mt-3 leading-relaxed text-muted ${
@@ -77,14 +73,14 @@ export function ProjectCard({
           {project.metrics.length > 0 && (
             <dl className="mt-7 flex flex-wrap gap-x-10 gap-y-4">
               {project.metrics.slice(0, featured ? 4 : 2).map((m) => (
-                <div key={t(m.label, locale)}>
+                <div key={t(m.label, locale)} className="flex flex-col">
+                  <dt className="label mt-2">{t(m.label, locale)}</dt>
                   <dd
                     data-metric
-                    className="font-display text-2xl leading-none tracking-tight"
+                    className="-order-1 font-display text-2xl leading-none tracking-tight"
                   >
                     {t(m.value, locale)}
                   </dd>
-                  <dt className="label mt-2">{t(m.label, locale)}</dt>
                 </div>
               ))}
             </dl>

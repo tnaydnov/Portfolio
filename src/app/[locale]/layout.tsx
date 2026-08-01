@@ -18,7 +18,7 @@ import { SmoothScroll } from "@/components/chrome/SmoothScroll";
 import { THEME_SCRIPT } from "@/components/chrome/ThemeToggle";
 import { DIR, LOCALES, isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
-import { site } from "@/lib/site";
+import { localeAlternates, site } from "@/lib/site";
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -73,18 +73,29 @@ export async function generateMetadata({
     metadataBase: new URL(site.url),
     title: { default: `${name} — ${role}`, template: `%s — ${name}` },
     description: t(site.description, locale),
-    alternates: {
-      canonical: `/${locale}`,
-      languages: Object.fromEntries(LOCALES.map((l) => [l, `/${l}`])),
-    },
+    alternates: localeAlternates("/", locale),
     openGraph: {
       type: "website",
+      url: `/${locale}`,
       siteName: name,
       title: `${name} — ${role}`,
       description: t(site.description, locale),
-      locale,
+      locale: locale === "he" ? "he_IL" : "en_US",
+      images: [
+        {
+          url: `/${locale}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: site.name.en,
+        },
+      ],
     },
-    twitter: { card: "summary_large_image" },
+    twitter: {
+      card: "summary_large_image",
+      title: `${name} — ${role}`,
+      description: t(site.description, locale),
+      images: [`/${locale}/opengraph-image`],
+    },
     robots: { index: true, follow: true },
   };
 }

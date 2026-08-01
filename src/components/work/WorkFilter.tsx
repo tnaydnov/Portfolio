@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, type ReactNode } from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { StageId } from "@/lib/stages";
 
 export interface FilterChip {
@@ -15,6 +15,7 @@ export interface FilterChip {
 export interface FilterItem {
   slug: string;
   stages: StageId[];
+  tier: "flagship" | "system";
   node: ReactNode;
 }
 
@@ -24,6 +25,7 @@ interface Props {
   allLabel: string;
   defaultNote: string;
   emptyNote: string;
+  initialStage: StageId | null;
 }
 
 /**
@@ -36,14 +38,18 @@ export function WorkFilter({
   allLabel,
   defaultNote,
   emptyNote,
+  initialStage,
 }: Props) {
-  const params = useSearchParams();
-  const requested = params.get("stage");
-  const initial = chips.some((c) => c.id === requested)
-    ? (requested as StageId)
-    : null;
+  const pathname = usePathname();
+  const router = useRouter();
+  const [stage, setStage] = useState<StageId | null>(initialStage);
 
-  const [stage, setStage] = useState<StageId | null>(initial);
+  const selectStage = (next: StageId | null) => {
+    setStage(next);
+    router.replace(next ? `${pathname}?stage=${next}` : pathname, {
+      scroll: false,
+    });
+  };
 
   const shown = useMemo(
     () => (stage ? items.filter((i) => i.stages.includes(stage)) : items),
@@ -57,7 +63,7 @@ export function WorkFilter({
       <div className="flex flex-wrap items-center gap-2">
         <button
           type="button"
-          onClick={() => setStage(null)}
+          onClick={() => selectStage(null)}
           aria-pressed={stage === null}
           className={`label h-9 border px-3.5 transition-colors ${
             stage === null
@@ -73,7 +79,7 @@ export function WorkFilter({
             <button
               key={c.id}
               type="button"
-              onClick={() => setStage(on ? null : c.id)}
+              onClick={() => selectStage(on ? null : c.id)}
               aria-pressed={on}
               className={`label h-9 border px-3.5 transition-colors ${
                 on
@@ -106,7 +112,7 @@ export function WorkFilter({
         {shown.map((item, i) => (
           <div
             key={item.slug}
-            className="reveal"
+            className={`reveal ${item.tier === "flagship" ? "md:col-span-2" : ""}`}
             style={{
               ["--d" as string]: `${i * 55}ms`,
               ["--rise-from" as string]: "12px",

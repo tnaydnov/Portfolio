@@ -5,7 +5,12 @@ import { ui } from "@/lib/ui";
 
 export function RepsLedger({ locale }: { locale: Locale }) {
   return (
-    <div className="overflow-x-auto">
+    <div
+      role="region"
+      tabIndex={0}
+      aria-label={t(ui.work.repsTitle, locale)}
+      className="overflow-x-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
+    >
       <table className="w-full min-w-[46rem] border-collapse text-start">
         <caption className="sr-only">{t(ui.work.repsSpan, locale)}</caption>
         <thead>

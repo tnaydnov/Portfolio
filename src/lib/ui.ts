@@ -4,7 +4,7 @@ import type { LS, LSA } from "./i18n";
 export const ui = {
   nav: {
     work: { en: "Work", he: "עבודה" },
-    system: { en: "System", he: "שיטה" },
+    system: { en: "How I work", he: "איך אני עובד" },
     about: { en: "About", he: "אודות" },
     contact: { en: "Contact", he: "יצירת קשר" },
     colophon: { en: "Colophon", he: "על האתר" },
@@ -106,47 +106,47 @@ export const ui = {
     },
     positionBody: {
       en: [
-        "Two degrees that read as unrelated are one argument: software is the tool, systems are the subject. I did not move away from engineering — I went and got the half that makes engineering land.",
+        "A completed Software Engineering degree and a Master’s in Industrial Engineering and Management in progress point in one direction: software is the tool, systems are the subject.",
       ],
       he: [
-        "שני תארים שנראים לא קשורים הם טענה אחת: תוכנה היא הכלי, מערכות הן הנושא. לא התרחקתי מהנדסה — הלכתי להשלים את החצי שגורם להנדסה לנחות במקום הנכון.",
+        "תואר שהושלם בהנדסת תוכנה ותואר שני בתהליך בהנדסת תעשייה וניהול מצביעים לאותו כיוון: תוכנה היא הכלי, מערכות הן הנושא.",
       ],
     } satisfies LSA,
     seeHowIWork: { en: "See how I work →", he: "איך אני עובד ←" },
     classroomLabel: { en: "The classroom", he: "הכיתה" },
     classroomHeading: {
-      en: "I learned requirements in front of a room of sixteen-year-olds.",
-      he: "למדתי אפיון דרישות מול כיתה של בני שש־עשרה.",
+      en: "I learned requirements in front of a room of high-school students.",
+      he: "למדתי אפיון דרישות מול כיתה של תלמידי תיכון.",
     },
     classroomBody: {
       en: [
-        "Three years of teaching programming, several hundred students, plus the syllabuses, lesson plans, exercises and instructor guides underneath. It is the most useful professional training I have had, and not for the reason people assume.",
+        "Since 2023, I have taught programming and developed the syllabuses, lesson plans, exercises and instructor guides underneath it. It is the most useful professional training I have had, and not for the reason people assume.",
         "Teaching is requirements engineering with a thirty-second feedback loop. You explain something, and a room full of people immediately shows you which part of your explanation was carrying an assumption. You cannot argue with it, defer it to next sprint, or blame the audience. You find the broken sentence and you fix it.",
       ],
       he: [
-        "שלוש שנים של הוראת תכנות, כמה מאות תלמידים, ומתחת לזה סילבוסים, מערכי שיעור, תרגילים ומדריכים למנחים. זו ההכשרה המקצועית הכי שימושית שעברתי, ולא מהסיבה שמניחים.",
+        "מאז 2023 אני מלמד תכנות ומפתח את הסילבוסים, מערכי השיעור, התרגילים והמדריכים למנחים שמתחתיו. זו ההכשרה המקצועית הכי שימושית שעברתי, ולא מהסיבה שמניחים.",
         "הוראה היא אפיון דרישות עם לולאת משוב של שלושים שניות. אתה מסביר משהו, וכיתה שלמה מראה לך מיד איזה חלק בהסבר נשען על הנחה סמויה. אי אפשר להתווכח עם זה, לדחות לספרינט הבא, או להאשים את הקהל. מוצאים את המשפט השבור ומתקנים אותו.",
       ],
     } satisfies LSA,
     classroomRule: {
-      en: "If you cannot explain the requirement to a sixteen-year-old, the requirement is not finished.",
-      he: "אם אי אפשר להסביר את הדרישה לנער בן שש־עשרה, הדרישה עוד לא גמורה.",
+      en: "If you cannot explain the requirement clearly to a high-school student, the requirement is not finished.",
+      he: "אם אי אפשר להסביר את הדרישה בבירור לתלמיד תיכון, הדרישה עוד לא גמורה.",
     },
   },
 
   work: {
     title: { en: "Work", he: "עבודה" },
     intro: {
-      en: "Filter by what I actually did, not by what it was written in. Every case study carries dates, a decision log, and a list of what I would rebuild.",
-      he: "סינון לפי מה שבאמת עשיתי, לא לפי מה שזה נכתב בו. לכל מקרה יש תאריכים, יומן החלטות, ורשימה של מה שהייתי בונה מחדש.",
+      en: "Filter by the part of delivery you want to inspect. Each record keeps its technology, dates, evidence status, source and rebuild notes visible.",
+      he: "סינון לפי חלק המסירה שתרצו לבחון. בכל רשומה הטכנולוגיה, התאריכים, מצב הראיות, המקור והערות הבנייה מחדש נשארים גלויים.",
     },
     filterNote: {
-      en: "Filtered by stage of delivery, not by technology — because the stack is the least interesting thing about any of these.",
-      he: "מסונן לפי שלב באספקה, לא לפי טכנולוגיה — כי הסטאק הוא הדבר הכי פחות מעניין בכל אחד מהם.",
+      en: "Choose a delivery stage to narrow the project record.",
+      he: "בחרו שלב מסירה כדי לצמצם את תיעוד הפרויקטים.",
     },
     empty: {
-      en: "Nothing at this stage yet. That is the honest answer rather than a padded one.",
-      he: "אין עדיין כלום בשלב הזה. זו התשובה הכנה, לא תשובה מרופדת.",
+      en: "No project record is tagged with this stage yet.",
+      he: "אין עדיין תיעוד פרויקט שמסומן בשלב הזה.",
     },
     repsTitle: { en: "The reps", he: "החזרות" },
     repsSpan: { en: "2022 — 2023 · University", he: "2022 — 2023 · אוניברסיטה" },
@@ -167,57 +167,57 @@ export const ui = {
   system: {
     title: { en: "System", he: "שיטה" },
     intro: {
-      en: "Delivery is not a talent, it is a process — and a process can be written down, taught, and improved. This is mine. It is the same six stages every time, and it is the reason the work on this site looks consistent despite spanning education, infrastructure and consumer product.",
-      he: "אספקה היא לא כישרון, היא תהליך — ותהליך אפשר לכתוב, ללמד ולשפר. זה שלי. אלה אותם שישה שלבים בכל פעם, וזו הסיבה שהעבודות באתר הזה נראות עקביות למרות שהן משתרעות על חינוך, תשתיות ומוצר צרכני.",
+      en: "Six repeatable stages I use to turn ambiguous needs into working systems. The projects link back to them as an index of decisions and artifacts — not as doctrine.",
+      he: "שישה שלבים חוזרים שבהם אני הופך צרכים עמומים למערכות עובדות. הפרויקטים מקושרים אליהם כאינדקס של החלטות ותוצרים — לא כדוקטרינה.",
     },
     sixStages: { en: "The six stages", he: "ששת השלבים" },
     produces: { en: "What this stage produces", he: "מה השלב הזה מייצר" },
     peopleTitle: { en: "Working with people", he: "עבודה עם אנשים" },
     peopleHeading: {
-      en: "Most requirements fail as translation, not as analysis.",
-      he: "רוב הדרישות נכשלות בתרגום, לא בניתוח.",
+      en: "I often find the broken requirement in the translation.",
+      he: "לעיתים קרובות אני מוצא את הדרישה השבורה דווקא בתרגום.",
     },
     peopleBody: {
       en: [
-        "When a client and a developer disagree, it is almost never because one of them is wrong. It is because a word in the spec means two different things and nobody has noticed yet. My job in that room is to find the word.",
-        "So I write things down, in plain language, and read them back to the people who will live with the result. It is unglamorous and it prevents most of the expensive failures.",
+        "When a client and a developer disagree, I look for the word in the specification that means two different things to them. My job in that room is to find it.",
+        "I write the requirement in plain language and read it back to the people who will live with the result. It catches mismatches before they harden into implementation.",
       ],
       he: [
-        "כשלקוח ומפתח לא מסכימים, זה כמעט אף פעם לא כי אחד מהם טועה. זה כי מילה אחת באפיון אומרת שני דברים שונים ואף אחד עוד לא שם לב. התפקיד שלי בחדר הזה הוא למצוא את המילה.",
-        "אז אני כותב דברים, בשפה פשוטה, ומקריא אותם בחזרה לאנשים שיחיו עם התוצאה. זה לא זוהר, וזה מונע את רוב הכישלונות היקרים.",
+        "כשלקוח ומפתח לא מסכימים, אני מחפש את המילה באפיון שאומרת לכל אחד מהם משהו אחר. התפקיד שלי בחדר הוא למצוא אותה.",
+        "אני כותב את הדרישה בשפה פשוטה ומקריא אותה בחזרה לאנשים שיחיו עם התוצאה. כך פערים מתגלים לפני שהם מתקבעים במימוש.",
       ],
     } satisfies LSA,
     nextTitle: { en: "Where to look next", he: "לאן להמשיך" },
     nextEvidence: { en: "The evidence", he: "הראיות" },
     nextEvidenceBody: {
-      en: "Case studies filtered by stage, each with a decision log and a rebuild list.",
-      he: "מקרי בוחן מסוננים לפי שלב, כל אחד עם יומן החלטות ורשימת בנייה מחדש.",
+      en: "Case studies filtered by stage, with decision records where documented and a rebuild list for each.",
+      he: "מקרי בוחן מסוננים לפי שלב, עם תיעוד החלטות כאשר הוא קיים ורשימת בנייה מחדש לכל אחד.",
     },
     nextThesis: { en: "The thesis", he: "התזה" },
     nextThesisBody: {
-      en: "Why a software engineer went and got an Industrial Engineering degree.",
-      he: "למה מהנדס תוכנה הלך ללמוד הנדסת תעשייה וניהול.",
+      en: "Why a software engineer is studying Industrial Engineering and Management.",
+      he: "למה מהנדס תוכנה לומד הנדסת תעשייה וניהול.",
     },
   },
 
   about: {
     title: { en: "About", he: "אודות" },
     lede: {
-      en: "I am a software engineer who went and got the other half of the problem.",
-      he: "אני מהנדס תוכנה שהלך להשלים את החצי השני של הבעיה.",
+      en: "I am a software engineer studying the other half of the problem.",
+      he: "אני מהנדס תוכנה שלומד את החצי השני של הבעיה.",
     },
     thesisLabel: { en: "The thesis", he: "התזה" },
     thesisBody: {
       en: [
         "I finished a Software Engineering degree and then enrolled in a Master’s in Industrial Engineering and Management. People read that as a pivot away from engineering. It is the opposite.",
-        "Industrial Engineering is the discipline of designing, measuring and improving systems and processes. It is the formal version of the thing I kept running into at work: the code was rarely the bottleneck. The bottleneck was an undefined requirement, a handoff nobody owned, or a workaround that had quietly become policy. I had been solving those problems by instinct. I went and learned to do it properly.",
-        "So the two degrees are one argument. **Software is the tool. Systems are the subject.** Being able to write the code is what stops the systems thinking from becoming a slide deck; understanding the system is what stops the code from being beautifully built and pointed at the wrong problem.",
+        "Industrial Engineering is the discipline of designing, measuring and improving systems and processes. It is the formal version of the thing I kept running into at work: the code was rarely the bottleneck. The bottleneck was an undefined requirement, a handoff nobody owned, or a workaround that had quietly become policy. I had been solving those problems by instinct; now I am learning the formal tools behind them.",
+        "So the two disciplines point in one direction. **Software is the tool. Systems are the subject.** Being able to write the code is what stops the systems thinking from becoming a slide deck; understanding the system is what stops the code from being beautifully built and pointed at the wrong problem.",
         "In practice this means I am not looking for a role where I only write tickets, and not one where I only close them. The work I am good at is the whole loop — finding the need, framing it, sequencing it, building it, proving it, and then sitting with the people who use it while they tell me what I got wrong.",
       ],
       he: [
         "סיימתי תואר בהנדסת תוכנה ואז נרשמתי לתואר שני בהנדסת תעשייה וניהול. אנשים קוראים את זה כפנייה החוצה מהנדסה. זה בדיוק ההפך.",
-        "הנדסת תעשייה היא הדיסציפלינה של תכנון, מדידה ושיפור של מערכות ותהליכים. זו הגרסה הפורמלית של הדבר שנתקלתי בו שוב ושוב בעבודה: הקוד כמעט אף פעם לא היה צוואר הבקבוק. צוואר הבקבוק היה דרישה לא מוגדרת, העברת אחריות שאף אחד לא לקח עליה בעלות, או עקיפה שהפכה בשקט לנוהל. פתרתי את הבעיות האלה באינטואיציה. הלכתי ללמוד לעשות את זה כמו שצריך.",
-        "אז שני התארים הם טענה אחת. **תוכנה היא הכלי. מערכות הן הנושא.** היכולת לכתוב את הקוד היא מה שמונע מחשיבה מערכתית להפוך למצגת; הבנת המערכת היא מה שמונע מהקוד להיבנות יפה ולהיות מכוון לבעיה הלא נכונה.",
+        "הנדסת תעשייה היא הדיסציפלינה של תכנון, מדידה ושיפור של מערכות ותהליכים. זו הגרסה הפורמלית של הדבר שנתקלתי בו שוב ושוב בעבודה: הקוד כמעט אף פעם לא היה צוואר הבקבוק. צוואר הבקבוק היה דרישה לא מוגדרת, העברת אחריות שאף אחד לא לקח עליה בעלות, או עקיפה שהפכה בשקט לנוהל. פתרתי את הבעיות האלה באינטואיציה; עכשיו אני לומד את הכלים הפורמליים שמאחוריהן.",
+        "אז שתי הדיסציפלינות מצביעות לאותו כיוון. **תוכנה היא הכלי. מערכות הן הנושא.** היכולת לכתוב את הקוד היא מה שמונע מחשיבה מערכתית להפוך למצגת; הבנת המערכת היא מה שמונע מהקוד להיבנות יפה ולהיות מכוון לבעיה הלא נכונה.",
         "בפועל זה אומר שאני לא מחפש תפקיד שבו אני רק כותב משימות, ולא כזה שבו אני רק סוגר אותן. העבודה שאני טוב בה היא הלולאה כולה — למצוא את הצורך, למסגר אותו, לתזמן אותו, לבנות אותו, להוכיח אותו, ואז לשבת עם האנשים שמשתמשים בו בזמן שהם מספרים לי מה פספסתי.",
       ],
     } satisfies LSA,
@@ -248,8 +248,8 @@ export const ui = {
     },
     based: { en: "Based", he: "מיקום" },
     basedValue: {
-      en: "Israel · GMT+3\nSunday to Thursday",
-      he: "ישראל · GMT+3\nראשון עד חמישי",
+      en: "Israel · UTC+2/+3\nSunday to Thursday",
+      he: "ישראל · UTC+2/+3\nראשון עד חמישי",
     },
     lookingFor: { en: "Looking for", he: "מחפש" },
     lookingForValue: {
@@ -276,8 +276,8 @@ export const ui = {
   colophon: {
     title: { en: "Colophon", he: "על האתר" },
     lede: {
-      en: "This site is the seventh case study. Same six stages, same decision log, same published tradeoffs.",
-      he: "האתר הזה הוא מקרה הבוחן השביעי. אותם שישה שלבים, אותו יומן החלטות, אותן פשרות מפורסמות.",
+      en: "This site is a case study too: the same attention to evidence, tradeoffs and what should be removed.",
+      he: "גם האתר הזה הוא מקרה בוחן: אותה תשומת לב לראיות, לפשרות ולמה שצריך להסיר.",
     },
     intro: {
       en: "A portfolio that argues for engineering judgement should be willing to show its own. So here is how this one was built, what it costs to load, and what I would change.",

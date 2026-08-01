@@ -8,10 +8,13 @@ export const timeline: {
   current?: boolean;
 }[] = [
   {
-    span: { en: "2026 — 2028", he: "2026 — 2028" },
+    span: {
+      en: "2026 — present · expected 2028",
+      he: "2026 — היום · סיום צפוי 2028",
+    },
     title: {
-      en: "M.Sc. Industrial Engineering & Management",
-      he: "מוסמך בהנדסת תעשייה וניהול",
+      en: "M.Sc. student · Industrial Engineering & Management",
+      he: "סטודנט לתואר שני · הנדסת תעשייה וניהול",
     },
     org: {
       en: "Shenkar College of Engineering, Design and Art",
@@ -49,6 +52,18 @@ export const timeline: {
     },
   },
   {
+    span: { en: "Oct 2022 — Jun 2023", he: "אוק׳ 2022 — יונ׳ 2023" },
+    title: {
+      en: "Volunteer Software Engineering Mentor",
+      he: "מנטור מתנדב להנדסת תוכנה",
+    },
+    org: { en: "Siraj Technologies", he: "Siraj Technologies" },
+    note: {
+      en: "Mentored Bedouin software-engineering students through required university courses.",
+      he: "ליווי סטודנטים בדואים להנדסת תוכנה בקורסי החובה באוניברסיטה.",
+    },
+  },
+  {
     span: { en: "2020 — 2023", he: "2020 — 2023" },
     title: { en: "Technical Support, Tier 2", he: "תמיכה טכנית, Tier 2" },
     org: {
@@ -64,32 +79,25 @@ export const timeline: {
 
 export const numbers: { value: LS; label: LS }[] = [
   {
-    value: { en: "650+", he: "‎650+" },
-    label: { en: "Students taught", he: "תלמידים שלימדתי" },
+    value: { en: "2023—now", he: "2023—היום" },
+    label: { en: "Nitzanim · EdTech", he: "ניצנים · EdTech" },
   },
   {
-    value: { en: "3 yrs", he: "3 שנים" },
-    label: { en: "Arc in production", he: "‏Arc בייצור" },
+    value: { en: "2021—25", he: "2021—25" },
+    label: { en: "B.Sc. Software Engineering", he: "B.Sc. הנדסת תוכנה" },
   },
   {
-    value: { en: "2", he: "2" },
-    label: { en: "Degrees, one argument", he: "תארים, טענה אחת" },
+    value: { en: "2026—28", he: "2026—28" },
+    label: { en: "M.Sc. in progress", he: "M.Sc. בתהליך" },
   },
   {
     value: { en: "6", he: "6" },
-    label: { en: "Stages I own", he: "שלבים באחריותי" },
+    label: { en: "Delivery stages I work across", he: "שלבי מסירה שאני עובד לאורכם" },
   },
 ];
 
 /** The inverted job description. */
 export const brief: { term: LS; def: LS }[] = [
-  {
-    term: { en: "The team", he: "הצוות" },
-    def: {
-      en: "Small enough that I know what everyone is working on. Large enough that someone will tell me when I am wrong.",
-      he: "קטן מספיק כדי שאדע על מה כל אחד עובד. גדול מספיק כדי שמישהו יגיד לי כשאני טועה.",
-    },
-  },
   {
     term: { en: "The work", he: "העבודה" },
     def: {
@@ -111,20 +119,6 @@ export const brief: { term: LS; def: LS }[] = [
       he: "אני יכול לכתוב את האפיון ואז לממש אותו, ולכן האפיון בר־שליחה. אני יכול לתכנן את לוח הזמנים ואז לחיות בתוכו, ולכן לוח הזמנים כן.",
     },
   },
-  {
-    term: { en: "What I do not want", he: "מה אני לא רוצה" },
-    def: {
-      en: "A role where the requirements arrive finished and my job is to translate them into code. That is the half of the work I already know how to do.",
-      he: "תפקיד שבו הדרישות מגיעות גמורות והתפקיד שלי הוא לתרגם אותן לקוד. זה החצי של העבודה שאני כבר יודע לעשות.",
-    },
-  },
-  {
-    term: { en: "Deal-breaker", he: "שובר עסקה" },
-    def: {
-      en: "Shipping something I would not defend in a decision log.",
-      he: "לשלוח משהו שלא הייתי מגן עליו ביומן החלטות.",
-    },
-  },
 ];
 
 export const budgetTargets: {
@@ -136,32 +130,35 @@ export const budgetTargets: {
   {
     metric: { en: "First-load JS, home", he: "‏JS ראשוני, דף הבית" },
     target: { en: "< 180 kB", he: "‎< 180 kB" },
-    measured: { en: "152 kB", he: "152 kB" },
-    note: { en: "gzipped", he: "מכווץ" },
+    measured: { en: "136 kB", he: "136 kB" },
+    note: { en: "gzip · Next build · 2026-08-01", he: "gzip · Next build · 2026-08-01" },
   },
   {
     metric: { en: "First-load JS, case", he: "‏JS ראשוני, מקרה בוחן" },
     target: { en: "< 180 kB", he: "‎< 180 kB" },
-    measured: { en: "130 kB", he: "130 kB" },
-    note: { en: "gzipped", he: "מכווץ" },
+    measured: { en: "137 kB", he: "137 kB" },
+    note: { en: "gzip · Next build · 2026-08-01", he: "gzip · Next build · 2026-08-01" },
   },
   {
-    metric: { en: "Animation libraries", he: "ספריות אנימציה" },
+    metric: {
+      en: "General-purpose animation libraries",
+      he: "ספריות אנימציה כלליות",
+    },
     target: { en: "0", he: "0" },
     measured: { en: "0", he: "0" },
-    note: { en: "Removed after measuring", he: "הוסרו אחרי מדידה" },
+    note: { en: "CSS motion only", he: "תנועת CSS בלבד" },
   },
   {
     metric: { en: "Runtime dependencies", he: "תלויות זמן ריצה" },
     target: { en: "Minimal", he: "מינימלי" },
-    measured: { en: "7", he: "7" },
+    measured: { en: "5", he: "5" },
     note: { en: "Including next & react", he: "כולל next ו־react" },
   },
   {
-    metric: { en: "CLS", he: "CLS" },
-    target: { en: "< 0.02", he: "‎< 0.02" },
-    measured: { en: "Reserved", he: "שמור מראש" },
-    note: { en: "Fonts and media reserve space", he: "גופנים ומדיה שומרים מקום" },
+    metric: { en: "Autoplay project video", he: "סרטון פרויקט אוטומטי" },
+    target: { en: "0", he: "0" },
+    measured: { en: "0", he: "0" },
+    note: { en: "Explicit controls on case pages", he: "פקדים מפורשים בעמודי המקרים" },
   },
   {
     metric: { en: "WebGL", he: "WebGL" },
@@ -174,12 +171,12 @@ export const budgetTargets: {
 export const colophonRules: { title: LS; body: LS }[] = [
   {
     title: {
-      en: "I installed two animation libraries, then deleted them",
-      he: "התקנתי שתי ספריות אנימציה, ואז מחקתי אותן",
+      en: "Motion has to earn its weight",
+      he: "תנועה צריכה להצדיק את המשקל שלה",
     },
     body: {
-      en: "GSAP and Motion were both in the build. The site needs three effects: a scroll reveal, a pinned horizontal track, and a keyed fade. Those are about sixty lines of IntersectionObserver, a rAF scroll handler, and a CSS keyframe. The libraries cost 74 kB on the home page and 108 kB on case studies. Reaching for a dependency is a decision, and this one did not survive being measured.",
-      he: "‏GSAP ו־Motion היו שתיהן בבנייה. האתר צריך שלושה אפקטים: חשיפה בגלילה, מסלול אופקי מוצמד, ודהייה מבוססת מפתח. אלה בערך שישים שורות של IntersectionObserver, מטפל גלילה על rAF, ו־keyframe ב־CSS. הספריות עלו 74 קילובייט בדף הבית ו־108 במקרי הבוחן. לקחת תלות היא החלטה, וההחלטה הזו לא שרדה מדידה.",
+      en: "The routed pages use restrained CSS entry motion and native scrolling. The proof-first redesign removed the long pinned homepage sequence; movement now supports hierarchy instead of becoming the subject.",
+      he: "העמודים הפעילים משתמשים בתנועת כניסה מאופקת ב־CSS ובגלילה טבעית. העיצוב המחודש הסיר את רצף הבית הארוך והמוצמד; התנועה תומכת עכשיו בהיררכיה במקום להפוך לנושא.",
     },
   },
   {
@@ -188,8 +185,8 @@ export const colophonRules: { title: LS; body: LS }[] = [
       he: "תנועה מופחתת היא פריסה, לא הורדת דרגה",
     },
     body: {
-      en: "prefers-reduced-motion is resolved at the layout level. The pinned horizontal loop becomes a vertical list, smooth scrolling is never mounted, and no transform animation runs. Nothing is hidden in that mode — it is a different composition of the same content, and it is also what every phone gets.",
-      he: "‏prefers-reduced-motion נפתר ברמת הפריסה. הלולאה האופקית המוצמדת הופכת לרשימה אנכית, גלילה חלקה לא נטענת כלל, ושום אנימציית טרנספורם לא רצה. שום דבר לא מוסתר במצב הזה — זו הרכבה אחרת של אותו תוכן, וזה גם מה שכל טלפון מקבל.",
+      en: "With prefers-reduced-motion, CSS animation collapses to a static state. Project videos never autoplay; the full demos require an explicit press on their case-study pages.",
+      he: "עם prefers-reduced-motion אנימציית CSS מצטמצמת למצב סטטי. סרטוני פרויקטים לעולם אינם מתחילים אוטומטית; ההדגמות המלאות דורשות לחיצה מפורשת בעמודי מקרי הבוחן.",
     },
   },
   {
@@ -208,8 +205,8 @@ export const colophonRules: { title: LS; body: LS }[] = [
       he: "דו־לשוני החל ממודל הנתונים",
     },
     body: {
-      en: "Every string in the content layer is typed as a record keyed by locale, so a missing translation is a compile error rather than a hole in the page. Direction is handled with logical CSS properties, not a mirrored stylesheet. I built this pattern for Applytide first; this is the second time, and it took a fraction of the effort.",
-      he: "כל מחרוזת בשכבת התוכן מוגדרת כרשומה לפי שפה, כך שתרגום חסר הוא שגיאת קומפילציה ולא חור בדף. כיוון מטופל בתכונות CSS לוגיות, לא בגיליון סגנונות משוקף. בניתי את התבנית הזו קודם ל־Applytide; זו הפעם השנייה, והיא לקחה שבריר מהמאמץ.",
+      en: "Localized narrative and interface strings are typed as records keyed by locale, so a missing translation in those records is a compile error rather than a hole in the page. Direction is handled with logical CSS properties, not a mirrored stylesheet. The pattern follows the bilingual approach used in Applytide.",
+      he: "מחרוזות נרטיב וממשק מקומיות מוגדרות כרשומות לפי שפה, כך שתרגום חסר ברשומות האלה הוא שגיאת קומפילציה ולא חור בדף. כיוון מטופל בתכונות CSS לוגיות, לא בגיליון סגנונות משוקף. התבנית ממשיכה את הגישה הדו־לשונית שבה השתמשתי ב־Applytide.",
     },
   },
   {
@@ -238,14 +235,14 @@ export const now: { label: LS; items: LSA } = {
   label: { en: "Now", he: "עכשיו" },
   items: {
     en: [
-      "Building Eventa, and cutting steps out of its onboarding.",
+      "Publishing Eventa as an inspectable post-mortem after taking it offline.",
       "First year of the M.Sc. at Shenkar.",
-      "Still teaching, still shipping to Arc.",
+      "Teaching, developing EdTech content, and continuing the work around Arc.",
     ],
     he: [
-      "בונה את Eventa, ומקצר שלבים בתהליך הכניסה שלו.",
+      "מפרסם את Eventa כמקרה בוחן שניתן לבדיקה לאחר שהורד מהאוויר.",
       "שנה ראשונה בתואר השני בשנקר.",
-      "עדיין מלמד, עדיין שולח עדכונים ל־Arc.",
+      "מלמד, מפתח תוכן EdTech וממשיך את העבודה סביב Arc.",
     ],
   },
 };

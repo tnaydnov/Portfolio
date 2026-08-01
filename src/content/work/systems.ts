@@ -4,18 +4,25 @@ export const lpr: Project = {
   slug: "license-plate-recognition",
   title: "License Plate Recognition",
   oneLiner: {
-    en: "A real-time parking-enforcement pipeline: motion detection, plate detection, OCR, alerting.",
-    he: "צינור אכיפת חניה בזמן אמת: זיהוי תנועה, זיהוי לוחית, OCR והתראות.",
+    en: "A streaming parking-enforcement prototype: motion detection, plate detection, OCR and alerting.",
+    he: "אב־טיפוס זורם לאכיפת חניה: זיהוי תנועה, זיהוי לוחית, OCR והתראות.",
   },
   hook: {
-    en: "Real-time computer vision is mostly a scheduling problem wearing a machine-learning costume.",
-    he: "ראייה ממוחשבת בזמן אמת היא בעיקר בעיית תזמון שלובשת תחפושת של למידת מכונה.",
+    en: "In a streaming vision pipeline, scheduling becomes as important as model choice.",
+    he: "בצינור ראייה זורם, התזמון חשוב כמו בחירת המודל.",
   },
   tier: "system",
   stages: ["frame", "build", "prove"],
   domain: ["applied-ai", "platform"],
-  role: { en: "Architecture · Build", he: "ארכיטקטורה · בנייה" },
-  started: "2025-01",
+  role: {
+    en: "Motion detection · Operator UI · Service architecture",
+    he: "זיהוי תנועה · ממשק מפעיל · ארכיטקטורת שירותים",
+  },
+  team: {
+    en: "BGU team project · credited to the original project team",
+    he: "פרויקט צוות ב־BGU · קרדיט לצוות הפרויקט המקורי",
+  },
+  started: "2024-11",
   ended: "2025-07",
   status: "archived",
   metrics: [
@@ -29,8 +36,11 @@ export const lpr: Project = {
     },
     {
       label: { en: "Mode", he: "מצב" },
-      value: { en: "Real-time", he: "זמן אמת" },
-      note: { en: "Continuous video", he: "וידאו רציף" },
+      value: { en: "Streaming", he: "זרימה" },
+      note: {
+        en: "Continuous-video design · no published latency benchmark",
+        he: "תכנון לווידאו רציף · ללא מדד השהיה שפורסם",
+      },
     },
     {
       label: { en: "Deploy", he: "פריסה" },
@@ -40,13 +50,37 @@ export const lpr: Project = {
   ],
   stack: ["Python", "YOLOv11", "PaddleOCR", "FastAPI", "Redis", "Docker", "PyQt5"],
   links: { repo: "https://github.com/tnaydnov/License_Plate_Recognition" },
+  proof: [
+    {
+      label: { en: "Demo record", he: "תיעוד הדגמה" },
+      value: {
+        en: "Recorded end-to-end detection run",
+        he: "הקלטת ריצה מלאה של תהליך הזיהוי",
+      },
+      access: "public",
+    },
+    {
+      label: { en: "Team record", he: "תיעוד צוות" },
+      value: {
+        en: "Original BGU project history and contributor record",
+        he: "היסטוריית הפרויקט המקורי ב־BGU ותיעוד התורמים",
+      },
+      href: "https://github.com/BGU-LPR-Project/lpr_final_project",
+      access: "public",
+    },
+  ],
   media: {
     poster: "/images/lpr-preview.png",
-    video: "/videos/lpr-demo.mp4",
+    video: "/videos/lpr-demo-web.mp4",
     alt: {
       en: "License plate recognition operator interface showing a detected plate",
       he: "ממשק המפעיל של מערכת זיהוי הלוחיות מציג לוחית שזוהתה",
     },
+    caption: {
+      en: "DEMO RECORD / End-to-end detection run",
+      he: "תיעוד הדגמה / ריצת זיהוי מקצה לקצה",
+    },
+    kind: "demo",
   },
   sections: [
     {
@@ -57,11 +91,11 @@ export const lpr: Project = {
       },
       body: {
         en: [
-          "The accuracy question — can a model read a plate — is largely solved by choosing good components. The engineering question is whether the whole chain keeps up with a camera that does not slow down for you.",
+          "Choosing detection and OCR components is only part of the problem. The engineering question is whether the whole chain keeps up with a camera that does not slow down for you.",
           "That reframes the problem. Every stage in the pipeline is a consumer with a fixed time budget, and the design work is deciding what to drop rather than what to compute.",
         ],
         he: [
-          "שאלת הדיוק — האם מודל יכול לקרוא לוחית — נפתרת ברובה בבחירת רכיבים טובים. השאלה ההנדסית היא האם כל השרשרת עומדת בקצב של מצלמה שלא מאטה בשבילך.",
+          "בחירת רכיבי הזיהוי וה־OCR היא רק חלק מהבעיה. השאלה ההנדסית היא האם כל השרשרת עומדת בקצב של מצלמה שלא מאטה בשבילך.",
           "זה ממסגר מחדש את הבעיה. כל שלב בצינור הוא צרכן עם תקציב זמן קבוע, ועבודת התכנון היא להחליט ממה לוותר ולא מה לחשב.",
         ],
       },
@@ -74,31 +108,29 @@ export const lpr: Project = {
       },
       body: {
         en: [
-          "The pipeline is ordered by cost. Motion detection is nearly free and rejects the overwhelming majority of frames, because a parking camera mostly watches nothing happen. Only surviving frames reach plate detection, and only detections reach OCR, which is the most expensive stage and therefore the last.",
-          "Splitting the stages into separate services with a queue between them was the decision that made it work. It decouples the stages' rates, so a slow OCR pass creates backpressure instead of dropping the frame that mattered, and it lets each stage be tuned or replaced without disturbing the others.",
-          "The operator interface is a desktop client rather than a web app, because the people using it sit in front of one screen in one room and need alerts that survive a browser tab being closed.",
+          "The pipeline was ordered by expected cost. Motion detection was treated as a cheap early gate intended to skip unchanged frames. Only surviving frames reach plate detection, and OCR was treated as the expensive final stage, so only detections reach it.",
+          "Redis decouples video ingestion from edge processing, while a bounded 30-frame worker queue prevents unbounded memory growth and deliberately drops frames under saturation. OCR remains a synchronous service call, so capture under load is the metric that still needs measurement.",
+          "The prototype assumes a dedicated operator workstation, so its interface is a desktop client rather than a web app and its alerts do not depend on a browser tab remaining open.",
         ],
         he: [
-          "הצינור מסודר לפי עלות. זיהוי תנועה כמעט חינמי ודוחה את הרוב המוחלט של הפריימים, כי מצלמת חניה בעיקר מסתכלת על כלום שקורה. רק פריימים ששרדו מגיעים לזיהוי לוחית, ורק זיהויים מגיעים ל־OCR, שהוא השלב היקר ביותר ולכן האחרון.",
-          "פיצול השלבים לשירותים נפרדים עם תור ביניהם הייתה ההחלטה שגרמה לזה לעבוד. זה מנתק את הקצבים של השלבים, כך שמעבר OCR איטי יוצר לחץ אחורי במקום להפיל את הפריים שהיה חשוב, וזה מאפשר לכוונן או להחליף כל שלב בלי להפריע לאחרים.",
-          "ממשק המפעיל הוא לקוח דסקטופ ולא אפליקציית ווב, כי האנשים שמשתמשים בו יושבים מול מסך אחד בחדר אחד וצריכים התראות ששורדות סגירת טאב.",
+          "הצינור סודר לפי העלות הצפויה. זיהוי תנועה טופל כשער מוקדם וזול שנועד לדלג על פריימים שלא השתנו. רק פריימים ששרדו מגיעים לזיהוי לוחית, וה־OCR טופל כשלב הסופי והיקר, כך שרק זיהויים מגיעים אליו.",
+          "Redis מנתק את קליטת הווידאו מעיבוד הקצה, בעוד תור עובדים תחום ל־30 פריימים מונע צמיחת זיכרון בלתי מוגבלת ומשמיט פריימים במכוון תחת עומס. OCR נשאר קריאת שירות סינכרונית, ולכן לכידה תחת עומס היא המדד שעדיין צריך למדוד.",
+          "אב־הטיפוס מניח עמדת מפעיל ייעודית, ולכן הממשק הוא לקוח דסקטופ ולא אפליקציית ווב, וההתראות אינן תלויות בכך שטאב בדפדפן יישאר פתוח.",
         ],
       },
     },
     {
       stage: "prove",
       heading: {
-        en: "Measured on the pipeline, not the model",
-        he: "נמדד על הצינור, לא על המודל",
+        en: "The missing metric is end-to-end capture",
+        he: "המדד החסר הוא לכידה מקצה לקצה",
       },
       body: {
         en: [
-          "Model accuracy in isolation is the wrong measure. What matters is end-to-end: of the vehicles that actually entered the frame, how many produced a correct plate in time to be useful.",
-          "That number is always worse than the model's benchmark, and the gap is where the real engineering is.",
+          "The public repository and demo show the pipeline architecture and a working detection flow; they do not publish an end-to-end latency or capture-rate benchmark. The next useful test is the share of vehicles entering frame that produce a correct plate within an operational time budget.",
         ],
         he: [
-          "דיוק המודל בפני עצמו הוא המדד הלא נכון. מה שחשוב הוא מקצה לקצה: מתוך כלי הרכב שבאמת נכנסו לפריים, כמה הפיקו לוחית נכונה בזמן שהיה בו שימוש.",
-          "המספר הזה תמיד גרוע יותר מהמדד של המודל, והפער הוא המקום שבו נמצאת ההנדסה האמיתית.",
+          "המאגר הציבורי וההדגמה מציגים את ארכיטקטורת הצינור ותהליך זיהוי עובד; הם אינם מפרסמים מדד השהיה או שיעור לכידה מקצה לקצה. הבדיקה השימושית הבאה היא שיעור כלי הרכב שנכנסים לפריים ומפיקים לוחית נכונה בתוך תקציב זמן תפעולי.",
         ],
       },
     },
@@ -108,12 +140,12 @@ export const lpr: Project = {
       id: "D-01",
       date: "2025",
       title: {
-        en: "Separate services with a queue, not a single process.",
-        he: "שירותים נפרדים עם תור, לא תהליך יחיד.",
+        en: "Separate services with bounded buffering.",
+        he: "שירותים נפרדים עם חציצה תחומה.",
       },
       why: {
-        en: "The stages have very different costs and rates. Coupling them in one process means the slowest stage sets the frame rate for everything and there is no way to absorb a burst.",
-        he: "לשלבים יש עלויות וקצבים שונים מאוד. צימוד שלהם בתהליך אחד אומר שהשלב האיטי ביותר קובע את קצב הפריימים לכולם ואין דרך לספוג פרץ.",
+        en: "The stages have different costs and rates. Redis separates ingestion from edge work, and the bounded worker queue makes the overload behavior explicit rather than allowing memory to grow without limit.",
+        he: "לשלבים יש עלויות וקצבים שונים. Redis מפריד בין הקליטה לעבודת הקצה, ותור העובדים התחום הופך את התנהגות העומס למפורשת במקום לאפשר לזיכרון לצמוח ללא גבול.",
       },
       tradeoff: {
         en: "Operational complexity, serialisation overhead between stages, and a much harder debugging story than a single script.",
@@ -165,16 +197,16 @@ export const tradingSystem: Project = {
     he: "פלטפורמת מסחר רב־חנויות: ניהול חנויות, תפקידים והרשאות, עגלות, רכישות ואינטגרציית ספקים.",
   },
   hook: {
-    en: "A large team project where the hard part was the specification, not the code.",
-    he: "פרויקט צוות גדול שבו החלק הקשה היה האפיון, לא הקוד.",
+    en: "A university team project where the hard part was the specification, not the code.",
+    he: "פרויקט צוות אוניברסיטאי שבו החלק הקשה היה האפיון, לא הקוד.",
   },
   tier: "system",
   stages: ["frame", "plan", "build"],
   domain: ["platform"],
-  role: { en: "Contributor on a large team", he: "תורם בצוות גדול" },
+  role: { en: "Contributor on a university team", he: "תורם בצוות אוניברסיטאי" },
   team: { en: "University team project", he: "פרויקט צוות אוניברסיטאי" },
-  started: "2024-01",
-  ended: "2025-08",
+  started: "2024-05",
+  ended: "2024-07",
   status: "archived",
   metrics: [
     {
@@ -192,11 +224,16 @@ export const tradingSystem: Project = {
   links: { repo: "https://github.com/tnaydnov/Trading_System" },
   media: {
     poster: "/images/trading-preview.png",
-    video: "/videos/trading-demo.mp4",
+    video: "/videos/trading-demo-web.mp4",
     alt: {
       en: "Trading system storefront and management interface",
       he: "חזית החנות וממשק הניהול של מערכת המסחר",
     },
+    caption: {
+      en: "DEMO RECORD / Storefront and management flow",
+      he: "תיעוד הדגמה / תהליך חנות וניהול",
+    },
+    kind: "demo",
   },
   sections: [
     {
@@ -207,11 +244,11 @@ export const tradingSystem: Project = {
       },
       body: {
         en: [
-          "This was a large team build against a long formal specification, and the lesson it taught was not about e-commerce. It was that on a team of that size, ambiguity in a requirement does not stay a small problem — every developer resolves it differently and the divergence surfaces at integration, which is the most expensive possible moment to find it.",
+          "This was a team build against a long formal specification, and the lesson it taught was not about e-commerce. Ambiguity in a requirement does not stay small: each contributor can resolve it differently, and the divergence surfaces at integration.",
           "It is listed here as a team project because it was one. I owned parts of it, not all of it, and claiming otherwise would undermine everything else on this site.",
         ],
         he: [
-          "זו הייתה בנייה של צוות גדול מול אפיון פורמלי ארוך, והלקח שהיא לימדה לא היה על מסחר אלקטרוני. הוא היה שבצוות בגודל כזה, עמימות בדרישה לא נשארת בעיה קטנה — כל מפתח פותר אותה אחרת והפער צף באינטגרציה, שהיא הרגע היקר ביותר האפשרי לגלות אותו.",
+          "זו הייתה בניית צוות מול אפיון פורמלי ארוך, והלקח שהיא לימדה לא היה על מסחר אלקטרוני. עמימות בדרישה לא נשארת קטנה: כל תורם יכול לפתור אותה אחרת, והפער צף באינטגרציה.",
           "זה מופיע כאן כפרויקט צוות כי זה מה שהוא היה. הייתי אחראי על חלקים ממנו, לא על כולו, וטענה אחרת הייתה מערערת כל דבר אחר באתר הזה.",
         ],
       },
@@ -241,10 +278,10 @@ export const tradingSystem: Project = {
       },
       body: {
         en: [
-          "Strict separation between the service layer and the domain was what made parallel work possible at all. It is a lesson that transferred directly into how I structured Applytide's backend years later.",
+          "Strict separation between the service layer and the domain was what made parallel work possible at all. The lesson transferred directly into how I structured Applytide's backend later.",
         ],
         he: [
-          "הפרדה קפדנית בין שכבת השירות לדומיין היא מה שאפשר עבודה מקבילית בכלל. זה לקח שעבר ישירות לאופן שבו בניתי את השרת של Applytide שנים אחר כך.",
+          "הפרדה קפדנית בין שכבת השירות לדומיין היא מה שאפשר עבודה מקבילית בכלל. הלקח עבר ישירות לאופן שבו בניתי את השרת של Applytide מאוחר יותר.",
         ],
       },
     },

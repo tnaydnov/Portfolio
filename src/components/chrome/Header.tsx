@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
 import { NAV, href, site } from "@/lib/site";
@@ -13,6 +13,7 @@ export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [lifted, setLifted] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -28,6 +29,19 @@ export function Header({ locale }: { locale: Locale }) {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
   return (
@@ -73,6 +87,7 @@ export function Header({ locale }: { locale: Locale }) {
         <div className="flex items-center gap-2 lg:hidden">
           <LocaleToggle locale={locale} />
           <button
+            ref={menuButtonRef}
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
@@ -101,7 +116,7 @@ export function Header({ locale }: { locale: Locale }) {
       {open && (
         <div
           id="mobile-nav"
-          className="fixed inset-x-0 bottom-0 top-16 z-50 border-t border-rule bg-ink lg:hidden"
+          className="fixed inset-x-0 bottom-0 top-16 z-50 overflow-y-auto overscroll-contain border-t border-rule bg-ink lg:hidden"
         >
           <nav className="shell flex flex-col pt-4">
             {[...NAV, { key: "colophon" as const, href: "/colophon" }].map(
@@ -109,6 +124,7 @@ export function Header({ locale }: { locale: Locale }) {
                 <Link
                   key={item.key}
                   href={href(item.href, locale)}
+                  onClick={() => setOpen(false)}
                   className="flex items-baseline justify-between border-b border-rule py-5 font-display text-2xl tracking-tight"
                 >
                   {t(ui.nav[item.key], locale)}

@@ -35,12 +35,12 @@ export const STAGES: Stage[] = [
     detail: {
       en: [
         "A request is already a solution in disguise. Someone has diagnosed their own problem and handed you the prescription. My first job is to put the prescription down and go find the symptom.",
-        "In practice that means watching how work actually gets done rather than how it is described. The signal is almost always a workaround: a spreadsheet that exists because a system does not, six instructors solving the same problem six different ways, a step everyone quietly repeats because the tool forgot it.",
+        "In practice that means watching how work actually gets done rather than how it is described. The signal is almost always a workaround: a spreadsheet that exists because a system does not, an instructor guide forked until nobody knows which copy is current, a step everyone quietly repeats because the tool forgot it.",
         "This stage ends when I can state the problem in one sentence that the people living with it would recognise as their own.",
       ],
       he: [
         "בקשה היא כבר פתרון בתחפושת. מישהו אבחן את הבעיה של עצמו והגיש לך מרשם. התפקיד הראשון שלי הוא להניח את המרשם בצד וללכת לחפש את הסימפטום.",
-        "בפועל זה אומר להסתכל איך העבודה באמת נעשית, ולא איך היא מתוארת. האיתות הוא כמעט תמיד עקיפה: גיליון אלקטרוני שקיים כי מערכת לא קיימת, שישה מנחים שפותרים את אותה בעיה בשש דרכים שונות, שלב שכולם חוזרים עליו בשקט כי הכלי שכח אותו.",
+        "בפועל זה אומר להסתכל איך העבודה באמת נעשית, ולא איך היא מתוארת. האיתות הוא כמעט תמיד עקיפה: גיליון אלקטרוני שקיים כי מערכת לא קיימת, מדריך מנחה שהתפצל עד שאיש אינו יודע איזה עותק עדכני, שלב שכולם חוזרים עליו בשקט כי הכלי שכח אותו.",
         "השלב הזה נגמר כשאני יכול לנסח את הבעיה במשפט אחד שהאנשים שחיים איתה יזהו כשלהם.",
       ],
     },
@@ -184,12 +184,12 @@ export const STAGES: Stage[] = [
       en: [
         "Unit tests are table stakes. What I actually care about is whether the end-to-end path holds when a user does something reasonable that I did not anticipate.",
         "So I test at the level of the job to be done: can a new instructor complete their first session without help, can a user recover from a failed upload, does the thing degrade gracefully when the network does.",
-        "I also decide, before launch, what number would tell me this worked — and what number would tell me it did not. Choosing the disconfirming metric in advance is the only way to avoid grading your own homework later.",
+        "I now define, before launch, what number would indicate success — and what number would disconfirm it. That standard comes directly from projects where missing instrumentation made later claims impossible to test.",
       ],
       he: [
         "בדיקות יחידה הן תנאי סף. מה שבאמת מעניין אותי הוא אם המסלול מקצה לקצה מחזיק כשמשתמש עושה משהו סביר שלא צפיתי.",
         "אז אני בודק ברמת המשימה שצריך לבצע: האם מנחה חדש יכול להעביר את המפגש הראשון שלו בלי עזרה, האם משתמש יכול להתאושש מהעלאה שנכשלה, האם הדבר מתדרדר בחן כשהרשת מתדרדרת.",
-        "אני גם מחליט, לפני ההשקה, איזה מספר יגיד לי שזה עבד — ואיזה מספר יגיד לי שלא. בחירת המדד המפריך מראש היא הדרך היחידה להימנע מלבדוק את המבחן של עצמך אחר כך.",
+        "כיום אני מגדיר לפני ההשקה איזה מספר יצביע על הצלחה — ואיזה מספר יפריך אותה. הסטנדרט הזה מגיע ישירות מפרויקטים שבהם מדידה חסרה הפכה טענות מאוחרות לבלתי ניתנות לבדיקה.",
       ],
     },
     artifacts: {

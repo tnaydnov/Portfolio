@@ -1,8 +1,9 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { LOCALES, isLocale, t } from "@/lib/i18n";
-import { site } from "@/lib/site";
+import { LOCALES } from "@/lib/i18n";
 
-export const alt = "Tomer Naydnov";
+export const alt = "Tomer Naydnov — software engineer and technical product builder";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -10,14 +11,11 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export default async function OpengraphImage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale: raw } = await params;
-  const locale = isLocale(raw) ? raw : "en";
-  const tagline = `${t(site.description, locale).split(". ")[0]}.`;
+export default async function OpengraphImage() {
+  const background = await readFile(
+    join(process.cwd(), "public", "images", "og-evidence-board.png"),
+  );
+  const backgroundDataUrl = `data:image/png;base64,${background.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -25,65 +23,103 @@ export default async function OpengraphImage({
         style={{
           width: "100%",
           height: "100%",
+          position: "relative",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          background: "#07080a",
-          color: "#ecebe8",
-          padding: 72,
+          overflow: "hidden",
+          background: "#eee6d8",
+          color: "#151615",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: 999,
-              background: "#ff4d17",
-            }}
-          />
-          <div
-            style={{
-              fontSize: 22,
-              letterSpacing: 6,
-              textTransform: "uppercase",
-              color: "#8a8f98",
-            }}
-          >
-            Signal · Frame · Plan · Build · Prove · Field
-          </div>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          <div style={{ fontSize: 104, lineHeight: 1, letterSpacing: -4 }}>
-            {t(site.name, "en")}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              fontSize: 32,
-              lineHeight: 1.3,
-              color: "#9299a2",
-              maxWidth: 940,
-            }}
-          >
-            {tagline}
-          </div>
-        </div>
+        {/* The generated image is atmosphere only; all factual text is exact HTML. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={backgroundDataUrl}
+          alt=""
+          width="1200"
+          height="630"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        />
 
         <div
           style={{
+            position: "absolute",
+            inset: 0,
             display: "flex",
+            flexDirection: "column",
             justifyContent: "space-between",
-            fontSize: 22,
-            color: "#666d76",
-            borderTop: "1px solid rgba(255,255,255,0.14)",
-            paddingTop: 24,
+            padding: "58px 68px",
           }}
         >
-          <span>{t(site.role, "en")}</span>
-          <span style={{ color: "#ff4d17" }}>מכלול</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <div
+              style={{
+                width: 11,
+                height: 11,
+                borderRadius: 999,
+                background: "#d54416",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                fontSize: 18,
+                fontWeight: 700,
+                letterSpacing: 4,
+                textTransform: "uppercase",
+              }}
+            >
+              EVIDENCE / PRODUCT / SYSTEMS
+            </div>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+            <div
+              style={{
+                display: "flex",
+                maxWidth: 720,
+                fontSize: 86,
+                fontWeight: 700,
+                lineHeight: 0.92,
+                letterSpacing: -4,
+              }}
+            >
+              Tomer Naydnov
+            </div>
+            <div
+              style={{
+                display: "flex",
+                maxWidth: 650,
+                fontSize: 28,
+                lineHeight: 1.25,
+                color: "#4f5658",
+              }}
+            >
+              Software engineer. EdTech builder. M.Sc. student.
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              width: 650,
+              justifyContent: "space-between",
+              borderTop: "1px solid rgba(21,22,21,.3)",
+              paddingTop: 18,
+              fontSize: 17,
+              fontWeight: 700,
+              letterSpacing: 2.5,
+              color: "#323637",
+            }}
+          >
+            <span>NEED</span>
+            <span style={{ color: "#d54416" }}>→</span>
+            <span>PLAN</span>
+            <span style={{ color: "#d54416" }}>→</span>
+            <span>BUILD</span>
+            <span style={{ color: "#d54416" }}>→</span>
+            <span>FIELD</span>
+          </div>
         </div>
       </div>
     ),

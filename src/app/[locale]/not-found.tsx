@@ -1,10 +1,16 @@
+"use client";
+
 import Link from "next/link";
-import { DEFAULT_LOCALE, t } from "@/lib/i18n";
+import { useParams, usePathname } from "next/navigation";
+import { DEFAULT_LOCALE, isLocale, t } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
 import { href } from "@/lib/site";
 
 export default function NotFound() {
-  const locale = DEFAULT_LOCALE;
+  const params = useParams<{ locale?: string }>();
+  const pathname = usePathname();
+  const candidate = params?.locale ?? pathname.split("/")[1];
+  const locale = isLocale(candidate) ? candidate : DEFAULT_LOCALE;
 
   return (
     <div className="shell flex min-h-[70svh] flex-col justify-center py-24">

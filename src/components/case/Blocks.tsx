@@ -1,7 +1,6 @@
 import { t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
-import type { Decision, Feedback, Metric } from "@/lib/types";
-import { CountUp } from "@/components/motion/CountUp";
+import type { Decision, Feedback, Metric, Proof } from "@/lib/types";
 
 export function MetricBlock({
   metrics,
@@ -15,16 +14,74 @@ export function MetricBlock({
   return (
     <dl className="grid grid-cols-2 gap-px border border-rule bg-rule md:grid-cols-4">
       {metrics.map((m) => (
-        <div key={t(m.label, locale)} className="bg-ink p-5 md:p-6">
-          <dd className="font-display text-[clamp(1.75rem,3.5vw,2.75rem)] leading-none tracking-tight">
-            <CountUp value={t(m.value, locale)} />
-          </dd>
+        <div key={t(m.label, locale)} className="flex flex-col bg-ink p-5 md:p-6">
           <dt className="label mt-3">{t(m.label, locale)}</dt>
+          <dd
+            data-metric
+            className="-order-1 font-display text-[clamp(1.75rem,3.5vw,2.75rem)] leading-none tracking-tight"
+          >
+            {t(m.value, locale)}
+          </dd>
           {m.note && (
-            <p className="mt-2 text-xs leading-relaxed text-faint">
+            <dd className="mt-2 text-xs leading-relaxed text-faint">
               {t(m.note, locale)}
-            </p>
+            </dd>
           )}
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+export function ProofLedger({
+  items,
+  locale,
+}: {
+  items: Proof[];
+  locale: Locale;
+}) {
+  return (
+    <dl className="grid gap-px border border-rule bg-rule lg:grid-cols-3">
+      {items.map((item) => (
+        <div
+          key={t(item.label, locale)}
+          className="flex h-full flex-col bg-ink p-5 md:p-6"
+        >
+          <dt className="label flex items-center gap-2">
+            <span
+              aria-hidden
+              className={`size-1.5 rounded-full ${
+                item.access === "public" ? "bg-ok" : "bg-signal"
+              }`}
+            />
+            {t(item.label, locale)}
+          </dt>
+          <dd className="mt-4 text-[0.95rem] leading-relaxed text-muted">
+            {item.href ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-text"
+              >
+                {t(item.value, locale)}
+                <span aria-hidden className="ms-2 text-signal">
+                  ↗
+                </span>
+              </a>
+            ) : (
+              t(item.value, locale)
+            )}
+          </dd>
+          <dd className="label mt-auto pt-6">
+            {item.access === "public"
+              ? locale === "he"
+                ? "ציבורי / ניתן לבדיקה"
+                : "Public / inspectable"
+              : locale === "he"
+                ? "פנימי / דיווח עצמי"
+                : "Internal / self-reported"}
+          </dd>
         </div>
       ))}
     </dl>

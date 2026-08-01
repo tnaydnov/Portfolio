@@ -8,7 +8,7 @@ import { STAGES } from "@/lib/stages";
 import { byStage } from "@/content/work";
 import { isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
-import { href } from "@/lib/site";
+import { href, routeMetadata } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -17,10 +17,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  return {
+  return routeMetadata({
+    path: "/system",
+    locale,
     title: t(ui.system.title, locale),
     description: t(ui.system.intro, locale),
-  };
+  });
 }
 
 export default async function SystemPage({
@@ -62,7 +64,7 @@ export default async function SystemPage({
 
       <section>
         <SectionMark index="01" title={t(ui.system.sixStages, locale)} />
-        <ol className="grid gap-px bg-rule">
+        <ol className="grid gap-px bg-rule md:grid-cols-2 xl:grid-cols-3">
           {STAGES.map((stage) => {
             const count = byStage(stage.id).length;
             const caseWord =
@@ -72,58 +74,43 @@ export default async function SystemPage({
 
             return (
               <li key={stage.id} className="bg-ink">
-                <Reveal>
-                  <div className="grid gap-8 py-14 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-                    <div className="lg:sticky lg:top-28 lg:self-start">
-                      <p className="label">
-                        <span className="text-signal">{stage.index}</span>
-                        <span className="mx-2 opacity-40">/</span>
-                        {t(ui.common.stage, locale)}
-                      </p>
-                      <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-none tracking-tight">
-                        {t(stage.name, locale)}
-                      </h2>
-                      <p className="mt-3 text-sm uppercase tracking-[0.18em] text-signal">
-                        {t(stage.kicker, locale)}
-                      </p>
-                      <Link
-                        href={`${href("/work", locale)}?stage=${stage.id}`}
-                        className="label mt-6 inline-block transition-colors hover:text-text"
-                      >
-                        {count} {caseWord} →
-                      </Link>
-                    </div>
+                <Reveal className="h-full">
+                  <Link
+                    href={`${href("/work", locale)}?stage=${stage.id}`}
+                    className="group flex h-full min-h-[23rem] flex-col p-6 transition-colors hover:bg-surface md:p-8"
+                  >
+                    <p className="label">
+                      <span className="text-signal">{stage.index}</span>
+                      <span className="mx-2 opacity-40">/</span>
+                      {t(stage.kicker, locale)}
+                    </p>
+                    <h2 className="mt-8 font-display text-[clamp(2rem,3.5vw,3.25rem)] leading-none tracking-tight transition-colors group-hover:text-signal">
+                      {t(stage.name, locale)}
+                    </h2>
+                    <p className="mt-5 max-w-[34ch] text-[0.95rem] leading-relaxed text-muted">
+                      {t(stage.line, locale)}
+                    </p>
 
-                    <div>
-                      <p className="max-w-[46ch] font-display text-xl leading-snug tracking-tight md:text-2xl">
-                        {t(stage.line, locale)}
-                      </p>
-                      <div className="prose mt-8">
-                        {t(stage.detail, locale).map((para) => (
-                          <p key={para.slice(0, 40)}>{para}</p>
-                        ))}
-                      </div>
-
-                      <div className="mt-10 border-t border-rule pt-5">
-                        <p className="label">
-                          {t(ui.system.produces, locale)}
-                        </p>
-                        <ul className="mt-4 grid gap-2.5">
-                          {t(stage.artifacts, locale).map((a) => (
+                    <div className="mt-8 border-t border-rule pt-5">
+                      <p className="label">{t(ui.system.produces, locale)}</p>
+                      <ul className="mt-4 flex flex-wrap gap-2">
+                        {t(stage.artifacts, locale)
+                          .slice(0, 3)
+                          .map((artifact) => (
                             <li
-                              key={a}
-                              className="flex gap-3 text-[0.95rem] text-muted"
+                              key={artifact}
+                              className="border border-rule px-2.5 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.08em] text-faint"
                             >
-                              <span aria-hidden className="text-signal">
-                                —
-                              </span>
-                              {a}
+                              {artifact}
                             </li>
                           ))}
-                        </ul>
-                      </div>
+                      </ul>
                     </div>
-                  </div>
+
+                    <p className="label mt-auto pt-8 transition-colors group-hover:text-text">
+                      {count} {caseWord} <span aria-hidden>→</span>
+                    </p>
+                  </Link>
                 </Reveal>
               </li>
             );

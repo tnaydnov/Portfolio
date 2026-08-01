@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { CASE_STUDIES, getProject } from "@/content/work";
@@ -13,11 +14,13 @@ import {
   DecisionLog,
   FieldFeedback,
   MetricBlock,
+  ProofLedger,
   RebuildList,
 } from "@/components/case/Blocks";
+import { ProjectVisual } from "@/components/work/ProjectVisual";
 import { LOCALES, isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
-import { href } from "@/lib/site";
+import { href, routeMetadata } from "@/lib/site";
 
 export function generateStaticParams() {
   return LOCALES.flatMap((locale) =>
@@ -33,11 +36,12 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const p = getProject(slug);
   if (!p || !isLocale(locale)) return {};
-  return {
+  return routeMetadata({
+    path: `/work/${slug}`,
+    locale,
     title: p.title,
     description: t(p.oneLiner, locale),
-    openGraph: { title: p.title, description: t(p.hook, locale) },
-  };
+  });
 }
 
 export default async function CaseStudyPage({
@@ -118,10 +122,59 @@ export default async function CaseStudyPage({
         )}
       </header>
 
+      <section
+        aria-label={locale === "he" ? "תיעוד חזותי" : "Visual record"}
+        className={`grid gap-2 ${p.gallery?.length ? "lg:grid-cols-[1.55fr_.45fr]" : ""}`}
+      >
+        <ProjectVisual
+          project={p}
+          locale={locale}
+          priority
+          videoMode="controls"
+          className={p.gallery?.length ? "aspect-[16/11] lg:aspect-auto lg:min-h-[34rem]" : "aspect-[16/9]"}
+        />
+        {p.gallery?.length ? (
+          <div className="grid gap-2">
+            {p.gallery.map((media) => (
+              <figure
+                key={media.poster}
+                className="relative min-h-64 overflow-hidden border border-rule bg-surface-2 lg:min-h-0"
+              >
+                <Image
+                  src={media.poster}
+                  alt={t(media.alt, locale)}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 30vw"
+                  className="object-cover"
+                />
+                {media.caption ? (
+                  <figcaption className="absolute inset-x-0 bottom-0 bg-black/70 p-3 font-mono text-[9px] tracking-[0.14em] text-white/80">
+                    {t(media.caption, locale)}
+                  </figcaption>
+                ) : null}
+              </figure>
+            ))}
+          </div>
+        ) : null}
+      </section>
+
       {p.metrics.length > 0 && (
-        <Reveal>
+        <Reveal className="mt-2">
           <MetricBlock metrics={p.metrics} locale={locale} />
         </Reveal>
+      )}
+
+      {p.proof && p.proof.length > 0 && (
+        <section className="pt-24 md:pt-32">
+          <SectionMark
+            index={mark()}
+            title={locale === "he" ? "תיעוד הוכחות" : "Proof record"}
+            aside={locale === "he" ? "מה ניתן לבדיקה" : "What can be inspected"}
+          />
+          <div className="py-12">
+            <ProofLedger items={p.proof} locale={locale} />
+          </div>
+        </section>
       )}
 
       {p.sections?.map((section) => {
@@ -154,7 +207,7 @@ export default async function CaseStudyPage({
           <SectionMark
             index={mark()}
             title={t(ui.common.architecture, locale)}
-            aside={t(ui.common.interactive, locale)}
+            aside={locale === "he" ? "מפה וגבולות" : "Map & boundaries"}
           />
           <div className="py-12">
             <ArchitectureGraphLazy
