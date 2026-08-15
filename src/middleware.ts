@@ -6,16 +6,10 @@ const LOCALES = ["en", "he"];
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const active = LOCALES.find(
+  const hasLocale = LOCALES.some(
     (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`),
   );
-  if (active) {
-    // `not-found.tsx` receives no params, so the locale rides along on the
-    // request. Without this a Hebrew visitor gets an English 404.
-    const headers = new Headers(request.headers);
-    headers.set("x-locale", active);
-    return NextResponse.next({ request: { headers } });
-  }
+  if (hasLocale) return NextResponse.next();
 
   const accept = request.headers.get("accept-language") ?? "";
   const locale = /(^|,)\s*he\b/i.test(accept) ? "he" : "en";

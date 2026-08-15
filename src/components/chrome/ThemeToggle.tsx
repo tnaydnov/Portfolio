@@ -2,32 +2,30 @@
 
 import { useEffect, useState } from "react";
 import type { Locale } from "@/lib/i18n";
+import { t } from "@/lib/i18n";
+import { ui } from "@/lib/ui";
 
-type Theme = "day" | "night";
+type Theme = "draft" | "blueprint";
 
-/** Runs before paint so the page never flashes the wrong ground. */
-export const THEME_SCRIPT = `(function(){try{var s=localStorage.getItem('theme');var t=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'night':'day');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','day');}})();`;
-
-const LABEL: Record<Theme, Record<Locale, string>> = {
-  day: { en: "Switch to dark", he: "מעבר לכהה" },
-  night: { en: "Switch to light", he: "מעבר לבהיר" },
-};
+export const THEME_SCRIPT = `(function(){try{var s=localStorage.getItem('theme');var t=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'blueprint':'draft');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','draft');}})();`;
 
 export function ThemeToggle({ locale }: { locale: Locale }) {
-  const [theme, setTheme] = useState<Theme>("day");
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
-    const current = document.documentElement.getAttribute("data-theme");
-    setTheme(current === "night" ? "night" : "day");
+    const current = document.documentElement.getAttribute(
+      "data-theme",
+    ) as Theme | null;
+    setTheme(current ?? "draft");
   }, []);
 
   const toggle = () => {
-    const next: Theme = theme === "night" ? "day" : "night";
+    const next: Theme = theme === "blueprint" ? "draft" : "blueprint";
     document.documentElement.setAttribute("data-theme", next);
     try {
       localStorage.setItem("theme", next);
     } catch {
-      // Private mode. The toggle still works for this session.
+      // Storage unavailable (private mode); the toggle still works this session.
     }
     setTheme(next);
   };
@@ -36,14 +34,23 @@ export function ThemeToggle({ locale }: { locale: Locale }) {
     <button
       type="button"
       onClick={toggle}
-      aria-label={LABEL[theme][locale]}
-      className="grid size-8 place-items-center rounded-full text-faint transition-colors hover:bg-sunk hover:text-ink"
+      aria-label={
+        theme === "blueprint"
+          ? t(ui.common.toPaper, locale)
+          : t(ui.common.toInk, locale)
+      }
+      className="label flex h-8 items-center gap-2 border border-rule px-2.5 transition-colors hover:border-rule-strong hover:text-text"
     >
       <span
         aria-hidden
-        className="block size-3 rounded-full border-2 border-current"
-        style={{ background: theme === "night" ? "currentColor" : "transparent" }}
+        className="block size-2 border border-current"
+        style={{
+          background: theme === "blueprint" ? "transparent" : "currentColor",
+        }}
       />
+      {theme === "blueprint"
+        ? t(ui.common.ink, locale)
+        : t(ui.common.paper, locale)}
     </button>
   );
 }

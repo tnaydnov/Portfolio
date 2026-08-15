@@ -1,17 +1,26 @@
 import type { MetadataRoute } from "next";
-import { projects } from "@/content/cv";
+import { CASE_STUDIES } from "@/content/work";
 import { LOCALES } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ["", ...projects.map((p) => `/work/${p.slug}`)];
+const ROUTES = ["", "/work", "/system", "/about", "/contact", "/colophon"];
 
-  return LOCALES.flatMap((locale) =>
-    paths.map((path) => ({
-      url: `${site.url}/${locale}${path}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: path === "" ? 1 : 0.7,
-    })),
-  );
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+
+  const entry = (path: string, priority: number) => ({
+    url: `${site.url}${path}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority,
+  });
+
+  return LOCALES.flatMap((locale) => [
+    ...ROUTES.map((route) =>
+      entry(`/${locale}${route}`, route === "" ? 1 : 0.8),
+    ),
+    ...CASE_STUDIES.map((p) =>
+      entry(`/${locale}/work/${p.slug}`, p.tier === "flagship" ? 0.9 : 0.6),
+    ),
+  ]);
 }

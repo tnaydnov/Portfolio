@@ -1,77 +1,74 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   A warm, quiet, friendly page. Two colours, two fonts, one spring.
-   Previous version was 567 lines for a site with seven routes; this is one
-   page and a short project page, so it should not need much.
+   TECHNICAL EDITORIAL — design tokens
+   Two first-class themes: `draft` (paper, default) and `blueprint` (ink).
    ========================================================================== */
 
 :root,
-[data-theme="day"] {
-  --paper: #fdf8f0;
-  --card: #fffdf9;
-  --sunk: #f6efe3;
-  --ink: #241f1a;
-  --ink-soft: #5f5850;
-  --ink-faint: #938a7e;
-  --line: #e6dccb;
-  --accent: #d1532a;
-  --accent-soft: #fbe6dd;
-  --study: #2f7d70;
-  --study-soft: #dcefe9;
+[data-theme="draft"] {
+  --ink: #f3f1ec;
+  --ink-2: #eae7e0;
+  --surface: #fffefb;
+  --surface-2: #f7f5f0;
+  --rule: rgba(20, 22, 26, 0.14);
+  --rule-strong: rgba(20, 22, 26, 0.3);
+  --text: #14161a;
+  --text-muted: #565b63;
+  --text-faint: #83888f;
+  --signal: #d93a05;
+  --signal-ink: #ffffff;
+  --trace: #3e5f80;
+  --ok: #4f7942;
+  --grain: 0.05;
   color-scheme: light;
 }
 
-[data-theme="night"] {
-  --paper: #171310;
-  --card: #201b16;
-  --sunk: #12100d;
-  --ink: #f4ece0;
-  --ink-soft: #b6aa9a;
-  --ink-faint: #837768;
-  --line: #332b23;
-  --accent: #ff7f52;
-  --accent-soft: #3a2117;
-  --study: #5cc0ac;
-  --study-soft: #14302b;
+[data-theme="blueprint"] {
+  --ink: #07080a;
+  --ink-2: #0b0d10;
+  --surface: #0e1013;
+  --surface-2: #14171c;
+  --rule: rgba(255, 255, 255, 0.11);
+  --rule-strong: rgba(255, 255, 255, 0.26);
+  --text: #ecebe8;
+  --text-muted: #9299a2;
+  --text-faint: #666d76;
+  --signal: #ff4d17;
+  --signal-ink: #0a0a0a;
+  --trace: #5b7fa6;
+  --ok: #7fb069;
+  --grain: 0.075;
   color-scheme: dark;
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-card: var(--card);
-  --color-sunk: var(--sunk);
   --color-ink: var(--ink);
-  --color-soft: var(--ink-soft);
-  --color-faint: var(--ink-faint);
-  --color-line: var(--line);
-  --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
-  --color-study: var(--study);
-  --color-study-soft: var(--study-soft);
+  --color-ink-2: var(--ink-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
+  --color-trace: var(--trace);
+  --color-ok: var(--ok);
 
-  --font-display: var(--font-rubik), ui-rounded, system-ui, sans-serif;
-  --font-sans: var(--font-assistant), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
 
-  --radius-tiny: 6px;
-  --radius-card: 16px;
-  --radius-pill: 999px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* A little overshoot. Enough to feel like an object with weight, not enough
-   to be a stunt — this is the only non-linear curve on the site. */
-:root {
-  --spring: linear(
-    0, 0.006, 0.025, 0.101, 0.539 39.4%, 0.721, 0.849, 0.937, 0.991 65.5%,
-    1.014, 1.024, 1.026, 1.021, 1.013, 1.005, 1.001, 0.999, 1
-  );
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* ------------------------------------------------------------------ base --- */
+/* ---------------------------------------------------------------- base --- */
 
 * {
-  border-color: var(--line);
+  border-color: var(--rule);
 }
 
 html {
@@ -80,153 +77,189 @@ html {
 }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-assistant), ui-sans-serif, system-ui, sans-serif;
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-synthesis-weight: none;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--signal-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 1px;
 }
 
 h1,
 h2,
-h3 {
-  font-family: var(--font-rubik), ui-rounded, system-ui, sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+h3,
+h4 {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
-p {
-  text-wrap: pretty;
+/* ------------------------------------------------------------- hebrew --- */
+
+[lang="he"] {
+  --font-display: var(--font-he-display);
+  --font-body: var(--font-he);
 }
 
-::selection {
-  background: var(--accent);
-  color: var(--paper);
+/* JetBrains Mono has no Hebrew glyphs; keep the instrument feel with tracking. */
+[lang="he"] .label {
+  font-family: var(--font-he), ui-monospace, monospace;
+  letter-spacing: 0.06em;
 }
 
-:focus-visible {
-  outline: 2.5px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: var(--radius-tiny);
+[lang="he"] h1,
+[lang="he"] h2,
+[lang="he"] h3,
+[lang="he"] h4 {
+  letter-spacing: 0;
 }
 
-/* Years and any other figure must never jitter. */
-.tnum {
+[lang="he"] .t-hero {
+  letter-spacing: -0.01em;
+}
+
+[lang="he"] .t-section {
+  letter-spacing: -0.005em;
+}
+
+/* Latin runs inside Hebrew prose keep their own face. */
+[lang="he"] code,
+[lang="he"] .lat {
+  font-family: var(--font-mono), monospace;
+}
+
+/* Metrics must not jitter when values change or animate. */
+.tnum,
+time,
+[data-metric] {
   font-variant-numeric: tabular-nums;
 }
 
-@utility wrap {
+/* ----------------------------------------------------------- utilities --- */
+
+@utility label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+@utility shell {
   width: 100%;
-  max-width: 46rem;
   margin-inline: auto;
-  padding-inline: 1.35rem;
+  max-width: 88rem;
+  padding-inline: 1.25rem;
 }
 
-/* --------------------------------------------------------------- pieces --- */
-
-/* Skill chips and the small "military service" qualifiers. */
-.pill {
-  display: inline-block;
-  border-radius: var(--radius-pill);
-  background: var(--sunk);
-  padding: 0.28rem 0.72rem;
-  font-size: 0.875rem;
-  line-height: 1.35;
-  color: var(--ink-soft);
+@utility halo {
+  box-shadow: 0 0 44px -14px color-mix(in oklab, var(--signal) 75%, transparent);
 }
 
-.link {
-  color: var(--ink);
+@utility t-hero {
+  font-size: clamp(2.75rem, 8.5vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+@utility t-section {
+  font-size: clamp(1.75rem, 3.6vw, 3rem);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+}
+
+@media (min-width: 768px) {
+  .shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .shell {
+    padding-inline: 4rem;
+  }
+}
+
+/* -------------------------------------------------------------- texture --- */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: var(--grain);
+  mix-blend-mode: multiply;
+  background-size: 170px 170px;
+}
+
+[data-theme="blueprint"] .grain {
+  mix-blend-mode: screen;
+}
+
+/* ---------------------------------------------------------------- prose --- */
+
+.prose {
+  max-width: 68ch;
+  font-size: 1.0625rem;
+  line-height: 1.68;
+  color: var(--text-muted);
+}
+
+.prose > * + * {
+  margin-top: 1.15em;
+}
+
+.prose strong {
+  color: var(--text);
+  font-weight: 550;
+}
+
+.prose em {
+  font-style: italic;
+  color: var(--text);
+}
+
+.prose a {
+  color: var(--text);
   text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 2px;
+  text-decoration-color: var(--signal);
   text-underline-offset: 3px;
-  border-radius: 3px;
-  transition: color 0.18s var(--ease);
+  text-decoration-thickness: 1.5px;
 }
 
-.link:hover {
-  color: var(--accent);
+.prose a:hover {
+  color: var(--signal);
 }
 
-/* ------------------------------------------------------------- timeline --- */
-
-.row {
-  border-radius: var(--radius-card);
-  transition: background-color 0.2s var(--ease);
+.prose code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.875em;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+  color: var(--text);
 }
 
-.row:hover {
-  background: var(--card);
-}
+/* --------------------------------------------------------- entry motion --- */
 
-/* The marker: filled for work, hollow for study. Matches the key above. */
-.dot {
-  width: 11px;
-  height: 11px;
-  border-radius: var(--radius-pill);
-  border: 2px solid var(--accent);
-  background: var(--accent);
-}
-
-.dot[data-kind="study"] {
-  border-color: var(--study);
-  background: transparent;
-}
-
-.spine {
-  background: var(--line);
-}
-
-/* The one piece of fun: rows unfold on a spring.
-   `interpolate-size` and `::details-content` are Chromium-only for now.
-   Everywhere else the row snaps open, which is a correct outcome, not a bug. */
-@supports (interpolate-size: allow-keywords) {
-  :root {
-    interpolate-size: allow-keywords;
-  }
-
-  .row::details-content {
-    block-size: 0;
-    overflow: clip;
-    transition:
-      block-size 0.34s var(--spring),
-      content-visibility 0.34s allow-discrete;
-  }
-
-  .row[open]::details-content {
-    block-size: auto;
-  }
-}
-
-.row > summary {
-  list-style: none;
-  cursor: pointer;
-}
-
-.row > summary::-webkit-details-marker {
-  display: none;
-}
-
-/* The +/− sign. Rotates rather than swapping glyphs, so it never reflows and
-   needs no mirroring in Hebrew. */
-.sign {
-  transition: transform 0.34s var(--spring);
-}
-
-.row[open] .sign {
-  transform: rotate(135deg);
-}
-
-/* --------------------------------------------------- entrance (gentle) --- */
-
-@keyframes lift {
+@keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translate3d(0, var(--rise-from, 14px), 0);
   }
   to {
     opacity: 1;
@@ -234,12 +267,85 @@ p {
   }
 }
 
-.lift {
-  animation: lift 0.55s var(--ease) both;
+@keyframes drawIn {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes sweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes travel {
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes ticker {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.reveal {
+  animation: rise 0.8s var(--ease-out-expo) both;
   animation-delay: var(--d, 0ms);
 }
 
-/* ---------------------------------------------------------- less motion --- */
+/* A token travelling the loop path — the carrier. */
+.carrier {
+  offset-path: var(--path);
+  offset-rotate: 0deg;
+  animation: travel var(--travel, 26s) linear infinite;
+}
+
+/* Corner registration brackets that draw in on hover. */
+.bracket {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--signal);
+  opacity: 0;
+  transition:
+    opacity 0.4s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo);
+  pointer-events: none;
+}
+
+.group:hover .bracket,
+.group:focus-within .bracket {
+  opacity: 1;
+  transform: none;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker var(--speed, 46s) linear infinite;
+}
+
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+/* ---------------------------------------------------- reduced-motion mode --- */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -250,75 +356,42 @@ p {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 
-  .lift {
+  .reveal {
     animation: none;
     opacity: 1;
     transform: none;
   }
+
+  .carrier,
+  .ticker-track {
+    animation: none !important;
+  }
+
+  .carrier {
+    display: none;
+  }
 }
 
-/* -------------------------------------------------------------- on paper --- */
+/* xyflow renders inside our token system, not its own. */
+.react-flow__attribution {
+  display: none;
+}
 
-/* Ctrl+P gives back a clean one-column résumé. Every row is forced open by
-   the print hook before this stylesheet ever applies. */
-@media print {
-  :root,
-  [data-theme="day"],
-  [data-theme="night"] {
-    --paper: #fff;
-    --card: #fff;
-    --sunk: #fff;
-    --ink: #000;
-    --ink-soft: #333;
-    --ink-faint: #555;
-    --line: #bbb;
-    --accent: #000;
-    --study: #666;
-  }
+.react-flow__handle {
+  width: 5px;
+  height: 5px;
+  min-width: 0;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--rule-strong);
+}
 
-  .no-print {
-    display: none !important;
-  }
-
-  .wrap {
-    max-width: none;
-    padding: 0;
-  }
-
-  /* Force every row open on paper, without a `beforeprint` listener.
-     Chromium hides closed content with `content-visibility` on
-     `::details-content`; older engines use `display: none` on the non-summary
-     children. Both are overridden here so the résumé is complete either way. */
-  .row::details-content {
-    block-size: auto !important;
-    content-visibility: visible !important;
-  }
-
-  .row > *:not(summary) {
-    display: block !important;
-  }
-
-  .sign {
-    display: none !important;
-  }
-
-  a[href^="http"]::after,
-  a[href^="mailto"]::after {
-    content: " (" attr(href) ")";
-    font-size: 0.75em;
-    color: #555;
-  }
-
-  section,
-  li {
-    break-inside: avoid;
-  }
-
-  @page {
-    size: A4;
-    margin: 15mm;
-  }
+.react-flow__node {
+  cursor: pointer;
+  font-family: var(--font-body), sans-serif;
 }
