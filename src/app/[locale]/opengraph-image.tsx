@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
+import { me, now } from "@/content/cv";
 import { LOCALES, isLocale, t } from "@/lib/i18n";
-import { site } from "@/lib/site";
 
 export const alt = "Tomer Naydnov";
 export const size = { width: 1200, height: 630 };
@@ -17,7 +17,7 @@ export default async function OpengraphImage({
 }) {
   const { locale: raw } = await params;
   const locale = isLocale(raw) ? raw : "en";
-  const tagline = `${t(site.description, locale).split(". ")[0]}.`;
+  const rtl = locale === "he";
 
   return new ImageResponse(
     (
@@ -27,63 +27,25 @@ export default async function OpengraphImage({
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          background: "#07080a",
-          color: "#ecebe8",
-          padding: 72,
-          fontFamily: "sans-serif",
+          justifyContent: "center",
+          gap: 24,
+          background: "#fdf8f0",
+          color: "#241f1a",
+          padding: 88,
+          direction: rtl ? "rtl" : "ltr",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: 999,
-              background: "#ff4d17",
-            }}
-          />
-          <div
-            style={{
-              fontSize: 22,
-              letterSpacing: 6,
-              textTransform: "uppercase",
-              color: "#8a8f98",
-            }}
-          >
-            Signal · Frame · Plan · Build · Prove · Field
-          </div>
+        <div style={{ display: "flex", fontSize: 82, fontWeight: 700, letterSpacing: -2 }}>
+          {t(me.greeting, locale)}
         </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          <div style={{ fontSize: 104, lineHeight: 1, letterSpacing: -4 }}>
-            {t(site.name, "en")}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              fontSize: 32,
-              lineHeight: 1.3,
-              color: "#9299a2",
-              maxWidth: 940,
-            }}
-          >
-            {tagline}
-          </div>
+        <div style={{ display: "flex", fontSize: 38, lineHeight: 1.35, color: "#5f5850", maxWidth: 900 }}>
+          {t(me.what, locale)}
         </div>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            fontSize: 22,
-            color: "#666d76",
-            borderTop: "1px solid rgba(255,255,255,0.14)",
-            paddingTop: 24,
-          }}
-        >
-          <span>{t(site.role, "en")}</span>
-          <span style={{ color: "#ff4d17" }}>מכלול</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 16 }}>
+          <div style={{ display: "flex", width: 14, height: 14, borderRadius: 7, background: "#d1532a" }} />
+          <div style={{ display: "flex", fontSize: 30, color: "#241f1a" }}>
+            {t(now.wanted, locale)}
+          </div>
         </div>
       </div>
     ),
