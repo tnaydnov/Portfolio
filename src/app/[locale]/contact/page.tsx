@@ -40,10 +40,7 @@ export default async function ContactPage({
       <SectionMark index="00" title={t(ui.contact.title, locale)} />
 
       <header className="py-14 md:py-24">
-        <h1 className="t-hero max-w-[9ch]">{t(ui.contact.title, locale)}</h1>
-        <p className="mt-10 max-w-[36ch] font-display text-[clamp(1.4rem,3vw,2.25rem)] leading-[1.18] tracking-tight">
-          {t(ui.contact.lede, locale)}
-        </p>
+        <h1 className="t-section max-w-[24ch]">{t(ui.contact.lede, locale)}</h1>
       </header>
 
       <ul className="grid gap-px border-y border-rule bg-rule">

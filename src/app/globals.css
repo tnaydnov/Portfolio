@@ -332,7 +332,9 @@ time,
 .group:hover .bracket,
 .group:focus-within .bracket {
   opacity: 1;
-  transform: none;
+  /* Tailwind v4 compiles `-translate-x-1.5` to the `translate` property, not
+     to `transform` — resetting `transform` here was a no-op for four years. */
+  translate: none;
 }
 
 .ticker-track {
@@ -343,6 +345,112 @@ time,
 
 .ticker:hover .ticker-track {
   animation-play-state: paused;
+}
+
+/* ------------------------------------------------------------ the sheet --- */
+
+/* Base state for every element the crosshair can reach. The lit rules
+   themselves are generated from `content/bio.ts` in `sheet/Sheet.tsx`, so the
+   selectors can never drift from the data they describe. */
+[data-tag] {
+  --lit: 0;
+  transition:
+    opacity 140ms var(--ease-out-expo),
+    color 140ms var(--ease-out-expo),
+    background-color 140ms var(--ease-out-expo);
+}
+
+/* Trajectory line. The separator is a pseudo-element, never a text glyph — a
+   literal arrow inside a mixed Hebrew/Latin/numeral run reorders into nonsense
+   under RTL. This one mirrors itself instead. */
+.traj > li + li::before {
+  content: "›";
+  display: inline-block;
+  margin-inline: 0.45em 0.55em;
+  color: var(--text-faint);
+  font-family: var(--font-mono), monospace;
+}
+
+[dir="rtl"] .traj > li + li::before {
+  scale: -1 1;
+}
+
+.traj > li {
+  color: color-mix(in oklab, var(--signal) calc(var(--lit, 0) * 100%), var(--text));
+}
+
+/* Gantt. One grid column per year; under `direction: rtl` the identical
+   `grid-column` places from the right edge, so 2019 lands on the right and the
+   whole chart mirrors without a single directional rule. */
+.gantt-row {
+  list-style: none;
+}
+
+.gantt-row::-webkit-details-marker,
+.gantt-row::marker {
+  display: none;
+  content: "";
+}
+
+.gantt-track {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--rule) 0 1px,
+    transparent 1px calc(100% / var(--years, 10))
+  );
+}
+
+.gantt-bar {
+  background: color-mix(
+    in oklab,
+    var(--signal) calc(var(--lit, 0) * 100%),
+    var(--bar, var(--trace))
+  );
+}
+
+/* Open-ended commitments fade out at the leading edge rather than stopping
+   with a hard cap. Gradients take no logical direction keyword, so the axis is
+   flipped explicitly for RTL. */
+.gantt-bar[data-open] {
+  mask-image: linear-gradient(to right, #000 55%, transparent 100%);
+}
+
+[dir="rtl"] .gantt-bar[data-open] {
+  mask-image: linear-gradient(to left, #000 55%, transparent 100%);
+}
+
+/* A derived date, drawn as such. */
+.gantt-bar[data-approx] {
+  mask-image: repeating-linear-gradient(
+    to right,
+    #000 0 4px,
+    transparent 4px 7px
+  );
+}
+
+.gantt-row:hover .gantt-bar,
+.gantt-row:focus-visible .gantt-bar {
+  height: 9px;
+}
+
+.rating-value {
+  color: color-mix(in oklab, var(--signal) calc(var(--lit, 0) * 100%), var(--text));
+}
+
+.work-row {
+  background: color-mix(
+    in oklab,
+    var(--signal) calc(var(--lit, 0) * 8%),
+    transparent
+  );
+}
+
+/* The cohort field is 650 marks, rendered twice on the home page. A staggered
+   per-dot reveal was built and then removed: it meant 1,300 concurrent CSS
+   animations to buy a flourish, on pages that are already inside a `Reveal`.
+   The dots inherit that fade and cost nothing of their own. */
+.dots circle.d {
+  fill-opacity: 0.26;
 }
 
 /* ---------------------------------------------------- reduced-motion mode --- */
@@ -373,6 +481,68 @@ time,
 
   .carrier {
     display: none;
+  }
+}
+
+/* ------------------------------------------------------------- on paper --- */
+
+/* For someone whose whole argument is that a system should survive its parts
+   being rearranged, a home page that prints correctly is not a nicety. */
+@media print {
+  :root,
+  [data-theme="draft"],
+  [data-theme="blueprint"] {
+    --ink: #fff;
+    --ink-2: #fff;
+    --surface: #fff;
+    --surface-2: #fff;
+    --text: #000;
+    --text-muted: #333;
+    --text-faint: #555;
+    --rule: rgba(0, 0, 0, 0.25);
+    --rule-strong: rgba(0, 0, 0, 0.55);
+    --signal: #000;
+    --trace: #666;
+    --grain: 0;
+  }
+
+  .grain,
+  header[class*="sticky"],
+  .ticker,
+  nav {
+    display: none !important;
+  }
+
+  /* The crosshair is a pointer affordance; on paper every relationship is
+     already printed as text. */
+  [data-tag] {
+    opacity: 1 !important;
+  }
+
+  /* Nothing is collapsed on paper. */
+  details > div {
+    display: block !important;
+  }
+
+  details > summary {
+    list-style: none;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #555;
+    word-break: break-all;
+  }
+
+  section,
+  li {
+    break-inside: avoid;
+  }
+
+  @page {
+    size: A4;
+    margin: 16mm;
   }
 }
 

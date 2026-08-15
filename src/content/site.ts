@@ -1,67 +1,5 @@
 import type { LS, LSA } from "@/lib/i18n";
 
-export const timeline: {
-  span: LS;
-  title: LS;
-  org: LS;
-  note: LS;
-  current?: boolean;
-}[] = [
-  {
-    span: { en: "2026 — 2028", he: "2026 — 2028" },
-    title: {
-      en: "M.Sc. Industrial Engineering & Management",
-      he: "מוסמך בהנדסת תעשייה וניהול",
-    },
-    org: {
-      en: "Shenkar College of Engineering, Design and Art",
-      he: "שנקר — הנדסה. עיצוב. אמנות",
-    },
-    note: {
-      en: "The systems half. Process design, optimisation, and the formal tools behind what I had been doing by instinct.",
-      he: "החצי המערכתי. תכנון תהליכים, אופטימיזציה, והכלים הפורמליים שמאחורי מה שעשיתי באינטואיציה.",
-    },
-    current: true,
-  },
-  {
-    span: { en: "2023 — now", he: "2023 — היום" },
-    title: {
-      en: "Programming Instructor & EdTech Content Developer",
-      he: "מנחה תכנות ומפתח תוכן EdTech",
-    },
-    org: { en: "Nitzanim", he: "ניצנים" },
-    note: {
-      en: "Requirements with clients and educational stakeholders, curriculum and product development, Gantt planning, and Arc — an internal learning platform I founded and shipped.",
-      he: "אפיון דרישות מול לקוחות ובעלי עניין חינוכיים, פיתוח תוכן ומוצר, תכנון גאנט, ו־Arc — פלטפורמת למידה פנימית שייסדתי ושלחתי לאוויר.",
-    },
-    current: true,
-  },
-  {
-    span: { en: "2021 — 2025", he: "2021 — 2025" },
-    title: { en: "B.Sc. Software Engineering", he: "בוגר בהנדסת תוכנה" },
-    org: {
-      en: "Ben-Gurion University of the Negev",
-      he: "אוניברסיטת בן־גוריון בנגב",
-    },
-    note: {
-      en: "The build half. Where the reps in the ledger come from.",
-      he: "החצי של הבנייה. משם מגיעות החזרות שברשימה.",
-    },
-  },
-  {
-    span: { en: "2020 — 2023", he: "2020 — 2023" },
-    title: { en: "Technical Support, Tier 2", he: "תמיכה טכנית, Tier 2" },
-    org: {
-      en: "IDF · Israel Electric Corporation · Isracard",
-      he: "צה״ל · חברת החשמל · ישראכרט",
-    },
-    note: {
-      en: "Three large organisations, three helpdesks. This is where I learned that users describe symptoms, never causes.",
-      he: "שלושה ארגונים גדולים, שלושה מוקדי תמיכה. כאן למדתי שמשתמשים מתארים סימפטומים, אף פעם לא סיבות.",
-    },
-  },
-];
-
 export const numbers: { value: LS; label: LS }[] = [
   {
     value: { en: "650+", he: "‎650+" },
@@ -136,14 +74,23 @@ export const budgetTargets: {
   {
     metric: { en: "First-load JS, home", he: "‏JS ראשוני, דף הבית" },
     target: { en: "< 180 kB", he: "‎< 180 kB" },
-    measured: { en: "152 kB", he: "152 kB" },
+    measured: { en: "112 kB", he: "112 kB" },
     note: { en: "gzipped", he: "מכווץ" },
   },
   {
     metric: { en: "First-load JS, case", he: "‏JS ראשוני, מקרה בוחן" },
     target: { en: "< 180 kB", he: "‎< 180 kB" },
-    measured: { en: "130 kB", he: "130 kB" },
+    measured: { en: "110 kB", he: "110 kB" },
     note: { en: "gzipped", he: "מכווץ" },
+  },
+  {
+    metric: {
+      en: "JS behind the home page's one interaction",
+      he: "‏JS מאחורי האינטראקציה היחידה בדף הבית",
+    },
+    target: { en: "0", he: "0" },
+    measured: { en: "0", he: "0" },
+    note: { en: "CSS :has(), not a listener", he: "‏CSS :has(), לא מאזין" },
   },
   {
     metric: { en: "Animation libraries", he: "ספריות אנימציה" },
@@ -220,6 +167,26 @@ export const colophonRules: { title: LS; body: LS }[] = [
     body: {
       en: "Case studies are TypeScript modules rather than MDX, because the format is a strict schema: stage sections, decision entries with a mandatory tradeoff, metrics, a graph topology. Typed content means the compiler enforces that every decision has a cost attached. MDX would have made it prose with escape hatches.",
       he: "מקרי הבוחן הם מודולי TypeScript ולא MDX, כי הפורמט הוא סכמה קשיחה: מקטעי שלבים, רשומות החלטה עם פשרה חובה, מדדים, טופולוגיית גרף. תוכן מוגדר בטיפוסים אומר שהמהדר אוכף שלכל החלטה מוצמד מחיר. MDX היה הופך את זה לפרוזה עם דלתות מילוט.",
+    },
+  },
+  {
+    title: {
+      en: "The home page's only interaction ships no JavaScript",
+      he: "האינטראקציה היחידה בדף הבית לא שולחת JavaScript",
+    },
+    body: {
+      en: "Engage anything on the datasheet and everything belonging to the same part of my life lights while the rest recede. It is twelve generated CSS rules built on :has() — no state, no observer, no listener, nothing to hydrate. Specificity does the work rather than source order, so a later refactor cannot quietly break it. Keyboard focus is ungated and hover is gated behind a real pointer, because on a touch screen :hover sticks after a tap. The signature interaction on this site weighs less than the film grain.",
+      he: "נגיעה בכל אלמנט בגיליון הנתונים מדליקה את כל מה ששייך לאותו פרק בחיים שלי, וכל השאר נסוג. אלה שתים־עשרה כללי CSS מיוצרים מעל ‎:has() — בלי state, בלי observer, בלי מאזין, בלי שום דבר להנדרט. הספציפיות עושה את העבודה במקום סדר ההופעה, כך שריפקטור עתידי לא יכול לשבור את זה בשקט. פוקוס מקלדת פתוח תמיד, ו־hover חסום מאחורי מצביע אמיתי, כי במסך מגע ‎:hover נתקע אחרי הקשה. האינטראקציה החתומה של האתר הזה שוקלת פחות מהגרעיניות.",
+    },
+  },
+  {
+    title: {
+      en: "The chart and the sentences come from the same file",
+      he: "התרשים והמשפטים מגיעים מאותו קובץ",
+    },
+    body: {
+      en: "The Gantt on the home page, the trajectory line above it, and every tag the crosshair matches on are all derived from one typed module. So is the caption that says how many things ran at once — it is computed from the bars, never typed, which means it cannot drift from the chart sitting directly beneath it. Where a date is inferred rather than documented, the entry is flagged in the source and the bar is drawn hatched. A chart that quietly launders a guess into a confident rectangle is the exact failure this site is arguing against.",
+      he: "הגאנט בדף הבית, קו המסלול שמעליו, וכל תגית שהכוונת מזהה — כולם נגזרים ממודול מוקלד אחד. כך גם הכיתוב שאומר כמה דברים רצו במקביל: הוא מחושב מהעמודות, לא נכתב, ולכן הוא לא יכול להתנתק מהתרשים שיושב מתחתיו. במקום שבו תאריך משוער ולא מתועד, הרשומה מסומנת בקוד והעמודה מצוירת מקווקוות. תרשים שמלבין ניחוש למלבן בטוח בעצמו הוא בדיוק הכשל שהאתר הזה טוען נגדו.",
     },
   },
   {

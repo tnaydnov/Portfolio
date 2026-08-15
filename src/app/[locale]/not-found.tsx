@@ -1,10 +1,13 @@
 import Link from "next/link";
-import { DEFAULT_LOCALE, t } from "@/lib/i18n";
+import { headers } from "next/headers";
+import { DEFAULT_LOCALE, isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
 import { href } from "@/lib/site";
 
-export default function NotFound() {
-  const locale = DEFAULT_LOCALE;
+export default async function NotFound() {
+  // `not-found.tsx` gets no params, so middleware hands the locale over.
+  const requested = (await headers()).get("x-locale") ?? undefined;
+  const locale: Locale = isLocale(requested) ? requested : DEFAULT_LOCALE;
 
   return (
     <div className="shell flex min-h-[70svh] flex-col justify-center py-24">

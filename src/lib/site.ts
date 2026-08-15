@@ -13,6 +13,15 @@ export const site = {
   },
   email: "tnaydnov@gmail.com",
   location: { en: "Israel · GMT+3", he: "ישראל · GMT+3" },
+  /**
+   * Drop a 4:5 portrait in `public/` and put its path here — the identity cell
+   * swaps from the cohort field to the photograph, and nothing else changes.
+   */
+  photo: "" as string,
+  portraitAlt: {
+    en: "Tomer Naydnov",
+    he: "תומר ניידנוב",
+  },
   links: {
     github: "https://github.com/tnaydnov",
     linkedin: "https://www.linkedin.com/in/tomer-naydnov/",

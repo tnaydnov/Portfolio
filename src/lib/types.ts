@@ -86,7 +86,7 @@ export interface Project {
   metrics: Metric[];
   stack: string[];
   links?: { repo?: string; live?: string };
-  media?: { poster: string; video?: string; alt: LS };
+  media?: { poster: string; alt: LS };
   sections?: StageSection[];
   decisions?: Decision[];
   feedback?: Feedback[];

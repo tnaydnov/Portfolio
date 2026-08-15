@@ -52,7 +52,7 @@ export default async function WorkPage({
       <SectionMark index="01" title={t(ui.common.evidence, locale)} />
 
       <header className="grid gap-8 py-14 md:grid-cols-[1fr_auto] md:items-end md:py-20">
-        <h1 className="t-hero max-w-[10ch]">{t(ui.work.title, locale)}</h1>
+        <h1 className="t-section max-w-[20ch]">{t(ui.work.heading, locale)}</h1>
         <p className="max-w-[36ch] text-[0.95rem] leading-relaxed text-muted">
           {t(ui.work.intro, locale)}
         </p>

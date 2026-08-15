@@ -33,10 +33,7 @@ export default async function ColophonPage({
       <SectionMark index="00" title={t(ui.colophon.title, locale)} />
 
       <header className="py-14 md:py-24">
-        <h1 className="t-hero max-w-[11ch]">{t(ui.colophon.title, locale)}</h1>
-        <p className="mt-10 max-w-[30ch] font-display text-[clamp(1.4rem,3vw,2.25rem)] leading-[1.18] tracking-tight">
-          {t(ui.colophon.lede, locale)}
-        </p>
+        <h1 className="t-section max-w-[24ch]">{t(ui.colophon.lede, locale)}</h1>
         <p className="mt-8 max-w-[54ch] text-[1.05rem] leading-relaxed text-muted">
           {t(ui.colophon.intro, locale)}
         </p>

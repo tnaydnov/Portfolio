@@ -42,7 +42,6 @@ export const lpr: Project = {
   links: { repo: "https://github.com/tnaydnov/License_Plate_Recognition" },
   media: {
     poster: "/images/lpr-preview.png",
-    video: "/videos/lpr-demo.mp4",
     alt: {
       en: "License plate recognition operator interface showing a detected plate",
       he: "ממשק המפעיל של מערכת זיהוי הלוחיות מציג לוחית שזוהתה",
@@ -192,7 +191,6 @@ export const tradingSystem: Project = {
   links: { repo: "https://github.com/tnaydnov/Trading_System" },
   media: {
     poster: "/images/trading-preview.png",
-    video: "/videos/trading-demo.mp4",
     alt: {
       en: "Trading system storefront and management interface",
       he: "חזית החנות וממשק הניהול של מערכת המסחר",

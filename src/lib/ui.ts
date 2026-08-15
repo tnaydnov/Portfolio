@@ -62,21 +62,72 @@ export const ui = {
   } satisfies Record<string, LS>,
 
   home: {
-    heroWord: { en: "מִכְלוֹל", he: "מִכְלוֹל" },
-    heroPron: { en: "/mikhlol/ · noun", he: "/מִכְלוֹל/ · שם עצם" },
-    heroDefinition: {
+    /* ---------------------------------------------------------- §00 sheet --- */
+    sheetLabel: { en: "Datasheet", he: "גיליון נתונים" },
+    rev: { en: "Rev.", he: "גרסה" },
+    abstract: {
+      en: "I’m Tomer. I spent three years behind help desks for about three thousand people — the IDF’s C4I Corps, then the Israel Electric Corporation, then Isracard — which is where I learned that nobody ever reports a cause. Now I teach teenagers preparing for the IDF’s technology units, and I built the platform their instructors run on; it has been in production three years. I’m doing a master’s in industrial engineering because the thing that kept biting me was never the code.",
+      he: "אני תומר. שלוש שנים ישבתי במוקדי תמיכה של כשלושת אלפים איש — חיל התקשוב, אחר כך חברת החשמל, אחר כך ישראכרט — ושם למדתי שאף אחד לא מדווח על סיבה. היום אני מלמד בני נוער שמתכוננים ליחידות הטכנולוגיות של צה״ל, ובניתי את הפלטפורמה שהמנחים שלהם עובדים עליה; היא בייצור שלוש שנים. אני עושה תואר שני בהנדסת תעשייה כי הדבר שהמשיך לתפוס אותי אף פעם לא היה הקוד.",
+    },
+    trajectoryLabel: { en: "Trajectory", he: "מסלול" },
+    overlapLabel: { en: "The overlap", he: "החפיפה" },
+    atOnce: { en: "at once", he: "במקביל" },
+    overlapNote: {
+      en: "Every bar is a real commitment with real dates. Almost none of it was sequential — which is the part a résumé, read top to bottom, hides. Open any row for what it was.",
+      he: "כל עמודה היא מחויבות אמיתית עם תאריכים אמיתיים. כמעט כלום מזה לא היה טורי — וזה בדיוק מה שקורות חיים, שנקראים מלמעלה למטה, מסתירים. אפשר לפתוח כל שורה כדי לראות מה זה היה.",
+    },
+    approxMark: { en: "Approximate", he: "משוער" },
+    ratingsLabel: { en: "By the numbers", he: "במספרים" },
+    workLabel: { en: "What I have built", he: "מה בניתי" },
+    colWhat: { en: "What it is", he: "מה זה" },
+    colStatus: { en: "Status", he: "סטטוס" },
+    wantedLabel: { en: "Wanted", he: "מבוקש" },
+    reachLabel: { en: "Reach me", he: "ליצירת קשר" },
+    scrollHint: { en: "The proof is below", he: "ההוכחות למטה" },
+
+    /* ----------------------------------------------------------- §01 desk --- */
+    deskLabel: { en: "The desk", he: "המוקד" },
+    deskHeading: {
+      en: "Nobody ever reports a cause.",
+      he: "אף אחד לא מדווח על סיבה.",
+    },
+    deskIntro: {
+      en: "Three years of help desks across the IDF, the Israel Electric Corporation and Isracard, and the job was always the same: someone hands you a symptom, and the work is finding the sentence underneath it. I do the same thing now, with requirements.",
+      he: "שלוש שנים של מוקדי תמיכה בצה״ל, בחברת החשמל ובישראכרט, והעבודה תמיד הייתה אותה עבודה: מישהו מוסר לך סימפטום, והמלאכה היא למצוא את המשפט שמתחתיו. אני עושה בדיוק את זה היום, עם דרישות.",
+    },
+    colSaid: { en: "Reported as", he: "דווח כ" },
+    colWas: { en: "What it actually was", he: "מה זה היה באמת" },
+    colChanged: { en: "What changed", he: "מה השתנה" },
+    reconstructed: { en: "Reconstructed", he: "משוחזר" },
+    reconstructedNote: {
+      en: "Substance recorded at the time; wording is mine, from memory.",
+      he: "התוכן תועד בזמן אמת; הניסוח שלי, מהזיכרון.",
+    },
+
+    /* ----------------------------------------------------------- §02 room --- */
+    roomLabel: { en: "The room", he: "הכיתה" },
+    cohortCaption: {
+      en: "One mark per student. The tinted ones sat a national exam I prepared them for.",
+      he: "סימן אחד לכל תלמיד. המסומנים ניגשו לבגרות שהכנתי אותם אליה.",
+    },
+
+    /* -------------------------------------------------------- §05 mikhlol --- */
+    mikhlolWord: { en: "מִכְלוֹל", he: "מִכְלוֹל" },
+    mikhlolPron: { en: "/mikhlol/ · noun", he: "/מִכְלוֹל/ · שם עצם" },
+    mikhlolDefinition: {
       en: "the whole formed by the combination of all its parts.",
       he: "השלם הנוצר מצירוף כל חלקיו.",
     },
-    heroStatementLead: {
+    mikhlolLead: {
       en: "That’s the job. Not the code, not the plan —",
       he: "זו העבודה. לא הקוד, לא התוכנית —",
     },
-    heroStatementBold: { en: "the combination.", he: "הצירוף." },
-    heroStatementRest: {
-      en: "I find the need, define the shape, plan the path, build the thing, prove it works, and fix what the field says is wrong.",
-      he: "אני מוצא את הצורך, מגדיר את הצורה, מתכנן את הדרך, בונה את הדבר, מוכיח שהוא עובד, ומתקן את מה שהשטח אומר שלא בסדר.",
+    mikhlolBold: { en: "the combination.", he: "הצירוף." },
+    mikhlolRest: {
+      en: "I find the need, define the shape, plan the path, build the thing, prove it works, and fix what the field says is wrong. Everything above is that, done six times.",
+      he: "אני מוצא את הצורך, מגדיר את הצורה, מתכנן את הדרך, בונה את הדבר, מוכיח שהוא עובד, ומתקן את מה שהשטח אומר שלא בסדר. כל מה שלמעלה הוא זה, שש פעמים.",
     },
+    mikhlolCta: { en: "The method, named →", he: "השיטה, בשמה ←" },
     seeTheLoop: { en: "See the loop", he: "לראות את הלולאה" },
     theEvidence: { en: "The evidence", he: "הראיות" },
     skipTheLoop: { en: "Skip the loop ↓", he: "דילוג על הלולאה ↓" },
@@ -136,6 +187,10 @@ export const ui = {
 
   work: {
     title: { en: "Work", he: "עבודה" },
+    heading: {
+      en: "Six things I built, and what each one cost me to get right.",
+      he: "שישה דברים שבניתי, ומה כל אחד מהם עלה לי כדי לצאת נכון.",
+    },
     intro: {
       en: "Filter by what I actually did, not by what it was written in. Every case study carries dates, a decision log, and a list of what I would rebuild.",
       he: "סינון לפי מה שבאמת עשיתי, לא לפי מה שזה נכתב בו. לכל מקרה יש תאריכים, יומן החלטות, ורשימה של מה שהייתי בונה מחדש.",

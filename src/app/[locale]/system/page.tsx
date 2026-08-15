@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionMark } from "@/components/chrome/SectionMark";
 import { Reveal } from "@/components/motion/Reveal";
-import { LoopSchematic } from "@/components/loop/LoopSchematic";
+import { LoopSchematic, StageTicker } from "@/components/loop/LoopSchematic";
+import { LoopSection } from "@/components/loop/LoopSection";
 import { STAGES } from "@/lib/stages";
 import { byStage } from "@/content/work";
 import { isLocale, t, type Locale } from "@/lib/i18n";
@@ -46,22 +47,37 @@ export default async function SystemPage({
   ];
 
   return (
-    <div className="shell pt-16 md:pt-24">
-      <SectionMark index="00" title={t(ui.common.method, locale)} />
+    <>
+      <div className="shell pt-16 md:pt-24">
+        <SectionMark index="00" title={t(ui.common.method, locale)} />
 
-      <header className="relative isolate overflow-hidden py-14 md:py-24">
-        <LoopSchematic
-          locale={locale}
-          className="pointer-events-none absolute left-1/2 top-1/2 w-[160%] max-w-none -translate-x-1/2 -translate-y-1/2 text-text opacity-[0.09]"
-        />
-        <h1 className="t-hero max-w-[9ch]">{t(ui.system.title, locale)}</h1>
-        <p className="mt-8 max-w-[52ch] text-[1.05rem] leading-relaxed text-muted">
-          {t(ui.system.intro, locale)}
-        </p>
-      </header>
+        <header className="relative isolate overflow-hidden py-14 md:py-24">
+          <LoopSchematic
+            locale={locale}
+            className="pointer-events-none absolute left-1/2 top-1/2 w-[160%] max-w-none -translate-x-1/2 -translate-y-1/2 text-text opacity-[0.09]"
+          />
+          {/* The largest type on the page is the argument, not the nav label. */}
+          <h1 className="t-section max-w-[20ch]">
+            {t(ui.home.positionQuoteLead, locale)}{" "}
+            <span className="text-signal">
+              {t(ui.home.positionQuoteAccent, locale)}
+            </span>
+          </h1>
+          <p className="mt-8 max-w-[52ch] text-[1.05rem] leading-relaxed text-muted">
+            {t(ui.system.intro, locale)}
+          </p>
+        </header>
+      </div>
 
-      <section>
-        <SectionMark index="01" title={t(ui.system.sixStages, locale)} />
+      <StageTicker locale={locale} />
+
+      {/* The loop, in full. It opened the site for a year; it belongs here, in
+          front of a reader who followed a link that promised a method. */}
+      <LoopSection locale={locale} />
+
+      <div className="shell pt-24 md:pt-32">
+        <section>
+          <SectionMark index="02" title={t(ui.system.sixStages, locale)} />
         <ol className="grid gap-px bg-rule">
           {STAGES.map((stage) => {
             const count = byStage(stage.id).length;
@@ -132,7 +148,7 @@ export default async function SystemPage({
       </section>
 
       <section className="pt-24 md:pt-32">
-        <SectionMark index="02" title={t(ui.system.peopleTitle, locale)} />
+        <SectionMark index="03" title={t(ui.system.peopleTitle, locale)} />
         <Reveal>
           <div className="grid gap-10 py-14 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
             <h2 className="t-section max-w-[14ch] lg:sticky lg:top-28 lg:self-start">
@@ -148,7 +164,7 @@ export default async function SystemPage({
       </section>
 
       <section className="pt-24 md:pt-32">
-        <SectionMark index="03" title={t(ui.system.nextTitle, locale)} />
+        <SectionMark index="04" title={t(ui.system.nextTitle, locale)} />
         <div className="grid gap-px bg-rule py-1 md:grid-cols-2">
           {cards.map((c) => (
             <Link
@@ -167,6 +183,7 @@ export default async function SystemPage({
           ))}
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { SectionMark } from "@/components/chrome/SectionMark";
 import { Reveal } from "@/components/motion/Reveal";
 import { CountUp } from "@/components/motion/CountUp";
-import { numbers, timeline } from "@/content/site";
+import { numbers } from "@/content/site";
+import { BIO, endOf } from "@/content/bio";
 import { isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
 import { href, site } from "@/lib/site";
@@ -58,10 +59,8 @@ export default async function AboutPage({
       <SectionMark index="00" title={t(ui.about.title, locale)} />
 
       <header className="py-14 md:py-24">
-        <h1 className="t-hero max-w-[9ch]">{t(ui.about.title, locale)}</h1>
-        <p className="mt-10 max-w-[30ch] font-display text-[clamp(1.5rem,3.4vw,2.6rem)] leading-[1.16] tracking-tight">
-          {t(ui.about.lede, locale)}
-        </p>
+        {/* The claim is the headline. "About" is already in the nav twice. */}
+        <h1 className="t-section max-w-[22ch]">{t(ui.about.lede, locale)}</h1>
       </header>
 
       <section>
@@ -106,28 +105,36 @@ export default async function AboutPage({
 
       <section className="pt-24 md:pt-32">
         <SectionMark index="02" title={t(ui.about.trackTitle, locale)} />
+        {/* Rendered from `content/bio.ts`, the same module that draws the Gantt
+            on the home page. One list of dates, not two that can disagree. */}
         <ol className="mt-8 grid gap-px bg-rule">
-          {timeline.map((entry) => (
-            <li key={t(entry.title, locale)} className="bg-ink">
+          {BIO.map((e) => (
+            <li key={e.id} className="bg-ink">
               <div className="grid gap-4 py-8 md:grid-cols-[11rem_1fr] md:gap-10">
                 <div className="flex items-baseline gap-3 md:flex-col md:gap-2">
-                  <p className="label">{t(entry.span, locale)}</p>
-                  {entry.current && (
+                  <p className="label" dir="ltr">
+                    {e.start}
+                    {endOf(e) !== e.start ? `—${e.end ?? ""}` : ""}
+                  </p>
+                  {e.end === null && (
                     <p className="label flex items-center gap-2 text-ok">
                       <span aria-hidden className="size-1.5 rounded-full bg-ok" />
                       {t(ui.about.current, locale)}
                     </p>
                   )}
+                  {e.approximate && (
+                    <p className="label text-signal">
+                      {t(ui.home.approxMark, locale)}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <h3 className="font-display text-xl tracking-tight md:text-2xl">
-                    {t(entry.title, locale)}
+                    {t(e.title, locale)}
                   </h3>
-                  <p className="mt-1.5 text-sm text-signal">
-                    {t(entry.org, locale)}
-                  </p>
+                  <p className="mt-1.5 text-sm text-signal">{t(e.org, locale)}</p>
                   <p className="mt-4 max-w-[62ch] text-[0.95rem] leading-relaxed text-muted">
-                    {t(entry.note, locale)}
+                    {t(e.note, locale)}
                   </p>
                 </div>
               </div>
