@@ -1,5 +1,5 @@
 import { timeline, type Row } from "@/content/cv";
-import { DIR, t, type Locale } from "@/lib/i18n";
+import { t, type Locale } from "@/lib/i18n";
 
 const LEGEND = {
   work: { en: "work", he: "עבודה" },
@@ -32,70 +32,54 @@ function span(rows: Row[]): { from: number; to: number } {
  */
 function YearStrip({ locale }: { locale: Locale }) {
   const all = span(timeline);
-  const rtl = DIR[locale] === "rtl";
-  const W = 100;
   const total = all.to - all.from;
 
+  // Positioned with `inset-inline-start`, so Hebrew mirrors the whole strip
+  // for free and 2019 lands on the right. No arithmetic flip, and no
+  // `scaleX(-1)` — that would have reversed the year labels with it.
   const bar = (rows: Row[]) => {
     const s = span(rows);
-    const x0 = ((s.from - all.from) / total) * W;
-    const x1 = ((s.to - all.from) / total) * W;
-    // Mirrored by arithmetic, never by scaleX(-1) — a flipped transform would
-    // reverse the year labels too.
-    return rtl
-      ? { x: W - x1, width: x1 - x0 }
-      : { x: x0, width: x1 - x0 };
+    return {
+      insetInlineStart: `${((s.from - all.from) / total) * 100}%`,
+      width: `${((s.to - s.from) / total) * 100}%`,
+    };
   };
 
   const work = bar(timeline.filter((r) => r.kind === "work"));
   const study = bar(timeline.filter((r) => r.kind === "study"));
-  const years = rtl ? [all.to, all.from] : [all.from, all.to];
 
   return (
     <div aria-hidden className="mt-6">
-      <svg
-        viewBox={`0 0 ${W} 15`}
-        preserveAspectRatio="none"
-        className="block h-[30px] w-full overflow-visible"
-      >
-        <rect
-          x={work.x}
-          width={work.width}
-          y={0}
-          height={6}
-          rx={3}
-          fill="var(--accent)"
+      {/* Plain boxes rather than an SVG: a stretched viewBox would squash the
+          rounded ends into ellipses. */}
+      <div className="relative h-[7px]">
+        <div
+          className="absolute h-full rounded-full bg-accent"
+          style={work}
         />
-        <rect
-          x={study.x}
-          width={study.width}
-          y={9}
-          height={6}
-          rx={3}
-          fill="none"
-          stroke="var(--study)"
-          strokeWidth={1.6}
-          vectorEffect="non-scaling-stroke"
+      </div>
+      <div className="relative mt-1.5 h-[7px]">
+        <div
+          className="absolute h-full rounded-full border-2 border-study"
+          style={study}
         />
-      </svg>
+      </div>
 
-      <div className="mt-2 flex items-center justify-between text-xs text-faint">
-        <span className="tnum" dir="ltr">
-          {years[0]}
-        </span>
+      {/* `justify-between` under RTL already puts the earlier year on the
+          right, matching the bars above it. */}
+      <div className="mt-2.5 flex items-center justify-between text-xs text-faint">
+        <span className="tnum">{all.from}</span>
         <span className="flex items-center gap-4">
           <span className="flex items-center gap-1.5">
-            <span className="dot" style={{ width: 9, height: 9 }} />
+            <span className="dot size-[9px]" />
             {t(LEGEND.work, locale)}
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="dot" data-kind="study" style={{ width: 9, height: 9 }} />
+            <span className="dot size-[9px]" data-kind="study" />
             {t(LEGEND.study, locale)}
           </span>
         </span>
-        <span className="tnum" dir="ltr">
-          {years[1]}
-        </span>
+        <span className="tnum">{all.to}</span>
       </div>
     </div>
   );
