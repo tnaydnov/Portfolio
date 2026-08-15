@@ -5,7 +5,6 @@ import { Reveal } from "@/components/motion/Reveal";
 import { budgetTargets, colophonRules } from "@/content/site";
 import { isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
-import { routeMetadata } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -14,12 +13,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  return routeMetadata({
-    path: "/colophon",
-    locale,
+  return {
     title: t(ui.colophon.title, locale),
     description: t(ui.colophon.lede, locale),
-  });
+  };
 }
 
 export default async function ColophonPage({
@@ -51,12 +48,7 @@ export default async function ColophonPage({
           title={t(ui.colophon.budgetTitle, locale)}
           aside={t(ui.colophon.budgetIntro, locale)}
         />
-        <div
-          role="region"
-          tabIndex={0}
-          aria-label={t(ui.colophon.budgetTitle, locale)}
-          className="mt-8 overflow-x-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
-        >
+        <div className="mt-8 overflow-x-auto">
           <table className="w-full min-w-[38rem] border-collapse text-start">
             <thead>
               <tr className="border-b border-rule">

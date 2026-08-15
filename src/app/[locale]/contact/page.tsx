@@ -5,7 +5,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { brief } from "@/content/site";
 import { isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
-import { routeMetadata, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -14,12 +14,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  return routeMetadata({
-    path: "/contact",
-    locale,
+  return {
     title: t(ui.contact.title, locale),
     description: t(ui.contact.footerNote, locale),
-  });
+  };
 }
 
 export default async function ContactPage({

@@ -1,6 +1,18 @@
-import type { ReactNode } from "react";
+"use client";
 
-/** Native scrolling keeps anchor navigation and hydration stable. */
+import { ReactLenis } from "lenis/react";
+import type { ReactNode } from "react";
+import { useReducedMotion } from "@/components/motion/hooks";
+
+/** Lenis is opt-in: never mounted when the user asked for reduced motion. */
 export function SmoothScroll({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+  const reduced = useReducedMotion();
+
+  if (reduced) return <>{children}</>;
+
+  return (
+    <ReactLenis root options={{ lerp: 0.11, wheelMultiplier: 0.9 }}>
+      {children}
+    </ReactLenis>
+  );
 }

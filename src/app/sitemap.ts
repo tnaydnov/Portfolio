@@ -6,8 +6,11 @@ import { site } from "@/lib/site";
 const ROUTES = ["", "/work", "/system", "/about", "/contact", "/colophon"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+
   const entry = (path: string, priority: number) => ({
     url: `${site.url}${path}`,
+    lastModified: now,
     changeFrequency: "monthly" as const,
     priority,
   });
