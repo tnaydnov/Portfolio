@@ -4,10 +4,8 @@ import type { LS, LSA } from "./i18n";
 export const ui = {
   nav: {
     work: { en: "Work", he: "עבודה" },
-    system: { en: "System", he: "שיטה" },
     about: { en: "About", he: "אודות" },
     contact: { en: "Contact", he: "יצירת קשר" },
-    colophon: { en: "Colophon", he: "על האתר" },
   } satisfies Record<string, LS>,
 
   common: {
@@ -121,16 +119,20 @@ export const ui = {
     classroomBody: {
       en: [
         "Teaching programming, alongside work on syllabuses, lesson plans, exercises and instructor guides, has been the most useful professional training I have had — and not for the reason people assume.",
-        "Teaching is requirements engineering with a thirty-second feedback loop. You explain something, and a room full of people immediately shows you which part of your explanation was carrying an assumption. You cannot argue with it, defer it to next sprint, or blame the audience. You find the broken sentence and you fix it.",
+        "Teaching is requirements engineering with a thirty-second feedback loop. A room shows you immediately which part of an explanation was carrying a hidden assumption.",
+        "But a room never learns in one way. Every student arrives with a different starting point, pace and way of making sense of a problem. I learned to change the wording, sequence, medium or level of abstraction until the idea lands — without changing the goal.",
+        "That habit travels beyond the classroom. Students, instructors, coordinators, clients and engineers do not need the same explanation or interface. Understanding the audience is part of understanding the requirement.",
       ],
       he: [
         "הוראת תכנות, לצד עבודה על סילבוסים, מערכי שיעור, תרגילים ומדריכים למנחים, הייתה ההכשרה המקצועית השימושית ביותר שעברתי — ולא מהסיבה שמניחים.",
-        "הוראה היא אפיון דרישות עם לולאת משוב של שלושים שניות. אתה מסביר משהו, וכיתה שלמה מראה לך מיד איזה חלק בהסבר נשען על הנחה סמויה. אי אפשר להתווכח עם זה, לדחות לספרינט הבא, או להאשים את הקהל. מוצאים את המשפט השבור ומתקנים אותו.",
+        "הוראה היא אפיון דרישות עם לולאת משוב של שלושים שניות. כיתה שלמה מראה מיד איזה חלק בהסבר נשען על הנחה סמויה.",
+        "אבל כיתה אינה לומדת בדרך אחת. כל תלמיד מגיע עם נקודת פתיחה, קצב ודרך חשיבה שונים. למדתי לשנות את הניסוח, הרצף, המדיום או רמת ההפשטה עד שהרעיון נקלט — בלי לשנות את המטרה.",
+        "ההרגל הזה ממשיך מעבר לכיתה. תלמידים, מנחים, רכזים, לקוחות ומהנדסים אינם צריכים את אותו הסבר או אותו ממשק. הבנת הקהל היא חלק מהבנת הדרישה.",
       ],
     } satisfies LSA,
     classroomRule: {
-      en: "If you cannot explain the requirement to a sixteen-year-old, the requirement is not finished.",
-      he: "אם אי אפשר להסביר את הדרישה לנער בן שש־עשרה, הדרישה עוד לא גמורה.",
+      en: "A requirement is not finished until the people it is for can understand and use it.",
+      he: "דרישה אינה גמורה עד שהאנשים שעבורם נכתבה יכולים להבין אותה ולהשתמש בה.",
     },
   },
 
@@ -250,13 +252,18 @@ export const ui = {
     } satisfies LSA,
     getInTouch: { en: "Get in touch →", he: "ליצירת קשר ←" },
     capabilitiesTitle: { en: "What I actually do", he: "מה אני עושה בפועל" },
-    approachTitle: { en: "How I approach a problem", he: "איך אני ניגש לבעיה" },
-    experienceTitle: { en: "Experience & education", he: "ניסיון והשכלה" },
+    experienceTitle: { en: "Experience", he: "ניסיון מקצועי" },
+    educationTitle: { en: "Education", he: "השכלה" },
+    detailsHint: {
+      en: "Hover, focus or tap a role to read the details.",
+      he: "העבירו עכבר, עברו עם המקלדת או הקישו על תפקיד כדי לקרוא את הפירוט.",
+    },
+    currentRole: { en: "Current role", he: "תפקיד נוכחי" },
+    currentStudies: { en: "Current studies", he: "לימודים נוכחיים" },
+    roleDetails: { en: "Role details", he: "פרטי התפקיד" },
+    closeDetails: { en: "Close details", he: "סגירת הפירוט" },
+    responsibilities: { en: "What I do", he: "מה אני עושה" },
     fitTitle: { en: "Where I do my best work", he: "איפה אני עובד הכי טוב" },
-    numbersTitle: { en: "By the numbers", he: "במספרים" },
-    trackTitle: { en: "Track", he: "מסלול" },
-    current: { en: "Current", he: "נוכחי" },
-    howIWork: { en: "How I work →", he: "איך אני עובד ←" },
   },
 
   contact: {
@@ -290,28 +297,6 @@ export const ui = {
       en: "Open to technical product and product-minded engineering roles with real ownership, close users and room to build.",
       he: "פתוח לתפקידי מוצר טכני והנדסה עם חשיבה מוצרית, בעלות אמיתית, קרבה למשתמשים ומקום לבנות.",
     },
-  },
-
-  colophon: {
-    title: { en: "Colophon", he: "על האתר" },
-    lede: {
-      en: "This portfolio is a live system: ordinary interfaces keep their identity while their physics become impossible.",
-      he: "הפורטפוליו הזה הוא מערכת חיה: ממשקים רגילים שומרים על הזהות שלהם בזמן שהפיזיקה שלהם הופכת לבלתי אפשרית.",
-    },
-    intro: {
-      en: "A portfolio that argues for engineering judgement should be willing to show its own. So here is how this one was built, what it costs to load, and what I would change.",
-      he: "פורטפוליו שטוען לשיקול דעת הנדסי צריך להיות מוכן להראות את שלו. אז הנה איך זה נבנה, כמה זה עולה לטעון, ומה הייתי משנה.",
-    },
-    budgetTitle: { en: "Budget", he: "תקציב" },
-    budgetIntro: {
-      en: "Bundle results from the latest production build, with device-only measurements left explicitly open.",
-      he: "תוצאות חבילה מבניית הייצור האחרונה, כאשר מדידות שמחייבות מכשיר נשארות פתוחות במפורש.",
-    },
-    rulesTitle: { en: "Rules", he: "כללים" },
-    measured: { en: "Measured", he: "נמדד" },
-    target: { en: "Target", he: "יעד" },
-    route: { en: "Route", he: "נתיב" },
-    firstLoad: { en: "First-load JS", he: "JS בטעינה ראשונה" },
   },
 
   notFound: {

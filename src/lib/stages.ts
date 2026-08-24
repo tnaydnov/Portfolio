@@ -16,7 +16,7 @@ export interface Stage {
   kicker: LS;
   /** The claim, in first person. One sentence. */
   line: LS;
-  /** Long-form explanation for /system. */
+  /** Long-form explanation used in case-study evidence. */
   detail: LSA;
   /** Concrete artifacts produced at this stage. */
   artifacts: LSA;

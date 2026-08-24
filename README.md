@@ -14,10 +14,10 @@ The public site deliberately has four simple destinations:
 
 - `/en` and `/he` — identity first, then the guided cinematic argument.
 - `/[locale]/work` — the fast index for all relevant work.
-- `/[locale]/about` — capabilities, approach, teaching, experience and fit.
+- `/[locale]/about` — capabilities, experience, education, teaching and fit.
 - `/[locale]/contact` — direct contact, CV and external profiles.
 
-`/[locale]/system` permanently redirects to the approach section on About. The technical colophon remains available from the footer but is excluded from the sitemap and search indexing. The superseded animatic, validation gates and vertical-slice application were moved out of the repository into a recoverable archive.
+`/[locale]/system` permanently redirects to About for compatibility with older links. The superseded animatic, validation gates and vertical-slice application were moved out of the repository into a recoverable archive.
 
 ## Two-speed review
 

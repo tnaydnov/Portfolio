@@ -9,5 +9,5 @@ export default async function LegacySystemPage({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  permanentRedirect(`${href("/about", locale as Locale)}#approach`);
+  permanentRedirect(href("/about", locale as Locale));
 }

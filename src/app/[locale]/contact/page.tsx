@@ -107,8 +107,8 @@ export default async function ContactPage({
         </div>
         <div>
           <p className="label">{locale === "he" ? "עוד הקשר" : "More context"}</p>
-          <Link href={`${href("/about", locale)}#approach`} className="mt-3 inline-block text-[0.95rem] underline decoration-signal underline-offset-4 hover:text-signal">
-            {locale === "he" ? "איך אני עובד ←" : "How I approach the work →"}
+          <Link href={`${href("/about", locale)}#experience`} className="mt-3 inline-block text-[0.95rem] underline decoration-signal underline-offset-4 hover:text-signal">
+            {locale === "he" ? "לניסיון ולהשכלה ←" : "Experience and education →"}
           </Link>
         </div>
       </section>

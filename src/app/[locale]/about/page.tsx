@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import {
+  EducationTimeline,
+  ExperienceTimeline,
+} from "@/components/about/CareerTimeline";
 import { SectionMark } from "@/components/chrome/SectionMark";
 import { Reveal } from "@/components/motion/Reveal";
-import { approach, brief, capabilities, timeline } from "@/content/site";
+import {
+  brief,
+  capabilities,
+  educationTimeline,
+  experienceTimeline,
+} from "@/content/site";
 import { isLocale, t, type Locale } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/metadata";
 import { href, site } from "@/lib/site";
@@ -47,6 +56,23 @@ export default async function AboutPage({
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
+  const experience = experienceTimeline.map((entry) => ({
+    id: entry.id,
+    span: t(entry.span, locale),
+    title: t(entry.title, locale),
+    org: t(entry.org, locale),
+    summary: t(entry.summary, locale),
+    details: t(entry.details, locale),
+    current: entry.current,
+  }));
+  const education = educationTimeline.map((entry) => ({
+    id: entry.id,
+    span: t(entry.span, locale),
+    title: t(entry.title, locale),
+    org: t(entry.org, locale),
+    summary: t(entry.summary, locale),
+    current: entry.current,
+  }));
 
   return (
     <div className="shell pt-12 md:pt-20">
@@ -90,28 +116,39 @@ export default async function AboutPage({
         </div>
       </section>
 
-      <section className="pt-24 md:pt-32" aria-labelledby="experience-title">
-        <SectionMark index="03" title={t(ui.about.experienceTitle, locale)} />
+      <section id="experience" className="scroll-mt-24 pt-24 md:pt-32" aria-labelledby="experience-title">
+        <SectionMark
+          index="03"
+          title={t(ui.about.experienceTitle, locale)}
+          aside={t(ui.about.detailsHint, locale)}
+        />
         <h2 id="experience-title" className="sr-only">{t(ui.about.experienceTitle, locale)}</h2>
-        <ol className="mt-8 border-t border-rule">
-          {timeline.map((entry) => (
-            <li key={`${t(entry.title, locale)}-${t(entry.span, locale)}`} className="grid gap-5 border-b border-rule py-8 md:grid-cols-[13rem_1fr] md:gap-12">
-              <div>
-                <p className="label leading-relaxed"><bdi>{t(entry.span, locale)}</bdi></p>
-                {entry.current ? <p className="label mt-3 flex items-center gap-2 text-ok"><span aria-hidden className="size-1.5 rounded-full bg-ok" />{t(ui.about.current, locale)}</p> : null}
-              </div>
-              <div>
-                <h3 className="font-display text-xl tracking-tight md:text-2xl">{t(entry.title, locale)}</h3>
-                <p className="mt-2 text-sm text-signal">{t(entry.org, locale)}</p>
-                <p className="mt-4 max-w-[64ch] text-[0.95rem] leading-relaxed text-muted">{t(entry.note, locale)}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <div className="mt-8">
+          <ExperienceTimeline
+            entries={experience}
+            labels={{
+              current: t(ui.about.currentRole, locale),
+              roleDetails: t(ui.about.roleDetails, locale),
+              closeDetails: t(ui.about.closeDetails, locale),
+              responsibilities: t(ui.about.responsibilities, locale),
+            }}
+          />
+        </div>
+      </section>
+
+      <section id="education" className="scroll-mt-24 pt-24 md:pt-32" aria-labelledby="education-title">
+        <SectionMark index="04" title={t(ui.about.educationTitle, locale)} />
+        <h2 id="education-title" className="sr-only">{t(ui.about.educationTitle, locale)}</h2>
+        <div className="mt-8">
+          <EducationTimeline
+            entries={education}
+            currentLabel={t(ui.about.currentStudies, locale)}
+          />
+        </div>
       </section>
 
       <section className="pt-24 md:pt-32" aria-labelledby="thesis-title">
-        <SectionMark index="04" title={t(ui.about.thesisLabel, locale)} />
+        <SectionMark index="05" title={t(ui.about.thesisLabel, locale)} />
         <Reveal>
           <div className="grid gap-10 py-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
             <h2 id="thesis-title" className="t-section max-w-[14ch] lg:sticky lg:top-28 lg:self-start">
@@ -127,7 +164,7 @@ export default async function AboutPage({
       </section>
 
       <section id="teaching" className="scroll-mt-24 pt-20 md:pt-28" aria-labelledby="teaching-title">
-        <SectionMark index="05" title={t(ui.about.teachingLabel, locale)} />
+        <SectionMark index="06" title={t(ui.about.teachingLabel, locale)} />
         <div className="grid gap-0 overflow-hidden border border-rule bg-surface md:grid-cols-[0.78fr_1.22fr]">
           <div className="relative min-h-72 overflow-hidden border-b border-rule bg-ink-2 p-7 md:min-h-[28rem] md:border-b-0 md:border-e">
             <div aria-hidden className="absolute -right-16 top-10 size-64 rounded-full border border-rule opacity-40" />
@@ -151,20 +188,6 @@ export default async function AboutPage({
             </p>
           </div>
         </div>
-      </section>
-
-      <section id="approach" className="scroll-mt-24 pt-24 md:pt-32" aria-labelledby="approach-title">
-        <SectionMark index="06" title={t(ui.about.approachTitle, locale)} />
-        <h2 id="approach-title" className="sr-only">{t(ui.about.approachTitle, locale)}</h2>
-        <ol className="mt-8 grid gap-px bg-rule lg:grid-cols-4">
-          {approach.map((step) => (
-            <li key={step.index} className="bg-ink p-6 md:p-8">
-              <p className="label text-signal">{step.index}</p>
-              <h3 className="mt-5 font-display text-2xl tracking-tight">{t(step.title, locale)}</h3>
-              <p className="mt-4 text-[0.95rem] leading-relaxed text-muted">{t(step.body, locale)}</p>
-            </li>
-          ))}
-        </ol>
       </section>
 
       <section className="pt-24 md:pt-32" aria-labelledby="fit-title">

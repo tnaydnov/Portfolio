@@ -54,9 +54,6 @@ export function Footer({ locale }: { locale: Locale }) {
                 {t(ui.nav[item.key], locale)}
               </Link>
             ))}
-            <Link href={href("/colophon", locale)} className="inline-flex min-h-11 w-fit items-center text-sm text-muted hover:text-text">
-              {t(ui.nav.colophon, locale)}
-            </Link>
           </nav>
 
           <div className="flex flex-col gap-1">
