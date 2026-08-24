@@ -139,23 +139,13 @@ export const ui = {
   work: {
     title: { en: "Work", he: "עבודה" },
     intro: {
-      en: "Three product stories, two engineering systems, and the earlier work that built the craft. Start with the decision; open the evidence when you want the depth.",
-      he: "שלושה סיפורי מוצר, שתי מערכות הנדסיות והעבודות המוקדמות שבנו את המלאכה. מתחילים בהחלטה; פותחים את הראיות כשרוצים עומק.",
+      en: "Four substantial case studies, followed by the earlier engineering work that built the craft. Start with the decision; open the evidence when you want the depth.",
+      he: "ארבעה מקרי בוחן משמעותיים, ואחריהם העבודות ההנדסיות המוקדמות שבנו את המלאכה. מתחילים בהחלטה; פותחים את הראיות כשרוצים עומק.",
     },
-    selectedTitle: { en: "Selected product work", he: "עבודות מוצר נבחרות" },
+    selectedTitle: { en: "Selected work", he: "עבודות נבחרות" },
     selectedIntro: {
-      en: "Real systems, presented around what was broken, what I owned and what can be inspected today.",
-      he: "מערכות אמיתיות, מוצגות סביב מה היה שבור, על מה לקחתי אחריות ומה אפשר לבדוק היום.",
-    },
-    engineeringTitle: { en: "Engineering systems", he: "מערכות הנדסיות" },
-    engineeringIntro: {
-      en: "Focused proof of architecture, team engineering and implementation depth.",
-      he: "הוכחה ממוקדת לעומק בארכיטקטורה, הנדסת צוות ומימוש.",
-    },
-    teachingTitle: { en: "Teaching is part of the work", he: "הוראה היא חלק מהעבודה" },
-    teachingBody: {
-      en: "Repeated live explanations taught me to detect hidden assumptions quickly. Curriculum, instructor tools and classroom behavior are not side notes to the product story; they are where much of it came from.",
-      he: "הסברים חיים שחזרו שוב ושוב לימדו אותי לזהות הנחות סמויות במהירות. תוכניות לימוד, כלי מנחים והתנהגות בכיתה אינם הערת שוליים לסיפור המוצר; משם הגיע חלק גדול ממנו.",
+      en: "The work that best shows what was broken, what I owned, how I built and what can be inspected today.",
+      he: "העבודות שמציגות בצורה הטובה ביותר מה היה שבור, על מה לקחתי אחריות, איך בניתי ומה אפשר לבדוק היום.",
     },
     filterNote: {
       en: "Filtered by stage of delivery, not by technology — because the stack is the least interesting thing about any of these.",
@@ -166,14 +156,14 @@ export const ui = {
       he: "אין עדיין כלום בשלב הזה. זו התשובה הכנה, לא תשובה מרופדת.",
     },
     repsTitle: { en: "Earlier engineering work", he: "עבודות הנדסיות מוקדמות" },
-    repsSpan: { en: "2022 — 2023 · University", he: "2022 — 2023 · אוניברסיטה" },
+    repsSpan: { en: "2022 — 2024 · University", he: "2022 — 2024 · אוניברסיטה" },
     repsHeading: {
       en: "Foundations, at the right weight.",
       he: "היסודות, במשקל הנכון.",
     },
     repsIntro: {
-      en: "Coursework stays visible for technical reviewers without competing with products that met real operational constraints.",
-      he: "עבודות הקורס נשארות זמינות לסקירה טכנית בלי להתחרות במוצרים שפגשו אילוצים תפעוליים אמיתיים.",
+      en: "University projects stay visible for technical reviewers without competing with the work that best represents me now.",
+      he: "פרויקטים מהאוניברסיטה נשארים זמינים לסקירה טכנית בלי להתחרות בעבודות שמייצגות אותי בצורה הטובה ביותר היום.",
     },
     colProject: { en: "Project", he: "פרויקט" },
     colSpan: { en: "Span", he: "תקופה" },
@@ -251,7 +241,6 @@ export const ui = {
       ],
     } satisfies LSA,
     getInTouch: { en: "Get in touch →", he: "ליצירת קשר ←" },
-    capabilitiesTitle: { en: "What I actually do", he: "מה אני עושה בפועל" },
     experienceTitle: { en: "Experience", he: "ניסיון מקצועי" },
     educationTitle: { en: "Education", he: "השכלה" },
     detailsHint: {

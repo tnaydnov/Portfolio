@@ -4,25 +4,25 @@ export const lpr: Project = {
   slug: "license-plate-recognition",
   title: "License Plate Recognition",
   oneLiner: {
-    en: "A parking-enforcement prototype designed for continuous video: motion detection, plate detection, OCR and alerting.",
-    he: "אב־טיפוס לאכיפת חניה שתוכנן לווידאו רציף: זיהוי תנועה, זיהוי לוחית, OCR והתראות.",
+    en: "A computer-vision prototype for continuous parking video: motion filtering, trained plate recognition, character analysis and alerts.",
+    he: "אב־טיפוס לראייה ממוחשבת עבור וידאו רציף מחניה: סינון תנועה, מודל מאומן לזיהוי לוחיות, ניתוח תווים והתראות.",
   },
   hook: {
-    en: "A continuous computer-vision pipeline is a scheduling problem wearing a machine-learning costume.",
-    he: "צינור ראייה ממוחשבת רציף הוא בעיית תזמון שלובשת תחפושת של למידת מכונה.",
+    en: "The hard part was not one model. It was teaching motion, plate recognition and plate analysis to behave like one system.",
+    he: "החלק הקשה לא היה מודל אחד. הוא היה לגרום לזיהוי תנועה, זיהוי לוחית וניתוח לוחית להתנהג כמערכת אחת.",
   },
   snapshot: {
     problem: {
-      en: "A camera never waits for detection, OCR or network work to catch up; slow stages turn useful frames into stale results.",
-      he: "מצלמה לא מחכה לזיהוי, OCR או רשת; שלבים איטיים הופכים פריימים שימושיים לתוצאות מאוחרות.",
+      en: "In continuous footage, the same plate changes with distance, angle, light and motion blur while every slow or inaccurate stage contaminates the next one.",
+      he: "בווידאו רציף, אותה לוחית משתנה עם המרחק, הזווית, התאורה וטשטוש התנועה, וכל שלב איטי או לא מדויק פוגע בשלב שאחריו.",
     },
     move: {
-      en: "Order the pipeline by cost, reject empty frames early and decouple the expensive stages with queues.",
-      he: "לסדר את הצינור לפי עלות, לדחות פריימים ריקים מוקדם ולנתק את השלבים היקרים בעזרת תורים.",
+      en: "Treat data gathering, motion gating, plate recognition and plate analysis as one trainable pipeline, then decouple the expensive stages with queues.",
+      he: "להתייחס לאיסוף הנתונים, שער התנועה, זיהוי הלוחית וניתוח הלוחית כצינור אחד שניתן לאמן, ואז לנתק את השלבים היקרים בעזרת תורים.",
     },
     contribution: {
-      en: "On a five-person team, my repository-visible work includes motion detection, Docker and project structure, and operator-interface work.",
-      he: "בצוות של חמישה, העבודה שלי שנראית במאגר כוללת זיהוי תנועה, Docker ומבנה הפרויקט, ועבודה על ממשק המפעיל.",
+      en: "On a five-person team, I focused on motion detection and the plate-recognition and plate-analysis models: gathering and preparing data, training, evaluating, fine-tuning and integrating them into the pipeline.",
+      he: "בצוות של חמישה התמקדתי בזיהוי תנועה ובמודלים לזיהוי ולניתוח לוחיות: איסוף והכנת נתונים, אימון, הערכה, כוונון ושילוב שלהם בצינור.",
     },
     proof: {
       en: "The upstream team repository preserves 69 commits and an inspectable multi-service Python architecture.",
@@ -32,7 +32,10 @@ export const lpr: Project = {
   tier: "system",
   stages: ["frame", "build", "prove"],
   domain: ["applied-ai", "platform"],
-  role: { en: "Motion pipeline · Docker/structure · operator UI", he: "צינור תנועה · Docker ומבנה · ממשק מפעיל" },
+  role: {
+    en: "Motion detection · model training & fine-tuning · plate analysis",
+    he: "זיהוי תנועה · אימון וכוונון מודלים · ניתוח לוחיות",
+  },
   team: { en: "Five-person university team", he: "צוות אוניברסיטאי של חמישה" },
   started: "2024-11",
   ended: "2025-07",
@@ -43,8 +46,8 @@ export const lpr: Project = {
     he: "פרויקט צוות אוניברסיטאי שהושלם; קוד המקור נשמר במאגר המקורי.",
   },
   evidenceNote: {
-    en: "The upstream history shows five contributors and 15 commits from Tomer's associated account. No deployment or end-to-end accuracy measurement is claimed. Project documentation conflicts on the YOLO version, so this case uses the version-neutral description ‘Ultralytics YOLO-based detection.’",
-    he: "ההיסטוריה במאגר המקורי מציגה חמישה תורמים ו־15 קומיטים מהחשבון המקושר לתומר. אין טענה לפריסה או למדידת דיוק מקצה לקצה. תיעוד הפרויקט סותר את עצמו לגבי גרסת YOLO, ולכן המקרה משתמש בתיאור הניטרלי ׳זיהוי מבוסס Ultralytics YOLO׳.",
+    en: "Tomer describes his focus as motion detection, data gathering and the training and fine-tuning of the plate-recognition and analysis models. The upstream history independently shows five contributors and 15 commits from Tomer's associated account, including motion, project-structure and interface work. No deployment or end-to-end accuracy result is claimed. Project documentation conflicts on the YOLO version, so this case uses the version-neutral description ‘Ultralytics YOLO-based detection.’",
+    he: "תומר מתאר את מוקד עבודתו כזיהוי תנועה, איסוף נתונים, אימון וכוונון של המודלים לזיהוי ולניתוח לוחיות. ההיסטוריה במאגר המקורי מציגה באופן עצמאי חמישה תורמים ו־15 קומיטים מהחשבון המקושר לתומר, כולל עבודה על תנועה, מבנה הפרויקט והממשק. אין טענה לפריסה או לתוצאת דיוק מקצה לקצה. תיעוד הפרויקט סותר את עצמו לגבי גרסת YOLO, ולכן המקרה משתמש בתיאור הניטרלי ׳זיהוי מבוסס Ultralytics YOLO׳.",
   },
   metrics: [
     {
@@ -73,34 +76,36 @@ export const lpr: Project = {
     {
       stage: "frame",
       heading: {
-        en: "The constraint is the frame budget",
-        he: "האילוץ הוא תקציב הפריימים",
+        en: "The model begins with the data",
+        he: "המודל מתחיל בנתונים",
       },
       body: {
         en: [
-          "A component benchmark can answer whether a model can read a plate under known conditions. It does not answer whether the whole chain can keep up with a camera that does not slow down for it.",
-          "That reframes the problem. Every stage in the pipeline is a consumer with a fixed time budget, and the design work is deciding what to drop rather than what to compute.",
+          "A clean, centered plate crop is an easy demonstration. Continuous footage is not: distance, angle, glare, darkness, occlusion and motion blur keep changing the input before a model gets to reason about it.",
+          "My work began with gathering and preparing project data, then training and fine-tuning the recognition and analysis models against the kinds of variation the pipeline had to handle. The project did not preserve a publishable dataset size or accuracy result, so this case describes the work rather than inventing a benchmark.",
         ],
         he: [
-          "מדד של רכיב יכול לענות אם מודל קורא לוחית בתנאים ידועים. הוא לא עונה אם כל השרשרת עומדת בקצב של מצלמה שלא מאטה בשבילה.",
-          "זה ממסגר מחדש את הבעיה. כל שלב בצינור הוא צרכן עם תקציב זמן קבוע, ועבודת התכנון היא להחליט ממה לוותר ולא מה לחשב.",
+          "חיתוך נקי וממורכז של לוחית הוא הדגמה קלה. וידאו רציף אינו כזה: מרחק, זווית, סנוור, חושך, הסתרה וטשטוש תנועה משנים כל הזמן את הקלט עוד לפני שמודל מתחיל לנתח אותו.",
+          "העבודה שלי התחילה באיסוף ובהכנת נתוני הפרויקט, ולאחר מכן באימון ובכוונון של מודלי הזיהוי והניתוח מול סוגי השונות שהצינור היה צריך להתמודד איתם. הפרויקט לא שמר גודל מערך נתונים או תוצאת דיוק שניתן לפרסם, ולכן המקרה מתאר את העבודה בלי להמציא מדד.",
         ],
       },
     },
     {
       stage: "build",
       heading: {
-        en: "Cheap gates before expensive ones",
-        he: "שערים זולים לפני יקרים",
+        en: "Several models, one failure chain",
+        he: "כמה מודלים, שרשרת כשל אחת",
       },
       body: {
         en: [
-          "The pipeline is ordered by expected cost. Motion detection was placed first to reject unchanged frames before they reached plate detection; only detected plates continued to OCR, the most expensive stage. The repository does not contain a publishable measurement of how many frames each gate rejected.",
+          "I worked on the motion detector that gated the pipeline before the heavier models ran. Unchanged frames were rejected early; only relevant frames continued toward plate recognition and analysis. The repository does not contain a publishable measurement of how many frames the gate rejected.",
+          "The recognition and plate-analysis models were not isolated experiments. I trained, evaluated and fine-tuned them as connected stages, because a weak crop or localization result immediately becomes bad input for character analysis.",
           "The team split the stages into services with queues to decouple their rates. In that design, a slow OCR pass can create backpressure instead of forcing every stage into one frame budget, and each component can be tuned or replaced independently. End-to-end throughput was not measured for this case study.",
           "The project used a desktop operator client so alerts lived in a dedicated surface rather than a disposable browser tab.",
         ],
         he: [
-          "הצינור מסודר לפי עלות צפויה. זיהוי תנועה הוצב ראשון כדי לדחות פריימים שלא השתנו לפני זיהוי לוחית; רק לוחיות שזוהו המשיכו ל־OCR, השלב היקר ביותר. במאגר אין מדידה שניתן לפרסם לגבי שיעור הפריימים שכל שער דחה.",
+          "עבדתי על גלאי התנועה ששימש כשער לצינור לפני שהמודלים הכבדים יותר רצו. פריימים שלא השתנו נדחו מוקדם; רק פריימים רלוונטיים המשיכו לזיהוי ולניתוח לוחיות. במאגר אין מדידה שניתן לפרסם לגבי מספר הפריימים שהשער דחה.",
+          "מודלי הזיהוי וניתוח הלוחית לא היו ניסויים מבודדים. אימנתי, הערכתי וכיוונתי אותם כשלבים מחוברים, משום שחיתוך או מיקום חלשים הופכים מיד לקלט גרוע עבור ניתוח התווים.",
           "הצוות פיצל את השלבים לשירותים עם תורים כדי לנתק בין הקצבים שלהם. בעיצוב הזה, מעבר OCR איטי יכול ליצור לחץ אחורי במקום לכפות תקציב פריים אחד על כל השלבים, וכל רכיב ניתן לכוונון או החלפה בנפרד. תפוקה מקצה לקצה לא נמדדה עבור מקרה הבוחן הזה.",
           "הפרויקט השתמש בלקוח מפעיל שולחני כדי שההתראות יחיו במשטח ייעודי ולא בטאב דפדפן שניתן לסגור.",
         ],
@@ -109,17 +114,17 @@ export const lpr: Project = {
     {
       stage: "prove",
       heading: {
-        en: "Measured on the pipeline, not the model",
-        he: "נמדד על הצינור, לא על המודל",
+        en: "Measure the models and the whole chain",
+        he: "למדוד את המודלים ואת השרשרת כולה",
       },
       body: {
         en: [
-          "Model accuracy in isolation is the wrong measure. What matters is end-to-end: of the vehicles that actually entered the frame, how many produced a correct plate in time to be useful.",
-          "That result can diverge sharply from a model benchmark. The project did not preserve a publishable end-to-end measurement, so this remains the evaluation I would add rather than an outcome I claim.",
+          "Model evaluation is necessary because it shows whether new data and fine-tuning improved recognition under held-out conditions. It is still incomplete: end-to-end capture asks whether a vehicle entering the frame produces correct plate text in time to matter.",
+          "No publishable model or end-to-end measurement was preserved, so this case explains the evaluation method rather than claiming an accuracy result.",
         ],
         he: [
-          "דיוק המודל בפני עצמו הוא המדד הלא נכון. מה שחשוב הוא מקצה לקצה: מתוך כלי הרכב שבאמת נכנסו לפריים, כמה הפיקו לוחית נכונה בזמן שהיה בו שימוש.",
-          "התוצאה הזו יכולה לסטות משמעותית ממדד של מודל. הפרויקט לא שמר מדידה מקצה לקצה שניתן לפרסם, ולכן זו הבדיקה שהייתי מוסיף ולא תוצאה שאני טוען לה.",
+          "הערכת מודל הכרחית משום שהיא מראה אם נתונים חדשים וכוונון שיפרו את הזיהוי בתנאים שלא נראו באימון. אבל היא עדיין חלקית: מדידה מקצה לקצה שואלת אם רכב שנכנס לפריים מפיק טקסט לוחית נכון בזמן שבו עדיין יש לתוצאה ערך.",
+          "לא נשמרה מדידת מודל או מדידה מקצה לקצה שניתן לפרסם, ולכן המקרה מסביר את שיטת ההערכה ולא טוען לתוצאת דיוק.",
         ],
       },
     },
@@ -168,10 +173,12 @@ export const lpr: Project = {
   ],
   rebuild: {
     en: [
+      "Version the dataset, training configuration and evaluation set together. Without that lineage, fine-tuning becomes a sequence of impressions rather than a reproducible experiment.",
       "Instrument the motion gate's rejections. It is the one stage whose failures leave no trace, which makes it the least trustworthy part of the system.",
       "Measure end-to-end capture rate from the beginning instead of component accuracy. It is the only number that describes whether the system works.",
     ],
     he: [
+      "לנהל גרסאות משותפות למערך הנתונים, להגדרות האימון ולמערך ההערכה. בלי הרצף הזה, כוונון הופך לסדרת תחושות במקום לניסוי שניתן לשחזר.",
       "למדוד את הדחיות של שער התנועה. זה השלב היחיד שהכשלים שלו לא משאירים עקבות, מה שהופך אותו לחלק הכי פחות אמין במערכת.",
       "למדוד שיעור לכידה מקצה לקצה מההתחלה במקום דיוק רכיבים. זה המספר היחיד שמתאר אם המערכת עובדת.",
     ],
@@ -282,10 +289,10 @@ export const tradingSystem: Project = {
       },
       body: {
         en: [
-          "Strict separation between the service layer and the domain was what made parallel work possible at all. It is a lesson that transferred directly into how I structured Applytide's backend years later.",
+          "Strict separation between the service layer and the domain was what made parallel work possible at all. It is a lesson that transferred directly into how I later structured Applytide's backend.",
         ],
         he: [
-          "הפרדה קפדנית בין שכבת השירות לדומיין היא מה שאפשר עבודה מקבילית בכלל. זה לקח שעבר ישירות לאופן שבו בניתי את השרת של Applytide שנים אחר כך.",
+          "הפרדה קפדנית בין שכבת השירות לדומיין היא מה שאפשר עבודה מקבילית בכלל. זה לקח שעבר ישירות לאופן שבו בניתי בהמשך את השרת של Applytide.",
         ],
       },
     },

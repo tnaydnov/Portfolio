@@ -136,53 +136,6 @@ export const brief: { term: LS; def: LS }[] = [
   },
 ];
 
-export const capabilities: { title: LS; body: LS; detail: LS }[] = [
-  {
-    title: { en: "Discover & frame", he: "גילוי ומסגור" },
-    body: {
-      en: "Find the real constraint behind a symptom or workaround.",
-      he: "למצוא את האילוץ האמיתי שמאחורי סימפטום או מעקף.",
-    },
-    detail: {
-      en: "User conversations · workflow mapping · requirements · problem definition",
-      he: "שיחות משתמשים · מיפוי תהליכים · דרישות · הגדרת בעיה",
-    },
-  },
-  {
-    title: { en: "Design & plan", he: "עיצוב ותכנון" },
-    body: {
-      en: "Turn ambiguity into a sequence a team can make and test.",
-      he: "להפוך עמימות לרצף שצוות יכול לבנות ולבדוק.",
-    },
-    detail: {
-      en: "User flows · specifications · trade-offs · Gantt and dependencies",
-      he: "תהליכי משתמש · אפיונים · פשרות · גאנט ותלויות",
-    },
-  },
-  {
-    title: { en: "Build & verify", he: "בנייה ואימות" },
-    body: {
-      en: "Build enough of the system to know its real cost and failure modes.",
-      he: "לבנות מספיק מהמערכת כדי להבין את המחיר האמיתי ואת אופני הכשל שלה.",
-    },
-    detail: {
-      en: "Full-stack engineering · data and APIs · QA · operational thinking",
-      he: "הנדסת פול־סטאק · נתונים ו־API · בדיקות · חשיבה תפעולית",
-    },
-  },
-  {
-    title: { en: "Teach & translate", he: "הוראה ותרגום" },
-    body: {
-      en: "Make hidden assumptions visible to learners, users and teammates.",
-      he: "להפוך הנחות סמויות לגלויות ללומדים, משתמשים וחברי צוות.",
-    },
-    detail: {
-      en: "Programming instruction · curriculum · technical writing · feedback loops",
-      he: "הדרכת תכנות · תוכניות לימוד · כתיבה טכנית · לולאות משוב",
-    },
-  },
-];
-
 export const now: { label: LS; items: LSA } = {
   label: { en: "Now", he: "עכשיו" },
   items: {

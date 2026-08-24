@@ -39,11 +39,6 @@ const fileBlocks = [
     id: "eventa-repository-not-archived",
     pattern: /status:\s*["']archived["']/i,
   },
-  {
-    file: "src/content/work/applytide.ts",
-    id: "applytide-solo-unreconciled",
-    pattern: /solo build|sole developer/i,
-  },
 ];
 
 async function collect(relativePath) {

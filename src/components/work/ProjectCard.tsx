@@ -23,7 +23,7 @@ export function ProjectCard({
   return (
     <article className="group relative h-full min-w-0 overflow-hidden border border-rule bg-surface transition-colors duration-500 hover:border-rule-strong focus-within:border-signal focus-within:shadow-[inset_0_0_0_1px_var(--signal)]">
       <Link href={href(`/work/${project.slug}`, locale)} className="flex h-full flex-col focus-visible:outline-none">
-        <ProjectArtifact slug={project.slug} locale={locale} size="card" />
+        <ProjectArtifact slug={project.slug} locale={locale} size={featured ? "hero" : "card"} />
 
         <div className={`flex flex-1 flex-col ${featured ? "p-7 md:p-9" : "p-6 md:p-7"}`}>
           <div className="flex flex-wrap items-center justify-between gap-3">

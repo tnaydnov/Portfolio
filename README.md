@@ -14,7 +14,7 @@ The public site deliberately has four simple destinations:
 
 - `/en` and `/he` — identity first, then the guided cinematic argument.
 - `/[locale]/work` — the fast index for all relevant work.
-- `/[locale]/about` — capabilities, experience, education, teaching and fit.
+- `/[locale]/about` — experience, education, teaching and fit.
 - `/[locale]/contact` — direct contact, CV and external profiles.
 
 `/[locale]/system` permanently redirects to About for compatibility with older links. The superseded animatic, validation gates and vertical-slice application were moved out of the repository into a recoverable archive.
@@ -30,16 +30,16 @@ Every retained case study opens with a self-contained 60-second layer:
 
 The full narrative, decisions, architecture, constraints and rebuild notes sit behind explicit disclosure controls. Recruiters can understand the work without reading a technical report; product and engineering reviewers can continue into the evidence.
 
-Selected product work:
+Selected work:
 
 - Arc — a learning-operations platform with a reachable public portal, accurately presented as co-developed with another engineer.
-- Applytide — an archived personal job-search operations platform with inspectable public source.
-- Eventa — a formerly live, now discontinued event-connection product with public source.
+- Applytide — a solo-created, archived job-search operations platform with inspectable public source.
+- Eventa — a solo-created, formerly live and now discontinued event-connection product with public source.
+- License Plate Recognition — a five-person computer-vision capstone focused here on Tomer's motion-detection, data, model-training and fine-tuning work.
 
-Engineering depth:
+Earlier engineering work:
 
-- License Plate Recognition — five-person computer-vision capstone.
-- Trading System — team-built distributed Java system.
+- Trading System — a team-built Java marketplace system.
 - Earlier coursework — retained as a compact source ledger rather than inflated into case studies.
 
 ## Visual system

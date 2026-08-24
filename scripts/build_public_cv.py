@@ -191,20 +191,10 @@ def build() -> None:
         left_x,
         left_y,
         left_w,
-        gap_after=7,
-    )
-    left_y = item(
-        c,
-        "Volunteer Programming Mentor",
-        "Siraj | Oct 2022 - Jun 2023",
-        ["Mentored learners through programming exercises and technical problem solving."],
-        left_x,
-        left_y,
-        left_w,
         gap_after=10,
     )
 
-    left_y = section(c, "Selected product work", left_x, left_y, left_w)
+    left_y = section(c, "Selected work", left_x, left_y, left_w)
     left_y = item(
         c,
         "Arc - learning operations platform",
@@ -220,7 +210,7 @@ def build() -> None:
     left_y = item(
         c,
         "Applytide - job application operations",
-        "Personal product project | Aug 2025 - Apr 2026 | Source archived",
+        "Solo creator | Aug 2025 - Apr 2026 | Source archived",
         [
             "Structured capture, application pipelines, documents, reminders, analytics and interview preparation across a React/FastAPI/PostgreSQL system."
         ],
@@ -232,7 +222,7 @@ def build() -> None:
     left_y = item(
         c,
         "Eventa - event-scoped social product",
-        "Personal product project | 2026 | Discontinued, source public",
+        "Solo creator | 2026 | Discontinued, source public",
         [
             "Implemented mobile QR onboarding, guest profiles, matching, private messaging and organizer workflows with Next.js and Supabase."
         ],
@@ -246,7 +236,7 @@ def build() -> None:
         "License Plate Recognition",
         "Five-person BGU capstone | 2024 - 2025",
         [
-            "Computer-vision prototype designed for continuous video, combining detection, tracking and OCR in a bounded processing pipeline."
+            "Focused on motion detection, data gathering, model training and fine-tuning, and failure analysis within a continuous plate-recognition pipeline."
         ],
         left_x,
         left_y,
@@ -256,9 +246,9 @@ def build() -> None:
     left_y = item(
         c,
         "Trading System - multi-store marketplace",
-        "Team engineering project | 2024 - 2025 | Source archived",
+        "Team engineering project | May - Jul 2024 | Source archived",
         [
-            "Java marketplace system exploring stores, carts, appointments, permissions and distributed service boundaries."
+            "Java marketplace system exploring stores, carts, appointments, permissions and domain/service boundaries."
         ],
         left_x,
         left_y,

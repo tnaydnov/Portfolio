@@ -9,7 +9,6 @@ import { SectionMark } from "@/components/chrome/SectionMark";
 import { Reveal } from "@/components/motion/Reveal";
 import {
   brief,
-  capabilities,
   educationTimeline,
   experienceTimeline,
 } from "@/content/site";
@@ -101,24 +100,9 @@ export default async function AboutPage({
         </div>
       </header>
 
-      <section aria-labelledby="capabilities-title">
-        <SectionMark index="02" title={t(ui.about.capabilitiesTitle, locale)} />
-        <h2 id="capabilities-title" className="sr-only">{t(ui.about.capabilitiesTitle, locale)}</h2>
-        <div className="mt-8 grid border-s border-t border-rule md:grid-cols-2 xl:grid-cols-4">
-          {capabilities.map((capability, index) => (
-            <article key={t(capability.title, locale)} className="min-h-64 border-b border-e border-rule p-6 md:p-8">
-              <p className="label text-signal">0{index + 1}</p>
-              <h3 className="mt-5 font-display text-2xl tracking-tight">{t(capability.title, locale)}</h3>
-              <p className="mt-4 text-[0.96rem] leading-relaxed text-muted">{t(capability.body, locale)}</p>
-              <p className="label mt-8 leading-relaxed">{t(capability.detail, locale)}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section id="experience" className="scroll-mt-24 pt-24 md:pt-32" aria-labelledby="experience-title">
         <SectionMark
-          index="03"
+          index="02"
           title={t(ui.about.experienceTitle, locale)}
           aside={t(ui.about.detailsHint, locale)}
         />
@@ -137,7 +121,7 @@ export default async function AboutPage({
       </section>
 
       <section id="education" className="scroll-mt-24 pt-24 md:pt-32" aria-labelledby="education-title">
-        <SectionMark index="04" title={t(ui.about.educationTitle, locale)} />
+        <SectionMark index="03" title={t(ui.about.educationTitle, locale)} />
         <h2 id="education-title" className="sr-only">{t(ui.about.educationTitle, locale)}</h2>
         <div className="mt-8">
           <EducationTimeline
@@ -148,7 +132,7 @@ export default async function AboutPage({
       </section>
 
       <section className="pt-24 md:pt-32" aria-labelledby="thesis-title">
-        <SectionMark index="05" title={t(ui.about.thesisLabel, locale)} />
+        <SectionMark index="04" title={t(ui.about.thesisLabel, locale)} />
         <Reveal>
           <div className="grid gap-10 py-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
             <h2 id="thesis-title" className="t-section max-w-[14ch] lg:sticky lg:top-28 lg:self-start">
@@ -164,7 +148,7 @@ export default async function AboutPage({
       </section>
 
       <section id="teaching" className="scroll-mt-24 pt-20 md:pt-28" aria-labelledby="teaching-title">
-        <SectionMark index="06" title={t(ui.about.teachingLabel, locale)} />
+        <SectionMark index="05" title={t(ui.about.teachingLabel, locale)} />
         <div className="grid gap-0 overflow-hidden border border-rule bg-surface md:grid-cols-[0.78fr_1.22fr]">
           <div className="relative min-h-72 overflow-hidden border-b border-rule bg-ink-2 p-7 md:min-h-[28rem] md:border-b-0 md:border-e">
             <div aria-hidden className="absolute -right-16 top-10 size-64 rounded-full border border-rule opacity-40" />
@@ -191,7 +175,7 @@ export default async function AboutPage({
       </section>
 
       <section className="pt-24 md:pt-32" aria-labelledby="fit-title">
-        <SectionMark index="07" title={t(ui.about.fitTitle, locale)} />
+        <SectionMark index="06" title={t(ui.about.fitTitle, locale)} />
         <div className="grid gap-10 py-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
           <div>
             <h2 id="fit-title" className="t-section max-w-[13ch]">{t(ui.about.wantLabel, locale)}</h2>

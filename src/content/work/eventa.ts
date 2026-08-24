@@ -21,8 +21,8 @@ export const eventa: Project = {
       he: "להשתמש באירוע עצמו כגבול האמון: QR פותח מסלול קצר ומוגבל לאירוע מהגעה ועד היכרות רלוונטית.",
     },
     contribution: {
-      en: "My recorded role covered product, design, full-stack implementation and operation across onboarding, profiles, matching, messaging, privacy and organizer controls.",
-      he: "התפקיד המתועד שלי כלל מוצר, עיצוב, מימוש פול־סטאק ותפעול לאורך כניסה, פרופילים, התאמות, הודעות, פרטיות וכלי מארגנים.",
+      en: "I independently conceived, designed, built and operated Eventa end to end: onboarding, profiles, matching, messaging, privacy and organizer controls.",
+      he: "הגיתי, עיצבתי, בניתי ותפעלתי את Eventa באופן עצמאי מקצה לקצה: כניסה, פרופילים, התאמות, הודעות, פרטיות וכלי מארגנים.",
     },
     proof: {
       en: "A published source snapshot with product, operations, privacy, testing and CI documentation. The service itself has been discontinued.",
@@ -36,7 +36,7 @@ export const eventa: Project = {
     en: "Product · design · full-stack build · operation",
     he: "מוצר · עיצוב · בנייה פול־סטאק · תפעול",
   },
-  team: { en: "Personal product project", he: "פרויקט מוצר אישי" },
+  team: { en: "Solo project · sole creator", he: "פרויקט עצמאי · יוצר יחיד" },
   started: "2026",
   ended: "2026",
   status: "discontinued",
@@ -46,8 +46,8 @@ export const eventa: Project = {
     he: "מסמכים שסופקו על ידי הבעלים - קורות החיים המקוריים וקובץ ה־README של הפרויקט - מתארים אותו כמי שהיה פעיל בעבר. כיום הוא הופסק ופורסם כצילום מצב לא מתוחזק של קוד המקור.",
   },
   evidenceNote: {
-    en: "Owner-provided records describe Eventa as operated and later discontinued. The public snapshot verifies the implemented product surface, but its squashed history does not establish iteration ownership and no user, match or event outcome is claimed.",
-    he: "מסמכים שסופקו על ידי הבעלים מתארים את Eventa כמי שהופעל ולאחר מכן הופסק. צילום המצב הציבורי מאמת את פני המוצר שמומשו, אך היסטוריה מרוכזת לקומיט יחיד אינה מוכיחה בעלות על איטרציות, ואין טענה למספר משתמשים, התאמות או תוצאות אירוע.",
+    en: "Tomer confirms he was Eventa's sole creator and describes it as formerly operated and later discontinued. The public source snapshot verifies the implemented product surface; no user, match or event outcome is claimed.",
+    he: "תומר מאשר שהוא היוצר היחיד של Eventa ומתאר אותו כמוצר שפעל בעבר ולאחר מכן הופסק. צילום המצב הציבורי מאמת את פני המוצר שמומשו; אין טענה למספר משתמשים, התאמות או תוצאות אירוע.",
   },
   metrics: [
     {

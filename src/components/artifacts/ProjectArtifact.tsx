@@ -31,8 +31,8 @@ const LABELS: Record<ArtifactSlug, Record<Locale, string>> = {
     he: "Eventa: כרטיס QR פיזי פותח נתיב בין אנשים שנמצאים באותו אירוע",
   },
   "license-plate-recognition": {
-    en: "License plate recognition: a camera frame becomes a selective detection pipeline",
-    he: "זיהוי לוחיות רישוי: תמונת מצלמה הופכת לצינור עיבוד סלקטיבי",
+    en: "License plate recognition: gathered data and a camera stream converge into a trained recognition pipeline",
+    he: "זיהוי לוחיות רישוי: נתונים שנאספו וזרם מצלמה מתכנסים לצינור זיהוי מאומן",
   },
   "trading-system": {
     en: "Trading system: store actions expose the permissions and state underneath a multi-store marketplace",
@@ -299,7 +299,7 @@ function LprArtifact() {
       <div className={styles.plateReceipt}>
         <span>FRAME 0421</span>
         <strong>TEST · PLATE · 042</strong>
-        <i>MOTION → DETECT → OCR</i>
+        <i>DATA → TRAIN → DETECT → ANALYSE</i>
       </div>
       <svg className={styles.lprTrace} viewBox="0 0 1000 560" focusable="false">
         <path d="M542 357 C657 358 702 431 814 410" />

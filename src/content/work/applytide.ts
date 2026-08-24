@@ -21,8 +21,8 @@ export const applytide: Project = {
       he: "להפוך את הקליטה לכמעט בלתי מורגשת, ואז לתת לכל מועמדות היסטוריה מובנית אחת מאיתור ועד החלטה.",
     },
     contribution: {
-      en: "My recorded role spans product direction and implementation across browser capture, the React interface, FastAPI services, data modelling, document tooling and the bounded AI layer.",
-      he: "התפקיד המתועד שלי משתרע על כיוון המוצר והמימוש — מקליטה מהדפדפן, דרך ממשק React ושירותי FastAPI, ועד מודל הנתונים, כלי המסמכים ושכבת AI מוגבלת תקציב.",
+      en: "I independently defined, designed and built Applytide end to end: browser capture, the React interface, FastAPI services, data modelling, document tooling, infrastructure and the bounded AI layer.",
+      he: "הגדרתי, עיצבתי ובניתי את Applytide באופן עצמאי מקצה לקצה: קליטה מהדפדפן, ממשק React, שירותי FastAPI, מודל הנתונים, כלי המסמכים, התשתית ושכבת AI מוגבלת תקציב.",
     },
     proof: {
       en: "An archived public repository with a substantial dated history and inspectable browser, frontend, backend and infrastructure code.",
@@ -33,12 +33,12 @@ export const applytide: Project = {
   stages: ["signal", "frame", "plan", "build", "prove", "field"],
   domain: ["product", "platform", "applied-ai"],
   role: {
-    en: "Product design · full-stack build",
-    he: "עיצוב מוצר · בנייה פול־סטאק",
+    en: "Product · design · full-stack engineering",
+    he: "מוצר · עיצוב · הנדסת פול־סטאק",
   },
   team: {
-    en: "Personal product project",
-    he: "פרויקט מוצר אישי",
+    en: "Solo project · sole creator",
+    he: "פרויקט עצמאי · יוצר יחיד",
   },
   started: "2025-08",
   ended: "2026-04",
@@ -49,8 +49,8 @@ export const applytide: Project = {
     he: "המאגר הציבורי נמצא בארכיון. אין טענה לפריסה חיה או לשימוש חיצוני.",
   },
   evidenceNote: {
-    en: "The public source contains the implemented system and its August 2025–April 2026 history. It is presented as a substantial build, not as evidence of adoption or production outcomes.",
-    he: "קוד המקור הציבורי כולל את המערכת שמומשה ואת היסטוריית הפיתוח מאוגוסט 2025 עד אפריל 2026. הוא מוצג כבנייה משמעותית, לא כהוכחה לאימוץ או לתוצאות בייצור.",
+    en: "Tomer confirms he was Applytide's sole creator. The public source independently verifies the implemented system and its August 2025–April 2026 history; it does not establish adoption or production outcomes.",
+    he: "תומר מאשר שהוא היוצר היחיד של Applytide. קוד המקור הציבורי מאמת באופן עצמאי את המערכת שמומשה ואת היסטוריית הפיתוח מאוגוסט 2025 עד אפריל 2026; הוא אינו מוכיח אימוץ או תוצאות בייצור.",
   },
   metrics: [
     {
@@ -424,8 +424,8 @@ export const applytide: Project = {
       time: 1,
       scope: 1,
       note: {
-          en: "Real conditions: constrained operating capacity, ongoing cost exposure, and a correctness bar high enough that a wrong salary field is worse than no salary field. That combination points at the cascade.",
-        he: "התנאים האמיתיים: בנייה לבד, חשיפה מתמשכת לעלות, ורף נכונות גבוה מספיק כדי ששדה שכר שגוי יהיה גרוע יותר משדה שכר חסר. הצירוף הזה מצביע על המפל.",
+          en: "Real conditions: one-person operating capacity, ongoing cost exposure, and a correctness bar high enough that a wrong salary field is worse than no salary field. That combination points at the cascade.",
+        he: "התנאים האמיתיים: קיבולת תפעול של אדם אחד, חשיפה מתמשכת לעלות, ורף נכונות גבוה מספיק כדי ששדה שכר שגוי יהיה גרוע יותר משדה שכר חסר. הצירוף הזה מצביע על המפל.",
       },
     },
     scenarios: [

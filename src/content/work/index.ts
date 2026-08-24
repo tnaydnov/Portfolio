@@ -5,11 +5,13 @@ import { eventa } from "./eventa";
 import { lpr, tradingSystem } from "./systems";
 import { reps } from "./reps";
 
-export const FLAGSHIPS: Project[] = [arc, applytide, eventa];
-export const SYSTEMS: Project[] = [lpr, tradingSystem];
-export const REPS: Project[] = reps;
+export const SELECTED_WORK: Project[] = [arc, applytide, eventa, lpr];
+export const EARLIER_ENGINEERING: Project[] = [tradingSystem, ...reps];
 
-export const ALL_PROJECTS: Project[] = [...FLAGSHIPS, ...SYSTEMS, ...REPS];
+export const ALL_PROJECTS: Project[] = [
+  ...SELECTED_WORK,
+  ...EARLIER_ENGINEERING,
+];
 
 export const CASE_STUDIES = ALL_PROJECTS.filter((p) => p.tier !== "rep");
 
