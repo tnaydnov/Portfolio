@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { useMediaQuery, useReducedMotion } from "@/components/motion/hooks";
 import { t, type Locale } from "@/lib/i18n";
 import { href } from "@/lib/site";
@@ -14,247 +14,209 @@ const CinematicWorld = dynamic(
   { ssr: false, loading: () => null },
 );
 
-const copy = {
-  role: { en: "Technical product builder", he: "בונה מוצר טכני" },
-  thesis: {
-    en: "I find the workaround everyone has accepted, trace it to the real problem, and build the fix.",
-    he: "אני מוצא את המעקף שכולם כבר התרגלו אליו, עוקב אחריו עד לבעיה האמיתית — ובונה את התיקון.",
-  },
-  sub: {
-    en: "The request is small. The system underneath isn’t.",
-    he: "הבקשה קטנה. המערכת שמתחתיה — לא.",
-  },
-  begin: { en: "Scroll to follow the request", he: "גללו כדי לעקוב אחרי הבקשה" },
-  skip: { en: "Skip to the work", he: "דלגו לעבודות" },
-  enter: { en: "Enter the story", he: "כניסה לסיפור" },
-  request: { en: "Can you add another button?", he: "אפשר להוסיף עוד כפתור?" },
-  reply: { en: "Maybe. What needs to happen?", he: "אולי. מה צריך לקרות?" },
-  requestLabel: { en: "REQUEST", he: "בקשה" },
-  tomerLabel: { en: "TOMER", he: "תומר" },
-  experience: {
-    en: "A request walks into Tomer’s systems workshop",
-    he: "בקשה נכנסת לסדנת המערכות של תומר",
-  },
-  chapters: { en: "Story chapters", he: "פרקי הסיפור" },
-  chapterRequest: { en: "Request", he: "בקשה" },
-  chapterTrace: { en: "Trace", he: "מעקב" },
-  chapterListen: { en: "Listen", he: "הקשבה" },
-  chapterTest: { en: "Test", he: "ניסוי" },
-  chapterReframe: { en: "Reframe", he: "מסגור מחדש" },
-  chapterReturn: { en: "Return", he: "חזרה" },
-  loopLabel: { en: "UNDER THE REQUEST", he: "מתחת לבקשה" },
-  loopTitle: { en: "Copy. Search. Ask. Wait. Repeat.", he: "להעתיק. לחפש. לשאול. לחכות. שוב." },
-  perspectiveLabel: { en: "THREE PEOPLE / ONE INSTRUCTION", he: "שלושה אנשים / הנחיה אחת" },
-  perspective: { en: "Same words. Different understanding.", he: "אותן מילים. הבנה שונה." },
-  listenLabel: { en: "LISTEN", he: "להקשיב" },
-  listen: { en: "That hesitation is data.", he: "ההיסוס הזה הוא מידע." },
-  testLabel: { en: "THE LITERAL ANSWER", he: "התשובה המילולית" },
-  test: { en: "One button. Then too many.", he: "כפתור אחד. ואז יותר מדי." },
-  secondRequest: { en: "So… another button?", he: "אז… עוד כפתור?" },
-  secondReply: { en: "Still no.", he: "עדיין לא." },
-  reframeLabel: { en: "REFRAME", he: "מסגור מחדש" },
-  reframe: {
-    en: "The request was real. The requested solution wasn’t.",
-    he: "הבקשה הייתה אמיתית. הפתרון שהתבקש — לא.",
-  },
-  realityLabel: { en: "REALITY EDITS THE SOLUTION", he: "המציאות עורכת את הפתרון" },
-  reality: { en: "One last hesitation. One last correction.", he: "עוד היסוס אחד. עוד תיקון אחד." },
-  resolvedLabel: { en: "THE REQUEST, REWRITTEN", he: "הבקשה, בניסוח מחדש" },
-  resolved: { en: "Help people understand what happens next.", he: "לעזור לאנשים להבין מה הצעד הבא." },
-  resolution: { en: "The question changed. So did the system.", he: "השאלה השתנתה. גם המערכת." },
-  ctaLead: { en: "See what this looks like in real work.", he: "לראות איך זה נראה בעבודה אמיתית." },
-  sound: { en: "Sound", he: "סאונד" },
-  on: { en: "On", he: "פעיל" },
-  off: { en: "Off", he: "כבוי" },
-  quality: { en: "Quality", he: "איכות" },
-  qualityEssential: { en: "Essential", he: "בסיסית" },
-  qualityBalanced: { en: "Balanced", he: "מאוזנת" },
-  qualityPremium: { en: "Premium", he: "מרבית" },
-  reduceMotion: { en: "Reduce motion", he: "הפחתת תנועה" },
-  enableMotion: { en: "Enable cinematic motion", he: "הפעלת תנועה קולנועית" },
-  reducedTitle: { en: "A request arrives in the wrong shape.", he: "בקשה מגיעה בצורה הלא נכונה." },
-  reducedBody: {
-    en: "Tomer does not begin with the requested feature. He begins by asking what needs to happen, then follows the workaround to the system underneath.",
-    he: "תומר לא מתחיל מהפיצ׳ר שהתבקש. הוא מתחיל בשאלה מה צריך לקרות, ואז עוקב אחרי המעקף אל המערכת שמתחתיו.",
-  },
-  reducedTrace: {
-    en: "The request opens into a loop of copying, searching, asking, waiting and repeating.",
-    he: "הבקשה נפתחת ללולאה של העתקה, חיפוש, שאלה, המתנה וחזרה.",
-  },
-  reducedListen: {
-    en: "Rather than repeat the explanation, Tomer watches where another person hesitates.",
-    he: "במקום לחזור על אותו הסבר, תומר מתבונן ברגע שבו אדם אחר מהסס.",
-  },
-  reducedTest: {
-    en: "The requested button is built, tested and allowed to fail. It multiplies the problem.",
-    he: "הכפתור שהתבקש נבנה, נבדק ומקבל רשות להיכשל. הוא מכפיל את הבעיה.",
-  },
-  reducedReframe: {
-    en: "The clutter is removed, the path is simplified, and real use gets the final word.",
-    he: "העומס מוסר, המסלול מפושט, והשימוש האמיתי מקבל את המילה האחרונה.",
-  },
-  viewWork: { en: "View the work →", he: "לצפייה בעבודות ←" },
-} satisfies Record<string, { en: string; he: string }>;
+const LazyProjectArtifact = dynamic(
+  () => import("@/components/artifacts/ProjectArtifact").then((module) => module.ProjectArtifact),
+  { ssr: false, loading: () => <div className={styles.artifactLoading} aria-hidden /> },
+);
 
-const CHAPTERS = [
-  { id: "request", at: 0, label: copy.chapterRequest },
-  { id: "trace", at: 0.275, label: copy.chapterTrace },
-  { id: "listen", at: 0.42, label: copy.chapterListen },
-  { id: "test", at: 0.475, label: copy.chapterTest },
-  { id: "reframe", at: 0.655, label: copy.chapterReframe },
-  { id: "return", at: 0.915, label: copy.chapterReturn },
+const copy = {
+  role: { en: "Technical Product Builder", he: "בונה מוצרים טכנולוגיים" },
+  name: { en: "Tomer Naydnov", he: "תומר ניידנוב" },
+  thesis: {
+    en: "I take a vague need and turn it into a real product—working, tested and shipped.",
+    he: "אני לוקח צורך מעורפל והופך אותו למוצר אמיתי — עובד, בדוק ומושק.",
+  },
+  disciplines: {
+    en: "Product thinking · UX · Systems · Code · Delivery",
+    he: "חשיבה מוצרית · חוויית משתמש · מערכות · קוד · הוצאה לפועל",
+  },
+  scroll: { en: "Scroll to start with almost nothing", he: "גללו כדי להתחיל מכמעט כלום" },
+  skip: { en: "Skip intro", he: "דלגו על הפתיח" },
+  experience: {
+    en: "A vague need becomes a live product",
+    he: "צורך מעורפל הופך למוצר חי",
+  },
+  signalLabel: { en: "NEW / 09:42", he: "חדש / 09:42" },
+  signal: { en: "Could we build something for this?", he: "אולי אפשר לבנות לזה משהו?" },
+  starts: { en: "That’s usually where it starts.", he: "ככה זה בדרך כלל מתחיל." },
+  fragments: { en: "A need. A frustration. A thought.", he: "צורך. תסכול. מחשבה." },
+  understand: {
+    en: "Before I decide what to build, I need to understand what needs to change.",
+    he: "לפני שאני מחליט מה לבנות, אני צריך להבין מה באמת צריך להשתנות.",
+  },
+  questions: {
+    en: ["Who needs it?", "What happens today?", "Where does it break?", "Why?", "What needs to change?"],
+    he: ["מי צריך את זה?", "מה קורה היום?", "איפה זה נשבר?", "למה?", "מה באמת צריך להשתנות?"],
+  },
+  evidence: {
+    en: ["conversation", "workflow", "handoff", "workaround", "constraint", "user action"],
+    he: ["שיחה", "תהליך עבודה", "העברה", "מעקף", "אילוץ", "פעולת משתמש"],
+  },
+  decisions: {
+    en: "A need becomes a product when the decisions become clear.",
+    he: "צורך מתחיל להפוך למוצר כשיש החלטות ברורות.",
+  },
+  decisionFooter: {
+    en: "scope · flow · tradeoffs · priority · system",
+    he: "היקף · זרימה · פשרות · עדיפות · מערכת",
+  },
+  decisionTerms: {
+    en: ["USER", "NEED", "FLOW", "REQUIREMENTS", "STATES", "CONSTRAINTS", "PRIORITY", "MVP", "SYSTEM"],
+    he: ["משתמש", "צורך", "זרימה", "דרישות", "מצבים", "אילוצים", "עדיפות", "MVP", "מערכת"],
+  },
+  build: { en: "Then I build it.", he: "ואז אני בונה אותו." },
+  buildSupport: {
+    en: "Product decisions and technical decisions belong in the same conversation.",
+    he: "מבחינתי, החלטות מוצר והחלטות טכניות הן חלק מאותה שיחה.",
+  },
+  productSystem: { en: "PRODUCT / SYSTEM", he: "מוצר / מערכת" },
+  workingState: { en: "PRODUCT / WORKING STATE", he: "מוצר / מצב עובד" },
+  interfaceLabel: { en: "INTERFACE", he: "ממשק" },
+  architectureTerms: {
+    en: ["CLIENT", "API", "AUTH", "DATA", "LOGIC", "SERVICES"],
+    he: ["לקוח", "API", "הרשאות", "נתונים", "לוגיקה", "שירותים"],
+  },
+  reality: { en: "Then reality gets a vote.", he: "ואז המציאות אומרת את שלה." },
+  realitySupport: {
+    en: "The product changes when use proves the plan wrong.",
+    he: "המוצר משתנה כשהשימוש מוכיח שהתכנון טעה.",
+  },
+  expectedPath: { en: "EXPECTED PATH", he: "המסלול הצפוי" },
+  unexpectedUse: { en: "WAIT — WHAT HAPPENS NEXT?", he: "רגע — מה קורה עכשיו?" },
+  iteration: {
+    en: ["TEST", "WATCH", "LEARN", "CHANGE"],
+    he: ["בודק", "מתבונן", "לומד", "משנה"],
+  },
+  shipping: { en: ["BUILD", "TEST", "PRODUCTION", "LIVE"], he: ["BUILD", "TEST", "PRODUCTION", "LIVE"] },
+  shippingLabel: {
+    en: "Build, test, production, live",
+    he: "בנייה, בדיקה, פרודקשן, עלייה לאוויר",
+  },
+  live: { en: "Live.", he: "באוויר." },
+  payoff: {
+    en: "From “we need something” to something people can actually use.",
+    he: "מ־״צריך פה משהו״ למוצר שאנשים באמת יכולים להשתמש בו.",
+  },
+  proof: { en: "This isn’t a process diagram.", he: "זה לא תרשים תהליך." },
+  proofStrong: { en: "It’s how I work.", he: "ככה אני עובד." },
+  proofIntro: { en: "Selected work. Different lifecycle stages.", he: "עבודות נבחרות. שלבים שונים במחזור החיים." },
+  viewProducts: { en: "See all work →", he: "לכל העבודות ←" },
+} as const;
+
+const PROJECTS = [
+  {
+    slug: "arc",
+    title: "Arc",
+    index: "01",
+    status: { en: "Portal online", he: "הפורטל זמין" },
+    provenance: { en: "Source-derived reconstruction · fictional data", he: "שחזור מבוסס מקור · נתונים בדויים" },
+  },
+  {
+    slug: "applytide",
+    title: "Applytide",
+    index: "02",
+    status: { en: "Source archived", he: "קוד המקור בארכיון" },
+    provenance: { en: "Source-derived reconstruction · fictional data", he: "שחזור מבוסס מקור · נתונים בדויים" },
+  },
+  {
+    slug: "eventa",
+    title: "Eventa",
+    index: "03",
+    status: { en: "Discontinued · source public", he: "הופסק · הקוד ציבורי" },
+    provenance: { en: "Illustrative product scenario · fictional profiles", he: "תרחיש מוצר להמחשה · פרופילים בדויים" },
+  },
+] as const;
+
+const ACTS = [
+  { id: "identity", at: 0 },
+  { id: "signal", at: 0.12 },
+  { id: "understand", at: 0.24 },
+  { id: "decisions", at: 0.41 },
+  { id: "build", at: 0.57 },
+  { id: "reality", at: 0.73 },
+  { id: "live", at: 0.87 },
+  { id: "proof", at: 0.95 },
 ] as const;
 
 const STABLE_PROGRESS: Record<string, number> = {
-  request: 0.13,
-  trace: 0.315,
-  listen: 0.445,
-  test: 0.56,
-  reframe: 0.775,
-  return: 0.975,
+  identity: 0.075,
+  signal: 0.19,
+  understand: 0.35,
+  decisions: 0.525,
+  build: 0.695,
+  reality: 0.845,
+  live: 0.925,
+  proof: 1,
 };
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
-const range = (value: number, start: number, end: number) =>
-  clamp01((value - start) / (end - start));
+const TIMELINE_FRACTION = 0.8;
+const range = (value: number, start: number, end: number) => clamp01((value - start) / (end - start));
 const ease = (value: number) => value * value * (3 - 2 * value);
-const opacityWindow = (value: number, start: number, end: number, feather = 0.035) =>
-  ease(range(value, start, start + feather)) *
-  (1 - ease(range(value, end - feather, end)));
+const localizeList = (value: { readonly en: readonly string[]; readonly he: readonly string[] }, locale: Locale) =>
+  value[locale];
+const opacityWindow = (value: number, start: number, end: number, feather = 0.025) =>
+  ease(range(value, start, start + feather)) * (1 - ease(range(value, end - feather, end)));
 
-function useStoredQuality() {
+function useAdaptiveQuality() {
   const [quality, setQuality] = useState<CinematicQuality>("balanced");
 
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem("tomer-cinematic-quality");
-      if (stored === "essential" || stored === "balanced" || stored === "premium") {
-        setQuality(stored);
-        return;
-      }
-    } catch {
-      // A blocked storage API must not block the experience.
-    }
-
-    const device = navigator as Navigator & {
-      deviceMemory?: number;
-      connection?: { saveData?: boolean };
-    };
-    const clearlyConstrained =
-      device.connection?.saveData === true ||
-      ((device.deviceMemory ?? 8) <= 4 && navigator.hardwareConcurrency <= 4);
-    if (clearlyConstrained) setQuality("essential");
-  }, []);
-
-  const update = useCallback((next: CinematicQuality) => {
-    setQuality(next);
-    try {
-      window.localStorage.setItem("tomer-cinematic-quality", next);
-    } catch {
-      // Keep the in-memory choice when storage is unavailable.
-    }
-  }, []);
-
-  return [quality, update] as const;
-}
-
-function useProceduralSound(chapter: string) {
-  const audio = useRef<AudioContext | null>(null);
-  const lastCue = useRef(0);
-  const [enabled, setEnabled] = useState(false);
-
-  const toggle = useCallback(() => {
-    if (enabled) {
-      void audio.current?.close().catch(() => undefined);
-      audio.current = null;
-      setEnabled(false);
+    const device = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
+    const coarseNarrow = window.matchMedia("(pointer: coarse) and (max-width: 520px)").matches;
+    const memory = device.deviceMemory;
+    const cores = navigator.hardwareConcurrency || 4;
+    if (device.connection?.saveData || (memory !== undefined && memory <= 4) || cores <= 4 || (coarseNarrow && cores <= 6)) {
+      setQuality("essential");
       return;
     }
-
-    const AudioCtor = window.AudioContext;
-    if (!AudioCtor) return;
-    try {
-      const context = new AudioCtor();
-      audio.current = context;
-      if (context.state === "suspended") void context.resume().catch(() => undefined);
-      setEnabled(true);
-    } catch {
-      setEnabled(false);
-    }
-  }, [enabled]);
-
-  useEffect(() => {
-    const context = audio.current;
-    if (!enabled || !context) return;
-    try {
-      const wallTime = performance.now();
-      if (wallTime - lastCue.current < 110) return;
-      lastCue.current = wallTime;
-      const oscillator = context.createOscillator();
-      const gain = context.createGain();
-      const frequencies: Record<string, number> = {
-        request: 220,
-        trace: 92,
-        listen: 72,
-        test: 138,
-        reframe: 104,
-        return: 174,
-      };
-      const now = context.currentTime;
-      oscillator.type = chapter === "request" || chapter === "return" ? "sine" : "triangle";
-      oscillator.frequency.setValueAtTime(frequencies[chapter] ?? 130, now);
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(0.035, now + 0.016);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.24);
-      oscillator.connect(gain).connect(context.destination);
-      oscillator.start(now);
-      oscillator.stop(now + 0.26);
-    } catch {
-      // Sound is optional and never carries unique meaning.
-    }
-  }, [chapter, enabled]);
-
-  useEffect(() => {
-    const onVisibility = () => {
-      const context = audio.current;
-      if (!context) return;
-      if (document.hidden) void context.suspend().catch(() => undefined);
-      else if (enabled) void context.resume().catch(() => undefined);
-    };
-    document.addEventListener("visibilitychange", onVisibility);
-    return () => document.removeEventListener("visibilitychange", onVisibility);
-  }, [enabled]);
-
-  useEffect(() => () => {
-    void audio.current?.close().catch(() => undefined);
-    audio.current = null;
+    if (!coarseNarrow && (memory ?? 8) >= 8 && cores >= 8 && window.innerWidth >= 1200) setQuality("premium");
   }, []);
 
-  return { enabled, toggle };
+  return quality;
 }
 
-function ReducedExperience({
+function ProjectProof({
   locale,
-  canEnableMotion,
-  enableMotion,
-  markFocusInside,
-  markFocusOutside,
+  interactive,
+  renderArtifacts = true,
 }: {
   locale: Locale;
-  canEnableMotion: boolean;
-  enableMotion: () => void;
+  interactive: boolean;
+  renderArtifacts?: boolean;
+}) {
+  return (
+    <div className={styles.projectProof}>
+      {PROJECTS.map((project) => (
+        <Link
+          key={project.slug}
+          href={href(`/work/${project.slug}`, locale)}
+          tabIndex={interactive ? undefined : -1}
+          aria-hidden={!interactive}
+          className={styles.projectProofItem}
+        >
+          <div className={styles.projectVisual}>
+            {renderArtifacts
+              ? <LazyProjectArtifact slug={project.slug} locale={locale} size="card" />
+              : <div className={styles.artifactLoading} aria-hidden />}
+          </div>
+          <div className={styles.projectProofMeta}>
+            <span>{project.index}</span>
+            <strong>{project.title}</strong>
+            <small>{t(project.status, locale)} · {t(project.provenance, locale)}</small>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+function ReducedExperience({ locale, markFocusInside, markFocusOutside, proofReady }: {
+  locale: Locale;
   markFocusInside: () => void;
   markFocusOutside: (nextTarget: EventTarget | null) => void;
+  proofReady: boolean;
 }) {
-  const frames = [
-    { title: copy.request, body: copy.reducedTitle, visual: styles.storyRequest },
-    { title: copy.reply, body: copy.reducedBody, visual: styles.storyQuestion },
-    { title: copy.loopTitle, body: copy.reducedTrace, visual: styles.storyLoop },
-    { title: copy.listen, body: copy.reducedListen, visual: styles.storyListen },
-    { title: copy.test, body: copy.reducedTest, visual: styles.storyTest },
-    { title: copy.resolved, body: copy.reducedReframe, visual: styles.storyResolved },
-  ];
-
   return (
     <section
       className={styles.reducedExperience}
@@ -264,32 +226,67 @@ function ReducedExperience({
       onFocusCapture={markFocusInside}
       onBlurCapture={(event) => markFocusOutside(event.relatedTarget)}
     >
-      <div className={styles.reducedIntro}>
-        <p className={styles.eyebrow}>{t(copy.role, locale)}</p>
-        <h1 id="reduced-title" tabIndex={-1}>Tomer Naydnov</h1>
-        <p className={styles.reducedThesis}>{t(copy.thesis, locale)}</p>
-        <ol className={styles.storyboard}>
-          {frames.map((frame, index) => (
-            <li key={frame.title.en}>
-              <div className={`${styles.storyVisual} ${frame.visual}`} aria-hidden>
-                <i /><i /><i /><i /><i />
-              </div>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h2>{t(frame.title, locale)}</h2>
-              <p>{t(frame.body, locale)}</p>
-            </li>
-          ))}
-        </ol>
-        <div className={styles.reducedResolution}>
-          <span>{t(copy.resolution, locale)}</span>
-          <strong>{t(copy.ctaLead, locale)}</strong>
-        </div>
-        <div className={styles.reducedActions}>
-          <Link href={href("/work", locale)}>{t(copy.viewWork, locale)}</Link>
-          {canEnableMotion ? (
-            <button type="button" onClick={enableMotion}>{t(copy.enableMotion, locale)}</button>
-          ) : null}
-        </div>
+      <header className={styles.reducedHero}>
+        <Link className={styles.reducedSkipLink} href={href("/work", locale)}>{t(copy.skip, locale)}</Link>
+        <p>{t(copy.role, locale)}</p>
+        <h1 id="reduced-title">{t(copy.name, locale)}</h1>
+        <strong>{t(copy.thesis, locale)}</strong>
+        <span>{t(copy.disciplines, locale)}</span>
+      </header>
+
+      <div className={styles.reducedStory}>
+        <section className={styles.reducedBeat}>
+          <div className={styles.reducedSignal}>
+            <span>{t(copy.signalLabel, locale)}</span>
+            <strong>{t(copy.signal, locale)}</strong>
+          </div>
+          <div><h2>{t(copy.starts, locale)}</h2><p>{t(copy.fragments, locale)}</p></div>
+        </section>
+
+        <section className={styles.reducedBeat}>
+          <div className={styles.reducedEvidence}>
+            {localizeList(copy.questions, locale).map((question) => <span key={question}>{question}</span>)}
+          </div>
+          <h2>{t(copy.understand, locale)}</h2>
+        </section>
+
+        <section className={styles.reducedBeat}>
+          <div className={styles.reducedDecisionField}>
+            {localizeList(copy.decisionTerms, locale).map((term) => <span key={term}>{term}</span>)}
+          </div>
+          <h2>{t(copy.decisions, locale)}</h2>
+        </section>
+
+        <section className={styles.reducedBeat}>
+          <div className={styles.reducedSystem} dir="ltr" aria-hidden>
+            <div><span>{t(copy.interfaceLabel, locale)}</span><i /><i /><i /></div>
+            {localizeList(copy.architectureTerms, locale).map((term) => <b key={term}>{term}</b>)}
+          </div>
+          <div><h2>{t(copy.build, locale)}</h2><p>{t(copy.buildSupport, locale)}</p></div>
+        </section>
+
+        <section className={styles.reducedBeat}>
+          <div className={styles.reducedIteration}>
+            {localizeList(copy.iteration, locale).map((verb, index) => <span key={verb} data-corrected={index === 3}>{verb}</span>)}
+          </div>
+          <div><h2>{t(copy.reality, locale)}</h2><p>{t(copy.realitySupport, locale)}</p></div>
+        </section>
+
+        <section className={styles.reducedBeat}>
+          <div className={styles.reducedShipping} dir="ltr" aria-label={t(copy.shippingLabel, locale)}>
+            {copy.shipping.en.map((status) => <span key={status} data-live={status === "LIVE"}>{status}</span>)}
+          </div>
+          <div><h2>{t(copy.live, locale)}</h2><p>{t(copy.payoff, locale)}</p></div>
+        </section>
+
+        <section className={`${styles.reducedBeat} ${styles.reducedProof}`}>
+          <div className={styles.reducedProofCopy}>
+            <span>{t(copy.proofIntro, locale)}</span>
+            <h2>{t(copy.proof, locale)} <strong>{t(copy.proofStrong, locale)}</strong></h2>
+          </div>
+          <ProjectProof locale={locale} interactive renderArtifacts={proofReady} />
+          <Link className={styles.reducedWorkLink} href={href("/work", locale)}>{t(copy.viewProducts, locale)}</Link>
+        </section>
       </div>
     </section>
   );
@@ -300,49 +297,27 @@ export function CinematicHome({ locale }: { locale: Locale }) {
   const forcedCompact = useMediaQuery(
     "(max-height: 520px) and (orientation: landscape), (max-height: 580px) and (max-width: 360px) and (orientation: portrait)",
   );
-  const [motionOverride, setMotionOverride] = useState<"full" | "reduced" | null>(null);
-  const [quality, setQuality] = useStoredQuality();
+  const quality = useAdaptiveQuality();
+  const reduced = forcedCompact || systemReduced;
   const [progress, setProgress] = useState(0);
   const [worldRequested, setWorldRequested] = useState(false);
   const [rendererReady, setRendererReady] = useState(false);
+  const [proofLoaded, setProofLoaded] = useState(false);
+  const [motionPreferenceResolved, setMotionPreferenceResolved] = useState(false);
   const progressRef = useRef(0);
   const root = useRef<HTMLElement>(null);
   const skipLink = useRef<HTMLAnchorElement>(null);
-  const enterButton = useRef<HTMLButtonElement>(null);
-  const endLink = useRef<HTMLAnchorElement>(null);
+  const proofRoot = useRef<HTMLDivElement>(null);
   const preservedProgress = useRef(0);
   const focusWasInCinematic = useRef(false);
-  const modeChangeRequested = useRef(false);
   const queryApplied = useRef(false);
   const initialPreferencePending = useRef(true);
-  const reduced = forcedCompact || motionOverride === "reduced" || (motionOverride === null && systemReduced);
 
   useEffect(() => {
-    try {
-      if (window.localStorage.getItem("tomer-cinematic-motion") === "reduced") {
-        setMotionOverride("reduced");
-      }
-    } catch {
-      // The system preference remains the fallback.
-    }
-  }, []);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      initialPreferencePending.current = false;
-    }, 0);
+    const timer = window.setTimeout(() => { initialPreferencePending.current = false; }, 0);
     return () => window.clearTimeout(timer);
   }, []);
-
-  const setReduced = useCallback((value: boolean) => {
-    setMotionOverride(value ? "reduced" : "full");
-    try {
-      if (value) window.localStorage.setItem("tomer-cinematic-motion", "reduced");
-      else window.localStorage.removeItem("tomer-cinematic-motion");
-    } catch {
-      // Keep the in-memory preference.
-    }
-  }, []);
+  useEffect(() => { setMotionPreferenceResolved(true); }, []);
 
   useEffect(() => {
     if (reduced) return;
@@ -350,9 +325,8 @@ export function CinematicHome({ locale }: { locale: Locale }) {
     return () => window.clearTimeout(timer);
   }, [reduced]);
 
-  useEffect(() => {
-    if (reduced) setRendererReady(false);
-  }, [reduced]);
+  useEffect(() => { if (reduced) setRendererReady(false); }, [reduced]);
+  useEffect(() => { if (progress > 0.905) setProofLoaded(true); }, [progress]);
 
   useEffect(() => {
     if (reduced) return;
@@ -363,14 +337,12 @@ export function CinematicHome({ locale }: { locale: Locale }) {
       if (!element) return;
       const rect = element.getBoundingClientRect();
       const distance = Math.max(1, element.offsetHeight - window.innerHeight);
-      const next = clamp01(-rect.top / distance);
+      const next = clamp01(-rect.top / (distance * TIMELINE_FRACTION));
       progressRef.current = next;
       if (next > 0.002) setWorldRequested(true);
       setProgress((current) => (Math.abs(current - next) > 0.0005 ? next : current));
     };
-    const requestMeasure = () => {
-      if (!frame) frame = window.requestAnimationFrame(measure);
-    };
+    const requestMeasure = () => { if (!frame) frame = window.requestAnimationFrame(measure); };
     measure();
     window.addEventListener("scroll", requestMeasure, { passive: true });
     window.addEventListener("resize", requestMeasure);
@@ -381,58 +353,29 @@ export function CinematicHome({ locale }: { locale: Locale }) {
     };
   }, [reduced]);
 
-  const chapter = useMemo(() => {
-    let current: (typeof CHAPTERS)[number] = CHAPTERS[0];
-    for (const item of CHAPTERS) if (progress >= item.at) current = item;
-    return current.id;
-  }, [progress]);
-
-  const { enabled: soundEnabled, toggle: toggleSound } = useProceduralSound(chapter);
-
-  useEffect(() => {
-    if (reduced && soundEnabled) toggleSound();
-  }, [reduced, soundEnabled, toggleSound]);
-
   const jump = useCallback((at: number, behavior: ScrollBehavior = "smooth") => {
     const element = root.current;
     if (!element) return;
     const top = element.getBoundingClientRect().top + window.scrollY;
     const distance = element.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: top + distance * at, behavior });
+    window.scrollTo({ top: top + distance * TIMELINE_FRACTION * at, behavior });
   }, []);
 
-  const markFocusInside = useCallback(() => {
-    focusWasInCinematic.current = true;
-  }, []);
-
+  const markFocusInside = useCallback(() => { focusWasInCinematic.current = true; }, []);
   const markFocusOutside = useCallback((nextTarget: EventTarget | null) => {
     const modeRoot = document.querySelector<HTMLElement>("[data-cinematic-mode-root]");
     focusWasInCinematic.current = nextTarget instanceof Node && Boolean(modeRoot?.contains(nextTarget));
   }, []);
-
-  const requestMotionMode = useCallback((nextReduced: boolean) => {
-    const modeRoot = document.querySelector<HTMLElement>("[data-cinematic-mode-root]");
-    focusWasInCinematic.current = Boolean(modeRoot?.contains(document.activeElement));
-    modeChangeRequested.current = true;
-    setReduced(nextReduced);
-  }, [setReduced]);
 
   const previousReduced = useRef(reduced);
   useEffect(() => {
     const wasReduced = previousReduced.current;
     previousReduced.current = reduced;
     if (wasReduced === reduced) return;
-
-    const requested = modeChangeRequested.current;
-    const shouldRestoreFocus = requested || focusWasInCinematic.current;
-    modeChangeRequested.current = false;
-
-    const initialHydrationSwap =
-      initialPreferencePending.current && !requested && wasReduced && !reduced;
+    const shouldRestoreFocus = focusWasInCinematic.current;
+    const initialHydrationSwap = initialPreferencePending.current && wasReduced && !reduced;
     initialPreferencePending.current = false;
-    if (initialHydrationSwap) {
-      return;
-    }
+    if (initialHydrationSwap) return;
 
     const frame = window.requestAnimationFrame(() => {
       if (!reduced) {
@@ -464,50 +407,42 @@ export function CinematicHome({ locale }: { locale: Locale }) {
     const requestedScene = query.get("scene");
     const target = Number.isFinite(requestedProgress) && query.has("progress")
       ? clamp01(requestedProgress)
-      : requestedScene
-        ? STABLE_PROGRESS[requestedScene]
-        : undefined;
+      : requestedScene ? STABLE_PROGRESS[requestedScene] : undefined;
     if (target === undefined) return;
     const frame = window.requestAnimationFrame(() => jump(target, "auto"));
     return () => window.cancelAnimationFrame(frame);
   }, [jump, reduced]);
 
+  const act = ACTS.reduce<(typeof ACTS)[number]>((current, item) => progress >= item.at ? item : current, ACTS[0]).id;
+  const proofOpacity = ease(range(progress, 0.945, 0.985));
+  const proofInteractive = proofOpacity > 0.82;
+
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || proofInteractive) return;
     const active = document.activeElement;
-    const identityInteractive = 1 - ease(range(progress, 0.04, 0.085)) > 0.2;
-    const endingInteractive = ease(range(progress, 0.978, 0.995)) > 0.6;
-    const sceneControlBecameHidden =
-      (active === enterButton.current && !identityInteractive) ||
-      (active === endLink.current && !endingInteractive);
-    if (sceneControlBecameHidden) skipLink.current?.focus({ preventScroll: true });
-  }, [progress, reduced]);
+    if (active instanceof Node && proofRoot.current?.contains(active)) skipLink.current?.focus({ preventScroll: true });
+  }, [proofInteractive, reduced]);
 
   if (reduced) {
     return (
       <ReducedExperience
         locale={locale}
-        canEnableMotion={!forcedCompact}
-        enableMotion={() => requestMotionMode(false)}
         markFocusInside={markFocusInside}
         markFocusOutside={markFocusOutside}
+        proofReady={motionPreferenceResolved}
       />
     );
   }
 
-  const identityOpacity = 1 - ease(range(progress, 0.04, 0.085));
-  const requestOpacity = opacityWindow(progress, 0.07, 0.175, 0.025);
-  const replyOpacity = opacityWindow(progress, 0.145, 0.245, 0.025);
-  const loopOpacity = opacityWindow(progress, 0.255, 0.36, 0.025);
-  const perspectiveOpacity = opacityWindow(progress, 0.35, 0.43, 0.018);
-  const listenOpacity = opacityWindow(progress, 0.415, 0.485, 0.016);
-  const testOpacity = opacityWindow(progress, 0.475, 0.605, 0.025);
-  const deadpanOpacity = opacityWindow(progress, 0.595, 0.675, 0.014);
-  const reframeOpacity = opacityWindow(progress, 0.655, 0.825, 0.028);
-  const realityOpacity = opacityWindow(progress, 0.815, 0.895, 0.018);
-  const questionOpacity = opacityWindow(progress, 0.895, 0.965, 0.018);
-  const resolvedOpacity = opacityWindow(progress, 0.95, 0.991, 0.012);
-  const endOpacity = ease(range(progress, 0.978, 0.995));
+  const identityOpacity = 1 - ease(range(progress, 0.075, 0.13));
+  const signalOpacity = opacityWindow(progress, 0.105, 0.275, 0.025);
+  const understandOpacity = opacityWindow(progress, 0.225, 0.435, 0.03);
+  const decisionsOpacity = opacityWindow(progress, 0.395, 0.595, 0.03);
+  const buildOpacity = opacityWindow(progress, 0.55, 0.755, 0.03);
+  const realityOpacity = opacityWindow(progress, 0.705, 0.895, 0.028);
+  const shipOpacity = opacityWindow(progress, 0.845, 0.965, 0.022);
+  const worldOpacity = 1 - ease(range(progress, 0.945, 0.995));
+  const shipStage = progress < 0.885 ? 0 : progress < 0.91 ? 1 : progress < 0.935 ? 2 : 3;
 
   return (
     <section
@@ -517,192 +452,112 @@ export function CinematicHome({ locale }: { locale: Locale }) {
       aria-label={t(copy.experience, locale)}
       data-cinematic-home
       data-cinematic-mode-root
-      data-chapter={chapter}
+      data-act={act}
       data-progress={progress.toFixed(4)}
       data-quality={quality}
-      data-sound={soundEnabled ? "on" : "off"}
       data-motion="full"
       data-renderer={rendererReady ? "r3f" : "pending"}
       onFocusCapture={markFocusInside}
       onBlurCapture={(event) => markFocusOutside(event.relatedTarget)}
     >
       <div className={styles.stickyFrame}>
-        <Link ref={skipLink} className={styles.skipLink} href={href("/work", locale)}>
-          {t(copy.skip, locale)}
-        </Link>
+        <Link ref={skipLink} className={styles.skipLink} href={href("/work", locale)}>{t(copy.skip, locale)}</Link>
 
         <div className="sr-only">
-          <h1><bdi dir="ltr">Tomer Naydnov</bdi> — {t(copy.role, locale)}</h1>
+          <h1>{t(copy.name, locale)} — {t(copy.role, locale)}</h1>
           <p>{t(copy.thesis, locale)}</p>
           <ol>
-            <li>{t(copy.request, locale)}</li>
-            <li>{t(copy.reply, locale)}</li>
-            <li>{t(copy.reducedTrace, locale)}</li>
-            <li>{t(copy.perspective, locale)}</li>
-            <li>{t(copy.listen, locale)}</li>
-            <li>{t(copy.reducedTest, locale)}</li>
-            <li>{t(copy.reframe, locale)}</li>
-            <li>{t(copy.reality, locale)}</li>
-            <li>{t(copy.resolved, locale)}</li>
-            <li>{t(copy.resolution, locale)}</li>
+            <li>{t(copy.signal, locale)} {t(copy.starts, locale)}</li>
+            <li>{t(copy.understand, locale)}</li>
+            <li>{t(copy.decisions, locale)}</li>
+            <li>{t(copy.build, locale)} {t(copy.buildSupport, locale)}</li>
+            <li>{t(copy.reality, locale)} {t(copy.realitySupport, locale)}</li>
+            <li>{t(copy.live, locale)} {t(copy.payoff, locale)}</li>
+            <li>{t(copy.proof, locale)} {t(copy.proofStrong, locale)}</li>
           </ol>
         </div>
 
-        <div className={styles.webgl} aria-hidden>
+        <div className={styles.cssFallback} aria-hidden><i /><i /><i /></div>
+        <div className={styles.webgl} style={{ opacity: worldOpacity }} aria-hidden>
           {worldRequested ? (
-            <CinematicWorld
-              progress={progressRef}
-              renderProgress={progress}
-              quality={quality}
-              onRendererStatus={setRendererReady}
-            />
+            <CinematicWorld progress={progressRef} renderProgress={progress} quality={quality} onRendererStatus={setRendererReady} />
           ) : null}
-        </div>
-        <div className={styles.cssFallback} aria-hidden>
-          <i /><i /><i />
         </div>
         <div className={styles.lightField} aria-hidden />
         <div className={styles.vignette} aria-hidden />
 
-        <div
-          className={styles.identity}
-          style={{
-            opacity: identityOpacity,
-            visibility: identityOpacity > 0.05 ? "visible" : "hidden",
-            pointerEvents: identityOpacity > 0.2 ? "auto" : "none",
-          }}
-        >
-          <p className={styles.eyebrow} aria-hidden>{t(copy.role, locale)}</p>
-          <h2 aria-hidden>Tomer Naydnov</h2>
-          <p aria-hidden>{t(copy.thesis, locale)}</p>
-          <span aria-hidden>{t(copy.begin, locale)} ↓</span>
-          <button
-            ref={enterButton}
-            tabIndex={identityOpacity > 0.2 ? undefined : -1}
-            type="button"
-            onClick={() => {
-              jump(0.105);
-              window.requestAnimationFrame(() => root.current?.focus({ preventScroll: true }));
-            }}
-          >
-            {t(copy.enter, locale)} ↓
-          </button>
+        <div className={styles.identity} style={{ opacity: identityOpacity, transform: `translate3d(0, ${progress * -8}vh, 0)` }} aria-hidden>
+          <p>{t(copy.role, locale)}</p>
+          <h2>{t(copy.name, locale)}</h2>
+          <strong>{t(copy.thesis, locale)}</strong>
+          <small>{t(copy.disciplines, locale)}</small>
+          <span>{t(copy.scroll, locale)} ↓</span>
         </div>
 
-        <div className={`${styles.dialogue} ${styles.requestDialogue}`} style={{ opacity: requestOpacity }} aria-hidden>
-          <span>{t(copy.requestLabel, locale)}</span>
-          <strong>{t(copy.request, locale)}</strong>
+        <div className={styles.signalComposition} style={{ opacity: signalOpacity, transform: `translate3d(0, ${(0.19 - progress) * 12}vh, 0)` }} aria-hidden>
+          <div className={styles.signalCard}><span>{t(copy.signalLabel, locale)}</span><strong>{t(copy.signal, locale)}</strong></div>
+          <p>{t(copy.starts, locale)}</p>
+          <small>{t(copy.fragments, locale)}</small>
         </div>
 
-        <div className={`${styles.dialogue} ${styles.tomerDialogue}`} style={{ opacity: replyOpacity }} aria-hidden>
-          <span>{t(copy.tomerLabel, locale)}</span>
-          <strong>{t(copy.reply, locale)}</strong>
-          <small>{t(copy.sub, locale)}</small>
+        <div className={styles.understandComposition} style={{ opacity: understandOpacity }} aria-hidden>
+          <div className={styles.questionField}>
+            {localizeList(copy.questions, locale).map((question, index) => <span key={question} style={{ "--index": index } as CSSProperties}>{question}</span>)}
+          </div>
+          <div className={styles.evidenceField}>
+            {localizeList(copy.evidence, locale).map((item, index) => <span key={item} style={{ "--index": index } as CSSProperties}>{item}</span>)}
+          </div>
+          <strong>{t(copy.understand, locale)}</strong>
         </div>
 
-        <div className={`${styles.sceneCaption} ${styles.loopCaption}`} style={{ opacity: loopOpacity }} aria-hidden>
-          <span>{t(copy.loopLabel, locale)}</span>
-          <strong>{t(copy.loopTitle, locale)}</strong>
+        <div className={styles.decisionsComposition} style={{ opacity: decisionsOpacity }} aria-hidden>
+          <div className={styles.decisionPlanes}>
+            {localizeList(copy.decisionTerms, locale).map((term, index) => <span key={term} style={{ "--index": index } as CSSProperties}>{term}</span>)}
+          </div>
+          <strong>{t(copy.decisions, locale)}</strong>
+          <small>{t(copy.decisionFooter, locale)}</small>
         </div>
 
-        <div className={`${styles.sceneCaption} ${styles.perspectiveCaption}`} style={{ opacity: perspectiveOpacity }} aria-hidden>
-          <span>{t(copy.perspectiveLabel, locale)}</span>
-          <strong>{t(copy.perspective, locale)}</strong>
-        </div>
-
-        <div className={styles.silence} style={{ opacity: listenOpacity }} aria-hidden>
-          <span>{t(copy.listenLabel, locale)}</span>
-          <strong>{t(copy.listen, locale)}</strong>
-        </div>
-
-        <div className={`${styles.sceneCaption} ${styles.testCaption}`} style={{ opacity: testOpacity }} aria-hidden>
-          <span>{t(copy.testLabel, locale)}</span>
-          <strong>{t(copy.test, locale)}</strong>
-        </div>
-
-        <div className={styles.deadpan} style={{ opacity: deadpanOpacity }} aria-hidden>
-          <p><span>{t(copy.requestLabel, locale)}</span>{t(copy.secondRequest, locale)}</p>
-          <p><span>{t(copy.tomerLabel, locale)}</span><strong>{t(copy.secondReply, locale)}</strong></p>
-        </div>
-
-        <div className={`${styles.sceneCaption} ${styles.reframeCaption}`} style={{ opacity: reframeOpacity }} aria-hidden>
-          <span>{t(copy.reframeLabel, locale)}</span>
-          <strong>{t(copy.reframe, locale)}</strong>
-        </div>
-
-        <div className={`${styles.sceneCaption} ${styles.realityCaption}`} style={{ opacity: realityOpacity }} aria-hidden>
-          <span>{t(copy.realityLabel, locale)}</span>
-          <strong>{t(copy.reality, locale)}</strong>
-        </div>
-
-        <div className={styles.questionReveal} style={{ opacity: questionOpacity }} aria-hidden>
-          <span>{t(copy.resolution, locale)}</span>
-        </div>
-
-        <div className={styles.resolvedRequest} style={{ opacity: resolvedOpacity }} aria-hidden>
-          <span>{t(copy.resolvedLabel, locale)}</span>
-          <strong>{t(copy.resolved, locale)}</strong>
-        </div>
-
-        <div
-          className={styles.endCard}
-          style={{ opacity: endOpacity, pointerEvents: endOpacity > 0.6 ? "auto" : "none" }}
-          aria-hidden={endOpacity <= 0.6}
-        >
-          <p aria-hidden>{t(copy.role, locale)}</p>
-          <h2 aria-hidden>Tomer Naydnov</h2>
-          <strong aria-hidden>{t(copy.ctaLead, locale)}</strong>
-          <Link ref={endLink} tabIndex={endOpacity > 0.6 ? undefined : -1} href={href("/work", locale)}>
-            {t(copy.viewWork, locale)}
-          </Link>
-        </div>
-
-        <div className={styles.controls}>
-          <div className={styles.progressRail} aria-hidden><i style={{ transform: `scaleX(${progress})` }} /></div>
-          <div className={styles.controlRow}>
-            <nav className={styles.chapterNav} aria-label={t(copy.chapters, locale)}>
-              {CHAPTERS.map((item) => (
-                <button
-                  type="button"
-                  key={item.id}
-                  onClick={() => jump(item.at)}
-                  aria-current={chapter === item.id ? "step" : undefined}
-                >
-                  {t(item.label, locale)}
-                </button>
-              ))}
-            </nav>
-            <div className={styles.settings}>
-              <button type="button" onClick={toggleSound} aria-pressed={soundEnabled}>
-                {t(copy.sound, locale)} {t(soundEnabled ? copy.on : copy.off, locale)}
-              </button>
-              <label>
-                <span>{t(copy.quality, locale)}</span>
-                <select
-                  aria-label={t(copy.quality, locale)}
-                  value={quality}
-                  onChange={(event) => {
-                    setRendererReady(false);
-                    setQuality(event.target.value as CinematicQuality);
-                  }}
-                >
-                  <option value="essential">{t(copy.qualityEssential, locale)}</option>
-                  <option value="balanced">{t(copy.qualityBalanced, locale)}</option>
-                  <option value="premium">{t(copy.qualityPremium, locale)}</option>
-                </select>
-              </label>
-              <button
-                type="button"
-                onClick={() => {
-                  if (soundEnabled) toggleSound();
-                  requestMotionMode(true);
-                }}
-              >
-                {t(copy.reduceMotion, locale)}
-              </button>
-            </div>
+        <div className={styles.buildComposition} style={{ opacity: buildOpacity }} aria-hidden>
+          <div className={styles.buildCopy}><span>{t(copy.productSystem, locale)}</span><strong>{t(copy.build, locale)}</strong><p>{t(copy.buildSupport, locale)}</p></div>
+          <div className={styles.interfaceSurface} dir="ltr">
+            <header><i /><i /><i /><span>{t(copy.workingState, locale)}</span></header>
+            <div className={styles.interfaceBody}><aside><i /><i /><i /></aside><main><span /><strong /><i /><i /><i /></main></div>
+          </div>
+          <div className={styles.architectureSurface} dir="ltr">
+            {localizeList(copy.architectureTerms, locale).map((term) => <span key={term}>{term}</span>)}
           </div>
         </div>
+
+        <div className={styles.realityComposition} style={{ opacity: realityOpacity }} aria-hidden>
+          <div className={styles.realityCopy}><strong>{t(copy.reality, locale)}</strong><p>{t(copy.realitySupport, locale)}</p></div>
+          <div className={styles.useEvidence} dir="ltr">
+            <span className={styles.useCursor}>↗</span><label>{t(copy.expectedPath, locale)}</label><div><i /><i /><i /></div><small>{t(copy.unexpectedUse, locale)}</small>
+          </div>
+          <div className={styles.iterationRail}>
+            {localizeList(copy.iteration, locale).map((verb, index) => <span key={verb} style={{ "--index": index } as CSSProperties}>{verb}</span>)}
+          </div>
+        </div>
+
+        <div className={styles.shipComposition} style={{ opacity: shipOpacity }} aria-hidden>
+          <div className={styles.shippingRail} dir="ltr" aria-label={t(copy.shippingLabel, locale)}>
+            {copy.shipping.en.map((status, index) => <span key={status} data-active={index <= shipStage} data-live={status === "LIVE"}>{status}</span>)}
+          </div>
+          <strong>{t(copy.live, locale)}</strong><p>{t(copy.payoff, locale)}</p>
+        </div>
+
+        <div
+          ref={proofRoot}
+          className={styles.proofComposition}
+          style={{ opacity: proofOpacity, pointerEvents: proofInteractive ? "auto" : "none" }}
+          aria-hidden={!proofInteractive}
+        >
+          <div className={styles.proofCopy}><span>{t(copy.proofIntro, locale)}</span><h2>{t(copy.proof, locale)} <strong>{t(copy.proofStrong, locale)}</strong></h2></div>
+          {proofLoaded ? <ProjectProof locale={locale} interactive={proofInteractive} /> : null}
+          <Link className={styles.workLink} tabIndex={proofInteractive ? undefined : -1} href={href("/work", locale)}>{t(copy.viewProducts, locale)}</Link>
+        </div>
+
+        <div className={styles.minimalProgress} aria-hidden><i><b style={{ transform: `scaleX(${progress})` }} /></i></div>
       </div>
     </section>
   );
