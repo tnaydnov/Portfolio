@@ -4,6 +4,7 @@ import { SectionMark } from "@/components/chrome/SectionMark";
 import { Reveal } from "@/components/motion/Reveal";
 import { budgetTargets, colophonRules } from "@/content/site";
 import { isLocale, t, type Locale } from "@/lib/i18n";
+import { pageMetadata } from "@/lib/metadata";
 import { ui } from "@/lib/ui";
 
 export async function generateMetadata({
@@ -13,10 +14,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  return {
+  return pageMetadata({
+    locale,
+    path: "/colophon",
     title: t(ui.colophon.title, locale),
     description: t(ui.colophon.lede, locale),
-  };
+    index: false,
+  });
 }
 
 export default async function ColophonPage({
@@ -48,50 +52,18 @@ export default async function ColophonPage({
           title={t(ui.colophon.budgetTitle, locale)}
           aside={t(ui.colophon.budgetIntro, locale)}
         />
-        <div className="mt-8 overflow-x-auto">
-          <table className="w-full min-w-[38rem] border-collapse text-start">
-            <thead>
-              <tr className="border-b border-rule">
-                <th scope="col" className="label py-3 pe-6 text-start font-normal">
-                  {t(ui.colophon.route, locale)}
-                </th>
-                <th scope="col" className="label py-3 pe-6 text-start font-normal">
-                  {t(ui.colophon.target, locale)}
-                </th>
-                <th scope="col" className="label py-3 pe-6 text-start font-normal">
-                  {t(ui.colophon.measured, locale)}
-                </th>
-                <th scope="col" className="label py-3 text-start font-normal" />
-              </tr>
-            </thead>
-            <tbody>
-              {budgetTargets.map((row) => (
-                <tr key={t(row.metric, locale)} className="border-b border-rule">
-                  <th
-                    scope="row"
-                    className="py-5 pe-6 text-start text-[0.95rem] font-normal"
-                  >
-                    {t(row.metric, locale)}
-                  </th>
-                  <td className="py-5 pe-6">
-                    <span className="label">{t(row.target, locale)}</span>
-                  </td>
-                  <td className="py-5 pe-6">
-                    <span
-                      data-metric
-                      className="font-display text-lg tracking-tight text-signal"
-                    >
-                      {t(row.measured, locale)}
-                    </span>
-                  </td>
-                  <td className="py-5 text-sm text-faint">
-                    {t(row.note, locale)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <dl className="mt-8 grid gap-px bg-rule md:grid-cols-2">
+          {budgetTargets.map((row) => (
+            <div key={t(row.metric, locale)} className="bg-ink p-6 md:p-8">
+              <dt className="font-display text-xl tracking-tight">{t(row.metric, locale)}</dt>
+              <dd className="mt-5 grid gap-4 sm:grid-cols-2">
+                <span><span className="label block">{t(ui.colophon.target, locale)}</span><span className="mt-2 block text-sm text-muted">{t(row.target, locale)}</span></span>
+                <span><span className="label block">{t(ui.colophon.measured, locale)}</span><span data-metric className="mt-2 block font-display text-lg tracking-tight text-signal">{t(row.measured, locale)}</span></span>
+              </dd>
+              <p className="mt-5 border-t border-rule pt-4 text-sm leading-relaxed text-faint">{t(row.note, locale)}</p>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <section className="pt-24 md:pt-32">

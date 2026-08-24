@@ -14,8 +14,14 @@ export function middleware(request: NextRequest) {
   const accept = request.headers.get("accept-language") ?? "";
   const locale = /(^|,)\s*he\b/i.test(accept) ? "he" : "en";
 
-  const url = request.nextUrl.clone();
-  url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
+  const forwardedHost = request.headers.get("x-forwarded-host");
+  const host = forwardedHost ?? request.headers.get("host") ?? request.nextUrl.host;
+  const protocol = request.headers.get("x-forwarded-proto") ?? request.nextUrl.protocol.slice(0, -1);
+  const url = new URL(
+    `/${locale}${pathname === "/" ? "" : pathname}`,
+    `${protocol}://${host}`,
+  );
+  url.search = request.nextUrl.search;
   return NextResponse.redirect(url);
 }
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { ProjectArtifact } from "@/components/artifacts";
 import { t, type Locale } from "@/lib/i18n";
 import { href } from "@/lib/site";
 import {
@@ -8,7 +8,6 @@ import {
   formatSpan,
   type Project,
 } from "@/lib/types";
-import { Brackets } from "@/components/chrome/SectionMark";
 
 export function ProjectCard({
   project,
@@ -19,83 +18,65 @@ export function ProjectCard({
   locale: Locale;
   featured?: boolean;
 }) {
-  return (
-    <article className="group relative h-full border border-rule bg-surface transition-colors duration-500 hover:border-rule-strong">
-      <Brackets />
-      <Link
-        href={href(`/work/${project.slug}`, locale)}
-        className="flex h-full flex-col outline-offset-4"
-      >
-        {project.media ? (
-          <div className="relative aspect-[16/9] overflow-hidden border-b border-rule bg-surface-2">
-            <Image
-              src={project.media.poster}
-              alt={t(project.media.alt, locale)}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-            />
-          </div>
-        ) : null}
+  const snapshot = project.snapshot;
 
-        <div className="flex flex-1 flex-col p-6 md:p-8">
-          <div className="flex items-center justify-between gap-4">
+  return (
+    <article className="group relative h-full min-w-0 overflow-hidden border border-rule bg-surface transition-colors duration-500 hover:border-rule-strong focus-within:border-signal focus-within:shadow-[inset_0_0_0_1px_var(--signal)]">
+      <Link href={href(`/work/${project.slug}`, locale)} className="flex h-full flex-col focus-visible:outline-none">
+        <ProjectArtifact slug={project.slug} locale={locale} size="card" />
+
+        <div className={`flex flex-1 flex-col ${featured ? "p-7 md:p-9" : "p-6 md:p-7"}`}>
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="label">
-              {project.domain.map((d) => t(DOMAIN_LABEL[d], locale)).join(" · ")}
+              {project.domain.map((domain) => t(DOMAIN_LABEL[domain], locale)).join(" · ")}
             </p>
             <p className="label flex items-center gap-2">
               <span
                 aria-hidden
-                className={`size-1.5 rounded-full ${
-                  project.status === "ongoing" || project.status === "live"
-                    ? "bg-ok"
-                    : "bg-faint"
-                }`}
+                className={`size-1.5 rounded-full ${project.status === "live" || project.status === "ongoing" ? "bg-ok" : "bg-faint"}`}
               />
-              {t(STATUS_LABEL[project.status], locale)}
+              {project.statusLabel
+                ? t(project.statusLabel, locale)
+                : t(STATUS_LABEL[project.status], locale)}
             </p>
           </div>
 
-          <h3
-            className={`mt-5 font-display tracking-tight transition-colors duration-300 group-hover:text-signal ${
-              featured
-                ? "text-[clamp(1.9rem,4vw,3rem)] leading-[1.02]"
-                : "text-[1.75rem] leading-[1.06]"
-            }`}
-          >
+          <h3 className={`mt-5 font-display leading-none tracking-[-0.035em] transition-colors duration-300 group-hover:text-signal ${featured ? "text-[clamp(2.2rem,4vw,3.5rem)]" : "text-[clamp(1.8rem,3vw,2.5rem)]"}`}>
             {project.title}
           </h3>
-
-          <p
-            className={`mt-3 leading-relaxed text-muted ${
-              featured ? "max-w-[52ch] text-[1.05rem]" : "text-[0.95rem]"
-            }`}
-          >
-            {t(featured ? project.hook : project.oneLiner, locale)}
+          <p className="mt-4 max-w-[55ch] text-[1rem] leading-relaxed text-muted">
+            {t(project.hook, locale)}
           </p>
 
-          {project.metrics.length > 0 && (
-            <dl className="mt-7 flex flex-wrap gap-x-10 gap-y-4">
-              {project.metrics.slice(0, featured ? 4 : 2).map((m) => (
-                <div key={t(m.label, locale)}>
-                  <dd
-                    data-metric
-                    className="font-display text-2xl leading-none tracking-tight"
-                  >
-                    {t(m.value, locale)}
-                  </dd>
-                  <dt className="label mt-2">{t(m.label, locale)}</dt>
-                </div>
-              ))}
+          {snapshot ? (
+            <dl className={`mt-7 grid gap-5 border-t border-rule pt-6 ${featured ? "sm:grid-cols-2" : ""}`}>
+              <div>
+                <dt className="label text-signal">
+                  {locale === "he" ? "מה השתנה" : "The move"}
+                </dt>
+                <dd className="mt-2 text-sm leading-relaxed text-muted">
+                  {t(snapshot.move, locale)}
+                </dd>
+              </div>
+              <div>
+                <dt className="label text-signal">
+                  {locale === "he" ? "התפקיד שלי" : "My part"}
+                </dt>
+                <dd className="mt-2 text-sm leading-relaxed text-muted">
+                  {t(snapshot.contribution, locale)}
+                </dd>
+              </div>
             </dl>
-          )}
+          ) : null}
 
-          <div className="mt-auto flex items-end justify-between gap-4 pt-8">
-            <p className="label">{formatSpan(project, locale)}</p>
-            <span
-              aria-hidden
-              className="text-signal transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
-            >
+          <div className="mt-auto flex flex-wrap items-end justify-between gap-4 pt-8">
+            <div>
+              <p className="label">{formatSpan(project, locale)}</p>
+              <p className="mt-2 max-w-[40ch] text-xs leading-relaxed text-faint">
+                {t(project.role, locale)}
+              </p>
+            </div>
+            <span aria-hidden className="text-xl text-signal transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
               →
             </span>
           </div>

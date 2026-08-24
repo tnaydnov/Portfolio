@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionMark } from "@/components/chrome/SectionMark";
-import { Reveal } from "@/components/motion/Reveal";
-import { brief } from "@/content/site";
 import { isLocale, t, type Locale } from "@/lib/i18n";
+import { pageMetadata } from "@/lib/metadata";
+import { href, site } from "@/lib/site";
 import { ui } from "@/lib/ui";
-import { site } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -14,10 +14,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  return {
+  return pageMetadata({
+    locale,
+    path: "/contact",
     title: t(ui.contact.title, locale),
     description: t(ui.contact.footerNote, locale),
-  };
+  });
 }
 
 export default async function ContactPage({
@@ -30,100 +32,85 @@ export default async function ContactPage({
   const locale = raw as Locale;
 
   const channels = [
-    { label: "Email", value: site.email, href: `mailto:${site.email}` },
-    { label: "LinkedIn", value: "/in/tomer-naydnov", href: site.links.linkedin },
-    { label: "GitHub", value: "@tnaydnov", href: site.links.github },
+    { label: "Email", value: site.email, target: `mailto:${site.email}` },
+    { label: "LinkedIn", value: "/in/tomer-naydnov", target: site.links.linkedin },
+    { label: "GitHub", value: "@tnaydnov", target: site.links.github },
   ];
 
   return (
-    <div className="shell pt-16 md:pt-24">
-      <SectionMark index="00" title={t(ui.contact.title, locale)} />
+    <div className="shell pt-12 md:pt-20">
+      <SectionMark index="01" title={t(ui.contact.title, locale)} />
 
-      <header className="py-14 md:py-24">
-        <h1 className="t-hero max-w-[9ch]">{t(ui.contact.title, locale)}</h1>
-        <p className="mt-10 max-w-[36ch] font-display text-[clamp(1.4rem,3vw,2.25rem)] leading-[1.18] tracking-tight">
-          {t(ui.contact.lede, locale)}
-        </p>
+      <header className="grid min-h-[min(44rem,75svh)] gap-12 py-14 md:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        <div>
+          <p className="label text-signal">{t(site.role, locale)}</p>
+          <h1 className="mt-5 t-hero max-w-[8ch]">{t(ui.contact.title, locale)}</h1>
+          <p className="mt-8 max-w-[28ch] font-display text-[clamp(1.55rem,3.2vw,2.8rem)] leading-[1.14] tracking-tight">
+            {t(ui.contact.lede, locale)}
+          </p>
+        </div>
+
+        <div className="border border-rule bg-surface p-6 md:p-8">
+          <p className="label">{locale === "he" ? "הדרך הישירה" : "The direct route"}</p>
+          <a
+            href={`mailto:${site.email}`}
+            dir="ltr"
+            className="mt-5 block break-all font-display text-[clamp(1.45rem,3vw,2.5rem)] tracking-tight transition-colors hover:text-signal"
+          >
+            {site.email}
+          </a>
+          <p className="mt-5 max-w-[42ch] text-sm leading-relaxed text-muted">
+            {locale === "he"
+              ? "תפקיד, בעיה, מוצר מעניין או פשוט שאלה טובה — מספיקים כמה משפטים."
+              : "A role, a difficult problem, an interesting product, or simply a good question—just a few lines are enough."}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href={site.cv} download className="inline-flex min-h-12 items-center bg-signal px-5 text-sm font-semibold text-signal-ink">
+              {t(ui.common.downloadCv, locale)} ↓
+            </a>
+            <Link href={href("/work", locale)} className="inline-flex min-h-12 items-center border border-rule-strong px-5 text-sm hover:border-signal hover:text-signal">
+              {locale === "he" ? "לצפייה בעבודות ←" : "Review the work →"}
+            </Link>
+          </div>
+        </div>
       </header>
 
-      <ul className="grid gap-px border-y border-rule bg-rule">
-        {channels.map((c) => (
-          <li key={c.label} className="bg-ink">
-            <a
-              href={c.href}
-              target={c.href.startsWith("http") ? "_blank" : undefined}
-              rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="group flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 py-7"
-            >
-              <span className="label">{c.label}</span>
-              <span
-                dir="ltr"
-                className="flex-1 font-display text-[clamp(1.35rem,3.5vw,2.5rem)] leading-none tracking-tight transition-colors group-hover:text-signal"
+      <section aria-label={locale === "he" ? "ערוצי קשר" : "Contact channels"}>
+        <ul className="border-t border-rule">
+          {channels.map((channel) => (
+            <li key={channel.label} className="border-b border-rule">
+              <a
+                href={channel.target}
+                target={channel.target.startsWith("http") ? "_blank" : undefined}
+                rel={channel.target.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="group grid min-h-20 items-center gap-3 py-5 sm:grid-cols-[8rem_1fr_auto]"
               >
-                {c.value}
-              </span>
-              <span
-                aria-hidden
-                className="text-signal transition-transform duration-300 group-hover:translate-x-2 rtl:rotate-180 rtl:group-hover:-translate-x-2"
-              >
-                →
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
+                <span className="label">{channel.label}</span>
+                <span dir="ltr" className="break-all font-display text-[clamp(1.25rem,3vw,2.25rem)] tracking-tight transition-colors group-hover:text-signal">
+                  {channel.value}
+                </span>
+                <span aria-hidden className="text-signal transition-transform group-hover:translate-x-1">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      <div className="grid gap-10 py-16 md:grid-cols-3">
+      <section className="grid gap-8 py-16 sm:grid-cols-2 lg:grid-cols-3">
         <div>
           <p className="label">{t(ui.contact.based, locale)}</p>
-          <p className="mt-3 whitespace-pre-line text-[0.95rem] leading-relaxed text-muted">
-            {t(ui.contact.basedValue, locale)}
-          </p>
+          <p className="mt-3 whitespace-pre-line text-[0.95rem] leading-relaxed text-muted">{t(ui.contact.basedValue, locale)}</p>
         </div>
         <div>
           <p className="label">{t(ui.contact.lookingFor, locale)}</p>
-          <p className="mt-3 max-w-[32ch] text-[0.95rem] leading-relaxed text-muted">
-            {t(ui.contact.lookingForValue, locale)}
-          </p>
+          <p className="mt-3 max-w-[36ch] text-[0.95rem] leading-relaxed text-muted">{t(ui.contact.lookingForValue, locale)}</p>
         </div>
         <div>
-          <p className="label">{t(ui.contact.cv, locale)}</p>
-          <a
-            href={site.cv}
-            download
-            className="mt-3 inline-flex items-center gap-2 text-[0.95rem] text-muted underline decoration-signal underline-offset-4 transition-colors hover:text-signal"
-          >
-            {t(ui.contact.downloadPdf, locale)}
-          </a>
+          <p className="label">{locale === "he" ? "עוד הקשר" : "More context"}</p>
+          <Link href={`${href("/about", locale)}#approach`} className="mt-3 inline-block text-[0.95rem] underline decoration-signal underline-offset-4 hover:text-signal">
+            {locale === "he" ? "איך אני עובד ←" : "How I approach the work →"}
+          </Link>
         </div>
-      </div>
-
-      <section className="pt-16 md:pt-24">
-        <SectionMark index="01" title={t(ui.contact.briefTitle, locale)} />
-        <Reveal>
-          <div className="grid gap-8 py-14 md:grid-cols-[1fr_auto] md:items-end">
-            <h2 className="t-section max-w-[18ch]">
-              {t(ui.contact.briefHeading, locale)}
-            </h2>
-            <p className="max-w-[36ch] text-[0.95rem] leading-relaxed text-muted">
-              {t(ui.contact.briefIntro, locale)}
-            </p>
-          </div>
-
-          <dl className="grid gap-px bg-rule">
-            {brief.map((row) => (
-              <div
-                key={t(row.term, locale)}
-                className="grid gap-2 bg-ink py-7 md:grid-cols-[14rem_1fr] md:gap-10"
-              >
-                <dt className="label pt-1">{t(row.term, locale)}</dt>
-                <dd className="max-w-[62ch] text-[1rem] leading-relaxed text-muted">
-                  {t(row.def, locale)}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
       </section>
     </div>
   );

@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local evidence ledger (contains private audit paths and repository details)
+/TRUTH_SOURCE.md

@@ -35,7 +35,7 @@ export const STAGES: Stage[] = [
     detail: {
       en: [
         "A request is already a solution in disguise. Someone has diagnosed their own problem and handed you the prescription. My first job is to put the prescription down and go find the symptom.",
-        "In practice that means watching how work actually gets done rather than how it is described. The signal is almost always a workaround: a spreadsheet that exists because a system does not, six instructors solving the same problem six different ways, a step everyone quietly repeats because the tool forgot it.",
+        "In practice that means watching how work actually gets done rather than how it is described. The signal is often a workaround: a spreadsheet that exists because a system does not, instructors independently rebuilding similar material, a step people quietly repeat because the tool forgot it.",
         "This stage ends when I can state the problem in one sentence that the people living with it would recognise as their own.",
       ],
       he: [

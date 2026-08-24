@@ -14,8 +14,6 @@ import { Header } from "@/components/chrome/Header";
 import { Footer } from "@/components/chrome/Footer";
 import { Grain } from "@/components/chrome/Grain";
 import { ScrollProgress } from "@/components/chrome/ScrollProgress";
-import { SmoothScroll } from "@/components/chrome/SmoothScroll";
-import { THEME_SCRIPT } from "@/components/chrome/ThemeToggle";
 import { DIR, LOCALES, isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
 import { site } from "@/lib/site";
@@ -42,15 +40,21 @@ const hebrew = Heebo({
   subsets: ["hebrew", "latin"],
   variable: "--font-he",
   display: "swap",
+  preload: false,
 });
 
 const hebrewDisplay = Rubik({
   subsets: ["hebrew", "latin"],
   variable: "--font-he-display",
   display: "swap",
+  preload: false,
 });
 
-const FONTS = [display, body, mono, hebrew, hebrewDisplay]
+const LATIN_FONTS = [display, body, mono]
+  .map((f) => f.variable)
+  .join(" ");
+
+const HEBREW_FONTS = [hebrew, hebrewDisplay]
   .map((f) => f.variable)
   .join(" ");
 
@@ -73,10 +77,6 @@ export async function generateMetadata({
     metadataBase: new URL(site.url),
     title: { default: `${name} — ${role}`, template: `%s — ${name}` },
     description: t(site.description, locale),
-    alternates: {
-      canonical: `/${locale}`,
-      languages: Object.fromEntries(LOCALES.map((l) => [l, `/${l}`])),
-    },
     openGraph: {
       type: "website",
       siteName: name,
@@ -99,16 +99,38 @@ export default async function LocaleLayout({
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: t(site.name, locale),
+    url: `${site.url}/${locale}`,
+    jobTitle: t(site.role, locale),
+    description: t(site.description, locale),
+    sameAs: [site.links.github, site.links.linkedin],
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "Ben-Gurion University of the Negev",
+    },
+    knowsAbout: [
+      "Software engineering",
+      "Technical product development",
+      "Workflow design",
+      "Educational technology",
+    ],
+  };
 
   return (
     <html
       lang={locale}
       dir={DIR[locale]}
       suppressHydrationWarning
-      className={FONTS}
+      className={`${LATIN_FONTS} ${locale === "he" ? HEBREW_FONTS : ""}`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </head>
       <body>
         <a
@@ -119,13 +141,15 @@ export default async function LocaleLayout({
         </a>
         <Grain />
         <ScrollProgress />
-        <SmoothScroll>
-          <Header locale={locale} />
-          <main id="main">{children}</main>
-          <Footer locale={locale} />
-        </SmoothScroll>
-        <Analytics />
-        <SpeedInsights />
+        <Header locale={locale} />
+        <main id="main">{children}</main>
+        <Footer locale={locale} />
+        {process.env.VERCEL ? (
+          <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        ) : null}
       </body>
     </html>
   );

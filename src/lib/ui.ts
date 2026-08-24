@@ -120,11 +120,11 @@ export const ui = {
     },
     classroomBody: {
       en: [
-        "Three years of teaching programming, several hundred students, plus the syllabuses, lesson plans, exercises and instructor guides underneath. It is the most useful professional training I have had, and not for the reason people assume.",
+        "Teaching programming, alongside work on syllabuses, lesson plans, exercises and instructor guides, has been the most useful professional training I have had — and not for the reason people assume.",
         "Teaching is requirements engineering with a thirty-second feedback loop. You explain something, and a room full of people immediately shows you which part of your explanation was carrying an assumption. You cannot argue with it, defer it to next sprint, or blame the audience. You find the broken sentence and you fix it.",
       ],
       he: [
-        "שלוש שנים של הוראת תכנות, כמה מאות תלמידים, ומתחת לזה סילבוסים, מערכי שיעור, תרגילים ומדריכים למנחים. זו ההכשרה המקצועית הכי שימושית שעברתי, ולא מהסיבה שמניחים.",
+        "הוראת תכנות, לצד עבודה על סילבוסים, מערכי שיעור, תרגילים ומדריכים למנחים, הייתה ההכשרה המקצועית השימושית ביותר שעברתי — ולא מהסיבה שמניחים.",
         "הוראה היא אפיון דרישות עם לולאת משוב של שלושים שניות. אתה מסביר משהו, וכיתה שלמה מראה לך מיד איזה חלק בהסבר נשען על הנחה סמויה. אי אפשר להתווכח עם זה, לדחות לספרינט הבא, או להאשים את הקהל. מוצאים את המשפט השבור ומתקנים אותו.",
       ],
     } satisfies LSA,
@@ -137,8 +137,23 @@ export const ui = {
   work: {
     title: { en: "Work", he: "עבודה" },
     intro: {
-      en: "Filter by what I actually did, not by what it was written in. Every case study carries dates, a decision log, and a list of what I would rebuild.",
-      he: "סינון לפי מה שבאמת עשיתי, לא לפי מה שזה נכתב בו. לכל מקרה יש תאריכים, יומן החלטות, ורשימה של מה שהייתי בונה מחדש.",
+      en: "Three product stories, two engineering systems, and the earlier work that built the craft. Start with the decision; open the evidence when you want the depth.",
+      he: "שלושה סיפורי מוצר, שתי מערכות הנדסיות והעבודות המוקדמות שבנו את המלאכה. מתחילים בהחלטה; פותחים את הראיות כשרוצים עומק.",
+    },
+    selectedTitle: { en: "Selected product work", he: "עבודות מוצר נבחרות" },
+    selectedIntro: {
+      en: "Real systems, presented around what was broken, what I owned and what can be inspected today.",
+      he: "מערכות אמיתיות, מוצגות סביב מה היה שבור, על מה לקחתי אחריות ומה אפשר לבדוק היום.",
+    },
+    engineeringTitle: { en: "Engineering systems", he: "מערכות הנדסיות" },
+    engineeringIntro: {
+      en: "Focused proof of architecture, team engineering and implementation depth.",
+      he: "הוכחה ממוקדת לעומק בארכיטקטורה, הנדסת צוות ומימוש.",
+    },
+    teachingTitle: { en: "Teaching is part of the work", he: "הוראה היא חלק מהעבודה" },
+    teachingBody: {
+      en: "Repeated live explanations taught me to detect hidden assumptions quickly. Curriculum, instructor tools and classroom behavior are not side notes to the product story; they are where much of it came from.",
+      he: "הסברים חיים שחזרו שוב ושוב לימדו אותי לזהות הנחות סמויות במהירות. תוכניות לימוד, כלי מנחים והתנהגות בכיתה אינם הערת שוליים לסיפור המוצר; משם הגיע חלק גדול ממנו.",
     },
     filterNote: {
       en: "Filtered by stage of delivery, not by technology — because the stack is the least interesting thing about any of these.",
@@ -148,15 +163,15 @@ export const ui = {
       en: "Nothing at this stage yet. That is the honest answer rather than a padded one.",
       he: "אין עדיין כלום בשלב הזה. זו התשובה הכנה, לא תשובה מרופדת.",
     },
-    repsTitle: { en: "The reps", he: "החזרות" },
+    repsTitle: { en: "Earlier engineering work", he: "עבודות הנדסיות מוקדמות" },
     repsSpan: { en: "2022 — 2023 · University", he: "2022 — 2023 · אוניברסיטה" },
     repsHeading: {
-      en: "Where I learned the craft.",
-      he: "כאן למדתי את המלאכה.",
+      en: "Foundations, at the right weight.",
+      he: "היסודות, במשקל הנכון.",
     },
     repsIntro: {
-      en: "Coursework, kept at coursework weight. Knowing the difference between a rep and a product is most of the point.",
-      he: "עבודות קורס, במשקל של עבודות קורס. לדעת את ההבדל בין חזרת אימון למוצר — זה רוב העניין.",
+      en: "Coursework stays visible for technical reviewers without competing with products that met real operational constraints.",
+      he: "עבודות הקורס נשארות זמינות לסקירה טכנית בלי להתחרות במוצרים שפגשו אילוצים תפעוליים אמיתיים.",
     },
     colProject: { en: "Project", he: "פרויקט" },
     colSpan: { en: "Span", he: "תקופה" },
@@ -203,19 +218,19 @@ export const ui = {
   about: {
     title: { en: "About", he: "אודות" },
     lede: {
-      en: "I am a software engineer who went and got the other half of the problem.",
-      he: "אני מהנדס תוכנה שהלך להשלים את החצי השני של הבעיה.",
+      en: "I work where product decisions, systems and implementation stop being separate conversations.",
+      he: "אני עובד במקום שבו החלטות מוצר, מערכות ומימוש מפסיקים להיות שיחות נפרדות.",
     },
     thesisLabel: { en: "The thesis", he: "התזה" },
     thesisBody: {
       en: [
-        "I finished a Software Engineering degree and then enrolled in a Master’s in Industrial Engineering and Management. People read that as a pivot away from engineering. It is the opposite.",
+        "I completed a B.Sc. in Software Engineering and am now studying toward an M.Sc. in Industrial Engineering & Management. That is not a pivot away from engineering; it is a closer look at what engineering is for.",
         "Industrial Engineering is the discipline of designing, measuring and improving systems and processes. It is the formal version of the thing I kept running into at work: the code was rarely the bottleneck. The bottleneck was an undefined requirement, a handoff nobody owned, or a workaround that had quietly become policy. I had been solving those problems by instinct. I went and learned to do it properly.",
         "So the two degrees are one argument. **Software is the tool. Systems are the subject.** Being able to write the code is what stops the systems thinking from becoming a slide deck; understanding the system is what stops the code from being beautifully built and pointed at the wrong problem.",
         "In practice this means I am not looking for a role where I only write tickets, and not one where I only close them. The work I am good at is the whole loop — finding the need, framing it, sequencing it, building it, proving it, and then sitting with the people who use it while they tell me what I got wrong.",
       ],
       he: [
-        "סיימתי תואר בהנדסת תוכנה ואז נרשמתי לתואר שני בהנדסת תעשייה וניהול. אנשים קוראים את זה כפנייה החוצה מהנדסה. זה בדיוק ההפך.",
+        "סיימתי B.Sc. בהנדסת תוכנה וכעת אני לומד לתואר M.Sc. בהנדסת תעשייה וניהול. זו לא פנייה החוצה מהנדסה; זו התבוננות קרובה יותר בשאלה בשביל מה הנדסה קיימת.",
         "הנדסת תעשייה היא הדיסציפלינה של תכנון, מדידה ושיפור של מערכות ותהליכים. זו הגרסה הפורמלית של הדבר שנתקלתי בו שוב ושוב בעבודה: הקוד כמעט אף פעם לא היה צוואר הבקבוק. צוואר הבקבוק היה דרישה לא מוגדרת, העברת אחריות שאף אחד לא לקח עליה בעלות, או עקיפה שהפכה בשקט לנוהל. פתרתי את הבעיות האלה באינטואיציה. הלכתי ללמוד לעשות את זה כמו שצריך.",
         "אז שני התארים הם טענה אחת. **תוכנה היא הכלי. מערכות הן הנושא.** היכולת לכתוב את הקוד היא מה שמונע מחשיבה מערכתית להפוך למצגת; הבנת המערכת היא מה שמונע מהקוד להיבנות יפה ולהיות מכוון לבעיה הלא נכונה.",
         "בפועל זה אומר שאני לא מחפש תפקיד שבו אני רק כותב משימות, ולא כזה שבו אני רק סוגר אותן. העבודה שאני טוב בה היא הלולאה כולה — למצוא את הצורך, למסגר אותו, לתזמן אותו, לבנות אותו, להוכיח אותו, ואז לשבת עם האנשים שמשתמשים בו בזמן שהם מספרים לי מה פספסתי.",
@@ -234,6 +249,10 @@ export const ui = {
       ],
     } satisfies LSA,
     getInTouch: { en: "Get in touch →", he: "ליצירת קשר ←" },
+    capabilitiesTitle: { en: "What I actually do", he: "מה אני עושה בפועל" },
+    approachTitle: { en: "How I approach a problem", he: "איך אני ניגש לבעיה" },
+    experienceTitle: { en: "Experience & education", he: "ניסיון והשכלה" },
+    fitTitle: { en: "Where I do my best work", he: "איפה אני עובד הכי טוב" },
     numbersTitle: { en: "By the numbers", he: "במספרים" },
     trackTitle: { en: "Track", he: "מסלול" },
     current: { en: "Current", he: "נוכחי" },
@@ -243,13 +262,13 @@ export const ui = {
   contact: {
     title: { en: "Contact", he: "יצירת קשר" },
     lede: {
-      en: "If you are hiring for a role that spans the whole loop, I would like to hear about it.",
-      he: "אם אתם מגייסים לתפקיד שמשתרע על הלולאה כולה, אשמח לשמוע עליו.",
+      en: "If the role needs someone who can move from the real problem to a shipped system, let’s talk.",
+      he: "אם התפקיד צריך מישהו שיכול לעבור מהבעיה האמיתית למערכת שעובדת — בואו נדבר.",
     },
     based: { en: "Based", he: "מיקום" },
     basedValue: {
-      en: "Israel · GMT+3\nSunday to Thursday",
-      he: "ישראל · GMT+3\nראשון עד חמישי",
+      en: "Israel time\nSunday to Thursday",
+      he: "שעון ישראל\nראשון עד חמישי",
     },
     lookingFor: { en: "Looking for", he: "מחפש" },
     lookingForValue: {
@@ -268,16 +287,16 @@ export const ui = {
       he: "רוב המועמדים קוראים אפיון תפקיד ומנסים להתאים את עצמם אליו. לי יותר שימושי לפרסם את שלי, כדי ששנינו נראה את הפער מוקדם ולא אחרי ארבעה שבועות בתהליך.",
     },
     footerNote: {
-      en: "Currently open to technical product roles where the job is the whole loop — discovery through delivery, and the iteration after it.",
-      he: "פתוח כרגע לתפקידי מוצר טכני שבהם העבודה היא הלולאה כולה — מגילוי ועד אספקה, והאיטרציה שאחריה.",
+      en: "Open to technical product and product-minded engineering roles with real ownership, close users and room to build.",
+      he: "פתוח לתפקידי מוצר טכני והנדסה עם חשיבה מוצרית, בעלות אמיתית, קרבה למשתמשים ומקום לבנות.",
     },
   },
 
   colophon: {
     title: { en: "Colophon", he: "על האתר" },
     lede: {
-      en: "This site is the seventh case study. Same six stages, same decision log, same published tradeoffs.",
-      he: "האתר הזה הוא מקרה הבוחן השביעי. אותם שישה שלבים, אותו יומן החלטות, אותן פשרות מפורסמות.",
+      en: "This portfolio is a live system: ordinary interfaces keep their identity while their physics become impossible.",
+      he: "הפורטפוליו הזה הוא מערכת חיה: ממשקים רגילים שומרים על הזהות שלהם בזמן שהפיזיקה שלהם הופכת לבלתי אפשרית.",
     },
     intro: {
       en: "A portfolio that argues for engineering judgement should be willing to show its own. So here is how this one was built, what it costs to load, and what I would change.",
@@ -285,8 +304,8 @@ export const ui = {
     },
     budgetTitle: { en: "Budget", he: "תקציב" },
     budgetIntro: {
-      en: "Targets set before the build, and the measured result. Published because a budget you do not report is a wish.",
-      he: "יעדים שנקבעו לפני הבנייה, והתוצאה שנמדדה. מפורסם כי תקציב שלא מדווחים עליו הוא משאלה.",
+      en: "Bundle results from the latest production build, with device-only measurements left explicitly open.",
+      he: "תוצאות חבילה מבניית הייצור האחרונה, כאשר מדידות שמחייבות מכשיר נשארות פתוחות במפורש.",
     },
     rulesTitle: { en: "Rules", he: "כללים" },
     measured: { en: "Measured", he: "נמדד" },

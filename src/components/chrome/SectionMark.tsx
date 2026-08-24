@@ -24,27 +24,3 @@ export function SectionMark({ index, title, aside, className = "" }: Props) {
     </div>
   );
 }
-
-/** Corner registration brackets, drawn on hover. Purely decorative. */
-export function Brackets() {
-  return (
-    <>
-      <span
-        aria-hidden
-        className="bracket start-0 top-0 -translate-x-1.5 -translate-y-1.5 border-s border-t"
-      />
-      <span
-        aria-hidden
-        className="bracket end-0 top-0 translate-x-1.5 -translate-y-1.5 border-e border-t"
-      />
-      <span
-        aria-hidden
-        className="bracket bottom-0 start-0 -translate-x-1.5 translate-y-1.5 border-b border-s"
-      />
-      <span
-        aria-hidden
-        className="bracket bottom-0 end-0 translate-x-1.5 translate-y-1.5 border-b border-e"
-      />
-    </>
-  );
-}

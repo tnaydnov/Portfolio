@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * A hairline at the very top of the viewport that fills with scroll progress.
@@ -8,6 +9,9 @@ import { useEffect, useRef } from "react";
  */
 export function ScrollProgress() {
   const ref = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const cinematicHome = /^\/(en|he)\/?$/.test(pathname);
+  const rtl = pathname === "/he" || pathname.startsWith("/he/");
 
   useEffect(() => {
     let frame = 0;
@@ -33,7 +37,9 @@ export function ScrollProgress() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [pathname]);
+
+  if (cinematicHome) return null;
 
   return (
     <div
@@ -44,7 +50,7 @@ export function ScrollProgress() {
     >
       <div
         className="h-full w-full bg-signal"
-        style={{ transform: "scaleX(var(--sp))", transformOrigin: "left" }}
+        style={{ transform: "scaleX(var(--sp))", transformOrigin: rtl ? "right" : "left" }}
       />
     </div>
   );

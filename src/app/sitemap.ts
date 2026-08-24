@@ -3,14 +3,13 @@ import { CASE_STUDIES } from "@/content/work";
 import { LOCALES } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
-const ROUTES = ["", "/work", "/system", "/about", "/contact", "/colophon"];
+const ROUTES = ["", "/work", "/about", "/contact"];
+const LAST_CONTENT_UPDATE = new Date("2026-08-24T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-
   const entry = (path: string, priority: number) => ({
     url: `${site.url}${path}`,
-    lastModified: now,
+    lastModified: LAST_CONTENT_UPDATE,
     changeFrequency: "monthly" as const,
     priority,
   });

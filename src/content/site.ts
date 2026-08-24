@@ -8,18 +8,18 @@ export const timeline: {
   current?: boolean;
 }[] = [
   {
-    span: { en: "2026 — 2028", he: "2026 — 2028" },
+    span: { en: "2026 — expected 2028", he: "2026 — צפי 2028" },
     title: {
-      en: "M.Sc. Industrial Engineering & Management",
-      he: "מוסמך בהנדסת תעשייה וניהול",
+      en: "Industrial Engineering & Management",
+      he: "הנדסת תעשייה וניהול",
     },
     org: {
       en: "Shenkar College of Engineering, Design and Art",
       he: "שנקר — הנדסה. עיצוב. אמנות",
     },
     note: {
-      en: "The systems half. Process design, optimisation, and the formal tools behind what I had been doing by instinct.",
-      he: "החצי המערכתי. תכנון תהליכים, אופטימיזציה, והכלים הפורמליים שמאחורי מה שעשיתי באינטואיציה.",
+      en: "M.Sc. studies in process design, optimisation and the formal tools behind the systems work I had been doing by instinct.",
+      he: "לימודי M.Sc. בתכנון תהליכים, אופטימיזציה והכלים הפורמליים שמאחורי עבודת המערכות שעשיתי קודם באינטואיציה.",
     },
     current: true,
   },
@@ -31,8 +31,8 @@ export const timeline: {
     },
     org: { en: "Nitzanim", he: "ניצנים" },
     note: {
-      en: "Requirements with clients and educational stakeholders, curriculum and product development, Gantt planning, and Arc — an internal learning platform I founded and shipped.",
-      he: "אפיון דרישות מול לקוחות ובעלי עניין חינוכיים, פיתוח תוכן ומוצר, תכנון גאנט, ו־Arc — פלטפורמת למידה פנימית שייסדתי ושלחתי לאוויר.",
+      en: "Programming instruction, requirements with educational stakeholders, curriculum and product development, Gantt planning, and co-development of Arc.",
+      he: "הדרכת תכנות, אפיון מול בעלי עניין חינוכיים, פיתוח תוכן ומוצר, תכנון גאנט ופיתוח משותף של Arc.",
     },
     current: true,
   },
@@ -49,6 +49,15 @@ export const timeline: {
     },
   },
   {
+    span: { en: "Oct 2022 — Jun 2023", he: "אוק׳ 2022 — יוני 2023" },
+    title: { en: "Volunteer Software Engineering Mentor", he: "מנטור מתנדב להנדסת תוכנה" },
+    org: { en: "Siraj Technologies", he: "Siraj Technologies" },
+    note: {
+      en: "Academic and technical mentoring for Bedouin software-engineering students.",
+      he: "ליווי אקדמי וטכני לסטודנטים בדואים להנדסת תוכנה.",
+    },
+  },
+  {
     span: { en: "2020 — 2023", he: "2020 — 2023" },
     title: { en: "Technical Support, Tier 2", he: "תמיכה טכנית, Tier 2" },
     org: {
@@ -56,73 +65,122 @@ export const timeline: {
       he: "צה״ל · חברת החשמל · ישראכרט",
     },
     note: {
-      en: "Three large organisations, three helpdesks. This is where I learned that users describe symptoms, never causes.",
-      he: "שלושה ארגונים גדולים, שלושה מוקדי תמיכה. כאן למדתי שמשתמשים מתארים סימפטומים, אף פעם לא סיבות.",
+      en: "Three large organisations, three helpdesks. This is where I learned that users often describe symptoms before causes.",
+      he: "שלושה ארגונים גדולים, שלושה מוקדי תמיכה. כאן למדתי שמשתמשים מתארים לעיתים קרובות סימפטומים לפני סיבות.",
     },
   },
 ];
 
-export const numbers: { value: LS; label: LS }[] = [
-  {
-    value: { en: "650+", he: "‎650+" },
-    label: { en: "Students taught", he: "תלמידים שלימדתי" },
-  },
-  {
-    value: { en: "3 yrs", he: "3 שנים" },
-    label: { en: "Arc in production", he: "‏Arc בייצור" },
-  },
-  {
-    value: { en: "2", he: "2" },
-    label: { en: "Degrees, one argument", he: "תארים, טענה אחת" },
-  },
-  {
-    value: { en: "6", he: "6" },
-    label: { en: "Stages I own", he: "שלבים באחריותי" },
-  },
-];
-
-/** The inverted job description. */
+/** The environment in which the cross-functional profile is most useful. */
 export const brief: { term: LS; def: LS }[] = [
   {
     term: { en: "The team", he: "הצוות" },
     def: {
-      en: "Small enough that I know what everyone is working on. Large enough that someone will tell me when I am wrong.",
-      he: "קטן מספיק כדי שאדע על מה כל אחד עובד. גדול מספיק כדי שמישהו יגיד לי כשאני טועה.",
+      en: "A small, candid team where product, engineering and users are close enough to learn from one another quickly.",
+      he: "צוות קטן וישיר שבו מוצר, הנדסה ומשתמשים קרובים מספיק כדי ללמוד זה מזה במהירות.",
     },
   },
   {
     term: { en: "The work", he: "העבודה" },
     def: {
-      en: "Owning a problem from the moment it is noticed to the moment it stops being a problem. Not a lane inside someone else's loop.",
-      he: "בעלות על בעיה מהרגע שמזהים אותה ועד הרגע שהיא מפסיקה להיות בעיה. לא נתיב בתוך הלולאה של מישהו אחר.",
+      en: "Owning a problem from the first uncomfortable observation through framing, delivery and the iteration after real use.",
+      he: "בעלות על בעיה מהתצפית הלא נוחה הראשונה, דרך מסגור ואספקה ועד לאיטרציה שאחרי שימוש אמיתי.",
     },
   },
   {
     term: { en: "The distance to users", he: "המרחק מהמשתמשים" },
     def: {
-      en: "Short. I want to hear the complaint, not a summary of the complaint in a quarterly deck.",
-      he: "קצר. אני רוצה לשמוע את התלונה, לא סיכום של התלונה במצגת רבעונית.",
+      en: "Short. Direct conversations and observation produce better decisions than second-hand summaries.",
+      he: "קצר. שיחות ישירות ותצפית מייצרות החלטות טובות יותר מסיכומים מיד שנייה.",
     },
   },
   {
     term: { en: "What I bring", he: "מה אני מביא" },
     def: {
-      en: "I can write the spec and then implement it, which means the spec is shippable. I can plan the timeline and then live inside it, which means the timeline is honest.",
-      he: "אני יכול לכתוב את האפיון ואז לממש אותו, ולכן האפיון בר־שליחה. אני יכול לתכנן את לוח הזמנים ואז לחיות בתוכו, ולכן לוח הזמנים כן.",
+      en: "I can investigate the workflow, write the specification, understand the data model, build the critical path, teach the decision and revise it when reality disagrees.",
+      he: "אני יכול לחקור את התהליך, לכתוב אפיון, להבין את מודל הנתונים, לבנות את הנתיב הקריטי, להסביר את ההחלטה ולתקן אותה כשהמציאות לא מסכימה.",
+    },
+  },
+];
+
+export const capabilities: { title: LS; body: LS; detail: LS }[] = [
+  {
+    title: { en: "Discover & frame", he: "גילוי ומסגור" },
+    body: {
+      en: "Find the real constraint behind a symptom or workaround.",
+      he: "למצוא את האילוץ האמיתי שמאחורי סימפטום או מעקף.",
+    },
+    detail: {
+      en: "User conversations · workflow mapping · requirements · problem definition",
+      he: "שיחות משתמשים · מיפוי תהליכים · דרישות · הגדרת בעיה",
     },
   },
   {
-    term: { en: "What I do not want", he: "מה אני לא רוצה" },
-    def: {
-      en: "A role where the requirements arrive finished and my job is to translate them into code. That is the half of the work I already know how to do.",
-      he: "תפקיד שבו הדרישות מגיעות גמורות והתפקיד שלי הוא לתרגם אותן לקוד. זה החצי של העבודה שאני כבר יודע לעשות.",
+    title: { en: "Design & plan", he: "עיצוב ותכנון" },
+    body: {
+      en: "Turn ambiguity into a sequence a team can make and test.",
+      he: "להפוך עמימות לרצף שצוות יכול לבנות ולבדוק.",
+    },
+    detail: {
+      en: "User flows · specifications · trade-offs · Gantt and dependencies",
+      he: "תהליכי משתמש · אפיונים · פשרות · גאנט ותלויות",
     },
   },
   {
-    term: { en: "Deal-breaker", he: "שובר עסקה" },
-    def: {
-      en: "Shipping something I would not defend in a decision log.",
-      he: "לשלוח משהו שלא הייתי מגן עליו ביומן החלטות.",
+    title: { en: "Build & verify", he: "בנייה ואימות" },
+    body: {
+      en: "Build enough of the system to know its real cost and failure modes.",
+      he: "לבנות מספיק מהמערכת כדי להבין את המחיר האמיתי ואת אופני הכשל שלה.",
+    },
+    detail: {
+      en: "Full-stack engineering · data and APIs · QA · operational thinking",
+      he: "הנדסת פול־סטאק · נתונים ו־API · בדיקות · חשיבה תפעולית",
+    },
+  },
+  {
+    title: { en: "Teach & translate", he: "הוראה ותרגום" },
+    body: {
+      en: "Make hidden assumptions visible to learners, users and teammates.",
+      he: "להפוך הנחות סמויות לגלויות ללומדים, משתמשים וחברי צוות.",
+    },
+    detail: {
+      en: "Programming instruction · curriculum · technical writing · feedback loops",
+      he: "הדרכת תכנות · תוכניות לימוד · כתיבה טכנית · לולאות משוב",
+    },
+  },
+];
+
+export const approach: { index: string; title: LS; body: LS }[] = [
+  {
+    index: "01",
+    title: { en: "Notice the tax", he: "לזהות את המס" },
+    body: {
+      en: "Repeated copying, searching, explaining or checking is usually a system asking to be examined.",
+      he: "העתקה, חיפוש, הסבר או בדיקה שחוזרים על עצמם הם בדרך כלל מערכת שמבקשת שיבחנו אותה.",
+    },
+  },
+  {
+    index: "02",
+    title: { en: "Trace the cause", he: "לעקוב לסיבה" },
+    body: {
+      en: "A reported request is evidence. I map the workflow before accepting its proposed solution.",
+      he: "בקשה מדווחת היא ראיה. אני ממפה את התהליך לפני שאני מקבל את הפתרון שהוצע לה.",
+    },
+  },
+  {
+    index: "03",
+    title: { en: "Build the smallest honest test", he: "לבנות את הבדיקה הכנה הקטנה ביותר" },
+    body: {
+      en: "Ship enough to expose cost, behavior and edge cases without pretending the first version is the answer.",
+      he: "לשחרר מספיק כדי לחשוף עלות, התנהגות ומקרי קצה בלי להעמיד פנים שהגרסה הראשונה היא התשובה.",
+    },
+  },
+  {
+    index: "04",
+    title: { en: "Let reality edit it", he: "לתת למציאות לערוך" },
+    body: {
+      en: "Watch use, preserve evidence and change the explanation or system when it proves us wrong.",
+      he: "לצפות בשימוש, לשמור ראיות ולשנות את ההסבר או המערכת כשהמציאות מוכיחה שטעינו.",
     },
   },
 ];
@@ -135,51 +193,51 @@ export const budgetTargets: {
 }[] = [
   {
     metric: { en: "First-load JS, home", he: "‏JS ראשוני, דף הבית" },
-    target: { en: "< 180 kB", he: "‎< 180 kB" },
-    measured: { en: "152 kB", he: "152 kB" },
-    note: { en: "gzipped", he: "מכווץ" },
+    target: { en: "Measured per release", he: "נמדד בכל גרסה" },
+    measured: { en: "144 kB + deferred renderer", he: "144 kB + מנוע שנטען בהמשך" },
+    note: { en: "Next production build · 2026-08-24", he: "בניית production של Next · 2026-08-24" },
   },
   {
     metric: { en: "First-load JS, case", he: "‏JS ראשוני, מקרה בוחן" },
     target: { en: "< 180 kB", he: "‎< 180 kB" },
-    measured: { en: "130 kB", he: "130 kB" },
-    note: { en: "gzipped", he: "מכווץ" },
+    measured: { en: "135 kB", he: "135 kB" },
+    note: { en: "Largest generated case route · 2026-08-24", he: "מסלול מקרה הבוחן הגדול ביותר · 2026-08-24" },
   },
   {
-    metric: { en: "Animation libraries", he: "ספריות אנימציה" },
-    target: { en: "0", he: "0" },
-    measured: { en: "0", he: "0" },
-    note: { en: "Removed after measuring", he: "הוסרו אחרי מדידה" },
+    metric: { en: "Cinematic renderer", he: "מנוע קולנועי" },
+    target: { en: "One isolated system", he: "מערכת מבודדת אחת" },
+    measured: { en: "R3F / Three", he: "R3F / Three" },
+    note: { en: "Isolated to the cinematic home", he: "מבודדות לדף הבית הקולנועי" },
   },
   {
     metric: { en: "Runtime dependencies", he: "תלויות זמן ריצה" },
     target: { en: "Minimal", he: "מינימלי" },
-    measured: { en: "7", he: "7" },
-    note: { en: "Including next & react", he: "כולל next ו־react" },
+    measured: { en: "Purpose-specific", he: "לפי צורך מוגדר" },
+    note: { en: "No effect library without a scene requirement", he: "אין ספריית אפקטים בלי צורך של סצנה" },
   },
   {
     metric: { en: "CLS", he: "CLS" },
     target: { en: "< 0.02", he: "‎< 0.02" },
-    measured: { en: "Reserved", he: "שמור מראש" },
-    note: { en: "Fonts and media reserve space", he: "גופנים ומדיה שומרים מקום" },
+    measured: { en: "Not measured on devices", he: "לא נמדד במכשירים" },
+    note: { en: "Layout reserves space; field measurement remains open", he: "הפריסה שומרת מקום; מדידת שטח עדיין פתוחה" },
   },
   {
     metric: { en: "WebGL", he: "WebGL" },
-    target: { en: "None", he: "אין" },
-    measured: { en: "None", he: "אין" },
-    note: { en: "SVG and CSS instead", he: "‏SVG ו־CSS במקום" },
+    target: { en: "One persistent canvas", he: "קנבס מתמשך אחד" },
+    measured: { en: "Balanced by default", he: "מאוזן כברירת מחדל" },
+    note: { en: "Semantic HTML survives without it", he: "HTML סמנטי נשאר גם בלעדיו" },
   },
 ];
 
 export const colophonRules: { title: LS; body: LS }[] = [
   {
     title: {
-      en: "I installed two animation libraries, then deleted them",
-      he: "התקנתי שתי ספריות אנימציה, ואז מחקתי אותן",
+      en: "The interface is the film",
+      he: "הממשק הוא הסרט",
     },
     body: {
-      en: "GSAP and Motion were both in the build. The site needs three effects: a scroll reveal, a pinned horizontal track, and a keyed fade. Those are about sixty lines of IntersectionObserver, a rAF scroll handler, and a CSS keyframe. The libraries cost 74 kB on the home page and 108 kB on case studies. Reaching for a dependency is a decision, and this one did not survive being measured.",
-      he: "‏GSAP ו־Motion היו שתיהן בבנייה. האתר צריך שלושה אפקטים: חשיפה בגלילה, מסלול אופקי מוצמד, ודהייה מבוססת מפתח. אלה בערך שישים שורות של IntersectionObserver, מטפל גלילה על rAF, ו־keyframe ב־CSS. הספריות עלו 74 קילובייט בדף הבית ו־108 במקרי הבוחן. לקחת תלות היא החלטה, וההחלטה הזו לא שרדה מדידה.",
+      en: "The homepage does not play a rendered film. Live HTML interfaces remain selectable and legible while a single realtime scene supplies impossible depth, light and scale. The same scroll value drives both layers so reversing changes the system rather than rewinding a video.",
+      he: "דף הבית לא מנגן סרט מרונדר. ממשקי HTML חיים נשארים ניתנים לבחירה ולקריאה, בזמן שסצנה אחת בזמן אמת מספקת עומק, אור וקנה מידה בלתי אפשריים. אותו ערך גלילה מניע את שתי השכבות, כך שגלילה לאחור משנה את המערכת במקום להריץ וידאו לאחור.",
     },
   },
   {
@@ -188,18 +246,18 @@ export const colophonRules: { title: LS; body: LS }[] = [
       he: "תנועה מופחתת היא פריסה, לא הורדת דרגה",
     },
     body: {
-      en: "prefers-reduced-motion is resolved at the layout level. The pinned horizontal loop becomes a vertical list, smooth scrolling is never mounted, and no transform animation runs. Nothing is hidden in that mode — it is a different composition of the same content, and it is also what every phone gets.",
-      he: "‏prefers-reduced-motion נפתר ברמת הפריסה. הלולאה האופקית המוצמדת הופכת לרשימה אנכית, גלילה חלקה לא נטענת כלל, ושום אנימציית טרנספורם לא רצה. שום דבר לא מוסתר במצב הזה — זו הרכבה אחרת של אותו תוכן, וזה גם מה שכל טלפון מקבל.",
+      en: "prefers-reduced-motion receives an authored HTML composition rather than a slowed camera ride. The same argument, evidence boundaries and project links remain available, and visitors can switch motion explicitly.",
+      he: "‏prefers-reduced-motion מקבל קומפוזיציית HTML ייעודית במקום מסע מצלמה מואט. אותו טיעון, גבולות הראיות וקישורי הפרויקטים נשארים זמינים, ואפשר לבחור תנועה במפורש.",
     },
   },
   {
     title: {
-      en: "The cinematic layer is SVG and CSS",
-      he: "השכבה הקולנועית היא SVG ו־CSS",
+      en: "DOM is reality; WebGL is where it breaks",
+      he: "ה־DOM הוא המציאות; ב־WebGL היא נשברת",
     },
     body: {
-      en: "No WebGL, no 3D scene, no shader. The loop schematic is a single SVG path that draws itself with stroke-dashoffset, the grain is one inline feTurbulence filter, and the depth comes from typography and hairlines. A WebGL hero would have cost more in Largest Contentful Paint than it returned in impression.",
-      he: "בלי WebGL, בלי סצנת תלת־ממד, בלי שיידר. סכמת הלולאה היא נתיב SVG יחיד שמצייר את עצמו עם stroke-dashoffset, הגרעיניות היא מסנן feTurbulence אחד מוטמע, והעומק מגיע מטיפוגרפיה וקווי שיער. גיבור WebGL היה עולה יותר ב־LCP ממה שהיה מחזיר ברושם.",
+      en: "Teaching code, Arc structure and product interfaces begin as ordinary HTML. Procedural geometry takes over only when depth communicates something the interface cannot. The professional story never depends on the canvas existing.",
+      he: "קוד ההוראה, מבנה Arc וממשקי המוצר מתחילים כ־HTML רגיל. גאומטריה פרוצדורלית נכנסת רק כשעומק מתקשר משהו שהממשק לא יכול. הסיפור המקצועי לעולם אינו תלוי בכך שהקנבס קיים.",
     },
   },
   {
@@ -228,8 +286,8 @@ export const colophonRules: { title: LS; body: LS }[] = [
       he: "מה הייתי בונה מחדש",
     },
     body: {
-      en: "The case-study schema grew organically and now has optional fields that only one project uses. I would collapse those into a block list. I would also add a visual regression check before the next redesign, because I verified this build by looking at it, which is exactly the kind of manual step I tell other people to automate.",
-      he: "סכמת מקרי הבוחן צמחה אורגנית ויש בה עכשיו שדות אופציונליים שרק פרויקט אחד משתמש בהם. הייתי מכווץ אותם לרשימת בלוקים. הייתי גם מוסיף בדיקת רגרסיה ויזואלית לפני העיצוב מחדש הבא, כי אימתתי את הבנייה הזו בעיניים — בדיוק סוג השלב הידני שאני אומר לאחרים לאוטמט.",
+      en: "The case-study schema grew organically and now has optional fields that only one project uses. I would collapse those into a block list. I would also add automated visual regression and a representative physical-device matrix; the current production build proves compilation and route integrity, not visual correctness on every screen.",
+      he: "סכמת מקרי הבוחן צמחה אורגנית ויש בה עכשיו שדות אופציונליים שרק פרויקט אחד משתמש בהם. הייתי מכווץ אותם לרשימת בלוקים. הייתי מוסיף גם רגרסיה ויזואלית אוטומטית ומטריצת מכשירים פיזיים מייצגת; בניית הייצור הנוכחית מוכיחה קומפילציה ושלמות נתיבים, לא נכונות ויזואלית בכל מסך.",
     },
   },
 ];
@@ -238,14 +296,14 @@ export const now: { label: LS; items: LSA } = {
   label: { en: "Now", he: "עכשיו" },
   items: {
     en: [
-      "Building Eventa, and cutting steps out of its onboarding.",
-      "First year of the M.Sc. at Shenkar.",
-      "Still teaching, still shipping to Arc.",
+      "Co-developing Arc and improving educational workflows at Nitzanim.",
+      "Studying Industrial Engineering & Management at Shenkar.",
+      "Teaching programming and developing learning material.",
     ],
     he: [
-      "בונה את Eventa, ומקצר שלבים בתהליך הכניסה שלו.",
-      "שנה ראשונה בתואר השני בשנקר.",
-      "עדיין מלמד, עדיין שולח עדכונים ל־Arc.",
+      "מפתח במשותף את Arc ומשפר תהליכי עבודה חינוכיים בניצנים.",
+      "לומד הנדסת תעשייה וניהול בשנקר.",
+      "מלמד תכנות ומפתח חומרי למידה.",
     ],
   },
 };

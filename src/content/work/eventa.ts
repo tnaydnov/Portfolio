@@ -8,15 +8,47 @@ export const eventa: Project = {
     he: "פלטפורמת ווב מובייל־תחילה לחיבור חברתי בחתונות — כניסה בקוד QR, פרופילי אורחים, התאמה והודעות פרטיות.",
   },
   hook: {
-    en: "A wedding puts a hundred and fifty strangers in one room and gives them no way to meet each other.",
-    he: "חתונה מכניסה מאה וחמישים זרים לחדר אחד ולא נותנת להם שום דרך להכיר.",
+    en: "A wedding can put strangers in one room while giving them no natural way to meet.",
+    he: "חתונה יכולה להכניס זרים לחדר אחד בלי לתת להם דרך טבעית להכיר.",
+  },
+  snapshot: {
+    problem: {
+      en: "People can share a room, a host and a moment while still lacking the context that would make a conversation feel natural.",
+      he: "אנשים יכולים לחלוק חדר, מארחים ורגע — ועדיין לחסר את ההקשר שיהפוך שיחה לטבעית.",
+    },
+    move: {
+      en: "Use the event itself as the trust boundary: a QR opens a short, event-scoped path from arrival to a relevant introduction.",
+      he: "להשתמש באירוע עצמו כגבול האמון: QR פותח מסלול קצר ומוגבל לאירוע מהגעה ועד היכרות רלוונטית.",
+    },
+    contribution: {
+      en: "My recorded role covered product, design, full-stack implementation and operation across onboarding, profiles, matching, messaging, privacy and organizer controls.",
+      he: "התפקיד המתועד שלי כלל מוצר, עיצוב, מימוש פול־סטאק ותפעול לאורך כניסה, פרופילים, התאמות, הודעות, פרטיות וכלי מארגנים.",
+    },
+    proof: {
+      en: "A published source snapshot with product, operations, privacy, testing and CI documentation. The service itself has been discontinued.",
+      he: "צילום מצב של קוד מקור שפורסם עם תיעוד מוצר, תפעול, פרטיות, בדיקות ו־CI. השירות עצמו הופסק.",
+    },
   },
   tier: "flagship",
   stages: ["signal", "frame", "prove", "field"],
   domain: ["product"],
-  role: { en: "Product · Design · Build", he: "מוצר · עיצוב · בנייה" },
-  started: "2026-01",
-  status: "ongoing",
+  role: {
+    en: "Product · design · full-stack build · operation",
+    he: "מוצר · עיצוב · בנייה פול־סטאק · תפעול",
+  },
+  team: { en: "Personal product project", he: "פרויקט מוצר אישי" },
+  started: "2026",
+  ended: "2026",
+  status: "discontinued",
+  statusLabel: { en: "Discontinued · source public", he: "הופסק · הקוד ציבורי" },
+  statusDetail: {
+    en: "Owner-provided records - the source CV and project README - describe it as formerly live. It is now discontinued and published as an unmaintained source snapshot.",
+    he: "מסמכים שסופקו על ידי הבעלים - קורות החיים המקוריים וקובץ ה־README של הפרויקט - מתארים אותו כמי שהיה פעיל בעבר. כיום הוא הופסק ופורסם כצילום מצב לא מתוחזק של קוד המקור.",
+  },
+  evidenceNote: {
+    en: "Owner-provided records describe Eventa as operated and later discontinued. The public snapshot verifies the implemented product surface, but its squashed history does not establish iteration ownership and no user, match or event outcome is claimed.",
+    he: "מסמכים שסופקו על ידי הבעלים מתארים את Eventa כמי שהופעל ולאחר מכן הופסק. צילום המצב הציבורי מאמת את פני המוצר שמומשו, אך היסטוריה מרוכזת לקומיט יחיד אינה מוכיחה בעלות על איטרציות, ואין טענה למספר משתמשים, התאמות או תוצאות אירוע.",
+  },
   metrics: [
     {
       label: { en: "Surface", he: "פלטפורמה" },
@@ -30,11 +62,14 @@ export const eventa: Project = {
     },
     {
       label: { en: "State", he: "מצב" },
-      value: { en: "In build", he: "בבנייה" },
-      note: { en: "Actively developed", he: "בפיתוח פעיל" },
+      value: { en: "Discontinued", he: "הופסק" },
+      note: {
+        en: "Source preserved for review",
+        he: "הקוד נשמר לצורך סקירה",
+      },
     },
   ],
-  stack: ["TypeScript", "Mobile web", "QR onboarding", "Realtime messaging"],
+  stack: ["Next.js 16", "React 19", "TypeScript", "Supabase", "PostgreSQL", "Playwright", "Vitest"],
   links: { repo: "https://github.com/tnaydnov/eventa" },
   sections: [
     {
@@ -45,14 +80,12 @@ export const eventa: Project = {
       },
       body: {
         en: [
-          "Weddings assemble a hundred and fifty people who have been pre-filtered by two people who know them all well, seat them by family politics, and then provide no mechanism whatsoever for them to meet.",
-          "The existing behaviour is the signal: guests already do this manually and badly. They ask the couple about someone across the room. They get seated next to a stranger and spend the evening finding out whether there was anything there. The couple fields matchmaking requests for weeks afterwards.",
-          "The interesting constraint is that this is a two-hour window with a hard start and a hard end, inside a physical space, among people with a real social connection to the same two hosts. That is a completely different problem from general-purpose dating, and treating it as one would produce a much worse product.",
+          "The product hypothesis begins with a room of people connected to the same hosts but separated by table plans, family groups and incomplete information about one another.",
+          "That creates a short, event-bound interaction rather than a general-purpose dating context. The source reflects that framing through QR entry, event-scoped profiles, matching and private messaging.",
         ],
         he: [
-          "חתונות מכנסות מאה וחמישים אנשים שסוננו מראש על ידי שני אנשים שמכירים את כולם היטב, מושיבות אותם לפי פוליטיקה משפחתית, ואז לא מספקות שום מנגנון שיאפשר להם להכיר.",
-          "ההתנהגות הקיימת היא האיתות: אורחים כבר עושים את זה ידנית ורע. הם שואלים את הזוג על מישהו מהצד השני של האולם. הם מושבים ליד זר ומבלים את הערב בלגלות אם היה שם משהו. הזוג מקבל בקשות שידוך במשך שבועות אחר כך.",
-          "האילוץ המעניין הוא שמדובר בחלון של שעתיים עם התחלה קשיחה וסוף קשיח, בתוך מרחב פיזי, בין אנשים עם קשר חברתי אמיתי לאותם שני מארחים. זו בעיה שונה לחלוטין מהיכרויות כלליות, והתייחסות אליה ככזו הייתה מייצרת מוצר גרוע בהרבה.",
+          "השערת המוצר מתחילה בחדר של אנשים שמחוברים לאותם מארחים, אך מופרדים על ידי סידורי שולחן, קבוצות משפחתיות ומידע חלקי זה על זה.",
+          "זה יוצר אינטראקציה קצרה ומוגבלת לאירוע, לא הקשר היכרויות כללי. קוד המקור משקף את המסגור הזה באמצעות כניסה ב־QR, פרופילים מוגבלי אירוע, התאמה והודעות פרטיות.",
         ],
       },
     },
@@ -87,12 +120,12 @@ export const eventa: Project = {
         en: [
           "This product cannot be iterated the way normal software is. An event happens once, it cannot be replayed, and a failure during it is not recoverable — you do not get a second attempt at a wedding.",
           "So validation has to happen before the event rather than during it: walking the full path on the oldest and cheapest phone available, in poor lighting, on venue wifi, with the assumption that the person holding it has never seen the product and will not read anything.",
-          "The metric that matters is completion rate through onboarding, and I would rather know it is low before an event than discover it afterwards from a couple who trusted me with their wedding.",
+          "The metric that would matter is completion rate through onboarding, and it should be measured before any live-event claim is made.",
         ],
         he: [
           "אי אפשר לבצע איטרציות על המוצר הזה כמו על תוכנה רגילה. אירוע קורה פעם אחת, אי אפשר לשחזר אותו, וכישלון במהלכו אינו ניתן לתיקון — אין ניסיון שני בחתונה.",
           "לכן האימות חייב לקרות לפני האירוע ולא במהלכו: ללכת את כל המסלול על הטלפון הישן והזול ביותר שיש, בתאורה גרועה, על ה־wifi של האולם, מתוך הנחה שמי שמחזיק אותו מעולם לא ראה את המוצר ולא יקרא שום דבר.",
-          "המדד שחשוב הוא שיעור ההשלמה של הכניסה, ואני מעדיף לדעת שהוא נמוך לפני אירוע מאשר לגלות את זה אחר כך מזוג שהפקיד בידיי את החתונה שלו.",
+          "המדד שהיה חשוב הוא שיעור ההשלמה של הכניסה, ויש למדוד אותו לפני שמעלים טענה כלשהי על אירוע חי.",
         ],
       },
     },
@@ -104,14 +137,14 @@ export const eventa: Project = {
       },
       body: {
         en: [
-          "The work so far has been repeatedly cutting the path between scanning a code and being present in the room. Almost every change has removed a step rather than adding a capability.",
-          "The same has applied to how the product describes itself. Messaging that sounds appealing in isolation reads very differently on a table card at someone's wedding, and getting the tone wrong makes people opt out before they have seen anything. That copy has gone through as many revisions as the onboarding flow itself.",
-          "This one is still in build, and it is listed here as in-progress rather than dressed up as finished.",
+          "The source snapshot shows a deliberately short path from QR entry to an event-scoped profile, with product copy and onboarding treated as part of the same interaction.",
+          "That is evidence of implementation, not evidence that guests completed the flow, that conversations occurred or that an event produced an outcome.",
+          "Eventa was later discontinued. I published the source as a portfolio artifact rather than presenting an unavailable service as a live product.",
         ],
         he: [
-          "העבודה עד כה הייתה קיצור חוזר ונשנה של המסלול בין סריקת קוד לבין נוכחות בחדר. כמעט כל שינוי הסיר שלב במקום להוסיף יכולת.",
-          "אותו דבר חל על האופן שבו המוצר מתאר את עצמו. ניסוח שנשמע מושך בפני עצמו נקרא אחרת לגמרי על כרטיס שולחן בחתונה של מישהו, וטון שגוי גורם לאנשים לוותר עוד לפני שראו משהו. הטקסט הזה עבר לא פחות גרסאות מזרימת הכניסה עצמה.",
-          "זה עדיין בבנייה, והוא מופיע כאן כבתהליך ולא מולבש כגמור.",
+          "צילום המצב של קוד המקור מציג מסלול קצר בכוונה מכניסה ב־QR לפרופיל מוגבל לאירוע, כאשר הטקסט והכניסה מטופלים כחלק מאותה אינטראקציה.",
+          "זו ראיה למימוש, לא ראיה לכך שאורחים השלימו את התהליך, שנוצרו שיחות או שאירוע הפיק תוצאה.",
+          "Eventa הופסק בהמשך. פרסמתי את קוד המקור כארטיפקט לפורטפוליו במקום להציג שירות שאינו זמין כמוצר חי.",
         ],
       },
     },

@@ -4,20 +4,48 @@ export const lpr: Project = {
   slug: "license-plate-recognition",
   title: "License Plate Recognition",
   oneLiner: {
-    en: "A real-time parking-enforcement pipeline: motion detection, plate detection, OCR, alerting.",
-    he: "צינור אכיפת חניה בזמן אמת: זיהוי תנועה, זיהוי לוחית, OCR והתראות.",
+    en: "A parking-enforcement prototype designed for continuous video: motion detection, plate detection, OCR and alerting.",
+    he: "אב־טיפוס לאכיפת חניה שתוכנן לווידאו רציף: זיהוי תנועה, זיהוי לוחית, OCR והתראות.",
   },
   hook: {
-    en: "Real-time computer vision is mostly a scheduling problem wearing a machine-learning costume.",
-    he: "ראייה ממוחשבת בזמן אמת היא בעיקר בעיית תזמון שלובשת תחפושת של למידת מכונה.",
+    en: "A continuous computer-vision pipeline is a scheduling problem wearing a machine-learning costume.",
+    he: "צינור ראייה ממוחשבת רציף הוא בעיית תזמון שלובשת תחפושת של למידת מכונה.",
+  },
+  snapshot: {
+    problem: {
+      en: "A camera never waits for detection, OCR or network work to catch up; slow stages turn useful frames into stale results.",
+      he: "מצלמה לא מחכה לזיהוי, OCR או רשת; שלבים איטיים הופכים פריימים שימושיים לתוצאות מאוחרות.",
+    },
+    move: {
+      en: "Order the pipeline by cost, reject empty frames early and decouple the expensive stages with queues.",
+      he: "לסדר את הצינור לפי עלות, לדחות פריימים ריקים מוקדם ולנתק את השלבים היקרים בעזרת תורים.",
+    },
+    contribution: {
+      en: "On a five-person team, my repository-visible work includes motion detection, Docker and project structure, and operator-interface work.",
+      he: "בצוות של חמישה, העבודה שלי שנראית במאגר כוללת זיהוי תנועה, Docker ומבנה הפרויקט, ועבודה על ממשק המפעיל.",
+    },
+    proof: {
+      en: "The upstream team repository preserves 69 commits and an inspectable multi-service Python architecture.",
+      he: "מאגר הצוות המקורי שומר 69 קומיטים וארכיטקטורת Python מרובת שירותים שניתן לבדוק.",
+    },
   },
   tier: "system",
   stages: ["frame", "build", "prove"],
   domain: ["applied-ai", "platform"],
-  role: { en: "Architecture · Build", he: "ארכיטקטורה · בנייה" },
-  started: "2025-01",
+  role: { en: "Motion pipeline · Docker/structure · operator UI", he: "צינור תנועה · Docker ומבנה · ממשק מפעיל" },
+  team: { en: "Five-person university team", he: "צוות אוניברסיטאי של חמישה" },
+  started: "2024-11",
   ended: "2025-07",
   status: "archived",
+  statusLabel: { en: "Completed team project", he: "פרויקט צוות שהושלם" },
+  statusDetail: {
+    en: "Completed university team project; source preserved in the upstream repository.",
+    he: "פרויקט צוות אוניברסיטאי שהושלם; קוד המקור נשמר במאגר המקורי.",
+  },
+  evidenceNote: {
+    en: "The upstream history shows five contributors and 15 commits from Tomer's associated account. No deployment or end-to-end accuracy measurement is claimed. Project documentation conflicts on the YOLO version, so this case uses the version-neutral description ‘Ultralytics YOLO-based detection.’",
+    he: "ההיסטוריה במאגר המקורי מציגה חמישה תורמים ו־15 קומיטים מהחשבון המקושר לתומר. אין טענה לפריסה או למדידת דיוק מקצה לקצה. תיעוד הפרויקט סותר את עצמו לגבי גרסת YOLO, ולכן המקרה משתמש בתיאור הניטרלי ׳זיהוי מבוסס Ultralytics YOLO׳.",
+  },
   metrics: [
     {
       label: { en: "Stages", he: "שלבים" },
@@ -29,8 +57,8 @@ export const lpr: Project = {
     },
     {
       label: { en: "Mode", he: "מצב" },
-      value: { en: "Real-time", he: "זמן אמת" },
-      note: { en: "Continuous video", he: "וידאו רציף" },
+      value: { en: "Continuous input", he: "קלט רציף" },
+      note: { en: "Asynchronous stages", he: "שלבים אסינכרוניים" },
     },
     {
       label: { en: "Deploy", he: "פריסה" },
@@ -38,16 +66,9 @@ export const lpr: Project = {
       note: { en: "Containerised services", he: "שירותים בקונטיינרים" },
     },
   ],
-  stack: ["Python", "YOLOv11", "PaddleOCR", "FastAPI", "Redis", "Docker", "PyQt5"],
-  links: { repo: "https://github.com/tnaydnov/License_Plate_Recognition" },
-  media: {
-    poster: "/images/lpr-preview.png",
-    video: "/videos/lpr-demo.mp4",
-    alt: {
-      en: "License plate recognition operator interface showing a detected plate",
-      he: "ממשק המפעיל של מערכת זיהוי הלוחיות מציג לוחית שזוהתה",
-    },
-  },
+  stack: ["Python", "Ultralytics YOLO", "PaddleOCR", "FastAPI", "Redis", "Docker", "PyQt5"],
+  links: { repo: "https://github.com/BGU-LPR-Project/lpr_final_project" },
+  visual: "lpr-pipeline",
   sections: [
     {
       stage: "frame",
@@ -57,11 +78,11 @@ export const lpr: Project = {
       },
       body: {
         en: [
-          "The accuracy question — can a model read a plate — is largely solved by choosing good components. The engineering question is whether the whole chain keeps up with a camera that does not slow down for you.",
+          "A component benchmark can answer whether a model can read a plate under known conditions. It does not answer whether the whole chain can keep up with a camera that does not slow down for it.",
           "That reframes the problem. Every stage in the pipeline is a consumer with a fixed time budget, and the design work is deciding what to drop rather than what to compute.",
         ],
         he: [
-          "שאלת הדיוק — האם מודל יכול לקרוא לוחית — נפתרת ברובה בבחירת רכיבים טובים. השאלה ההנדסית היא האם כל השרשרת עומדת בקצב של מצלמה שלא מאטה בשבילך.",
+          "מדד של רכיב יכול לענות אם מודל קורא לוחית בתנאים ידועים. הוא לא עונה אם כל השרשרת עומדת בקצב של מצלמה שלא מאטה בשבילה.",
           "זה ממסגר מחדש את הבעיה. כל שלב בצינור הוא צרכן עם תקציב זמן קבוע, ועבודת התכנון היא להחליט ממה לוותר ולא מה לחשב.",
         ],
       },
@@ -74,14 +95,14 @@ export const lpr: Project = {
       },
       body: {
         en: [
-          "The pipeline is ordered by cost. Motion detection is nearly free and rejects the overwhelming majority of frames, because a parking camera mostly watches nothing happen. Only surviving frames reach plate detection, and only detections reach OCR, which is the most expensive stage and therefore the last.",
-          "Splitting the stages into separate services with a queue between them was the decision that made it work. It decouples the stages' rates, so a slow OCR pass creates backpressure instead of dropping the frame that mattered, and it lets each stage be tuned or replaced without disturbing the others.",
-          "The operator interface is a desktop client rather than a web app, because the people using it sit in front of one screen in one room and need alerts that survive a browser tab being closed.",
+          "The pipeline is ordered by expected cost. Motion detection was placed first to reject unchanged frames before they reached plate detection; only detected plates continued to OCR, the most expensive stage. The repository does not contain a publishable measurement of how many frames each gate rejected.",
+          "The team split the stages into services with queues to decouple their rates. In that design, a slow OCR pass can create backpressure instead of forcing every stage into one frame budget, and each component can be tuned or replaced independently. End-to-end throughput was not measured for this case study.",
+          "The project used a desktop operator client so alerts lived in a dedicated surface rather than a disposable browser tab.",
         ],
         he: [
-          "הצינור מסודר לפי עלות. זיהוי תנועה כמעט חינמי ודוחה את הרוב המוחלט של הפריימים, כי מצלמת חניה בעיקר מסתכלת על כלום שקורה. רק פריימים ששרדו מגיעים לזיהוי לוחית, ורק זיהויים מגיעים ל־OCR, שהוא השלב היקר ביותר ולכן האחרון.",
-          "פיצול השלבים לשירותים נפרדים עם תור ביניהם הייתה ההחלטה שגרמה לזה לעבוד. זה מנתק את הקצבים של השלבים, כך שמעבר OCR איטי יוצר לחץ אחורי במקום להפיל את הפריים שהיה חשוב, וזה מאפשר לכוונן או להחליף כל שלב בלי להפריע לאחרים.",
-          "ממשק המפעיל הוא לקוח דסקטופ ולא אפליקציית ווב, כי האנשים שמשתמשים בו יושבים מול מסך אחד בחדר אחד וצריכים התראות ששורדות סגירת טאב.",
+          "הצינור מסודר לפי עלות צפויה. זיהוי תנועה הוצב ראשון כדי לדחות פריימים שלא השתנו לפני זיהוי לוחית; רק לוחיות שזוהו המשיכו ל־OCR, השלב היקר ביותר. במאגר אין מדידה שניתן לפרסם לגבי שיעור הפריימים שכל שער דחה.",
+          "הצוות פיצל את השלבים לשירותים עם תורים כדי לנתק בין הקצבים שלהם. בעיצוב הזה, מעבר OCR איטי יכול ליצור לחץ אחורי במקום לכפות תקציב פריים אחד על כל השלבים, וכל רכיב ניתן לכוונון או החלפה בנפרד. תפוקה מקצה לקצה לא נמדדה עבור מקרה הבוחן הזה.",
+          "הפרויקט השתמש בלקוח מפעיל שולחני כדי שההתראות יחיו במשטח ייעודי ולא בטאב דפדפן שניתן לסגור.",
         ],
       },
     },
@@ -94,11 +115,11 @@ export const lpr: Project = {
       body: {
         en: [
           "Model accuracy in isolation is the wrong measure. What matters is end-to-end: of the vehicles that actually entered the frame, how many produced a correct plate in time to be useful.",
-          "That number is always worse than the model's benchmark, and the gap is where the real engineering is.",
+          "That result can diverge sharply from a model benchmark. The project did not preserve a publishable end-to-end measurement, so this remains the evaluation I would add rather than an outcome I claim.",
         ],
         he: [
           "דיוק המודל בפני עצמו הוא המדד הלא נכון. מה שחשוב הוא מקצה לקצה: מתוך כלי הרכב שבאמת נכנסו לפריים, כמה הפיקו לוחית נכונה בזמן שהיה בו שימוש.",
-          "המספר הזה תמיד גרוע יותר מהמדד של המודל, והפער הוא המקום שבו נמצאת ההנדסה האמיתית.",
+          "התוצאה הזו יכולה לסטות משמעותית ממדד של מודל. הפרויקט לא שמר מדידה מקצה לקצה שניתן לפרסם, ולכן זו הבדיקה שהייתי מוסיף ולא תוצאה שאני טוען לה.",
         ],
       },
     },
@@ -168,14 +189,41 @@ export const tradingSystem: Project = {
     en: "A large team project where the hard part was the specification, not the code.",
     he: "פרויקט צוות גדול שבו החלק הקשה היה האפיון, לא הקוד.",
   },
+  snapshot: {
+    problem: {
+      en: "In a multi-store marketplace, ambiguous authority rules multiply across appointments, permissions, purchases and integration work.",
+      he: "בשוק רב־חנויות, כל עמימות בכללי סמכות מתרבה דרך מינויים, הרשאות, רכישות ואינטגרציה.",
+    },
+    move: {
+      en: "Treat roles, permissions and state transitions as the load-bearing domain before building the storefront around them.",
+      he: "להתייחס לתפקידים, הרשאות ומעברי מצב כדומיין נושא העומס לפני שבונים סביבם את חזית המסחר.",
+    },
+    contribution: {
+      en: "I contributed to a large university team implementation and learned to resolve specification ambiguity before it becomes an integration defect.",
+      he: "תרמתי למימוש בצוות אוניברסיטאי גדול ולמדתי לפתור עמימות באפיון לפני שהיא הופכת לתקלה באינטגרציה.",
+    },
+    proof: {
+      en: "An archived Java/Spring repository with the marketplace domain, security layers and a substantial automated-test structure.",
+      he: "מאגר Java/Spring בארכיון עם דומיין המסחר, שכבות האבטחה ומבנה משמעותי של בדיקות אוטומטיות.",
+    },
+  },
   tier: "system",
   stages: ["frame", "plan", "build"],
   domain: ["platform"],
   role: { en: "Contributor on a large team", he: "תורם בצוות גדול" },
   team: { en: "University team project", he: "פרויקט צוות אוניברסיטאי" },
-  started: "2024-01",
-  ended: "2025-08",
+  started: "2024-05",
+  ended: "2024-07",
   status: "archived",
+  statusLabel: { en: "Completed team project", he: "פרויקט צוות שהושלם" },
+  statusDetail: {
+    en: "Completed university team project; public repository is archived.",
+    he: "פרויקט צוות אוניברסיטאי שהושלם; המאגר הציבורי נמצא בארכיון.",
+  },
+  evidenceNote: {
+    en: "The source verifies a substantial Java/Spring system and test structure. Its short public mirror history does not provide a reliable subsystem-by-subsystem contribution ledger, so the case keeps Tomer's role at team-contributor level.",
+    he: "קוד המקור מאמת מערכת Java/Spring משמעותית ומבנה בדיקות. ההיסטוריה הציבורית הקצרה של המאגר אינה מספקת פנקס תרומות אמין לפי תתי־מערכות, ולכן המקרה משאיר את התפקיד של תומר ברמת תורם בצוות.",
+  },
   metrics: [
     {
       label: { en: "Scope", he: "היקף" },
@@ -188,16 +236,9 @@ export const tradingSystem: Project = {
       note: { en: "Not solo work", he: "לא עבודה עצמאית" },
     },
   ],
-  stack: ["Java", "JavaScript", "REST", "Layered architecture"],
+  stack: ["Java 17", "Spring Boot", "Spring Security", "Vaadin", "JPA", "MySQL", "WebSockets", "JUnit", "Mockito"],
   links: { repo: "https://github.com/tnaydnov/Trading_System" },
-  media: {
-    poster: "/images/trading-preview.png",
-    video: "/videos/trading-demo.mp4",
-    alt: {
-      en: "Trading system storefront and management interface",
-      he: "חזית החנות וממשק הניהול של מערכת המסחר",
-    },
-  },
+  visual: "trading-model",
   sections: [
     {
       stage: "frame",

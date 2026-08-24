@@ -4,18 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "prebuild": "npm run truth:check",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "truth:check": "node scripts/check-truth-claims.mjs"
   },
   "dependencies": {
+    "@react-three/fiber": "^9.7.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
-    "@xyflow/react": "^12.11.2",
-    "lenis": "^1.3.25",
     "next": "^15.5.22",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -23,12 +25,15 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.185.4",
     "eslint": "^9",
     "eslint-config-next": "^15.5.22",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
   "overrides": {
+    "nanoid": "^3.3.18",
+    "postcss": "^8.5.23",
     "sharp": "^0.35.3"
   }
 }

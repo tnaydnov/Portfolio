@@ -17,7 +17,9 @@ export default async function OpengraphImage({
 }) {
   const { locale: raw } = await params;
   const locale = isLocale(raw) ? raw : "en";
-  const tagline = `${t(site.description, locale).split(". ")[0]}.`;
+  const tagline = t(site.description, locale);
+  const concept = locale === "he" ? "השאלה שמאחורי השאלה" : "THE QUESTION BEHIND THE QUESTION";
+  const rule = locale === "he" ? "הארטיפקט אמיתי. הפיזיקה לא." : "THE ARTIFACT IS REAL. THE PHYSICS ARE NOT.";
 
   return new ImageResponse(
     (
@@ -32,6 +34,7 @@ export default async function OpengraphImage({
           color: "#ecebe8",
           padding: 72,
           fontFamily: "sans-serif",
+          direction: locale === "he" ? "rtl" : "ltr",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -51,13 +54,13 @@ export default async function OpengraphImage({
               color: "#8a8f98",
             }}
           >
-            Signal · Frame · Plan · Build · Prove · Field
+            {concept}
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           <div style={{ fontSize: 104, lineHeight: 1, letterSpacing: -4 }}>
-            {t(site.name, "en")}
+            {t(site.name, locale)}
           </div>
           <div
             style={{
@@ -82,8 +85,8 @@ export default async function OpengraphImage({
             paddingTop: 24,
           }}
         >
-          <span>{t(site.role, "en")}</span>
-          <span style={{ color: "#ff4d17" }}>מכלול</span>
+          <span>{t(site.role, locale)}</span>
+          <span style={{ color: "#ff4d17" }}>{rule}</span>
         </div>
       </div>
     ),

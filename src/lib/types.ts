@@ -3,7 +3,13 @@ import type { StageId } from "./stages";
 
 export type Tier = "flagship" | "system" | "rep";
 export type Domain = "product" | "platform" | "applied-ai" | "education";
-export type Status = "live" | "ongoing" | "internal" | "archived";
+export type Status =
+  | "live"
+  | "ongoing"
+  | "internal"
+  | "archived"
+  | "discontinued"
+  | "status-unverified";
 
 export interface Metric {
   label: LS;
@@ -68,25 +74,43 @@ export interface ConstraintStudy {
   scenarios: ConstraintScenario[];
 }
 
+export interface ProjectSnapshot {
+  /** The situation a visitor should understand before reading the full case. */
+  problem: LS;
+  /** The important reframing or product move. */
+  move: LS;
+  /** Tomer's concrete contribution, with team boundaries intact. */
+  contribution: LS;
+  /** What can be inspected today. */
+  proof: LS;
+}
+
 export interface Project {
   slug: string;
   title: string;
   oneLiner: LS;
   /** The angle — the sentence that frames the whole case study. */
   hook: LS;
+  /** A recruiter-readable version of the case before the long-form material. */
+  snapshot?: ProjectSnapshot;
   tier: Tier;
   stages: StageId[];
   domain: Domain[];
   role: LS;
   team?: LS;
-  /** 'YYYY-MM' */
+  /** 'YYYY' or 'YYYY-MM'. */
   started: string;
   ended?: string;
   status: Status;
+  /** Public-facing wording when the generic status enum would imply too much. */
+  statusLabel?: LS;
+  statusDetail?: LS;
+  /** Plain-language provenance, kept below the main story. */
+  evidenceNote?: LS;
   metrics: Metric[];
   stack: string[];
   links?: { repo?: string; live?: string };
-  media?: { poster: string; video?: string; alt: LS };
+  visual?: "lpr-pipeline" | "trading-model";
   sections?: StageSection[];
   decisions?: Decision[];
   feedback?: Feedback[];
@@ -115,6 +139,11 @@ export const STATUS_LABEL: Record<Status, LS> = {
   ongoing: { en: "Ongoing", he: "בעבודה" },
   internal: { en: "Internal", he: "פנימי" },
   archived: { en: "Archived", he: "בארכיון" },
+  discontinued: { en: "Discontinued", he: "הופסק" },
+  "status-unverified": {
+    en: "Status unverified",
+    he: "סטטוס לא מאומת",
+  },
 };
 
 export function formatSpan(
@@ -122,14 +151,20 @@ export function formatSpan(
   locale: Locale,
 ): string {
   const fmt = (v: string) => {
+    if (v === "unverified") {
+      return locale === "he" ? "תאריך לא מאומת" : "Date unverified";
+    }
     const [y, m] = v.split("-");
+    if (!m) return y;
     const month = new Date(Number(y), Number(m) - 1).toLocaleString(
       locale === "he" ? "he-IL" : "en",
       { month: "short" },
     );
     return `${month} ${y}`;
   };
+  if (p.started === "unverified" && !p.ended) return fmt(p.started);
   const nowLabel = locale === "he" ? "היום" : "now";
+  if (p.ended && fmt(p.started) === fmt(p.ended)) return fmt(p.started);
   return p.ended
     ? `${fmt(p.started)} — ${fmt(p.ended)}`
     : `${fmt(p.started)} — ${nowLabel}`;

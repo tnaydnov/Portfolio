@@ -1,44 +1,30 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   TECHNICAL EDITORIAL — design tokens
-   Two first-class themes: `draft` (paper, default) and `blueprint` (ink).
+   DOCUMENTARY SYSTEM — one authored grade across the entire portfolio.
+   Ordinary interfaces stay tactile; signal orange marks the moment a system
+   is questioned or changed.
    ========================================================================== */
 
 :root,
-[data-theme="draft"] {
-  --ink: #f3f1ec;
-  --ink-2: #eae7e0;
-  --surface: #fffefb;
-  --surface-2: #f7f5f0;
-  --rule: rgba(20, 22, 26, 0.14);
-  --rule-strong: rgba(20, 22, 26, 0.3);
-  --text: #14161a;
-  --text-muted: #565b63;
-  --text-faint: #83888f;
-  --signal: #d93a05;
-  --signal-ink: #ffffff;
-  --trace: #3e5f80;
-  --ok: #4f7942;
-  --grain: 0.05;
-  color-scheme: light;
-}
-
+[data-theme="draft"],
 [data-theme="blueprint"] {
-  --ink: #07080a;
-  --ink-2: #0b0d10;
-  --surface: #0e1013;
-  --surface-2: #14171c;
+  --ink: #080a0c;
+  --ink-2: #0c0f11;
+  --surface: #111518;
+  --surface-2: #171c1f;
   --rule: rgba(255, 255, 255, 0.11);
   --rule-strong: rgba(255, 255, 255, 0.26);
-  --text: #ecebe8;
-  --text-muted: #9299a2;
-  --text-faint: #666d76;
-  --signal: #ff4d17;
+  --text: #f3efe6;
+  --text-muted: #a8afad;
+  --text-faint: #7f8988;
+  --signal: #ff5a2f;
   --signal-ink: #0a0a0a;
-  --trace: #5b7fa6;
-  --ok: #7fb069;
-  --grain: 0.075;
+  --trace: #6f9a9b;
+  --ok: #8db77e;
+  --paper: #e8e0d2;
+  --paper-ink: #22251f;
+  --grain: 0.065;
   color-scheme: dark;
 }
 
@@ -73,10 +59,11 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
+  min-height: 100svh;
   background: var(--ink);
   color: var(--text);
   font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
@@ -181,6 +168,16 @@ time,
   letter-spacing: -0.03em;
 }
 
+@media (max-width: 359px) {
+  .shell {
+    padding-inline: 1rem;
+  }
+
+  .label {
+    letter-spacing: 0.1em;
+  }
+}
+
 @media (min-width: 768px) {
   .shell {
     padding-inline: 2.5rem;
@@ -201,12 +198,8 @@ time,
   z-index: 90;
   pointer-events: none;
   opacity: var(--grain);
-  mix-blend-mode: multiply;
-  background-size: 170px 170px;
-}
-
-[data-theme="blueprint"] .grain {
   mix-blend-mode: screen;
+  background-size: 170px 170px;
 }
 
 /* ---------------------------------------------------------------- prose --- */
@@ -267,89 +260,30 @@ time,
   }
 }
 
-@keyframes drawIn {
-  to {
-    stroke-dashoffset: 0;
+/* Content stays visible without JavaScript; view timelines add progressive motion. */
+@supports (animation-timeline: view()) {
+  .scroll-reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 24%;
   }
 }
 
-@keyframes sweep {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
+details > summary::-webkit-details-marker {
+  display: none;
 }
 
-@keyframes travel {
-  to {
-    offset-distance: 100%;
-  }
-}
-
-@keyframes ticker {
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.25;
-  }
-}
-
-.reveal {
-  animation: rise 0.8s var(--ease-out-expo) both;
-  animation-delay: var(--d, 0ms);
-}
-
-/* A token travelling the loop path — the carrier. */
-.carrier {
-  offset-path: var(--path);
-  offset-rotate: 0deg;
-  animation: travel var(--travel, 26s) linear infinite;
-}
-
-/* Corner registration brackets that draw in on hover. */
-.bracket {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-color: var(--signal);
-  opacity: 0;
-  transition:
-    opacity 0.4s var(--ease-out-expo),
-    transform 0.5s var(--ease-out-expo);
-  pointer-events: none;
-}
-
-.group:hover .bracket,
-.group:focus-within .bracket {
-  opacity: 1;
-  transform: none;
-}
-
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: ticker var(--speed, 46s) linear infinite;
-}
-
-.ticker:hover .ticker-track {
-  animation-play-state: paused;
+details > summary::marker {
+  content: "";
 }
 
 /* ---------------------------------------------------- reduced-motion mode --- */
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  .scroll-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   *,
@@ -360,38 +294,4 @@ time,
     transition-duration: 0.001ms !important;
   }
 
-  .reveal {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .carrier,
-  .ticker-track {
-    animation: none !important;
-  }
-
-  .carrier {
-    display: none;
-  }
-}
-
-/* xyflow renders inside our token system, not its own. */
-.react-flow__attribution {
-  display: none;
-}
-
-.react-flow__handle {
-  width: 5px;
-  height: 5px;
-  min-width: 0;
-  min-height: 0;
-  border: 0;
-  border-radius: 0;
-  background: var(--rule-strong);
-}
-
-.react-flow__node {
-  cursor: pointer;
-  font-family: var(--font-body), sans-serif;
 }

@@ -92,7 +92,7 @@ export function ConstraintDial({
               onChange={(e) => d.set(Number(e.target.value))}
               aria-valuetext={d.labels[d.value]}
               dir="ltr"
-              className="mt-4 h-1 w-full cursor-pointer appearance-none rounded-none bg-rule accent-[var(--signal)]"
+              className="mt-2 h-11 w-full cursor-pointer accent-[var(--signal)]"
             />
             <div className="mt-3 flex justify-between" dir="ltr">
               {d.labels.map((l) => (
@@ -105,7 +105,7 @@ export function ConstraintDial({
         ))}
       </div>
 
-      <div className="border-t border-rule p-6 md:p-8">
+      <div aria-live="polite" aria-atomic="true" className="border-t border-rule p-6 md:p-8">
         <div key={`${time}-${scope}`} className="reveal">
           <p className="label flex items-center gap-2">
             {isActual ? (

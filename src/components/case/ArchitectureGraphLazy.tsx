@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import type { Locale } from "@/lib/i18n";
 import type { Architecture } from "@/lib/types";
 
-// Keeps @xyflow out of the server render and out of the route's first-load JS.
+// Keeps the interactive architecture explorer out of the server render.
 const Graph = dynamic(
   () => import("./ArchitectureGraph").then((m) => m.ArchitectureGraph),
   {
@@ -12,7 +12,7 @@ const Graph = dynamic(
     loading: () => (
       <div
         aria-hidden
-        className="h-[26rem] animate-pulse border border-rule bg-surface md:h-[30rem]"
+        className="h-64 animate-pulse border border-rule bg-surface md:h-[30rem]"
       />
     ),
   },

@@ -8,35 +8,65 @@ export const applytide: Project = {
     he: "פלטפורמה לניהול מועמדויות: צינור מיון, מסמכים, תזכורות, אנליטיקה והכנה לראיונות.",
   },
   hook: {
-    en: "A job search is a pipeline with terrible instrumentation. I built the instrumentation.",
-    he: "חיפוש עבודה הוא צינור עם מדידה גרועה. בניתי את המדידה.",
+    en: "The browser had become the workaround for a process that needed its own operating system.",
+    he: "הדפדפן הפך למעקף עבור תהליך שהיה צריך מערכת הפעלה משלו.",
+  },
+  snapshot: {
+    problem: {
+      en: "Job discovery, tailored documents, follow-ups and interview context were spread across tabs, files, inboxes and memory.",
+      he: "איתור משרות, מסמכים מותאמים, מעקבים והקשר לראיונות התפזרו בין טאבים, קבצים, תיבות דואר וזיכרון.",
+    },
+    move: {
+      en: "Make capture almost invisible, then give every application one structured history from discovery to decision.",
+      he: "להפוך את הקליטה לכמעט בלתי מורגשת, ואז לתת לכל מועמדות היסטוריה מובנית אחת מאיתור ועד החלטה.",
+    },
+    contribution: {
+      en: "My recorded role spans product direction and implementation across browser capture, the React interface, FastAPI services, data modelling, document tooling and the bounded AI layer.",
+      he: "התפקיד המתועד שלי משתרע על כיוון המוצר והמימוש — מקליטה מהדפדפן, דרך ממשק React ושירותי FastAPI, ועד מודל הנתונים, כלי המסמכים ושכבת AI מוגבלת תקציב.",
+    },
+    proof: {
+      en: "An archived public repository with a substantial dated history and inspectable browser, frontend, backend and infrastructure code.",
+      he: "מאגר ציבורי בארכיון עם היסטוריה מתוארכת משמעותית וקוד דפדפן, חזית, שרת ותשתיות שניתן לבדוק.",
+    },
   },
   tier: "flagship",
   stages: ["signal", "frame", "plan", "build", "prove", "field"],
   domain: ["product", "platform", "applied-ai"],
   role: {
-    en: "Product & architecture · Full-stack build",
-    he: "מוצר וארכיטקטורה · בנייה פול־סטאק",
+    en: "Product design · full-stack build",
+    he: "עיצוב מוצר · בנייה פול־סטאק",
   },
-  team: { en: "Two contributors", he: "שני תורמים" },
-  started: "2025-01",
+  team: {
+    en: "Personal product project",
+    he: "פרויקט מוצר אישי",
+  },
+  started: "2025-08",
   ended: "2026-04",
   status: "archived",
+  statusLabel: { en: "Source archived", he: "קוד המקור בארכיון" },
+  statusDetail: {
+    en: "The public repository is archived. No live deployment or external usage is claimed.",
+    he: "המאגר הציבורי נמצא בארכיון. אין טענה לפריסה חיה או לשימוש חיצוני.",
+  },
+  evidenceNote: {
+    en: "The public source contains the implemented system and its August 2025–April 2026 history. It is presented as a substantial build, not as evidence of adoption or production outcomes.",
+    he: "קוד המקור הציבורי כולל את המערכת שמומשה ואת היסטוריית הפיתוח מאוגוסט 2025 עד אפריל 2026. הוא מוצג כבנייה משמעותית, לא כהוכחה לאימוץ או לתוצאות בייצור.",
+  },
   metrics: [
     {
-      label: { en: "Services", he: "שירותים" },
-      value: { en: "6", he: "6" },
-      note: { en: "Compose topology", he: "טופולוגיית Compose" },
+      label: { en: "Compose entries", he: "רשומות Compose" },
+      value: { en: "8", he: "8" },
+      note: { en: "At audited commit; includes MailDev", he: "בקומיט שנבדק; כולל MailDev" },
     },
     {
       label: { en: "Data models", he: "מודלי נתונים" },
-      value: { en: "20", he: "20" },
-      note: { en: "PostgreSQL, UUID keys", he: "PostgreSQL, מפתחות UUID" },
+      value: { en: "19", he: "19" },
+      note: { en: "SQLAlchemy class declarations", he: "הצהרות מחלקות SQLAlchemy" },
     },
     {
       label: { en: "API routers", he: "ראוטרים ב־API" },
-      value: { en: "14", he: "14" },
-      note: { en: "REST + WebSocket", he: "REST + WebSocket" },
+      value: { en: "15", he: "15" },
+      note: { en: "include_router registrations", he: "הרשמות include_router" },
     },
     {
       label: { en: "Locales", he: "שפות" },
@@ -63,12 +93,12 @@ export const applytide: Project = {
       body: {
         en: [
           "Anyone running a serious job search is operating a pipeline: sourcing, qualification, application, follow-up, interview, decision. It has stages, conversion rates, and a cycle time. It is a process, and people run it in a spreadsheet or in their head.",
-          "The friction is not finding jobs. It is the accounting around them — which version of the CV went where, what you said in the cover letter, when you promised to follow up, and which of forty applications is actually still alive. That work is boring, high-frequency, and exactly what software is for.",
+          "The friction is not finding jobs. It is the accounting around them — which version of the CV went where, what you said in the cover letter, when you promised to follow up, and which applications are actually still alive. That work is boring, high-frequency, and exactly what software is for.",
           "What I got wrong initially: I assumed the painful step was writing applications. It was not. The painful step was capture — getting a posting out of a browser tab and into a structured record before the tab closed. Everything downstream depends on that one moment being frictionless.",
         ],
         he: [
           "כל מי שמנהל חיפוש עבודה רציני מפעיל צינור: איתור, סינון, הגשה, מעקב, ראיון, החלטה. יש לו שלבים, שיעורי המרה, וזמן מחזור. זה תהליך, ואנשים מריצים אותו בגיליון אלקטרוני או בראש.",
-          "החיכוך הוא לא במציאת משרות. הוא בהנהלת החשבונות סביבן — איזו גרסה של קורות החיים הלכה לאן, מה כתבת במכתב המקדים, מתי הבטחת לחזור, ואיזו מתוך ארבעים הגשות עדיין חיה. העבודה הזו משעממת, בתדירות גבוהה, ובדיוק בשביל זה יש תוכנה.",
+          "החיכוך הוא לא במציאת משרות. הוא בהנהלת החשבונות סביבן — איזו גרסה של קורות החיים הלכה לאן, מה כתבת במכתב המקדים, מתי הבטחת לחזור, ואילו הגשות עדיין חיות. העבודה הזו משעממת, בתדירות גבוהה, ובדיוק בשביל זה יש תוכנה.",
           "מה שטעיתי בו בהתחלה: הנחתי שהשלב הכואב הוא כתיבת ההגשות. הוא לא. השלב הכואב היה הקליטה — להוציא משרה מטאב בדפדפן ולהכניס אותה לרשומה מובנית לפני שהטאב נסגר. כל מה שבהמשך תלוי בכך שהרגע הבודד הזה יהיה נטול חיכוך.",
         ],
       },
@@ -83,12 +113,12 @@ export const applytide: Project = {
         en: [
           "Two real constraints shaped almost every decision. The first was cost: any feature calling a language model has an unbounded bill attached to it, and a personal project cannot absorb that. The second was trust: this system holds a user's CV, their employment history, and a list of every company they are quietly talking to. That is a small dataset with a very high blast radius.",
           "So security and cost control were not features to add later — they were framing constraints. That is why the build contains things a side project usually skips: HttpOnly cookie sessions rather than tokens in localStorage, TOTP two-factor, revocable session tracking, per-endpoint rate limits, and a hard daily spending cap on AI calls enforced in Redis.",
-          "Explicitly out of scope: automated applying. It was the most-requested idea and I refused it. Mass-applying is a strategy that fails candidates and annoys employers, and building it would have made the product worse at the thing it was for.",
+          "Explicitly out of scope: automated applying. I excluded it because mass-applying optimises application volume while making the surrounding search process noisier.",
         ],
         he: [
           "שני אילוצים אמיתיים עיצבו כמעט כל החלטה. הראשון היה עלות: לכל פיצ׳ר שקורא למודל שפה מוצמד חשבון בלתי חסום, ופרויקט אישי לא יכול לספוג את זה. השני היה אמון: המערכת הזו מחזיקה את קורות החיים של המשתמש, את היסטוריית ההעסקה שלו, ורשימה של כל חברה שהוא מדבר איתה בשקט. זה מאגר קטן עם רדיוס נזק גבוה מאוד.",
           "לכן אבטחה ובקרת עלויות לא היו פיצ׳רים להוסיף אחר כך — הן היו אילוצי מסגור. בגלל זה הבנייה כוללת דברים שפרויקט צד בדרך כלל מדלג עליהם: סשנים בעוגיות HttpOnly במקום טוקנים ב־localStorage, אימות דו־שלבי מבוסס TOTP, מעקב סשנים ניתן לביטול, הגבלות קצב לכל נקודת קצה, ותקרת הוצאה יומית קשיחה לקריאות בינה מלאכותית שנאכפת ב־Redis.",
-          "מחוץ להיקף במפורש: הגשה אוטומטית. זה היה הרעיון המבוקש ביותר וסירבתי לו. הגשה המונית היא אסטרטגיה שמכשילה מועמדים ומעצבנת מעסיקים, ובנייה שלה הייתה הופכת את המוצר לגרוע יותר בדבר שלשמו הוא נועד.",
+          "מחוץ להיקף במפורש: הגשה אוטומטית. הוצאתי אותה מההיקף משום שהגשה המונית ממטבת את נפח ההגשות ומגבירה את הרעש בתהליך החיפוש.",
         ],
       },
     },
@@ -114,19 +144,19 @@ export const applytide: Project = {
     {
       stage: "build",
       heading: {
-        en: "Six containers, and a defence for each",
-        he: "שישה קונטיינרים, והגנה לכל אחד",
+        en: "Eight Compose entries, counted by definition",
+        he: "שמונה רשומות Compose, לפי הגדרת ספירה",
       },
       body: {
         en: [
-          "The system runs as a Docker Compose topology: Nginx terminating and rate-limiting, a React SPA, a FastAPI backend, a Node email microservice, PostgreSQL, Redis, and a scheduler process for background work.",
-          "The backend is layered rather than flat — an API layer of 14 routers with Pydantic schemas at the boundary, a domain layer holding business logic, a persistence layer of 20 SQLAlchemy models under Alembic migrations, and an infrastructure layer for email, LLM access, security and workers. The point of that separation is that the LLM integration is infrastructure, not business logic; it can be swapped or disabled without touching the domain.",
+          "At the audited public commit, Docker Compose contains eight service entries, including development-only MailDev. The runtime topology also includes Nginx, a React SPA, a FastAPI backend, a Node email service, PostgreSQL, Redis and a scheduler process.",
+          "The backend is layered rather than flat — 15 include_router registrations at the API boundary, a domain layer holding business logic, 19 SQLAlchemy model class declarations under Alembic migrations, and infrastructure for email, LLM access, security and workers. Those are snapshot counts with recorded definitions, not product outcomes.",
           "The hardest problem was extraction: turning an arbitrary job page into structured fields. The naive answer is to send the page to a model. That answer is wrong for reasons covered in the decision log below.",
           "The second hardest was internationalisation. Full Hebrew support means real RTL — not a mirrored stylesheet, but a layout that is correct in both directions, including inputs, charts, and drag-and-drop. Retrofitting that is expensive, which is why it was designed in rather than bolted on.",
         ],
         he: [
-          "המערכת רצה כטופולוגיית Docker Compose: Nginx שמסיים חיבורים ומגביל קצב, SPA ב־React, שרת FastAPI, מיקרו־שירות מיילים ב־Node, PostgreSQL, Redis, ותהליך מתזמן לעבודות רקע.",
-          "השרת בנוי בשכבות ולא שטוח — שכבת API של 14 ראוטרים עם סכמות Pydantic בגבול, שכבת דומיין שמחזיקה את הלוגיקה העסקית, שכבת התמדה של 20 מודלי SQLAlchemy תחת מיגרציות Alembic, ושכבת תשתית למיילים, גישה למודל שפה, אבטחה ועובדי רקע. הנקודה בהפרדה הזו היא שאינטגרציית מודל השפה היא תשתית, לא לוגיקה עסקית; אפשר להחליף אותה או לכבות אותה בלי לגעת בדומיין.",
+          "בקומיט הציבורי שנבדק, Docker Compose מכיל שמונה רשומות שירות, כולל MailDev שמיועד לפיתוח. הטופולוגיה כוללת גם Nginx, אפליקציית React, שרת FastAPI, שירות מיילים ב־Node, PostgreSQL, Redis ותהליך מתזמן.",
+          "השרת בנוי בשכבות — 15 הרשמות include_router בגבול ה־API, שכבת דומיין, 19 הצהרות מחלקות מודל SQLAlchemy תחת Alembic, ותשתית למיילים, מודל שפה, אבטחה ועובדי רקע. אלה ספירות של צילום מצב לפי הגדרה מתועדת, לא תוצאות מוצר.",
           "הבעיה הקשה ביותר הייתה חילוץ: להפוך דף משרה שרירותי לשדות מובנים. התשובה הנאיבית היא לשלוח את הדף למודל. התשובה הזו שגויה מסיבות שמפורטות ביומן ההחלטות למטה.",
           "השנייה בקושי הייתה בינאום. תמיכה מלאה בעברית פירושה RTL אמיתי — לא גיליון סגנונות משוקף, אלא פריסה שנכונה בשני הכיוונים, כולל שדות קלט, גרפים, וגרירה ושחרור. התאמה בדיעבד יקרה, ולכן זה תוכנן פנימה ולא הוברג מבחוץ.",
         ],
@@ -141,29 +171,32 @@ export const applytide: Project = {
       body: {
         en: [
           "Some of this was conventional: Pydantic schemas validating every endpoint boundary, parameterised queries throughout, a health endpoint checking both Postgres and Redis.",
-          "The parts I care more about are the ones that catch failures a test suite would not. LLM usage is logged per call with token counts and cost attributed to a user, against a configurable daily budget. That is not observability theatre — it is the mechanism that makes an AI feature safe to leave running unattended.",
+          "The source logs LLM usage per call with token counts and account attribution against a configurable daily budget. That is a spend-bounding mechanism; without operating evidence, it is not a production-reliability claim.",
           "Session management is testable in the same spirit: a user can list their active sessions and revoke them. The question that validates it is not “does the endpoint return 200”, it is “can a user who lost a laptop actually recover”.",
         ],
         he: [
           "חלק מזה היה שגרתי: סכמות Pydantic שמאמתות כל גבול של נקודת קצה, שאילתות פרמטריות לכל אורך הדרך, נקודת קצה לבדיקת תקינות שבודקת גם את Postgres וגם את Redis.",
-          "החלקים שחשובים לי יותר הם אלה שתופסים כשלים שחבילת טסטים לא הייתה תופסת. שימוש במודל שפה נרשם לכל קריאה עם ספירת טוקנים ועלות המשויכת למשתמש, מול תקציב יומי הניתן להגדרה. זה לא תיאטרון תצפיתיות — זה המנגנון שהופך פיצ׳ר בינה מלאכותית לבטוח להשארה ללא השגחה.",
+          "קוד המקור רושם שימוש במודל שפה לכל קריאה, עם ספירת טוקנים וייחוס לחשבון מול תקציב יומי הניתן להגדרה. זהו מנגנון להגבלת הוצאה; ללא ראיות תפעוליות, זו אינה טענה לאמינות בייצור.",
           "ניהול סשנים ניתן לבדיקה באותה רוח: משתמש יכול לראות את הסשנים הפעילים שלו ולבטל אותם. השאלה שמאמתת את זה היא לא ״האם נקודת הקצה מחזירה 200״, אלא ״האם משתמש שאיבד מחשב נייד באמת יכול להתאושש״.",
         ],
       },
     },
     {
       stage: "field",
-      heading: { en: "Archived on purpose", he: "בארכיון בכוונה" },
+      heading: {
+        en: "What the archive does — and does not — prove",
+        he: "מה הארכיון מוכיח — ומה לא",
+      },
       body: {
         en: [
-          "Applytide is archived, and I would rather say why than quietly leave it looking active.",
-          "It reached the point where it did what it was designed to do, and the remaining work was operational — running infrastructure, absorbing AI costs for other people, and maintaining a security surface that deserves real attention rather than spare evenings. Continuing would have meant committing to operate a product, which is a different decision from building one.",
-          "What it produced instead is the clearest evidence I have of end-to-end system ownership: a real architecture, real security posture, real cost controls, and a documented set of decisions I can still defend.",
+          "The public Applytide repository is archived. There is no live deployment or external-usage result presented here.",
+          "I stopped when continuing would have meant operating infrastructure, funding model usage and maintaining a security surface — a different commitment from proving the product and engineering decisions.",
+          "What the source independently demonstrates is an implemented multi-service architecture, session and budget controls, bilingual UI and a documented set of design decisions. It does not by itself prove production security, reliability or adoption.",
         ],
         he: [
-          "Applytide נמצא בארכיון, ואני מעדיף להגיד למה מאשר להשאיר אותו בשקט נראה פעיל.",
-          "הוא הגיע לנקודה שבה עשה את מה שנועד לעשות, והעבודה שנותרה הייתה תפעולית — להריץ תשתית, לספוג עלויות בינה מלאכותית עבור אנשים אחרים, ולתחזק משטח אבטחה שראוי לתשומת לב אמיתית ולא לערבים פנויים. להמשיך היה אומר להתחייב לתפעל מוצר, וזו החלטה אחרת מלבנות אחד.",
-          "מה שהוא ייצר במקום זה הראיה הברורה ביותר שיש לי לבעלות על מערכת מקצה לקצה: ארכיטקטורה אמיתית, עמדת אבטחה אמיתית, בקרות עלות אמיתיות, ואוסף מתועד של החלטות שאני עדיין יכול להגן עליהן.",
+          "מאגר Applytide הציבורי מסומן כארכיון. לא מוצגים כאן פריסה חיה או תוצאות משימוש חיצוני.",
+          "עצרתי כשהמשך העבודה היה הופך מתיקוף החלטות המוצר וההנדסה לתפעול תשתית, מימון שימוש במודלים ותחזוקת משטח אבטחה.",
+          "קוד המקור מדגים באופן עצמאי ארכיטקטורה מרובת שירותים, בקרות סשנים ותקציב, ממשק דו־לשוני והחלטות עיצוב מתועדות. הוא אינו מוכיח לבדו אבטחה בייצור, אמינות או אימוץ.",
         ],
       },
     },
@@ -213,7 +246,7 @@ export const applytide: Project = {
       {
         id: "api",
         label: "FastAPI",
-        sub: "14 routers · domain layer",
+        sub: "15 registrations · domain layer",
         x: 2,
         y: 1,
         kind: "service",
@@ -249,7 +282,7 @@ export const applytide: Project = {
       {
         id: "pg",
         label: "PostgreSQL 16",
-        sub: "20 models · Alembic",
+        sub: "19 declarations · Alembic",
         x: 3,
         y: 0,
         kind: "store",
@@ -292,12 +325,12 @@ export const applytide: Project = {
         he: "מפל חילוץ תלת־שלבי (JSON-LD ← DOM ← מודל שפה) במקום ניתוח מבוסס מודל בלבד.",
       },
       why: {
-        en: "A large share of job boards already publish valid JobPosting structured data, which is free, instant and exact. Sending those pages to a model would mean paying per job for a worse answer, and models hallucinate confidently on fields like salary where being wrong is costly.",
-        he: "חלק גדול מלוחות המשרות כבר מפרסמים נתונים מובנים תקינים של JobPosting, שהם חינמיים, מיידיים ומדויקים. לשלוח את הדפים האלה למודל פירושו לשלם לכל משרה על תשובה גרועה יותר, ומודלים ממציאים בביטחון בשדות כמו שכר, שבהם טעות עולה ביוקר.",
+        en: "Some job boards publish JobPosting structured data that can be extracted without a model call. When it is present and well formed, it preserves source fields directly; this project did not benchmark its coverage or accuracy across boards. A model remains the least predictable path for fields such as salary, where a confident error is costly.",
+        he: "חלק מלוחות המשרות מפרסמים נתוני JobPosting מובנים שניתן לחלץ בלי קריאה למודל. כשהם קיימים ותקינים, הם משמרים שדות מהמקור ישירות; הפרויקט לא מדד את הכיסוי או הדיוק שלהם בין לוחות. מודל נשאר המסלול הפחות צפוי לשדות כמו שכר, שבהם טעות בטוחה בעצמה יקרה.",
       },
       tradeoff: {
-        en: "Three code paths and three distinct failure modes to maintain instead of one, in exchange for lower cost and higher precision on the majority path.",
-        he: "שלושה מסלולי קוד ושלושה מצבי כשל נפרדים לתחזוקה במקום אחד, בתמורה לעלות נמוכה יותר ודיוק גבוה יותר במסלול הרוב.",
+        en: "Three code paths and three distinct failure modes to maintain instead of one, in exchange for avoiding model cost and extra transformation when structured source data is available. Coverage and precision were not benchmarked.",
+        he: "שלושה מסלולי קוד ושלושה מצבי כשל נפרדים לתחזוקה במקום אחד, בתמורה להימנעות מעלות מודל ומטרנספורמציה נוספת כשנתוני מקור מובנים זמינים. הכיסוי והדיוק לא נמדדו.",
       },
       revisit: {
         en: "If model cost per extraction falls far enough that the accounting stops mattering, or if structured-data coverage across boards collapses.",
@@ -348,8 +381,8 @@ export const applytide: Project = {
       id: "D-04",
       date: "2025",
       title: {
-        en: "Refused automated mass-applying, the most requested feature.",
-        he: "סירבתי להגשה המונית אוטומטית, הפיצ׳ר המבוקש ביותר.",
+        en: "Excluded automated mass-applying from the product scope.",
+        he: "הוצאתי הגשה המונית אוטומטית מהיקף המוצר.",
       },
       why: {
         en: "It optimises the metric the product displays while making the user's actual outcome worse, and it degrades the ecosystem it operates in. A tool for running a search well should not ship a feature that runs it badly at scale.",
@@ -391,7 +424,7 @@ export const applytide: Project = {
       time: 1,
       scope: 1,
       note: {
-        en: "Real conditions: solo build, ongoing cost exposure, and a correctness bar high enough that a wrong salary field is worse than no salary field. That combination points at the cascade.",
+          en: "Real conditions: constrained operating capacity, ongoing cost exposure, and a correctness bar high enough that a wrong salary field is worse than no salary field. That combination points at the cascade.",
         he: "התנאים האמיתיים: בנייה לבד, חשיפה מתמשכת לעלות, ורף נכונות גבוה מספיק כדי ששדה שכר שגוי יהיה גרוע יותר משדה שכר חסר. הצירוף הזה מצביע על המפל.",
       },
     },
@@ -432,16 +465,16 @@ export const applytide: Project = {
         time: 1,
         scope: 1,
         outcome: {
-          en: "The three-stage cascade — JSON-LD, then DOM parsing, then LLM fallback. What I actually built. Free and exact on the majority path, degrading gracefully to paid-and-fuzzy only when it has to.",
-          he: "המפל התלת־שלבי — JSON-LD, אחר כך ניתוח DOM, אחר כך נפילה למודל שפה. מה שבאמת בניתי. חינמי ומדויק במסלול הרוב, מתדרדר בחן למשולם־ומעורפל רק כשהוא חייב.",
+          en: "The three-stage cascade — JSON-LD, then DOM parsing, then LLM fallback. This is the implemented path: it avoids a model call when usable structured data exists. Coverage and extraction accuracy were not benchmarked.",
+          he: "המפל התלת־שלבי — JSON-LD, אחר כך ניתוח DOM, אחר כך נפילה למודל שפה. זהו המסלול שמומש: הוא נמנע מקריאה למודל כשקיימים נתונים מובנים שימושיים. הכיסוי ודיוק החילוץ לא נמדדו.",
         },
       },
       {
         time: 1,
         scope: 2,
         outcome: {
-          en: "Cascade plus per-board adapters for the top sites. Better accuracy, but each adapter is a maintenance liability that breaks silently when a site redesigns.",
-          he: "מפל בתוספת מתאמים ייעודיים לאתרים המובילים. דיוק טוב יותר, אבל כל מתאם הוא התחייבות תחזוקה שנשברת בשקט כשאתר מתעצב מחדש.",
+          en: "Cascade plus per-board adapters for the top sites. This could improve extraction for known layouts, but each adapter is a maintenance liability that breaks silently when a site redesigns.",
+          he: "מפל בתוספת מתאמים ייעודיים לאתרים המובילים. זה יכול לשפר חילוץ בפריסות מוכרות, אבל כל מתאם הוא התחייבות תחזוקה שנשברת בשקט כשאתר מתעצב מחדש.",
         },
       },
       {
@@ -464,21 +497,21 @@ export const applytide: Project = {
         time: 2,
         scope: 2,
         outcome: {
-          en: "Cascade, evaluation harness, and a fine-tuned small model for the fallback tier. Best accuracy per unit cost, and only justifiable at real volume.",
-          he: "מפל, מערך הערכה, ומודל קטן מכוונן לשכבת הנפילה. הדיוק הטוב ביותר ליחידת עלות, ומוצדק רק בנפח אמיתי.",
+          en: "Cascade, evaluation harness, and a fine-tuned small model for the fallback tier. Potentially the strongest accuracy/cost option, and only justifiable after real volume exists.",
+          he: "מפל, מערך הערכה ומודל קטן מכוונן לשכבת הנפילה. אפשרות שעשויה לתת את יחס הדיוק־עלות החזק ביותר, ומוצדקת רק אחרי שיש נפח אמיתי.",
         },
       },
     ],
   },
   rebuild: {
     en: [
-      "Build the evaluation harness for extraction first. I made routing decisions between the three stages on judgement when a labelled corpus of a few hundred pages would have made them measurable.",
-      "Start with one locale and add Hebrew at a defined checkpoint. Designing bidirectional from day one was the right call architecturally, but it taxed every single component while the product still had no users.",
+      "Build the evaluation harness for extraction first. I made routing decisions between the three stages on judgement when a representative labelled corpus would have made them measurable.",
+      "Start with one locale and add Hebrew at a defined checkpoint. Designing bidirectional from day one taxed every component before any external usage was documented.",
       "Cut the admin panel. It was built because it was interesting, and it served one administrator — me. That effort belonged in capture reliability.",
     ],
     he: [
-      "לבנות קודם את מערך ההערכה לחילוץ. קיבלתי החלטות ניתוב בין שלושת השלבים על סמך שיקול דעת, בזמן שקורפוס מתויג של כמה מאות דפים היה הופך אותן למדידות.",
-      "להתחיל בשפה אחת ולהוסיף עברית בנקודת בדיקה מוגדרת. תכנון דו־כיווני מהיום הראשון היה נכון ארכיטקטונית, אבל הוא הטיל מס על כל רכיב ורכיב בזמן שלמוצר עדיין לא היו משתמשים.",
+      "לבנות קודם את מערך ההערכה לחילוץ. קיבלתי החלטות ניתוב בין שלושת השלבים על סמך שיקול דעת, בזמן שקורפוס מתויג ומייצג היה הופך אותן למדידות.",
+      "להתחיל בשפה אחת ולהוסיף עברית בנקודת בדיקה מוגדרת. תכנון דו־כיווני מהיום הראשון הטיל מס על כל רכיב לפני שתועד שימוש חיצוני כלשהו.",
       "לוותר על פאנל הניהול. הוא נבנה כי הוא היה מעניין, והוא שירת מנהל אחד — אותי. המאמץ הזה היה שייך לאמינות הקליטה.",
     ],
   },

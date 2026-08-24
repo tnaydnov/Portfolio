@@ -3,16 +3,16 @@ import type { Locale } from "./i18n";
 export const site = {
   name: { en: "Tomer Naydnov", he: "תומר ניידנוב" },
   role: {
-    en: "Technical product · end-to-end delivery",
-    he: "מוצר טכני · אספקה מקצה לקצה",
+    en: "Technical product builder",
+    he: "בונה מוצר טכני",
   },
   url: "https://tomernaydnov.com",
   description: {
-    en: "I find the need, define the shape, plan the path, build the thing, prove it works, and fix what the field says is wrong. Software Engineering for the build, Industrial Engineering for the system.",
-    he: "אני מוצא את הצורך, מגדיר את הצורה, מתכנן את הדרך, בונה את הדבר, מוכיח שהוא עובד, ומתקן את מה שהשטח אומר שלא בסדר. הנדסת תוכנה לבנייה, הנדסת תעשייה למערכת.",
+    en: "I find the workaround everyone has accepted, trace it to the real problem, and build the fix.",
+    he: "אני מוצא את המעקף שכולם כבר קיבלו, עוקב אחריו עד לבעיה האמיתית, ובונה את התיקון.",
   },
   email: "tnaydnov@gmail.com",
-  location: { en: "Israel · GMT+3", he: "ישראל · GMT+3" },
+  location: { en: "Israel time", he: "שעון ישראל" },
   links: {
     github: "https://github.com/tnaydnov",
     linkedin: "https://www.linkedin.com/in/tomer-naydnov/",
@@ -22,7 +22,6 @@ export const site = {
 
 export const NAV = [
   { key: "work", href: "/work" },
-  { key: "system", href: "/system" },
   { key: "about", href: "/about" },
   { key: "contact", href: "/contact" },
 ] as const;
