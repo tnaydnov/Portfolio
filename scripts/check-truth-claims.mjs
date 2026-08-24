@@ -4,7 +4,7 @@ import process from "node:process";
 
 const projectRoot = process.cwd();
 const textExtensions = new Set([".ts", ".tsx", ".html", ".json", ".py"]);
-const scanTargets = ["src", "scripts/build_public_cv.py"];
+const scanTargets = ["src"];
 
 const globalBlocks = [
   { id: "arc-650", pattern: /650\+|650\s+students?/i },

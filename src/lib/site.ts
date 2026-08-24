@@ -18,6 +18,7 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/tomer-naydnov/",
   },
   cv: "/Tomer Naydnov.pdf",
+  cvFileName: "Tomer Naydnov.pdf",
 } as const;
 
 export const NAV = [

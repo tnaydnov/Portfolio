@@ -90,7 +90,7 @@ export default async function AboutPage({
             {t(site.description, locale)}
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <a href={site.cv} download className="inline-flex min-h-12 items-center bg-signal px-5 text-sm font-semibold text-signal-ink transition-transform hover:-translate-y-0.5">
+            <a href={site.cv} download={site.cvFileName} className="inline-flex min-h-12 items-center bg-signal px-5 text-sm font-semibold text-signal-ink transition-transform hover:-translate-y-0.5">
               {t(ui.common.downloadCv, locale)} ↓
             </a>
             <Link href={href("/contact", locale)} className="inline-flex min-h-12 items-center border border-rule-strong px-5 text-sm hover:border-signal hover:text-signal">

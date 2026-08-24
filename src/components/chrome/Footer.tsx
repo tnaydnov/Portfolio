@@ -64,7 +64,7 @@ export function Footer({ locale }: { locale: Locale }) {
             <a href={site.links.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 w-fit items-center text-sm text-muted hover:text-text">
               LinkedIn ↗
             </a>
-            <a href={site.cv} download className="inline-flex min-h-11 w-fit items-center text-sm text-muted hover:text-text">
+            <a href={site.cv} download={site.cvFileName} className="inline-flex min-h-11 w-fit items-center text-sm text-muted hover:text-text">
               {t(ui.common.cvPdf, locale)} ↓
             </a>
           </div>

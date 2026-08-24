@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { CSSProperties, memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useMediaQuery, useReducedMotion } from "@/components/motion/hooks";
 import { t, type Locale } from "@/lib/i18n";
 import { href } from "@/lib/site";
@@ -146,57 +146,6 @@ const localized = {
     en: "An illustrative reconstruction of an event product. Owner-provided records describe it as formerly live and now discontinued; public source verifies the implemented surface, not outcomes.",
     he: "שחזור המחשה של מוצר אירועים. מסמכים שסופקו על ידי הבעלים מתארים אותו כמי שהיה פעיל וכיום הופסק; קוד המקור הציבורי מאמת את הממשק שמומש, לא תוצאות.",
   },
-  evidenceLabel: {
-    en: "SELECTED WORK / the evidence beneath the film",
-    he: "עבודות נבחרות / הראיות שמתחת לחוויה",
-  },
-  evidenceTitle: {
-    en: "Three discoveries. One recurring instinct.",
-    he: "שלוש תגליות. אינסטינקט אחד שחוזר.",
-  },
-  evidenceIntro: {
-    en: "Start with the idea. Open a case when you want the role, decisions, architecture and evidence underneath it.",
-    he: "מתחילים ברעיון. פותחים מקרה בוחן כשרוצים לראות את התפקיד, ההחלטות, הארכיטקטורה והראיות שמתחתיו.",
-  },
-  arcCardTitle: {
-    en: "Teaching material kept being rebuilt.",
-    he: "חומרי הוראה נבנו שוב ושוב.",
-  },
-  arcCardBody: {
-    en: "I traced the workflow and now co-develop Arc, a platform built to connect content, classrooms, student work and feedback. Its public portal is online.",
-    he: "חקרתי את התהליך וכיום מפתח במשותף את Arc, פלטפורמה שנבנתה כדי לחבר תוכן, כיתות, עבודת תלמידים ומשוב. הפורטל הציבורי שלה זמין.",
-  },
-  ownerDescribedCase: {
-    en: "Explore Arc →",
-    he: "למקרה הבוחן של Arc ←",
-  },
-  applytideCardTitle: {
-    en: "The job search had become its own operations system.",
-    he: "חיפוש העבודה הפך למערכת תפעולית בפני עצמה.",
-  },
-  applytideCardBody: {
-    en: "The build connects capture, pipeline, documents, follow-ups and a bounded AI layer. The complete public source is archived and inspectable.",
-    he: "הבנייה מחברת קליטה, צינור מועמדויות, מסמכים, מעקבים ושכבת AI מוגבלת. קוד המקור הציבורי המלא נמצא בארכיון וניתן לבדיקה.",
-  },
-  sourceBackedCase: { en: "Explore Applytide →", he: "למקרה הבוחן של Applytide ←" },
-  eventaCardTitle: {
-    en: "People can share a room without sharing context.",
-    he: "אנשים יכולים לחלוק חדר בלי לחלוק הקשר.",
-  },
-  eventaCardBody: {
-    en: "An event-scoped system for onboarding, matching, messaging and operations. Owner-provided records describe it as formerly live and now discontinued; its source snapshot remains public.",
-    he: "מערכת תחומה לאירוע עבור כניסה, התאמה, הודעות ותפעול. מסמכים שסופקו על ידי הבעלים מתארים אותה כמי שהייתה פעילה וכיום הופסקה; צילום מצב של קוד המקור נשאר ציבורי.",
-  },
-  sourceSnapshotCase: {
-    en: "Explore Eventa →",
-    he: "למקרה הבוחן של Eventa ←",
-  },
-  seeAllWork: { en: "See all work", he: "לכל העבודות" },
-  meetWithoutEffects: {
-    en: "Meet Tomer without the effects",
-    he: "הכירו את תומר בלי האפקטים",
-  },
-  startConversation: { en: "Start a conversation", he: "התחילו שיחה" },
   experienceAria: {
     en: "The Question Behind the Question",
     he: "השאלה שמאחורי השאלה",
@@ -622,7 +571,7 @@ function ProgressControls({
           <button type="button" onClick={() => setMotionReduced(!motionReduced)} aria-pressed={motionReduced}>
             {t(localized.motion, locale)} {t(motionReduced ? localized.reduced : localized.full, locale)}
           </button>
-          <a href="#selected-work">{t(copy.skip, locale)}</a>
+          <Link href={href("/work", locale)}>{t(copy.skip, locale)}</Link>
         </div>
       </div>
     </div>
@@ -639,7 +588,7 @@ function ReducedExperience({ locale, enableMotion }: { locale: Locale; enableMot
         <p>{t(copy.sub, locale)}</p>
         <div className={styles.reducedActions}>
           <button type="button" onClick={enableMotion}>{t(localized.enableMotion, locale)}</button>
-          <a href="#selected-work">{t(copy.skip, locale)}</a>
+          <Link href={href("/work", locale)}>{t(copy.skip, locale)}</Link>
         </div>
       </div>
       <div className={styles.reducedGrid}>
@@ -651,46 +600,6 @@ function ReducedExperience({ locale, enableMotion }: { locale: Locale; enableMot
     </section>
   );
 }
-
-const ProjectEvidence = memo(function ProjectEvidence({ locale }: { locale: Locale }) {
-  return (
-    <section id="selected-work" className={styles.evidence} tabIndex={-1}>
-      <div className={styles.evidenceHead}>
-        <p>{t(localized.evidenceLabel, locale)}</p>
-        <h2>{t(localized.evidenceTitle, locale)}</h2>
-        <p>{t(localized.evidenceIntro, locale)}</p>
-      </div>
-      <div className={styles.projectGrid}>
-        <Link href={href("/work/arc", locale)} className={styles.projectCard}>
-          <span>01 / ARC</span>
-          <h3>{t(localized.arcCardTitle, locale)}</h3>
-          <p>{t(localized.arcCardBody, locale)}</p>
-          <div className={styles.miniFiles} aria-hidden><i /><i /><i /><i /></div>
-          <b>{t(localized.ownerDescribedCase, locale)}</b>
-        </Link>
-        <Link href={href("/work/applytide", locale)} className={styles.projectCard}>
-          <span>02 / APPLYTIDE</span>
-          <h3>{t(localized.applytideCardTitle, locale)}</h3>
-          <p>{t(localized.applytideCardBody, locale)}</p>
-          <div className={styles.miniPipeline} aria-hidden><i /><i /><i /></div>
-          <b>{t(localized.sourceBackedCase, locale)}</b>
-        </Link>
-        <Link href={href("/work/eventa", locale)} className={styles.projectCard}>
-          <span>03 / EVENTA</span>
-          <h3>{t(localized.eventaCardTitle, locale)}</h3>
-          <p>{t(localized.eventaCardBody, locale)}</p>
-          <div className={styles.miniWorlds} aria-hidden><i /><i /><i /></div>
-          <b>{t(localized.sourceSnapshotCase, locale)}</b>
-        </Link>
-      </div>
-      <div className={styles.evidenceActions}>
-        <Link href={href("/work", locale)}>{t(localized.seeAllWork, locale)}</Link>
-        <Link href={href("/about", locale)}>{t(localized.meetWithoutEffects, locale)}</Link>
-        <Link href={href("/contact", locale)}>{t(localized.startConversation, locale)}</Link>
-      </div>
-    </section>
-  );
-});
 
 export function CinematicHome({ locale }: { locale: Locale }) {
   const systemReduced = useReducedMotion();
@@ -808,9 +717,7 @@ export function CinematicHome({ locale }: { locale: Locale }) {
           ? "reduced-arc"
           : at < 0.7
             ? "reduced-applytide"
-            : at < 0.84
-              ? "reduced-eventa"
-              : "selected-work";
+            : "reduced-eventa";
       const destination = document.getElementById(target);
       destination?.scrollIntoView({ behavior: "auto", block: "start" });
       if (shouldRestoreFocus) destination?.focus({ preventScroll: true });
@@ -836,12 +743,7 @@ export function CinematicHome({ locale }: { locale: Locale }) {
   }, [jump, reduced]);
 
   if (reduced) {
-    return (
-      <>
-        <ReducedExperience locale={locale} enableMotion={() => setReduced(false)} />
-        <ProjectEvidence locale={locale} />
-      </>
-    );
+    return <ReducedExperience locale={locale} enableMotion={() => setReduced(false)} />;
   }
 
   // Identity is the first frame, not a reveal the visitor must earn. Hold it
@@ -851,7 +753,6 @@ export function CinematicHome({ locale }: { locale: Locale }) {
   const returnOpacity = opacityWindow(progress, 0.91, 1, 0.028);
 
   return (
-    <>
       <section
         ref={root}
         tabIndex={-1}
@@ -965,7 +866,5 @@ export function CinematicHome({ locale }: { locale: Locale }) {
           />
         </div>
       </section>
-      <ProjectEvidence locale={locale} />
-    </>
   );
 }

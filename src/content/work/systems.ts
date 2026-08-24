@@ -214,7 +214,7 @@ export const tradingSystem: Project = {
       he: "מאגר Java/Spring בארכיון עם דומיין המסחר, שכבות האבטחה ומבנה משמעותי של בדיקות אוטומטיות.",
     },
   },
-  tier: "system",
+  tier: "rep",
   stages: ["frame", "plan", "build"],
   domain: ["platform"],
   role: { en: "Contributor on a large team", he: "תורם בצוות גדול" },

@@ -6,7 +6,7 @@ import { ArchitectureGraphLazy } from "@/components/case/ArchitectureGraphLazy";
 import { DecisionLog, MetricBlock, RebuildList } from "@/components/case/Blocks";
 import { ConstraintDial } from "@/components/case/ConstraintDial";
 import { SectionMark } from "@/components/chrome/SectionMark";
-import { CASE_STUDIES, getProject } from "@/content/work";
+import { CASE_STUDIES } from "@/content/work";
 import { LOCALES, isLocale, t, type Locale } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/metadata";
 import { href } from "@/lib/site";
@@ -20,13 +20,15 @@ export function generateStaticParams() {
   );
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const project = getProject(slug);
+  const project = CASE_STUDIES.find((candidate) => candidate.slug === slug);
   if (!project || !isLocale(locale)) return {};
   return pageMetadata({
     locale,
@@ -44,8 +46,8 @@ export default async function CaseStudyPage({
   const { locale: raw, slug } = await params;
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
-  const project = getProject(slug);
-  if (!project || project.tier === "rep" || !project.snapshot) notFound();
+  const project = CASE_STUDIES.find((candidate) => candidate.slug === slug);
+  if (!project || !project.snapshot) notFound();
 
   const index = CASE_STUDIES.findIndex((candidate) => candidate.slug === project.slug);
   const next = CASE_STUDIES[(index + 1) % CASE_STUDIES.length];

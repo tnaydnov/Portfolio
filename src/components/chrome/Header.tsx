@@ -120,8 +120,7 @@ export function Header({ locale }: { locale: Locale }) {
           })}
           <a
             href={site.cv}
-            target="_blank"
-            rel="noopener noreferrer"
+            download={site.cvFileName}
             className="label flex min-h-11 items-center px-3 transition-colors hover:text-text"
           >
             {t(ui.common.cvPdf, locale)}
@@ -198,8 +197,7 @@ export function Header({ locale }: { locale: Locale }) {
             })}
             <a
               href={site.cv}
-              target="_blank"
-              rel="noopener noreferrer"
+              download={site.cvFileName}
               className="group flex min-h-16 items-center justify-between border-b border-rule font-display text-[clamp(1.7rem,8vw,2.6rem)] tracking-tight"
             >
               {t(ui.common.cvPdf, locale)}

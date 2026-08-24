@@ -65,7 +65,7 @@ export default async function ContactPage({
               : "A role, a difficult problem, an interesting product, or simply a good question—just a few lines are enough."}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href={site.cv} download className="inline-flex min-h-12 items-center bg-signal px-5 text-sm font-semibold text-signal-ink">
+            <a href={site.cv} download={site.cvFileName} className="inline-flex min-h-12 items-center bg-signal px-5 text-sm font-semibold text-signal-ink">
               {t(ui.common.downloadCv, locale)} ↓
             </a>
             <Link href={href("/work", locale)} className="inline-flex min-h-12 items-center border border-rule-strong px-5 text-sm hover:border-signal hover:text-signal">
