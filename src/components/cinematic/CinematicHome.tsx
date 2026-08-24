@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useMediaQuery, useReducedMotion } from "@/components/motion/hooks";
 import { t, type Locale } from "@/lib/i18n";
 import { href } from "@/lib/site";
@@ -14,192 +14,105 @@ const CinematicWorld = dynamic(
   { ssr: false, loading: () => null },
 );
 
-type Copy = {
-  role: { en: string; he: string };
-  thesis: { en: string; he: string };
-  sub: { en: string; he: string };
-  begin: { en: string; he: string };
-  skip: { en: string; he: string };
-  sourceNote: { en: string; he: string };
-};
-
-const copy: Copy = {
+const copy = {
   role: { en: "Technical product builder", he: "בונה מוצר טכני" },
   thesis: {
     en: "I find the workaround everyone has accepted, trace it to the real problem, and build the fix.",
-    he: "אני מוצא את העקיפה שכולם כבר קיבלו, עוקב אחריה עד לבעיה האמיתית — ובונה את התיקון.",
+    he: "אני מוצא את המעקף שכולם כבר התרגלו אליו, עוקב אחריו עד לבעיה האמיתית — ובונה את התיקון.",
   },
   sub: {
-    en: "The artifact is real. The physics are not.",
-    he: "הארטיפקט אמיתי. הפיזיקה לא.",
+    en: "The request is small. The system underneath isn’t.",
+    he: "הבקשה קטנה. המערכת שמתחתיה — לא.",
   },
-  begin: { en: "Scroll to question the obvious", he: "גללו כדי לשאול על המובן מאליו" },
-  skip: { en: "Skip cinematic", he: "דלגו על החוויה" },
-  sourceNote: {
-    en: "Source-derived interface · fictional private data",
-    he: "ממשק מבוסס־מקור · מידע פרטי בדיוני",
+  begin: { en: "Scroll to follow the request", he: "גללו כדי לעקוב אחרי הבקשה" },
+  skip: { en: "Skip to the work", he: "דלגו לעבודות" },
+  enter: { en: "Enter the story", he: "כניסה לסיפור" },
+  request: { en: "Can you add another button?", he: "אפשר להוסיף עוד כפתור?" },
+  reply: { en: "Maybe. What needs to happen?", he: "אולי. מה צריך לקרות?" },
+  requestLabel: { en: "REQUEST", he: "בקשה" },
+  tomerLabel: { en: "TOMER", he: "תומר" },
+  experience: {
+    en: "A request walks into Tomer’s systems workshop",
+    he: "בקשה נכנסת לסדנת המערכות של תומר",
   },
-};
-
-const localized = {
-  chapterQuestion: { en: "Question", he: "שאלה" },
-  chapterArc: { en: "Arc", he: "Arc" },
+  chapters: { en: "Story chapters", he: "פרקי הסיפור" },
+  chapterRequest: { en: "Request", he: "בקשה" },
+  chapterTrace: { en: "Trace", he: "מעקב" },
   chapterListen: { en: "Listen", he: "הקשבה" },
-  chapterApplytide: { en: "Applytide", he: "Applytide" },
-  chapterEventa: { en: "Eventa", he: "Eventa" },
-  chapterCorrect: { en: "Correct", he: "תיקון" },
+  chapterTest: { en: "Test", he: "ניסוי" },
+  chapterReframe: { en: "Reframe", he: "מסגור מחדש" },
   chapterReturn: { en: "Return", he: "חזרה" },
-  teachingExample: { en: "illustrative teaching example", he: "דוגמת הוראה להמחשה" },
-  arcReconstruction: { en: "ARC / reconstructed workflow", he: "ARC / תהליך עבודה משוחזר" },
-  aligned: { en: "aligned", he: "מיושר" },
-  openArc: { en: "Open the Arc case →", he: "למקרה הבוחן של Arc ←" },
-  reconstructedBrowser: {
-    en: "Reconstructed job-search browser",
-    he: "דפדפן חיפוש עבודה משוחזר",
+  loopLabel: { en: "UNDER THE REQUEST", he: "מתחת לבקשה" },
+  loopTitle: { en: "Copy. Search. Ask. Wait. Repeat.", he: "להעתיק. לחפש. לשאול. לחכות. שוב." },
+  perspectiveLabel: { en: "THREE PEOPLE / ONE INSTRUCTION", he: "שלושה אנשים / הנחיה אחת" },
+  perspective: { en: "Same words. Different understanding.", he: "אותן מילים. הבנה שונה." },
+  listenLabel: { en: "LISTEN", he: "להקשיב" },
+  listen: { en: "That hesitation is data.", he: "ההיסוס הזה הוא מידע." },
+  testLabel: { en: "THE LITERAL ANSWER", he: "התשובה המילולית" },
+  test: { en: "One button. Then too many.", he: "כפתור אחד. ואז יותר מדי." },
+  secondRequest: { en: "So… another button?", he: "אז… עוד כפתור?" },
+  secondReply: { en: "Still no.", he: "עדיין לא." },
+  reframeLabel: { en: "REFRAME", he: "מסגור מחדש" },
+  reframe: {
+    en: "The request was real. The requested solution wasn’t.",
+    he: "הבקשה הייתה אמיתית. הפתרון שהתבקש — לא.",
   },
-  inspectApplytide: { en: "Inspect Applytide →", he: "למקרה הבוחן של Applytide ←" },
-  eventaScenario: {
-    en: "EVENTA / illustrative product scenario",
-    he: "EVENTA / תרחיש מוצר להמחשה",
-  },
-  presenceNotPortraits: { en: "presence, not portraits", he: "נוכחות, לא דיוקנאות" },
-  presenceA: { en: "Presence A", he: "נוכחות א׳" },
-  presenceB: { en: "Presence B", he: "נוכחות ב׳" },
-  teaching: { en: "teaching", he: "הוראה" },
-  systems: { en: "systems", he: "מערכות" },
-  making: { en: "making", he: "יצירה" },
-  events: { en: "events", he: "אירועים" },
-  product: { en: "product", he: "מוצר" },
-  education: { en: "education", he: "חינוך" },
-  detailVisible: {
-    en: "one relevant detail becomes visible",
-    he: "פרט רלוונטי אחד נעשה גלוי",
-  },
-  eventaQuestion: {
-    en: "“You build tools for people who teach?”",
-    he: "״אתם בונים כלים לאנשים שמלמדים?״",
-  },
-  eventaProvenance: {
-    en: "Illustrative scenario · fictional profile data",
-    he: "תרחיש להמחשה · נתוני פרופיל בדיוניים",
-  },
-  inspectEventa: { en: "Inspect Eventa →", he: "למקרה הבוחן של Eventa ←" },
-  systemAnswers: { en: "the system answers back", he: "המערכת עונה בחזרה" },
-  notActuallyProblem: {
-    en: "No. That is not actually the problem.",
-    he: "לא. זאת בעצם לא הבעיה.",
-  },
-  requestedFeature: {
-    en: "- Build the requested feature.",
-    he: "- לבנות את הפיצ׳ר שהתבקש.",
-  },
-  necessaryRequest: {
-    en: "+ Find what made the request necessary.",
-    he: "+ למצוא מה הפך את הבקשה לנחוצה.",
-  },
-  eventaTiming: { en: "EVENTA / timing", he: "EVENTA / תזמון" },
-  applytidePath: { en: "APPLYTIDE / path", he: "APPLYTIDE / מסלול" },
-  arcStructure: { en: "ARC / structure", he: "ARC / מבנה" },
-  openingExplanation: { en: "OPENING / explanation", he: "פתיחה / הסבר" },
-  chaptersAria: { en: "Cinematic chapters", he: "פרקי החוויה הקולנועית" },
+  realityLabel: { en: "REALITY EDITS THE SOLUTION", he: "המציאות עורכת את הפתרון" },
+  reality: { en: "One last hesitation. One last correction.", he: "עוד היסוס אחד. עוד תיקון אחד." },
+  resolvedLabel: { en: "THE REQUEST, REWRITTEN", he: "הבקשה, בניסוח מחדש" },
+  resolved: { en: "Help people understand what happens next.", he: "לעזור לאנשים להבין מה הצעד הבא." },
+  resolution: { en: "The question changed. So did the system.", he: "השאלה השתנתה. גם המערכת." },
+  ctaLead: { en: "See what this looks like in real work.", he: "לראות איך זה נראה בעבודה אמיתית." },
   sound: { en: "Sound", he: "סאונד" },
-  on: { en: "on", he: "פעיל" },
-  off: { en: "off", he: "כבוי" },
+  on: { en: "On", he: "פעיל" },
+  off: { en: "Off", he: "כבוי" },
   quality: { en: "Quality", he: "איכות" },
-  qualityEssential: { en: "essential", he: "בסיסית" },
-  qualityBalanced: { en: "balanced", he: "מאוזנת" },
-  qualityPremium: { en: "premium", he: "מרבית" },
-  motion: { en: "Motion", he: "תנועה" },
-  reduced: { en: "reduced", he: "מופחתת" },
-  full: { en: "full", he: "מלאה" },
-  enableMotion: { en: "Enable cinematic motion", he: "הפעילו תנועה קולנועית" },
-  reducedTeachingLabel: { en: "01 / Teaching", he: "01 / הוראה" },
-  hiddenAssumption: { en: "The hidden assumption", he: "ההנחה הסמויה" },
-  teachingSummary: {
-    en: "returns text. The explanation changes before the student is blamed.",
-    he: "מחזירה טקסט. משנים את ההסבר לפני שמאשימים את התלמיד.",
+  qualityEssential: { en: "Essential", he: "בסיסית" },
+  qualityBalanced: { en: "Balanced", he: "מאוזנת" },
+  qualityPremium: { en: "Premium", he: "מרבית" },
+  reduceMotion: { en: "Reduce motion", he: "הפחתת תנועה" },
+  enableMotion: { en: "Enable cinematic motion", he: "הפעלת תנועה קולנועית" },
+  reducedTitle: { en: "A request arrives in the wrong shape.", he: "בקשה מגיעה בצורה הלא נכונה." },
+  reducedBody: {
+    en: "Tomer does not begin with the requested feature. He begins by asking what needs to happen, then follows the workaround to the system underneath.",
+    he: "תומר לא מתחיל מהפיצ׳ר שהתבקש. הוא מתחיל בשאלה מה צריך לקרות, ואז עוקב אחרי המעקף אל המערכת שמתחתיו.",
   },
-  reducedArcLabel: { en: "02 / Arc", he: "02 / Arc" },
-  duplicateToStructure: {
-    en: "Duplicated work becomes structure",
-    he: "עבודה כפולה הופכת למבנה",
+  reducedTrace: {
+    en: "The request opens into a loop of copying, searching, asking, waiting and repeating.",
+    he: "הבקשה נפתחת ללולאה של העתקה, חיפוש, שאלה, המתנה וחזרה.",
   },
-  arcSummary: {
-    en: "A source-grounded reconstruction of the content → classroom → work → feedback loop. Private operational data stays private.",
-    he: "שחזור מבוסס־מקור של הלולאה תוכן ← כיתה ← עבודה ← משוב. נתונים תפעוליים פרטיים נשארים פרטיים.",
+  reducedListen: {
+    en: "Rather than repeat the explanation, Tomer watches where another person hesitates.",
+    he: "במקום לחזור על אותו הסבר, תומר מתבונן ברגע שבו אדם אחר מהסס.",
   },
-  reducedApplytideLabel: { en: "03 / Applytide", he: "03 / Applytide" },
-  browserProblemSpace: {
-    en: "A browser becomes the problem space",
-    he: "הדפדפן הופך למרחב הבעיה",
+  reducedTest: {
+    en: "The requested button is built, tested and allowed to fail. It multiplies the problem.",
+    he: "הכפתור שהתבקש נבנה, נבדק ומקבל רשות להיכשל. הוא מכפיל את הבעיה.",
   },
-  applytideSummary: {
-    en: "A source-derived interface rebuilt with fictional applications: capture, pipeline, follow-up and context in one place.",
-    he: "ממשק המבוסס על קוד המקור ונבנה מחדש עם מועמדויות בדיוניות: קליטה, צינור, מעקב והקשר במקום אחד.",
+  reducedReframe: {
+    en: "The clutter is removed, the path is simplified, and real use gets the final word.",
+    he: "העומס מוסר, המסלול מפושט, והשימוש האמיתי מקבל את המילה האחרונה.",
   },
-  reducedEventaLabel: { en: "04 / Eventa", he: "04 / Eventa" },
-  informationVisible: {
-    en: "Information changes what becomes visible",
-    he: "מידע משנה את מה שנעשה גלוי",
-  },
-  eventaSummary: {
-    en: "An illustrative reconstruction of an event product. Owner-provided records describe it as formerly live and now discontinued; public source verifies the implemented surface, not outcomes.",
-    he: "שחזור המחשה של מוצר אירועים. מסמכים שסופקו על ידי הבעלים מתארים אותו כמי שהיה פעיל וכיום הופסק; קוד המקור הציבורי מאמת את הממשק שמומש, לא תוצאות.",
-  },
-  experienceAria: {
-    en: "The Question Behind the Question",
-    he: "השאלה שמאחורי השאלה",
-  },
-  semanticTeaching: {
-    en: "A teaching example exposes a hidden assumption.",
-    he: "דוגמת הוראה חושפת הנחה סמויה.",
-  },
-  semanticArc: {
-    en: "Reconstructed instructor documents reorganize into Arc.",
-    he: "מסמכי מדריכים משוחזרים מסתדרים מחדש והופכים ל־Arc.",
-  },
-  semanticApplytide: {
-    en: "A source-derived Applytide interface becomes a field of browser tabs.",
-    he: "ממשק Applytide המבוסס על קוד המקור הופך לשדה של לשוניות דפדפן.",
-  },
-  semanticEventa: {
-    en: "An illustrative Eventa scenario changes what two presences can perceive.",
-    he: "תרחיש Eventa להמחשה משנה את מה ששתי נוכחויות יכולות לתפוס.",
-  },
-  semanticCorrection: {
-    en: "One corrected assumption recomputes the earlier systems.",
-    he: "תיקון של הנחה אחת מחשב מחדש את המערכות הקודמות.",
-  },
-  wait: { en: "Wait.", he: "רגע." },
-  whyThisWay: { en: "Why are we doing it this way?", he: "למה אנחנו עושים את זה ככה?" },
-  workaroundEvidence: {
-    en: "The workaround was the evidence.",
-    he: "הפתרון העוקף היה הראיה.",
-  },
-  listen: { en: "LISTEN", he: "להקשיב" },
-  brokenSentence: {
-    en: "The sentence that broke was not the student’s.",
-    he: "המשפט שנשבר לא היה של התלמיד.",
-  },
-  explanationChanges: {
-    en: "So the explanation—not the person—changes.",
-    he: "לכן ההסבר — לא האדם — משתנה.",
-  },
-  browserWorkaround: {
-    en: "Then the browser became the workaround.",
-    he: "ואז הדפדפן הפך לפתרון העוקף.",
-  },
-  hiddenPerson: {
-    en: "Sometimes the system hides another person.",
-    he: "לפעמים המערכת מסתירה אדם אחר.",
-  },
-  changedSystem: {
-    en: "The question changed. So did the system.",
-    he: "השאלה השתנתה. גם המערכת.",
-  },
-  viewWorkNow: { en: "View selected work", he: "לצפייה בעבודות" },
-  enterExperience: { en: "Enter the experience", he: "כניסה לחוויה" },
+  viewWork: { en: "View the work →", he: "לצפייה בעבודות ←" },
 } satisfies Record<string, { en: string; he: string }>;
+
+const CHAPTERS = [
+  { id: "request", at: 0, label: copy.chapterRequest },
+  { id: "trace", at: 0.275, label: copy.chapterTrace },
+  { id: "listen", at: 0.42, label: copy.chapterListen },
+  { id: "test", at: 0.475, label: copy.chapterTest },
+  { id: "reframe", at: 0.655, label: copy.chapterReframe },
+  { id: "return", at: 0.915, label: copy.chapterReturn },
+] as const;
+
+const STABLE_PROGRESS: Record<string, number> = {
+  request: 0.13,
+  trace: 0.315,
+  listen: 0.445,
+  test: 0.56,
+  reframe: 0.775,
+  return: 0.975,
+};
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 const range = (value: number, start: number, end: number) =>
@@ -209,34 +122,18 @@ const opacityWindow = (value: number, start: number, end: number, feather = 0.03
   ease(range(value, start, start + feather)) *
   (1 - ease(range(value, end - feather, end)));
 
-const CHAPTERS = [
-  { id: "question", at: 0, label: localized.chapterQuestion },
-  { id: "arc", at: 0.2, label: localized.chapterArc },
-  { id: "pause", at: 0.43, label: localized.chapterListen },
-  { id: "applytide", at: 0.49, label: localized.chapterApplytide },
-  { id: "eventa", at: 0.7, label: localized.chapterEventa },
-  { id: "correction", at: 0.84, label: localized.chapterCorrect },
-  { id: "return", at: 0.93, label: localized.chapterReturn },
-] as const;
-
-const STABLE_PROGRESS: Record<string, number> = {
-  question: 0,
-  arc: 0.36,
-  pause: 0.46,
-  applytide: 0.57,
-  eventa: 0.79,
-  correction: 0.89,
-  return: 0.965,
-};
-
 function useStoredQuality() {
   const [quality, setQuality] = useState<CinematicQuality>("balanced");
 
   useEffect(() => {
-    const stored = window.localStorage.getItem("tomer-cinematic-quality");
-    if (stored === "essential" || stored === "balanced" || stored === "premium") {
-      setQuality(stored);
-      return;
+    try {
+      const stored = window.localStorage.getItem("tomer-cinematic-quality");
+      if (stored === "essential" || stored === "balanced" || stored === "premium") {
+        setQuality(stored);
+        return;
+      }
+    } catch {
+      // A blocked storage API must not block the experience.
     }
 
     const device = navigator as Navigator & {
@@ -251,351 +148,148 @@ function useStoredQuality() {
 
   const update = useCallback((next: CinematicQuality) => {
     setQuality(next);
-    window.localStorage.setItem("tomer-cinematic-quality", next);
+    try {
+      window.localStorage.setItem("tomer-cinematic-quality", next);
+    } catch {
+      // Keep the in-memory choice when storage is unavailable.
+    }
   }, []);
 
   return [quality, update] as const;
 }
 
-function useProceduralSound(enabled: boolean, chapter: string) {
+function useProceduralSound(chapter: string) {
   const audio = useRef<AudioContext | null>(null);
+  const lastCue = useRef(0);
+  const [enabled, setEnabled] = useState(false);
 
-  useEffect(() => {
-    if (!enabled) {
+  const toggle = useCallback(() => {
+    if (enabled) {
       void audio.current?.close().catch(() => undefined);
       audio.current = null;
+      setEnabled(false);
       return;
     }
 
     const AudioCtor = window.AudioContext;
     if (!AudioCtor) return;
-    let context: AudioContext;
     try {
-      context = new AudioCtor();
+      const context = new AudioCtor();
+      audio.current = context;
+      if (context.state === "suspended") void context.resume().catch(() => undefined);
+      setEnabled(true);
     } catch {
-      return;
+      setEnabled(false);
     }
-    audio.current = context;
-    if (context.state === "suspended") void context.resume().catch(() => undefined);
-
-    return () => {
-      void context.close().catch(() => undefined);
-      if (audio.current === context) audio.current = null;
-    };
   }, [enabled]);
 
   useEffect(() => {
     const context = audio.current;
     if (!enabled || !context) return;
     try {
-      const now = context.currentTime;
+      const wallTime = performance.now();
+      if (wallTime - lastCue.current < 110) return;
+      lastCue.current = wallTime;
       const oscillator = context.createOscillator();
       const gain = context.createGain();
       const frequencies: Record<string, number> = {
-        question: 174,
-        arc: 116,
-        pause: 82,
-        applytide: 146,
-        eventa: 196,
-        correction: 98,
+        request: 220,
+        trace: 92,
+        listen: 72,
+        test: 138,
+        reframe: 104,
         return: 174,
       };
-      oscillator.type = chapter === "eventa" ? "sine" : "triangle";
+      const now = context.currentTime;
+      oscillator.type = chapter === "request" || chapter === "return" ? "sine" : "triangle";
       oscillator.frequency.setValueAtTime(frequencies[chapter] ?? 130, now);
       gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(0.045, now + 0.018);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+      gain.gain.exponentialRampToValueAtTime(0.035, now + 0.016);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.24);
       oscillator.connect(gain).connect(context.destination);
       oscillator.start(now);
-      oscillator.stop(now + 0.3);
+      oscillator.stop(now + 0.26);
     } catch {
-      // Audio is an optional layer; the visual and semantic experience must continue.
+      // Sound is optional and never carries unique meaning.
     }
   }, [chapter, enabled]);
+
+  useEffect(() => {
+    const onVisibility = () => {
+      const context = audio.current;
+      if (!context) return;
+      if (document.hidden) void context.suspend().catch(() => undefined);
+      else if (enabled) void context.resume().catch(() => undefined);
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, [enabled]);
+
+  useEffect(() => () => {
+    void audio.current?.close().catch(() => undefined);
+    audio.current = null;
+  }, []);
+
+  return { enabled, toggle };
 }
 
-function TeachingSurface({ progress, locale }: { progress: number; locale: Locale }) {
-  const error = progress >= 0.03 && progress < 0.078;
-  const corrected = progress >= 0.078;
-  const depth = ease(range(progress, 0.105, 0.205));
-
-  return (
-    <div
-      className={styles.editor}
-      style={
-        {
-          "--editor-y": `${-18 * depth}vh`,
-          "--editor-z": `${250 * depth}px`,
-          "--editor-rx": `${17 * depth}deg`,
-          "--editor-scale": 1 - depth * 0.14,
-          opacity: opacityWindow(progress, 0.008, 0.22, 0.045),
-        } as CSSProperties
-      }
-    >
-      <div className={styles.windowBar}>
-        <span className={styles.windowDots} aria-hidden>● ● ●</span>
-        <span>conditions.py</span>
-        <span className={styles.reconstruction}>{t(localized.teachingExample, locale)}</span>
-      </div>
-      <pre className={styles.code} dir="ltr">
-        <code>
-          <span><i>01</i> age = {corrected && <b className={styles.insert}>int(</b>}input(<em>&quot;Enter age: &quot;</em>){corrected && <b className={styles.insert}>)</b>}</span>
-          <span><i>02</i> if age &gt;= <strong>16</strong>:</span>
-          <span><i>03</i>     print(<em>&quot;Allowed&quot;</em>)</span>
-          <span><i>04</i> else:</span>
-          <span><i>05</i>     print(<em>&quot;Too young&quot;</em>)</span>
-        </code>
-      </pre>
-      <div className={`${styles.console} ${error ? styles.consoleError : ""}`} dir="ltr">
-        <span>OUTPUT</span>
-        <strong>{error ? "TypeError: '>=' not supported between str and int" : corrected ? "Allowed" : "Run the example"}</strong>
-      </div>
-      {error && <div className={styles.liveCursor} aria-hidden />}
-    </div>
-  );
-}
-
-function ArcSurface({ progress, locale }: { progress: number; locale: Locale }) {
-  const local = range(progress, 0.31, 0.45);
-  return (
-    <div
-      className={styles.arcSurface}
-      style={{ opacity: opacityWindow(progress, 0.285, 0.46, 0.035) }}
-    >
-      <div className={styles.artifactLabel}>
-        <span>{t(localized.arcReconstruction, locale)}</span>
-        <span>{Math.round(local * 100).toString().padStart(3, "0")}% {t(localized.aligned, locale)}</span>
-      </div>
-      <div className={styles.arcGrid}>
-        <div className={styles.fileTree} dir="ltr">
-          <span>▾ CONDITIONS</span>
-          <span>　lesson_final.py</span>
-          <span>　lesson_final_2.py</span>
-          <span>　lesson_revised.py</span>
-          <span>▾ LOOPS</span>
-          <span>　exercise_copy.py</span>
-          <span>　exercise_new.py</span>
-        </div>
-        <div className={styles.arcIndex}>
-          <div className={styles.arcTopline}><strong>Arc</strong><span>Teaching material / indexed</span></div>
-          <div className={styles.arcRows}>
-            <span><b>Conditions</b><i>one canonical path</i></span>
-            <span><b>Loops</b><i>reviewed structure</i></span>
-            <span><b>Functions</b><i>owner-described model</i></span>
-          </div>
-          <span className={styles.visualLink}>{t(localized.openArc, locale)}</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ApplytideSurface({ progress, locale }: { progress: number; locale: Locale }) {
-  const local = range(progress, 0.49, 0.66);
-  const lift = ease(range(local, 0.08, 0.58));
-  const fade = 1 - ease(range(local, 0.69, 0.98));
-
-  return (
-    <div
-      className={styles.browser}
-      style={
-        {
-          opacity: opacityWindow(progress, 0.48, 0.68, 0.035) * fade,
-          "--tab-y": `${-190 * lift}px`,
-          "--tab-z": `${210 * lift}px`,
-          "--tab-rx": `${-14 * lift}deg`,
-          "--tab-ry": `${8 * lift}deg`,
-          "--tab-shadow": 0.1 + lift * 0.9,
-        } as CSSProperties
-      }
-    >
-      <div className={styles.browserChrome}>
-        <div className={styles.traffic}>● ● ●</div>
-        <div className={styles.tabs}>
-          <span>Inbox (18)</span>
-          <span className={styles.liftingTab}>Product roles</span>
-          <span>Applications</span>
-          <span>Follow up</span>
-        </div>
-        <span className={styles.browserMenu}>•••</span>
-      </div>
-      <div className={styles.address} dir="ltr">applytide.local / applications</div>
-      <div className={styles.pipeline}>
-        {[
-          ["Captured", "Product builder", "Platform role"],
-          ["Applied", "Systems product", "Technical PM"],
-          ["Interview", "Workflow tools"],
-        ].map(([stage, ...items]) => (
-          <div key={stage}>
-            <strong>{stage}</strong>
-            {items.map((item) => <span key={item}>{item}<i>fictional</i></span>)}
-          </div>
-        ))}
-      </div>
-      <div className={styles.browserFoot}>
-        <span>{t(copy.sourceNote, locale)}</span>
-        <span className={styles.visualLink}>{t(localized.inspectApplytide, locale)}</span>
-      </div>
-    </div>
-  );
-}
-
-function EventaSurface({ progress, locale }: { progress: number; locale: Locale }) {
-  const local = ease(range(progress, 0.72, 0.84));
-  return (
-    <div
-      className={styles.eventa}
-      style={{ opacity: opacityWindow(progress, 0.7, 0.855, 0.032) }}
-    >
-      <div className={styles.artifactLabel}>
-        <span>{t(localized.eventaScenario, locale)}</span>
-        <span>{t(localized.presenceNotPortraits, locale)}</span>
-      </div>
-      <div
-        className={styles.presenceStage}
-        style={
-          {
-            "--world-a-x": `${110 * local}px`,
-            "--world-b-x": `${-110 * local}px`,
-            "--shared-opacity": local,
-            "--shared-scale": 0.82 + local * 0.18,
-          } as CSSProperties
-        }
-      >
-        <div className={`${styles.presence} ${styles.presenceA}`}>
-          <span>{t(localized.presenceA, locale)}</span>
-          <b>{t(localized.teaching, locale)}</b><b>{t(localized.systems, locale)}</b><b>{t(localized.making, locale)}</b>
-        </div>
-        <div className={styles.sharedPresence}>
-          <span>{t(localized.detailVisible, locale)}</span>
-          <strong>{t(localized.eventaQuestion, locale)}</strong>
-        </div>
-        <div className={`${styles.presence} ${styles.presenceB}`}>
-          <span>{t(localized.presenceB, locale)}</span>
-          <b>{t(localized.events, locale)}</b><b>{t(localized.product, locale)}</b><b>{t(localized.education, locale)}</b>
-        </div>
-      </div>
-      <div className={styles.eventaFoot}>
-        <span>{t(localized.eventaProvenance, locale)}</span>
-        <span className={styles.visualLink}>{t(localized.inspectEventa, locale)}</span>
-      </div>
-    </div>
-  );
-}
-
-function CorrectionSurface({ progress, locale }: { progress: number; locale: Locale }) {
-  const changed = progress > 0.862;
-  const recomputations = [
-    [localized.eventaTiming, 0.856],
-    [localized.applytidePath, 0.878],
-    [localized.arcStructure, 0.9],
-    [localized.openingExplanation, 0.922],
-  ] as const;
-  return (
-    <div
-      className={styles.correction}
-      style={{ opacity: opacityWindow(progress, 0.835, 0.94, 0.025) }}
-      dir={locale === "he" ? "rtl" : "ltr"}
-    >
-      <div className={styles.artifactLabel}><span dir="ltr">ASSUMPTION.LOG</span><span>{t(localized.systemAnswers, locale)}</span></div>
-      <strong className={styles.correctionCallout}>{t(localized.notActuallyProblem, locale)}</strong>
-      <div className={styles.diffLine}>
-        <span className={changed ? styles.removed : ""}>{t(localized.requestedFeature, locale)}</span>
-        <span className={changed ? styles.added : styles.pending}>{t(localized.necessaryRequest, locale)}</span>
-      </div>
-      <div className={styles.recompileTrack}>
-        {recomputations.map(([label, at]) => (
-          <i key={label.en} className={progress >= at ? styles.recompiled : ""}>{t(label, locale)}</i>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ProgressControls({
-  progress,
-  chapter,
-  quality,
-  setQuality,
-  sound,
-  setSound,
-  motionReduced,
-  setMotionReduced,
-  jump,
+function ReducedExperience({
   locale,
+  canEnableMotion,
+  enableMotion,
+  markFocusInside,
+  markFocusOutside,
 }: {
-  progress: number;
-  chapter: string;
-  quality: CinematicQuality;
-  setQuality: (quality: CinematicQuality) => void;
-  sound: boolean;
-  setSound: (value: boolean) => void;
-  motionReduced: boolean;
-  setMotionReduced: (value: boolean) => void;
-  jump: (at: number) => void;
   locale: Locale;
+  canEnableMotion: boolean;
+  enableMotion: () => void;
+  markFocusInside: () => void;
+  markFocusOutside: (nextTarget: EventTarget | null) => void;
 }) {
-  const nextQuality: Record<CinematicQuality, CinematicQuality> = {
-    essential: "balanced",
-    balanced: "premium",
-    premium: "essential",
-  };
-  const qualityLabel = {
-    essential: localized.qualityEssential,
-    balanced: localized.qualityBalanced,
-    premium: localized.qualityPremium,
-  } satisfies Record<CinematicQuality, { en: string; he: string }>;
-  return (
-    <div className={styles.controls}>
-      <div className={styles.progressRail} aria-hidden><i style={{ transform: `scaleX(${progress})` }} /></div>
-      <div className={styles.controlRow}>
-        <div className={styles.chapterNav} aria-label={t(localized.chaptersAria, locale)}>
-          {CHAPTERS.map((item) => (
-            <button
-              type="button"
-              key={item.id}
-              onClick={() => jump(item.at)}
-              aria-current={chapter === item.id ? "step" : undefined}
-            >
-              {t(item.label, locale)}
-            </button>
-          ))}
-        </div>
-        <div className={styles.toggles}>
-          <button type="button" onClick={() => setSound(!sound)} aria-pressed={sound}>
-            {t(localized.sound, locale)} {t(sound ? localized.on : localized.off, locale)}
-          </button>
-          <button type="button" onClick={() => setQuality(nextQuality[quality])}>
-            {t(localized.quality, locale)} {t(qualityLabel[quality], locale)}
-          </button>
-          <button type="button" onClick={() => setMotionReduced(!motionReduced)} aria-pressed={motionReduced}>
-            {t(localized.motion, locale)} {t(motionReduced ? localized.reduced : localized.full, locale)}
-          </button>
-          <Link href={href("/work", locale)}>{t(copy.skip, locale)}</Link>
-        </div>
-      </div>
-    </div>
-  );
-}
+  const frames = [
+    { title: copy.request, body: copy.reducedTitle, visual: styles.storyRequest },
+    { title: copy.reply, body: copy.reducedBody, visual: styles.storyQuestion },
+    { title: copy.loopTitle, body: copy.reducedTrace, visual: styles.storyLoop },
+    { title: copy.listen, body: copy.reducedListen, visual: styles.storyListen },
+    { title: copy.test, body: copy.reducedTest, visual: styles.storyTest },
+    { title: copy.resolved, body: copy.reducedReframe, visual: styles.storyResolved },
+  ];
 
-function ReducedExperience({ locale, enableMotion }: { locale: Locale; enableMotion: () => void }) {
   return (
-    <section className={styles.reducedExperience} aria-labelledby="reduced-title" data-cinematic-mode-root>
+    <section
+      className={styles.reducedExperience}
+      aria-labelledby="reduced-title"
+      data-cinematic-mode-root
+      tabIndex={-1}
+      onFocusCapture={markFocusInside}
+      onBlurCapture={(event) => markFocusOutside(event.relatedTarget)}
+    >
       <div className={styles.reducedIntro}>
         <p className={styles.eyebrow}>{t(copy.role, locale)}</p>
-        <h1 id="reduced-title">Tomer Naydnov</h1>
+        <h1 id="reduced-title" tabIndex={-1}>Tomer Naydnov</h1>
         <p className={styles.reducedThesis}>{t(copy.thesis, locale)}</p>
-        <p>{t(copy.sub, locale)}</p>
-        <div className={styles.reducedActions}>
-          <button type="button" onClick={enableMotion}>{t(localized.enableMotion, locale)}</button>
-          <Link href={href("/work", locale)}>{t(copy.skip, locale)}</Link>
+        <ol className={styles.storyboard}>
+          {frames.map((frame, index) => (
+            <li key={frame.title.en}>
+              <div className={`${styles.storyVisual} ${frame.visual}`} aria-hidden>
+                <i /><i /><i /><i /><i />
+              </div>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h2>{t(frame.title, locale)}</h2>
+              <p>{t(frame.body, locale)}</p>
+            </li>
+          ))}
+        </ol>
+        <div className={styles.reducedResolution}>
+          <span>{t(copy.resolution, locale)}</span>
+          <strong>{t(copy.ctaLead, locale)}</strong>
         </div>
-      </div>
-      <div className={styles.reducedGrid}>
-        <article id="reduced-teaching" tabIndex={-1}><span>{t(localized.reducedTeachingLabel, locale)}</span><h2>{t(localized.hiddenAssumption, locale)}</h2><p><code>input()</code> {t(localized.teachingSummary, locale)}</p></article>
-        <article id="reduced-arc" tabIndex={-1}><span>{t(localized.reducedArcLabel, locale)}</span><h2>{t(localized.duplicateToStructure, locale)}</h2><p>{t(localized.arcSummary, locale)}</p></article>
-        <article id="reduced-applytide" tabIndex={-1}><span>{t(localized.reducedApplytideLabel, locale)}</span><h2>{t(localized.browserProblemSpace, locale)}</h2><p>{t(localized.applytideSummary, locale)}</p></article>
-        <article id="reduced-eventa" tabIndex={-1}><span>{t(localized.reducedEventaLabel, locale)}</span><h2>{t(localized.informationVisible, locale)}</h2><p>{t(localized.eventaSummary, locale)}</p></article>
+        <div className={styles.reducedActions}>
+          <Link href={href("/work", locale)}>{t(copy.viewWork, locale)}</Link>
+          {canEnableMotion ? (
+            <button type="button" onClick={enableMotion}>{t(copy.enableMotion, locale)}</button>
+          ) : null}
+        </div>
       </div>
     </section>
   );
@@ -603,50 +297,61 @@ function ReducedExperience({ locale, enableMotion }: { locale: Locale; enableMot
 
 export function CinematicHome({ locale }: { locale: Locale }) {
   const systemReduced = useReducedMotion();
-  const compactViewport = useMediaQuery(
-    "(max-height: 560px) and (orientation: landscape), (max-height: 650px) and (max-width: 420px) and (orientation: portrait)",
+  const forcedCompact = useMediaQuery(
+    "(max-height: 520px) and (orientation: landscape), (max-height: 580px) and (max-width: 360px) and (orientation: portrait)",
   );
   const [motionOverride, setMotionOverride] = useState<"full" | "reduced" | null>(null);
   const [quality, setQuality] = useStoredQuality();
-  const [sound, setSound] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [worldReady, setWorldReady] = useState(false);
+  const [worldRequested, setWorldRequested] = useState(false);
+  const [rendererReady, setRendererReady] = useState(false);
   const progressRef = useRef(0);
-  const preservedProgress = useRef(0);
   const root = useRef<HTMLElement>(null);
+  const skipLink = useRef<HTMLAnchorElement>(null);
+  const enterButton = useRef<HTMLButtonElement>(null);
+  const endLink = useRef<HTMLAnchorElement>(null);
+  const preservedProgress = useRef(0);
   const focusWasInCinematic = useRef(false);
-  const reduced =
-    compactViewport ||
-    motionOverride === "reduced" ||
-    (motionOverride === null && systemReduced);
+  const modeChangeRequested = useRef(false);
+  const queryApplied = useRef(false);
+  const initialPreferencePending = useRef(true);
+  const reduced = forcedCompact || motionOverride === "reduced" || (motionOverride === null && systemReduced);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem("tomer-cinematic-motion");
-    if (stored === "reduced") setMotionOverride("reduced");
-    else if (stored === "full") window.localStorage.removeItem("tomer-cinematic-motion");
+    try {
+      if (window.localStorage.getItem("tomer-cinematic-motion") === "reduced") {
+        setMotionOverride("reduced");
+      }
+    } catch {
+      // The system preference remains the fallback.
+    }
   }, []);
 
   useEffect(() => {
-    const trackFocus = (event: FocusEvent) => {
-      focusWasInCinematic.current =
-        event.target instanceof Element &&
-        Boolean(event.target.closest("[data-cinematic-mode-root]"));
-    };
-    document.addEventListener("focusin", trackFocus);
-    return () => document.removeEventListener("focusin", trackFocus);
+    const timer = window.setTimeout(() => {
+      initialPreferencePending.current = false;
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const setReduced = useCallback((value: boolean) => {
-    const next = value ? "reduced" : "full";
-    setMotionOverride(next);
-    if (value) window.localStorage.setItem("tomer-cinematic-motion", next);
-    else window.localStorage.removeItem("tomer-cinematic-motion");
+    setMotionOverride(value ? "reduced" : "full");
+    try {
+      if (value) window.localStorage.setItem("tomer-cinematic-motion", "reduced");
+      else window.localStorage.removeItem("tomer-cinematic-motion");
+    } catch {
+      // Keep the in-memory preference.
+    }
   }, []);
 
   useEffect(() => {
     if (reduced) return;
-    const timer = window.setTimeout(() => setWorldReady(true), 700);
+    const timer = window.setTimeout(() => setWorldRequested(true), 320);
     return () => window.clearTimeout(timer);
+  }, [reduced]);
+
+  useEffect(() => {
+    if (reduced) setRendererReady(false);
   }, [reduced]);
 
   useEffect(() => {
@@ -660,7 +365,7 @@ export function CinematicHome({ locale }: { locale: Locale }) {
       const distance = Math.max(1, element.offsetHeight - window.innerHeight);
       const next = clamp01(-rect.top / distance);
       progressRef.current = next;
-      if (next > 0.002) setWorldReady(true);
+      if (next > 0.002) setWorldRequested(true);
       setProgress((current) => (Math.abs(current - next) > 0.0005 ? next : current));
     };
     const requestMeasure = () => {
@@ -682,7 +387,11 @@ export function CinematicHome({ locale }: { locale: Locale }) {
     return current.id;
   }, [progress]);
 
-  useProceduralSound(sound, chapter);
+  const { enabled: soundEnabled, toggle: toggleSound } = useProceduralSound(chapter);
+
+  useEffect(() => {
+    if (reduced && soundEnabled) toggleSound();
+  }, [reduced, soundEnabled, toggleSound]);
 
   const jump = useCallback((at: number, behavior: ScrollBehavior = "smooth") => {
     const element = root.current;
@@ -692,13 +401,38 @@ export function CinematicHome({ locale }: { locale: Locale }) {
     window.scrollTo({ top: top + distance * at, behavior });
   }, []);
 
+  const markFocusInside = useCallback(() => {
+    focusWasInCinematic.current = true;
+  }, []);
+
+  const markFocusOutside = useCallback((nextTarget: EventTarget | null) => {
+    const modeRoot = document.querySelector<HTMLElement>("[data-cinematic-mode-root]");
+    focusWasInCinematic.current = nextTarget instanceof Node && Boolean(modeRoot?.contains(nextTarget));
+  }, []);
+
+  const requestMotionMode = useCallback((nextReduced: boolean) => {
+    const modeRoot = document.querySelector<HTMLElement>("[data-cinematic-mode-root]");
+    focusWasInCinematic.current = Boolean(modeRoot?.contains(document.activeElement));
+    modeChangeRequested.current = true;
+    setReduced(nextReduced);
+  }, [setReduced]);
+
   const previousReduced = useRef(reduced);
   useEffect(() => {
     const wasReduced = previousReduced.current;
     previousReduced.current = reduced;
     if (wasReduced === reduced) return;
 
-    const shouldRestoreFocus = focusWasInCinematic.current;
+    const requested = modeChangeRequested.current;
+    const shouldRestoreFocus = requested || focusWasInCinematic.current;
+    modeChangeRequested.current = false;
+
+    const initialHydrationSwap =
+      initialPreferencePending.current && !requested && wasReduced && !reduced;
+    initialPreferencePending.current = false;
+    if (initialHydrationSwap) {
+      return;
+    }
 
     const frame = window.requestAnimationFrame(() => {
       if (!reduced) {
@@ -706,28 +440,25 @@ export function CinematicHome({ locale }: { locale: Locale }) {
         setProgress(preservedProgress.current);
         jump(preservedProgress.current, "auto");
         if (shouldRestoreFocus) root.current?.focus({ preventScroll: true });
+        focusWasInCinematic.current = shouldRestoreFocus;
         return;
       }
-
-      const at = progressRef.current;
-      preservedProgress.current = at;
-      const target = at < 0.2
-        ? "reduced-teaching"
-        : at < 0.47
-          ? "reduced-arc"
-          : at < 0.7
-            ? "reduced-applytide"
-            : "reduced-eventa";
-      const destination = document.getElementById(target);
-      destination?.scrollIntoView({ behavior: "auto", block: "start" });
-      if (shouldRestoreFocus) destination?.focus({ preventScroll: true });
+      preservedProgress.current = progressRef.current;
+      const reducedRoot = document.querySelector<HTMLElement>("[data-cinematic-mode-root]");
+      if (reducedRoot) {
+        const top = reducedRoot.getBoundingClientRect().top + window.scrollY;
+        const distance = Math.max(0, reducedRoot.offsetHeight - window.innerHeight);
+        window.scrollTo({ top: top + distance * preservedProgress.current, behavior: "auto" });
+        if (shouldRestoreFocus) reducedRoot.focus({ preventScroll: true });
+      }
+      focusWasInCinematic.current = shouldRestoreFocus;
     });
-
     return () => window.cancelAnimationFrame(frame);
   }, [jump, reduced]);
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || queryApplied.current) return;
+    queryApplied.current = true;
     const query = new URLSearchParams(window.location.search);
     const requestedProgress = Number(query.get("progress"));
     const requestedScene = query.get("scene");
@@ -737,134 +468,242 @@ export function CinematicHome({ locale }: { locale: Locale }) {
         ? STABLE_PROGRESS[requestedScene]
         : undefined;
     if (target === undefined) return;
-
     const frame = window.requestAnimationFrame(() => jump(target, "auto"));
     return () => window.cancelAnimationFrame(frame);
   }, [jump, reduced]);
 
+  useEffect(() => {
+    if (reduced) return;
+    const active = document.activeElement;
+    const identityInteractive = 1 - ease(range(progress, 0.04, 0.085)) > 0.2;
+    const endingInteractive = ease(range(progress, 0.978, 0.995)) > 0.6;
+    const sceneControlBecameHidden =
+      (active === enterButton.current && !identityInteractive) ||
+      (active === endLink.current && !endingInteractive);
+    if (sceneControlBecameHidden) skipLink.current?.focus({ preventScroll: true });
+  }, [progress, reduced]);
+
   if (reduced) {
-    return <ReducedExperience locale={locale} enableMotion={() => setReduced(false)} />;
+    return (
+      <ReducedExperience
+        locale={locale}
+        canEnableMotion={!forcedCompact}
+        enableMotion={() => requestMotionMode(false)}
+        markFocusInside={markFocusInside}
+        markFocusOutside={markFocusOutside}
+      />
+    );
   }
 
-  // Identity is the first frame, not a reveal the visitor must earn. Hold it
-  // immediately, then clear the stage before the teaching artifact arrives.
-  const identityOpacity = 1 - ease(range(progress, 0.035, 0.08));
-  const pauseOpacity = opacityWindow(progress, 0.425, 0.505, 0.025);
-  const returnOpacity = opacityWindow(progress, 0.91, 1, 0.028);
+  const identityOpacity = 1 - ease(range(progress, 0.04, 0.085));
+  const requestOpacity = opacityWindow(progress, 0.07, 0.175, 0.025);
+  const replyOpacity = opacityWindow(progress, 0.145, 0.245, 0.025);
+  const loopOpacity = opacityWindow(progress, 0.255, 0.36, 0.025);
+  const perspectiveOpacity = opacityWindow(progress, 0.35, 0.43, 0.018);
+  const listenOpacity = opacityWindow(progress, 0.415, 0.485, 0.016);
+  const testOpacity = opacityWindow(progress, 0.475, 0.605, 0.025);
+  const deadpanOpacity = opacityWindow(progress, 0.595, 0.675, 0.014);
+  const reframeOpacity = opacityWindow(progress, 0.655, 0.825, 0.028);
+  const realityOpacity = opacityWindow(progress, 0.815, 0.895, 0.018);
+  const questionOpacity = opacityWindow(progress, 0.895, 0.965, 0.018);
+  const resolvedOpacity = opacityWindow(progress, 0.95, 0.991, 0.012);
+  const endOpacity = ease(range(progress, 0.978, 0.995));
 
   return (
-      <section
-        ref={root}
-        tabIndex={-1}
-        className={styles.experience}
-        aria-label={t(localized.experienceAria, locale)}
-        data-cinematic-home
-        data-chapter={chapter}
-        data-progress={progress.toFixed(4)}
-        data-quality={quality}
-        data-sound={sound ? "on" : "off"}
-        data-motion="full"
-        data-renderer={worldReady ? "r3f" : "pending"}
-        data-cinematic-mode-root
-      >
+    <section
+      ref={root}
+      tabIndex={-1}
+      className={styles.experience}
+      aria-label={t(copy.experience, locale)}
+      data-cinematic-home
+      data-cinematic-mode-root
+      data-chapter={chapter}
+      data-progress={progress.toFixed(4)}
+      data-quality={quality}
+      data-sound={soundEnabled ? "on" : "off"}
+      data-motion="full"
+      data-renderer={rendererReady ? "r3f" : "pending"}
+      onFocusCapture={markFocusInside}
+      onBlurCapture={(event) => markFocusOutside(event.relatedTarget)}
+    >
+      <div className={styles.stickyFrame}>
+        <Link ref={skipLink} className={styles.skipLink} href={href("/work", locale)}>
+          {t(copy.skip, locale)}
+        </Link>
+
         <div className="sr-only">
-          <h1>Tomer Naydnov — {t(copy.role, locale)}</h1>
+          <h1><bdi dir="ltr">Tomer Naydnov</bdi> — {t(copy.role, locale)}</h1>
           <p>{t(copy.thesis, locale)}</p>
           <ol>
-            <li>{t(localized.semanticTeaching, locale)}</li>
-            <li>{t(localized.semanticArc, locale)}</li>
-            <li>{t(localized.semanticApplytide, locale)}</li>
-            <li>{t(localized.semanticEventa, locale)}</li>
-            <li>{t(localized.semanticCorrection, locale)}</li>
+            <li>{t(copy.request, locale)}</li>
+            <li>{t(copy.reply, locale)}</li>
+            <li>{t(copy.reducedTrace, locale)}</li>
+            <li>{t(copy.perspective, locale)}</li>
+            <li>{t(copy.listen, locale)}</li>
+            <li>{t(copy.reducedTest, locale)}</li>
+            <li>{t(copy.reframe, locale)}</li>
+            <li>{t(copy.reality, locale)}</li>
+            <li>{t(copy.resolved, locale)}</li>
+            <li>{t(copy.resolution, locale)}</li>
           </ol>
         </div>
 
-        <div className={styles.stickyFrame}>
-          <div className={styles.webgl}>
-            {worldReady ? (
-              <CinematicWorld
-                progress={progressRef}
-                renderProgress={progress}
-                quality={quality}
-              />
-            ) : null}
-          </div>
-          <div className={styles.lightField} aria-hidden />
-          <div className={styles.scanlines} aria-hidden />
-
-          <div className={styles.identity} style={{ opacity: identityOpacity }} aria-hidden>
-            <p className={styles.eyebrow}>{t(copy.role, locale)}</p>
-            <h2>Tomer Naydnov</h2>
-            <p>{t(copy.thesis, locale)}</p>
-            <span>{t(copy.begin, locale)} ↓</span>
-          </div>
-
-          <div
-            className={styles.quickEntry}
-            style={{
-              opacity: identityOpacity,
-              visibility: identityOpacity > 0.35 ? "visible" : "hidden",
-              pointerEvents: identityOpacity > 0.35 ? "auto" : "none",
-            }}
-            aria-hidden={identityOpacity <= 0.35}
-          >
-            <Link tabIndex={identityOpacity > 0.35 ? undefined : -1} href={href("/work", locale)}>{t(localized.viewWorkNow, locale)}</Link>
-            <button tabIndex={identityOpacity > 0.35 ? undefined : -1} type="button" onClick={() => jump(0.055)}>{t(localized.enterExperience, locale)} ↓</button>
-          </div>
-
-          <div className={styles.question} style={{ opacity: opacityWindow(progress, 0.058, 0.25, 0.04) }} aria-hidden>
-            <span>{t(localized.wait, locale)}</span>
-            <strong>{t(localized.whyThisWay, locale)}</strong>
-          </div>
-
-          <div aria-hidden><TeachingSurface progress={progress} locale={locale} /></div>
-
-          <div className={styles.sceneTitle} style={{ opacity: opacityWindow(progress, 0.18, 0.31, 0.025) }} aria-hidden>
-            <span>ARC / 01</span>
-            <strong>{t(localized.workaroundEvidence, locale)}</strong>
-          </div>
-          <div aria-hidden><ArcSurface progress={progress} locale={locale} /></div>
-
-          <div className={styles.pause} style={{ opacity: pauseOpacity }} aria-hidden>
-            <span>{t(localized.listen, locale)}</span>
-            <strong>{t(localized.brokenSentence, locale)}</strong>
-            <p>{t(localized.explanationChanges, locale)}</p>
-          </div>
-
-          <div className={styles.sceneTitle} style={{ opacity: opacityWindow(progress, 0.47, 0.535, 0.018) }} aria-hidden>
-            <span>APPLYTIDE / 02</span>
-            <strong>{t(localized.browserWorkaround, locale)}</strong>
-          </div>
-          <div aria-hidden><ApplytideSurface progress={progress} locale={locale} /></div>
-
-          <div className={styles.sceneTitle} style={{ opacity: opacityWindow(progress, 0.68, 0.735, 0.018) }} aria-hidden>
-            <span>EVENTA / 03</span>
-            <strong>{t(localized.hiddenPerson, locale)}</strong>
-          </div>
-          <div aria-hidden><EventaSurface progress={progress} locale={locale} /></div>
-
-          <div aria-hidden><CorrectionSurface progress={progress} locale={locale} /></div>
-
-          <div className={styles.return} style={{ opacity: returnOpacity }} aria-hidden>
-            <p>{t(copy.sub, locale)}</p>
-            <h2>Tomer Naydnov</h2>
-            <strong>{t(copy.thesis, locale)}</strong>
-            <span>{t(localized.changedSystem, locale)}</span>
-          </div>
-
-          <ProgressControls
-            progress={progress}
-            chapter={chapter}
-            quality={quality}
-            setQuality={setQuality}
-            sound={sound}
-            setSound={setSound}
-            motionReduced={reduced}
-            setMotionReduced={setReduced}
-            jump={jump}
-            locale={locale}
-          />
+        <div className={styles.webgl} aria-hidden>
+          {worldRequested ? (
+            <CinematicWorld
+              progress={progressRef}
+              renderProgress={progress}
+              quality={quality}
+              onRendererStatus={setRendererReady}
+            />
+          ) : null}
         </div>
-      </section>
+        <div className={styles.cssFallback} aria-hidden>
+          <i /><i /><i />
+        </div>
+        <div className={styles.lightField} aria-hidden />
+        <div className={styles.vignette} aria-hidden />
+
+        <div
+          className={styles.identity}
+          style={{
+            opacity: identityOpacity,
+            visibility: identityOpacity > 0.05 ? "visible" : "hidden",
+            pointerEvents: identityOpacity > 0.2 ? "auto" : "none",
+          }}
+        >
+          <p className={styles.eyebrow} aria-hidden>{t(copy.role, locale)}</p>
+          <h2 aria-hidden>Tomer Naydnov</h2>
+          <p aria-hidden>{t(copy.thesis, locale)}</p>
+          <span aria-hidden>{t(copy.begin, locale)} ↓</span>
+          <button
+            ref={enterButton}
+            tabIndex={identityOpacity > 0.2 ? undefined : -1}
+            type="button"
+            onClick={() => {
+              jump(0.105);
+              window.requestAnimationFrame(() => root.current?.focus({ preventScroll: true }));
+            }}
+          >
+            {t(copy.enter, locale)} ↓
+          </button>
+        </div>
+
+        <div className={`${styles.dialogue} ${styles.requestDialogue}`} style={{ opacity: requestOpacity }} aria-hidden>
+          <span>{t(copy.requestLabel, locale)}</span>
+          <strong>{t(copy.request, locale)}</strong>
+        </div>
+
+        <div className={`${styles.dialogue} ${styles.tomerDialogue}`} style={{ opacity: replyOpacity }} aria-hidden>
+          <span>{t(copy.tomerLabel, locale)}</span>
+          <strong>{t(copy.reply, locale)}</strong>
+          <small>{t(copy.sub, locale)}</small>
+        </div>
+
+        <div className={`${styles.sceneCaption} ${styles.loopCaption}`} style={{ opacity: loopOpacity }} aria-hidden>
+          <span>{t(copy.loopLabel, locale)}</span>
+          <strong>{t(copy.loopTitle, locale)}</strong>
+        </div>
+
+        <div className={`${styles.sceneCaption} ${styles.perspectiveCaption}`} style={{ opacity: perspectiveOpacity }} aria-hidden>
+          <span>{t(copy.perspectiveLabel, locale)}</span>
+          <strong>{t(copy.perspective, locale)}</strong>
+        </div>
+
+        <div className={styles.silence} style={{ opacity: listenOpacity }} aria-hidden>
+          <span>{t(copy.listenLabel, locale)}</span>
+          <strong>{t(copy.listen, locale)}</strong>
+        </div>
+
+        <div className={`${styles.sceneCaption} ${styles.testCaption}`} style={{ opacity: testOpacity }} aria-hidden>
+          <span>{t(copy.testLabel, locale)}</span>
+          <strong>{t(copy.test, locale)}</strong>
+        </div>
+
+        <div className={styles.deadpan} style={{ opacity: deadpanOpacity }} aria-hidden>
+          <p><span>{t(copy.requestLabel, locale)}</span>{t(copy.secondRequest, locale)}</p>
+          <p><span>{t(copy.tomerLabel, locale)}</span><strong>{t(copy.secondReply, locale)}</strong></p>
+        </div>
+
+        <div className={`${styles.sceneCaption} ${styles.reframeCaption}`} style={{ opacity: reframeOpacity }} aria-hidden>
+          <span>{t(copy.reframeLabel, locale)}</span>
+          <strong>{t(copy.reframe, locale)}</strong>
+        </div>
+
+        <div className={`${styles.sceneCaption} ${styles.realityCaption}`} style={{ opacity: realityOpacity }} aria-hidden>
+          <span>{t(copy.realityLabel, locale)}</span>
+          <strong>{t(copy.reality, locale)}</strong>
+        </div>
+
+        <div className={styles.questionReveal} style={{ opacity: questionOpacity }} aria-hidden>
+          <span>{t(copy.resolution, locale)}</span>
+        </div>
+
+        <div className={styles.resolvedRequest} style={{ opacity: resolvedOpacity }} aria-hidden>
+          <span>{t(copy.resolvedLabel, locale)}</span>
+          <strong>{t(copy.resolved, locale)}</strong>
+        </div>
+
+        <div
+          className={styles.endCard}
+          style={{ opacity: endOpacity, pointerEvents: endOpacity > 0.6 ? "auto" : "none" }}
+          aria-hidden={endOpacity <= 0.6}
+        >
+          <p aria-hidden>{t(copy.role, locale)}</p>
+          <h2 aria-hidden>Tomer Naydnov</h2>
+          <strong aria-hidden>{t(copy.ctaLead, locale)}</strong>
+          <Link ref={endLink} tabIndex={endOpacity > 0.6 ? undefined : -1} href={href("/work", locale)}>
+            {t(copy.viewWork, locale)}
+          </Link>
+        </div>
+
+        <div className={styles.controls}>
+          <div className={styles.progressRail} aria-hidden><i style={{ transform: `scaleX(${progress})` }} /></div>
+          <div className={styles.controlRow}>
+            <nav className={styles.chapterNav} aria-label={t(copy.chapters, locale)}>
+              {CHAPTERS.map((item) => (
+                <button
+                  type="button"
+                  key={item.id}
+                  onClick={() => jump(item.at)}
+                  aria-current={chapter === item.id ? "step" : undefined}
+                >
+                  {t(item.label, locale)}
+                </button>
+              ))}
+            </nav>
+            <div className={styles.settings}>
+              <button type="button" onClick={toggleSound} aria-pressed={soundEnabled}>
+                {t(copy.sound, locale)} {t(soundEnabled ? copy.on : copy.off, locale)}
+              </button>
+              <label>
+                <span>{t(copy.quality, locale)}</span>
+                <select
+                  aria-label={t(copy.quality, locale)}
+                  value={quality}
+                  onChange={(event) => {
+                    setRendererReady(false);
+                    setQuality(event.target.value as CinematicQuality);
+                  }}
+                >
+                  <option value="essential">{t(copy.qualityEssential, locale)}</option>
+                  <option value="balanced">{t(copy.qualityBalanced, locale)}</option>
+                  <option value="premium">{t(copy.qualityPremium, locale)}</option>
+                </select>
+              </label>
+              <button
+                type="button"
+                onClick={() => {
+                  if (soundEnabled) toggleSound();
+                  requestMotionMode(true);
+                }}
+              >
+                {t(copy.reduceMotion, locale)}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
