@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import {
-  Fraunces,
+  Space_Grotesk,
   Heebo,
   Manrope,
   JetBrains_Mono,
@@ -16,7 +16,7 @@ import { DIR, LOCALES, isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
 import { site } from "@/lib/site";
 
-const display = Fraunces({
+const display = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
@@ -56,7 +56,7 @@ const HEBREW_FONTS = [hebrew, hebrewDisplay]
   .map((f) => f.variable)
   .join(" ");
 
-export const viewport: Viewport = { themeColor: "#faf9f4" };
+export const viewport: Viewport = { themeColor: "#0b0e11" };
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));

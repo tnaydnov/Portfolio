@@ -30,12 +30,25 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     <header className={styles.aboutHero}>
       <div>
         <p className="label">{t(ui.about.title, locale)} <span className={styles.labelDot}>/</span> {t(site.name, locale)}</p>
-        <h1 className={styles.heroTitle}>{he ? "סקרן מטבעי." : "Curious by nature."}<br /><em>{he ? "מהנדס בהכשרתי." : "Engineer by training."}</em></h1>
+        <h1 className={styles.heroTitle}>{he ? "להבין לעומק." : "Understand deeply."}<br /><em>{he ? "לבנות בכוונה." : "Build deliberately."}</em></h1>
         <p className={styles.heroLede}>{t(ui.about.lede, locale)}</p>
         <div className={styles.actions}><a href={site.cv} download={site.cvFileName} className={styles.primaryButton}>{t(ui.common.downloadCv, locale)} <span aria-hidden="true">↓</span></a><Link href={href("/contact", locale)} className={styles.textLink}>{t(ui.about.getInTouch, locale)}</Link></div>
       </div>
-      <div className={styles.profileCard}>
-        <div className={styles.identityFold} aria-hidden="true"><span /><span /><span /><b>tn.</b></div>
+      <div className={styles.profileSystem}>
+        <svg className={styles.identitySystem} viewBox="0 0 420 350" fill="none" aria-hidden="true">
+          <path d="M20 70h380M20 140h380M20 210h380M20 280h380M70 20v300M140 20v300M210 20v300M280 20v300M350 20v300" stroke="currentColor" opacity=".08" />
+          <path d="M20 55V20h35m310 0h35v35M20 295v35h35m310 0h35v-35" stroke="currentColor" opacity=".4" />
+          <path d="m90 126 120 69 120-69M210 195v109M90 126v89l120 69 120-69v-89" stroke="currentColor" opacity=".25" />
+          <path d="m210 62 81 47-81 47-81-47Z" fill="#182e29" stroke="currentColor" strokeWidth="1.5" />
+          <path d="m129 109 81 47v82l-81-47Z" fill="#12201e" stroke="currentColor" strokeWidth="1.5" />
+          <path d="m210 156 81-47v82l-81 47Z" fill="#0d1817" stroke="currentColor" strokeWidth="1.5" />
+          <path d="m175 109 35-20 35 20-35 20Z" fill="currentColor" fillOpacity=".12" stroke="currentColor" />
+          <path d="M90 126H44m286 0h46M210 284v35" stroke="currentColor" strokeDasharray="3 5" />
+          <circle cx="90" cy="126" r="5" fill="currentColor" /><circle cx="330" cy="126" r="5" fill="currentColor" /><circle cx="210" cy="284" r="5" fill="currentColor" />
+          <path d="m155 149-9 6 9 16m20-10 9 16-9 6" stroke="currentColor" strokeWidth="2" />
+          <path d="m239 160 31-18m-31 33 21-12m-21 27 31-18" stroke="currentColor" strokeWidth="2" opacity=".6" />
+        </svg>
+        <div className={styles.profileDomains}><span>{he ? "הנדסה" : "Engineering"}</span><span>{he ? "מוצר" : "Product"}</span><span>{he ? "הוראה" : "Teaching"}</span></div>
         <div className={styles.profileCaption}><p>{t(site.name, locale)}</p><span>{t(site.role, locale)}</span></div>
         <p className={styles.profileNote}>{t(site.description, locale)}</p>
       </div>
@@ -57,7 +70,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     </section>
 
     <section id="teaching" className={styles.teachingSection} aria-labelledby="teaching-title">
-      <div className={styles.teachingHeading}><p className="label">03 / {t(ui.about.teachingLabel, locale)}</p><h2 id="teaching-title">{t(ui.home.classroomHeading, locale)}</h2><div className={styles.paperFan} aria-hidden="true"><i /><i /><i /><i /></div></div>
+      <div className={styles.teachingHeading}><p className="label">03 / {t(ui.about.teachingLabel, locale)}</p><h2 id="teaching-title">{t(ui.home.classroomHeading, locale)}</h2><div className={styles.learningLoop}><span>{he ? "הסבר" : "Explain"}</span><i aria-hidden="true" /><span>{he ? "תרגול" : "Practice"}</span><i aria-hidden="true" /><span>{he ? "משוב" : "Feedback"}</span></div></div>
       <div className={styles.teachingBody}>{t(ui.home.classroomBody, locale).map((paragraph) => <p key={paragraph.slice(0, 45)}>{paragraph}</p>)}<blockquote>{t(ui.home.classroomRule, locale)}</blockquote><Link href={href("/work/arc", locale)}>{he ? "לסיפור של Arc" : "Read the Arc story"} <span aria-hidden="true">↗</span></Link></div>
     </section>
 

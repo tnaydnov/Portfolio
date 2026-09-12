@@ -1,10 +1,10 @@
-# Tomer Naydnov — Fold / Flow
+# Tomer Naydnov — Project Select
 
-A bilingual portfolio for a software engineer, technical product builder and programming instructor. Warm paper, cobalt, editorial typography and a code-built folding sculpture give the work a distinct identity while keeping navigation familiar.
+A bilingual portfolio for a software engineer, technical product builder and programming instructor. A full-scene project selector turns three products into interactive 3D environments. Dark surfaces, mint/coral/lilac accents and large typography connect the homepage with the work, case and profile pages.
 
 ## Design and routes
 
-- `/en` and `/he`: introduction, interactive Fold / Flow exhibit, selected work, approach and background.
+- `/en` and `/he`: identity, three interactive product worlds, direct case links and a persistent project selector. A `?project=` URL preserves selection through reload, back navigation and language changes.
 - `/[locale]/work`: four selected projects and a compact earlier-work index.
 - `/[locale]/work/[slug]`: project context, ownership, status, a concise snapshot, and optional narrative/technical detail. Trading System remains in earlier work and has a complete case page.
 - `/[locale]/about`: experience, education, teaching, approach and fit.
@@ -13,13 +13,15 @@ A bilingual portfolio for a software engineer, technical product builder and pro
 
 English and Hebrew have separate font families and real RTL layouts. The header, footer, case studies, project illustrations, social previews, favicon and not-found pages share the same visual system. Essential content uses server-rendered HTML and ordinary links.
 
-## The exhibit
+## The experience
 
-`src/components/fold/FoldScene.tsx` creates a connected three-panel sculpture from geometry. Materials, geometric surface marks, environmental lighting and shadows are produced in code. The site does not load generated artwork, stock imagery, HDR photographs or external 3D models for its visual design.
+`src/components/experience/ProjectScene.tsx` builds the entire scene from Three.js geometry, materials, lights and canvas-drawn lettering. Arc becomes a connected classroom environment; Applytide an opportunity pipeline; Eventa a circular guest network. No generated pictures, stock images, HDR photographs or external models are fetched.
 
-The single unfold button is a native HTML control. The visible explanation stays outside the canvas. Rendering stops when the sculpture settles or leaves view; reduced-motion preferences select immediate state changes. A CSS-built paper silhouette covers loading, unavailable WebGL and context loss.
+`ProjectExperience.tsx` keeps identity, controls, lifecycle, explanations and real links in server-rendered HTML. The renderer loads separately. Selecting a project slides the next environment into view; one optional action illustrates its workflow. Rendering stops when movement settles, the page is hidden or the scene leaves view. OS reduced motion and a saved motion preference are supported. Original SVG art covers loading, unsupported WebGL and context loss. The selector appears first on phones.
 
-`FoldHome.tsx` remains a server component; only the contained exhibit is interactive. The renderer loads separately from the information layer. Project-cover artwork is original HTML/CSS and is labeled as illustration. The social-preview image is rendered from code using `next/og`.
+Case pages include bounded product demonstrations in `PlayableCase.tsx`: Arc preserves a source lesson while producing a classroom release and a feedback-led next draft; Applytide captures a fictional opportunity into a structured record/history; Eventa previews an introduction between fictional guests. They use local, resettable state and make no network requests or submissions.
+
+Project-cover SVGs and the social-preview image are also built in code. Decorative models and demos are labeled as illustrations; project facts remain separate and explicit.
 
 ## Content boundaries
 
@@ -37,7 +39,7 @@ The private, git-ignored `TRUTH_SOURCE.md` is the factual ledger. `npm run truth
 
 ## Development
 
-The application uses Next.js 15, React 19, TypeScript, Tailwind CSS 4, Three.js and React Three Fiber. Next/font serves Fraunces and Manrope for English, Heebo and Rubik for Hebrew, and JetBrains Mono for code. Analytics are enabled when running on Vercel.
+The application uses Next.js 15, React 19, TypeScript, Tailwind CSS 4, Three.js and React Three Fiber. Next/font serves Space Grotesk and Manrope for English, Heebo and Rubik for Hebrew, and JetBrains Mono for code. Analytics are enabled when running on Vercel.
 
 ```sh
 npm ci
@@ -56,6 +58,6 @@ npm run test:e2e
 npm audit
 ```
 
-Playwright covers public routes in both languages and desktop/mobile widths, mobile-menu keyboard behavior, locale preservation, real WebGL readiness and context-loss fallback, folding, reduced motion, reading without JavaScript, email copying, case disclosures, CV delivery, social images and not-found behavior.
+Playwright covers public routes in both languages and desktop/mobile widths, mobile-menu keyboard behavior, locale preservation, real WebGL readiness and context-loss fallback, project switching, selection persistence, reduced motion, the three product demonstrations, reading without JavaScript, email copying, case disclosures, CV delivery, social images and not-found behavior.
 
 Tests normally start or reuse a local development server. Set `PLAYWRIGHT_SERVER_COMMAND` to `npm run start -- --hostname 127.0.0.1` to test an existing production build. Screenshots and traces from failures are stored in ignored test-output directories. Browser emulation validates layout and behavior; it is not a physical-device performance benchmark.

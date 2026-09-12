@@ -3,22 +3,22 @@
 :root,
 [data-theme="draft"],
 [data-theme="blueprint"] {
-  --ink: #faf9f4;
-  --ink-2: #f1efe5;
-  --surface: #fffefb;
-  --surface-2: #eeece1;
-  --rule: rgba(32, 38, 74, 0.16);
-  --rule-strong: rgba(32, 38, 74, 0.32);
-  --text: #20264a;
-  --text-muted: #626779;
-  --text-faint: #6b7080;
-  --signal: #264bec;
-  --signal-ink: #fffefb;
-  --trace: #3d736b;
-  --ok: #326748;
-  --paper: #f8e88a;
-  --paper-ink: #20264a;
-  color-scheme: light;
+  --ink: #0b0e11;
+  --ink-2: #10161a;
+  --surface: #151b20;
+  --surface-2: #1c252b;
+  --rule: rgba(213, 235, 228, 0.14);
+  --rule-strong: rgba(213, 235, 228, 0.3);
+  --text: #eef4ef;
+  --text-muted: #a8b3b5;
+  --text-faint: #859496;
+  --signal: #a7ecd4;
+  --signal-ink: #10211c;
+  --trace: #9ecbde;
+  --ok: #a7ecd4;
+  --paper: #1c252b;
+  --paper-ink: #eef4ef;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -35,14 +35,14 @@
   --color-signal-ink: var(--signal-ink);
   --color-trace: var(--trace);
   --color-ok: var(--ok);
-  --font-display: var(--font-heading), Georgia, serif;
+  --font-display: var(--font-heading), ui-sans-serif, sans-serif;
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-code), ui-monospace, SFMono-Regular, monospace;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * { border-color: var(--rule); }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 7rem; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 6rem; }
 body {
   min-height: 100svh;
   margin: 0;
@@ -59,9 +59,9 @@ button, summary { cursor: pointer; }
 button:disabled { cursor: default; }
 button, input, select, textarea { font: inherit; }
 h1, h2, h3, h4 {
-  font-family: var(--font-heading), Georgia, serif;
-  font-weight: 450;
-  letter-spacing: -0.045em;
+  font-family: var(--font-heading), ui-sans-serif, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.05em;
   text-wrap: balance;
 }
 p { text-wrap: pretty; }

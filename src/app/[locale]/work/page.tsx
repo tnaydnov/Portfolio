@@ -20,14 +20,18 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
   const locale = raw as Locale;
   return (
     <div className={`shell ${styles.page}`}>
-      <p className={styles.eyebrow}>{locale === "he" ? "רעיונות שפגשו את המציאות" : "Ideas, put into practice"}</p>
+      <p className={styles.eyebrow}>{locale === "he" ? "מבחר פרויקטים / מוצר והנדסה" : "Selected projects / Product & engineering"}</p>
       <header className={styles.header}>
-        <h1>{t(ui.work.title, locale)}<span className="text-signal">.</span></h1>
+        <h1>{t(ui.work.title, locale)}<span className={styles.titleMark} aria-hidden>↘</span></h1>
         <div className={styles.headerCopy}>
           <p>{t(ui.work.intro, locale)}</p>
-          <span>{locale === "he" ? "סקירה מהירה. עומק לפי בחירה." : "A quick read. Room to go deeper."}</span>
+          <span>{locale === "he" ? "מהצורך, דרך ההחלטות, ועד המערכת." : "From the need, through the decisions, to the system."}</span>
         </div>
       </header>
+      <nav className={styles.quickIndex} aria-label={locale === "he" ? "מעבר לפרויקט" : "Jump to a project"}>
+        {SELECTED_WORK.map((project, index) => <a key={project.slug} href={`#${project.slug}`}><span>{String(index + 1).padStart(2, "0")}</span>{project.title}<span aria-hidden>↓</span></a>)}
+        <a href="#archive-title"><span>05+</span>{locale === "he" ? "עבודות קודמות" : "Earlier engineering"}<span aria-hidden>↓</span></a>
+      </nav>
       <section aria-labelledby="selected-work-title">
         <div className={styles.indexHead}><h2 id="selected-work-title">{t(ui.work.selectedTitle, locale)} / 01—{String(SELECTED_WORK.length).padStart(2, "0")}</h2><span>{t(ui.work.selectedIntro, locale)}</span></div>
         <div className={styles.list}>

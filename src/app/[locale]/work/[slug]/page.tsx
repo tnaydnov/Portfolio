@@ -3,8 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectArtifact } from "@/components/artifacts";
 import { ArchitectureGraphLazy } from "@/components/case/ArchitectureGraphLazy";
-import { DecisionLog, MetricBlock, RebuildList } from "@/components/case/Blocks";
+import { DecisionLog, FieldFeedback, MetricBlock, RebuildList } from "@/components/case/Blocks";
 import { ConstraintDial } from "@/components/case/ConstraintDial";
+import { PlayableCase } from "@/components/experience/PlayableCase";
 import { CASE_STUDIES } from "@/content/work";
 import { LOCALES, isLocale, t, type Locale } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/metadata";
@@ -34,7 +35,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ loca
   if (!project || !project.snapshot) notFound();
   const index = CASE_STUDIES.findIndex((candidate) => candidate.slug === project.slug);
   const next = CASE_STUDIES[(index + 1) % CASE_STUDIES.length];
-  const hasDeepDive = project.metrics.length > 0 || Boolean(project.architecture) || Boolean(project.decisions?.length) || Boolean(project.constraints) || Boolean(project.rebuild);
+  const hasPlayable = ["arc", "applytide", "eventa"].includes(project.slug);
+  const hasDeepDive = project.metrics.length > 0 || project.stack.length > 0 || Boolean(project.architecture) || Boolean(project.decisions?.length) || Boolean(project.feedback?.length) || Boolean(project.constraints) || Boolean(project.rebuild);
   const snapshotRows = [
     { label: locale === "he" ? "מה היה שבור" : "What was broken", value: project.snapshot.problem },
     { label: locale === "he" ? "המהלך" : "The move", value: project.snapshot.move },
@@ -43,7 +45,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ loca
   ];
 
   return (
-    <article className={`shell ${styles.page}`}>
+    <article className={`shell ${styles.page}`} data-project={project.slug}>
       <div className={styles.breadcrumb}>
         <Link href={href("/work", locale)}><span aria-hidden>{locale === "he" ? "→" : "←"}</span>{locale === "he" ? "כל העבודות" : "All work"}</Link>
         <span>{locale === "he" ? "מקרה בוחן" : "Case study"} / {String(index + 1).padStart(2, "0")}</span>
@@ -53,6 +55,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ loca
           <div className={styles.heroCopy}>
             <p className={styles.domain}>{project.domain.map((domain) => t(DOMAIN_LABEL[domain], locale)).join(" / ")}</p>
             <h1>{project.title}</h1>
+          </div>
+          <div className={styles.heroSummary}>
             <p className={styles.hook}>{t(project.hook, locale)}</p>
             <p className={styles.intro}>{t(project.oneLiner, locale)}</p>
             <div className={styles.actions}>
@@ -60,7 +64,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ loca
               {project.links?.repo ? <a href={project.links.repo} target="_blank" rel="noopener noreferrer" className={styles.action}>{locale === "he" ? "בדיקת קוד המקור" : "Inspect source"}<span aria-hidden>↗</span></a> : null}
             </div>
           </div>
-          <div className={styles.heroCover}><ProjectArtifact slug={project.slug} locale={locale} size="hero" /></div>
         </div>
         <dl className={styles.facts}>
           {[
@@ -73,19 +76,30 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ loca
         {project.statusDetail ? <p className={styles.statusNote}>{t(project.statusDetail, locale)}</p> : null}
         <nav className={styles.localNav} aria-label={locale === "he" ? "בתוך הפרויקט" : "Inside this project"}>
           <a href="#snapshot">{locale === "he" ? "התקציר" : "At a glance"}</a>
+          {hasPlayable ? <a href="#explore">{locale === "he" ? "להתנסות במערכת" : "Explore the system"}</a> : null}
           <a href="#story">{locale === "he" ? "הסיפור המלא" : "The full story"}</a>
           {hasDeepDive ? <a href="#deep-dive">{locale === "he" ? "החלטות וטכנולוגיה" : "Decisions & technology"}</a> : null}
         </nav>
       </header>
 
+      <details className={styles.modelStudy} open={!hasPlayable}>
+        <summary><span>{locale === "he" ? "המחשת הפרויקט" : "Project illustration"}</span><span className={styles.plus} aria-hidden>+</span></summary>
+        <ProjectArtifact slug={project.slug} locale={locale} size="hero" />
+      </details>
+
       <section id="snapshot" aria-labelledby="snapshot-title" className={styles.section}>
-        <div className={styles.sectionHeading}><span>01 / {locale === "he" ? "בתמצית" : "At a glance"}</span><h2 id="snapshot-title">{locale === "he" ? "גרסת 60 שניות." : "The 60-second version."}</h2></div>
+        <div className={styles.sectionHeading}><span>01 / {locale === "he" ? "בתמצית" : "At a glance"}</span><h2 id="snapshot-title">{locale === "he" ? "הפרויקט, בתמצית." : "The project, in focus."}</h2></div>
         <dl className={styles.snapshot}>{snapshotRows.map((row, rowIndex) => <div key={row.label}><dt><span>0{rowIndex + 1}</span>{row.label}</dt><dd>{t(row.value, locale)}</dd></div>)}</dl>
       </section>
 
+      {hasPlayable ? <section id="explore" className={styles.section} aria-labelledby="explore-title">
+        <div className={styles.sectionHeading}><span>02 / {locale === "he" ? "התנסות" : "Hands on"}</span><h2 id="explore-title">{locale === "he" ? "להתנסות במערכת." : "Explore the system."}</h2></div>
+        <PlayableCase slug={project.slug} locale={locale} />
+      </section> : null}
+
       <section id="story" className={styles.section} aria-labelledby="story-title">
         <div className={styles.sectionHeading}>
-          <span>02 / {locale === "he" ? "איך זה קרה" : "How it happened"}</span>
+          <span>{hasPlayable ? "03" : "02"} / {locale === "he" ? "איך זה קרה" : "How it happened"}</span>
           <div><h2 id="story-title">{locale === "he" ? "הסיפור המלא." : "The full story."}</h2><p>{locale === "he" ? "התקציר למעלה עומד בפני עצמו. כאן אפשר לפתוח את קבלת ההחלטות, פרק אחד בכל פעם." : "The summary above stands on its own. Open the decision trail below, one chapter at a time."}</p></div>
         </div>
         <div className={styles.chapters}>
@@ -97,9 +111,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ loca
       </section>
 
       {hasDeepDive ? <section id="deep-dive" className={styles.section} aria-labelledby="deep-title">
-        <div className={styles.sectionHeading}><span>03 / {locale === "he" ? "מבט מקרוב" : "A closer look"}</span><div><h2 id="deep-title">{locale === "he" ? "מתחת לפני השטח." : "Beneath the surface."}</h2><p>{locale === "he" ? "המערכת, הפשרות וההחלטות. עומק לפי בחירה." : "The system, the trade-offs and the decisions. Explore what interests you."}</p></div></div>
+        <div className={styles.sectionHeading}><span>{hasPlayable ? "04" : "03"} / {locale === "he" ? "מבט מקרוב" : "A closer look"}</span><div><h2 id="deep-title">{locale === "he" ? "מתחת לפני השטח." : "Beneath the surface."}</h2><p>{locale === "he" ? "המערכת, הפשרות וההחלטות. עומק לפי בחירה." : "The system, the trade-offs and the decisions. Explore what interests you."}</p></div></div>
         <div className={styles.deepList}>
-          {(project.metrics.length > 0 || project.architecture) ? <details className={styles.deepItem}>
+          {(project.metrics.length > 0 || project.stack.length > 0 || project.architecture) ? <details className={styles.deepItem}>
             <summary><span>{locale === "he" ? "מערכת וארכיטקטורה" : "System & architecture"}</span><span aria-hidden className={styles.plus}>+</span></summary>
             <div className={styles.deepBody}>
               {project.metrics.length > 0 ? <MetricBlock metrics={project.metrics} locale={locale} /> : null}
@@ -108,6 +122,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ loca
             </div>
           </details> : null}
           {project.decisions?.length ? <details className={styles.deepItem}><summary><span>{locale === "he" ? "החלטות ופשרות" : "Decisions & trade-offs"}</span><span aria-hidden className={styles.plus}>+</span></summary><div className={styles.deepBody}><DecisionLog decisions={project.decisions} locale={locale} /></div></details> : null}
+          {project.feedback?.length ? <details className={styles.deepItem}><summary><span>{locale === "he" ? "משוב מהשטח" : "Field feedback"}</span><span aria-hidden className={styles.plus}>+</span></summary><div className={styles.deepBody}><FieldFeedback items={project.feedback} locale={locale} /></div></details> : null}
           {project.constraints ? <details className={styles.deepItem}><summary><span>{locale === "he" ? "משחק האילוצים" : "Constraint study"}</span><span aria-hidden className={styles.plus}>+</span></summary><div className={styles.deepBody}><ConstraintDial study={project.constraints} locale={locale} /></div></details> : null}
           {project.rebuild ? <details className={styles.deepItem}><summary><span>{t(ui.common.rebuildToday, locale)}</span><span aria-hidden className={styles.plus}>+</span></summary><div className={styles.deepBody}><RebuildList items={t(project.rebuild, locale)} /></div></details> : null}
         </div>

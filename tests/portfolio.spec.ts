@@ -44,30 +44,42 @@ for (const locale of ["en", "he"]) {
   });
 }
 
-test("folding responds to keyboard and exposes its complete explanation", async ({ page }) => {
+test("project selection responds to keyboard and opens the selected case directly", async ({ page }) => {
   await page.goto("/en");
-  const unfold = page.getByRole("button", { name: "Unfold the thinking" });
   await expect(page.locator("canvas")).toBeVisible();
   await expect(page.locator('[data-ready="true"]')).toBeVisible();
-  await unfold.focus();
+  await page.getByRole("button", { name: "Follow a lesson", exact: true }).focus();
   await page.keyboard.press("Enter");
-  const fold = page.getByRole("button", { name: "Fold it back" });
-  await expect(fold).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByRole("status")).toContainText("unfolded");
-  for (const label of ["Reusable lessons", "Classroom work", "Feedback & revision"]) {
-    await expect(page.getByText(label, { exact: true })).toBeVisible();
-  }
-  await fold.click();
-  await expect(page.getByRole("button", { name: "Unfold the thinking" })).toHaveAttribute("aria-pressed", "false");
+  await expect(page.getByRole("button", { name: "Reset the view", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("status")).toContainText("source stays connected");
+  await page.getByRole("button", { name: "Preview Applytide", exact: true }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("main h1")).toHaveText("Applytide.");
+  await expect(page.getByRole("button", { name: "Preview Applytide", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: "Preview Arc", exact: true })).toHaveAttribute("aria-pressed", "false");
+  await expect(page.getByRole("button", { name: "Follow an opportunity", exact: true })).toHaveAttribute("aria-pressed", "false");
+  await expect(page).toHaveURL(/project=applytide$/);
+  await page.getByRole("link", { name: "Explore the project", exact: true }).click();
+  await expect(page).toHaveURL(/\/en\/work\/applytide$/);
+  await page.goBack();
+  await expect(page.locator("main h1")).toHaveText("Applytide.");
+  await page.locator('header a[href="/en"]').first().click();
+  await expect(page).toHaveURL(/\/en$/);
+  await expect(page.locator("main h1")).toHaveText("Arc.");
 });
 
-test("reduced-motion readers can use the complete page and fold control", async ({ page }) => {
+test("reduced-motion readers can switch projects and use the complete controls", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/en");
-  await page.getByRole("button", { name: "Unfold the thinking" }).click();
-  await expect(page.getByRole("button", { name: "Fold it back" })).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("link", { name: "Explore my work", exact: true }).click();
-  await expect(page.locator("#selected-title")).toBeInViewport();
+  await expect(page.locator('[data-motion="off"]')).toBeVisible();
+  await page.getByRole("button", { name: "Preview Eventa", exact: true }).click();
+  await expect(page.locator("main h1")).toHaveText("Eventa.");
+  await page.getByRole("button", { name: "Make a connection", exact: true }).click();
+  await expect(page.getByRole("status")).toContainText("fictional guest profiles");
+  await page.getByRole("button", { name: "Reset the view", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Make a connection", exact: true })).toHaveAttribute("aria-pressed", "false");
+  await page.getByRole("link", { name: "All work", exact: true }).click();
+  await expect(page).toHaveURL(/\/en\/work$/);
 });
 
 test("a lost WebGL context leaves the artwork and controls usable", async ({ page }) => {
@@ -77,9 +89,43 @@ test("a lost WebGL context leaves the artwork and controls usable", async ({ pag
     canvas.getContext("webgl2")?.getExtension("WEBGL_lose_context")?.loseContext();
   });
   await expect(page.locator('[data-hidden="false"]')).toBeVisible();
-  await page.getByRole("button", { name: "Unfold the thinking" }).click();
-  await expect(page.getByRole("button", { name: "Fold it back" })).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByRole("link", { name: "Explore my work", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Follow a lesson", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Reset the view", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Preview Eventa", exact: true }).click();
+  await expect(page.locator("main h1")).toHaveText("Eventa.");
+  await expect(page.getByRole("link", { name: "Explore the project", exact: true })).toHaveAttribute("href", "/en/work/eventa");
+});
+
+test("a selected home scene survives reload and language switching", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/en");
+  await expect(page.getByRole("button", { name: "Preview Eventa", exact: true })).toBeInViewport();
+  await page.getByRole("button", { name: "Preview Eventa", exact: true }).click();
+  await page.reload();
+  await expect(page.locator("main h1")).toHaveText("Eventa.");
+  const hebrew = page.locator('header a[hreflang="he"]:visible').first();
+  await expect(hebrew).toHaveAttribute("href", "/he?project=eventa");
+  await hebrew.click();
+  await expect(page.locator("main h1")).toHaveText("Eventa.");
+  await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
+  await expect(page.locator('a[href="/he/work/eventa"]').first()).toBeVisible();
+});
+
+test("WebGL initialization failure preserves project browsing", async ({ page }) => {
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (this: HTMLCanvasElement, type: string, ...args: unknown[]) {
+      if (type.startsWith("webgl") || type === "experimental-webgl") return null;
+      return original.apply(this, [type, ...args] as Parameters<typeof original>);
+    } as typeof original;
+  });
+  await page.goto("/en?project=applytide");
+  await expect(page.locator("main h1")).toHaveText("Applytide.");
+  await expect(page.locator('[data-hidden="false"]')).toBeVisible();
+  await page.getByRole("button", { name: "Preview Eventa", exact: true }).click();
+  await expect(page.locator("main h1")).toHaveText("Eventa.");
+  await page.getByRole("link", { name: "Explore the project", exact: true }).click();
+  await expect(page).toHaveURL(/\/en\/work\/eventa$/);
 });
 
 test("email copying provides confirmation and preserves the direct email link", async ({ context, page }) => {

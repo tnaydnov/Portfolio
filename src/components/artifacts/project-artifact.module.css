@@ -1,103 +1,21 @@
-.artifact { --cover: #e5e8fb; --accent: #264bec; --art-ink: #20264a; --sheet: #fffef8; position: relative; display: flex; flex-direction: column; min-width: 0; overflow: hidden; border-radius: .4rem; background: var(--cover); color: var(--art-ink); isolation: isolate; container-type: inline-size; }
-.arc { --cover: #e6eadb; --accent: #365b49; }
-.apply { --cover: #e4e8fb; --accent: #264bec; }
-.event { --cover: #f3dfca; --accent: #ae502f; }
-.recognition { --cover: #e1e9eb; --accent: #286477; }
-.trading { --cover: #f2e8c5; --accent: #725d2d; }
-.stage { position: relative; flex: 1; min-height: 21rem; padding-bottom: 2.5rem; overflow: hidden; }
-.artifact[data-size="hero"] .stage { min-height: 29rem; }
-.coverCaption { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1.5rem 1.8rem 0; color: var(--accent); }
-.coverCaption > span:first-child { font-family: var(--font-heading), Georgia, serif; font-size: clamp(1.05rem,3.6cqw,1.8rem); letter-spacing: -.035em; }
-.coverCaption > span:last-child { font-size: .65rem; }
-.scene { position: absolute; inset: 12% 0 10%; perspective: 1000px; }
-.scene strong, .scene b { font-weight: 500; }
-.scene strong { font-family: var(--font-heading), Georgia, serif; letter-spacing: -.045em; line-height: 1.05; }
-.studyNote { position: absolute; bottom: 1.2rem; left: 1.8rem; font-size: .71rem; color: var(--accent); }
-.provenance { position: relative; z-index: 4; padding: .75rem 1.1rem; border-top: 1px solid #20264a16; background: #fffef86b; font-size: .65rem; line-height: 1.6; color: #535c65; }
-.book, .application, .eventStudy, .recognitionStudy, .tradingStudy { position: absolute; inset: 3% 7%; transform-style: preserve-3d; transition: transform 650ms cubic-bezier(.2,.75,.2,1); }
-.artifact:hover .book, .artifact:hover .application, .artifact:hover .eventStudy, .artifact:hover .recognitionStudy, .artifact:hover .tradingStudy { transform: translateY(-.4rem) rotate(-1deg); }
-.book { transform: rotate(-7deg); }
-.bookBack { position: absolute; inset: 18% 12% 6%; background: #829778; transform: rotate(-3deg); box-shadow: 0 20px 30px #34483220; }
-.bookLeft { position: absolute; top: 15%; bottom: 10%; left: 12%; width: 38%; background: linear-gradient(90deg,#fffef8 80%,#d7dccb); transform: rotateY(14deg); transform-origin: right; padding: 7% 5%; box-shadow: -9px 12px 18px #3448320e; }
-.bookLeft > span, .bookRight > span { display: block; font-size: clamp(.4rem,1.35cqw,.72rem); color: var(--accent); }
-.bookLeft strong { display: block; margin-top: 17%; font-size: clamp(1.6rem,6.2cqw,3.5rem); }
-.bookLeft > i { display: block; width: 81%; height: 1px; background: #9fab986e; margin-top: 11%; }
-.bookLeft > i:nth-of-type(2) { width: 65%; margin-top: 7%; }
-.bookLeft > i:nth-of-type(3) { width: 72%; margin-top: 7%; }
-.bookLeft > b { position: absolute; bottom: 7%; font-size: 1.5cqw; color: var(--accent); }
-.bookRight { position: absolute; top: 15%; bottom: 10%; left: 50%; width: 37%; background: linear-gradient(90deg,#dde1d4,#fffef8 12%); transform: rotateY(-15deg); transform-origin: left; padding: 7% 4.5%; box-shadow: 14px 19px 24px #34483220; }
-.lesson { display: flex; align-items: center; gap: 7%; margin-top: 12%; padding-bottom: 10%; border-bottom: 1px solid #9fab984f; font-size: clamp(.55rem,1.75cqw,.9rem); }
-.lesson b { color: var(--accent); font-size: .8em; }
-.lesson i { margin-left: auto; font-style: normal; color: var(--accent); }
-.bookRight > small { display: block; margin-top: 13%; font-size: 1.2cqw; color: #626f60; }
-.bookTab { position: absolute; right: 4%; bottom: 18%; padding: 3% 4%; background: #f8e88a; color: #565235; font-size: clamp(.45rem,1.35cqw,.72rem); transform: rotate(9deg) translateZ(25px); box-shadow: 4px 8px 12px #34483216; }
-.application { transform: rotate(-5deg); }
-.applicationBack { position: absolute; inset: 14% 19% 8% 14%; background: #859bf4; transform: rotate(-7deg); box-shadow: 0 15px 25px #27478b18; }
-.applicationSheet { position: absolute; inset: 12% 17% 10% 15%; background: var(--sheet); box-shadow: 12px 20px 30px #27478b22; }
-.browser { display: flex; align-items: center; gap: 3%; height: 12%; padding-inline: 6%; border-bottom: 1px solid #20264a19; }
-.browser i { height: .7cqw; width: .7cqw; border-radius: 50%; background: #a4aed3; }
-.browser span { margin-left: 7%; font-size: 1.15cqw; color: #747c94; }
-.sheetKicker { display: block; margin: 8% 9% 0; font-size: 1.3cqw; color: var(--accent); }
-.applicationSheet > strong { display: block; margin: 5% 9%; font-size: clamp(1.65rem,6.2cqw,3.5rem); }
-.applicationRows { display: flex; gap: 6%; margin: 8% 9%; font-size: 1.5cqw; color: #687089; }
-.applicationRows span { display: flex; align-items: center; gap: .5cqw; }
-.applicationRows i { width: 1cqw; height: 1cqw; border-radius: 50%; background: #a2b0e6; }
-.applicationFold { position: absolute; right: 5%; bottom: 6%; width: 31%; height: 48%; padding: 6% 4%; color: #fffefb; background: linear-gradient(130deg,#4968f2,#264bec 75%); transform: rotate(12deg) translateZ(40px); box-shadow: 8px 16px 22px #264bec25; clip-path: polygon(0 0,80% 0,100% 18%,100% 100%,0 100%); }
-.applicationFold::after { content: ''; position: absolute; right: 0; top: 0; width: 20%; height: 18%; background: #93a7ff; box-shadow: -2px 2px 3px #1736a636; }
-.applicationFold > span { font-size: 1.2cqw; }
-.applicationFold > strong { display: block; margin-top: 13%; font-size: clamp(1.2rem,4.3cqw,2.5rem); }
-.applicationFold > i { position: absolute; right: 14%; bottom: 7%; font-size: 5cqw; font-style: normal; }
-.applicationTicket { position: absolute; top: 5%; left: 6%; padding: 4% 5%; width: 30%; color: #46462d; background: #f8e88a; transform: rotate(12deg) translateZ(20px); box-shadow: 3px 8px 16px #3b469017; font-size: 1.6cqw; line-height: 1.5; }
-.applicationTicket b { position: absolute; right: 12%; bottom: 19%; font-size: 3cqw; }
-.eventStudy { transform: rotate(2deg); }
-.eventRing { position: absolute; width: 69%; aspect-ratio: 1; top: 4%; left: 15%; border: 1px solid #af6c453e; border-radius: 50%; transform: rotateX(34deg); }
-.eventRing::before { content: ''; position: absolute; inset: 14%; border: 1px solid #af6c4526; border-radius: inherit; }
-.eventCard { position: absolute; left: 18%; top: 7%; width: 40%; height: 83%; padding: 7% 5%; background: #fffaf0; transform: rotate(-10deg); box-shadow: 9px 17px 24px #8d583126; }
-.eventCard > span, .guestCard > span { font-size: 1.25cqw; color: var(--accent); }
-.eventCard strong { display: block; margin-top: 12%; font-size: clamp(2rem,7.6cqw,4.1rem); }
-.eventSymbol { position: relative; width: 29%; aspect-ratio: 1; margin-top: 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 9%; }
-.eventSymbol i { background: #ae502f; border-radius: 50% 50% 0 50%; }
-.eventSymbol i:nth-child(even) { transform: rotate(90deg); }
-.eventCard small { display: block; margin-top: 14%; font-size: 1.2cqw; color: #876e5e; }
-.guestCard { position: absolute; top: 22%; left: 53%; width: 34%; height: 65%; padding: 6% 4%; background: #b85432; color: #fff5e7; transform: rotate(10deg) translateZ(20px); box-shadow: 8px 16px 23px #8d583122; }
-.guestCard > span { color: #ffddc7; }
-.guestCard > strong { display: block; margin-top: 12%; font-size: clamp(1.4rem,4.6cqw,2.9rem); }
-.guestPortrait { position: relative; height: 28%; margin-top: 9%; overflow: hidden; }
-.guestPortrait i { position: absolute; top: 0; left: 12%; width: 22%; aspect-ratio: 1; background: #f3bf91; border-radius: 50%; }
-.guestPortrait b { position: absolute; bottom: -40%; left: 0; width: 48%; aspect-ratio: 1; background: #e99867; border-radius: 50%; }
-.guestCard small { display: block; margin-top: 8%; font-size: 1.1cqw; color: #ffddc7; }
-.eventTicket { position: absolute; left: 7%; bottom: 3%; display: flex; align-items: center; gap: 3cqw; padding: 4% 6%; background: #f8e88a; transform: rotate(8deg) translateZ(30px); box-shadow: 4px 7px 14px #8d583117; font-size: 1.6cqw; line-height: 1.3; }
-.eventTicket b { color: #ae502f; font-size: 4cqw; }
-.recognitionStudy { transform: rotate(-3deg); }
-.captureSheet, .recognitionSheet, .outputSheet { position: absolute; width: 38%; height: 70%; padding: 5% 4%; box-shadow: 8px 16px 22px #294d6424; }
-.captureSheet { top: 5%; left: 5%; background: #527380; color: white; transform: rotate(-7deg); }
-.captureSheet > span, .recognitionSheet > span, .outputSheet > span { font-size: 1.25cqw; }
-.captureSheet small, .recognitionSheet small, .outputSheet small { position: absolute; bottom: 7%; font-size: 1.2cqw; }
-.captureFrame { position: relative; height: 49%; margin-top: 20%; border: 1px solid #b9d9df70; }
-.captureFrame > i { position: absolute; width: 15%; height: 20%; border-color: #e4f3ed; border-style: solid; border-width: 2px 0 0 2px; top: 9%; left: 8%; }
-.captureFrame > i:nth-child(2) { left: auto; right: 8%; rotate: 90deg; }
-.captureFrame > i:nth-child(3) { top: auto; bottom: 9%; rotate: -90deg; }
-.captureFrame > i:nth-child(4) { top: auto; left: auto; bottom: 9%; right: 8%; rotate: 180deg; }
-.captureFrame b { position: absolute; inset: 32% 19%; background: #d8e3df; transform: rotate(-4deg); }
-.recognitionSheet { top: 16%; left: 31%; background: #fffef8; transform: rotate(3deg) translateZ(20px); }
-.plate { margin-top: 25%; padding: 10% 4%; border: 1px solid #20264a56; border-radius: 4px; font-family: var(--font-code), monospace; font-size: 3.1cqw; white-space: nowrap; text-align: center; }
-.scanLines { display: flex; gap: 8%; margin-top: 14%; }
-.scanLines i { display: block; width: 12%; height: 2px; background: #9fb9bd; }
-.outputSheet { top: 30%; left: 61%; width: 32%; height: 61%; background: #c9dce1; transform: rotate(12deg) translateZ(40px); }
-.outputSheet strong { display: block; margin-top: 25%; font-size: 4.5cqw; }
-.outputSheet > i { display: block; font-style: normal; margin-top: 9%; font-size: 4cqw; }
-.tradingStudy { transform: rotate(-5deg); }
-.tradingBase { position: absolute; inset: 8% 13% 10%; padding: 7% 6%; background: #fffaf0; transform: rotate(-4deg); box-shadow: 9px 18px 25px #67553220; }
-.tradingBase > span { font-size: 1.3cqw; color: var(--accent); }
-.tradingBase > strong { display: block; margin-top: 8%; font-size: 6cqw; }
-.tradingBase > div { display: flex; gap: 8%; margin-top: 10%; }
-.tradingBase i { display: block; width: 15%; aspect-ratio: 1; border: 1px solid #9c8e686e; transform: rotate(45deg); }
-.permissionSheet, .stateSheet { position: absolute; bottom: 3%; width: 36%; height: 43%; padding: 5% 4%; box-shadow: 6px 12px 20px #6755321a; }
-.permissionSheet { left: 4%; background: #f8e88a; transform: rotate(8deg) translateZ(20px); }
-.stateSheet { right: 3%; background: #725d2d; color: #fffaf0; transform: rotate(-7deg) translateZ(30px); }
-.permissionSheet span, .stateSheet span { display: block; font-size: 1.2cqw; }
-.permissionSheet b, .stateSheet b { display: block; margin-top: 11%; font-size: 2.4cqw; line-height: 1.3; }
-.permissionSheet i, .stateSheet i { position: absolute; bottom: 10%; right: 12%; font-style: normal; font-size: 4cqw; }
-@container(max-width: 480px) { .stage { min-height: 19rem; } .artifact[data-size="hero"] .stage { min-height: 22rem; } .coverCaption { padding: 1.2rem 1.2rem 0; } .coverCaption > span:last-child { font-size: .57rem; } .scene { inset: 13% -3% 13%; } .studyNote { left: 1.2rem; bottom: 1rem; font-size: .65rem; } .provenance { font-size: .6rem; } }
-@media(prefers-reduced-motion: reduce) { .book, .application, .eventStudy, .recognitionStudy, .tradingStudy { transition: none; } .artifact:hover .book { transform: rotate(-7deg); } .artifact:hover .application, .artifact:hover .tradingStudy { transform: rotate(-5deg); } .artifact:hover .eventStudy { transform: rotate(2deg); } .artifact:hover .recognitionStudy { transform: rotate(-3deg); } }
+.artifact { --art-accent: #a7ecd4; --art-glow: #a7ecd412; position: relative; width: 100%; min-width: 0; overflow: hidden; color: var(--art-accent); background: #10181a; isolation: isolate; container-type: inline-size; }
+.arc { --art-accent: #a7ecd4; --art-glow: #a7ecd415; background: #101c1a; }
+.apply { --art-accent: #ffad91; --art-glow: #ffad9114; background: #1c1616; }
+.event { --art-accent: #c9b5f5; --art-glow: #c9b5f513; background: #181620; }
+.recognition { --art-accent: #a7d8ef; --art-glow: #a7d8ef13; background: #111a20; }
+.trading { --art-accent: #e8ce9a; --art-glow: #e8ce9a14; background: #1b1915; }
+.stage { position: relative; width: 100%; aspect-ratio: 1.82; min-height: 15rem; background: radial-gradient(ellipse at 52% 35%,var(--art-glow),transparent 64%); }
+.coverCaption { position: absolute; z-index: 2; inset: 1.7rem 2rem auto; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.coverCaption > span:first-child { font-family: var(--font-heading),sans-serif; font-size: clamp(.85rem,2.2cqw,1.4rem); line-height: 1.3; letter-spacing: -.025em; }
+.coverCaption > span:last-child { max-width: 48%; font-size: .62rem; line-height: 1.6; text-align: end; color: #b1bcbb; }
+.scene { position: absolute; inset: 0; width: 100%; height: 100%; transform: scale(1.02); transition: transform 600ms cubic-bezier(.2,.65,.3,1); }
+.artifact:hover .scene { transform: scale(1.045); }
+.svgLabel { fill: currentColor; font: 14px var(--font-body),sans-serif; letter-spacing: .025em; opacity: .8; }
+.studyNote { position: absolute; z-index: 2; inset: auto 2rem 1.6rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: .7rem; color: #c1cbc7; }
+.studyNote i { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border: 1px solid #d5ebe42b; border-radius: 50%; font-size: .8rem; font-style: normal; color: var(--art-accent); }
+.artifact[data-size="card"] .coverCaption { inset: 1.2rem 1.4rem auto; }
+.artifact[data-size="card"] .studyNote { inset: auto 1.4rem 1.2rem; }
+:global([dir="rtl"]) .studyNote i { scale: -1 1; }
+@container(max-width: 500px) { .stage { aspect-ratio: 1.2; min-height: 19rem; } .coverCaption { inset: 1.2rem 1.2rem auto; } .coverCaption > span:first-child { max-width: 50%; font-size: .82rem; } .coverCaption > span:last-child { max-width: 43%; font-size: .61rem; } .scene { width: 127%; max-width: none; left: -13.5%; right: auto; } .studyNote { inset: auto 1.2rem 1.2rem; font-size: .64rem; } .svgLabel { font-size: 27px; } }
+@media(prefers-reduced-motion: reduce) { .scene { transition: none; } .artifact:hover .scene { transform: scale(1.02); } }
 @media(forced-colors: active) { .artifact { border: 1px solid CanvasText; } }

@@ -41,6 +41,13 @@ export function ArchitectureGraph({ architecture, locale }: { architecture: Arch
     <div aria-live="polite" aria-atomic="true" className={styles.graphDetail}>
       <div><p>{t(ui.common.selected, locale)}</p><h3>{detail.label}</h3>{detail.sub ? <small>{detail.sub}</small> : null}</div>
       <p>{t(detail.note, locale)}</p>
+      <div className={styles.nodeConnections}>
+        <p>{locale === "he" ? "חיבורים" : "Connections"}</p>
+        <ul>{architecture.edges.filter((edge) => edge.from === selected || edge.to === selected).map((edge, index) => <li key={`${edge.from}-${edge.to}-${index}`}>
+          <span dir="ltr">{nodeById[edge.from]?.label} <span aria-hidden>→</span><span className="sr-only">{locale === "he" ? "אל" : "to"}</span> {nodeById[edge.to]?.label}</span>
+          {edge.label ? <small>{edge.label}</small> : null}
+        </li>)}</ul>
+      </div>
     </div>
     <figcaption>{t(architecture.caption, locale)}</figcaption>
   </figure>;

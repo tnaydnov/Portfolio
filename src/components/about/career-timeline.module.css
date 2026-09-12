@@ -1,31 +1,32 @@
 .timeline { border-block-start: 1px solid var(--rule-strong); }
-.item { padding-block: 2rem 2.5rem; border-block-end: 1px solid var(--rule); }
-.chronology { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1rem; margin-block-end: 1.7rem; font-size: .7rem; color: var(--text-faint); }
-.sequence { display: grid; place-items: center; inline-size: 1.9rem; block-size: 1.9rem; border-radius: 50%; background: var(--ink-2); color: var(--signal); font-weight: 700; }
-.current { display: inline-flex; align-items: center; gap: .45rem; font-size: .65rem; font-weight: 650; color: var(--trace); }
-.current::before { content: ""; inline-size: 5px; block-size: 5px; border-radius: 50%; background: currentColor; }
-.org { margin-block-end: .65rem; color: var(--signal); font-size: .81rem; line-height: 1.65; font-weight: 650; }
-.title { max-inline-size: 30ch; font-family: var(--font-heading), serif; font-size: clamp(1.7rem, 2.9vw, 2.4rem); line-height: 1.16; letter-spacing: -.04em; }
-.summary { margin-block-start: 1.1rem; max-inline-size: 62ch; color: var(--text-muted); font-size: .92rem; line-height: 1.85; }
-.disclosure { margin-block-start: 1.6rem; border-block-start: 1px solid var(--rule); }
-.disclosure summary { display: flex; min-block-size: 48px; align-items: center; justify-content: space-between; gap: 1rem; list-style: none; cursor: pointer; font-size: .75rem; font-weight: 650; }
+.item { position: relative; padding-block: 1.8rem 2rem; padding-inline-start: 1.7rem; border-inline-start: 1px solid var(--rule); border-block-end: 1px solid var(--rule); }
+.item::before { content: ""; position: absolute; inset-inline-start: -3px; inset-block-start: 2.2rem; inline-size: 5px; block-size: 5px; background: var(--signal); }
+.chronology { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem 1rem; margin-block-end: 1.4rem; font-family: var(--font-code), var(--font-body), monospace; font-size: .63rem; color: var(--text-faint); }
+.sequence { color: var(--signal); opacity: .6; }
+.current { display: inline-flex; align-items: center; gap: .45rem; font-family: var(--font-body), sans-serif; font-size: .61rem; color: var(--signal); }
+.current::before { content: ""; inline-size: 4px; block-size: 4px; border-radius: 50%; background: currentColor; }
+.org { margin-block-end: .65rem; color: var(--signal); font-size: .75rem; line-height: 1.7; font-weight: 500; }
+.title { max-inline-size: 31ch; font-family: var(--font-heading), sans-serif; font-size: clamp(1.6rem, 2.4vw, 2.15rem); line-height: 1.18; font-weight: 500; letter-spacing: -.045em; }
+.summary { margin-block-start: 1rem; max-inline-size: 62ch; color: var(--text-muted); font-size: .84rem; line-height: 1.95; }
+.disclosure { margin-block-start: 1.4rem; border-block-start: 1px solid var(--rule); }
+.disclosure summary { display: flex; min-block-size: 48px; align-items: center; justify-content: space-between; gap: 1rem; list-style: none; cursor: pointer; font-size: .7rem; }
 .disclosure summary::-webkit-details-marker { display: none; }
 .disclosure summary:hover, .disclosure[open] summary { color: var(--signal); }
-.disclosureMark { display: grid; place-items: center; inline-size: 26px; block-size: 26px; border: 1px solid var(--rule); border-radius: 50%; font-size: 1.05rem; font-weight: 400; transition: transform 180ms ease; }
+.disclosureMark { display: grid; place-items: center; inline-size: 24px; block-size: 24px; border: 1px solid var(--rule); font-size: 1rem; font-weight: 400; transition: transform 180ms ease; }
 .disclosure[open] .disclosureMark { transform: rotate(45deg); }
 .openCue { display: none; }
 .disclosure[open] .openCue { display: inline; }
 .disclosure[open] .closedCue { display: none; }
-.detailPanel { padding: 1rem 1.25rem 1.35rem; border-radius: 6px; background: var(--surface-2); }
-.detailLabel { margin-block-end: .9rem; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
-.detailPanel ul { display: grid; gap: 1rem; }
-.detailPanel li { position: relative; padding-inline-start: 1rem; font-size: .84rem; line-height: 1.85; color: var(--text-muted); }
-.detailPanel li::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: .8em; inline-size: 4px; block-size: 4px; background: var(--signal); }
-.educationTimeline { display: grid; gap: 1rem; }
-.educationItem { padding: 1.8rem; border: 1px solid var(--rule); border-radius: 7px; background: var(--surface); }
-.educationDate { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.4rem; margin-block-end: 1.4rem; color: var(--text-faint); font-size: .7rem; }
-.educationItem .title { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+.detailPanel { padding: 1rem 1.1rem 1.25rem; border-inline-start: 1px solid var(--signal); background: var(--surface); }
+.detailLabel { margin-block-end: .9rem; color: var(--text); font-size: .6rem; font-weight: 500; text-transform: uppercase; letter-spacing: .07em; }
+.detailPanel ul { display: grid; gap: .95rem; }
+.detailPanel li { position: relative; padding-inline-start: 1rem; font-size: .77rem; line-height: 1.95; color: var(--text-muted); }
+.detailPanel li::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: .8em; inline-size: 3px; block-size: 3px; background: var(--signal); }
+.educationTimeline { border-block-start: 1px solid var(--rule-strong); }
+.educationItem { padding-block: 1.8rem; border-block-end: 1px solid var(--rule); }
+.educationDate { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem 1.4rem; margin-block-end: 1.4rem; color: var(--text-faint); font-family: var(--font-code), var(--font-body), monospace; font-size: .63rem; }
+.educationItem .title { font-size: clamp(1.5rem, 2.4vw, 2rem); }
 .educationItem .org { margin-block: .85rem 0; }
-@media (max-width: 600px) { .educationItem { padding: 1.4rem; } .chronology { gap: .6rem; } }
+@media (max-width: 600px) { .item { padding-inline-start: 1.2rem; } .chronology { gap: .6rem; } }
 @media (prefers-reduced-motion: reduce) { .disclosureMark { transition: none; } }
 @media print { .disclosure:not([open]) > .detailPanel { display: block; } .disclosure summary { display: none; } }

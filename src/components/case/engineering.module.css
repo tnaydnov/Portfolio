@@ -1,6 +1,7 @@
-.metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1rem; }
-.metric { padding: 1.5rem; background: var(--ink-2); border-radius: .25rem; }
-.metric dd { font-family: var(--font-heading),Georgia,serif; font-size: clamp(1.75rem,3.5vw,3rem); line-height: 1.1; color: var(--signal); }
+.metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); border-block: 1px solid var(--rule); }
+.metric { padding: 1.75rem 1.5rem; border-inline-end: 1px solid var(--rule); }
+.metric:last-child { border-inline-end: 0; }
+.metric dd { font-family: var(--font-heading),sans-serif; font-size: clamp(1.75rem,3.5vw,3rem); line-height: 1.1; color: var(--signal); }
 .metric dt { margin-top: .85rem; font-size: .74rem; font-weight: 600; line-height: 1.5; }
 .metric p { margin-top: .5rem; font-size: .7rem; line-height: 1.7; color: var(--text-muted); }
 .decisions { display: grid; }
@@ -15,7 +16,7 @@
 .decision dd { font-size: .88rem; color: var(--text-muted); line-height: 1.85; }
 .feedback > li { padding-block: 2rem; border-bottom: 1px solid var(--rule); }
 .feedback figure { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-.feedback blockquote { font-family: var(--font-heading),Georgia,serif; font-size: 1.5rem; line-height: 1.4; }
+.feedback blockquote { font-family: var(--font-heading),sans-serif; font-size: 1.5rem; line-height: 1.4; }
 .feedback figcaption { margin-top: 1rem; color: var(--signal); font-size: .7rem; }
 .feedback figure > div:last-child { padding-inline-start: 1.5rem; border-inline-start: 1px solid var(--rule); }
 .feedback figure > div:last-child p:first-child { color: var(--signal); font-size: .72rem; }
@@ -24,10 +25,10 @@
 .rebuild > li + li { border-top: 1px solid var(--rule); }
 .rebuild span { color: var(--signal); font-size: .75rem; padding-top: .25rem; }
 .rebuild p { max-width: 75ch; font-size: .9rem; line-height: 1.85; color: var(--text-muted); }
-.graph { border: 1px solid var(--rule); border-radius: .35rem; overflow: hidden; }
-.diagram { position: relative; height: 25rem; overflow: hidden; background-color: var(--ink-2); background-image: radial-gradient(#20264a22 .8px,transparent .8px); background-size: 20px 20px; }
+.graph { border: 1px solid var(--rule); overflow: hidden; }
+.diagram { position: relative; height: 25rem; overflow: hidden; background-color: #10191b; background-image: radial-gradient(#d5ebe419 .8px,transparent .8px); background-size: 20px 20px; }
 .diagram svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.node { position: absolute; width: 18%; max-width: 10rem; min-height: 4.3rem; padding: .7rem; transform: translate(-50%,-50%); border: 1px solid var(--rule-strong); border-radius: .25rem; background: var(--surface); box-shadow: 0 5px 12px #20264a08; }
+.node { position: absolute; width: 18%; max-width: 10rem; min-height: 4.3rem; padding: .7rem; transform: translate(-50%,-50%); border: 1px solid var(--rule-strong); background: var(--surface); box-shadow: 0 5px 12px #0002; }
 .node[data-selected="true"] { border-color: var(--signal); box-shadow: 0 0 0 1px var(--signal); }
 .node > i { display: block; width: 1.25rem; height: 2px; margin-bottom: .45rem; }
 .node > span { display: block; font-size: .69rem; font-weight: 650; line-height: 1.5; }
@@ -35,7 +36,7 @@
 .nodeButtons { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .5rem; padding: 1.3rem; border-top: 1px solid var(--rule); }
 .nodeButtons button { min-width: 0; min-height: 3.5rem; padding: .75rem 1rem; border: 1px solid var(--rule); border-radius: .25rem; text-align: start; font-size: .76rem; line-height: 1.5; transition: border-color 180ms ease, background 180ms ease; }
 .nodeButtons button:hover { border-color: var(--signal); }
-.nodeButtons button[aria-pressed="true"] { border-color: var(--signal); background: #e8edff; color: var(--signal); }
+.nodeButtons button[aria-pressed="true"] { border-color: var(--signal); background: color-mix(in srgb,var(--signal) 9%,var(--ink)); color: var(--signal); }
 .nodeButtons button > span { display: block; font-weight: 600; }
 .nodeButtons small { display: block; margin-top: .25rem; font-size: .66rem; color: var(--text-muted); }
 .graphDetail { display: grid; grid-template-columns: .7fr 1fr; gap: 2rem; padding: 1.5rem; border-top: 1px solid var(--rule); }
@@ -43,16 +44,21 @@
 .graphDetail h3 { margin-top: .6rem; font-size: 1.5rem; }
 .graphDetail small { display: block; margin-top: .4rem; font-size: .7rem; color: var(--text-faint); }
 .graphDetail > p { font-size: .85rem; line-height: 1.85; color: var(--text-muted); }
+.nodeConnections { grid-column: 1 / -1; border-top: 1px solid var(--rule); padding-top: 1rem; }
+.nodeConnections ul { display: flex; flex-wrap: wrap; gap: .65rem 1.5rem; margin-top: .65rem; }
+.nodeConnections li { display: flex; flex-wrap: wrap; gap: .6rem; align-items: baseline; color: var(--text-muted); font-size: .72rem; line-height: 1.8; }
+.nodeConnections li small { margin-top: 0; color: var(--signal); font-size: .65rem; }
 .graph > figcaption { padding: 1rem 1.5rem; border-top: 1px solid var(--rule); font-size: .72rem; line-height: 1.75; color: var(--text-faint); }
-.dial { border-radius: .25rem; background: var(--ink-2); }
+.dial { background: var(--surface); border: 1px solid var(--rule); }
 .dialHead { padding: clamp(1.2rem,3vw,2rem); border-bottom: 1px solid var(--rule); }
 .dialHead > p:first-child { font-size: .73rem; color: var(--signal); }
 .dialHead h3 { max-width: 47ch; margin-top: .85rem; font-size: clamp(1.3rem,2.3vw,2rem); line-height: 1.35; }
 .dialHead > p:last-child { max-width: 70ch; margin-top: .9rem; font-size: .86rem; line-height: 1.8; color: var(--text-muted); }
 .dials { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding: clamp(1.2rem,3vw,2rem); }
-.dialResult { padding: clamp(1.2rem,3vw,2rem); border-top: 1px solid var(--rule); background: #e7ebfc; border-radius: 0 0 .25rem .25rem; }
+.dialResult { padding: clamp(1.2rem,3vw,2rem); border-top: 1px solid var(--rule); background: color-mix(in srgb,var(--signal) 6%,var(--ink)); }
 .dialReset { display: inline-flex; align-items: center; min-height: 2.75rem; margin-top: 1rem; font-size: .76rem; color: var(--signal); text-decoration: underline; text-underline-offset: .2rem; }
 :global([lang="he"]) .metric dd, :global([lang="he"]) .feedback blockquote { font-family: var(--font-he-display),var(--font-he),sans-serif; }
-@media(max-width: 1000px) { .metrics { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width: 1000px) { .metrics { grid-template-columns: repeat(2,minmax(0,1fr)); } .metric:nth-child(even) { border-inline-end: 0; } .metric:nth-child(n+3) { border-top: 1px solid var(--rule); } }
 @media(max-width: 700px) { .metric { padding: 1.1rem; } .decision { grid-template-columns: 1fr; gap: 1rem; } .decisionMeta { display: flex; gap: 1rem; align-items: baseline; } .decisionMeta > p:last-child { margin-top: 0; } .decision dl > div { grid-template-columns: 1fr; gap: .4rem; } .feedback figure { grid-template-columns: 1fr; gap: 1.5rem; } .diagram { display: none; } .nodeButtons { grid-template-columns: repeat(2,minmax(0,1fr)); padding: .8rem; } .graphDetail { grid-template-columns: 1fr; gap: 1rem; padding: 1.1rem; } .dials { grid-template-columns: 1fr; gap: 2rem; } }
+.decision dd,.metric p,.rebuild p { overflow-wrap: anywhere; }
 @media(prefers-reduced-motion: reduce) { .nodeButtons button { transition: none; } }

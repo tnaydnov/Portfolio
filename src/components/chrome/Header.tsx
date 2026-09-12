@@ -56,10 +56,9 @@ export function Header({ locale }: { locale: Locale }) {
   return <header className={styles.header}>
     <div className={`shell ${styles.headerInner}`}>
       <Link href={href("/", locale)} className={styles.brand} aria-label={`${t(site.name, locale)} — ${locale === "he" ? "דף הבית" : "Home"}`}>
-        <svg className={styles.brandMark} viewBox="0 0 64 64" fill="none" aria-hidden="true">
-          <path d="M8 15 26 7v42L8 57Z" fill="currentColor" />
-          <path d="m26 7 19 13v42L26 49Z" fill="#1735b9" />
-          <path d="m45 20 12-6v42l-12 6Z" fill="#7892ff" />
+        <svg className={styles.brandMark} viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M2 12V2h10m16 0h10v10M2 28v10h10m16 0h10V28" stroke="currentColor" strokeWidth="1" opacity=".4" />
+          <path d="M8 12h16m-8 0v17m7 0V15l9 14V12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter" />
         </svg>
         <span className={styles.brandName}>{t(site.name, locale)}</span>
       </Link>
@@ -69,7 +68,7 @@ export function Header({ locale }: { locale: Locale }) {
           const active = pathname === target || pathname.startsWith(`${target}/`);
           return <Link key={item.key} href={target} aria-current={active ? "page" : undefined} className={styles.navLink}>{t(ui.nav[item.key], locale)}</Link>;
         })}
-        <a href={site.cv} download={site.cvFileName} className={styles.cvLink}>{t(ui.common.cvPdf, locale)} <span aria-hidden="true">↓</span></a>
+        <a href={site.cv} download={site.cvFileName} className={styles.cvLink}>{t(ui.common.cvPdf, locale)} <span aria-hidden="true">↗</span></a>
         <LocaleToggle locale={locale} />
       </nav>
       <div className={styles.mobileControls}>

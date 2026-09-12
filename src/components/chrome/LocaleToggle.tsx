@@ -13,7 +13,8 @@ export function LocaleToggle({ locale }: { locale: Locale }) {
     update();
     window.addEventListener("hashchange", update);
     window.addEventListener("popstate", update);
-    return () => { window.removeEventListener("hashchange", update); window.removeEventListener("popstate", update); };
+    window.addEventListener("portfolio:selection", update);
+    return () => { window.removeEventListener("hashchange", update); window.removeEventListener("popstate", update); window.removeEventListener("portfolio:selection", update); };
   }, [pathname]);
   return <div className={styles.localeToggle} role="group" aria-label={locale === "he" ? "שפת האתר" : "Site language"} dir="ltr">
     {LOCALES.map((language) => <Link key={language} href={`${localizePath(pathname, language)}${suffix}`} hrefLang={language} lang={language} aria-label={LOCALE_FULL[language]} aria-current={language === locale ? "page" : undefined}>{LOCALE_NAME[language]}</Link>)}

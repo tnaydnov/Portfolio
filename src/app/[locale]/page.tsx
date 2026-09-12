@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { FoldHome } from "@/components/fold/FoldHome";
-import { isLocale, t, type Locale } from "@/lib/i18n";
+import { ProjectExperience } from "@/components/experience/ProjectExperience";
+import { isExperienceProject } from "@/components/experience/projects";
+import { isLocale, t } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/metadata";
 import { site } from "@/lib/site";
 
@@ -20,10 +21,13 @@ export async function generateMetadata({
 
 export default async function HomePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ project?: string }>;
 }) {
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
-  return <FoldHome locale={raw as Locale} />;
+  const project = (await searchParams).project ?? null;
+  return <ProjectExperience locale={raw} initialProject={isExperienceProject(project) ? project : "arc"} />;
 }
