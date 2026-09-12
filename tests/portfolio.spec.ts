@@ -27,7 +27,7 @@ for (const width of [320, 390, 768, 1366, 2560]) {
       expect(response?.status(), path).toBe(200);
       await page.evaluate(() => document.fonts.ready);
       await expectEnglishPage(page, path);
-      if (path === "/") await expect(page.locator("main h1")).toHaveAccessibleName(/^\s*Tomer\s*Naydnov\.?\s*$/i);
+      if (path === "/") await expect(page.locator("main h1")).toHaveAccessibleName("Hey, I'm Tomer.");
     }
     expect(errors).toEqual([]);
   });
@@ -54,10 +54,10 @@ test("mobile menu supports keyboard, navigation and scroll recovery", async ({ p
   expect(await page.evaluate(() => document.body.style.overflow)).not.toBe("hidden");
 });
 
-test("identity and direct links are available without waiting for the artwork", async ({ page }) => {
+test("identity and direct links are available without waiting for the portrait", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  const hero = page.getByTestId("identity-hero");
-  const heading = hero.getByRole("heading", { level: 1, name: /^Tomer\s*Naydnov$/i });
+  const hero = page.getByTestId("welcome-hero");
+  const heading = hero.getByRole("heading", { level: 1, name: "Hey, I'm Tomer.", exact: true });
   const work = hero.getByRole("link", { name: "Explore my work", exact: true });
   const about = hero.getByRole("link", { name: "A little about me", exact: true });
   expect(await heading.isVisible()).toBeTruthy();
@@ -65,18 +65,18 @@ test("identity and direct links are available without waiting for the artwork", 
   expect(await about.isVisible()).toBeTruthy();
   await expect(work).toHaveAttribute("href", "/work");
   await expect(about).toHaveAttribute("href", "/about");
-  await expect(hero.getByRole("button")).toHaveCount(0);
+  await expect(page.locator("header").getByRole("link", { name: "Tomer Naydnov \u2014 Home", exact: true })).toBeVisible();
   await work.focus();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/work$/);
 });
 
-test("touching the decorative hero permits ordinary vertical page scrolling", async ({ browser, baseURL }) => {
+test("touching the portrait hero permits ordinary vertical page scrolling", async ({ browser, baseURL }) => {
   const context = await browser.newContext({ baseURL, viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const page = await context.newPage();
   try {
     await page.goto("/");
-    const hero = page.getByTestId("identity-hero");
+    const hero = page.getByTestId("welcome-hero");
     await expect(hero).toBeVisible();
     const bounds = await hero.boundingBox();
     expect(bounds).toBeTruthy();
@@ -91,81 +91,117 @@ test("touching the decorative hero permits ordinary vertical page scrolling", as
   } finally { await context.close(); }
 });
 
-test("reduced motion shows the static identity and keeps direct navigation", async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  const hero = page.getByTestId("identity-hero");
-  await expect(hero).toHaveAttribute("data-ready", "true");
-  await expect(hero.getByRole("heading", { level: 1 })).toHaveAccessibleName(/^Tomer\s*Naydnov$/i);
-  await expect(hero.getByRole("button")).toHaveCount(0);
-  expect(await hero.evaluate((element) => element.getAnimations({ subtree: true }).filter((animation) => animation.playState === "running").length)).toBe(0);
-  await hero.getByRole("link", { name: "Explore my work", exact: true }).click();
-  await expect(page).toHaveURL(/\/work$/);
-});
-
-test("a lost WebGL context preserves the name fallback and direct links", async ({ page }) => {
+test("the portrait loads and its greeting can be replayed with the keyboard", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
+  await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
-  const hero = page.getByTestId("identity-hero");
-  await expect(hero).toHaveAttribute("data-ready", "true");
-  await hero.locator("canvas").evaluate((canvas: HTMLCanvasElement) => canvas.getContext("webgl2")?.getExtension("WEBGL_lose_context")?.loseContext());
-  await expect(hero.locator('[data-hidden="false"]')).toBeVisible();
-  await expect(hero.getByRole("heading", { level: 1 })).toHaveAccessibleName(/^Tomer\s*Naydnov$/i);
-  await hero.getByRole("link", { name: "Explore my work", exact: true }).click();
-  await expect(page).toHaveURL(/\/work$/);
+  const portrait = page.getByTestId("living-portrait");
+  await portrait.scrollIntoViewIfNeeded();
+  await expect(portrait).toHaveAttribute("data-loaded", "true");
+  await expect(portrait.getByRole("img", { name: "Tomer Naydnov smiling and raising a hand in welcome", exact: true })).toBeVisible();
+  await expect(portrait).toHaveAttribute("data-moving", "true");
+  // The first wave is automatic. Wait for it to finish before exercising replay.
+  await expect(portrait.getByRole("button", { name: "Hey there!", exact: true })).toBeDisabled();
+  const wave = portrait.getByRole("button", { name: "Wave hello", exact: true });
+  await expect(wave).toBeEnabled();
+  for (let replay = 0; replay < 2; replay++) {
+    await wave.focus();
+    await page.keyboard.press("Enter");
+    await expect(portrait.getByRole("status")).toHaveText("Hey! Glad you stopped by.");
+    await expect(portrait.getByRole("button", { name: "Hey there!", exact: true })).toBeDisabled();
+    await expect(wave).toBeEnabled();
+  }
   expect(errors).toEqual([]);
 });
 
-test("WebGL startup failure preserves the identity and useful navigation", async ({ page }) => {
+test("portrait motion can be paused and resumed without disabling the greeting", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  const portrait = page.getByTestId("living-portrait");
+  await portrait.scrollIntoViewIfNeeded();
+  await expect(portrait).toHaveAttribute("data-loaded", "true");
+  await expect(portrait).toHaveAttribute("data-moving", "true");
+  const pause = portrait.getByRole("button", { name: "Pause portrait animation", exact: true });
+  await expect(pause).toHaveAttribute("aria-pressed", "false");
+  await pause.click();
+  const resume = portrait.getByRole("button", { name: "Resume portrait animation", exact: true });
+  await expect(resume).toHaveAttribute("aria-pressed", "true");
+  await expect(portrait).toHaveAttribute("data-moving", "false");
+  // Button hover transitions remain usable while the portrait itself is paused.
+  const runningAnimations = () => portrait.evaluate((element) => element.getAnimations({ subtree: true }).filter((animation) => animation.playState === "running" && !(animation instanceof CSSTransition)).length);
+  await expect.poll(runningAnimations).toBe(0);
+  await portrait.getByRole("button", { name: "Wave hello", exact: true }).click();
+  await expect(portrait.getByRole("status")).toHaveText("Hey! Glad you stopped by.");
+  await expect(portrait.getByRole("button", { name: "Wave hello", exact: true })).toBeEnabled();
+  expect(await runningAnimations()).toBe(0);
+  await resume.focus();
+  await page.keyboard.press("Enter");
+  await expect(pause).toHaveAttribute("aria-pressed", "false");
+  await expect(portrait).toHaveAttribute("data-moving", "true");
+  await expect.poll(runningAnimations).toBeGreaterThan(0);
+});
+
+test("reduced motion keeps the portrait still while the greeting and navigation work", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const hero = page.getByTestId("welcome-hero");
+  const portrait = page.getByTestId("living-portrait");
+  await expect(portrait).toHaveAttribute("data-loaded", "true");
+  await expect(portrait).toHaveAttribute("data-moving", "false");
+  await expect(hero.getByRole("heading", { level: 1 })).toHaveAccessibleName("Hey, I'm Tomer.");
+  await expect(portrait.getByRole("button", { name: /(?:Pause|Resume) portrait animation/ })).toHaveCount(0);
+  const runningAnimations = () => portrait.evaluate((element) => element.getAnimations({ subtree: true }).filter((animation) => animation.playState === "running").length);
+  expect(await runningAnimations()).toBe(0);
+  const wave = portrait.getByRole("button", { name: "Wave hello", exact: true });
+  await wave.click();
+  await expect(portrait.getByRole("status")).toHaveText("Hey! Glad you stopped by.");
+  await expect(wave).toBeEnabled();
+  expect(await runningAnimations()).toBe(0);
+  await hero.getByRole("link", { name: "Explore my work", exact: true }).click();
+  await expect(page).toHaveURL(/\/work$/);
+});
+
+test("an unavailable portrait preserves identity and useful navigation", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.addInitScript(() => {
-    const original = HTMLCanvasElement.prototype.getContext;
-    HTMLCanvasElement.prototype.getContext = function (this: HTMLCanvasElement, type: string, ...args: unknown[]) {
-      if (type.startsWith("webgl") || type === "experimental-webgl") return null;
-      return original.apply(this, [type, ...args] as Parameters<typeof original>);
-    } as typeof original;
-  });
+  await page.route(/tomer-welcome\.webp/, (route) => route.abort());
   await page.goto("/");
   await expectEnglishPage(page, "/");
-  const hero = page.getByTestId("identity-hero");
-  await expect(hero.locator('[data-hidden="false"]')).toBeVisible();
-  await expect(hero.locator("canvas")).toHaveCount(0);
-  await expect(hero.getByRole("heading", { level: 1 })).toHaveAccessibleName(/^Tomer\s*Naydnov$/i);
+  const hero = page.getByTestId("welcome-hero");
+  const portrait = page.getByTestId("living-portrait");
+  const photo = portrait.getByRole("img", { name: "Tomer Naydnov smiling and raising a hand in welcome", exact: true });
+  await expect.poll(() => photo.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth === 0)).toBe(true);
+  await expect(portrait).toHaveAttribute("data-moving", "false");
+  await expect(portrait.getByRole("button")).toHaveCount(0);
+  await expect(hero.getByRole("heading", { level: 1 })).toHaveAccessibleName("Hey, I'm Tomer.");
+  await expect(hero.getByRole("link", { name: "Explore my work", exact: true })).toBeVisible();
   await hero.getByRole("link", { name: "A little about me", exact: true }).click();
   await expect(page).toHaveURL(/\/about$/);
   expect(errors).toEqual([]);
 });
 
-test("the static renderer idles, redraws for a new viewport, then idles again", async ({ page }) => {
-  await page.addInitScript(() => {
-    let draws = 0;
-    Object.defineProperty(window, "__portfolioDrawCount", { get: () => draws });
-    for (const Context of [window.WebGLRenderingContext, window.WebGL2RenderingContext]) {
-      if (!Context) continue;
-      const prototype = Context.prototype as unknown as Record<string, (...args: unknown[]) => unknown>;
-      for (const method of ["drawArrays", "drawElements", "drawArraysInstanced", "drawElementsInstanced"]) {
-        const original = prototype[method];
-        if (original) prototype[method] = function (...args: unknown[]) { draws++; return original.apply(this, args); };
-      }
-    }
-  });
+test("the warm homepage palette follows navigation without affecting work pages", async ({ page }) => {
   await page.goto("/");
-  const hero = page.getByTestId("identity-hero");
-  await expect(hero).toHaveAttribute("data-ready", "true");
-  expect(await hero.locator("canvas").evaluate((canvas) => Boolean(canvas.closest('[aria-hidden="true"]')))).toBeTruthy();
-  await expect(hero.locator('canvas[tabindex="0"]')).toHaveCount(0);
-  const count = () => page.evaluate(() => Reflect.get(window, "__portfolioDrawCount") as number);
-  const expectIdle = async () => {
-    await expect.poll(async () => { const before = await count(); await page.waitForTimeout(350); return (await count()) - before; }, { timeout: 15_000, intervals: [350] }).toBe(0);
-  };
-  await expectIdle();
-  const before = await count();
-  await page.setViewportSize({ width: 390, height: 844 });
-  await expect.poll(count).toBeGreaterThan(before);
-  await expectIdle();
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBeTruthy();
+  const palette = () => page.evaluate(() => ({
+    background: getComputedStyle(document.body).backgroundColor,
+    header: getComputedStyle(document.querySelector("header")!).color,
+    footer: getComputedStyle(document.querySelector("footer")!).color,
+    scheme: getComputedStyle(document.documentElement).colorScheme,
+  }));
+  const homePalette = await palette();
+  expect(homePalette.scheme).toBe("light");
+  await page.getByTestId("welcome-hero").getByRole("link", { name: "Explore my work", exact: true }).click();
+  await expect(page).toHaveURL(/\/work$/);
+  await expect.poll(async () => (await palette()).scheme).toBe("dark");
+  const workPalette = await palette();
+  expect(workPalette.background).not.toBe(homePalette.background);
+  expect(workPalette.header).not.toBe(homePalette.header);
+  expect(workPalette.footer).not.toBe(homePalette.footer);
+  await page.locator("header").getByRole("link", { name: "Tomer Naydnov \u2014 Home", exact: true }).click();
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page.getByTestId("welcome-hero")).toBeVisible();
+  await expect.poll(palette).toEqual(homePalette);
 });
 
 test("email copying confirms the action and keeps the direct email link", async ({ context, page }) => {
@@ -182,7 +218,7 @@ test("identity and project links work without JavaScript", async ({ browser, bas
   const page = await context.newPage();
   try {
     await page.goto("/");
-    await expect(page.locator("main h1")).toHaveAccessibleName(/^\s*Tomer\s*Naydnov\.?\s*$/i);
+    await expect(page.locator("main h1")).toHaveAccessibleName("Hey, I'm Tomer.");
     await expect(page.locator('header a[href="/work"]')).toBeVisible();
     await page.locator('header a[href="/work"]').click();
     await page.locator('main a[href="/work/arc"]').first().click();

@@ -1,0 +1,122 @@
+.details {
+  --home-paper: #f6f3eb;
+  --home-ink: #28352b;
+  --home-muted: #5c655a;
+  --home-moss: #496349;
+  --home-rule: #28352b26;
+  background: var(--home-paper);
+  color: var(--home-ink);
+}
+
+.container { width: 100%; max-width: 1240px; min-width: 0; margin-inline: auto; padding-inline: clamp(22px, 4.5vw, 56px); }
+.details a:focus-visible { outline: 2px solid var(--home-moss); outline-offset: 6px; }
+.details svg { display: block; flex-shrink: 0; width: 20px; height: 20px; }
+.details h2 { font-size: clamp(2rem, 3.8vw, 3.2rem); line-height: 1.13; letter-spacing: -.045em; font-weight: 500; }
+.eyebrow { margin-bottom: 15px; color: var(--home-moss); font-size: .75rem; font-weight: 600; line-height: 1.7; letter-spacing: .015em; }
+
+.context { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.15fr); gap: clamp(48px, 8vw, 120px); padding-block: clamp(64px, 9vw, 120px); border-top: 1px solid var(--home-rule); }
+.contextHeading, .contextCopy { min-width: 0; }
+.contextCopy { padding-top: 33px; }
+.lead { max-width: 30ch; font-family: var(--font-heading), sans-serif; font-size: clamp(1.35rem, 2.25vw, 1.8rem); line-height: 1.5; letter-spacing: -.025em; text-wrap: pretty; }
+.contextCopy > p + p { max-width: 54ch; margin-top: 22px; color: var(--home-muted); font-size: .975rem; line-height: 1.95; }
+.now { margin-top: 32px; max-width: 37ch; }
+.now > p { display: flex; align-items: center; gap: 8px; color: var(--home-moss); font-size: .75rem; font-weight: 600; }
+.now > p > span { width: 6px; height: 6px; border-radius: 50%; background: #d5a451; box-shadow: 0 0 0 4px #d5a45118; }
+.now ul { display: grid; gap: 10px; margin-top: 16px; }
+.now li { padding-inline-start: 14px; border-inline-start: 1px solid var(--home-rule); color: var(--home-muted); font-size: .8125rem; line-height: 1.8; }
+.contextLinks { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 24px; }
+.contextLinks a { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; color: var(--home-moss); font-size: .8125rem; line-height: 1.6; text-decoration: underline; text-decoration-color: #49634955; text-underline-offset: 5px; }
+.contextLinks a:hover { text-decoration-color: currentColor; }
+.contextLinks svg { width: 17px; height: 17px; }
+
+.work { padding-bottom: clamp(68px, 9vw, 118px); }
+.workHeading { display: flex; justify-content: space-between; align-items: end; gap: 24px 40px; margin-bottom: 38px; }
+.workHeading > div { min-width: 0; }
+.allWork { display: inline-flex; flex-shrink: 0; align-items: center; gap: 24px; min-height: 44px; padding-block: 10px; color: var(--home-moss); font-size: .875rem; }
+.allWork:hover { text-decoration: underline; text-underline-offset: 5px; }
+.projects { border-top: 1px solid var(--home-rule); }
+.project { --project-color: #496349; --project-soft: #e9ede1; border-bottom: 1px solid var(--home-rule); }
+.project[data-tone="ochre"] { --project-color: #7c602d; --project-soft: #f0e8d8; }
+.project[data-tone="rose"] { --project-color: #875f58; --project-soft: #f0e5de; }
+.projectLink { display: grid; grid-template-columns: 26px minmax(0, .78fr) minmax(0, 1.35fr) 44px; align-items: start; gap: 26px; padding-block: 34px 38px; }
+.projectLink > * { min-width: 0; }
+.projectNumber { padding-top: 6px; color: var(--project-color); font-size: .6875rem; line-height: 1.7; font-variant-numeric: tabular-nums; }
+.projectTitle > p:first-child { margin-bottom: 11px; color: var(--project-color); font-size: .75rem; line-height: 1.7; }
+.projectTitle h3 { font-size: clamp(2rem, 3.2vw, 2.75rem); line-height: 1.1; letter-spacing: -.05em; font-weight: 500; transition: color 160ms ease; }
+.projectStatus { max-width: 24ch; margin-top: 17px; color: var(--home-muted); font-size: .75rem; line-height: 1.7; }
+.projectCopy { padding-top: 3px; }
+.projectDescription { max-width: 59ch; color: var(--home-ink); font-size: .9375rem; line-height: 1.9; }
+.projectRole { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 10px; max-width: 66ch; margin-top: 17px; color: var(--home-muted); font-size: .8125rem; line-height: 1.8; }
+.projectRole > span { color: var(--project-color); font-size: .75rem; }
+.projectTeam { margin-top: 8px; padding-inline-start: 56px; color: var(--home-muted); font-size: .75rem; line-height: 1.8; }
+.projectArrow { display: grid; place-items: center; width: 44px; height: 44px; margin-top: 1px; border: 1px solid var(--home-rule); border-radius: 50%; color: var(--project-color); transition: background 160ms ease, border-color 160ms ease; }
+.projectLink:hover h3 { color: var(--project-color); }
+.projectLink:hover .projectArrow { background: var(--project-soft); border-color: var(--project-color); }
+.projectLink:focus-visible { border-radius: 2px; }
+
+.invitation { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 32px 48px; padding: clamp(30px, 4.7vw, 60px); margin-bottom: clamp(64px, 9vw, 118px); background: #eee9db; border-radius: 3px 3px 64px 3px; }
+.invitationCopy { position: relative; min-width: 0; }
+.invitation h2 { max-width: 18ch; font-size: clamp(1.8rem, 3.2vw, 2.65rem); line-height: 1.15; }
+.invitationCopy > p:last-child { max-width: 47ch; margin-top: 18px; color: var(--home-muted); font-size: .9375rem; line-height: 1.85; }
+.details .invitationMark { position: absolute; inset: 18px 20px auto auto; width: 54px; height: 54px; color: #d5a451; opacity: .38; rotate: 12deg; pointer-events: none; }
+.contactLinks { position: relative; display: grid; justify-items: start; gap: 16px; padding-top: 32px; }
+.contactButton { display: inline-flex; align-items: center; justify-content: space-between; gap: 36px; min-height: 49px; padding: 13px 21px; border: 1px solid var(--home-moss); border-radius: 4px; color: #f6f3eb; background: var(--home-moss); font-size: .875rem; transition: background 160ms ease; }
+.contactButton:hover { background: #364d38; }
+.email { display: inline-flex; align-items: center; min-height: 44px; color: var(--home-moss); font-size: .8125rem; line-height: 1.7; text-decoration: underline; text-decoration-color: #49634955; text-underline-offset: 5px; overflow-wrap: anywhere; }
+.email:hover { text-decoration-color: currentColor; }
+
+@media (max-width: 900px) {
+  .context { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 36px; }
+  .projectLink { grid-template-columns: 20px minmax(0, .7fr) minmax(0, 1.2fr) 40px; gap: 18px; }
+  .projectArrow { width: 40px; height: 40px; }
+  .projectRole { grid-template-columns: 1fr; gap: 4px; }
+  .projectTeam { padding-inline-start: 0; }
+  .invitation { grid-template-columns: 1fr; gap: 22px; }
+  .contactLinks { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 26px; padding-top: 0; }
+}
+
+@media (max-width: 650px) {
+  .container { padding-inline: 24px; }
+  .context { grid-template-columns: 1fr; gap: 32px; padding-block: 58px 64px; }
+  .contextHeading { display: contents; }
+  .contextHeading > .eyebrow { margin-bottom: -20px; }
+  .now { grid-row: 4; margin-top: 0; max-width: 45ch; }
+  .contextCopy { padding-top: 0; }
+  .lead { max-width: 31ch; font-size: 1.35rem; }
+  .contextCopy > p + p { margin-top: 18px; font-size: .9375rem; }
+  .contextLinks { gap: 7px 24px; margin-top: 19px; }
+  .workHeading { align-items: start; flex-direction: column; gap: 15px; margin-bottom: 24px; }
+  .workHeading h2 { max-width: 15ch; }
+  .allWork { gap: 20px; }
+  .projectLink { grid-template-columns: 23px minmax(0, 1fr) 40px; gap: 15px 12px; padding-block: 28px 32px; }
+  .projectNumber { padding-top: 3px; }
+  .projectTitle { grid-column: 2; }
+  .projectTitle > p:first-child { margin-bottom: 8px; font-size: .6875rem; }
+  .projectTitle h3 { font-size: 2.15rem; }
+  .projectStatus { max-width: none; margin-top: 11px; }
+  .projectArrow { grid-column: 3; grid-row: 1; }
+  .projectCopy { grid-column: 2 / -1; padding-top: 0; }
+  .projectDescription { font-size: .9375rem; line-height: 1.85; }
+  .projectRole { margin-top: 15px; }
+  .projectTeam { margin-top: 7px; }
+  .invitation { padding: 30px 26px 34px; border-end-end-radius: 42px; }
+  .invitation .eyebrow { max-width: 24ch; margin-bottom: 17px; padding-inline-end: 15px; }
+  .details .invitationMark { inset: 20px 15px auto auto; width: 39px; height: 39px; }
+  .invitation h2 { max-width: 15ch; }
+  .contactLinks { gap: 8px 20px; }
+  .contactButton { gap: 30px; }
+}
+
+@media (max-width: 359px) {
+  .container { padding-inline: 18px; }
+  .details h2 { font-size: 1.9rem; }
+  .projectLink { grid-template-columns: 19px minmax(0, 1fr) 36px; column-gap: 9px; }
+  .projectArrow { width: 36px; height: 36px; }
+  .projectTitle h3 { font-size: 1.95rem; }
+  .projectCopy { grid-column: 1 / -1; }
+  .invitation { padding-inline: 23px; }
+  .invitation h2 { font-size: 1.8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) { .projectTitle h3, .projectArrow, .contactButton { transition: none; } }
+@media (forced-colors: active) { .invitation { border: 1px solid CanvasText; } .contactButton { border-color: LinkText; } }

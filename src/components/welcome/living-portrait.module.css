@@ -1,0 +1,52 @@
+.studio { grid-area: portrait; position: relative; width: 100%; height: 655px; align-self: end; min-width: 0; isolation: isolate; }
+.arch { position: absolute; z-index: -2; top: 45px; bottom: 66px; left: 11%; right: -2%; overflow: hidden; border-radius: 49% 49% 5px 5px; border: 1px solid #dadccc; background: radial-gradient(ellipse at 23% 15%, #edf0df 0%, #e2e7d3 46%, #c8d0b6 100%); box-shadow: inset 0 0 50px #92a07410, 15px 24px 40px -30px #6b714049; }
+.arch::before { content: ""; position: absolute; width: 140%; height: 60%; left: -30%; top: 3%; background: linear-gradient(130deg, #fffff882, transparent 60%); transform: rotate(-25deg); }
+.arch > span { position: absolute; left: -70%; right: -70%; height: 2px; top: 46%; background: #a4af9128; box-shadow: 0 10px 26px #78835c10; transform: rotate(-39deg); }
+.arch > span:last-child { top: 82%; }
+.orbit { position: absolute; z-index: -1; top: 20px; right: -6%; bottom: 88px; left: 5%; border: 1px solid #bdc6ac55; border-radius: 48% 48% 6px 6px; transform: rotate(8deg); pointer-events: none; }
+.hello { position: absolute; z-index: 3; top: 100px; left: 6%; transform: rotate(-9deg); color: #687657; pointer-events: none; }
+.hello > span { display: block; font-family: Georgia, serif; font-style: italic; font-size: 23px; letter-spacing: -.045em; }
+.hello svg { display: block; margin-left: 10px; margin-top: 8px; width: 55px; height: 40px; opacity: .7; transform: rotate(13deg); }
+.portraitWindow { position: absolute; top: 0; left: -1%; right: -8%; bottom: 66px; overflow: hidden; border-radius: 0 0 5px 5px; }
+.filters { position: absolute; pointer-events: none; }
+.person { position: absolute; width: 100%; aspect-ratio: 2 / 3; top: 0; left: 0; transform-origin: 58% 68%; animation: breathe 8s ease-in-out infinite; animation-play-state: paused; }
+.person img { width: 100%; height: auto; display: block; user-select: none; pointer-events: none; }
+.body, .wrist, .hand, .blink { position: absolute; inset: 0; }
+.wrist { clip-path: ellipse(5.65% 1.7% at 11.7% 35.1%); }
+/* Both pieces share one photograph and a wrist pivot. Clip boundaries follow
+   the empty space around the raised hand, keeping the shoulder intact. */
+.body { clip-path: polygon(31% 0, 100% 0, 100% 100%, 0 100%, 0 35.1%, 5% 35.1%, 18.5% 35.1%, 24.5% 32.4%, 30% 28.5%); }
+.hand { clip-path: polygon(0 0, 31% 0, 30% 28.5%, 24.5% 32.4%, 18.5% 35.3%, 5% 35.3%, 0 35.3%); transform-origin: 11.8% 35%; }
+.blink { opacity: 0; mask-image: radial-gradient(ellipse 4.9% 1.35% at 46.45% 14.5%, #000 65%, transparent 100%), radial-gradient(ellipse 4.9% 1.35% at 57.05% 13.65%, #000 65%, transparent 100%); animation: blink 7.7s steps(1, end) infinite; animation-play-state: paused; }
+.signature { position: absolute; z-index: 4; bottom: 46px; right: 2%; display: flex; align-items: center; gap: 13px; padding: 14px 20px 15px 15px; background: #fffcf3; border: 1px solid #e8e5d8; border-radius: 3px; box-shadow: 0 8px 20px #4d573520, 0 1px 3px #4d573508; transform: rotate(-4deg); }
+.signature::before { content: ""; position: absolute; width: 53px; height: 17px; background: #e3d7bda0; top: -9px; left: calc(50% - 26px); transform: rotate(5deg); border: 1px solid #f2e7cf70; }
+.signatureMark { display: grid; place-items: center; width: 39px; height: 39px; border: 1px solid #9caa863b; border-radius: 50%; font-family: Georgia, serif; font-size: 23px; font-style: italic; color: #647552; letter-spacing: -.09em; padding-right: 3px; }
+.signature > span:last-child { color: #647052; font-size: .625rem; line-height: 1.65; }
+.controls { position: absolute; bottom: 5px; left: 8%; z-index: 5; }
+.controlRow { display: flex; align-items: center; gap: 5px; }
+.waveButton { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 6px 13px; border: 1px solid #bec6af; border-radius: 999px; background: #fbf9f1; color: #4a6240; font-size: .6875rem; box-shadow: 0 2px 3px #33482905; transition: background 160ms ease, border-color 160ms ease; }
+.waveButton:hover { background: #eef0e3; border-color: #81946d; }
+.waveButton:disabled { opacity: .8; }
+.waveButton svg { width: 19px; height: 19px; }
+.motionButton { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: #758166; }
+.motionButton:hover { background: #e8ecde; color: #435c3e; }
+.motionButton svg { width: 16px; height: 16px; }
+.greeting { position: absolute; bottom: calc(100% + 12px); left: 0; white-space: nowrap; background: #fffcf4; color: #506444; border-radius: 10px 10px 10px 2px; padding: 9px 13px; font-size: .75rem; line-height: 1.5; box-shadow: 0 4px 18px #263b2620; }
+.greeting:empty { opacity: 0; pointer-events: none; }
+.studio[data-moving="true"] .person, .studio[data-moving="true"] .blink { animation-play-state: running; }
+.studio[data-moving="false"] .blink { opacity: 0; animation: none; }
+@keyframes breathe { 0%, 100% { transform: translateY(0) rotate(0deg) scale(1); } 50% { transform: translateY(-1.2px) rotate(.18deg) scale(1.003); } }
+@keyframes blink { 0%, 38%, 41%, 100% { opacity: 0; } 39%, 40% { opacity: 1; } }
+@media (max-width: 1100px) { .studio { height: 590px; } .arch { top: 73px; bottom: 98px; left: 10%; right: -3%; } .orbit { top: 60px; bottom: 114px; } .portraitWindow { top: 47px; bottom: 98px; left: -9%; right: -12%; } .hello { top: 106px; left: -1%; } .hello > span { font-size: 19px; } .signature { right: -3%; bottom: 80px; padding: 10px 12px; gap: 10px; } .signatureMark { width: 33px; height: 33px; font-size: 21px; } .signature > span:last-child { font-size: .5625rem; } .controls { bottom: 26px; left: 1%; } }
+@media (max-width: 900px) { .studio { width: 100%; max-width: 460px; height: 515px; justify-self: center; margin-top: 18px; } .arch { top: 39px; bottom: 75px; left: 15%; right: 3%; } .orbit { top: 20px; left: 10%; right: 1%; bottom: 95px; } .portraitWindow { top: 0; bottom: 75px; left: 0; right: 0; } .hello { top: 67px; left: 3%; } .signature { right: 2%; bottom: 55px; } .controls { bottom: 4px; left: 10%; } }
+@media (max-width: 600px) { .studio { max-width: 340px; height: 371px; margin-top: 13px; } .arch { top: 26px; bottom: 59px; left: 14%; right: 2%; } .orbit { top: 11px; bottom: 74px; } .portraitWindow { top: 0; bottom: 59px; left: -2%; right: -2%; } .hello { top: 38px; left: 0; } .hello > span { font-size: 17px; } .hello svg { width: 40px; height: 33px; margin-top: 3px; margin-left: 5px; } .signature { bottom: 40px; right: 1%; padding: 9px 11px 9px 9px; gap: 9px; } .signatureMark { width: 29px; height: 29px; font-size: 19px; } .signature > span:last-child { font-size: .5rem; } .signature::before { width: 39px; height: 13px; top: -7px; left: calc(50% - 20px); } .controls { bottom: 1px; left: 3%; } .waveButton { font-size: .625rem; gap: 7px; padding-inline: 11px; } .waveButton svg { width: 17px; height: 17px; } .motionButton { width: 38px; } .greeting { font-size: .6875rem; bottom: calc(100% + 8px); } }
+@media (max-width: 359px) { .studio { height: 333px; } .signature { right: -1%; } .hello { top: 34px; left: -2%; } }
+@media (max-width: 600px) {
+  .studio { width: min(100%, 320px); height: clamp(265px, 37svh, 330px); margin: 21px auto 12px; }
+  .arch { top: 24px; bottom: 54px; }
+  .portraitWindow { bottom: 54px; }
+  .signature { bottom: 35px; }
+  .hello { top: 31px; }
+}
+@media (prefers-reduced-motion: reduce) { .person, .blink { animation: none !important; } .blink { opacity: 0 !important; } .waveButton { transition: none; } }
+@media (forced-colors: active) { .waveButton { border: 1px solid ButtonText; } .signature { border: 1px solid CanvasText; } }

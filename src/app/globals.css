@@ -17,6 +17,25 @@
   color-scheme: dark;
 }
 
+/* The server-rendered home marker themes its chrome too, without a theme flash
+   or client-side body state leaking into the other routes. */
+:root:has(body > main [data-home-theme="warm"]) {
+  --ink: #f6f3eb;
+  --ink-2: #eeeade;
+  --surface: #ebe8dc;
+  --surface-2: #e2e6d7;
+  --rule: #28352b26;
+  --rule-strong: #28352b55;
+  --text: #28352b;
+  --text-muted: #5c655a;
+  --text-faint: #64705c;
+  --signal: #496349;
+  --signal-ink: #fffcf2;
+  --trace: #607956;
+  --ok: #496349;
+  color-scheme: light;
+}
+
 @theme inline {
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);

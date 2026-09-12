@@ -1,104 +1,74 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { wordmarkLines } from "@/components/identity/wordmark";
 import { site } from "@/lib/site";
 
-export const alt = "Tomer Naydnov - Software engineer, product builder and programming instructor";
+export const alt = "Hey, I'm Tomer. Software engineer, product builder and programming instructor.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const lineWidth = 1080;
-const baselines = [240, 435];
+export default async function OpengraphImage() {
+  const portrait = await readFile(join(process.cwd(), "public/images/tomer-social.png"));
 
-export default function OpengraphImage() {
   return new ImageResponse(
     <div
       style={{
+        position: "relative",
+        display: "flex",
         width: "100%",
         height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "44px 60px 36px",
-        background: "#090e20",
-        backgroundImage:
-          "radial-gradient(ellipse at 50% 36%, #223b79 0%, #101c40 44%, #090e20 76%)",
-        color: "#e7edfa",
+        padding: "62px 64px",
+        background: "#f6f3eb",
+        color: "#28352b",
         fontFamily: "sans-serif",
       }}
     >
-      <svg width="1080" height="448" viewBox="0 0 1080 448" fill="none">
-        <defs>
-          {wordmarkLines.flatMap((line) =>
-            line.letters.map((letter, index) => (
-              <linearGradient
-                key={`${line.word}-${index}`}
-                id={`silver-${line.word}-${index}`}
-                gradientUnits="userSpaceOnUse"
-                x1={-letter.x}
-                y1="760"
-                x2={line.width - letter.x}
-                y2="-160"
-              >
-                <stop offset="0" stopColor="#f6f8ff" />
-                <stop offset="0.27" stopColor="#b0bbcf" />
-                <stop offset="0.45" stopColor="#f4f7fe" />
-                <stop offset="0.7" stopColor="#bdcce3" />
-                <stop offset="1" stopColor="#819ac3" />
-              </linearGradient>
-            )),
-          )}
-        </defs>
-        {wordmarkLines.map((line, lineIndex) => {
-          const scale = lineWidth / line.width;
-          const transform = `translate(0 ${baselines[lineIndex]}) scale(${scale} ${-scale})`;
-
-          return (
-            <g key={line.word}>
-              <g transform="translate(3 6)">
-                <g transform={transform} fill="#1a2b53" stroke="#29416e" strokeWidth="9" strokeLinejoin="round">
-                  {line.letters.map((letter, index) => (
-                    <path key={index} d={letter.path} transform={`translate(${letter.x} 0)`} />
-                  ))}
-                </g>
-              </g>
-              <g transform={transform} strokeLinejoin="round">
-                {line.letters.map((letter, index) => (
-                  <g key={index} transform={`translate(${letter.x} 0)`}>
-                    <path d={letter.path} fill="#a5b9da" stroke="#607ca8" strokeWidth="11" />
-                    <path
-                      d={letter.path}
-                      fill={`url(#silver-${line.word}-${index})`}
-                      stroke="#dce6f7"
-                      strokeWidth="2.2"
-                    />
-                  </g>
-                ))}
-              </g>
-            </g>
-          );
-        })}
-      </svg>
-      <div
-        style={{
-          display: "flex",
-          marginTop: 28,
-          fontSize: 23,
-          letterSpacing: -0.35,
-          color: "#dce6fa",
-        }}
-      >
-        {"Software engineer \u00b7 Product builder \u00b7 Programming instructor"}
+      <div style={{ display: "flex", flexDirection: "column", width: 650, paddingTop: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, color: "#435c3e", fontSize: 23 }}>
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#d5a451" }} />
+          {site.name}
+        </div>
+        <div style={{ display: "flex", marginTop: 34, fontSize: 66, lineHeight: 1.1, letterSpacing: -3 }}>
+          Hey, I&apos;m Tomer.
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 29, gap: 7, color: "#435c3e", fontSize: 24, lineHeight: 1.35 }}>
+          <div>Software engineer · Product builder</div>
+          <div>Programming instructor</div>
+        </div>
+        <div style={{ display: "flex", maxWidth: 570, marginTop: 28, color: "#5c655a", fontSize: 25, lineHeight: 1.5 }}>
+          I turn messy problems into useful software—and make complex ideas easier to understand.
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: "auto", color: "#435c3e", fontSize: 20 }}>
+          {new URL(site.url).hostname}
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M5 19 19 5M5 5h14v14" />
+          </svg>
+        </div>
       </div>
+
       <div
         style={{
+          position: "absolute",
+          right: 54,
+          top: 54,
           display: "flex",
-          marginTop: 16,
-          fontSize: 18,
-          letterSpacing: 0.4,
-          color: "#9badcf",
+          width: 380,
+          height: 522,
+          overflow: "hidden",
+          borderRadius: "190px 190px 22px 22px",
+          border: "1px solid #28352b1a",
+          background: "#ffffff",
         }}
       >
-        {new URL(site.url).hostname}
+        {/* A pre-sized PNG keeps this route independent of runtime image conversion. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={"data:image/png;base64," + portrait.toString("base64")}
+          alt=""
+          width={380}
+          height={570}
+          style={{ objectFit: "cover", objectPosition: "top" }}
+        />
       </div>
     </div>,
     size,

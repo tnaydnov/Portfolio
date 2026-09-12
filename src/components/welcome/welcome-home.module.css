@@ -1,0 +1,94 @@
+.hero { position: relative; isolation: isolate; overflow: clip; background: #f6f3eb; color: #28352b; }
+.daylight { position: absolute; z-index: -1; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 79% 27%, #fdfaf2 0%, transparent 65%); }
+.daylight::after { content: ""; position: absolute; width: 110%; height: 160%; top: -40%; left: 3%; transform: rotate(-32deg); background: linear-gradient(90deg, transparent 39%, #c1b9920b 39%, #c1b9920b 40%, transparent 40%, transparent 60%, #c1b9920a 60%, #c1b9920a 61%, transparent 61%); filter: blur(4px); }
+.inner { display: grid; grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr); grid-template-areas: "heading portrait" "intro portrait" "footnote footnote"; align-items: center; width: 100%; max-width: 1360px; min-width: 0; margin-inline: auto; padding: 42px clamp(24px, 4.8vw, 66px) 0; }
+.heading { grid-area: heading; position: relative; z-index: 2; align-self: end; padding-top: 65px; }
+.intro { grid-area: intro; position: relative; z-index: 2; align-self: start; padding-bottom: 60px; }
+.eyebrow { display: flex; align-items: center; gap: 10px; color: #62715e; font-size: .8125rem; }
+.sun { display: block; flex-shrink: 0; width: 26px; height: 26px; color: #a87734; }
+.heading h1 { margin-top: 24px; font-size: clamp(2.5rem, 4.05vw, 3.65rem); line-height: 1.2; letter-spacing: -.065em; }
+.heading h1 em { font-family: Georgia, "Times New Roman", serif; font-weight: 400; letter-spacing: -.055em; color: #58704f; }
+.lead { margin-top: 27px; font-size: clamp(1.35rem, 2vw, 1.7rem); font-weight: 450; line-height: 1.5; letter-spacing: -.045em; color: #40533f; }
+.lead span { display: block; }
+.description { max-width: 37ch; margin-top: 21px; color: #61695c; font-size: .975rem; line-height: 1.85; }
+.roles { display: flex; flex-wrap: wrap; column-gap: 11px; row-gap: 7px; margin-top: 22px; color: #586751; font-size: .6875rem; font-weight: 550; line-height: 1.6; }
+.roles span:not(:last-child)::after { content: "/"; margin-left: 11px; color: #9ca68f; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 25px; margin-top: 30px; }
+.primary, .about { display: inline-flex; align-items: center; justify-content: center; gap: 16px; min-height: 49px; font-size: .8125rem; }
+.primary { padding: 13px 20px; border: 1px solid #435c3e; border-radius: 7px; color: #fffcf2; background: #435c3e; box-shadow: 0 4px 7px #354b2d0b, inset 0 1px #ffffff18; transition: background 160ms ease, box-shadow 160ms ease; }
+.primary:hover { background: #324c30; box-shadow: 0 5px 12px #354b2d1f; }
+.primary svg, .about svg, .footnote svg { width: 18px; height: 18px; }
+.about { gap: 8px; color: #42583e; }
+.about:hover { text-decoration: underline; text-underline-offset: 5px; }
+.current { max-width: 50ch; margin-top: 32px; color: #68725f; font-size: .6875rem; line-height: 1.9; }
+.current > span { display: inline-block; width: 5px; height: 5px; margin-right: 7px; border-radius: 50%; background: #8d9b69; vertical-align: 2px; }
+.current a { color: #425b3f; text-decoration: underline; text-decoration-color: #a5af97; text-underline-offset: 3px; }
+.footnote { grid-area: footnote; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 0 29px; border-top: 1px solid #28352b20; }
+.footnote p { color: #46583f; font-size: .6875rem; line-height: 1.8; }
+.footnote p span { color: #7a806f; margin-left: 16px; }
+.footnote a { display: inline-flex; min-height: 44px; align-items: center; gap: 16px; color: #5d6b53; font-size: .75rem; }
+.footnote a svg { width: 15px; height: 15px; transform: rotate(90deg); }
+.footnote a:hover { color: #28352b; }
+@media (min-width: 1500px) {
+  .inner { padding-top: clamp(50px, 5vh, 95px); }
+  .intro { padding-bottom: 70px; }
+}
+@media (max-width: 1100px) {
+  .inner { padding: 26px 42px 0; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .heading { padding-top: 40px; }
+  .heading h1 { font-size: 2.8rem; }
+  .intro { padding-bottom: 48px; }
+  .roles { max-width: 30ch; }
+  .roles span:nth-child(2)::after { display: none; }
+  .roles span:last-child { flex-basis: 100%; }
+  .actions { gap: 9px 18px; }
+  .primary, .about { font-size: .75rem; }
+  .primary { padding-inline: 16px; }
+  .current { max-width: 36ch; }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  .inner { padding: 22px 32px 0; }
+  .heading { padding-top: 35px; }
+  .heading h1 { font-size: clamp(2rem, 4.4vw, 2.6rem); }
+  .eyebrow { font-size: .75rem; }
+  .lead { font-size: 1.25rem; margin-top: 23px; }
+  .description { font-size: .875rem; }
+  .actions { gap: 9px 14px; }
+  .primary, .about { font-size: .6875rem; }
+  .primary { gap: 9px; padding-inline: 13px; }
+  .current { font-size: .625rem; margin-top: 24px; }
+  .footnote { padding-block: 19px; }
+}
+@media (max-width: 600px) {
+  .inner { display: flex; flex-direction: column; align-items: stretch; padding: 17px 24px 0; }
+  .heading { align-self: auto; padding-top: 0; text-align: center; }
+  .heading h1 { font-size: clamp(2.15rem, 8.8vw, 3rem); margin-top: 10px; }
+  .intro { align-self: auto; padding-bottom: 0; text-align: center; }
+  .eyebrow, .roles, .actions { justify-content: center; }
+  .eyebrow { font-size: .75rem; }
+  .sun { font-size: 25px; }
+  .lead { font-size: 1.1rem; line-height: 1.6; margin-top: 9px; }
+  .lead span { display: inline; }
+  .description { max-width: 35ch; font-size: .875rem; line-height: 1.8; margin: 10px auto 0; }
+  .roles { max-width: none; gap: 4px 8px; font-size: .625rem; margin-top: 13px; }
+  .roles span:not(:last-child)::after { margin-left: 8px; }
+  .roles span:nth-child(2)::after { display: none; }
+  .roles span:last-child { flex-basis: 100%; }
+  .actions { margin-top: 18px; gap: 8px 17px; }
+  .primary, .about { font-size: .75rem; min-height: 46px; }
+  .primary { padding: 11px 14px; gap: 9px; }
+  .about { gap: 6px; }
+  .primary svg, .about svg { width: 16px; height: 16px; }
+  .current { max-width: 36ch; font-size: .625rem; margin: 15px auto 27px; }
+  .footnote p span { display: block; margin-left: 0; }
+  .footnote { gap: 20px; padding-block: 16px; }
+  .footnote a { gap: 9px; font-size: .6875rem; }
+}
+@media (max-width: 359px) {
+  .inner { padding-inline: 18px; }
+  .actions { gap: 6px 13px; }
+  .primary, .about { font-size: .6875rem; }
+  .lead { font-size: 1.05rem; }
+}
+@media (prefers-reduced-motion: reduce) { .primary { transition: none; } }
+@media (forced-colors: active) { .primary { border: 1px solid LinkText; } }

@@ -1,10 +1,10 @@
 # Tomer Naydnov - Personal portfolio
 
-An English-only portfolio for a software engineer, product builder and programming instructor. The homepage introduces Tomer through a sculptural typographic title, with direct access to his work, background, CV and contact details.
+An English-only portfolio for a software engineer, product builder and programming instructor. The homepage introduces Tomer with a warm, animated personal portrait and direct access to his work, background, CV and contact details.
 
 ## Routes
 
-- `/`: a personal title card, introduction, background and selected project links.
+- `/`: a personal welcome, animated portrait, background and selected project links.
 - `/work`: selected projects and an earlier-work index.
 - `/work/[slug]`: project ownership, lifecycle, snapshot, interactive examples and optional technical detail.
 - `/about`: experience, education, teaching, approach and fit.
@@ -13,15 +13,15 @@ An English-only portfolio for a software engineer, product builder and programmi
 
 The previous `/en` and `/he` URL prefixes permanently redirect to the equivalent English route and preserve query strings. There is no locale selector, translation layer, alternate language content or language-prefixed canonical URL. The sitemap, metadata, social preview, icon and not-found pages use the same English identity.
 
-## The title card
+## The personal welcome
 
-`src/components/identity/IdentityScene.tsx` constructs a two-line sculptural wordmark from font outlines, extruded geometry, shaped metallic reflections and a procedural studio lighting environment. The silver lettering and midnight-blue setting form a static composition; the homepage has no interaction instructions or animation controls.
+`src/components/welcome/WelcomeHome.tsx` introduces Tomer through a cream-and-moss studio composition. A modest greeting, role descriptions and immediate Work/About links sit beside his personal portrait; the portrait follows the greeting on small screens. `HomeDetails.tsx` provides his background, current activities, selected work and a contact invitation.
 
-The accessible name, introduction and links are server-rendered HTML. The scene loads separately; an SVG using the same outlines provides the first paint and fallback for unsupported WebGL or context loss. Rendering is on demand: it draws the finished title, redraws on resize, and remains idle otherwise. The brief crossfade respects reduced motion, and ordinary touch scrolling and pinch zoom remain available. Scene resources are disposed on unmount.
+`LivingPortrait.tsx` animates custom artwork based on the photo Tomer supplied. This is a **2.5D layered portrait**, not a rigged or rotatable 3D model. A shared portrait supplies the body and hand; an aligned eye layer supplies a blink. An SVG filter keys the white studio background. The Web Animations API provides a brief welcome wave, while CSS adds occasional blinking and subtle breathing.
 
-The letter outlines are derived from Space Grotesk Bold by Florian Karsten and included directly in `wordmark.ts`. The [SIL Open Font License](public/licenses/space-grotesk-OFL.txt) is included; the scene fetches no font or model. Geometry and reflections use Three.js [ExtrudeGeometry](https://threejs.org/docs/pages/ExtrudeGeometry.html) and [PMREMGenerator](https://threejs.org/docs/pages/PMREMGenerator.html).
+The greeting wave plays once after the portrait loads and enters view. Visitors can replay it or pause animation. Reduced-motion preferences show a composed still portrait; the greeting button still returns a text hello. Animation pauses offscreen and in hidden tabs. Timers, observers and animations are cleaned up on unmount. There is no audio or camera/microphone access.
 
-The site fetches no generated pictures, stock images, external 3D models or HDR photographs for its visual design. Product-cover SVGs and the social preview are also built in code.
+The introduction and all navigation/content are server-rendered and remain useful without JavaScript or a loaded portrait. Homepage artwork is served as optimized local WebP; the social preview uses a pre-sized PNG. [Asset provenance and generation prompts](public/images/README.md) are included. Product-cover SVGs remain code-native. A server-rendered home marker sets the warm palette for the header/footer too, reverting automatically on other routes.
 
 ## Content and demonstrations
 
@@ -41,7 +41,7 @@ The private, ignored `TRUTH_SOURCE.md` is the factual ledger. `npm run truth:che
 
 ## Development
 
-Next.js 15, React 19, TypeScript, Tailwind CSS 4, Three.js and React Three Fiber. Next/font serves Space Grotesk, Manrope and JetBrains Mono. Vercel enables analytics.
+Next.js 15, React 19, TypeScript and Tailwind CSS 4. Next/font serves Space Grotesk, Manrope and JetBrains Mono. Vercel enables analytics.
 
 ```sh
 npm ci
@@ -60,6 +60,6 @@ npm run test:e2e
 npm audit
 ```
 
-Playwright covers all public pages at 320, 390, 768, 1366 and 2560px; personal identity and immediate navigation; native touch scrolling; renderer idling and resize; reduced motion; WebGL failure and context loss; no-JavaScript navigation; the three product examples; menu focus; disclosures; clipboard; legacy redirects; metadata, CV and social images.
+Playwright covers all public pages at 320, 390, 768, 1366 and 2560px; personal identity and immediate navigation; portrait loading, greeting replay and pause/resume; reduced motion; image failure; home-theme isolation; native touch scrolling; no-JavaScript navigation; the three product examples; menu focus; disclosures; clipboard; legacy redirects; metadata, CV and social images.
 
 Tests start or reuse a server on port 3000. Set `PLAYWRIGHT_SERVER_COMMAND` to `npm run start -- --hostname 127.0.0.1` to test a production build. Temporary screenshots and traces stay in ignored QA/test-output directories. Browser emulation validates layout and behavior; it is not a physical-device performance benchmark.
