@@ -2,7 +2,7 @@
 
 `tomer-welcome.webp` and `tomer-blink.webp` are custom artwork based on the portrait Tomer supplied for this redesign. Created with the built-in image generation tool; exported to WebP at quality 88. The source portrait is not included in the repository.
 
-The homepage uses a **2.5D animated portrait**, not a rigged or rotatable 3D model. CSS clips a hand layer from the same artwork, and the Web Animations API plays a brief wrist wave. A masked, aligned eye layer supplies an occasional blink. The warm scene, lighting shapes, and all motion are code. An SVG color matrix keys the white studio background at render time, preserving the opacity of the dark clothing and warm skin.
+The homepage uses a **2.5D animated portrait**, not a rigged or rotatable 3D model. CSS clips a hand layer from the same artwork, and the Web Animations API plays a brief wrist wave. A masked, aligned eye layer supplies an occasional blink. The mist-and-teal scene, perspective layers, lighting shapes, and all motion are code. A small eased mouse parallax separates the portrait, window and foreground label; it stops and resets when paused, offscreen, or reduced motion is requested. An SVG color matrix keys the white studio background at render time, preserving the opacity of the dark clothing and warm skin.
 
 ## Portrait prompt
 

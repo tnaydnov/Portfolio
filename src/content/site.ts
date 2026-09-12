@@ -9,15 +9,15 @@ export const experienceTimeline: {
 }[] = [
   {
     id: "nitzanim",
-    span: "2023 — now",
-    title: "Programming Instructor & EdTech Content Developer",
+    span: "Nitzanim tenure · 2023 — present",
+    title: "EdTech Project Leader & Content Developer",
     org: "Nitzanim",
-    summary: "Teach programming and turn field needs into curricula, delivery plans and digital learning products.",
+    summary: "Lead educational projects, develop learning content and help turn field needs into digital products. Earlier work at Nitzanim included programming instruction.",
     details: [
-      "Work with clients and educational stakeholders to understand needs, clarify requirements, define deliverables and keep expectations aligned throughout development.",
-      "Plan and develop syllabuses, presentations, lesson plans, instructor guides and programming exercises, adapting the sequence and explanation to different starting points and audiences.",
-      "Build project timelines and Gantt plans, break initiatives into actionable tasks and support execution from initial planning through testing and delivery.",
-      "Co-develop Arc with another engineer, translating field needs into product requirements, prioritising improvements, testing workflows and coordinating rollout with instructors and relevant teams.",
+      "Work with clients and educational stakeholders to clarify needs, define requirements and deliverables, and keep expectations aligned.",
+      "Develop syllabuses, presentations, lesson plans, instructor guides and programming exercises for different audiences and starting points.",
+      "Build project timelines and Gantt plans, break initiatives into tasks and coordinate work through testing and delivery.",
+      "Co-develop Arc Academy with another engineer: translate field needs into product requirements, prioritise improvements, test workflows and coordinate rollout with instructors and relevant teams.",
     ],
     current: true,
   },
@@ -47,7 +47,7 @@ export const educationTimeline: {
     span: "2026 — expected 2028",
     title: "M.Sc. Industrial Engineering & Management",
     org: "Shenkar College of Engineering, Design and Art",
-    summary: "Studying the formal tools for designing, measuring and improving the systems I had previously approached by instinct.",
+    summary: "Current studies in the design, measurement and improvement of systems and processes.",
     current: true,
   },
   {
@@ -55,7 +55,7 @@ export const educationTimeline: {
     span: "2021 — 2025",
     title: "B.Sc. Software Engineering",
     org: "Ben-Gurion University of the Negev",
-    summary: "The engineering foundation behind the systems and projects shown throughout this portfolio.",
+    summary: "Completed in 2025. The software engineering foundation behind the products and systems in this portfolio.",
   },
 ];
 /** The environment in which the cross-functional profile is most useful. */
@@ -65,19 +65,19 @@ export const brief: {
 }[] = [
   {
     term: "The team",
-    def: "A small, candid team where product, engineering and users are close enough to learn from one another quickly.",
+    def: "A small team with direct conversations between product, engineering and users.",
   },
   {
     term: "The work",
-    def: "Owning a problem from the first uncomfortable observation through framing, delivery and the iteration after real use.",
+    def: "Follow a problem from discovery and planning through implementation and revision.",
   },
   {
     term: "The distance to users",
-    def: "Short. Direct conversations and observation produce better decisions than second-hand summaries.",
+    def: "Close enough to understand the workflow and hear what needs to change.",
   },
   {
     term: "What I bring",
-    def: "I can investigate the workflow, write the specification, understand the data model, build the critical path, teach the decision and revise it when reality disagrees.",
+    def: "Requirements, delivery planning and hands-on engineering, with clear communication throughout.",
   },
 ];
 export const now: {
@@ -86,8 +86,8 @@ export const now: {
 } = {
   label: "Now",
   items: [
-    "Co-developing Arc and improving educational workflows at Nitzanim.",
+    "Leading EdTech projects and developing learning content at Nitzanim.",
+    "Co-developing Arc Academy and contributing to Browser Coder.",
     "Studying Industrial Engineering & Management at Shenkar.",
-    "Teaching programming and developing learning material.",
   ],
 };

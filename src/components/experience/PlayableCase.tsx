@@ -63,8 +63,8 @@ function StageHeading({ step, children, complete = false }: {
     return <div className={styles.stageHeading}><span className={styles.stageIndex} aria-hidden="true">{complete ? <Check /> : step}</span><span>{children}</span></div>;
 }
 const ARC = {
-    title: "A lesson keeps its history.",
-    intro: "Release it to a class. Bring what you learn back to the source.",
+    title: "From a lesson to useful feedback.",
+    intro: "Release an assigned lesson, then review a fictional student's work. The reusable material stays separate.",
     source: "Reusable source",
     lesson: "Loops & patterns",
     lessonMeta: "Sample lesson · 2 activities",
@@ -72,44 +72,47 @@ const ARC = {
     sourceKept: "Source kept for reuse",
     classroom: "Classroom release",
     emptyClass: "Ready when the class is.",
-    emptyClassBody: "A release gives this class its own lesson context.",
+    emptyClassBody: "This sample lesson is already assigned to the class. Release it to make it available.",
     className: "Sample classroom",
-    releasedFrom: "Released from source version 1",
+    releasedFrom: "Using source version 1",
     classActivity: "Activity 1 · Trace the loop",
     activityBody: "What does the loop print at each step?",
-    review: "Feedback → next revision",
-    emptyReview: "Classroom evidence can shape the next lesson.",
-    feedback: "Add a worked example before independent practice.",
+    sampleSubmission: "Example student submission · version 1",
+    sampleAnswer: "The loop prints 1, 2, 3.",
+    review: "Student feedback & revision",
+    emptyReview: "An instructor can review submitted work and request a student revision.",
+    feedback: "Trace range(3) from zero and explain where it stops.",
     feedbackLabel: "Sample instructor feedback",
-    revision: "Version 2 · Draft",
-    linked: "Linked to this classroom release",
+    revision: "Student revision requested",
+    linked: "Feedback on submission version 1",
     release: "Release sample lesson",
     addFeedback: "Add sample feedback",
-    complete: "Loop connected",
-    initialStatus: "The source is reusable. Release a copy to see the classroom context.",
-    releaseStatus: "A classroom release now exists. The reusable source remains at version 1.",
-    feedbackStatus: "Sample feedback is linked to a version 2 draft. This class still has its version 1 release.",
+    complete: "Revision requested",
+    initialStatus: "The sample lesson is assigned but locked. Its source remains reusable.",
+    releaseStatus: "The lesson is available. This example now shows a fictional student's first submission, ready for review.",
+    feedbackStatus: "Feedback requests a new version of the student's work. The reusable lesson and classroom release remain unchanged.",
 } satisfies Record<string, string>;
 type ClassroomRelease = {
     id: string;
     sourceVersion: 1;
     title: string;
 };
-type LessonRevision = {
-    version: 2;
+type SubmissionRevision = {
+    submissionId: string;
+    status: "requested";
     releaseId: string;
     feedback: string;
 };
 function ArcExample() {
     const [release, setRelease] = useState<ClassroomRelease | null>(null);
-    const [revision, setRevision] = useState<LessonRevision | null>(null);
+    const [revision, setRevision] = useState<SubmissionRevision | null>(null);
     const primary = useRef<HTMLButtonElement>(null);
     const stateId = useId();
     const action = () => {
         if (!release)
             setRelease({ id: "sample-classroom-release", sourceVersion: 1, title: "sample-loops" });
         else if (!revision)
-            setRevision({ version: 2, releaseId: release.id, feedback: "worked-example" });
+            setRevision({ submissionId: "sample-submission-v1", status: "requested", releaseId: release.id, feedback: "trace-from-zero" });
     };
     const reset = () => {
         setRelease(null);
@@ -136,6 +139,7 @@ function ArcExample() {
           <h4>{ARC.lesson}</h4>
           <p className={styles.linkedNote}>{ARC.releasedFrom}</p>
           <div className={styles.activity}><span className={styles.activityNumber} aria-hidden="true">01</span><div><strong>{ARC.classActivity}</strong><p>{ARC.activityBody}</p></div></div>
+          <div className={styles.activity} data-testid="arc-submission"><span className={styles.activityNumber} aria-hidden="true">v1</span><div><strong>{ARC.sampleSubmission}</strong><p>{ARC.sampleAnswer}</p></div></div>
         </div> : <div className={styles.emptyClass}><div className={styles.emptyOrbit} aria-hidden="true"><DocumentMark /></div><h4>{ARC.emptyClass}</h4><p>{ARC.emptyClassBody}</p></div>}
       </div>
       <div className={styles.arcReview} data-active={!!revision}>

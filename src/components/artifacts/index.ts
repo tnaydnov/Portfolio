@@ -1,2 +1,1 @@
-export { ProjectArtifact } from "./ProjectArtifact";
-export type { ProjectArtifactProps } from "./ProjectArtifact";
+export { ProductPreview } from "./ProductPreview";

@@ -17,6 +17,8 @@ const globalBlocks = [
   { id: "seasonal-timezone", pattern: /GMT\+3/i },
   { id: "eventa-current-status", pattern: /actively developed|still in build|listed here as in-progress/i },
   { id: "applytide-request-claim", pattern: /most[- ]requested (idea|feature)/i },
+  { id: "obsolete-current-teaching-role", pattern: /currently.{0,60}teaching at Nitzanim|\bI teach programming\b/i },
+  { id: "browser-coder-sole-creator", pattern: /\bsole (creator|developer) of Browser Coder\b|\bI created Browser Coder\b/i },
 ];
 
 const fileBlocks = [

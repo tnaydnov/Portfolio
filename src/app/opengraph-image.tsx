@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
-export const alt = "Hey, I'm Tomer. Software engineer, product builder and programming instructor.";
+export const alt = "Hey, I'm Tomer. Software engineer, EdTech project leader and content developer.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -18,27 +18,27 @@ export default async function OpengraphImage() {
         width: "100%",
         height: "100%",
         padding: "62px 64px",
-        background: "#f6f3eb",
-        color: "#28352b",
+        background: "#e7eeee",
+        color: "#172f35",
         fontFamily: "sans-serif",
       }}
     >
       <div style={{ display: "flex", flexDirection: "column", width: 650, paddingTop: 10 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12, color: "#435c3e", fontSize: 23 }}>
-          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#d5a451" }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 12, color: "#067c68", fontSize: 23 }}>
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#067c68" }} />
           {site.name}
         </div>
         <div style={{ display: "flex", marginTop: 34, fontSize: 66, lineHeight: 1.1, letterSpacing: -3 }}>
           Hey, I&apos;m Tomer.
         </div>
-        <div style={{ display: "flex", flexDirection: "column", marginTop: 29, gap: 7, color: "#435c3e", fontSize: 24, lineHeight: 1.35 }}>
-          <div>Software engineer · Product builder</div>
-          <div>Programming instructor</div>
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 29, gap: 7, color: "#067c68", fontSize: 24, lineHeight: 1.35 }}>
+          <div>Software engineer · EdTech project leader</div>
+          <div>Content developer</div>
         </div>
-        <div style={{ display: "flex", maxWidth: 570, marginTop: 28, color: "#5c655a", fontSize: 25, lineHeight: 1.5 }}>
-          I turn messy problems into useful software—and make complex ideas easier to understand.
+        <div style={{ display: "flex", maxWidth: 570, marginTop: 28, color: "#50676a", fontSize: 25, lineHeight: 1.5 }}>
+          I lead educational projects, develop learning content, and build the software that connects them.
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: "auto", color: "#435c3e", fontSize: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: "auto", color: "#067c68", fontSize: 20 }}>
           {new URL(site.url).hostname}
           <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M5 19 19 5M5 5h14v14" />
@@ -55,8 +55,8 @@ export default async function OpengraphImage() {
           width: 380,
           height: 522,
           overflow: "hidden",
-          borderRadius: "190px 190px 22px 22px",
-          border: "1px solid #28352b1a",
+          borderRadius: "18px",
+          border: "1px solid #172f351a",
           background: "#ffffff",
         }}
       >

@@ -12,7 +12,7 @@ const display = Space_Grotesk({ subsets: ["latin"], variable: "--font-heading", 
 const body = Manrope({ subsets: ["latin"], variable: "--font-body", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-code", display: "swap" });
 
-export const viewport: Viewport = { themeColor: "#0b0e11" };
+export const viewport: Viewport = { themeColor: "#e7eeee" };
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

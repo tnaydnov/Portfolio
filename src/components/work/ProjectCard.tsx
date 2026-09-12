@@ -1,40 +1,29 @@
 import Link from "next/link";
-import { ProjectArtifact } from "@/components/artifacts";
-import { href } from "@/lib/site";
-import { DOMAIN_LABEL, STATUS_LABEL, formatSpan, type Project } from "@/lib/types";
+import { ProductPreview } from "@/components/artifacts/ProductPreview";
+import { STATUS_LABEL, type Project } from "@/lib/types";
 import styles from "./work.module.css";
+
 export function ProjectCard({ project, featured = false, index }: {
-    project: Project;
-    featured?: boolean;
-    index?: number;
+  project: Project;
+  featured?: boolean;
+  index?: number;
 }) {
-    return (<article id={project.slug} className={styles.project} data-featured={featured} data-project={project.slug}>
-      <Link href={href(`/work/${project.slug}`)} className={styles.projectLink}>
+  const titleId = `project-${project.slug}-title`;
+  return <article id={project.slug} className={styles.project} data-featured={featured} data-project={project.slug}>
+    <Link href={`/work/${project.slug}`} className={styles.projectLink} aria-labelledby={titleId}>
+      <ProductPreview project={project} compact />
+      <div className={styles.projectCopy}>
         <div className={styles.projectHeading}>
-          <span className={styles.projectNumber}>{index !== undefined ? String(index + 1).padStart(2, "0") : "↗"}</span>
-          <h3>{project.title}</h3>
-          <span className={styles.coverArrow} aria-hidden>{"↗"}</span>
+          <h3 id={titleId}>{project.title}</h3>
+          <span className={styles.status} data-status={project.status}>{project.statusLabel ?? STATUS_LABEL[project.status]}</span>
         </div>
-        <div className={styles.cover}>
-          <ProjectArtifact slug={project.slug} size="hero"/>
+        <p className={styles.projectRole}>{project.role}</p>
+        <p className={styles.summary}>{project.oneLiner}</p>
+        <div className={styles.projectFoot}>
+          <span className={styles.projectNumber}>{index === undefined ? "PROJECT NOTES" : `PROJECT ${String(index + 1).padStart(2, "0")}`}</span>
+          <span className={styles.readLink}>Explore project<span aria-hidden="true">↗</span></span>
         </div>
-        <div className={styles.projectCopy}>
-          <div className={styles.projectOverview}>
-          <div className={styles.projectMeta}>
-            <span>{project.domain.map((domain) => DOMAIN_LABEL[domain]).join(" / ")}</span>
-          </div>
-          <p className={styles.hook}>{project.hook}</p>
-          <span className={styles.readLink}>{"Inside the project"}<span aria-hidden>{"→"}</span></span>
-          </div>
-          {project.snapshot ? (<dl className={styles.projectFacts}>
-              <div><dt>{"The move"}</dt><dd>{project.snapshot.move}</dd></div>
-              <div><dt>{"My part"}</dt><dd>{project.snapshot.contribution}</dd></div>
-            </dl>) : null}
-          <div className={styles.projectFoot}>
-            <div><span>{formatSpan(project)}</span><p>{project.role}</p></div>
-            <span className={styles.status}>{project.statusLabel ? project.statusLabel : STATUS_LABEL[project.status]}</span>
-          </div>
-        </div>
-      </Link>
-    </article>);
+      </div>
+    </Link>
+  </article>;
 }

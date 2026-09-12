@@ -1,12 +1,13 @@
 import type { Project, Tier } from "@/lib/types";
 import { arc } from "./arc";
+import { browserCoder } from "./browser-coder";
 import { applytide } from "./applytide";
 import { eventa } from "./eventa";
 import { lpr, tradingSystem } from "./systems";
 import { reps } from "./reps";
 
-export const SELECTED_WORK: Project[] = [arc, applytide, eventa, lpr];
-export const EARLIER_ENGINEERING: Project[] = [tradingSystem, ...reps];
+export const SELECTED_WORK: Project[] = [arc, browserCoder, applytide, eventa];
+export const EARLIER_ENGINEERING: Project[] = [lpr, tradingSystem, ...reps];
 
 export const ALL_PROJECTS: Project[] = [
   ...SELECTED_WORK,

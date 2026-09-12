@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("Arc preserves the reusable source and released version when feedback creates a draft", async ({ page }) => {
+test("Arc keeps source and classroom context unchanged when student revision is requested", async ({ page }) => {
   await page.goto("/work/arc");
   const demo = page.getByRole("region", { name: "Arc interactive example" });
   await expect(demo).toContainText("Co-developed · Portal online");
@@ -9,14 +9,14 @@ test("Arc preserves the reusable source and released version when feedback creat
   const release = demo.getByRole("button", { name: "Release sample lesson" });
   await release.focus();
   await page.keyboard.press("Enter");
-  await expect(demo.getByTestId("arc-release")).toContainText("Released from source version 1");
+  await expect(demo.getByTestId("arc-release")).toContainText("Using source version 1");
   await expect(demo.getByTestId("arc-source")).toContainText("Source version 1");
   await demo.getByRole("button", { name: "Add sample feedback" }).click();
-  await expect(demo.getByTestId("arc-revision")).toContainText("Version 2 · Draft");
-  await expect(demo.getByTestId("arc-revision")).toContainText("Add a worked example before independent practice.");
-  await expect(demo.getByTestId("arc-release")).toContainText("Released from source version 1");
+  await expect(demo.getByTestId("arc-revision")).toContainText("Student revision requested");
+  await expect(demo.getByTestId("arc-revision")).toContainText("Trace range(3) from zero and explain where it stops.");
+  await expect(demo.getByTestId("arc-release")).toContainText("Using source version 1");
   await expect(demo.getByTestId("arc-source")).toContainText("Source version 1");
-  await expect(demo.getByRole("status")).toContainText("This class still has its version 1 release.");
+  await expect(demo.getByRole("status")).toContainText("The reusable lesson and classroom release remain unchanged.");
   await demo.getByRole("button", { name: "Reset example" }).click();
   await expect(demo.getByTestId("arc-release")).toHaveCount(0);
   await expect(demo.getByTestId("arc-revision")).toHaveCount(0);
@@ -73,8 +73,8 @@ test("320px demos keep their complete behavior with reduced motion", async ({ pa
   let demo = page.getByTestId("playable-case");
   await demo.getByRole("button", { name: "Release sample lesson" }).click();
   await demo.getByRole("button", { name: "Add sample feedback" }).click();
-  await expect(demo.getByTestId("arc-revision")).toContainText("Version 2");
-  await expect(demo.getByTestId("arc-release")).toContainText("Released from source version 1");
+  await expect(demo.getByTestId("arc-revision")).toContainText("Student revision requested");
+  await expect(demo.getByTestId("arc-release")).toContainText("Using source version 1");
   expect(await demo.evaluate((element) => element.scrollWidth <= element.clientWidth + 1)).toBeTruthy();
   await page.goto("/work/applytide");
   demo = page.getByTestId("playable-case");

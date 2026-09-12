@@ -1,94 +1,50 @@
 import Link from "next/link";
-import { now } from "@/content/site";
 import { arc } from "@/content/work/arc";
-import { applytide } from "@/content/work/applytide";
-import { eventa } from "@/content/work/eventa";
+import { browserCoder } from "@/content/work/browser-coder";
+import { ProductPreview } from "@/components/artifacts/ProductPreview";
 import { site } from "@/lib/site";
 import styles from "./home-details.module.css";
 
-const projects = [
-  { project: arc, category: "Learning & teaching", tone: "moss" },
-  { project: applytide, category: "The job search", tone: "ochre" },
-  { project: eventa, category: "People & connection", tone: "rose" },
-] as const;
-
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <path d={diagonal ? "M5 19 19 5M5 5h14v14" : "M4 12h15m-6-6 6 6-6 6"} />
-    </svg>
-  );
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d={diagonal ? "M5 19 19 5M5 5h14v14" : "M4 12h15m-6-6 6 6-6 6"} /></svg>;
 }
 
+const practice = [
+  { index: "01", title: "Understand the need", copy: "Listen to the people doing the work. Find the real problem.", glyph: "M7 6h18v13H15l-6 5v-5H7Z M12 10h8m-8 4h5" },
+  { index: "02", title: "Give it structure", copy: "Turn the idea into a learning plan, a clear scope and practical steps.", glyph: "M6 7h7v7H6ZM19 19h7v7h-7ZM16 10h7v6M10 17v6h6" },
+  { index: "03", title: "Build & keep improving", copy: "Connect content and code. Test the experience and work through the details.", glyph: "m12 8-7 8 7 8m8-16 7 8-7 8m-3-20-3 24" },
+];
+
 export function HomeDetails() {
-  return (
-    <div className={styles.details}>
-      <div className={styles.container}>
-        <section className={styles.context} aria-labelledby="home-context-title">
-          <div className={styles.contextHeading}>
-            <p className={styles.eyebrow}>A bit about me</p>
-            <h2 id="home-context-title">A little context.</h2>
-            <div className={styles.now}>
-              <p><span aria-hidden="true" />Right now</p>
-              <ul>{now.items.map((item) => <li key={item}>{item}</li>)}</ul>
-            </div>
-          </div>
-          <div className={styles.contextCopy}>
-            <p className={styles.lead}>I like being close enough to a problem to understand the people behind it.</p>
-            <p>Technical support taught me to look past the first symptom. Teaching taught me to make complicated things clear. Engineering gives me the tools to build something useful from both.</p>
-            <div className={styles.contextLinks}>
-              <Link href="/about">My background &amp; approach<Arrow diagonal /></Link>
-              <a href={site.cv} download={site.cvFileName}>The short version: my CV<span aria-hidden="true">↓</span></a>
-            </div>
-          </div>
-        </section>
+  return <div className={styles.details}>
+    <div className={styles.container}>
+      <section className={styles.currentWork} aria-labelledby="home-context-title">
+        <div className={styles.sectionHeading}>
+          <div><p className={styles.eyebrow}>01 / What I&apos;m working on</p><h2 id="home-context-title">Learning, connected.</h2></div>
+          <p>At Nitzanim, I lead EdTech projects and develop learning content. These are two of the products I help build.</p>
+        </div>
+        <div className={styles.products}>
+          {[arc, browserCoder].map((project) => <article className={styles.product} key={project.slug}>
+            <Link href={`/work/${project.slug}`} aria-labelledby={`home-${project.slug}`}>
+              <ProductPreview project={project} compact />
+              <div className={styles.productCopy}><div><p className={styles.productType}>{project.slug === "arc" ? "The learning platform" : "The coding workspace"}</p><h3 id={`home-${project.slug}`}>{project.title}</h3></div><Arrow diagonal /><p>{project.slug === "arc" ? "From curriculum and classroom activities to feedback and reporting." : "Write code, see what it does, and understand the steps in between."}</p></div>
+            </Link>
+          </article>)}
+        </div>
+        <div className={styles.workFoot}><p>Also in my work: independent products, computer vision, and systems engineering.</p><Link href="/work">See all projects<Arrow /></Link></div>
+      </section>
 
-        <section className={styles.work} aria-labelledby="home-work-title">
-          <div className={styles.workHeading}>
-            <div>
-              <p className={styles.eyebrow}>Selected work</p>
-              <h2 id="home-work-title">A few things I&apos;ve built.</h2>
-            </div>
-            <Link className={styles.allWork} href="/work">All work<Arrow /></Link>
-          </div>
-          <div className={styles.projects}>
-            {projects.map(({ project, category, tone }, index) => (
-              <article key={project.slug} className={styles.project} data-tone={tone}>
-                <Link className={styles.projectLink} href={`/work/${project.slug}`} aria-labelledby={`home-project-${project.slug}`}>
-                  <span className={styles.projectNumber} aria-hidden="true">0{index + 1}</span>
-                  <div className={styles.projectTitle}>
-                    <p>{category}</p>
-                    <h3 id={`home-project-${project.slug}`}>{project.title}</h3>
-                    <p className={styles.projectStatus}>{project.statusLabel}</p>
-                  </div>
-                  <div className={styles.projectCopy}>
-                    <p className={styles.projectDescription}>{project.oneLiner}</p>
-                    <p className={styles.projectRole}><span>My role</span>{project.role}</p>
-                    <p className={styles.projectTeam}>{project.team}</p>
-                  </div>
-                  <span className={styles.projectArrow}><Arrow diagonal /></span>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
+      <section className={styles.practice} aria-labelledby="home-approach-title">
+        <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>02 / How I think</p><h2 id="home-approach-title">People first. Then the pieces.</h2></div><Link href="/about">More about me<Arrow diagonal /></Link></div>
+        <div className={styles.steps}>{practice.map((step) => <article className={styles.step} key={step.index}><div className={styles.stepTop}><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden="true"><path d={step.glyph} /></svg><span>{step.index}</span></div><h3>{step.title}</h3><p>{step.copy}</p></article>)}</div>
+        <p className={styles.background}>Technical support taught me to investigate. Teaching taught me to explain. Engineering helps me turn both into useful tools.</p>
+      </section>
 
-        <section className={styles.invitation} aria-labelledby="home-contact-title">
-          <svg className={styles.invitationMark} viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <path d="M40 4v72M4 40h72M14.5 14.5l51 51m0-51-51 51" />
-            <circle cx="40" cy="40" r="13" fill="currentColor" stroke="none" />
-          </svg>
-          <div className={styles.invitationCopy}>
-            <p className={styles.eyebrow}>There&apos;s always room for a conversation</p>
-            <h2 id="home-contact-title">Have something in mind?</h2>
-            <p>A product question, a teaching idea, or a good problem to work on. I&apos;d love to hear about it.</p>
-          </div>
-          <div className={styles.contactLinks}>
-            <Link className={styles.contactButton} href="/contact">Let&apos;s talk<Arrow /></Link>
-            <a className={styles.email} href={`mailto:${site.email}`}>{site.email}</a>
-          </div>
-        </section>
-      </div>
+      <section className={styles.invitation} aria-labelledby="home-contact-title">
+        <div className={styles.invitationMark} aria-hidden="true"><span>&gt;_</span><svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="54" stroke="currentColor" strokeDasharray="2 9"/><path d="M60 0v13M0 60h13m94 0h13M60 107v13" stroke="currentColor"/></svg></div>
+        <div className={styles.invitationCopy}><p className={styles.eyebrow}>03 / Let&apos;s connect</p><h2 id="home-contact-title">Good things start with a hello.</h2><p>A product to build, an educational challenge, or a role worth talking about.</p></div>
+        <div className={styles.contactLinks}><Link className={styles.contactButton} href="/contact">Let&apos;s talk<Arrow /></Link><a className={styles.email} href={`mailto:${site.email}`}>{site.email}</a></div>
+      </section>
     </div>
-  );
+  </div>;
 }

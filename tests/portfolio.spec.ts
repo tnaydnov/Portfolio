@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 
-const cases = ["arc", "applytide", "eventa", "license-plate-recognition", "trading-system"];
+const cases = ["arc", "browser-coder", "applytide", "eventa", "license-plate-recognition", "trading-system"];
 const publicPaths = ["/", "/work", "/about", "/contact", ...cases.map((slug) => `/work/${slug}`)];
 
 async function expectEnglishPage(page: Page, path: string) {
@@ -181,7 +181,7 @@ test("an unavailable portrait preserves identity and useful navigation", async (
   expect(errors).toEqual([]);
 });
 
-test("the warm homepage palette follows navigation without affecting work pages", async ({ page }) => {
+test("all pages share the same mist and teal palette through navigation", async ({ page }) => {
   await page.goto("/");
   const palette = () => page.evaluate(() => ({
     background: getComputedStyle(document.body).backgroundColor,
@@ -193,15 +193,35 @@ test("the warm homepage palette follows navigation without affecting work pages"
   expect(homePalette.scheme).toBe("light");
   await page.getByTestId("welcome-hero").getByRole("link", { name: "Explore my work", exact: true }).click();
   await expect(page).toHaveURL(/\/work$/);
-  await expect.poll(async () => (await palette()).scheme).toBe("dark");
+  await expect.poll(async () => (await palette()).scheme).toBe("light");
   const workPalette = await palette();
-  expect(workPalette.background).not.toBe(homePalette.background);
-  expect(workPalette.header).not.toBe(homePalette.header);
-  expect(workPalette.footer).not.toBe(homePalette.footer);
+  expect(workPalette.background).toBe(homePalette.background);
+  expect(workPalette.header).toBe(homePalette.header);
+  expect(workPalette.footer).toBe(homePalette.footer);
+  for (const path of ["/about", "/contact", "/work/browser-coder"]) {
+    await page.goto(path);
+    expect(await palette()).toEqual(homePalette);
+  }
   await page.locator("header").getByRole("link", { name: "Tomer Naydnov \u2014 Home", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByTestId("welcome-hero")).toBeVisible();
   await expect.poll(palette).toEqual(homePalette);
+});
+
+test("portrait depth follows a mouse and returns to rest when animation is paused", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 960 });
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  const portrait = page.getByTestId("living-portrait");
+  await expect(portrait).toHaveAttribute("data-moving", "true");
+  const bounds = (await portrait.boundingBox())!;
+  await page.mouse.move(bounds.x + bounds.width * .85, bounds.y + bounds.height * .35);
+  const offset = () => portrait.evaluate(el => Number(el.style.getPropertyValue("--look-x")));
+  await expect.poll(offset).toBeGreaterThan(.3);
+  await portrait.getByRole("button", { name: "Pause portrait animation" }).click();
+  await expect.poll(offset).toBe(0);
+  await page.mouse.move(bounds.x + bounds.width * .15, bounds.y + bounds.height * .3);
+  expect(await offset()).toBe(0);
 });
 
 test("email copying confirms the action and keeps the direct email link", async ({ context, page }) => {

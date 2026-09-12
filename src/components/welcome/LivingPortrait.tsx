@@ -50,6 +50,45 @@ export function LivingPortrait() {
 
   const moving = loaded && !failed && !reduced && !paused && visible;
 
+  useEffect(() => {
+    const element = stage.current;
+    if (!element || !moving) return;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+    let targetX = 0;
+    let targetY = 0;
+    function draw() {
+      x += (targetX - x) * .09;
+      y += (targetY - y) * .09;
+      element!.style.setProperty("--look-x", x.toFixed(3));
+      element!.style.setProperty("--look-y", y.toFixed(3));
+      if (Math.abs(targetX - x) + Math.abs(targetY - y) > .003) frame = requestAnimationFrame(draw);
+      else frame = 0;
+    }
+    function start() { if (!frame) frame = requestAnimationFrame(draw); }
+    function follow(event: PointerEvent) {
+      if (!finePointer.matches || event.pointerType === "touch") return;
+      const rect = element!.getBoundingClientRect();
+      targetX = Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - .5) * 2));
+      targetY = Math.max(-1, Math.min(1, ((event.clientY - rect.top) / rect.height - .5) * 2));
+      start();
+    }
+    function reset() { targetX = 0; targetY = 0; start(); }
+    element.addEventListener("pointermove", follow, { passive: true });
+    element.addEventListener("pointerleave", reset);
+    finePointer.addEventListener("change", reset);
+    return () => {
+      cancelAnimationFrame(frame);
+      element.removeEventListener("pointermove", follow);
+      element.removeEventListener("pointerleave", reset);
+      finePointer.removeEventListener("change", reset);
+      element.style.removeProperty("--look-x");
+      element.style.removeProperty("--look-y");
+    };
+  }, [moving]);
+
   const animateWave = useCallback(() => {
     if (!hand.current) return;
     animation.current?.cancel();
@@ -93,9 +132,10 @@ export function LivingPortrait() {
           <feComposite in="keyed" in2="SourceGraphic" operator="in" />
         </filter></defs>
       </svg>
-      <div className={styles.arch} aria-hidden="true"><span /><span /></div>
+      <div className={styles.scene}>
+      <div className={styles.arch} aria-hidden="true"><div className={styles.windowBar}><i /><i /><i /><span>tomer / in his element</span></div><span className={styles.halo} /></div>
       <div className={styles.orbit} aria-hidden="true" />
-      <div className={styles.hello} aria-hidden="true"><span>Oh, hey!</span><svg viewBox="0 0 60 45" fill="none"><path d="M5 4c25-4 44 8 42 28m-9-5 9 9 7-12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg></div>
+      <div className={styles.hello} aria-hidden="true"><span>&lt;hello /&gt;</span><svg viewBox="0 0 60 45" fill="none"><path d="M5 4c25-4 44 8 42 28m-9-5 9 9 7-12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg></div>
       <div className={styles.portraitWindow}>
         <div className={styles.person} style={{ filter: `url(#${matteId})` }}>
           <div className={styles.body}>
@@ -108,7 +148,9 @@ export function LivingPortrait() {
           </>}
         </div>
       </div>
-      <div className={styles.signature} aria-hidden="true"><span className={styles.signatureMark}>tn.</span><span>A builder, a teacher,<br />a person behind the pixels.</span></div>
+      <div className={styles.signature} aria-hidden="true"><span className={styles.signatureMark}>&gt;_</span><span>Curious by default.<br /><strong>Human, always.</strong></span></div>
+      <div className={styles.coordinate} aria-hidden="true"><span />ideas → things that work</div>
+      </div>
       <div className={styles.controls}>
         <p className={styles.greeting} role="status" aria-live="polite">{greeting ? "Hey! Glad you stopped by." : ""}</p>
         {hydrated && !failed && <div className={styles.controlRow}>

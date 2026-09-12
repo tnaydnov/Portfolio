@@ -1,8 +1,5 @@
 import type { Project } from "@/lib/types";
-/**
-* University coursework, 2022–2023. Kept deliberately compact — these are reps,
-* not products, and weighting them correctly is part of the point.
-*/
+/** Archived university coursework, 2022–2023. */
 export const reps: Project[] = [
   {
     slug: "hr-organization",
@@ -19,12 +16,12 @@ export const reps: Project[] = [
     metrics: [],
     stack: ["Java"],
     links: { repo: "https://github.com/tnaydnov/HR_Organization" },
-    taught: "Scheduling is a constraint-satisfaction problem, and most of the difficulty lives in the rules people never write down.",
+    taught: "Modeling the staffing and delivery rules behind a workable schedule.",
   },
   {
     slug: "kanban",
     title: "Kanban",
-    oneLiner: "A board-based task and workflow tool.",
+    oneLiner: "A Kanban task-management backend with a partial desktop frontend.",
     hook: "",
     tier: "rep",
     stages: ["build"],
@@ -36,7 +33,7 @@ export const reps: Project[] = [
     metrics: [],
     stack: ["C#", ".NET"],
     links: { repo: "https://github.com/tnaydnov/Kanban" },
-    taught: "A test suite written after the fact documents what the code does. Written first, it documents what it should do.",
+    taught: "Defining task and board behavior through layered code and tests.",
   },
   {
     slug: "set-card-game",
@@ -53,7 +50,7 @@ export const reps: Project[] = [
     metrics: [],
     stack: ["Java", "Concurrency", "Threading"],
     links: { repo: "https://github.com/tnaydnov/Set_Card_Game" },
-    taught: "Concurrency bugs are not bugs in the code you wrote, they are bugs in the assumptions you did not know you had.",
+    taught: "Coordinating player and dealer threads around shared game state.",
   },
   {
     slug: "dungeons-and-dragons",
@@ -70,7 +67,7 @@ export const reps: Project[] = [
     metrics: [],
     stack: ["Java", "OOP"],
     links: { repo: "https://github.com/tnaydnov/Dungeons_and_Dragons" },
-    taught: "Inheritance modelled on nouns collapses fast. Behaviour is the thing worth composing.",
+    taught: "Separating characters, combat rules, and progression in an object-oriented model.",
   },
   {
     slug: "the-coalition-race",
@@ -87,6 +84,6 @@ export const reps: Project[] = [
     metrics: [],
     stack: ["C++", "OOP"],
     links: { repo: "https://github.com/tnaydnov/The_Coalition_Race" },
-    taught: "Owning memory manually teaches you what every garbage-collected language is quietly doing on your behalf.",
+    taught: "Making ownership and object lifetime explicit in C++.",
   },
 ];

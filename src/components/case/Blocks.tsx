@@ -1,6 +1,5 @@
 import { ui } from "@/lib/ui";
 import type { Decision, Feedback, Metric } from "@/lib/types";
-import { CountUp } from "@/components/motion/CountUp";
 import styles from "./engineering.module.css";
 export function MetricBlock({ metrics }: {
     metrics: Metric[];
@@ -8,9 +7,8 @@ export function MetricBlock({ metrics }: {
     if (metrics.length === 0)
         return null;
     return <dl className={styles.metrics}>{metrics.map((metric) => <div key={metric.label} className={styles.metric}>
-    <dd><CountUp value={metric.value}/></dd>
     <dt>{metric.label}</dt>
-    {metric.note ? <p>{metric.note}</p> : null}
+    <dd>{metric.value}{metric.note ? <p>{metric.note}</p> : null}</dd>
   </div>)}</dl>;
 }
 export function DecisionLog({ decisions }: {
