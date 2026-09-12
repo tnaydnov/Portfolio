@@ -15,7 +15,8 @@
 .studyNote i { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border: 1px solid #d5ebe42b; border-radius: 50%; font-size: .8rem; font-style: normal; color: var(--art-accent); }
 .artifact[data-size="card"] .coverCaption { inset: 1.2rem 1.4rem auto; }
 .artifact[data-size="card"] .studyNote { inset: auto 1.4rem 1.2rem; }
-:global([dir="rtl"]) .studyNote i { scale: -1 1; }
 @container(max-width: 500px) { .stage { aspect-ratio: 1.2; min-height: 19rem; } .coverCaption { inset: 1.2rem 1.2rem auto; } .coverCaption > span:first-child { max-width: 50%; font-size: .82rem; } .coverCaption > span:last-child { max-width: 43%; font-size: .61rem; } .scene { width: 127%; max-width: none; left: -13.5%; right: auto; } .studyNote { inset: auto 1.2rem 1.2rem; font-size: .64rem; } .svgLabel { font-size: 27px; } }
 @media(prefers-reduced-motion: reduce) { .scene { transition: none; } .artifact:hover .scene { transform: scale(1.02); } }
 @media(forced-colors: active) { .artifact { border: 1px solid CanvasText; } }
+@container(max-width: 300px) { .coverCaption { inset: 1rem 1rem auto; gap: .65rem; } .coverCaption > span:first-child { font-size: .75rem; } .coverCaption > span:last-child { font-size: .58rem; } .svgLabel { font-size: 34px; } .studyNote { inset: auto 1rem 1rem; font-size: .61rem; } .studyNote > span { max-width: 80%; line-height: 1.6; } }
+@container(max-width: 500px) { .arc .svgLabel text:nth-child(2) { transform: translateY(34px); } }

@@ -1,45 +1,45 @@
-# Tomer Naydnov — Project Select
+# Tomer Naydnov - Personal playground
 
-A bilingual portfolio for a software engineer, technical product builder and programming instructor. A full-scene project selector turns three products into interactive 3D environments. Dark surfaces, mint/coral/lilac accents and large typography connect the homepage with the work, case and profile pages.
+An English-only portfolio for a software engineer, product builder and programming instructor. The homepage introduces Tomer through a single interactive 3D playground, with direct access to his work, background, CV and contact details.
 
-## Design and routes
+## Routes
 
-- `/en` and `/he`: identity, three interactive product worlds, direct case links and a persistent project selector. A `?project=` URL preserves selection through reload, back navigation and language changes.
-- `/[locale]/work`: four selected projects and a compact earlier-work index.
-- `/[locale]/work/[slug]`: project context, ownership, status, a concise snapshot, and optional narrative/technical detail. Trading System remains in earlier work and has a complete case page.
-- `/[locale]/about`: experience, education, teaching, approach and fit.
-- `/[locale]/contact`: email, email copying, CV and external profiles.
-- `/[locale]/system`: permanent redirect to About for older links.
+- `/`: personal introduction, a hands-on 3D playground, background and selected project links.
+- `/work`: selected projects and an earlier-work index.
+- `/work/[slug]`: project ownership, lifecycle, snapshot, interactive examples and optional technical detail.
+- `/about`: experience, education, teaching, approach and fit.
+- `/contact`: email, copy-email action, CV and external profiles.
+- `/system`: permanent redirect to About.
 
-English and Hebrew have separate font families and real RTL layouts. The header, footer, case studies, project illustrations, social previews, favicon and not-found pages share the same visual system. Essential content uses server-rendered HTML and ordinary links.
+The previous `/en` and `/he` URL prefixes permanently redirect to the equivalent English route and preserve query strings. There is no locale selector, translation layer, alternate language content or language-prefixed canonical URL. The sitemap, metadata, social preview, icon and not-found pages use the same English identity.
 
-## The experience
+## The playground
 
-`src/components/experience/ProjectScene.tsx` builds the entire scene from Three.js geometry, materials, lights and canvas-drawn lettering. Arc becomes a connected classroom environment; Applytide an opportunity pipeline; Eventa a circular guest network. No generated pictures, stock images, HDR photographs or external models are fetched.
+`src/components/experience/PlaygroundScene.tsx` constructs the scene from Three.js geometry, materials, lights and code-drawn lettering. Engineering is an explodable stack, teaching is an opening book sculpture, and product thinking is a kinetic loop. All three occupy the same space and work independently. Visitors can click the objects or their accessible HTML controls, drag horizontally to turn the view, and reset the playground.
 
-`ProjectExperience.tsx` keeps identity, controls, lifecycle, explanations and real links in server-rendered HTML. The renderer loads separately. Selecting a project slides the next environment into view; one optional action illustrates its workflow. Rendering stops when movement settles, the page is hidden or the scene leaves view. OS reduced motion and a saved motion preference are supported. Original SVG art covers loading, unsupported WebGL and context loss. The selector appears first on phones.
+The introduction and links are server-rendered HTML. The scene loads separately; a procedural SVG provides the first paint and fallback for unsupported WebGL or context loss. Keyboard controls, OS reduced motion and a saved motion preference are supported. Vertical touch scrolling and pinch zoom remain available. Rendering stops when interactions settle, the scene leaves view or the page is hidden. Static geometry is batched, repeated surfaces share resources, and render resources are disposed on unmount.
 
-Case pages include bounded product demonstrations in `PlayableCase.tsx`: Arc preserves a source lesson while producing a classroom release and a feedback-led next draft; Applytide captures a fictional opportunity into a structured record/history; Eventa previews an introduction between fictional guests. They use local, resettable state and make no network requests or submissions.
+The site fetches no generated pictures, stock images, external 3D models or HDR photographs for its visual design. Product-cover SVGs and the social preview are also built in code.
 
-Project-cover SVGs and the social-preview image are also built in code. Decorative models and demos are labeled as illustrations; project facts remain separate and explicit.
+## Content and demonstrations
 
-## Content boundaries
+Content lives in `src/content/` as plain English strings and arrays. Ownership and lifecycle remain explicit:
 
-Project content lives in `src/content/`. Ownership and lifecycle are explicit:
-
-- Arc is co-developed with another engineer; its public portal and inspected development work are distinguished.
+- Arc is co-developed with another engineer. The public portal and inspected development work are distinguished.
 - Applytide is a solo-created, archived job-search platform with public source.
 - Eventa is a solo-created, discontinued event-connection product with public source.
-- License Plate Recognition is a five-person capstone; Tomer's contribution covers motion detection, data, training and fine-tuning.
-- Trading System is a university team contribution, retained with the earlier work.
+- License Plate Recognition is a five-person capstone; Tomer's part covers motion detection, data, training and fine-tuning.
+- Trading System is an earlier university team contribution with a complete case page.
 
-The private, git-ignored `TRUTH_SOURCE.md` is the factual ledger. `npm run truth:check` runs before every production build. Arc illustrations use fictional material; private learner records, credentials and operational data do not belong in this repository.
+`PlayableCase.tsx` provides three bounded, illustrative examples: Arc preserves a source lesson while creating a classroom release and a feedback-led next draft; Applytide captures a fictional opportunity into a record and history; Eventa previews an introduction between fictional guests. These use local resettable state, without network requests or submissions.
 
-`public/Tomer Naydnov.pdf` is the owner's supplied CV and is served unchanged. Canonical metadata, language alternates and the sitemap use `https://tomer-naydnov.com`.
+The private, ignored `TRUTH_SOURCE.md` is the factual ledger. `npm run truth:check` runs before production builds and rejects known blocked claims and Hebrew script in publication sources. Historical language-support facts about the original products remain in their English technical descriptions.
+
+`public/Tomer Naydnov.pdf` is the supplied CV, served unchanged. Canonical metadata and the sitemap use `https://tomer-naydnov.com`.
 
 ## Development
 
-The application uses Next.js 15, React 19, TypeScript, Tailwind CSS 4, Three.js and React Three Fiber. Next/font serves Space Grotesk and Manrope for English, Heebo and Rubik for Hebrew, and JetBrains Mono for code. Analytics are enabled when running on Vercel.
+Next.js 15, React 19, TypeScript, Tailwind CSS 4, Three.js and React Three Fiber. Next/font serves Space Grotesk, Manrope and JetBrains Mono. Vercel enables analytics.
 
 ```sh
 npm ci
@@ -58,6 +58,6 @@ npm run test:e2e
 npm audit
 ```
 
-Playwright covers public routes in both languages and desktop/mobile widths, mobile-menu keyboard behavior, locale preservation, real WebGL readiness and context-loss fallback, project switching, selection persistence, reduced motion, the three product demonstrations, reading without JavaScript, email copying, case disclosures, CV delivery, social images and not-found behavior.
+Playwright covers all public pages at 320, 390, 768, 1366 and 2560px; personal identity and immediate navigation; independent playground controls, reset, keyboard and pointer rotation, native touch scrolling and rendering at rest; reduced motion; WebGL failure and context loss; no-JavaScript navigation; the three product examples; menu focus; disclosures; clipboard; legacy redirects; metadata, CV and social images.
 
-Tests normally start or reuse a local development server. Set `PLAYWRIGHT_SERVER_COMMAND` to `npm run start -- --hostname 127.0.0.1` to test an existing production build. Screenshots and traces from failures are stored in ignored test-output directories. Browser emulation validates layout and behavior; it is not a physical-device performance benchmark.
+Tests start or reuse a server on port 3000. Set `PLAYWRIGHT_SERVER_COMMAND` to `npm run start -- --hostname 127.0.0.1` to test a production build. Temporary screenshots and traces stay in ignored QA/test-output directories. Browser emulation validates layout and behavior; it is not a physical-device performance benchmark.

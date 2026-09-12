@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("Arc preserves the reusable source and released version when feedback creates a draft", async ({ page }) => {
-  await page.goto("/en/work/arc");
+  await page.goto("/work/arc");
   const demo = page.getByRole("region", { name: "Arc interactive example" });
   await expect(demo).toContainText("Co-developed · Portal online");
   await expect(demo.getByTestId("arc-release")).toHaveCount(0);
@@ -24,7 +24,7 @@ test("Arc preserves the reusable source and released version when feedback creat
 });
 
 test("Applytide captures one coherent record and clears its history on reset", async ({ page }) => {
-  await page.goto("/en/work/applytide");
+  await page.goto("/work/applytide");
   const demo = page.getByRole("region", { name: "Applytide interactive example" });
   await expect(demo).toContainText("Source archived");
   await expect(demo.getByTestId("applytide-record")).toHaveCount(0);
@@ -45,7 +45,7 @@ test("Applytide captures one coherent record and clears its history on reset", a
 });
 
 test("Eventa keeps the profile and introduction inside the selected fictional event", async ({ page }) => {
-  await page.goto("/en/work/eventa");
+  await page.goto("/work/eventa");
   const demo = page.getByRole("region", { name: "Eventa interactive example" });
   await expect(demo).toContainText("Discontinued");
   await expect(demo.getByTestId("eventa-profile")).toHaveCount(0);
@@ -66,33 +66,32 @@ test("Eventa keeps the profile and introduction inside the selected fictional ev
   await expect(demo.getByRole("button", { name: "Open sample event" })).toBeFocused();
 });
 
-test("Hebrew mobile demos retain their complete behavior with reduced motion", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
+test("320px demos keep their complete behavior with reduced motion", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 844 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/he/work/arc");
+  await page.goto("/work/arc");
   let demo = page.getByTestId("playable-case");
-  await expect(demo).toHaveAttribute("dir", "rtl");
-  await demo.getByRole("button", { name: "שחרור שיעור לדוגמה" }).click();
-  await demo.getByRole("button", { name: "הוספת משוב לדוגמה" }).click();
-  await expect(demo.getByTestId("arc-revision")).toContainText("גרסה 2 · טיוטה");
-  await expect(demo.getByTestId("arc-release")).toContainText("שוחרר מגרסת מקור 1");
+  await demo.getByRole("button", { name: "Release sample lesson" }).click();
+  await demo.getByRole("button", { name: "Add sample feedback" }).click();
+  await expect(demo.getByTestId("arc-revision")).toContainText("Version 2");
+  await expect(demo.getByTestId("arc-release")).toContainText("Released from source version 1");
   expect(await demo.evaluate((element) => element.scrollWidth <= element.clientWidth + 1)).toBeTruthy();
-  await page.goto("/he/work/applytide");
+  await page.goto("/work/applytide");
   demo = page.getByTestId("playable-case");
-  await demo.getByRole("button", { name: "שמירת הזדמנות לדוגמה" }).click();
-  await expect(demo.getByTestId("applytide-record")).toContainText("מהנדס/ת תוכנה");
+  await demo.getByRole("button", { name: "Capture sample opportunity" }).click();
+  await expect(demo.getByTestId("applytide-record")).toContainText("Software Engineer");
   expect(await demo.evaluate((element) => element.scrollWidth <= element.clientWidth + 1)).toBeTruthy();
-  await page.goto("/he/work/eventa");
+  await page.goto("/work/eventa");
   demo = page.getByTestId("playable-case");
-  await demo.getByRole("button", { name: "כניסה לאירוע לדוגמה" }).click();
-  await demo.getByRole("button", { name: "הפרופיל של מאיה" }).click();
-  await demo.getByRole("button", { name: "תצוגה מקדימה להיכרות", exact: true }).click();
-  await expect(demo.getByTestId("eventa-introduction")).toContainText("היי מאיה");
+  await demo.getByRole("button", { name: "Open sample event" }).click();
+  await demo.getByRole("button", { name: "View Maya's profile" }).click();
+  await demo.getByRole("button", { name: "Preview an introduction", exact: true }).click();
+  await expect(demo.getByTestId("eventa-introduction")).toContainText("Hi Maya");
   expect(await demo.evaluate((element) => element.scrollWidth <= element.clientWidth + 1)).toBeTruthy();
 });
 
 test("leaving a demo discards its fictional state", async ({ page }) => {
-  await page.goto("/en/work/applytide");
+  await page.goto("/work/applytide");
   const demo = page.getByRole("region", { name: "Applytide interactive example" });
   await demo.getByRole("button", { name: "Capture sample opportunity" }).click();
   await expect(demo.getByTestId("applytide-record")).toHaveCount(1);

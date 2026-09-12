@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
-:root,
-[data-theme="draft"],
-[data-theme="blueprint"] {
+:root {
   --ink: #0b0e11;
   --ink-2: #10161a;
   --surface: #151b20;
@@ -16,8 +14,6 @@
   --signal-ink: #10211c;
   --trace: #9ecbde;
   --ok: #a7ecd4;
-  --paper: #1c252b;
-  --paper-ink: #eef4ef;
   color-scheme: dark;
 }
 
@@ -66,10 +62,6 @@ h1, h2, h3, h4 {
 }
 p { text-wrap: pretty; }
 img, svg, canvas { max-width: 100%; }
-html[lang="he"] { --font-heading: var(--font-he-display); --font-body: var(--font-he); }
-[lang="he"] .label { font-family: var(--font-he), sans-serif; letter-spacing: 0; }
-[lang="he"] :is(h1, h2, h3, h4, .t-hero, .t-section) { letter-spacing: -0.025em; font-weight: 450; }
-[lang="he"] code, [lang="he"] .lat { font-family: var(--font-code), monospace; }
 .tnum, time, [data-metric] { font-variant-numeric: tabular-nums; }
 
 @utility label {

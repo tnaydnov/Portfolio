@@ -1,9 +1,9 @@
 .metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); border-block: 1px solid var(--rule); }
-.metric { padding: 1.75rem 1.5rem; border-inline-end: 1px solid var(--rule); }
+.metric { min-width: 0; padding: 1.75rem 1.5rem; border-inline-end: 1px solid var(--rule); }
 .metric:last-child { border-inline-end: 0; }
-.metric dd { font-family: var(--font-heading),sans-serif; font-size: clamp(1.75rem,3.5vw,3rem); line-height: 1.1; color: var(--signal); }
+.metric dd { font-family: var(--font-heading),sans-serif; font-size: clamp(1.35rem,3.5vw,3rem); line-height: 1.15; color: var(--signal); overflow-wrap: anywhere; }
 .metric dt { margin-top: .85rem; font-size: .74rem; font-weight: 600; line-height: 1.5; }
-.metric p { margin-top: .5rem; font-size: .7rem; line-height: 1.7; color: var(--text-muted); }
+.metric p { margin-top: .5rem; font-size: .8125rem; line-height: 1.7; color: var(--text-muted); }
 .decisions { display: grid; }
 .decision { display: grid; grid-template-columns: 6.5rem 1fr; gap: 2rem; padding-block: 2rem; }
 .decisions > li + li { border-top: 1px solid var(--rule); }
@@ -13,18 +13,18 @@
 .decision dl { display: grid; gap: 1.4rem; margin-top: 1.5rem; }
 .decision dl > div { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; }
 .decision dt { font-size: .7rem; font-weight: 650; color: var(--signal); padding-top: .2rem; }
-.decision dd { font-size: .88rem; color: var(--text-muted); line-height: 1.85; }
+.decision dd { font-size: .95rem; color: var(--text-muted); line-height: 1.85; }
 .feedback > li { padding-block: 2rem; border-bottom: 1px solid var(--rule); }
 .feedback figure { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
 .feedback blockquote { font-family: var(--font-heading),sans-serif; font-size: 1.5rem; line-height: 1.4; }
 .feedback figcaption { margin-top: 1rem; color: var(--signal); font-size: .7rem; }
 .feedback figure > div:last-child { padding-inline-start: 1.5rem; border-inline-start: 1px solid var(--rule); }
 .feedback figure > div:last-child p:first-child { color: var(--signal); font-size: .72rem; }
-.feedback figure > div:last-child p:last-child { margin-top: .7rem; color: var(--text-muted); font-size: .87rem; line-height: 1.85; }
+.feedback figure > div:last-child p:last-child { margin-top: .7rem; color: var(--text-muted); font-size: .95rem; line-height: 1.85; }
 .rebuild > li { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; padding-block: 1.4rem; }
 .rebuild > li + li { border-top: 1px solid var(--rule); }
 .rebuild span { color: var(--signal); font-size: .75rem; padding-top: .25rem; }
-.rebuild p { max-width: 75ch; font-size: .9rem; line-height: 1.85; color: var(--text-muted); }
+.rebuild p { max-width: 75ch; font-size: .95rem; line-height: 1.85; color: var(--text-muted); }
 .graph { border: 1px solid var(--rule); overflow: hidden; }
 .diagram { position: relative; height: 25rem; overflow: hidden; background-color: #10191b; background-image: radial-gradient(#d5ebe419 .8px,transparent .8px); background-size: 20px 20px; }
 .diagram svg { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -43,7 +43,7 @@
 .graphDetail div > p:first-child { font-size: .7rem; color: var(--signal); }
 .graphDetail h3 { margin-top: .6rem; font-size: 1.5rem; }
 .graphDetail small { display: block; margin-top: .4rem; font-size: .7rem; color: var(--text-faint); }
-.graphDetail > p { font-size: .85rem; line-height: 1.85; color: var(--text-muted); }
+.graphDetail > p { font-size: .95rem; line-height: 1.85; color: var(--text-muted); }
 .nodeConnections { grid-column: 1 / -1; border-top: 1px solid var(--rule); padding-top: 1rem; }
 .nodeConnections ul { display: flex; flex-wrap: wrap; gap: .65rem 1.5rem; margin-top: .65rem; }
 .nodeConnections li { display: flex; flex-wrap: wrap; gap: .6rem; align-items: baseline; color: var(--text-muted); font-size: .72rem; line-height: 1.8; }
@@ -53,12 +53,13 @@
 .dialHead { padding: clamp(1.2rem,3vw,2rem); border-bottom: 1px solid var(--rule); }
 .dialHead > p:first-child { font-size: .73rem; color: var(--signal); }
 .dialHead h3 { max-width: 47ch; margin-top: .85rem; font-size: clamp(1.3rem,2.3vw,2rem); line-height: 1.35; }
-.dialHead > p:last-child { max-width: 70ch; margin-top: .9rem; font-size: .86rem; line-height: 1.8; color: var(--text-muted); }
+.dialHead > p:last-child { max-width: 70ch; margin-top: .9rem; font-size: .95rem; line-height: 1.8; color: var(--text-muted); }
 .dials { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding: clamp(1.2rem,3vw,2rem); }
 .dialResult { padding: clamp(1.2rem,3vw,2rem); border-top: 1px solid var(--rule); background: color-mix(in srgb,var(--signal) 6%,var(--ink)); }
 .dialReset { display: inline-flex; align-items: center; min-height: 2.75rem; margin-top: 1rem; font-size: .76rem; color: var(--signal); text-decoration: underline; text-underline-offset: .2rem; }
-:global([lang="he"]) .metric dd, :global([lang="he"]) .feedback blockquote { font-family: var(--font-he-display),var(--font-he),sans-serif; }
 @media(max-width: 1000px) { .metrics { grid-template-columns: repeat(2,minmax(0,1fr)); } .metric:nth-child(even) { border-inline-end: 0; } .metric:nth-child(n+3) { border-top: 1px solid var(--rule); } }
 @media(max-width: 700px) { .metric { padding: 1.1rem; } .decision { grid-template-columns: 1fr; gap: 1rem; } .decisionMeta { display: flex; gap: 1rem; align-items: baseline; } .decisionMeta > p:last-child { margin-top: 0; } .decision dl > div { grid-template-columns: 1fr; gap: .4rem; } .feedback figure { grid-template-columns: 1fr; gap: 1.5rem; } .diagram { display: none; } .nodeButtons { grid-template-columns: repeat(2,minmax(0,1fr)); padding: .8rem; } .graphDetail { grid-template-columns: 1fr; gap: 1rem; padding: 1.1rem; } .dials { grid-template-columns: 1fr; gap: 2rem; } }
 .decision dd,.metric p,.rebuild p { overflow-wrap: anywhere; }
+.decision > *, .decision dl > div > *, .graphDetail > *, .dials > *, .rebuild > li > * { min-width: 0; }
+@media(max-width: 360px) { .nodeButtons { grid-template-columns: 1fr; } .metric { padding: 1.2rem .8rem; } }
 @media(prefers-reduced-motion: reduce) { .nodeButtons button { transition: none; } }

@@ -1,5 +1,5 @@
 .page { padding-block: clamp(3rem, 6vw, 6rem) clamp(4rem, 7vw, 7rem); }
-.aboutHero, .contactHero { display: grid; grid-template-columns: 1.35fr .85fr; align-items: center; gap: clamp(2rem, 5vw, 5rem); padding-block: .5rem clamp(3.5rem, 6vw, 6rem); }
+.aboutHero, .contactHero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .85fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); padding-block: .5rem clamp(3.5rem, 6vw, 6rem); }
 .heroTitle { margin-block-start: 1.65rem; max-inline-size: 17ch; font-family: var(--font-heading), sans-serif; font-size: clamp(2.8rem, 5.6vw, 5.6rem); font-weight: 500; line-height: 1.06; letter-spacing: -.065em; text-wrap: balance; }
 .heroTitle em { color: var(--signal); font-style: normal; font-weight: inherit; }
 .heroLede { max-inline-size: 46ch; margin-block-start: 1.8rem; font-size: clamp(.92rem, 1.2vw, 1.05rem); line-height: 1.9; color: var(--text-muted); }
@@ -14,17 +14,17 @@
 .textLink:hover { text-decoration-color: currentColor; }
 .profileSystem { position: relative; inline-size: 100%; max-inline-size: 28rem; justify-self: end; }
 .identitySystem { inline-size: 100%; block-size: auto; color: var(--signal); background: radial-gradient(ellipse at 50% 48%, #18372c55, transparent 64%); }
-.profileDomains { display: flex; justify-content: space-between; gap: 1rem; margin-block: -.1rem 1.8rem; padding-inline: 1.3rem; color: var(--text-faint); font-family: var(--font-code), var(--font-body), monospace; font-size: .58rem; }
+.profileDomains { display: flex; justify-content: space-between; gap: 1rem; margin-block: -.1rem 1.8rem; padding-inline: 1.3rem; color: var(--text-faint); font-family: var(--font-code), var(--font-body), monospace; font-size: .67rem; }
 .profileCaption { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .5rem 1rem; padding-block: 1rem; border-block: 1px solid var(--rule); }
 .profileCaption p { font-family: var(--font-heading), sans-serif; font-size: .91rem; font-weight: 500; }
 .profileCaption span { color: var(--signal); font-size: .63rem; }
-.profileNote { margin-block-start: 1rem; font-size: .72rem; line-height: 1.9; color: var(--text-muted); }
+.profileNote { margin-block-start: 1rem; font-size: .8rem; line-height: 1.9; color: var(--text-muted); }
 .pageIndex { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 2rem; padding-block: .65rem; border-block: 1px solid var(--rule); }
 .pageIndex > span { margin-inline-end: auto; }
 .pageIndex a { display: inline-flex; min-block-size: 44px; align-items: center; gap: .8rem; font-size: .7rem; font-weight: 500; }
 .pageIndex a span { color: var(--signal); }
 .pageIndex a:hover { color: var(--signal); }
-.splitSection { display: grid; grid-template-columns: .85fr 1.3fr; align-items: start; gap: clamp(2.5rem, 7vw, 7rem); padding-block-start: clamp(4rem, 7vw, 7rem); scroll-margin-block-start: 6rem; }
+.splitSection { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.3fr); align-items: start; gap: clamp(2.5rem, 7vw, 7rem); padding-block-start: clamp(4rem, 7vw, 7rem); scroll-margin-block-start: 6rem; }
 .sectionHeading { position: sticky; inset-block-start: 6.5rem; }
 .sectionHeading h2 { max-inline-size: 19ch; margin-block-start: 1.2rem; font-family: var(--font-heading), sans-serif; font-size: clamp(2rem, 3.5vw, 3.25rem); font-weight: 500; line-height: 1.13; letter-spacing: -.055em; }
 .sectionHeading > p:last-child:not(:first-child) { max-inline-size: 32ch; margin-block-start: 1.25rem; font-size: .82rem; line-height: 1.9; color: var(--text-muted); }
@@ -35,22 +35,22 @@
 .learningLoop > span { padding-block: .8rem; border-block: 1px solid var(--rule); }
 .learningLoop i { flex: 1; min-inline-size: 12px; block-size: 1px; background: var(--signal); opacity: .45; }
 .teachingBody { padding-block-start: 2.1rem; }
-.teachingBody p { margin-block-end: 1.25rem; font-size: .82rem; line-height: 1.95; color: var(--text-muted); }
+.teachingBody p { margin-block-end: 1.25rem; font-size: .93rem; line-height: 1.9; color: var(--text-muted); }
 .teachingBody blockquote { margin-block: 1.8rem 1rem; padding-block-start: 1.4rem; border-block-start: 1px solid var(--rule); color: var(--text); font-family: var(--font-heading), sans-serif; font-size: 1.35rem; line-height: 1.5; letter-spacing: -.025em; }
 .teachingBody a { display: inline-flex; align-items: center; min-block-size: 44px; gap: 1rem; color: var(--signal); font-size: .72rem; text-decoration: underline; text-underline-offset: 5px; }
-.bodyCopy p { max-inline-size: 64ch; margin-block-end: 1.4rem; color: var(--text-muted); font-size: .87rem; line-height: 1.95; }
+.bodyCopy p { max-inline-size: 64ch; margin-block-end: 1.4rem; color: var(--text-muted); font-size: .96rem; line-height: 1.9; }
 .bodyCopy strong { color: var(--text); font-weight: 600; }
-.fitSection { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; margin-block-start: clamp(4rem, 7vw, 7rem); padding-block-start: 3.5rem; border-block-start: 1px solid var(--rule-strong); }
+.fitSection { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 4rem; margin-block-start: clamp(4rem, 7vw, 7rem); padding-block-start: 3.5rem; border-block-start: 1px solid var(--rule-strong); }
 .fitIntro h2 { margin-block: 1.2rem 1.4rem; font-family: var(--font-heading), sans-serif; font-size: clamp(1.9rem, 3vw, 2.8rem); letter-spacing: -.05em; line-height: 1.15; font-weight: 500; }
-.fitIntro > p:not(:first-child) { max-inline-size: 40ch; color: var(--text-muted); font-size: .84rem; line-height: 1.9; }
+.fitIntro > p:not(:first-child) { max-inline-size: 40ch; color: var(--text-muted); font-size: .93rem; line-height: 1.9; }
 .fitIntro .textLink { margin-block-start: 1.2rem; }
 .fitSection dl { display: grid; }
 .fitSection dl > div { padding-block: 1.2rem; border-block-end: 1px solid var(--rule); }
 .fitSection dl > div:first-child { padding-block-start: 0; }
 .fitSection dl > div:last-child { border-block-end: 0; }
 .fitSection dt { margin-block-end: .6rem; color: var(--signal); font-size: .71rem; font-weight: 600; }
-.fitSection dd { font-size: .81rem; line-height: 1.85; color: var(--text-muted); }
-.contactHero { grid-template-columns: 1.4fr .8fr; padding-block-end: 3.5rem; }
+.fitSection dd { font-size: .9rem; line-height: 1.85; color: var(--text-muted); }
+.contactHero { grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr); padding-block-end: 3.5rem; }
 .contactHero .heroTitle { font-size: clamp(2.65rem, 5vw, 5rem); max-inline-size: 19ch; }
 .contactHero .heroLede { max-inline-size: 43ch; }
 .transmissionScene { position: relative; inline-size: 100%; max-inline-size: 25rem; aspect-ratio: 1; justify-self: end; color: var(--signal); background: radial-gradient(circle, #a7ecd408, transparent 60%); }
@@ -61,7 +61,7 @@
 .emailAddress:hover span { transform: translate(3px, -3px); }
 .contactNote { display: flex; flex-wrap: wrap; gap: 1rem 4rem; justify-content: space-between; padding-block: 1.5rem; border-block: 1px solid var(--rule); }
 .contactNote h2 { flex: 1; min-inline-size: 180px; padding-block-start: .3rem; }
-.contactNote p { flex: 2; max-inline-size: 66ch; min-inline-size: min(100%, 260px); font-size: .79rem; color: var(--text-muted); line-height: 1.9; }
+.contactNote p { flex: 2; max-inline-size: 66ch; min-inline-size: min(100%, 260px); font-size: .88rem; color: var(--text-muted); line-height: 1.9; }
 .copyAction { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem; }
 .copyError { display: block; max-inline-size: 28ch; color: var(--text-muted); font-size: .73rem; }
 .contactLinks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-block-start: 2rem; border-block: 1px solid var(--rule); }
@@ -73,7 +73,7 @@
 .contactLinks strong span { font-size: .7em; color: var(--signal); }
 .contactLinks > a > span:last-child { color: var(--text-faint); font-size: .67rem; }
 .contactContext { display: grid; grid-template-columns: .8fr 1.1fr 1fr; gap: 3rem; padding-block-start: 3rem; }
-.contactContext > div > p:not(:first-child) { margin-block-start: 1rem; max-inline-size: 36ch; font-size: .78rem; line-height: 1.9; white-space: pre-line; color: var(--text-muted); }
+.contactContext > div > p:not(:first-child) { margin-block-start: 1rem; max-inline-size: 36ch; font-size: .88rem; line-height: 1.9; white-space: pre-line; color: var(--text-muted); }
 .contactContext a { display: flex; align-items: center; gap: .8rem; min-block-size: 40px; color: var(--signal); font-size: .74rem; }
 .contactContext a:first-of-type { margin-block-start: .6rem; }
 .notFound { display: flex; min-block-size: calc(100svh - 68px); flex-direction: column; justify-content: center; align-items: center; padding-block: 4rem; text-align: center; }
@@ -85,7 +85,7 @@
 .notFound h1 { margin-block: 1.2rem 1.4rem; max-inline-size: 22ch; font-family: var(--font-heading), sans-serif; font-size: clamp(2.3rem, 4.5vw, 4rem); font-weight: 500; line-height: 1.13; letter-spacing: -.055em; }
 .notFound > p:not(:first-child) { max-inline-size: 47ch; color: var(--text-muted); font-size: .87rem; line-height: 1.9; }
 .notFound .actions { justify-content: center; }
-@media (max-width: 1000px) { .aboutHero, .contactHero { gap: 2rem; } .heroTitle { font-size: clamp(2.8rem, 5.5vw, 4.5rem); } .splitSection { gap: 2.5rem; } .teachingSection { gap: 2.5rem; } .profileDomains { padding-inline: .5rem; gap: .5rem; font-size: .55rem; } .contactLinks > a { padding: 1.3rem; } .fitSection { gap: 2rem; } }
+@media (max-width: 1000px) { .aboutHero, .contactHero { gap: 2rem; } .heroTitle { font-size: clamp(2.8rem, 5.5vw, 4.5rem); } .splitSection { gap: 2.5rem; } .teachingSection { gap: 2.5rem; } .profileDomains { padding-inline: .5rem; gap: .5rem; font-size: .63rem; } .contactLinks > a { padding: 1.3rem; } .fitSection { gap: 2rem; } }
 @media (max-width: 700px) { .page { padding-block-start: 2.8rem; } .aboutHero, .contactHero { grid-template-columns: 1fr; gap: 2.5rem; } .heroTitle { font-size: clamp(2.6rem, 9.6vw, 4.6rem); max-inline-size: 19ch; } .heroLede { max-inline-size: 46ch; } .profileSystem { justify-self: center; inline-size: min(100%, 26rem); } .identitySystem { max-block-size: 18rem; } .profileCaption { margin-block-start: .5rem; } .pageIndex { gap: .2rem 1.2rem; } .pageIndex > span { flex-basis: 100%; margin-block-end: .4rem; } .splitSection { grid-template-columns: 1fr; gap: 2rem; } .sectionHeading { position: static; } .sectionHeading h2 { max-inline-size: 22ch; } .teachingSection { grid-template-columns: 1fr; gap: 1.5rem; } .teachingHeading h2 { max-inline-size: 22ch; } .learningLoop { margin-block-start: 1.8rem; max-inline-size: 28rem; } .teachingBody { padding-block-start: .5rem; } .fitSection { grid-template-columns: 1fr; gap: 2rem; } .contactHero { position: relative; overflow: hidden; padding-block-end: 2rem; } .contactHero > div:first-child { position: relative; z-index: 1; } .contactHero .heroTitle { font-size: clamp(2.5rem, 9vw, 4.2rem); } .transmissionScene { position: absolute; inline-size: 19rem; inset-block-start: 0; inset-inline-end: -8rem; opacity: .15; pointer-events: none; } .transmissionScene > span { display: none; } .contactHero .heroLede { max-inline-size: 42ch; } .emailAddress { font-size: clamp(1.15rem, 5.5vw, 1.6rem); } .contactLinks { grid-template-columns: 1fr; } .contactLinks > a, .contactLinks > a:first-child { padding: 1.5rem 0; } .contactLinks > a + a { border-inline-start: 0; border-block-start: 1px solid var(--rule); } .contactLinks strong { font-size: 1.7rem; } .contactContext { grid-template-columns: 1fr 1fr; gap: 2rem; } .contactContext > div:last-child { grid-column: 1 / -1; } }
-@media (max-width: 360px) { .heroTitle { font-size: 2.5rem; } .contactHero .heroTitle { font-size: 2.4rem; } .primaryButton, .secondaryButton { padding-inline: .9rem; font-size: .71rem; } .actions { gap: .65rem; } .profileDomains { font-size: .51rem; } .contactContext { grid-template-columns: 1fr; } }
+@media (max-width: 360px) { .heroTitle { font-size: 2.5rem; } .contactHero .heroTitle { font-size: 2.4rem; } .primaryButton, .secondaryButton { padding-inline: .9rem; font-size: .71rem; } .actions { gap: .65rem; } .profileDomains { font-size: .6rem; } .contactContext { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .primaryButton, .secondaryButton, .emailAddress span, .contactLinks > a { transition: none; } }

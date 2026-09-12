@@ -7,6 +7,7 @@ const textExtensions = new Set([".ts", ".tsx", ".html", ".json", ".py"]);
 const scanTargets = ["src"];
 
 const globalBlocks = [
+  { id: "english-only-publication", pattern: /[\u0590-\u05ff\ufb1d-\ufb4f]/u },
   { id: "arc-650", pattern: /650\+|650\s+students?/i },
   { id: "arc-uncleared-scale", pattern: /1,?300\+|50\+\s+instructors?|80\+\s+schools?/i },
   { id: "arc-three-years", pattern: /three years of classroom|3\s*yrs?|arc in production/i },
@@ -32,7 +33,7 @@ const fileBlocks = [
   {
     file: "src/content/work/eventa.ts",
     id: "eventa-uncleared-status",
-    pattern: /status:\s*["']ongoing["']|value:\s*\{\s*en:\s*["']In build["']/i,
+    pattern: /status:\s*["']ongoing["']|value:\s*["']In build["']/i,
   },
   {
     file: "src/content/work/eventa.ts",

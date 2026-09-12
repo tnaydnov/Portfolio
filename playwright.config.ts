@@ -15,7 +15,7 @@ export default defineConfig({
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"], launchOptions: { args: ["--enable-unsafe-swiftshader"] } } }],
   webServer: {
     command: process.env.PLAYWRIGHT_SERVER_COMMAND ?? "npm run dev -- --hostname 127.0.0.1",
-    url: "http://127.0.0.1:3000/en",
+    url: "http://127.0.0.1:3000/",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

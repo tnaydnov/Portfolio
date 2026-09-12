@@ -1,6 +1,7 @@
-import { redirect } from "next/navigation";
-import { DEFAULT_LOCALE } from "@/lib/i18n";
+import { PlaygroundHome } from "@/components/experience/PlaygroundHome";
+import { pageMetadata } from "@/lib/metadata";
+import { site } from "@/lib/site";
 
-export default function RootPage() {
-  redirect(`/${DEFAULT_LOCALE}`);
-}
+export const metadata = pageMetadata({ description: site.description });
+
+export default function HomePage() { return <PlaygroundHome />; }

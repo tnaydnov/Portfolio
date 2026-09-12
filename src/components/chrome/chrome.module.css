@@ -10,13 +10,8 @@
 .navLink:hover::after, .navLink[aria-current]::after { transform: scaleX(1); }
 .cvLink { display: inline-flex; align-items: center; gap: .7rem; min-block-size: 40px; padding-inline: 1rem; border: 1px solid var(--rule); border-radius: 3px; font-size: .71rem; transition: background 180ms ease, color 180ms ease; }
 .cvLink:hover { background: var(--signal); color: var(--signal-ink); border-color: var(--signal); }
-.localeToggle { display: inline-flex; align-items: center; flex-shrink: 0; gap: 1px; }
-.localeToggle a { display: grid; place-items: center; min-inline-size: 36px; min-block-size: 44px; padding-inline: .35rem; font-size: .67rem; font-weight: 500; color: var(--text-faint); }
-.localeToggle a[aria-current] { color: var(--signal); }
-.localeToggle a:not([aria-current]):hover { color: var(--text); }
-.localeToggle a + a { position: relative; }
-.localeToggle a + a::before { content: ""; position: absolute; left: 0; top: 17px; inline-size: 1px; block-size: 10px; background: var(--rule-strong); }
 .mobileControls { display: none; align-items: center; gap: .45rem; }
+.quickCv { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-inline-size: 54px; min-block-size: 44px; font-size: .72rem; color: var(--signal); }
 .menuTrigger { display: grid; place-items: center; inline-size: 44px; block-size: 44px; }
 .menuTrigger > span { display: grid; gap: 6px; }
 .menuTrigger i { display: block; inline-size: 18px; block-size: 1px; background: var(--text); transition: transform 200ms ease; }
@@ -37,16 +32,17 @@
 .footerDirectory { display: grid; grid-template-columns: 1.1fr 1.4fr .6fr .65fr; gap: 3rem; padding-block-end: 2.3rem; }
 .footerDirectory > nav, .footerDirectory > div { display: flex; flex-direction: column; align-items: start; }
 .footerDirectory :global(.label) { margin-block-end: .8rem; font-size: .58rem; }
-.footerDirectory a { display: inline-flex; align-items: center; gap: .65rem; min-block-size: 36px; font-size: .7rem; color: var(--text-muted); }
+.footerDirectory a { display: inline-flex; align-items: center; gap: .65rem; min-block-size: 36px; font-size: .78rem; color: var(--text-muted); }
 .footerDirectory a:hover { color: var(--signal); }
 .footerDirectory a > span { color: var(--text-faint); }
 .footerDirectory .footerName { min-block-size: 32px; font-family: var(--font-heading), sans-serif; font-size: 1.03rem; letter-spacing: -.035em; color: var(--text); }
-.footerIdentity > p { margin-block: .4rem .8rem; color: var(--text-faint); font-size: .67rem; }
-.footerNow ul { display: grid; gap: .5rem; max-inline-size: 40ch; color: var(--text-muted); font-size: .65rem; line-height: 1.8; }
+.footerIdentity > p { margin-block: .4rem .8rem; color: var(--text-faint); font-size: .74rem; }
+.footerNow ul { display: grid; gap: .5rem; max-inline-size: 40ch; color: var(--text-muted); font-size: .74rem; line-height: 1.8; }
 .footerNow li { padding-inline-start: .9rem; position: relative; }
 .footerNow li::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: .7em; inline-size: 3px; block-size: 3px; background: var(--signal); opacity: .65; }
 .colophon { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .7rem 2rem; padding-block-start: 1.2rem; border-block-start: 1px solid var(--rule); color: var(--text-faint); font-size: .58rem; }
-@media (max-width: 1023px) { .desktopNav { display: none; } .mobileControls { display: flex; } .headerInner { gap: 1rem; } .footerDirectory { grid-template-columns: 1fr 1.2fr; gap: 2rem 3rem; } }
-@media (max-width: 600px) { .brand { gap: .55rem; } .brandName { font-size: .77rem; } .brandMark { inline-size: 27px; block-size: 27px; } .localeToggle a { min-inline-size: 30px; } .footer { padding-block-start: 2rem; } .footerDirectory { grid-template-columns: 1fr 1fr; gap: 1.7rem; } .footerIdentity, .footerNow { grid-column: 1 / -1; } .footerNow ul { max-inline-size: 48ch; } .footerDirectory a { min-block-size: 40px; } .colophon { font-size: .56rem; } .colophon > p:nth-child(2) { display: none; } }
-@media (max-width: 360px) { .headerInner { gap: .3rem; } .brand { gap: .35rem; } .brandName { font-size: .69rem; } .mobileControls { gap: 0; } .brandMark { inline-size: 24px; } }
+@media (max-width: 1023px) { .footerDirectory { grid-template-columns: 1fr 1.2fr; gap: 2rem 3rem; } .desktopNav { gap: 1.3rem; } }
+@media (max-width: 767px) { .desktopNav { display: none; } .mobileControls { display: flex; } .headerInner { gap: 1rem; } }
+@media (max-width: 600px) { .brand { gap: .55rem; } .brandName { font-size: .82rem; } .brandMark { inline-size: 27px; block-size: 27px; } .footer { padding-block-start: 2rem; } .footerDirectory { grid-template-columns: 1fr 1fr; gap: 1.7rem; } .footerIdentity, .footerNow { grid-column: 1 / -1; } .footerNow ul { max-inline-size: 48ch; } .footerDirectory a { min-block-size: 44px; } .colophon { font-size: .62rem; } .colophon > p:nth-child(2) { display: none; } }
+@media (max-width: 360px) { .headerInner { gap: .3rem; } .brand { gap: .35rem; } .brandName { font-size: .78rem; } .mobileControls { gap: 0; } .brandMark { inline-size: 24px; } }
 @media (prefers-reduced-motion: reduce) { .navLink::after, .cvLink, .menuTrigger i { transition: none; } }
