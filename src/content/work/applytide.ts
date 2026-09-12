@@ -9,7 +9,7 @@ export const applytide: Project = {
     problem: "Job postings, tailored CVs, follow-ups, and interview notes were scattered across browser tabs, files, and memory.",
     move: "Capture a posting from the browser and keep its documents, progress, reminders, and preparation together.",
     contribution: "I designed and built the complete product: Chrome extension, React interface, FastAPI backend, data model, document tools, and AI cost controls.",
-    proof: "Archived public source covering the browser extension, application, backend, and delivery configuration.",
+    proof: "Archived public source and a recorded local application workflow, including persisted stage changes, notes, documents and reminders.",
   },
   tier: "flagship",
   stages: ["signal", "frame", "build", "field"],
@@ -21,7 +21,7 @@ export const applytide: Project = {
   status: "archived",
   statusLabel: "Source archived",
   statusDetail: "The final version is local-only after hosted infrastructure was removed. The public repository is archived.",
-  evidenceNote: "Refreshed September 2026 against the archived public source. Built independently from August 2025 to April 2026; no external-usage results are reported.",
+  evidenceNote: "Built independently from August 2025 to April 2026. September 2026 captures run the archived product with a fresh database and fictional account. The extension and paid AI integrations are documented in source but were not exercised in this tour; no external-usage results are reported.",
   metrics: [
     { label: "Capture", value: "Browser → record", note: "Chrome extension and structured extraction" },
     { label: "Workflow", value: "One pipeline", note: "Stages, reminders, and interview preparation" },

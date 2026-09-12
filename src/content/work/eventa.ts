@@ -9,7 +9,7 @@ export const eventa: Project = {
     problem: "Guests can share a celebration without knowing enough about each other to start a conversation.",
     move: "Offer a short QR-to-profile journey and keep discovery, introductions, and private messages inside the event.",
     contribution: "I conceived, designed, built, and operated the product, including the guest experience, organizer ordering, payments, and operational tools.",
-    proof: "Public source preserves the guest, organizer, and operator workflows. The former live service is discontinued.",
+    proof: "Public source and recorded local workflows preserve the customer website, guest experience and organizer tools. The former live service is discontinued.",
   },
   tier: "flagship",
   stages: ["signal", "frame", "build", "field"],
@@ -21,14 +21,14 @@ export const eventa: Project = {
   status: "discontinued",
   statusLabel: "Discontinued · Source public",
   statusDetail: "Formerly live. The service is discontinued, and the public source is an unmaintained snapshot.",
-  evidenceNote: "Built and operated independently. Refreshed September 2026 against the published source; no guest, match, or event-outcome metrics are reported.",
+  evidenceNote: "Built and operated independently. September 2026 captures run the original product against a fresh local Supabase database with fictional event data. External SMS, payments and AI providers were not exercised; no real guest or event-outcome metrics are reported.",
   metrics: [
     { label: "Entry", value: "QR + OTP", note: "A browser-based path into the event" },
     { label: "Guest experience", value: "Event-scoped", note: "Profiles, matching, and private messaging" },
     { label: "Organizers", value: "Order → event", note: "Setup, payments, and printable materials" },
     { label: "Operations", value: "Managed", note: "Analytics and moderation tools" },
   ],
-  stack: ["Next.js 16", "React 19", "TypeScript", "Supabase", "PostgreSQL", "Playwright", "Vitest"],
+  stack: ["Next.js 16", "React 19", "TypeScript", "Supabase", "PostgreSQL", "Supabase Storage", "Supabase Realtime", "Playwright", "Vitest"],
   links: { repo: "https://github.com/tnaydnov/eventa" },
   sections: [
     {
@@ -64,6 +64,26 @@ export const eventa: Project = {
       ],
     },
   ],
+  architecture: {
+    caption: "Customer, guest and organizer surfaces share a Next.js application. Protected server routes enforce session and event scope before accessing data or issuing photo URLs.",
+    nodes: [
+      { id: "customer", label: "Customer website", sub: "Product · Event setup", x: 0, y: 0, kind: "client", note: "The public website and order wizard introduce the service and collect organizer setup choices." },
+      { id: "attendee", label: "Guest experience", sub: "Profiles · Likes · Chat", x: 0, y: 1, kind: "client", note: "Event-scoped mobile web routes use a signed HttpOnly session. Realtime updates have recovery and polling paths." },
+      { id: "organizer", label: "Organizer console", sub: "Events · Analytics", x: 0, y: 2, kind: "client", note: "Administrative routes provide event management and operational reporting behind their own access checks." },
+      { id: "routes", label: "Protected server routes", sub: "Session + event checks", x: 1, y: 1, kind: "edge", note: "Server routes handle profiles, reciprocal likes, conversations, messages and signed photo URLs. Sensitive profile fields are encrypted server-side." },
+      { id: "database", label: "Supabase Postgres", sub: "Event-scoped records", x: 2, y: 0, kind: "store", note: "Profiles, likes, conversations, persisted messages and organizer analytics live in the database." },
+      { id: "photos", label: "Photo storage", sub: "Signed access", x: 2, y: 1, kind: "store", note: "Supabase Storage holds profile photos. The protected photo route supplies signed URLs." },
+      { id: "providers", label: "External adapters", sub: "SMS · Checkout · Moderation", x: 2, y: 2, kind: "service", note: "Source integrations include SMS verification, notifications, payment/invoice and image moderation providers. These services were disabled or unused during local capture." },
+    ],
+    edges: [
+      { from: "customer", to: "routes", label: "setup" },
+      { from: "attendee", to: "routes", label: "authenticated actions" },
+      { from: "organizer", to: "routes", label: "management" },
+      { from: "routes", to: "database", label: "read / persist" },
+      { from: "routes", to: "photos", label: "signed access" },
+      { from: "routes", to: "providers", label: "external workflows" },
+    ],
+  },
   decisions: [
     {
       id: "D-01", date: "2026", title: "Meet guests in the browser.",

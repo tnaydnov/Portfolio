@@ -1,0 +1,168 @@
+{
+  "project": "arc",
+  "captured": "2026-09-12",
+  "sourceRevision": "43dfaf6e0a548f9e382a96744aad12a8611aad43",
+  "sourceBranch": "dev",
+  "sourceRepositoryVisibility": "private",
+  "backend": "real",
+  "assets": [
+    {
+      "id": "student-lesson",
+      "title": "A lesson from the student side",
+      "description": "One lesson brings reflection, writing, drawing, and a short pitch together, with submission and feedback states beside each activity.",
+      "portal": "Student",
+      "src": "/media/projects/arc/student-lesson.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "Opened the real seeded lesson as a demo student. Completed and submitted states come from the isolated English demo history."
+    },
+    {
+      "id": "instructor-review",
+      "title": "Feedback beside the original work",
+      "description": "The instructor reads a student response and writes a concrete next step in the same review panel.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/instructor-review.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "Opened Jordan Reed’s real version 1 submission through the classroom and task list, entered original feedback, and subsequently published a revision request through the native UI."
+    },
+    {
+      "id": "student-revision",
+      "title": "A clear reason to try again",
+      "description": "The student receives the revision request alongside the previous version, with a direct path to improve the answer.",
+      "portal": "Student",
+      "src": "/media/projects/arc/student-revision.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "The same student session loaded the published instructor feedback and revision note, then created and submitted version 2 through the native UI."
+    },
+    {
+      "id": "content-authoring",
+      "title": "Reusable activities become a lesson",
+      "description": "The draft builder assembles writing, drawing, recording, and reflection activities while showing teaching materials and the mix of activity types.",
+      "portal": "Content author",
+      "src": "/media/projects/arc/content-authoring.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "Created a new draft and lesson through the real admin UI, selected four existing demo activities, and opened the rendered builder. Existing demo teaching material and activity tags were linked during fixture preparation. The draft was not published or assigned to a classroom."
+    },
+    {
+      "id": "school-overview",
+      "title": "A school view with classroom context",
+      "description": "The school workspace gathers scoped classrooms, instructors, participation, and submission totals in one operational view.",
+      "portal": "School manager",
+      "src": "/media/projects/arc/school-overview.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "Signed into the isolated school-manager demo account and opened its real school/classroom overview. All schools, people, and totals are synthetic fixtures."
+    },
+    {
+      "id": "program-analytics",
+      "title": "Reporting that keeps the learning loop visible",
+      "description": "Participation, submissions, feedback, and revisions appear together, with time and lesson views for deeper inspection.",
+      "portal": "Program analytics",
+      "src": "/media/projects/arc/program-analytics.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "Signed into the isolated analytics account and inspected the populated classroom analytics view, including submission, feedback, revision, participation, and grade data. Charts are rendered by the app from synthetic classroom history."
+    },
+    {
+      "id": "learning-loop",
+      "title": "From a first idea to a stronger second version",
+      "description": "A real student submission, an instructor’s revision request, and an improved answer—with both versions preserved.",
+      "portal": "Student → Instructor → Student",
+      "src": "/media/projects/arc/learning-loop.mp4",
+      "poster": "/media/projects/arc/learning-loop-poster.webp",
+      "width": 1600,
+      "height": 1080,
+      "duration": 36.066666,
+      "chapters": [
+        {
+          "at": 0,
+          "title": "Submit a first idea",
+          "description": "A fictional student writes a first response and submits version 1 of the activity."
+        },
+        {
+          "at": 9.533,
+          "title": "Turn feedback into a clear next step",
+          "description": "The instructor reads that response, publishes actionable feedback and requests a revision."
+        },
+        {
+          "at": 20.067,
+          "title": "Improve the work. Keep both versions.",
+          "description": "The student reads the feedback and submits an improved version 2, preserving the first submission."
+        }
+      ],
+      "type": "video",
+      "verifiedBehavior": "The recording operates the actual local Laravel app with two authenticated synthetic users. Version 1 was submitted, the instructor published feedback with revision_requested=true, and the student submitted version 2. The SQLite records were checked after the UI flow; no HTTP responses or displayed application states were mocked."
+    }
+  ],
+  "caveats": [
+    "Captured from the audited development revision; this is not a statement that every shown feature is deployed to production.",
+    "All people, schools, work, and analytics figures are synthetic. Figures demonstrate the interface and are not product impact or usage metrics.",
+    "The learning-loop film is edited for pace. Idle time is removed and the longer improvement typing segment is shown at 1.5×. The caption band sits below the original UI; there is no audio or generated interface imagery.",
+    "The authoring screenshot contains a locally prepared draft using existing demo activities and teacher material. It does not demonstrate publishing or automatic classroom assignment.",
+    "AI suggestions, email, Browser Coder execution, ArcGaming, and live Reverb activity were not used or verified in this capture. External service requests were blocked.",
+    "The portfolio hosts selected recordings and screenshots. The isolated capture runtime is not deployed as a public sandbox."
+  ],
+  "verification": {
+    "screenshots": {
+      "count": 6,
+      "viewport": {
+        "width": 1600,
+        "height": 1000
+      },
+      "deviceScaleFactor": 2,
+      "output": {
+        "width": 3200,
+        "height": 2000
+      },
+      "format": "WebP quality 92",
+      "visualInspection": "All six final screenshots inspected for content, composition, loading failures, and readable text."
+    },
+    "video": {
+      "codec": "H.264",
+      "pixelFormat": "yuv420p",
+      "fps": 30,
+      "crf": 18,
+      "fastStart": true,
+      "width": 1600,
+      "height": 1080,
+      "uiViewport": {
+        "width": 1600,
+        "height": 1000
+      },
+      "source": "Native 1600×1000 Playwright Chromium video",
+      "visualInspection": "Contact sheet plus a native-size instructor review frame inspected. Submission and feedback text remain readable."
+    },
+    "workflow": {
+      "syntheticStudent": "Jordan Reed",
+      "task": "My Innovator Intro",
+      "firstSubmissionId": 3115,
+      "firstVersion": 1,
+      "reviewId": 2199,
+      "reviewStatus": "published",
+      "revisionRequested": true,
+      "secondSubmissionId": 3116,
+      "secondVersion": 2,
+      "secondStatus": "submitted"
+    },
+    "originalCheckout": {
+      "branch": "dev",
+      "head": "43dfaf6e0a548f9e382a96744aad12a8611aad43",
+      "clean": true,
+      "sourceChanged": false
+    },
+    "runtimeStopped": true,
+    "stoppedContainers": [
+      "arc-capture-0912",
+      "arc-capture-proxy-0912"
+    ]
+  }
+}

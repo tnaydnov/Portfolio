@@ -5,7 +5,8 @@ import { ProductPreview } from "@/components/artifacts/ProductPreview";
 import { ArchitectureGraphLazy } from "@/components/case/ArchitectureGraphLazy";
 import { DecisionLog, FieldFeedback, MetricBlock, RebuildList } from "@/components/case/Blocks";
 import { ConstraintDial } from "@/components/case/ConstraintDial";
-import { PlayableCase } from "@/components/experience/PlayableCase";
+import { ProductTourPage } from "@/components/case/ProductTourPage";
+import { getProductTour } from "@/content/tours";
 import { CASE_STUDIES } from "@/content/work";
 import { pageMetadata } from "@/lib/metadata";
 import { STAGE_BY_ID } from "@/lib/stages";
@@ -34,7 +35,8 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   const index = CASE_STUDIES.findIndex((candidate) => candidate.slug === project.slug);
   const next = CASE_STUDIES[(index + 1) % CASE_STUDIES.length];
-  const hasPlayable = ["arc", "applytide", "eventa"].includes(project.slug);
+  const tour = getProductTour(project.slug);
+  if (tour) return <ProductTourPage project={project} tour={tour} next={next}/>;
   const hasStory = Boolean(project.sections?.length);
   const hasSystem = project.metrics.length > 0 || project.stack.length > 0 || Boolean(project.architecture);
   const hasDeepDive = hasSystem || Boolean(project.decisions?.length) || Boolean(project.feedback?.length) || Boolean(project.constraints) || Boolean(project.rebuild?.length);
@@ -43,7 +45,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
     { label: "The approach", value: project.snapshot.move },
     { label: "My contribution", value: project.snapshot.contribution },
   ];
-  const storyIndex = hasPlayable ? 3 : 2;
+  const storyIndex = 2;
   const deepIndex = storyIndex + (hasStory ? 1 : 0);
 
   return (
@@ -84,7 +86,6 @@ export default async function CaseStudyPage({ params }: PageProps) {
         <div className={styles.preview}><ProductPreview project={project}/></div>
         <nav className={styles.localNav} aria-label="Inside this project">
           <a href="#snapshot">Overview</a>
-          {hasPlayable ? <a href="#explore">Try the workflow</a> : null}
           {hasStory ? <a href="#story">The story</a> : null}
           {hasDeepDive ? <a href="#deep-dive">Engineering</a> : null}
         </nav>
@@ -97,11 +98,6 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </dl>
         <div className={styles.evidence}><span>Evidence</span><p>{project.snapshot.proof}</p></div>
       </section>
-
-      {hasPlayable ? <section id="explore" className={styles.section} aria-labelledby="explore-title">
-        <div className={styles.sectionHeading}><span>02 / Interactive example</span><h2 id="explore-title">Try one workflow.</h2></div>
-        <PlayableCase slug={project.slug}/>
-      </section> : null}
 
       {hasStory ? <section id="story" className={styles.section} aria-labelledby="story-title">
         <div className={styles.sectionHeading}><span>0{storyIndex} / The story</span><h2 id="story-title">How it took shape.</h2></div>

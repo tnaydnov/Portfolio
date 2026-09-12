@@ -248,7 +248,7 @@ test("identity and project links work without JavaScript", async ({ browser, bas
 
 test("case disclosures retain technical detail and adjustable decisions", async ({ page }) => {
   await page.goto("/work/arc");
-  const chapter = page.locator("#story details").first();
+  const chapter = page.locator("details#story");
   await chapter.locator("summary").click();
   await expect(chapter).toHaveAttribute("open", "");
   await expect(chapter.locator("p").first()).toBeVisible();

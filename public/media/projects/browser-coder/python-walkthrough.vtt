@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.488
+Run Python and read the actual result in the output panel.
+
+2
+00:00:04.488 --> 00:00:07.806
+Pause before the average is calculated. Inspect the values already in memory.
+
+3
+00:00:07.806 --> 00:00:10.992
+Step over one line. The new average appears as 84.0.
+
+4
+00:00:10.992 --> 00:00:14.953
+Look back at an earlier snapshot, then return to the live paused state.
+
+5
+00:00:14.953 --> 00:00:17.793
+Continue the real program. Session controls clear when execution finishes.

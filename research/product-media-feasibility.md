@@ -1,5 +1,7 @@
 # Real product media and demos for the portfolio
 
+**Implementation update:** all four original applications were subsequently run locally and captured. See [the completed capture report](product-tours-capture.md) and the public per-project manifests. The readiness findings below preserve the earlier investigation; their pending-work statements describe that earlier stage.
+
 Research and local checks: 12 September 2026. Scope: the four featured projects, Arc, Browser Coder, Applytide and Eventa.
 
 **Yes: the setup, sample data, browser operation, screenshots and recordings can be handled autonomously. Tomer does not need to start the apps or record them manually.** Repository access is available, and the current machine has browser automation and the relevant runtime foundations. A complete public demo is feasible for selected workflows, but requires more preparation than recording an app locally.

@@ -1,0 +1,4 @@
+.preview { position: relative; display: grid; align-content: start; aspect-ratio: 1.85; padding: 35px 18px 0; overflow: hidden; border-bottom: 1px solid var(--rule); background: radial-gradient(ellipse at 50% 0,#f1fff5,transparent 70%),linear-gradient(125deg,#d1e4dc,#b7d5cb); }
+.preview img { display: block; width: 100%; height: auto; border-radius: 5px 5px 0 0; box-shadow: 0 7px 20px #173f3425; }
+.preview[data-mobile="true"] img { width: 43%; justify-self: center; border: 3px solid #24463d; border-radius: 12px; }
+.label { position: absolute; inset: 0 18px auto; height: 35px; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #356758; font: 9px var(--font-code),monospace; }

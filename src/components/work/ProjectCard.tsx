@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ProductPreview } from "@/components/artifacts/ProductPreview";
+import { ProductCover } from "@/components/artifacts/ProductCover";
 import { STATUS_LABEL, type Project } from "@/lib/types";
 import styles from "./work.module.css";
 
@@ -11,7 +11,7 @@ export function ProjectCard({ project, featured = false, index }: {
   const titleId = `project-${project.slug}-title`;
   return <article id={project.slug} className={styles.project} data-featured={featured} data-project={project.slug}>
     <Link href={`/work/${project.slug}`} className={styles.projectLink} aria-labelledby={titleId}>
-      <ProductPreview project={project} compact />
+      <ProductCover project={project}/>
       <div className={styles.projectCopy}>
         <div className={styles.projectHeading}>
           <h3 id={titleId}>{project.title}</h3>

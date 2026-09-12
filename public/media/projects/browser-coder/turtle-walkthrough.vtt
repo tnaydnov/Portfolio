@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.149
+A short loop creates a geometric drawing through real Python Turtle commands.
+
+2
+00:00:04.149 --> 00:00:08.214
+Replay recorded drawing commands alongside the Python line responsible for each step.
+
+3
+00:00:08.214 --> 00:00:14.404
+Scrub the replay to inspect an earlier drawing state. This replays output; it does not rerun Python.

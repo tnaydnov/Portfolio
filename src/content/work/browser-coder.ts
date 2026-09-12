@@ -9,7 +9,7 @@ export const browserCoder: Project = {
     problem: "A learner can run a program and still be unsure which line, variable or execution state explains the result.",
     move: "Connect the editor, debugger, source-linked feedback and visual output inside a workspace that also fits into a lesson.",
     contribution: "As a collaborating engineer, I contributed the learning-platform integration, execution refactor, debugging tools, diagnostics and reliability fixes to an existing project.",
-    proof: "Public source, merged contribution history and a publicly accessible demo.",
+    proof: "Public source, merged contribution history, a public demo and recorded Python execution, debugging and Turtle replay from the original application.",
   },
   tier: "flagship",
   stages: ["frame", "build", "prove", "field"],
@@ -20,7 +20,7 @@ export const browserCoder: Project = {
   status: "live",
   statusLabel: "Public demo",
   statusDetail: "Publicly accessible browser IDE, with source and contribution history on GitHub.",
-  evidenceNote: "Public code and merged pull requests document my contributions from April–August 2026. Current main had successful CI and deployment runs when reviewed in September 2026. The preview uses fictional data.",
+  evidenceNote: "Public code and merged pull requests document my contributions from April–August 2026. The September 2026 tour runs sample programs against a real local Python execution service. Capture source revisions are recorded alongside the media.",
   metrics: [
     { label: "Language adapters", value: "6", note: "JavaScript, TypeScript, Python, Java, PHP and C#" },
     { label: "Interface", value: "EN + HE", note: "Teaching explanations and controls" },

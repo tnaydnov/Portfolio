@@ -1,0 +1,119 @@
+{
+  "project": "applytide",
+  "captured": "2026-09-12",
+  "sourceRevision": "a040d14d5c45491e3db1651c0d4daa67a218c32f",
+  "sourceRepository": "tnaydnov/Applytide",
+  "environment": "Alex Morgan is a fictional software engineer managing a job search. All personal, company, application and document content is synthetic.",
+  "backend": "real",
+  "assets": [
+    {
+      "id": "jobs",
+      "title": "Saved opportunities",
+      "description": "Alex keeps prospective roles, requirements and application actions in one searchable job collection.",
+      "portal": "Opportunities",
+      "src": "/media/projects/applytide/jobs.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "The real Jobs page loaded thirteen persisted synthetic opportunities, including Lattice Studio created through the original manual-entry form."
+    },
+    {
+      "id": "pipeline",
+      "title": "From application to interview",
+      "description": "Alex can see the applications grouped by stage and open the context for each opportunity.",
+      "portal": "Pipeline",
+      "src": "/media/projects/applytide/pipeline.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "The real pipeline loaded eleven persisted applications. The recorded Lattice Studio application moved from Applied into Phone Screen through its original stage menu."
+    },
+    {
+      "id": "application-notes",
+      "title": "Context beside the application",
+      "description": "Fieldnote’s application keeps the portfolio conversation and technical-interview preparation together.",
+      "portal": "Application detail",
+      "src": "/media/projects/applytide/application-notes.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "Two synthetic historical notes were loaded by the original application drawer from the real backend. The video separately demonstrates creating a new note for Lattice Studio."
+    },
+    {
+      "id": "documents",
+      "title": "Documents ready to attach",
+      "description": "A resume, cover letter and portfolio PDF are available inside Alex’s document library.",
+      "portal": "Documents",
+      "src": "/media/projects/applytide/documents.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "Three real, fictional PDF files were uploaded through the original document endpoint. The workflow selected the saved resume and successfully attached it to a real application."
+    },
+    {
+      "id": "reminders",
+      "title": "The next conversation, remembered",
+      "description": "Upcoming interview preparation and follow-ups belong to Alex’s individual workspace.",
+      "portal": "Reminders",
+      "src": "/media/projects/applytide/reminders.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "verifiedBehavior": "The original reminder list loaded five persisted records. The recording created the fifth reminder for Lattice Studio through the original form; a fresh authenticated context confirmed it persisted."
+    },
+    {
+      "id": "application-workflow",
+      "title": "One opportunity, all the way to the next conversation",
+      "description": "Alex saves a role at Lattice Studio, attaches an existing resume, advances the application, saves a note and schedules an interview reminder.",
+      "portal": "Job seeker",
+      "src": "/media/projects/applytide/application-workflow.mp4",
+      "poster": "/media/projects/applytide/application-workflow-poster.webp",
+      "width": 1600,
+      "height": 1080,
+      "duration": 26.633,
+      "captions": "/media/projects/applytide/application-workflow.vtt",
+      "chapters": [
+        {
+          "at": 0,
+          "title": "Save a role worth pursuing",
+          "description": "Save a fictional Product Engineer role through the original manual-entry form."
+        },
+        {
+          "at": 4.989,
+          "title": "Attach the right resume",
+          "description": "Select an uploaded PDF and attach it to the application record."
+        },
+        {
+          "at": 11.102,
+          "title": "Move to Phone Screen",
+          "description": "Update the application stage through the original pipeline menu."
+        },
+        {
+          "at": 13.47,
+          "title": "Keep the conversation in context",
+          "description": "Save a note with useful context for the next interview."
+        },
+        {
+          "at": 17.352,
+          "title": "Schedule the next conversation",
+          "description": "Create a dated reminder within the application."
+        },
+        {
+          "at": 22.846,
+          "title": "Return to your follow-ups",
+          "description": "Open the reminder list and see the saved follow-up in the same account."
+        }
+      ],
+      "type": "video",
+      "verifiedBehavior": "Original UI controls performed six backend mutations: manual job creation, application creation, document attachment, stage change, note creation and reminder creation. Every mutation returned 200 after the original trailing-slash redirects. Application state, note, PDF attachment and reminder were reloaded successfully in a fresh authenticated context. No browser page errors were recorded."
+    }
+  ],
+  "caveats": [
+    "The original frontend was built and run from an isolated archive of the recorded revision; its presentation and product behavior were not edited. The backend reused installed dependencies from a cached image, with the archived current source mounted over /app.",
+    "A fresh database exposed an incomplete migration baseline. The isolated setup added the missing users.totp_secret column before the existing widening migration and supplied users.totp_enabled and users.backup_codes to match the current ORM. All fifteen existing migrations then reached head. These setup repairs are not changes to the original checkout.",
+    "Historical workspace data and the verified Pro account were seeded directly into the isolated database. The new Lattice Studio job, application, resume attachment, stage update, note and reminder were created through the original UI. The Pro flag demonstrates available UI, not a verified payment flow.",
+    "Paid AI, Google OAuth/Calendar, outbound email and background workers were disabled or absent. Their visible controls were not exercised. The backend was isolated on an internal Docker network; the only browser-facing gateway and frontend were bound to loopback.",
+    "The original dashboard has status-mapping and weekly-metric inconsistencies, so it is omitted. Mixed historical status labels can appear as separate summary chips even when the Kanban column combines them; the original UI was preserved.",
+    "The film contains real lossless Chromium compositor frames, trimmed before setup, slowed to 62.5% playback for reading, and encoded once to H.264. The dark chapter band is editorial; the application pixels were not recreated."
+  ]
+}

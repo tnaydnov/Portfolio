@@ -9,7 +9,7 @@ export const arc: Project = {
     problem: "Curriculum planning, classroom delivery, and program reporting can lose context when the material, student work, and feedback live in separate tools.",
     move: "Give students, instructors, and program teams connected workspaces, preserving the relationship between reusable content, classroom activity, and reviewed work.",
     contribution: "I co-develop the platform across typed application boundaries, permissions, realtime workflows, touch-friendly editors, and automated delivery checks.",
-    proof: "A live portal, dated contribution history, and a September 11 development build that passed its automated checks and deployment job.",
+    proof: "A live portal, dated contribution history, automated delivery checks, and real local captures of the development build across its learning and management portals.",
   },
   tier: "flagship",
   stages: ["signal", "frame", "plan", "build", "prove", "field"],
@@ -20,7 +20,7 @@ export const arc: Project = {
   status: "live",
   statusLabel: "Live portal · Active development",
   statusDetail: "The latest audited work is merged into development. Production and development have separate releases.",
-  evidenceNote: "Refreshed September 12, 2026 from the repository, current product demo, GitHub workflow results, and public portal availability. Product previews use fictional data; private source and learner records stay private.",
+  evidenceNote: "Refreshed September 12, 2026 from the repository, product demo, workflow results and portal availability. The product tour runs development source with fictional classroom data in an isolated local database. Private source and learner records remain private; production has a separate release.",
   metrics: [
     { label: "Product scope", value: "Five workspaces", note: "Students, teaching, school, program, and system teams" },
     { label: "Activity catalog", value: "21 task types", note: "From writing and coding to collaborative activities" },

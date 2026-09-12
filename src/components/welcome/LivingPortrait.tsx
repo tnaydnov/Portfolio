@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import styles from "./living-portrait.module.css";
 
-const portrait = "/images/tomer-welcome.webp?v=2";
+const portrait = "/images/tomer-welcome.webp?v=3";
 const sizes = "(max-width: 600px) 360px, (max-width: 900px) 480px, (max-width: 1100px) 560px, 750px";
 const waveFrames = [0, -8, 6, -6, 3, 0].map((degrees) => ({ transform: `rotate(${degrees}deg)` }));
 
@@ -139,12 +139,12 @@ export function LivingPortrait() {
       <div className={styles.portraitWindow}>
         <div className={styles.person} style={{ filter: `url(#${matteId})` }}>
           <div className={styles.body}>
-            <Image src={portrait} width={1024} height={1536} sizes={sizes} priority alt="Tomer Naydnov smiling and raising a hand in welcome" onLoad={() => setLoaded(true)} onError={() => setFailed(true)} />
+            <Image src={portrait} width={1024} height={1536} sizes={sizes} quality={95} priority alt="Tomer Naydnov smiling and raising a hand in welcome" onLoad={() => setLoaded(true)} onError={() => setFailed(true)} />
           </div>
           {!failed && <>
-            <div className={styles.wrist} aria-hidden="true"><Image src={portrait} width={1024} height={1536} sizes={sizes} alt="" /></div>
-            <div ref={hand} className={styles.hand} aria-hidden="true"><Image src={portrait} width={1024} height={1536} sizes={sizes} alt="" /></div>
-            <div className={styles.blink} aria-hidden="true"><Image src="/images/tomer-blink.webp?v=2" width={1024} height={1536} sizes={sizes} alt="" loading="eager" /></div>
+            <div className={styles.wrist} aria-hidden="true"><Image src={portrait} width={1024} height={1536} sizes={sizes} quality={95} alt="" /></div>
+            <div ref={hand} className={styles.hand} aria-hidden="true"><Image src={portrait} width={1024} height={1536} sizes={sizes} quality={95} alt="" /></div>
+            <div className={styles.blink} aria-hidden="true"><Image src="/images/tomer-blink.webp?v=3" width={1024} height={1536} sizes={sizes} quality={95} alt="" loading="eager" /></div>
           </>}
         </div>
       </div>

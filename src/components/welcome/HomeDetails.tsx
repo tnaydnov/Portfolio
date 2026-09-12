@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { arc } from "@/content/work/arc";
 import { browserCoder } from "@/content/work/browser-coder";
-import { ProductPreview } from "@/components/artifacts/ProductPreview";
+import { ProductCover } from "@/components/artifacts/ProductCover";
 import { site } from "@/lib/site";
 import styles from "./home-details.module.css";
 
@@ -26,7 +26,7 @@ export function HomeDetails() {
         <div className={styles.products}>
           {[arc, browserCoder].map((project) => <article className={styles.product} key={project.slug}>
             <Link href={`/work/${project.slug}`} aria-labelledby={`home-${project.slug}`}>
-              <ProductPreview project={project} compact />
+              <ProductCover project={project}/>
               <div className={styles.productCopy}><div><p className={styles.productType}>{project.slug === "arc" ? "The learning platform" : "The coding workspace"}</p><h3 id={`home-${project.slug}`}>{project.title}</h3></div><Arrow diagonal /><p>{project.slug === "arc" ? "From curriculum and classroom activities to feedback and reporting." : "Write code, see what it does, and understand the steps in between."}</p></div>
             </Link>
           </article>)}
