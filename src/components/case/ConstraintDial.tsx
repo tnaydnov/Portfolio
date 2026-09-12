@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { t, type Locale } from "@/lib/i18n";
 import type { ConstraintStudy } from "@/lib/types";
+import styles from "./engineering.module.css";
 
 const LABELS = {
   time: {
@@ -37,6 +38,7 @@ export function ConstraintDial({
 }) {
   const [time, setTime] = useState<number>(study.actual.time);
   const [scope, setScope] = useState<number>(study.actual.scope);
+  const timeSlider = useRef<HTMLInputElement>(null);
 
   const current =
     study.scenarios.find((s) => s.time === time && s.scope === scope) ?? null;
@@ -60,8 +62,8 @@ export function ConstraintDial({
   ];
 
   return (
-    <div className="border border-rule bg-surface">
-      <div className="border-b border-rule p-6 md:p-8">
+    <div className={styles.dial}>
+      <div className={styles.dialHead}>
         <p className="label">{t(LABELS.dial, locale)}</p>
         <h3 className="mt-4 max-w-[40ch] font-display text-xl leading-snug tracking-tight md:text-2xl">
           {t(study.question, locale)}
@@ -71,7 +73,7 @@ export function ConstraintDial({
         </p>
       </div>
 
-      <div className="grid gap-8 p-6 md:grid-cols-2 md:gap-12 md:p-8">
+      <div className={styles.dials}>
         {dials.map((d) => (
           <div key={d.id}>
             <div className="flex items-baseline justify-between">
@@ -83,6 +85,7 @@ export function ConstraintDial({
               </span>
             </div>
             <input
+              ref={d.id === "time" ? timeSlider : undefined}
               id={`dial-${d.id}`}
               type="range"
               min={0}
@@ -105,7 +108,7 @@ export function ConstraintDial({
         ))}
       </div>
 
-      <div aria-live="polite" aria-atomic="true" className="border-t border-rule p-6 md:p-8">
+      <div aria-live="polite" aria-atomic="true" className={styles.dialResult}>
         <div key={`${time}-${scope}`} className="reveal">
           <p className="label flex items-center gap-2">
             {isActual ? (
@@ -126,6 +129,19 @@ export function ConstraintDial({
             </p>
           )}
         </div>
+        {!isActual ? (
+          <button
+            type="button"
+            className={styles.dialReset}
+            onClick={() => {
+              setTime(study.actual.time);
+              setScope(study.actual.scope);
+              timeSlider.current?.focus();
+            }}
+          >
+            {locale === "he" ? "חזרה להחלטה המקורית" : "Back to the actual decision"}
+          </button>
+        ) : null}
       </div>
     </div>
   );

@@ -13,7 +13,9 @@ export const ALL_PROJECTS: Project[] = [
   ...EARLIER_ENGINEERING,
 ];
 
-export const CASE_STUDIES = ALL_PROJECTS.filter((p) => p.tier !== "rep");
+export const CASE_STUDIES = ALL_PROJECTS.filter(
+  (project) => project.tier !== "rep" || Boolean(project.snapshot && project.sections?.length),
+);
 
 export function byTier(tier: Tier): Project[] {
   return ALL_PROJECTS.filter((p) => p.tier === tier);

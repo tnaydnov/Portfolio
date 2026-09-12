@@ -1,42 +1,19 @@
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
 import { href } from "@/lib/site";
+import styles from "@/components/about/editorial-pages.module.css";
 
 export default function NotFound() {
   const pathname = usePathname();
   const locale: Locale = pathname === "/he" || pathname.startsWith("/he/") ? "he" : "en";
-
-  return (
-    <div className="shell flex min-h-[70svh] flex-col justify-center py-24">
-      <p className="label">
-        <span className="text-signal">404</span>
-        <span className="mx-2 opacity-40">/</span>
-        {t(ui.notFound.label, locale)}
-      </p>
-      <h1 className="mt-8 t-hero max-w-[12ch]">
-        {t(ui.notFound.title, locale)}
-      </h1>
-      <p className="mt-8 max-w-[46ch] text-[1.05rem] leading-relaxed text-muted">
-        {t(ui.notFound.body, locale)}
-      </p>
-      <div className="mt-10 flex flex-wrap gap-3">
-        <Link
-          href={href("/work", locale)}
-          className="inline-flex h-11 items-center gap-2.5 bg-signal px-5 text-sm font-medium text-signal-ink"
-        >
-          {t(ui.notFound.cta, locale)}
-        </Link>
-        <Link
-          href={href("/", locale)}
-          className="inline-flex h-11 items-center gap-2.5 border border-rule-strong px-5 text-sm transition-colors hover:border-signal hover:text-signal"
-        >
-          {t(ui.notFound.home, locale)}
-        </Link>
-      </div>
-    </div>
-  );
+  return <div className={`shell ${styles.notFound}`}>
+    <div className={styles.lostFold} aria-hidden="true"><span>4</span><span>0</span><span>4</span></div>
+    <p className="label">404 / {locale === "he" ? "העמוד לא נמצא" : "Page not found"}</p>
+    <h1>{locale === "he" ? "הדף הזה עוד לא נכתב." : "This page hasn't been written."}</h1>
+    <p>{locale === "he" ? "הקישור הזה לא מוביל לעמוד. אפשר לחזור לדף הבית או להמשיך לעבודות." : "This link doesn't lead to a page. Head home or pick up with the work."}</p>
+    <div className={styles.actions}><Link href={href("/work", locale)} className={styles.primaryButton}>{t(ui.notFound.cta, locale)}</Link><Link href={href("/", locale)} className={styles.secondaryButton}>{t(ui.notFound.home, locale)}</Link></div>
+  </div>;
 }

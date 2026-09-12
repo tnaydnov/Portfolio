@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import {
-  Bricolage_Grotesque,
+  Fraunces,
   Heebo,
-  Inter_Tight,
+  Manrope,
   JetBrains_Mono,
   Rubik,
 } from "next/font/google";
@@ -12,19 +12,17 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Header } from "@/components/chrome/Header";
 import { Footer } from "@/components/chrome/Footer";
-import { Grain } from "@/components/chrome/Grain";
-import { ScrollProgress } from "@/components/chrome/ScrollProgress";
 import { DIR, LOCALES, isLocale, t, type Locale } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
 import { site } from "@/lib/site";
 
-const display = Bricolage_Grotesque({
+const display = Fraunces({
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-heading",
   display: "swap",
 });
 
-const body = Inter_Tight({
+const body = Manrope({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -32,7 +30,7 @@ const body = Inter_Tight({
 
 const mono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-code",
   display: "swap",
 });
 
@@ -57,6 +55,8 @@ const LATIN_FONTS = [display, body, mono]
 const HEBREW_FONTS = [hebrew, hebrewDisplay]
   .map((f) => f.variable)
   .join(" ");
+
+export const viewport: Viewport = { themeColor: "#faf9f4" };
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -139,8 +139,6 @@ export default async function LocaleLayout({
         >
           {t(ui.common.skipToContent, locale)}
         </a>
-        <Grain />
-        <ScrollProgress />
         <Header locale={locale} />
         <main id="main">{children}</main>
         <Footer locale={locale} />

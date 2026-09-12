@@ -1,0 +1,56 @@
+.header { position: sticky; inset-block-start: 0; z-index: 50; border-block-end: 1px solid var(--rule); background: color-mix(in srgb, var(--ink) 93%, transparent); backdrop-filter: blur(18px); }
+.headerInner { display: flex; min-block-size: 5.25rem; align-items: center; justify-content: space-between; gap: 2rem; }
+.brand { display: inline-flex; min-block-size: 44px; align-items: center; gap: 1rem; }
+.brandMark { inline-size: 2.25rem; block-size: 2.25rem; flex-shrink: 0; color: var(--signal); transition: transform 200ms ease; }
+.brand:hover .brandMark { transform: rotate(-5deg); }
+.brandName { font-size: .94rem; font-weight: 700; letter-spacing: -.03em; }
+.desktopNav { display: flex; align-items: center; gap: 1.8rem; }
+.navLink { position: relative; display: inline-flex; align-items: center; min-block-size: 44px; font-size: .83rem; font-weight: 600; color: var(--text-muted); }
+.navLink::after { content: ""; position: absolute; inset-block-end: 5px; inset-inline-start: 0; inline-size: 100%; block-size: 2px; background: var(--signal); transform: scaleX(0); transform-origin: left; transition: transform 180ms ease; }
+.navLink:hover, .navLink[aria-current] { color: var(--signal); }
+.navLink:hover::after, .navLink[aria-current]::after { transform: scaleX(1); }
+.cvLink { display: inline-flex; align-items: center; gap: .75rem; min-block-size: 44px; padding-inline: 1.1rem; border: 1px solid var(--rule-strong); border-radius: 5px; font-size: .79rem; font-weight: 650; transition: background 180ms ease, color 180ms ease; }
+.cvLink:hover { color: var(--signal-ink); background: var(--signal); border-color: var(--signal); }
+.localeToggle { display: inline-flex; align-items: center; flex-shrink: 0; gap: 2px; padding: 3px; border: 1px solid var(--rule); border-radius: 7px; }
+.localeToggle a { display: grid; place-items: center; min-inline-size: 38px; min-block-size: 38px; padding-inline: .5rem; border-radius: 4px; font-size: .72rem; font-weight: 700; color: var(--text-muted); transition: background 180ms ease, color 180ms ease; }
+.localeToggle a[aria-current] { background: var(--signal); color: var(--signal-ink); }
+.localeToggle a:not([aria-current]):hover { background: var(--surface-2); color: var(--text); }
+.mobileControls { display: none; align-items: center; gap: .7rem; }
+.menuTrigger { display: grid; place-items: center; inline-size: 44px; block-size: 44px; border: 1px solid var(--rule); border-radius: 5px; }
+.menuTrigger > span { display: grid; gap: 6px; }
+.menuTrigger i { display: block; inline-size: 17px; block-size: 1.5px; background: var(--text); transition: transform 200ms ease; }
+.cross i:first-child { transform: translateY(3.75px) rotate(45deg); }
+.cross i:last-child { transform: translateY(-3.75px) rotate(-45deg); }
+.mobileMenu { position: absolute; inset-inline: 0; inset-block-start: 100%; block-size: calc(100dvh - 4.5rem); overflow-y: auto; background: var(--ink); border-block-start: 1px solid var(--rule); }
+.mobileMenuInner { display: flex; flex-direction: column; min-block-size: 100%; padding-block: 1rem max(1.5rem, env(safe-area-inset-bottom)); }
+.menuClose { display: flex; align-items: center; justify-content: space-between; min-block-size: 48px; color: var(--text-muted); font-size: .8rem; }
+.menuClose > span { font-size: 1.6rem; }
+.mobileLink { display: flex; align-items: center; justify-content: space-between; gap: 2rem; min-block-size: 5.25rem; padding-block: .6rem; border-block-end: 1px solid var(--rule); font-family: var(--font-heading), serif; font-size: clamp(2.2rem, 9vw, 3.5rem); letter-spacing: -.045em; }
+.mobileLink[aria-current], .mobileLink:hover { color: var(--signal); }
+.menuNumber { font-family: var(--font-body), sans-serif; font-size: .7rem; letter-spacing: 0; color: var(--text-faint); }
+.mobileCv { display: flex; min-block-size: 50px; align-items: center; justify-content: space-between; margin-block-start: 1.5rem; padding-inline: 1rem; border-radius: 5px; background: var(--signal); color: var(--signal-ink); font-size: .85rem; font-weight: 650; }
+.menuBottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; margin-block-start: auto; padding-block-start: 3rem; }
+.menuBottom > a { display: inline-flex; align-items: center; min-block-size: 44px; font-size: .9rem; }
+.footer { margin-block-start: clamp(6rem, 10vw, 11rem); padding-block: 4.5rem 1.5rem; border-block-start: 1px solid var(--rule); background: var(--ink-2); }
+.footerCompact { margin-block-start: 4rem; padding-block-start: 0; }
+.footerCompact .footerDirectory { border-block-start: 0; }
+.footerInvitation { display: grid; grid-template-columns: 1.25fr 1fr; align-items: end; gap: 3rem; padding-block-end: 4.5rem; }
+.hello { display: inline-flex; align-items: center; gap: .4em; margin-block-start: 1rem; font-family: var(--font-heading), serif; font-size: clamp(3.5rem, 8vw, 7.2rem); line-height: 1.1; letter-spacing: -.07em; color: var(--signal); }
+.hello > span { display: inline-block; font-family: var(--font-body), sans-serif; font-size: .65em; transition: transform 240ms ease; }
+.hello:hover > span { transform: translate(5px, -5px); }
+.footerNote { justify-self: end; max-inline-size: 37ch; font-size: .94rem; line-height: 1.8; color: var(--text-muted); }
+.footerNote a { display: inline-flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-block-size: 44px; margin-block-start: 1.1rem; color: var(--text); border-block-end: 1px solid var(--rule-strong); }
+.footerNote a:hover { color: var(--signal); }
+.footerDirectory { display: grid; grid-template-columns: 1.8fr 1fr 1fr; gap: 3rem; padding-block: 2.8rem; border-block: 1px solid var(--rule); }
+.footerDirectory > nav, .footerDirectory > div { display: flex; flex-direction: column; align-items: start; }
+.footerDirectory :global(.label) { margin-block-end: 1rem; }
+.footerDirectory a { display: inline-flex; align-items: center; gap: .5rem; min-block-size: 40px; font-size: .83rem; color: var(--text-muted); }
+.footerDirectory a:hover { color: var(--signal); }
+.footerNow ul { display: grid; gap: .6rem; max-inline-size: 47ch; }
+.footerNow li { padding-inline-start: 1rem; position: relative; font-size: .82rem; line-height: 1.8; color: var(--text-muted); }
+.footerNow li::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: .72em; inline-size: 4px; block-size: 4px; background: var(--trace); border-radius: 50%; }
+.colophon { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-block-start: 1.5rem; font-size: .68rem; color: var(--text-faint); }
+@media (max-width: 1023px) { .headerInner { min-block-size: 4.5rem; gap: 1rem; } .desktopNav { display: none; } .mobileControls { display: flex; } }
+@media (min-width: 1024px) { .mobileMenu { display: none; } }
+@media (max-width: 640px) { .brand { gap: .6rem; } .brandMark { inline-size: 2rem; } .brandName { font-size: .8rem; } .mobileControls { gap: .45rem; } .localeToggle a { min-inline-size: 30px; padding-inline: .3rem; } .footer { padding-block-start: 3rem; } .footerInvitation { grid-template-columns: 1fr; gap: 2rem; padding-block-end: 2.5rem; } .footerNote { justify-self: start; } .footerDirectory { grid-template-columns: 1fr 1fr; gap: 2rem; } .footerNow { grid-column: 1 / -1; } .colophon { flex-direction: column; gap: .5rem; } }
+@media (prefers-reduced-motion: reduce) { .brandMark, .navLink::after, .hello > span, .menuTrigger i, .cvLink, .localeToggle a { transition: none; } }

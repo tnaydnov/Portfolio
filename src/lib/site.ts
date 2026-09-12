@@ -6,10 +6,10 @@ export const site = {
     en: "Technical product builder",
     he: "בונה מוצר טכני",
   },
-  url: "https://tomernaydnov.com",
+  url: "https://tomer-naydnov.com",
   description: {
-    en: "I find the workaround everyone has accepted, trace it to the real problem, and build the fix.",
-    he: "אני מוצא את המעקף שכולם כבר קיבלו, עוקב אחריו עד לבעיה האמיתית, ובונה את התיקון.",
+    en: "Software engineer, technical product builder and programming instructor. I turn real-world questions into thoughtful, useful software.",
+    he: "מהנדס תוכנה, בונה מוצרים טכנולוגיים ומנחה תכנות. הופך שאלות מהשטח לתוכנה שימושית ומתוכננת היטב.",
   },
   email: "tnaydnov@gmail.com",
   location: { en: "Israel time", he: "שעון ישראל" },

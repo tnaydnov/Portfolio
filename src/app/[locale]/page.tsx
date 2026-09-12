@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CinematicHome } from "@/components/cinematic/CinematicHome";
+import { FoldHome } from "@/components/fold/FoldHome";
 import { isLocale, t, type Locale } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/metadata";
 import { site } from "@/lib/site";
@@ -25,5 +25,5 @@ export default async function HomePage({
 }) {
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
-  return <CinematicHome locale={raw as Locale} />;
+  return <FoldHome locale={raw as Locale} />;
 }

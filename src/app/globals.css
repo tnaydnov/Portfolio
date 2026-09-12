@@ -1,31 +1,24 @@
 @import "tailwindcss";
 
-/* ============================================================================
-   DOCUMENTARY SYSTEM — one authored grade across the entire portfolio.
-   Ordinary interfaces stay tactile; signal orange marks the moment a system
-   is questioned or changed.
-   ========================================================================== */
-
 :root,
 [data-theme="draft"],
 [data-theme="blueprint"] {
-  --ink: #080a0c;
-  --ink-2: #0c0f11;
-  --surface: #111518;
-  --surface-2: #171c1f;
-  --rule: rgba(255, 255, 255, 0.11);
-  --rule-strong: rgba(255, 255, 255, 0.26);
-  --text: #f3efe6;
-  --text-muted: #a8afad;
-  --text-faint: #7f8988;
-  --signal: #ff5a2f;
-  --signal-ink: #0a0a0a;
-  --trace: #6f9a9b;
-  --ok: #8db77e;
-  --paper: #e8e0d2;
-  --paper-ink: #22251f;
-  --grain: 0.065;
-  color-scheme: dark;
+  --ink: #faf9f4;
+  --ink-2: #f1efe5;
+  --surface: #fffefb;
+  --surface-2: #eeece1;
+  --rule: rgba(32, 38, 74, 0.16);
+  --rule-strong: rgba(32, 38, 74, 0.32);
+  --text: #20264a;
+  --text-muted: #626779;
+  --text-faint: #6b7080;
+  --signal: #264bec;
+  --signal-ink: #fffefb;
+  --trace: #3d736b;
+  --ok: #326748;
+  --paper: #f8e88a;
+  --paper-ink: #20264a;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -42,256 +35,95 @@
   --color-signal-ink: var(--signal-ink);
   --color-trace: var(--trace);
   --color-ok: var(--ok);
-
-  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), Georgia, serif;
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
-
+  --font-mono: var(--font-code), ui-monospace, SFMono-Regular, monospace;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out-quint: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* ---------------------------------------------------------------- base --- */
-
-* {
-  border-color: var(--rule);
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  scroll-padding-top: 5.5rem;
-}
-
+* { border-color: var(--rule); }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 7rem; }
 body {
   min-height: 100svh;
+  margin: 0;
   background: var(--ink);
   color: var(--text);
   font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  font-synthesis-weight: none;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
-
-::selection {
-  background: var(--signal);
-  color: var(--signal-ink);
-}
-
-:focus-visible {
-  outline: 2px solid var(--signal);
-  outline-offset: 3px;
-  border-radius: 1px;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  font-weight: 500;
-  letter-spacing: -0.025em;
+::selection { background: var(--signal); color: var(--signal-ink); }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 5px; }
+button, a, summary, input { -webkit-tap-highlight-color: transparent; }
+button, summary { cursor: pointer; }
+button:disabled { cursor: default; }
+button, input, select, textarea { font: inherit; }
+h1, h2, h3, h4 {
+  font-family: var(--font-heading), Georgia, serif;
+  font-weight: 450;
+  letter-spacing: -0.045em;
   text-wrap: balance;
 }
-
-/* ------------------------------------------------------------- hebrew --- */
-
-[lang="he"] {
-  --font-display: var(--font-he-display);
-  --font-body: var(--font-he);
-}
-
-/* JetBrains Mono has no Hebrew glyphs; keep the instrument feel with tracking. */
-[lang="he"] .label {
-  font-family: var(--font-he), ui-monospace, monospace;
-  letter-spacing: 0.06em;
-}
-
-[lang="he"] h1,
-[lang="he"] h2,
-[lang="he"] h3,
-[lang="he"] h4 {
-  letter-spacing: 0;
-}
-
-[lang="he"] .t-hero {
-  letter-spacing: -0.01em;
-}
-
-[lang="he"] .t-section {
-  letter-spacing: -0.005em;
-}
-
-/* Latin runs inside Hebrew prose keep their own face. */
-[lang="he"] code,
-[lang="he"] .lat {
-  font-family: var(--font-mono), monospace;
-}
-
-/* Metrics must not jitter when values change or animate. */
-.tnum,
-time,
-[data-metric] {
-  font-variant-numeric: tabular-nums;
-}
-
-/* ----------------------------------------------------------- utilities --- */
+p { text-wrap: pretty; }
+img, svg, canvas { max-width: 100%; }
+html[lang="he"] { --font-heading: var(--font-he-display); --font-body: var(--font-he); }
+[lang="he"] .label { font-family: var(--font-he), sans-serif; letter-spacing: 0; }
+[lang="he"] :is(h1, h2, h3, h4, .t-hero, .t-section) { letter-spacing: -0.025em; font-weight: 450; }
+[lang="he"] code, [lang="he"] .lat { font-family: var(--font-code), monospace; }
+.tnum, time, [data-metric] { font-variant-numeric: tabular-nums; }
 
 @utility label {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   font-size: 0.6875rem;
-  line-height: 1;
-  letter-spacing: 0.14em;
+  font-weight: 650;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--text-faint);
 }
-
 @utility shell {
   width: 100%;
   margin-inline: auto;
-  max-width: 88rem;
-  padding-inline: 1.25rem;
+  max-width: 90rem;
+  padding-inline: 1.5rem;
 }
-
-@utility halo {
-  box-shadow: 0 0 44px -14px color-mix(in oklab, var(--signal) 75%, transparent);
-}
-
 @utility t-hero {
-  font-size: clamp(2.75rem, 8.5vw, 7.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.04em;
+  font-size: clamp(3.1rem, 7vw, 6.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.055em;
 }
-
 @utility t-section {
-  font-size: clamp(1.75rem, 3.6vw, 3rem);
-  line-height: 1.03;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.15rem, 4.5vw, 4.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
 }
+@utility halo { box-shadow: 0 12px 40px -20px color-mix(in oklab, var(--signal) 35%, transparent); }
+@media (min-width: 768px) { .shell { padding-inline: 3rem; } }
+@media (min-width: 1280px) { .shell { padding-inline: 4rem; } }
+@media (max-width: 359px) { .shell { padding-inline: 1.1rem; } }
 
-@media (max-width: 359px) {
-  .shell {
-    padding-inline: 1rem;
-  }
-
-  .label {
-    letter-spacing: 0.1em;
-  }
-}
-
-@media (min-width: 768px) {
-  .shell {
-    padding-inline: 2.5rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .shell {
-    padding-inline: 4rem;
-  }
-}
-
-/* -------------------------------------------------------------- texture --- */
-
-.grain {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  pointer-events: none;
-  opacity: var(--grain);
-  mix-blend-mode: screen;
-  background-size: 170px 170px;
-}
-
-/* ---------------------------------------------------------------- prose --- */
-
-.prose {
-  max-width: 68ch;
-  font-size: 1.0625rem;
-  line-height: 1.68;
-  color: var(--text-muted);
-}
-
-.prose > * + * {
-  margin-top: 1.15em;
-}
-
-.prose strong {
-  color: var(--text);
-  font-weight: 550;
-}
-
-.prose em {
-  font-style: italic;
-  color: var(--text);
-}
-
-.prose a {
-  color: var(--text);
-  text-decoration: underline;
-  text-decoration-color: var(--signal);
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1.5px;
-}
-
-.prose a:hover {
-  color: var(--signal);
-}
-
+.prose { max-width: 68ch; font-size: 1.0625rem; line-height: 1.8; color: var(--text-muted); }
+.prose > * + * { margin-top: 1.15em; }
+.prose strong { color: var(--text); font-weight: 650; }
+.prose em { color: var(--text); }
+.prose a { color: var(--signal); text-decoration: underline; text-underline-offset: 4px; }
+.prose a:hover { text-decoration-thickness: 2px; }
 .prose code {
-  font-family: var(--font-mono), monospace;
+  font-family: var(--font-code), monospace;
   font-size: 0.875em;
   background: var(--surface-2);
-  border: 1px solid var(--rule);
-  padding: 0.1em 0.35em;
-  border-radius: 2px;
+  padding: 0.15em 0.35em;
   color: var(--text);
+  overflow-wrap: anywhere;
 }
-
-/* --------------------------------------------------------- entry motion --- */
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translate3d(0, var(--rise-from, 14px), 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Content stays visible without JavaScript; view timelines add progressive motion. */
-@supports (animation-timeline: view()) {
-  .scroll-reveal {
-    animation: rise linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 24%;
-  }
-}
-
-details > summary::-webkit-details-marker {
-  display: none;
-}
-
-details > summary::marker {
-  content: "";
-}
-
-/* ---------------------------------------------------- reduced-motion mode --- */
-
+details > summary::-webkit-details-marker { display: none; }
+details > summary::marker { content: ""; }
+.scroll-reveal { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
-  .scroll-reveal {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-
 }

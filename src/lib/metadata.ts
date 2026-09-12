@@ -3,7 +3,7 @@ import { LOCALES, type Locale } from "./i18n";
 import { site } from "./site";
 
 function localizedPath(locale: Locale, path = "") {
-  const suffix = path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
+  const suffix = path === "" || path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
   return `/${locale}${suffix}`;
 }
 export function pageMetadata({

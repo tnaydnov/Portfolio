@@ -1,196 +1,74 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  EducationTimeline,
-  ExperienceTimeline,
-} from "@/components/about/CareerTimeline";
-import { SectionMark } from "@/components/chrome/SectionMark";
-import { Reveal } from "@/components/motion/Reveal";
-import {
-  brief,
-  educationTimeline,
-  experienceTimeline,
-} from "@/content/site";
-import { isLocale, t, type Locale } from "@/lib/i18n";
+import { EducationTimeline, ExperienceTimeline } from "@/components/about/CareerTimeline";
+import { brief, educationTimeline, experienceTimeline } from "@/content/site";
+import { isLocale, t } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/metadata";
 import { href, site } from "@/lib/site";
 import { ui } from "@/lib/ui";
+import styles from "@/components/about/editorial-pages.module.css";
 
 function Rich({ text }: { text: string }) {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
-  return (
-    <>
-      {parts.map((part, index) =>
-        part.startsWith("**") && part.endsWith("**") ? (
-          <strong key={index}>{part.slice(2, -2)}</strong>
-        ) : (
-          <span key={index}>{part}</span>
-        ),
-      )}
-    </>
-  );
+  return <>{text.split(/(\*\*[^*]+\*\*)/g).map((part, index) => part.startsWith("**") && part.endsWith("**") ? <strong key={index}>{part.slice(2, -2)}</strong> : <span key={index}>{part}</span>)}</>;
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  return pageMetadata({
-    locale,
-    path: "/about",
-    title: t(ui.about.title, locale),
-    description: t(ui.about.lede, locale),
-  });
+  return pageMetadata({ locale, path: "/about", title: t(ui.about.title, locale), description: t(ui.about.lede, locale) });
 }
 
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale: raw } = await params;
-  if (!isLocale(raw)) notFound();
-  const locale = raw as Locale;
-  const experience = experienceTimeline.map((entry) => ({
-    id: entry.id,
-    span: t(entry.span, locale),
-    title: t(entry.title, locale),
-    org: t(entry.org, locale),
-    summary: t(entry.summary, locale),
-    details: t(entry.details, locale),
-    current: entry.current,
-  }));
-  const education = educationTimeline.map((entry) => ({
-    id: entry.id,
-    span: t(entry.span, locale),
-    title: t(entry.title, locale),
-    org: t(entry.org, locale),
-    summary: t(entry.summary, locale),
-    current: entry.current,
-  }));
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const he = locale === "he";
+  const experience = experienceTimeline.map((entry) => ({ id: entry.id, span: t(entry.span, locale), title: t(entry.title, locale), org: t(entry.org, locale), summary: t(entry.summary, locale), details: t(entry.details, locale), current: entry.current }));
+  const education = educationTimeline.map((entry) => ({ id: entry.id, span: t(entry.span, locale), title: t(entry.title, locale), org: t(entry.org, locale), summary: t(entry.summary, locale), current: entry.current }));
 
-  return (
-    <div className="shell pt-12 md:pt-20">
-      <SectionMark index="01" title={t(ui.about.title, locale)} />
+  return <div className={`shell ${styles.page}`}>
+    <header className={styles.aboutHero}>
+      <div>
+        <p className="label">{t(ui.about.title, locale)} <span className={styles.labelDot}>/</span> {t(site.name, locale)}</p>
+        <h1 className={styles.heroTitle}>{he ? "סקרן מטבעי." : "Curious by nature."}<br /><em>{he ? "מהנדס בהכשרתי." : "Engineer by training."}</em></h1>
+        <p className={styles.heroLede}>{t(ui.about.lede, locale)}</p>
+        <div className={styles.actions}><a href={site.cv} download={site.cvFileName} className={styles.primaryButton}>{t(ui.common.downloadCv, locale)} <span aria-hidden="true">↓</span></a><Link href={href("/contact", locale)} className={styles.textLink}>{t(ui.about.getInTouch, locale)}</Link></div>
+      </div>
+      <div className={styles.profileCard}>
+        <div className={styles.identityFold} aria-hidden="true"><span /><span /><span /><b>tn.</b></div>
+        <div className={styles.profileCaption}><p>{t(site.name, locale)}</p><span>{t(site.role, locale)}</span></div>
+        <p className={styles.profileNote}>{t(site.description, locale)}</p>
+      </div>
+    </header>
 
-      <header className="grid gap-10 py-14 md:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-        <div>
-          <p className="label text-signal">{t(site.role, locale)}</p>
-          <h1 className="mt-5 t-hero max-w-[9ch]">{t(ui.about.title, locale)}</h1>
-          <p className="mt-8 max-w-[26ch] font-display text-[clamp(1.55rem,3vw,2.6rem)] leading-[1.14] tracking-tight">
-            {t(ui.about.lede, locale)}
-          </p>
-        </div>
-        <div className="lg:justify-self-end">
-          <p className="max-w-[48ch] text-[1.05rem] leading-relaxed text-muted">
-            {t(site.description, locale)}
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <a href={site.cv} download={site.cvFileName} className="inline-flex min-h-12 items-center bg-signal px-5 text-sm font-semibold text-signal-ink transition-transform hover:-translate-y-0.5">
-              {t(ui.common.downloadCv, locale)} ↓
-            </a>
-            <Link href={href("/contact", locale)} className="inline-flex min-h-12 items-center border border-rule-strong px-5 text-sm hover:border-signal hover:text-signal">
-              {t(ui.about.getInTouch, locale)}
-            </Link>
-          </div>
-        </div>
-      </header>
+    <nav className={styles.pageIndex} aria-label={he ? "תוכן עמוד האודות" : "About page sections"}>
+      <span className="label">{he ? "בעמוד הזה" : "On this page"}</span>
+      <a href="#experience">{t(ui.about.experienceTitle, locale)} <span aria-hidden="true">↓</span></a><a href="#education">{t(ui.about.educationTitle, locale)} <span aria-hidden="true">↓</span></a><a href="#teaching">{he ? "הוראה" : "Teaching"} <span aria-hidden="true">↓</span></a><a href="#approach">{he ? "הגישה שלי" : "My approach"} <span aria-hidden="true">↓</span></a>
+    </nav>
 
-      <section id="experience" className="scroll-mt-24 pt-24 md:pt-32" aria-labelledby="experience-title">
-        <SectionMark
-          index="02"
-          title={t(ui.about.experienceTitle, locale)}
-          aside={t(ui.about.detailsHint, locale)}
-        />
-        <h2 id="experience-title" className="sr-only">{t(ui.about.experienceTitle, locale)}</h2>
-        <div className="mt-8">
-          <ExperienceTimeline
-            entries={experience}
-            labels={{
-              current: t(ui.about.currentRole, locale),
-              roleDetails: t(ui.about.roleDetails, locale),
-              closeDetails: t(ui.about.closeDetails, locale),
-              responsibilities: t(ui.about.responsibilities, locale),
-            }}
-          />
-        </div>
-      </section>
+    <section id="experience" className={styles.splitSection} aria-labelledby="experience-title">
+      <div className={styles.sectionHeading}><p className="label">01 / {he ? "מהשטח" : "In practice"}</p><h2 id="experience-title">{t(ui.about.experienceTitle, locale)}</h2><p>{he ? "תכנות, אנשים והבעיות שביניהם." : "Programming, people, and the problems in between."}</p></div>
+      <ExperienceTimeline entries={experience} labels={{ current: t(ui.about.currentRole, locale), roleDetails: t(ui.about.roleDetails, locale), closeDetails: t(ui.about.closeDetails, locale), responsibilities: t(ui.about.responsibilities, locale) }} />
+    </section>
 
-      <section id="education" className="scroll-mt-24 pt-24 md:pt-32" aria-labelledby="education-title">
-        <SectionMark index="03" title={t(ui.about.educationTitle, locale)} />
-        <h2 id="education-title" className="sr-only">{t(ui.about.educationTitle, locale)}</h2>
-        <div className="mt-8">
-          <EducationTimeline
-            entries={education}
-            currentLabel={t(ui.about.currentStudies, locale)}
-          />
-        </div>
-      </section>
+    <section id="education" className={styles.splitSection} aria-labelledby="education-title">
+      <div className={styles.sectionHeading}><p className="label">02 / {he ? "מרחיב את המבט" : "Broadening the lens"}</p><h2 id="education-title">{t(ui.about.educationTitle, locale)}</h2><p>{he ? "בסיס בהנדסת תוכנה. מבט רחב יותר על המערכת כולה." : "A foundation in software. A wider view of the whole system."}</p></div>
+      <EducationTimeline entries={education} currentLabel={t(ui.about.currentStudies, locale)} />
+    </section>
 
-      <section className="pt-24 md:pt-32" aria-labelledby="thesis-title">
-        <SectionMark index="04" title={t(ui.about.thesisLabel, locale)} />
-        <Reveal>
-          <div className="grid gap-10 py-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-            <h2 id="thesis-title" className="t-section max-w-[14ch] lg:sticky lg:top-28 lg:self-start">
-              {locale === "he" ? "תוכנה היא הכלי. מערכות הן הנושא." : "Software is the tool. Systems are the subject."}
-            </h2>
-            <div className="prose">
-              {t(ui.about.thesisBody, locale).slice(0, 3).map((paragraph) => (
-                <p key={paragraph.slice(0, 48)}><Rich text={paragraph} /></p>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-      </section>
+    <section id="teaching" className={styles.teachingSection} aria-labelledby="teaching-title">
+      <div className={styles.teachingHeading}><p className="label">03 / {t(ui.about.teachingLabel, locale)}</p><h2 id="teaching-title">{t(ui.home.classroomHeading, locale)}</h2><div className={styles.paperFan} aria-hidden="true"><i /><i /><i /><i /></div></div>
+      <div className={styles.teachingBody}>{t(ui.home.classroomBody, locale).map((paragraph) => <p key={paragraph.slice(0, 45)}>{paragraph}</p>)}<blockquote>{t(ui.home.classroomRule, locale)}</blockquote><Link href={href("/work/arc", locale)}>{he ? "לסיפור של Arc" : "Read the Arc story"} <span aria-hidden="true">↗</span></Link></div>
+    </section>
 
-      <section id="teaching" className="scroll-mt-24 pt-20 md:pt-28" aria-labelledby="teaching-title">
-        <SectionMark index="05" title={t(ui.about.teachingLabel, locale)} />
-        <div className="grid gap-0 overflow-hidden border border-rule bg-surface md:grid-cols-[0.78fr_1.22fr]">
-          <div className="relative min-h-72 overflow-hidden border-b border-rule bg-ink-2 p-7 md:min-h-[28rem] md:border-b-0 md:border-e">
-            <div aria-hidden className="absolute -right-16 top-10 size-64 rounded-full border border-rule opacity-40" />
-            <div aria-hidden className="absolute -right-8 top-20 size-44 rounded-full border border-signal/40" />
-            <div className="relative flex h-full flex-col justify-between">
-              <p className="label text-signal">CLASSROOM / LIVE FEEDBACK</p>
-              <blockquote className="max-w-[16ch] font-display text-[clamp(2rem,4vw,3.7rem)] leading-[1.02] tracking-tight">
-                {locale === "he" ? "חדר שלם חושף מיד הנחה סמויה." : "A room of faces exposes a hidden assumption immediately."}
-              </blockquote>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center p-7 md:p-12">
-            <h2 id="teaching-title" className="t-section max-w-[15ch]">
-              {t(ui.home.classroomHeading, locale)}
-            </h2>
-            <div className="prose mt-7">
-              {t(ui.home.classroomBody, locale).map((paragraph) => <p key={paragraph.slice(0, 48)}>{paragraph}</p>)}
-            </div>
-            <p className="mt-8 border-s-2 border-signal ps-5 font-display text-lg leading-snug">
-              {t(ui.home.classroomRule, locale)}
-            </p>
-          </div>
-        </div>
-      </section>
+    <section id="approach" className={styles.splitSection} aria-labelledby="approach-title">
+      <div className={styles.sectionHeading}><p className="label">04 / {he ? "איך אני חושב" : "How I think"}</p><h2 id="approach-title">{he ? "תוכנה היא הכלי. מערכות הן הנושא." : "Software is the tool. Systems are the subject."}</h2></div>
+      <div className={styles.bodyCopy}>{t(ui.about.thesisBody, locale).map((paragraph) => <p key={paragraph.slice(0, 45)}><Rich text={paragraph} /></p>)}</div>
+    </section>
 
-      <section className="pt-24 md:pt-32" aria-labelledby="fit-title">
-        <SectionMark index="06" title={t(ui.about.fitTitle, locale)} />
-        <div className="grid gap-10 py-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-          <div>
-            <h2 id="fit-title" className="t-section max-w-[13ch]">{t(ui.about.wantLabel, locale)}</h2>
-            <p className="mt-5 max-w-[35ch] text-[0.96rem] leading-relaxed text-muted">{t(ui.about.wantBody, locale)[0]}</p>
-          </div>
-          <dl className="border-t border-rule">
-            {brief.map((row) => (
-              <div key={t(row.term, locale)} className="grid gap-2 border-b border-rule py-6 sm:grid-cols-[11rem_1fr] sm:gap-8">
-                <dt className="label pt-1">{t(row.term, locale)}</dt>
-                <dd className="max-w-[62ch] text-[0.98rem] leading-relaxed text-muted">{t(row.def, locale)}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-    </div>
-  );
+    <section className={styles.fitSection} aria-labelledby="fit-title">
+      <div className={styles.fitIntro}><p className="label">{t(ui.about.fitTitle, locale)}</p><h2 id="fit-title">{t(ui.about.wantLabel, locale)}</h2><p>{t(ui.about.wantBody, locale)[0]}</p><Link href={href("/contact", locale)} className={styles.textLink}>{t(ui.about.getInTouch, locale)}</Link></div>
+      <dl>{brief.map((row) => <div key={t(row.term, locale)}><dt>{t(row.term, locale)}</dt><dd>{t(row.def, locale)}</dd></div>)}</dl>
+    </section>
+  </div>;
 }

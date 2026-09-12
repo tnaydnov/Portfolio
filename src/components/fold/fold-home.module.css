@@ -1,0 +1,132 @@
+.hero { background: var(--paper); overflow: clip; }
+.heroGrid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; min-height: 640px; gap: 0; }
+.heroCopy { position: relative; z-index: 2; padding-block: 64px 72px; }
+.hello { font-size: 17px; font-weight: 550; margin-bottom: 26px; }
+.heroTitle { font-size: clamp(3.8rem, 6.1vw, 6rem); line-height: 1.07; letter-spacing: -.065em; }
+.heroTitle span, .heroTitle em { display: block; }
+.heroTitle em { color: var(--signal); font-weight: 400; }
+.heroIntro { max-width: 420px; font-size: 17px; line-height: 1.8; margin-top: 28px; color: #454a61; }
+.heroActions { display: flex; flex-wrap: wrap; gap: 22px 30px; align-items: center; margin-top: 34px; }
+.primaryLink { display: inline-flex; align-items: center; gap: 28px; padding: 17px 24px; border-radius: 3px; background: var(--signal); color: var(--signal-ink); font-size: 13px; font-weight: 650; transition: background .2s, transform .2s; }
+.primaryLink:hover { background: #1735b9; transform: translateY(-2px); }
+.arrow { display: inline-block; font-family: Arial, sans-serif; font-size: 21px; font-weight: 400; line-height: 1; transition: transform .25s; }
+.textLink { display: inline-flex; align-items: center; gap: 20px; padding-block: 10px; font-size: 13px; font-weight: 650; }
+.textLink:hover { color: var(--signal); }
+.textLink:hover .arrow, .primaryLink:hover .arrow { transform: translateX(3px); }
+:global([dir="rtl"]) .arrow { transform: scaleX(-1); }
+:global([dir="rtl"]) .textLink:hover .arrow, :global([dir="rtl"]) .primaryLink:hover .arrow { transform: scaleX(-1) translateX(3px); }
+.heroExhibit { min-width: 0; margin-inline: -32px; }
+.quickWork { display: grid; grid-template-columns: 1fr repeat(3, 1.15fr); padding-block: 25px 27px; border-top: 1px solid rgba(32,38,74,.2); }
+.quickLabel { display: flex; flex-direction: column; justify-content: space-between; gap: 10px; font-size: 11px; font-weight: 650; text-transform: uppercase; letter-spacing: .08em; }
+.quickLabel > span { font-size: 22px; }
+.quickWork > a { padding-inline-start: 30px; border-inline-start: 1px solid rgba(32,38,74,.2); }
+.quickWork > a > span:first-child { display: flex; align-items: center; gap: 15px; font-size: 18px; font-weight: 550; }
+.quickWork > a > span:last-child { display: block; margin-top: 6px; font-size: 11px; color: #454a61; }
+.quickWork > a:hover { color: var(--signal); }
+.work { padding-block: 104px 86px; scroll-margin-top: 12px; }
+.sectionHeading { display: flex; align-items: flex-end; justify-content: space-between; gap: 36px; margin-bottom: 48px; }
+.sectionHeading h2, .about h2 { margin-top: 21px; white-space: pre-line; }
+.sectionHeading > p { max-width: 325px; font-size: 14px; line-height: 1.8; color: var(--text-muted); padding-bottom: 5px; }
+.projectGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 58px 32px; }
+.project { min-width: 0; }
+.projectCover { display: block; position: relative; overflow: hidden; border-radius: 5px; }
+.projectCover > figure { border: 0; }
+.coverArrow { position: absolute; bottom: 18px; inset-inline-end: 18px; display: grid; place-items: center; height: 44px; width: 44px; border-radius: 50%; background: var(--surface); color: var(--signal); font-size: 23px; transition: transform .25s, background .25s, color .25s; }
+.projectCover:hover .coverArrow { transform: rotate(45deg); background: var(--signal); color: var(--signal-ink); }
+.projectBody { padding-top: 24px; }
+.projectMeta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; font-size: 10px; font-weight: 650; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); }
+.projectMeta > span:first-child { color: var(--signal); }
+.project h3 { font-size: clamp(1.9rem, 3vw, 2.7rem); line-height: 1.15; margin-top: 18px; max-width: 18ch; }
+.project h3 a:hover { color: var(--signal); }
+.projectDescription { max-width: 52ch; font-size: 14px; line-height: 1.8; margin-top: 14px; color: var(--text-muted); }
+.projectRole { margin-top: 23px; font-size: 11px; line-height: 1.6; font-weight: 550; }
+.projectBody .textLink { margin-top: 16px; color: var(--signal); }
+.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; background: #efeee5; padding: 28px; border-radius: 6px; }
+.featured .projectBody { padding: 14px 18px 14px 0; }
+.featured h3 { font-size: clamp(2.2rem, 3.8vw, 3.5rem); }
+.featured .projectCover { align-self: stretch; display: flex; align-items: center; background: #e4e8db; }
+.featured .projectCover > *:first-child { width: 100%; }
+.allWork { margin-top: 48px; border-top: 1px solid var(--rule); padding-top: 25px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.allWork p { color: var(--text-muted); font-size: 12px; }
+.allWork .textLink { color: var(--signal); }
+.approach { background: #efeee5; padding-block: 82px; }
+.foldMark { width: 125px; height: 105px; margin-inline-end: 30px; transform: rotate(-8deg); }
+.principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 50px; }
+.principles article { border-top: 1px solid var(--rule-strong); padding-top: 20px; }
+.principleNumber { display: block; font-size: 11px; color: var(--signal); }
+.principles h3 { font-size: clamp(1.6rem, 2.3vw, 2.05rem); line-height: 1.2; margin-top: 20px; }
+.principles p { max-width: 33ch; font-size: 13px; line-height: 1.85; margin-top: 15px; color: var(--text-muted); }
+.about { display: grid; grid-template-columns: 1fr 1.05fr; gap: 100px; align-items: center; padding-block: 110px; }
+.aboutIllustration { position: relative; min-height: 390px; display: flex; align-items: center; justify-content: center; isolation: isolate; }
+.aboutIllustration::before { content: ""; width: 270px; height: 270px; border-radius: 50%; position: absolute; background: #e9e9dc; z-index: -1; }
+.aboutSheet { width: 265px; height: 315px; padding: 28px; background: var(--surface); border: 1px solid var(--rule); box-shadow: 14px 20px 0 #e6e3d5; transform: rotate(-9deg); }
+.aboutSheet > span { font-family: var(--font-code), monospace; font-size: 10px; color: var(--signal); white-space: nowrap; }
+.sheetLines { display: grid; gap: 8px; margin-top: 24px; }
+.sheetLines i { display: block; height: 3px; width: 85%; background: #dddedc; }
+.sheetLines i:nth-child(2) { width: 60%; }
+.sheetLines i:nth-child(3) { width: 74%; }
+.sheetSymbol { font-size: 83px; line-height: 1; letter-spacing: -.1em; color: var(--signal); margin-top: 19px; font-family: var(--font-code), monospace; }
+.aboutNote { position: absolute; inset-inline-end: 0; bottom: 10px; width: 172px; height: 135px; padding: 19px; background: var(--paper); transform: rotate(9deg); box-shadow: 5px 9px 20px #20264a0d; }
+.aboutNote > span { font-family: var(--font-heading), Georgia, serif; font-style: italic; font-size: 20px; }
+.aboutNote svg { width: 76px; height: 65px; margin-inline-start: auto; color: var(--signal); }
+.aboutCopy > p:not(:first-child) { margin-top: 26px; font-size: 14px; line-height: 1.9; max-width: 54ch; color: var(--text-muted); }
+.quietLink { display: inline-flex; align-items: center; gap: 12px; color: var(--text-muted); font-size: 12px; padding-block: 11px; }
+.quietLink:hover { color: var(--signal); }
+:global([lang="he"]) .heroTitle { font-size: clamp(3.7rem, 5.8vw, 5.5rem); letter-spacing: -.045em; }
+:global([lang="he"]) .heroTitle em { font-style: normal; }
+@media (max-width: 1100px) {
+  .heroGrid { min-height: 590px; }
+  .heroTitle { font-size: 4.5rem; }
+  .heroIntro { max-width: 360px; font-size: 15px; }
+  .heroExhibit { margin-inline: -22px; }
+  .featured { gap: 28px; padding: 22px; }
+  .featured .projectBody { padding-inline-end: 0; }
+  .about { gap: 55px; }
+}
+@media (max-width: 767px) {
+  .heroGrid { grid-template-columns: 1fr; min-height: 0; }
+  .heroCopy { padding-block: 43px 0; }
+  .hello { font-size: 14px; margin-bottom: 20px; }
+  .heroTitle { font-size: clamp(3.05rem, 10.4vw, 4.8rem); letter-spacing: -.065em; }
+  .heroIntro { font-size: 14px; max-width: 440px; margin-top: 21px; }
+  .heroActions { margin-top: 24px; gap: 14px 24px; }
+  .primaryLink { padding: 15px 19px; gap: 24px; font-size: 12px; }
+  .textLink { font-size: 12px; gap: 16px; }
+  .heroExhibit { margin-inline: -24px; margin-top: 16px; }
+  .quickWork { grid-template-columns: repeat(3, 1fr); padding-block: 18px 22px; }
+  .quickLabel { grid-column: 1 / -1; flex-direction: row; margin-bottom: 15px; align-items: center; }
+  .quickLabel > span { font-size: 17px; }
+  .quickWork > a { padding-inline: 13px 5px; }
+  .quickWork > a:nth-child(2) { border: 0; padding-inline-start: 0; }
+  .quickWork > a > span:first-child { font-size: 14px; gap: 6px; }
+  .quickWork > a > span:last-child { font-size: 10px; line-height: 1.5; }
+  .quickWork .arrow { font-size: 15px; }
+  .work { padding-block: 64px 54px; }
+  .sectionHeading { display: block; margin-bottom: 30px; }
+  .sectionHeading > p { margin-top: 21px; max-width: 42ch; font-size: 13px; }
+  .sectionHeading h2, .about h2 { margin-top: 15px; }
+  .projectGrid { grid-template-columns: 1fr; gap: 40px; }
+  .featured { display: block; padding: 15px; }
+  .featured .projectBody { padding: 25px 5px 8px; }
+  .project h3 { font-size: 2rem; max-width: 20ch; }
+  .featured h3 { font-size: 2.25rem; }
+  .projectDescription { font-size: 13px; }
+  .projectRole { font-size: 10px; }
+  .allWork { flex-direction: column; align-items: flex-start; gap: 7px; }
+  .allWork p { font-size: 11px; }
+  .approach { padding-block: 56px; }
+  .approach .sectionHeading { position: relative; }
+  .foldMark { display: none; }
+  .principles { grid-template-columns: 1fr; gap: 27px; margin-top: 35px; }
+  .principles article { position: relative; padding-inline-start: 42px; }
+  .principleNumber { position: absolute; inset-inline-start: 0; top: 24px; }
+  .principles h3 { margin-top: 0; font-size: 1.65rem; }
+  .principles p { max-width: 46ch; font-size: 13px; margin-top: 10px; }
+  .about { grid-template-columns: 1fr; gap: 36px; padding-block: 55px 65px; }
+  .aboutIllustration { min-height: 330px; max-width: 370px; width: 100%; margin-inline: auto; }
+  .aboutSheet { width: 240px; height: 285px; }
+  .aboutNote { width: 155px; height: 120px; }
+  .aboutNote > span { font-size: 18px; }
+  .aboutCopy > p:not(:first-child) { font-size: 13px; margin-top: 20px; }
+  :global([lang="he"]) .heroTitle { font-size: clamp(3rem, 10.3vw, 4.6rem); }
+}

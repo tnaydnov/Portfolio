@@ -4,7 +4,7 @@ import { LOCALES } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
 const ROUTES = ["", "/work", "/about", "/contact"];
-const LAST_CONTENT_UPDATE = new Date("2026-08-24T00:00:00.000Z");
+const LAST_CONTENT_UPDATE = new Date("2026-09-12T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entry = (path: string, priority: number) => ({

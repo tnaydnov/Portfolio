@@ -1,89 +1,61 @@
-# Tomer Naydnov — portfolio
+# Tomer Naydnov — Fold / Flow
 
-A bilingual, code-native portfolio for a technical product builder.
+A bilingual portfolio for a software engineer, technical product builder and programming instructor. Warm paper, cobalt, editorial typography and a code-built folding sculpture give the work a distinct identity while keeping navigation familiar.
 
-The creative rule is simple:
+## Design and routes
 
-> The artifact is real. The physics are not.
+- `/en` and `/he`: introduction, interactive Fold / Flow exhibit, selected work, approach and background.
+- `/[locale]/work`: four selected projects and a compact earlier-work index.
+- `/[locale]/work/[slug]`: project context, ownership, status, a concise snapshot, and optional narrative/technical detail. Trading System remains in earlier work and has a complete case page.
+- `/[locale]/about`: experience, education, teaching, approach and fit.
+- `/[locale]/contact`: email, email copying, CV and external profiles.
+- `/[locale]/system`: permanent redirect to About for older links.
 
-The homepage behaves like an interactive film, but the film is made from semantic HTML, source-derived interfaces, SVG/CSS artifacts and a small isolated realtime 3D layer. It does not depend on live-action video, narrative photography, stock footage or AI-generated hero imagery.
+English and Hebrew have separate font families and real RTL layouts. The header, footer, case studies, project illustrations, social previews, favicon and not-found pages share the same visual system. Essential content uses server-rendered HTML and ordinary links.
 
-## Information architecture
+## The exhibit
 
-The public site deliberately has four simple destinations:
+`src/components/fold/FoldScene.tsx` creates a connected three-panel sculpture from geometry. Materials, geometric surface marks, environmental lighting and shadows are produced in code. The site does not load generated artwork, stock imagery, HDR photographs or external 3D models for its visual design.
 
-- `/en` and `/he` — identity first, then the guided cinematic argument.
-- `/[locale]/work` — the fast index for all relevant work.
-- `/[locale]/about` — experience, education, teaching and fit.
-- `/[locale]/contact` — direct contact, CV and external profiles.
+The single unfold button is a native HTML control. The visible explanation stays outside the canvas. Rendering stops when the sculpture settles or leaves view; reduced-motion preferences select immediate state changes. A CSS-built paper silhouette covers loading, unavailable WebGL and context loss.
 
-`/[locale]/system` permanently redirects to About for compatibility with older links. The superseded animatic, validation gates and vertical-slice application were moved out of the repository into a recoverable archive.
+`FoldHome.tsx` remains a server component; only the contained exhibit is interactive. The renderer loads separately from the information layer. Project-cover artwork is original HTML/CSS and is labeled as illustration. The social-preview image is rendered from code using `next/og`.
 
-## Two-speed review
+## Content boundaries
 
-Every retained case study opens with a self-contained 60-second layer:
+Project content lives in `src/content/`. Ownership and lifecycle are explicit:
 
-1. What was broken.
-2. The product move.
-3. What Tomer owned.
-4. What can be inspected.
+- Arc is co-developed with another engineer; its public portal and inspected development work are distinguished.
+- Applytide is a solo-created, archived job-search platform with public source.
+- Eventa is a solo-created, discontinued event-connection product with public source.
+- License Plate Recognition is a five-person capstone; Tomer's contribution covers motion detection, data, training and fine-tuning.
+- Trading System is a university team contribution, retained with the earlier work.
 
-The full narrative, decisions, architecture, constraints and rebuild notes sit behind explicit disclosure controls. Recruiters can understand the work without reading a technical report; product and engineering reviewers can continue into the evidence.
+The private, git-ignored `TRUTH_SOURCE.md` is the factual ledger. `npm run truth:check` runs before every production build. Arc illustrations use fictional material; private learner records, credentials and operational data do not belong in this repository.
 
-Selected work:
+`public/Tomer Naydnov.pdf` is the owner's supplied CV and is served unchanged. Canonical metadata, language alternates and the sitemap use `https://tomer-naydnov.com`.
 
-- Arc — a learning-operations platform with a reachable public portal, accurately presented as co-developed with another engineer.
-- Applytide — a solo-created, archived job-search operations platform with inspectable public source.
-- Eventa — a solo-created, formerly live and now discontinued event-connection product with public source.
-- License Plate Recognition — a five-person computer-vision capstone focused here on Tomer's motion-detection, data, model-training and fine-tuning work.
+## Development
 
-Earlier engineering work:
+The application uses Next.js 15, React 19, TypeScript, Tailwind CSS 4, Three.js and React Three Fiber. Next/font serves Fraunces and Manrope for English, Heebo and Rubik for Hebrew, and JetBrains Mono for code. Analytics are enabled when running on Vercel.
 
-- Trading System — a team-built Java marketplace system.
-- Earlier coursework — retained as a compact source ledger rather than inflated into case studies.
-
-## Visual system
-
-- One dark documentary grade across the whole site.
-- Orange signal color for questions, decisions and active states.
-- Teal/gray system color for structure and secondary information.
-- Code-native project artifacts instead of screenshots or generic cards.
-- Native scrolling on every route.
-- English and Hebrew with real RTL layouts.
-- Minimum 44–48px interactive targets and a keyboard-safe mobile menu.
-- Authored reduced-motion states; semantic content never depends on WebGL.
-- Balanced rendering by default, with Essential and Premium quality choices.
-
-## Truth boundary
-
-A private local `TRUTH_SOURCE.md` is the internal factual ledger. It is deliberately git-ignored because it contains local audit paths and private-repository evidence. It separates repository-verifiable facts, CV/owner-provided statements, staged interface content and claims that must not be published. `npm run truth:check` runs before every production build.
-
-Arc interfaces must be reconstructed with fictional data. Nothing from the private repository's `storage/` tree, real learner work, real instructor records, credentials or private operational material belongs in this portfolio.
-
-The CV at `public/Tomer Naydnov.pdf` is an owner-managed PDF supplied by Tomer and served unchanged by the portfolio. Do not regenerate or rewrite it as part of portfolio builds. Its wording is owner-provided evidence rather than independent verification.
-
-## Stack
-
-- Next.js 15 and React 19
-- TypeScript and Tailwind CSS 4
-- Three.js and React Three Fiber, isolated to the cinematic homepage
-- Native document scroll
-- Vercel Analytics and Speed Insights
-
-## Local development
-
-```bash
-npm install
+```sh
+npm ci
 npm run dev
 ```
 
-Validation commands:
+## Validation
 
-```bash
+```sh
 npm run truth:check
 npm run lint
 npx tsc --noEmit
 npm run build
+npx playwright install chromium
+npm run test:e2e
+npm audit
 ```
 
-The production build is the code gate. Representative physical-device testing and unfamiliar-viewer comprehension testing are still required before making a field-validation claim.
+Playwright covers public routes in both languages and desktop/mobile widths, mobile-menu keyboard behavior, locale preservation, real WebGL readiness and context-loss fallback, folding, reduced motion, reading without JavaScript, email copying, case disclosures, CV delivery, social images and not-found behavior.
+
+Tests normally start or reuse a local development server. Set `PLAYWRIGHT_SERVER_COMMAND` to `npm run start -- --hostname 127.0.0.1` to test an existing production build. Screenshots and traces from failures are stored in ignored test-output directories. Browser emulation validates layout and behavior; it is not a physical-device performance benchmark.
