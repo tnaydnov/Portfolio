@@ -2,7 +2,6 @@ import { expect, test, type Page } from "@playwright/test";
 
 const cases = ["arc", "applytide", "eventa", "license-plate-recognition", "trading-system"];
 const publicPaths = ["/", "/work", "/about", "/contact", ...cases.map((slug) => `/work/${slug}`)];
-const labels = { engineering: "Engineering: Pull it apart", product: "Product: Run the loop", teaching: "Teaching: Open an idea" };
 
 async function expectEnglishPage(page: Page, path: string) {
   await expect(page.locator("main h1")).toHaveCount(1);
@@ -28,7 +27,7 @@ for (const width of [320, 390, 768, 1366, 2560]) {
       expect(response?.status(), path).toBe(200);
       await page.evaluate(() => document.fonts.ready);
       await expectEnglishPage(page, path);
-      if (path === "/") await expect(page.locator("main h1")).toHaveText(/^\s*Tomer\s*Naydnov\.?\s*$/);
+      if (path === "/") await expect(page.locator("main h1")).toHaveAccessibleName(/^\s*Tomer\s*Naydnov\.?\s*$/i);
     }
     expect(errors).toEqual([]);
   });
@@ -55,115 +54,70 @@ test("mobile menu supports keyboard, navigation and scroll recovery", async ({ p
   expect(await page.evaluate(() => document.body.style.overflow)).not.toBe("hidden");
 });
 
-test("playground actions stay independent and reset their object states", async ({ page }) => {
-  await page.goto("/");
-  const playground = page.getByTestId("playground");
-  await expect(page.locator('section[data-ready="true"]')).toBeVisible();
-  const engineering = page.getByRole("button", { name: labels.engineering, exact: true });
-  const teaching = page.getByRole("button", { name: labels.teaching, exact: true });
-  await engineering.focus();
+test("identity and direct links are available without waiting for the artwork", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  const hero = page.getByTestId("identity-hero");
+  const heading = hero.getByRole("heading", { level: 1, name: /^Tomer\s*Naydnov$/i });
+  const work = hero.getByRole("link", { name: "Explore my work", exact: true });
+  const about = hero.getByRole("link", { name: "A little about me", exact: true });
+  expect(await heading.isVisible()).toBeTruthy();
+  expect(await work.isVisible()).toBeTruthy();
+  expect(await about.isVisible()).toBeTruthy();
+  await expect(work).toHaveAttribute("href", "/work");
+  await expect(about).toHaveAttribute("href", "/about");
+  await expect(hero.getByRole("button")).toHaveCount(0);
+  await work.focus();
   await page.keyboard.press("Enter");
-  await expect(engineering).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByRole("heading", { name: "Get underneath the surface.", exact: true })).toBeVisible();
-  await teaching.click();
-  await expect(teaching).toHaveAttribute("aria-pressed", "true");
-  await expect(engineering).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByRole("heading", { name: "Make the complicated click.", exact: true })).toBeVisible();
-  await engineering.click();
-  await expect(engineering).toHaveAttribute("aria-pressed", "false");
-  await expect(teaching).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("button", { name: labels.product, exact: true }).click();
-  await expect(playground).toHaveAttribute("data-loop", "1");
-  await expect(page.getByRole("heading", { name: "Build. Learn. Make it better.", exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Close object note", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Build. Learn. Make it better.", exact: true })).toHaveCount(0);
-  await expect(teaching).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("button", { name: "Reset playground", exact: true }).click();
-  await expect(engineering).toHaveAttribute("aria-pressed", "false");
-  await expect(teaching).toHaveAttribute("aria-pressed", "false");
-  await expect(playground).toHaveAttribute("data-loop", "0");
-  await expect(playground).toHaveAttribute("data-turn", /^0(?:\.0+)?$/);
-});
-
-test("the playground rotates by keyboard and pointer without trapping navigation", async ({ page }) => {
-  await page.goto("/");
-  const playground = page.getByTestId("playground");
-  await expect(page.locator('section[data-ready="true"]')).toBeVisible();
-  await playground.focus();
-  const initial = Number(await playground.getAttribute("data-turn"));
-  await page.keyboard.press("ArrowRight");
-  await expect.poll(async () => Number(await playground.getAttribute("data-turn"))).not.toBe(initial);
-  await page.keyboard.press("ArrowLeft");
-  await expect.poll(async () => Number(await playground.getAttribute("data-turn"))).toBeCloseTo(initial, 4);
-  const bounds = await playground.boundingBox();
-  expect(bounds).toBeTruthy();
-  const x = bounds!.x + bounds!.width * .5, y = bounds!.y + bounds!.height * .5;
-  await page.mouse.move(x, y);
-  await page.mouse.down();
-  await page.mouse.move(x + 95, y, { steps: 8 });
-  await page.mouse.up();
-  await expect.poll(async () => Number(await playground.getAttribute("data-turn"))).not.toBe(initial);
-  await page.getByRole("button", { name: "Reset playground", exact: true }).click();
-  await expect(playground).toHaveAttribute("data-turn", /^0(?:\.0+)?$/);
-  await page.locator('header a[href="/work"]').click();
   await expect(page).toHaveURL(/\/work$/);
 });
 
-test("touching the playground permits ordinary vertical page scrolling", async ({ browser, baseURL }) => {
+test("touching the decorative hero permits ordinary vertical page scrolling", async ({ browser, baseURL }) => {
   const context = await browser.newContext({ baseURL, viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const page = await context.newPage();
   try {
     await page.goto("/");
-    const playground = page.getByTestId("playground");
-    await expect(playground).toBeVisible();
-    const bounds = await playground.boundingBox();
+    const hero = page.getByTestId("identity-hero");
+    await expect(hero).toBeVisible();
+    const bounds = await hero.boundingBox();
     expect(bounds).toBeTruthy();
     const x = Math.round(bounds!.x + bounds!.width * .5);
     const y = Math.round(Math.min(650, bounds!.y + bounds!.height * .55));
     const beforeScroll = await page.evaluate(() => scrollY);
-    const beforeTurn = await playground.getAttribute("data-turn");
     const session = await context.newCDPSession(page);
     await session.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x, y }] });
     for (let step = 1; step <= 6; step++) await session.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [{ x, y: y - step * 30 }] });
     await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
     await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(beforeScroll + 30);
-    await expect(playground).toHaveAttribute("data-turn", beforeTurn!);
   } finally { await context.close(); }
 });
 
-test("reduced motion preserves object controls and direct work navigation", async ({ page }) => {
+test("reduced motion shows the static identity and keeps direct navigation", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await expect(page.locator('section[data-motion="off"]')).toBeVisible();
-  const engineering = page.getByRole("button", { name: labels.engineering, exact: true });
-  await engineering.click();
-  await expect(engineering).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("button", { name: labels.product, exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Build. Learn. Make it better.", exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Reset playground", exact: true }).click();
-  await expect(engineering).toHaveAttribute("aria-pressed", "false");
-  await page.locator('header a[href="/work"]').click();
+  const hero = page.getByTestId("identity-hero");
+  await expect(hero).toHaveAttribute("data-ready", "true");
+  await expect(hero.getByRole("heading", { level: 1 })).toHaveAccessibleName(/^Tomer\s*Naydnov$/i);
+  await expect(hero.getByRole("button")).toHaveCount(0);
+  expect(await hero.evaluate((element) => element.getAnimations({ subtree: true }).filter((animation) => animation.playState === "running").length)).toBe(0);
+  await hero.getByRole("link", { name: "Explore my work", exact: true }).click();
   await expect(page).toHaveURL(/\/work$/);
 });
 
-test("a lost WebGL context leaves the fallback and controls available", async ({ page }) => {
+test("a lost WebGL context preserves the name fallback and direct links", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
-  const playground = page.getByTestId("playground");
-  await expect(page.locator('section[data-ready="true"]')).toBeVisible();
-  await playground.locator("canvas").evaluate((canvas: HTMLCanvasElement) => canvas.getContext("webgl2")?.getExtension("WEBGL_lose_context")?.loseContext());
-  await expect(playground.locator('[data-hidden="false"]')).toBeVisible();
-  const teaching = page.getByRole("button", { name: labels.teaching, exact: true });
-  await teaching.click();
-  await expect(teaching).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("button", { name: "Reset playground", exact: true }).click();
-  await page.locator('header a[href="/work"]').click();
+  const hero = page.getByTestId("identity-hero");
+  await expect(hero).toHaveAttribute("data-ready", "true");
+  await hero.locator("canvas").evaluate((canvas: HTMLCanvasElement) => canvas.getContext("webgl2")?.getExtension("WEBGL_lose_context")?.loseContext());
+  await expect(hero.locator('[data-hidden="false"]')).toBeVisible();
+  await expect(hero.getByRole("heading", { level: 1 })).toHaveAccessibleName(/^Tomer\s*Naydnov$/i);
+  await hero.getByRole("link", { name: "Explore my work", exact: true }).click();
   await expect(page).toHaveURL(/\/work$/);
   expect(errors).toEqual([]);
 });
 
-test("WebGL startup failure preserves the page and object descriptions", async ({ page }) => {
+test("WebGL startup failure preserves the identity and useful navigation", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.addInitScript(() => {
@@ -175,16 +129,16 @@ test("WebGL startup failure preserves the page and object descriptions", async (
   });
   await page.goto("/");
   await expectEnglishPage(page, "/");
-  await expect(page.getByTestId("playground").locator('[data-hidden="false"]')).toBeVisible();
-  await expect(page.locator("canvas")).toHaveCount(0);
-  await page.getByRole("button", { name: labels.engineering, exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Get underneath the surface.", exact: true })).toBeVisible();
-  await page.locator('header a[href="/about"]').click();
+  const hero = page.getByTestId("identity-hero");
+  await expect(hero.locator('[data-hidden="false"]')).toBeVisible();
+  await expect(hero.locator("canvas")).toHaveCount(0);
+  await expect(hero.getByRole("heading", { level: 1 })).toHaveAccessibleName(/^Tomer\s*Naydnov$/i);
+  await hero.getByRole("link", { name: "A little about me", exact: true }).click();
   await expect(page).toHaveURL(/\/about$/);
   expect(errors).toEqual([]);
 });
 
-test("the renderer settles after toggles, a product loop and reset", async ({ page }) => {
+test("the static renderer idles, redraws for a new viewport, then idles again", async ({ page }) => {
   await page.addInitScript(() => {
     let draws = 0;
     Object.defineProperty(window, "__portfolioDrawCount", { get: () => draws });
@@ -198,22 +152,20 @@ test("the renderer settles after toggles, a product loop and reset", async ({ pa
     }
   });
   await page.goto("/");
-  await expect(page.locator('section[data-ready="true"]')).toBeVisible();
+  const hero = page.getByTestId("identity-hero");
+  await expect(hero).toHaveAttribute("data-ready", "true");
+  expect(await hero.locator("canvas").evaluate((canvas) => Boolean(canvas.closest('[aria-hidden="true"]')))).toBeTruthy();
+  await expect(hero.locator('canvas[tabindex="0"]')).toHaveCount(0);
   const count = () => page.evaluate(() => Reflect.get(window, "__portfolioDrawCount") as number);
   const expectIdle = async () => {
     await expect.poll(async () => { const before = await count(); await page.waitForTimeout(350); return (await count()) - before; }, { timeout: 15_000, intervals: [350] }).toBe(0);
   };
   await expectIdle();
   const before = await count();
-  await page.getByRole("button", { name: labels.engineering, exact: true }).click();
+  await page.setViewportSize({ width: 390, height: 844 });
   await expect.poll(count).toBeGreaterThan(before);
   await expectIdle();
-  await page.getByRole("button", { name: labels.product, exact: true }).click();
-  await expect(page.getByTestId("playground")).toHaveAttribute("data-loop", "1");
-  await expectIdle();
-  await page.getByRole("button", { name: "Reset playground", exact: true }).click();
-  await expect(page.getByTestId("playground")).toHaveAttribute("data-loop", "0");
-  await expectIdle();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBeTruthy();
 });
 
 test("email copying confirms the action and keeps the direct email link", async ({ context, page }) => {
@@ -230,7 +182,7 @@ test("identity and project links work without JavaScript", async ({ browser, bas
   const page = await context.newPage();
   try {
     await page.goto("/");
-    await expect(page.locator("main h1")).toHaveText(/^\s*Tomer\s*Naydnov\.?\s*$/);
+    await expect(page.locator("main h1")).toHaveAccessibleName(/^\s*Tomer\s*Naydnov\.?\s*$/i);
     await expect(page.locator('header a[href="/work"]')).toBeVisible();
     await page.locator('header a[href="/work"]').click();
     await page.locator('main a[href="/work/arc"]').first().click();

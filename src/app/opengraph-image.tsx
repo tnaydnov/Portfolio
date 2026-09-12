@@ -1,40 +1,106 @@
 import { ImageResponse } from "next/og";
+import { wordmarkLines } from "@/components/identity/wordmark";
 import { site } from "@/lib/site";
-export const alt = "Tomer Naydnov — Software engineer & product builder";
+
+export const alt = "Tomer Naydnov - Software engineer, product builder and programming instructor";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+const lineWidth = 1080;
+const baselines = [240, 435];
+
 export default function OpengraphImage() {
-    return new ImageResponse(<div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "48px 60px", background: "#0b0e11", color: "#eef4ef", fontFamily: "sans-serif" }}>
-      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", fontSize: 23 }}>
-        <span>{site.name}</span><span style={{ fontSize: 17, color: "#a8b3b5" }}>tomer-naydnov.com</span>
+  return new ImageResponse(
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "44px 60px 36px",
+        background: "#090e20",
+        backgroundImage:
+          "radial-gradient(ellipse at 50% 36%, #223b79 0%, #101c40 44%, #090e20 76%)",
+        color: "#e7edfa",
+        fontFamily: "sans-serif",
+      }}
+    >
+      <svg width="1080" height="448" viewBox="0 0 1080 448" fill="none">
+        <defs>
+          {wordmarkLines.flatMap((line) =>
+            line.letters.map((letter, index) => (
+              <linearGradient
+                key={`${line.word}-${index}`}
+                id={`silver-${line.word}-${index}`}
+                gradientUnits="userSpaceOnUse"
+                x1={-letter.x}
+                y1="760"
+                x2={line.width - letter.x}
+                y2="-160"
+              >
+                <stop offset="0" stopColor="#f6f8ff" />
+                <stop offset="0.27" stopColor="#b0bbcf" />
+                <stop offset="0.45" stopColor="#f4f7fe" />
+                <stop offset="0.7" stopColor="#bdcce3" />
+                <stop offset="1" stopColor="#819ac3" />
+              </linearGradient>
+            )),
+          )}
+        </defs>
+        {wordmarkLines.map((line, lineIndex) => {
+          const scale = lineWidth / line.width;
+          const transform = `translate(0 ${baselines[lineIndex]}) scale(${scale} ${-scale})`;
+
+          return (
+            <g key={line.word}>
+              <g transform="translate(3 6)">
+                <g transform={transform} fill="#1a2b53" stroke="#29416e" strokeWidth="9" strokeLinejoin="round">
+                  {line.letters.map((letter, index) => (
+                    <path key={index} d={letter.path} transform={`translate(${letter.x} 0)`} />
+                  ))}
+                </g>
+              </g>
+              <g transform={transform} strokeLinejoin="round">
+                {line.letters.map((letter, index) => (
+                  <g key={index} transform={`translate(${letter.x} 0)`}>
+                    <path d={letter.path} fill="#a5b9da" stroke="#607ca8" strokeWidth="11" />
+                    <path
+                      d={letter.path}
+                      fill={`url(#silver-${line.word}-${index})`}
+                      stroke="#dce6f7"
+                      strokeWidth="2.2"
+                    />
+                  </g>
+                ))}
+              </g>
+            </g>
+          );
+        })}
+      </svg>
+      <div
+        style={{
+          display: "flex",
+          marginTop: 28,
+          fontSize: 23,
+          letterSpacing: -0.35,
+          color: "#dce6fa",
+        }}
+      >
+        {"Software engineer \u00b7 Product builder \u00b7 Programming instructor"}
       </div>
-      <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 0, fontSize: 82, letterSpacing: -4, lineHeight: 1.05 }}>
-          <span>{"Software."}</span>
-          <span style={{ color: "#a7ecd4" }}>{"Product."}</span>
-          <span>{"People."}</span>
-        </div>
-        <svg width="470" height="360" viewBox="0 0 470 360" fill="none">
-          <path d="m15 255 220-127 220 127-220 127ZM15 305l220-127 220 127M70 223l220 127M125 191l220 127M180 159l220 127M290 159 70 286M345 191 125 318M400 223 180 350" stroke="#a7ecd4" strokeOpacity=".12"/>
-          <path d="m51 253 54-31 54 31-54 31Z" fill="#21322f" stroke="#a7ecd4" strokeOpacity=".5"/>
-          <path d="m51 253 54 31v12l-54-31Zm54 31 54-31v12l-54 31Z" fill="#12231e" stroke="#a7ecd4" strokeOpacity=".25"/>
-          <path d="m84 234 21-12 21 12-21 12Z" fill="#a7ecd4"/>
-          <path d="m84 234 21 12v-54l-21-12Zm21 12 21-12v-54l-21 12Z" fill="#183d30" stroke="#a7ecd4" strokeOpacity=".5"/>
-          <path d="m84 180 21-12 21 12-21 12Z" fill="#a7ecd4"/>
-          <path d="m177 187 58-34 58 34-58 34Z" fill="#1d2a30" stroke="#9cbfdf" strokeOpacity=".5"/>
-          <path d="m177 187 58 34v12l-58-34Zm58 34 58-34v12l-58 34Z" fill="#142128" stroke="#9cbfdf" strokeOpacity=".3"/>
-          <path d="m202 89 33-19 33 19-33 19Z" fill="#b9d4e7"/>
-          <path d="m202 89 33 19v81l-33-19Zm33 19 33-19v81l-33 19Z" fill="#264353" stroke="#9cbfdf" strokeOpacity=".6"/>
-          <path d="m317 259 51-29 51 29-51 29Z" fill="#342e21" stroke="#e2c88e" strokeOpacity=".5"/>
-          <path d="m317 259 51 29v12l-51-29Zm51 29 51-29v12l-51 29Z" fill="#252115" stroke="#e2c88e" strokeOpacity=".3"/>
-          <path d="m342 189 26-15 26 15-26 15Z" fill="#e2c88e"/>
-          <path d="m342 189 26 15v49l-26-15Zm26 15 26-15v49l-26 15Z" fill="#564727" stroke="#e2c88e" strokeOpacity=".6"/>
-          <path d="m160 284 75 44 76-44M235 328v-78" stroke="#a7ecd4" strokeOpacity=".4" strokeDasharray="4 6"/>
-          <path d="M20 50V20h30m370 0h30v30" stroke="#a7ecd4" strokeOpacity=".4"/>
-        </svg>
+      <div
+        style={{
+          display: "flex",
+          marginTop: 16,
+          fontSize: 18,
+          letterSpacing: 0.4,
+          color: "#9badcf",
+        }}
+      >
+        {new URL(site.url).hostname}
       </div>
-      <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", borderTop: "1px solid #2a3835", paddingTop: 20, fontSize: 21, color: "#a8b3b5" }}>
-        {"Software engineer · Product builder · Programming instructor"}
-      </div>
-    </div>, size);
+    </div>,
+    size,
+  );
 }
