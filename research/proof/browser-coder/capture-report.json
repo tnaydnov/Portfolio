@@ -1,0 +1,58 @@
+{
+  "sourceCommit": "7d3cae91ff9cc73001d7fcfa0aa3b315cebb2aeb",
+  "sample": "# A small Python data transformation\nnumbers = [2, 4, 6]\nsquared = [value ** 2 for value in numbers]\n\nprint(\"Input:\", numbers)\nprint(\"Squared:\", squared)\nprint(\"Sum:\", sum(squared))",
+  "verifiedOutput": [
+    "Input: [2, 4, 6]",
+    "Squared: [4, 16, 36]",
+    "Sum: 56",
+    "[exit 0 ✓]",
+    "Run finished successfully."
+  ],
+  "pageErrors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "endpoints": [
+    {
+      "url": "http://127.0.0.1:8000/api/starter/csharp/csharp12",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/starter/java/java17",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/starter/javascript/es2022",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/starter/python/python3",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/starter/typescript/ts5-strict",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/starter/asset/png",
+      "status": 404
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/starter/text/text",
+      "status": 404
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/starter/php/php8",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/check",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/run/interactive",
+      "status": 200
+    }
+  ]
+}

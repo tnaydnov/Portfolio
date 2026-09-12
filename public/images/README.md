@@ -22,6 +22,30 @@ Change ONLY the man's two eyes to gently CLOSED eyelids, as one single relaxed n
 Do not tilt or move his head. Do not change brows, nose, mouth, hand, shoulders or torso. Eyes should be fully closed with relaxed eyelid creases, not squeezed shut or laughing.
 Output the same 1024x1536 portrait image, on the exact same solid white background. This will be used as a blink overlay aligned on top of the original, so perfect feature alignment is critical. No other changes.
 
+## Under-eye refinement (12 September 2026)
+
+The current artwork softens the under-eye shadows in both the open-eye portrait and the blink asset. The selected edits were made with the built-in image generation tool, then converted with Sharp; no programmatic facial retouching was applied. The composition remains 1024x1536 so the existing hand and eye masks continue to align. The portrait remains 2.5D.
+
+Saved assets:
+
+- `public/images/tomer-welcome.webp`: refined open-eye portrait, WebP quality 88.
+- `public/images/tomer-blink.webp`: matching closed-eye refinement, WebP quality 88.
+- `public/images/tomer-social.png`: 640x960 PNG exported from the refined portrait for the social card renderer.
+
+The homepage image URLs include `?v=2` so the new artwork does not reuse a previously optimized image cache entry.
+
+Selected portrait edit prompt:
+
+> Retouch dark circles. IMAGE 1 is the full portrait to edit. IMAGE 2 is a magnified detail of the exact problem area, for guidance only. In image 1 REMOVE the brown under-eye bags shown in image 2. The skin beneath both eyes should be much brighter and smoother, with the same healthy peach skin tone as the surrounding cheeks. The dark bags must be substantially reduced, no deep dark crescents below the lower eyelids. A professional gentle under-eye concealer retouch, without altering his facial identity. Keep the eyelids and actual eyes open. Preserve everything outside the eye-bag region. Return the FULL portrait with identical framing and pose to IMAGE 1, 1024 x 1536. The output must show a visible meaningful correction of the dark circles, not merely an identical reconstruction of the source.
+
+Final refinement of that result:
+
+> Please edit the last image: give the man brighter, fresh, well-rested eyes. Remove the dark circles and the heavy bags directly beneath both eyes. Make this area evenly toned and smooth like the upper cheeks. The under-eye circles should be visibly gone. Keep his identity and the rest of the full portrait unchanged.
+
+Blink edit specification:
+
+> Use case: precise-object-edit. Edit the existing 1024x1536 closed-eye portrait. Gently lighten and soften the shadows directly under both eyes by approximately 25-35%, blending naturally with the surrounding warm skin. Retain natural skin texture and eyelid anatomy. Keep both eyes fully closed. Preserve identity, expression, brows, nose, smile, beard, hair, hand, clothing, necklace, pose, scale, feature positions and the white background. Do not reframe or shift the face; this asset must align with the original animation.
+
 ## Behavior
 
 - All introduction, navigation, and work content is server-rendered.
