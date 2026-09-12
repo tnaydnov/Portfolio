@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.300
+BROWSER CODER / PYTHON TURTLE, WITH MEMORY
+
+00:00:02.300 --> 00:00:06.133
+Ninety loop iterations produce real Turtle commands and the finished geometry.
+
+00:00:06.133 --> 00:00:11.433
+Replay the recorded drawing. Source highlights follow the selected command.
+
+00:00:11.433 --> 00:00:17.200
+Scrub back and inspect an earlier drawing state, without running Python again.
+
+00:00:17.200 --> 00:00:19.900
+The same recorded output can be explored at the learner’s own pace.
+
+00:00:19.900 --> 00:00:22.100
+Real Python output / Original replay controls / Source-linked drawing commands

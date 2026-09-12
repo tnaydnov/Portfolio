@@ -21,7 +21,7 @@ The previous `/en` and `/he` URL prefixes permanently redirect to the equivalent
 
 The greeting wave plays once after the portrait loads and enters view. Visitors can replay it or pause animation. Reduced-motion preferences show a composed still portrait; the greeting button still returns a text hello. Animation pauses offscreen and in hidden tabs. Timers, observers and animations are cleaned up on unmount. There is no audio or camera/microphone access.
 
-The introduction and all navigation/content are server-rendered and remain useful without JavaScript or a loaded portrait. Homepage artwork is served as optimized local WebP; the social preview uses a pre-sized PNG. [Asset provenance and generation prompts](public/images/README.md) are included. Selected project covers use real screenshots; earlier-project illustrations remain code-native. All routes and shared chrome use the same cool mist, deep ink and teal tokens, with contained dark product graphics.
+The introduction and all navigation/content are server-rendered and remain useful without JavaScript or a loaded portrait. Homepage artwork is served as optimized local WebP; the social preview uses a pre-sized PNG. [Asset provenance and generation prompts](public/images/README.md) are included. Selected project covers use real screenshots; earlier-project illustrations remain code-native. Shared chrome uses cool mist, deep ink and teal. Product studies introduce their own contained palettes: Arc's aurora, Browser Coder's blue workbench, Applytide's paper workspace and Eventa's warm editorial treatment.
 
 ## Content and demonstrations
 
@@ -34,11 +34,15 @@ Content lives in `src/content/` as plain English strings and arrays. Ownership a
 - License Plate Recognition is a five-person capstone; Tomer's part covers motion detection, data, training and fine-tuning.
 - Trading System is an earlier university team contribution with a complete case page.
 
-The four selected products use `ProductTourPage.tsx`: actual screenshots and edited recordings captured from their original applications running locally with fictional data. `src/content/tours/` separates the tour narrative from capture metadata. Each product's public media directory includes a source revision and capture manifest. Work cards use the actual app imagery.
+The four selected products use `ProjectWorldPage.tsx`: actual screenshots and edited recordings captured from their original applications running locally with fictional data. `src/content/tours/*-world.ts` defines each product's visual stories, audience, technical decisions and evidence boundaries; `media.json` records source assets and crop coordinates. Every chapter is directly reachable through sticky navigation. Each product's public media directory includes a pinned source revision, capture manifest, detailed review and downloadable 3200 × 2000 presentation board. Work cards use the actual app imagery.
 
-`ProductMedia.tsx` provides native video controls, chapter seeking, downloadable recordings and a full-resolution screenshot dialog with keyboard navigation and zoom. Videos are requested only after activation; playing another film pauses the previous one. Architecture, technical decisions and development history use progressively disclosed sections. The previous illustrative workflow simulations have been removed.
+`ProductMedia.tsx` provides native video controls, chapter seeking, downloadable recordings and a full-resolution screenshot dialog with keyboard navigation and zoom. Videos are requested only after activation; playing another film pauses the previous one. Choosing a chapter brings its video into view and respects reduced-motion preferences. Editorial image crops use original pixels, while the viewer retains the full screenshot. Architecture, trade-offs and limitations use progressively disclosed sections.
+
+The seven earlier projects use `EngineeringStudyPage.tsx`, `EngineeringVisual.tsx` and the source-backed records in `src/content/engineering/`. Their diagrams explain implementation rather than imitating application screenshots. Coalition Race additionally visualizes actual committed fixture totals. No fresh runtime or benchmark is claimed for these source studies. Individual ownership and coursework context remain explicit.
 
 [Capture methods, verified workflows and local restoration notes](research/product-tours-capture.md) document the evidence behind the tours. Private source archives and capture credentials remain outside publication.
+
+The [deeper evidence review](docs/project-evidence-review.md) covers all eleven repositories, the selected capabilities, 46 new screenshots, 12 new edited films and the boundaries of each audit. It distinguishes complete file inventories from focused semantic review, and source behavior from exercised application behavior. The new captures supplement selected earlier evidence; not every historical recording is featured in the current tour.
 
 The private, ignored `TRUTH_SOURCE.md` is the factual ledger. The September 2026 refresh uses the supplied Arc and Browser Coder product demos, authenticated repository audits and the owner’s current-role correction. LinkedIn blocked public access; its current text was not verified. `npm run truth:check` runs before production builds and rejects known blocked claims and Hebrew script in publication sources. Historical language-support facts about the original products remain in their English technical descriptions.
 
@@ -60,11 +64,11 @@ npm run truth:check
 npm run lint
 npx tsc --noEmit
 npm run build
-npx playwright install chromium
+npx playwright install chromium webkit
 npm run test:e2e
 npm audit
 ```
 
-Playwright covers all public pages at 320, 390, 768, 1366 and 2560px; identity and immediate navigation; portrait loading, greeting replay and pause/resume; reduced motion; image failure; site-wide theme consistency and mouse-depth pause behavior; native touch scrolling; no-JavaScript navigation; media loading, chapters and screenshot inspection; menu focus; disclosures; clipboard; legacy redirects; metadata, CV and social images.
+Playwright covers Chromium and WebKit, all eleven project routes and the main pages at 320, 390, 768, 1366 and 2560px; identity and immediate navigation; portrait loading, greeting replay and pause/resume; reduced motion; image failure; shared navigation and mouse-depth pause behavior; native touch scrolling; no-JavaScript navigation; source-asset integrity, chapter visibility, captions and screenshot inspection; menu focus; disclosures; clipboard; legacy redirects; metadata, CV and social images. Browser-specific touch and clipboard checks run in Chromium.
 
 Tests start or reuse a server on port 3000. Set `PLAYWRIGHT_SERVER_COMMAND` to `npm run start -- --hostname 127.0.0.1` to test a production build. Temporary screenshots and traces stay in ignored QA/test-output directories. Browser emulation validates layout and behavior; it is not a physical-device performance benchmark.

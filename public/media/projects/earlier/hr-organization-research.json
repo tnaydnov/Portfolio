@@ -1,0 +1,427 @@
+{
+  "title": "HR & Delivery Coordination",
+  "revision": "1c7044d3a563fd705c87bf775d1b4ee215f4d100",
+  "repo": "https://github.com/tnaydnov/HR_Organization",
+  "oneLiner": "Connect staff availability and driver qualifications to store delivery planning.",
+  "summary": "An academic Java desktop system joins employee administration and weekly shift scheduling with deliveries, truck selection and driver assignment. Its most useful engineering story is the boundary between two business areas: HR provides availability, while delivery planning checks driver qualifications and reports assignments back.",
+  "stack": [
+    "Java 17",
+    "Swing",
+    "CLI",
+    "SQLite / JDBC",
+    "Maven configuration",
+    "JUnit 5",
+    "Mockito"
+  ],
+  "status": "Archived academic implementation; source reviewed, not run in this audit.",
+  "ownership": {
+    "verified": "Repository owned by tnaydnov; one import commit in available history. Maven artifact is ADSS_Group_O and the repository includes group requirements/use-case documents.",
+    "boundary": "Treat as a team/coursework project. Available Git history cannot establish which subsystem or lines Tomer individually authored; avoid sole-author claims."
+  },
+  "capabilityGroups": [
+    {
+      "title": "Schedule around actual constraints",
+      "summary": "Employees submit availability; HR assigns qualified staff to stores and roles, confirms shifts and manages weekly schedules.",
+      "details": [
+        "Role/store certification checks before shift assignment.",
+        "No two shifts on a day and a six-shift weekly limit in the controller.",
+        "Shift confirmation requires a shift manager.",
+        "Employee removal is refused when future shifts remain."
+      ],
+      "citations": [
+        {
+          "file": "dev/src/HR/BusinessLayer/Facade.java",
+          "line": 65,
+          "endLine": 77,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/BusinessLayer/Facade.java#L65-L77"
+        },
+        {
+          "file": "dev/src/HR/BusinessLayer/Facade.java",
+          "line": 131,
+          "endLine": 174,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/BusinessLayer/Facade.java#L131-L174"
+        },
+        {
+          "file": "dev/src/HR/BusinessLayer/ShiftController.java",
+          "line": 207,
+          "endLine": 222,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/BusinessLayer/ShiftController.java#L207-L222"
+        },
+        {
+          "file": "dev/src/HR/BusinessLayer/Shift.java",
+          "line": 86,
+          "endLine": 99,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/BusinessLayer/Shift.java#L86-L99"
+        }
+      ]
+    },
+    {
+      "title": "Find a driver and truck that fit",
+      "summary": "Delivery planning selects available regular or refrigerated trucks, checks license weight/type permissions and asks HR for drivers available over the trip interval.",
+      "details": [
+        "Truck selection reserves an available matching vehicle.",
+        "Driver selection combines HR time availability with local busy state and license compatibility.",
+        "Successful driver assignment is reported back through HRIntegrator."
+      ],
+      "citations": [
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/TruckController.java",
+          "line": 30,
+          "endLine": 54,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/TruckController.java#L30-L54"
+        },
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/DriverController.java",
+          "line": 70,
+          "endLine": 104,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DriverController.java#L70-L104"
+        },
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/License.java",
+          "line": 38,
+          "endLine": 41,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/License.java#L38-L41"
+        }
+      ]
+    },
+    {
+      "title": "Handle changes during a delivery",
+      "summary": "Delivery stops are grouped by origin and delivery zone. A journey tracks visited stops and invokes replanning when a measured load exceeds the truck limit.",
+      "details": [
+        "Replanning can try a replacement truck/driver, remove a stop, cancel the form or reweigh.",
+        "Cancelled undelivered stops return to the pending set.",
+        "Origin/zone grouping is implemented; route-distance optimization is not established."
+      ],
+      "citations": [
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/DeliveryManagerImpl.java",
+          "line": 63,
+          "endLine": 120,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryManagerImpl.java#L63-L120"
+        },
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/DeliveryManagerImpl.java",
+          "line": 122,
+          "endLine": 166,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryManagerImpl.java#L122-L166"
+        },
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/DeliveryForm.java",
+          "line": 101,
+          "endLine": 124,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryForm.java#L101-L124"
+        },
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/DeliveryForm.java",
+          "line": 183,
+          "endLine": 229,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryForm.java#L183-L229"
+        }
+      ]
+    },
+    {
+      "title": "One business system, two interfaces",
+      "summary": "CLI and Swing screens use shared service/business layers, backed by SQLite data-access classes for employees, shifts, trucks and delivery records.",
+      "citations": [
+        {
+          "file": "dev/src/Deliveries_HR_Main.java",
+          "line": 15,
+          "endLine": 34,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries_HR_Main.java#L15-L34"
+        },
+        {
+          "file": "dev/src/HR/ServiceLayer/EmployeeService.java",
+          "line": 1,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/ServiceLayer/EmployeeService.java#L1"
+        },
+        {
+          "file": "dev/src/Deliveries/PresentationLayer/DeliveryManagerService.java",
+          "line": 1,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/PresentationLayer/DeliveryManagerService.java#L1"
+        },
+        {
+          "file": "dev/src/HR/DataAccessLayer/Connect.java",
+          "line": 248,
+          "endLine": 274,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/DataAccessLayer/Connect.java#L248-L274"
+        }
+      ]
+    }
+  ],
+  "architecture": {
+    "nodes": [
+      {
+        "id": "ui",
+        "label": "Swing + CLI",
+        "detail": "Separate presentation paths"
+      },
+      {
+        "id": "hr",
+        "label": "HR facade + scheduling",
+        "detail": "Employees, roles, stores, weekly shifts"
+      },
+      {
+        "id": "contracts",
+        "label": "Integration contracts",
+        "detail": "HRIntegrator · DeliveryIntegrator · DriverSaver"
+      },
+      {
+        "id": "delivery",
+        "label": "Delivery planning",
+        "detail": "Stops, forms, drivers, trucks"
+      },
+      {
+        "id": "storage",
+        "label": "SQLite data access",
+        "detail": "HR and delivery DAOs"
+      }
+    ],
+    "edges": [
+      {
+        "from": "ui",
+        "to": "hr",
+        "label": "EmployeeService"
+      },
+      {
+        "from": "ui",
+        "to": "delivery",
+        "label": "DeliveryManagerService"
+      },
+      {
+        "from": "hr",
+        "to": "contracts",
+        "label": "Availability / driver certification"
+      },
+      {
+        "from": "delivery",
+        "to": "contracts",
+        "label": "Driver assignment / scheduled arrivals"
+      },
+      {
+        "from": "hr",
+        "to": "storage",
+        "label": "Employee and shift records"
+      },
+      {
+        "from": "delivery",
+        "to": "storage",
+        "label": "Fleet and delivery records"
+      }
+    ],
+    "citations": [
+      {
+        "file": "dev/src/HR_Deliveries_Interface/HRIntegrator.java",
+        "line": 6,
+        "endLine": 9,
+        "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR_Deliveries_Interface/HRIntegrator.java#L6-L9"
+      },
+      {
+        "file": "dev/src/HR_Deliveries_Interface/DeliveryIntegrator.java",
+        "line": 7,
+        "endLine": 8,
+        "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR_Deliveries_Interface/DeliveryIntegrator.java#L7-L8"
+      },
+      {
+        "file": "dev/src/HR_Deliveries_Interface/DriverSaver.java",
+        "line": 2,
+        "endLine": 5,
+        "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR_Deliveries_Interface/DriverSaver.java#L2-L5"
+      }
+    ]
+  },
+  "decisions": [
+    {
+      "title": "Use explicit contracts between staffing and delivery",
+      "implementation": "Three small interfaces expose availability, assignment, scheduled arrivals and driver registration without requiring the caller to own the other subsystem’s data structures.",
+      "whyItMatters": "A delivery’s staffing dependency is visible and testable. This benefit is inferred from the implementation, not a quote from the author.",
+      "citations": [
+        {
+          "file": "dev/src/HR_Deliveries_Interface/HRIntegrator.java",
+          "line": 6,
+          "endLine": 9,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR_Deliveries_Interface/HRIntegrator.java#L6-L9"
+        },
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/DriverController.java",
+          "line": 70,
+          "endLine": 104,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DriverController.java#L70-L104"
+        },
+        {
+          "file": "dev/src/Deliveries/DeliveriesTests/HR_Del_IntegrationTests.java",
+          "line": 22,
+          "endLine": 65,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/DeliveriesTests/HR_Del_IntegrationTests.java#L22-L65"
+        }
+      ]
+    },
+    {
+      "title": "Make overload handling a domain operation",
+      "implementation": "WeightMeasurer and TripReplanner interfaces feed DeliveryForm’s load checks, with explicit remove-stop, cancel and reweigh actions.",
+      "whyItMatters": "The exceptional case is modeled alongside the normal trip, rather than reduced to an unstructured UI error.",
+      "citations": [
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/DeliveryForm.java",
+          "line": 116,
+          "endLine": 128,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryForm.java#L116-L128"
+        },
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/DeliveryManagerImpl.java",
+          "line": 89,
+          "endLine": 120,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryManagerImpl.java#L89-L120"
+        },
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/Enums_and_Interfaces/TripReplanner.java",
+          "line": 1,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/Enums_and_Interfaces/TripReplanner.java#L1"
+        }
+      ]
+    },
+    {
+      "title": "Keep presentation separate from stored business records",
+      "implementation": "Swing/CLI choices share HR and delivery services; DAOs use a SQLite connector, whose query/update helpers bind supplied parameters.",
+      "whyItMatters": "Business behavior can serve multiple presentation paths and persist beyond the in-memory objects. Some controllers remain singletons and coupled to concrete classes, so this is layered design, not a perfectly isolated domain.",
+      "citations": [
+        {
+          "file": "dev/src/Deliveries_HR_Main.java",
+          "line": 15,
+          "endLine": 34,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries_HR_Main.java#L15-L34"
+        },
+        {
+          "file": "dev/src/HR/DataAccessLayer/Connect.java",
+          "line": 248,
+          "endLine": 274,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/DataAccessLayer/Connect.java#L248-L274"
+        },
+        {
+          "file": "dev/src/HR/BusinessLayer/Facade.java",
+          "line": 13,
+          "endLine": 18,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/BusinessLayer/Facade.java#L13-L18"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    {
+      "text": "Source-only evidence. No fresh execution, deployment or current test-pass claim.",
+      "citations": []
+    },
+    {
+      "text": "The startup loader resets HR tables and loads example records; the executable should be treated as an archived academic demonstration, not an operated HR database.",
+      "citations": [
+        {
+          "file": "dev/src/Deliveries_HR_Main.java",
+          "line": 51,
+          "endLine": 58,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries_HR_Main.java#L51-L58"
+        },
+        {
+          "file": "dev/src/HR/DataAccessLayer/Connect.java",
+          "line": 276,
+          "endLine": 298,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/DataAccessLayer/Connect.java#L276-L298"
+        }
+      ]
+    },
+    {
+      "text": "Destination staff availability is queried but its rejection branch remains TODO; do not claim unstaffed destinations are prevented automatically.",
+      "citations": [
+        {
+          "file": "dev/src/Deliveries/BusinessLayer/DeliveryForm.java",
+          "line": 262,
+          "endLine": 270,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryForm.java#L262-L270"
+        }
+      ]
+    },
+    {
+      "text": "Default startup accesses args[0] and args[1] before checking argument count. Build/source layout and packaged artifacts are archival, not verified current instructions.",
+      "citations": [
+        {
+          "file": "dev/src/Deliveries_HR_Main.java",
+          "line": 17,
+          "endLine": 29,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries_HR_Main.java#L17-L29"
+        },
+        {
+          "file": "pom.xml",
+          "line": 1,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/pom.xml#L1"
+        }
+      ]
+    },
+    {
+      "text": "Tests include meaningful driver/HR integration cases alongside some empty test methods. Presence of tests is not proof of full coverage or passing behavior.",
+      "citations": [
+        {
+          "file": "dev/src/Deliveries/DeliveriesTests/DriverControllerTest.java",
+          "line": 44,
+          "endLine": 99,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/DeliveriesTests/DriverControllerTest.java#L44-L99"
+        },
+        {
+          "file": "dev/src/Deliveries/DeliveriesTests/DeliveryFormsControllerTest.java",
+          "line": 43,
+          "endLine": 53,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/DeliveriesTests/DeliveryFormsControllerTest.java#L43-L53"
+        }
+      ]
+    }
+  ],
+  "visualConcept": {
+    "title": "The dispatch handshake",
+    "description": "A code-native split diagram joins a compact weekly shift strip to a delivery route strip through one central “available + licensed” driver token. A second small detail shows an overloaded truck branching to replace, remove stop or reweigh. Label it an implementation diagram, not a screenshot or live dispatch simulator.",
+    "labels": [
+      "Staff availability",
+      "Role / store qualification",
+      "Driver license",
+      "Truck type + capacity",
+      "Delivery form",
+      "Load check"
+    ],
+    "avoid": [
+      "Map or route optimization claims",
+      "Live logistics tracking",
+      "Invented dashboard screenshots",
+      "Automatic staff-availability rejection at destinations"
+    ]
+  },
+  "coverage": {
+    "inventory": "HR_Organization-inventory.json",
+    "method": "All tracked files classified and full text structurally scanned. Focused manual implementation reads cover HR facade/shifts, delivery orchestration/resources, integration interfaces, data access, both presentation paths and tests; no claim of every line receiving a full semantic review.",
+    "counts": {
+      "config/metadata": {
+        "files": 28,
+        "lines": 1434
+      },
+      "binary/documentation-or-data": {
+        "files": 36,
+        "lines": 0
+      },
+      "authored-source": {
+        "files": 87,
+        "lines": 10365
+      },
+      "test": {
+        "files": 7,
+        "lines": 1020
+      },
+      "documentation": {
+        "files": 9,
+        "lines": 6927
+      },
+      "vendor/binary": {
+        "files": 9,
+        "lines": 0
+      },
+      "generated/release": {
+        "files": 101,
+        "lines": 5
+      }
+    }
+  }
+}

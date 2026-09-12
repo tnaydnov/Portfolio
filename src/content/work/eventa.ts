@@ -9,7 +9,7 @@ export const eventa: Project = {
     problem: "Guests can share a celebration without knowing enough about each other to start a conversation.",
     move: "Offer a short QR-to-profile journey and keep discovery, introductions, and private messages inside the event.",
     contribution: "I conceived, designed, built, and operated the product, including the guest experience, organizer ordering, payments, and operational tools.",
-    proof: "Public source and recorded local workflows preserve the customer website, guest experience and organizer tools. The former live service is discontinued.",
+    proof: "Public source and recorded local workflows preserve customer customization, organizer guest preparation and reporting, guest interactions and separate operator tools. The former live service is discontinued.",
   },
   tier: "flagship",
   stages: ["signal", "frame", "build", "field"],
@@ -69,7 +69,7 @@ export const eventa: Project = {
     nodes: [
       { id: "customer", label: "Customer website", sub: "Product · Event setup", x: 0, y: 0, kind: "client", note: "The public website and order wizard introduce the service and collect organizer setup choices." },
       { id: "attendee", label: "Guest experience", sub: "Profiles · Likes · Chat", x: 0, y: 1, kind: "client", note: "Event-scoped mobile web routes use a signed HttpOnly session. Realtime updates have recovery and polling paths." },
-      { id: "organizer", label: "Organizer console", sub: "Events · Analytics", x: 0, y: 2, kind: "client", note: "Administrative routes provide event management and operational reporting behind their own access checks." },
+      { id: "organizer", label: "Organizer portal", sub: "Guest lists · Event report", x: 0, y: 2, kind: "client", note: "A token-protected client portal prepares guest lists and shows the event report. Operator administration is a separate authenticated surface." },
       { id: "routes", label: "Protected server routes", sub: "Session + event checks", x: 1, y: 1, kind: "edge", note: "Server routes handle profiles, reciprocal likes, conversations, messages and signed photo URLs. Sensitive profile fields are encrypted server-side." },
       { id: "database", label: "Supabase Postgres", sub: "Event-scoped records", x: 2, y: 0, kind: "store", note: "Profiles, likes, conversations, persisted messages and organizer analytics live in the database." },
       { id: "photos", label: "Photo storage", sub: "Signed access", x: 2, y: 1, kind: "store", note: "Supabase Storage holds profile photos. The protected photo route supplies signed URLs." },

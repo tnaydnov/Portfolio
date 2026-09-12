@@ -1,0 +1,583 @@
+{
+  "title": "Dungeons and Dragons",
+  "revision": "6f044b2bb42ef51f0920c06c8e5c807a4b87c509",
+  "repo": "https://github.com/tnaydnov/Dungeons_and_Dragons",
+  "status": "Archived university coursework; source reviewed, not executed during this audit.",
+  "ownership": {
+    "verified": "Public archived coursework repository under tnaydnov.",
+    "boundary": "This review describes repository behavior; it does not attribute all supplied framework code or team work exclusively to Tomer."
+  },
+  "auditScope": {
+    "trackedFiles": 29,
+    "method": "Complete review of authored source, tests, build configuration and project documentation in a fresh source-only clone. Vendor code, image assets and IDE metadata were inventoried rather than treated as authored implementation.",
+    "execution": "No fresh build, runtime or test pass is claimed.",
+    "inventory": "Dungeons_and_Dragons-source-inventory.json",
+    "reviewedTextFiles": 23
+  },
+  "oneLiner": "A turn-based Java dungeon engine separating board interactions, character abilities and enemy behavior.",
+  "summary": "A command-line dungeon assignment models movement, combat and progression through an object hierarchy. Four character classes use different ability resources, while monsters, bosses and traps react on game ticks. Visitor-style dispatch connects an attempted move with the behavior of the tile it reaches.",
+  "stack": [
+    "Java",
+    "Object-oriented design",
+    "Visitor-style dispatch",
+    "Command-line interface",
+    "JUnit 5 test source"
+  ],
+  "capabilityGroups": [
+    {
+      "title": "One move, different outcomes",
+      "summary": "Moving into empty ground swaps tile positions; a wall blocks movement; reaching an opposing unit starts combat. Dispatch separates these outcomes from the directional movement commands.",
+      "details": [
+        "The board stores a tile grid and synchronizes positions during swaps.",
+        "The manager processes player input, enemy ticks and player resource updates."
+      ],
+      "citations": [
+        {
+          "file": "src/Tile.java",
+          "line": 1,
+          "endLine": 71,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Tile.java#L1-L71"
+        },
+        {
+          "file": "src/Unit.java",
+          "line": 90,
+          "endLine": 108,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L90-L108"
+        },
+        {
+          "file": "src/Player.java",
+          "line": 74,
+          "endLine": 92,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Player.java#L74-L92"
+        },
+        {
+          "file": "src/Manager.java",
+          "line": 38,
+          "endLine": 51,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L38-L51"
+        }
+      ]
+    },
+    {
+      "title": "Four ways to spend an ability",
+      "summary": "Warriors use cooldowns, mages spend and regenerate mana, rogues manage energy, and hunters replenish and spend arrows. Preset heroes share progression rules while specializing their attacks.",
+      "details": [
+        "The character menu defines seven presets across four classes.",
+        "Experience can trigger level-ups, stat increases and resource changes."
+      ],
+      "citations": [
+        {
+          "file": "src/Warrior.java",
+          "line": 16,
+          "endLine": 58,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Warrior.java#L16-L58"
+        },
+        {
+          "file": "src/Mage.java",
+          "line": 23,
+          "endLine": 68,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Mage.java#L23-L68"
+        },
+        {
+          "file": "src/Rogue.java",
+          "line": 14,
+          "endLine": 49,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Rogue.java#L14-L49"
+        },
+        {
+          "file": "src/Hunter.java",
+          "line": 16,
+          "endLine": 68,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Hunter.java#L16-L68"
+        },
+        {
+          "file": "src/Player.java",
+          "line": 21,
+          "endLine": 36,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Player.java#L21-L36"
+        },
+        {
+          "file": "src/Manager.java",
+          "line": 140,
+          "endLine": 185,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L140-L185"
+        }
+      ]
+    },
+    {
+      "title": "Different threats on the same board",
+      "summary": "Monsters chase within vision range and otherwise choose random moves. Bosses add timed special attacks, while traps cycle between visible and concealed glyphs and attack nearby players.",
+      "details": [
+        "Chasing uses a simple dominant-axis choice, not a general pathfinding algorithm.",
+        "Defeating the remaining enemies loads the next level from an external map directory."
+      ],
+      "citations": [
+        {
+          "file": "src/Monster.java",
+          "line": 16,
+          "endLine": 49,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Monster.java#L16-L49"
+        },
+        {
+          "file": "src/Boss.java",
+          "line": 15,
+          "endLine": 44,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Boss.java#L15-L44"
+        },
+        {
+          "file": "src/Trap.java",
+          "line": 24,
+          "endLine": 42,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Trap.java#L24-L42"
+        },
+        {
+          "file": "src/Manager.java",
+          "line": 60,
+          "endLine": 73,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L60-L73"
+        },
+        {
+          "file": "src/Manager.java",
+          "line": 245,
+          "endLine": 252,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L245-L252"
+        }
+      ]
+    }
+  ],
+  "architecture": {
+    "nodes": [
+      {
+        "id": "cli",
+        "label": "CLI input",
+        "detail": "Movement and ability commands"
+      },
+      {
+        "id": "manager",
+        "label": "Manager",
+        "detail": "Turn order, maps and progression"
+      },
+      {
+        "id": "board",
+        "label": "Board + Tile",
+        "detail": "Grid coordinates and tile swaps"
+      },
+      {
+        "id": "dispatch",
+        "label": "Visitor-style interactions",
+        "detail": "Empty / wall / opposing unit"
+      },
+      {
+        "id": "players",
+        "label": "Player classes",
+        "detail": "Cooldown, mana, energy and arrows"
+      },
+      {
+        "id": "enemies",
+        "label": "Enemy classes",
+        "detail": "Monster, boss and trap ticks"
+      }
+    ],
+    "edges": [
+      {
+        "from": "cli",
+        "to": "manager",
+        "label": "One command"
+      },
+      {
+        "from": "manager",
+        "to": "players",
+        "label": "Act and update resources"
+      },
+      {
+        "from": "manager",
+        "to": "enemies",
+        "label": "Enemy ticks"
+      },
+      {
+        "from": "players",
+        "to": "board",
+        "label": "Choose target tile"
+      },
+      {
+        "from": "board",
+        "to": "dispatch",
+        "label": "Accept visitor"
+      },
+      {
+        "from": "dispatch",
+        "to": "board",
+        "label": "Move or remain"
+      },
+      {
+        "from": "dispatch",
+        "to": "enemies",
+        "label": "Resolve combat"
+      }
+    ],
+    "citations": [
+      {
+        "file": "src/Manager.java",
+        "line": 38,
+        "endLine": 96,
+        "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L38-L96"
+      },
+      {
+        "file": "src/Tile.java",
+        "line": 1,
+        "endLine": 71,
+        "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Tile.java#L1-L71"
+      },
+      {
+        "file": "src/Unit.java",
+        "line": 90,
+        "endLine": 108,
+        "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L90-L108"
+      },
+      {
+        "file": "src/Player.java",
+        "line": 74,
+        "endLine": 92,
+        "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Player.java#L74-L92"
+      }
+    ]
+  },
+  "decisions": [
+    {
+      "title": "Put interaction behavior on the types involved",
+      "implementation": "Tiles implement Visitor and Visited; accept and overloaded interact methods route movement into empty, wall, player or enemy behavior.",
+      "whyItMatters": "A small three-outcome diagram can explain how polymorphism replaces a single large movement conditional. This design rationale is inferred from source.",
+      "citations": [
+        {
+          "file": "src/Visitor.java",
+          "line": 1,
+          "endLine": 7,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Visitor.java#L1-L7"
+        },
+        {
+          "file": "src/Visited.java",
+          "line": 1,
+          "endLine": 4,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Visited.java#L1-L4"
+        },
+        {
+          "file": "src/Tile.java",
+          "line": 63,
+          "endLine": 65,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Tile.java#L63-L65"
+        },
+        {
+          "file": "src/Unit.java",
+          "line": 90,
+          "endLine": 108,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L90-L108"
+        }
+      ]
+    },
+    {
+      "title": "Share progression, specialize ability economics",
+      "implementation": "Player implements experience and level progression; Warrior, Mage, Rogue and Hunter override ability and tick behavior using different resources.",
+      "whyItMatters": "The same game loop supports four distinct play styles without requiring a different board engine for each.",
+      "citations": [
+        {
+          "file": "src/Player.java",
+          "line": 21,
+          "endLine": 36,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Player.java#L21-L36"
+        },
+        {
+          "file": "src/Warrior.java",
+          "line": 16,
+          "endLine": 58,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Warrior.java#L16-L58"
+        },
+        {
+          "file": "src/Mage.java",
+          "line": 23,
+          "endLine": 68,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Mage.java#L23-L68"
+        },
+        {
+          "file": "src/Rogue.java",
+          "line": 14,
+          "endLine": 49,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Rogue.java#L14-L49"
+        },
+        {
+          "file": "src/Hunter.java",
+          "line": 16,
+          "endLine": 68,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Hunter.java#L16-L68"
+        }
+      ]
+    },
+    {
+      "title": "Drive enemies through a common tick",
+      "implementation": "Manager advances each enemy, allowing monster pursuit, boss ability timing and trap visibility to run through the same turn sequence.",
+      "whyItMatters": "Different behavior can be compared at the shared lifecycle boundary instead of described as a generic enemy AI system.",
+      "citations": [
+        {
+          "file": "src/Manager.java",
+          "line": 38,
+          "endLine": 51,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L38-L51"
+        },
+        {
+          "file": "src/Monster.java",
+          "line": 16,
+          "endLine": 49,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Monster.java#L16-L49"
+        },
+        {
+          "file": "src/Boss.java",
+          "line": 15,
+          "endLine": 44,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Boss.java#L15-L44"
+        },
+        {
+          "file": "src/Trap.java",
+          "line": 24,
+          "endLine": 42,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Trap.java#L24-L42"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    {
+      "text": "The tracked repository has no level text assets or Maven/Gradle build configuration. Main requires a map-directory argument, so an out-of-the-box playable run is not established.",
+      "citations": [
+        {
+          "file": "src/Main.java",
+          "line": 4,
+          "endLine": 8,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Main.java#L4-L8"
+        },
+        {
+          "file": "src/Manager.java",
+          "line": 99,
+          "endLine": 137,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L99-L137"
+        }
+      ],
+      "inventoryEvidence": "Dungeons_and_Dragons-source-inventory.json"
+    },
+    {
+      "text": "Map loading uses a Windows path separator and treats a missing level file as victory, including a missing initial map. Do not show that outcome as evidence of a completed campaign.",
+      "citations": [
+        {
+          "file": "src/Manager.java",
+          "line": 99,
+          "endLine": 137,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L99-L137"
+        }
+      ]
+    },
+    {
+      "text": "Shared static board, manager and enemy state couples instances. The implementation is a local coursework engine, not an isolated multi-session service.",
+      "citations": [
+        {
+          "file": "src/Tile.java",
+          "line": 1,
+          "endLine": 14,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Tile.java#L1-L14"
+        },
+        {
+          "file": "src/Unit.java",
+          "line": 1,
+          "endLine": 35,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L1-L35"
+        }
+      ]
+    },
+    {
+      "text": "Combat uses unseeded random rolls, and some tests assert outcomes affected by those rolls. The test source was reviewed but not rerun or certified deterministic.",
+      "citations": [
+        {
+          "file": "src/Unit.java",
+          "line": 76,
+          "endLine": 87,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L76-L87"
+        },
+        {
+          "file": "src/MainTest.java",
+          "line": 1,
+          "endLine": 119,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/MainTest.java#L1-L119"
+        }
+      ]
+    }
+  ],
+  "visualConcept": {
+    "title": "What happens when a move meets a tile?",
+    "description": "Use a small code-native grid with an original @ player glyph, a wall, empty ground and an enemy. Three adjacent frames show the same movement command producing move, blocked and combat outcomes. Under the board, compare four compact resource tracks: cooldown, mana, energy and arrows. Keep it an explanatory diagram of the source rather than inventing a polished graphical game that the repository never contained.",
+    "labels": [
+      "Attempted move",
+      "Empty: swap",
+      "Wall: remain",
+      "Enemy: combat",
+      "Cooldown",
+      "Mana",
+      "Energy",
+      "Arrows"
+    ],
+    "avoid": [
+      "Fictional 3D gameplay",
+      "Claims of general pathfinding",
+      "Ready-to-run claims without map assets",
+      "A full campaign completion claim"
+    ]
+  },
+  "citations": [
+    {
+      "file": "src/Tile.java",
+      "line": 1,
+      "endLine": 71,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Tile.java#L1-L71"
+    },
+    {
+      "file": "src/Unit.java",
+      "line": 90,
+      "endLine": 108,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L90-L108"
+    },
+    {
+      "file": "src/Player.java",
+      "line": 74,
+      "endLine": 92,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Player.java#L74-L92"
+    },
+    {
+      "file": "src/Manager.java",
+      "line": 38,
+      "endLine": 51,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L38-L51"
+    },
+    {
+      "file": "src/Warrior.java",
+      "line": 16,
+      "endLine": 58,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Warrior.java#L16-L58"
+    },
+    {
+      "file": "src/Mage.java",
+      "line": 23,
+      "endLine": 68,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Mage.java#L23-L68"
+    },
+    {
+      "file": "src/Rogue.java",
+      "line": 14,
+      "endLine": 49,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Rogue.java#L14-L49"
+    },
+    {
+      "file": "src/Hunter.java",
+      "line": 16,
+      "endLine": 68,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Hunter.java#L16-L68"
+    },
+    {
+      "file": "src/Player.java",
+      "line": 21,
+      "endLine": 36,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Player.java#L21-L36"
+    },
+    {
+      "file": "src/Manager.java",
+      "line": 140,
+      "endLine": 185,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L140-L185"
+    },
+    {
+      "file": "src/Monster.java",
+      "line": 16,
+      "endLine": 49,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Monster.java#L16-L49"
+    },
+    {
+      "file": "src/Boss.java",
+      "line": 15,
+      "endLine": 44,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Boss.java#L15-L44"
+    },
+    {
+      "file": "src/Trap.java",
+      "line": 24,
+      "endLine": 42,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Trap.java#L24-L42"
+    },
+    {
+      "file": "src/Manager.java",
+      "line": 60,
+      "endLine": 73,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L60-L73"
+    },
+    {
+      "file": "src/Manager.java",
+      "line": 245,
+      "endLine": 252,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L245-L252"
+    },
+    {
+      "file": "src/Manager.java",
+      "line": 38,
+      "endLine": 96,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L38-L96"
+    },
+    {
+      "file": "src/Visitor.java",
+      "line": 1,
+      "endLine": 7,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Visitor.java#L1-L7"
+    },
+    {
+      "file": "src/Visited.java",
+      "line": 1,
+      "endLine": 4,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Visited.java#L1-L4"
+    },
+    {
+      "file": "src/Tile.java",
+      "line": 63,
+      "endLine": 65,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Tile.java#L63-L65"
+    },
+    {
+      "file": "src/Main.java",
+      "line": 4,
+      "endLine": 8,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Main.java#L4-L8"
+    },
+    {
+      "file": "src/Manager.java",
+      "line": 99,
+      "endLine": 137,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L99-L137"
+    },
+    {
+      "file": "src/Tile.java",
+      "line": 1,
+      "endLine": 14,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Tile.java#L1-L14"
+    },
+    {
+      "file": "src/Unit.java",
+      "line": 1,
+      "endLine": 35,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L1-L35"
+    },
+    {
+      "file": "src/Unit.java",
+      "line": 76,
+      "endLine": 87,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L76-L87"
+    },
+    {
+      "file": "src/MainTest.java",
+      "line": 1,
+      "endLine": 119,
+      "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/MainTest.java#L1-L119"
+    }
+  ]
+}

@@ -1,0 +1,419 @@
+{
+  "title": "Kanban",
+  "revision": "3ff1364574cad3c1980df267e64b9c46f3a0f16b",
+  "repo": "https://github.com/tnaydnov/Kanban",
+  "oneLiner": "A task-board domain built around ownership, capacity limits and persistent state.",
+  "summary": "A C# coursework project implements three-column boards, task assignment, membership and ownership transfer through an in-process service layer backed by SQLite. A partial WPF desktop frontend exposes login, board browsing and column lists; the stronger case study is the rule-driven backend, not a complete modern web product.",
+  "stack": [
+    "C#",
+    ".NET 6",
+    "SQLite",
+    "WPF / XAML",
+    "Newtonsoft.Json",
+    "log4net"
+  ],
+  "status": "Archived academic implementation with partial Windows desktop frontend; source reviewed only.",
+  "ownership": {
+    "verified": "Repository belongs to tnaydnov; available history has two commits by tnaydnov and one by tnayd. README describes the author’s implementation.",
+    "boundary": "Coursework naming, grading service and participant fixture names do not establish individual ownership of all components. Avoid claiming every line or all team work as exclusively Tomer’s."
+  },
+  "capabilityGroups": [
+    {
+      "title": "Model a clear task lifecycle",
+      "summary": "Tasks move from backlog to in progress to done. The domain rejects further advancement from done and prevents editing completed tasks.",
+      "details": [
+        "New tasks enter the backlog with board-local IDs.",
+        "Titles, descriptions and due dates are validated by services.",
+        "Column capacity applies to new and advancing tasks."
+      ],
+      "citations": [
+        {
+          "file": "Backend/BusinessLayer/Board.cs",
+          "line": 49,
+          "endLine": 57,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L49-L57"
+        },
+        {
+          "file": "Backend/BusinessLayer/Board.cs",
+          "line": 227,
+          "endLine": 278,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L227-L278"
+        },
+        {
+          "file": "Backend/BusinessLayer/Board.cs",
+          "line": 479,
+          "endLine": 544,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L479-L544"
+        },
+        {
+          "file": "Backend/ServiceLayer/BoardService.cs",
+          "line": 113,
+          "endLine": 140,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/BoardService.cs#L113-L140"
+        },
+        {
+          "file": "Backend/BusinessLayer/Column.cs",
+          "line": 216,
+          "endLine": 239,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Column.cs#L216-L239"
+        }
+      ]
+    },
+    {
+      "title": "Make ownership and membership explicit",
+      "summary": "Boards support joining, leaving, assignment and ownership transfer. Leaving a board unassigns that member’s unfinished work; an owner cannot simply leave without transferring ownership.",
+      "details": [
+        "Deleting a board requires its owner.",
+        "Task reassignment is controlled by the existing assignee when present.",
+        "An unassigned task may be advanced by a valid member; do not claim only explicitly assigned users can move every task."
+      ],
+      "citations": [
+        {
+          "file": "Backend/BusinessLayer/Board.cs",
+          "line": 154,
+          "endLine": 165,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L154-L165"
+        },
+        {
+          "file": "Backend/BusinessLayer/Board.cs",
+          "line": 331,
+          "endLine": 398,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L331-L398"
+        },
+        {
+          "file": "Backend/BusinessLayer/Task.cs",
+          "line": 173,
+          "endLine": 199,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Task.cs#L173-L199"
+        },
+        {
+          "file": "Backend/ServiceLayer/ServiceController.cs",
+          "line": 184,
+          "endLine": 226,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/ServiceController.cs#L184-L226"
+        }
+      ]
+    },
+    {
+      "title": "Keep a personal view across shared boards",
+      "summary": "The backend aggregates in-progress tasks assigned to a user across owned and shared boards, and separates board identity from display name.",
+      "citations": [
+        {
+          "file": "Backend/BusinessLayer/User.cs",
+          "line": 221,
+          "endLine": 232,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/User.cs#L221-L232"
+        },
+        {
+          "file": "Backend/BusinessLayer/Board.cs",
+          "line": 423,
+          "endLine": 433,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L423-L433"
+        },
+        {
+          "file": "Backend/BusinessLayer/UserController.cs",
+          "line": 205,
+          "endLine": 234,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/UserController.cs#L205-L234"
+        }
+      ]
+    },
+    {
+      "title": "Persist the model behind the interface",
+      "summary": "DTOs and mappers serialize board/task state into SQLite. A JSON response boundary connects the backend to the partial WPF view models.",
+      "citations": [
+        {
+          "file": "Backend/DataAccessLayer/DBConnector.cs",
+          "line": 78,
+          "endLine": 128,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/DataAccessLayer/DBConnector.cs#L78-L128"
+        },
+        {
+          "file": "Backend/DataAccessLayer/DTOS/TaskDTO.cs",
+          "line": 118,
+          "endLine": 173,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/DataAccessLayer/DTOS/TaskDTO.cs#L118-L173"
+        },
+        {
+          "file": "Frontend/Model/BackendController.cs",
+          "line": 49,
+          "endLine": 95,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/Model/BackendController.cs#L49-L95"
+        },
+        {
+          "file": "Frontend/View/BoardView.xaml",
+          "line": 8,
+          "endLine": 16,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/View/BoardView.xaml#L8-L16"
+        }
+      ]
+    }
+  ],
+  "architecture": {
+    "nodes": [
+      {
+        "id": "view",
+        "label": "WPF views + view models",
+        "detail": "Partial desktop frontend"
+      },
+      {
+        "id": "service",
+        "label": "ServiceController",
+        "detail": "Login checks + JSON responses"
+      },
+      {
+        "id": "domain",
+        "label": "Board / Column / Task / User",
+        "detail": "Membership, limits, transitions"
+      },
+      {
+        "id": "mapping",
+        "label": "DTOs + mappers",
+        "detail": "Stored state and reconstruction"
+      },
+      {
+        "id": "db",
+        "label": "SQLite",
+        "detail": "Users · boards · columns · tasks"
+      }
+    ],
+    "edges": [
+      {
+        "from": "view",
+        "to": "service",
+        "label": "In-process calls, not HTTP"
+      },
+      {
+        "from": "service",
+        "to": "domain",
+        "label": "Validated operations"
+      },
+      {
+        "from": "domain",
+        "to": "mapping",
+        "label": "State changes"
+      },
+      {
+        "from": "mapping",
+        "to": "db",
+        "label": "SQL reads / writes"
+      }
+    ],
+    "citations": [
+      {
+        "file": "Frontend/Model/BackendController.cs",
+        "line": 20,
+        "endLine": 32,
+        "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/Model/BackendController.cs#L20-L32"
+      },
+      {
+        "file": "Backend/ServiceLayer/ServiceController.cs",
+        "line": 21,
+        "endLine": 40,
+        "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/ServiceController.cs#L21-L40"
+      },
+      {
+        "file": "Backend/DataAccessLayer/DBConnector.cs",
+        "line": 78,
+        "endLine": 128,
+        "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/DataAccessLayer/DBConnector.cs#L78-L128"
+      }
+    ]
+  },
+  "decisions": [
+    {
+      "title": "Treat capacity as a rule of the column",
+      "implementation": "Column rejects additions and incoming tasks when full and refuses a new capacity smaller than its existing task count.",
+      "whyItMatters": "The same workload limit follows all callers; it does not depend on whether a UI button is disabled. This is a rationale inferred from the code.",
+      "citations": [
+        {
+          "file": "Backend/BusinessLayer/Column.cs",
+          "line": 119,
+          "endLine": 137,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Column.cs#L119-L137"
+        },
+        {
+          "file": "Backend/BusinessLayer/Column.cs",
+          "line": 216,
+          "endLine": 239,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Column.cs#L216-L239"
+        }
+      ]
+    },
+    {
+      "title": "Separate membership from task responsibility",
+      "implementation": "Board handles members and ownership; Task handles assignment/reassignment, while leaving a board removes unfinished assignments.",
+      "whyItMatters": "A shared board can distinguish access to the board from responsibility for a particular item.",
+      "citations": [
+        {
+          "file": "Backend/BusinessLayer/Board.cs",
+          "line": 331,
+          "endLine": 398,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L331-L398"
+        },
+        {
+          "file": "Backend/BusinessLayer/Task.cs",
+          "line": 173,
+          "endLine": 207,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Task.cs#L173-L207"
+        }
+      ]
+    },
+    {
+      "title": "Put a response boundary between presentation and core",
+      "implementation": "ServiceController performs common user/login validation and returns JSON error/value responses. The WPF adapter deserializes those responses into frontend models.",
+      "whyItMatters": "The partial frontend and grading/test harness call the same backend behavior. The backend is an in-process library/executable, not a remote API.",
+      "citations": [
+        {
+          "file": "Backend/ServiceLayer/ServiceController.cs",
+          "line": 29,
+          "endLine": 40,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/ServiceController.cs#L29-L40"
+        },
+        {
+          "file": "Backend/ServiceLayer/ServiceController.cs",
+          "line": 168,
+          "endLine": 171,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/ServiceController.cs#L168-L171"
+        },
+        {
+          "file": "Frontend/Model/BackendController.cs",
+          "line": 49,
+          "endLine": 95,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/Model/BackendController.cs#L49-L95"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    {
+      "text": "README explicitly says partial frontend. BoardView shows three list boxes and a Back button; no complete drag-and-drop editing UI is supported by these views.",
+      "citations": [
+        {
+          "file": "README.md",
+          "line": 6,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/README.md#L6"
+        },
+        {
+          "file": "Frontend/View/BoardView.xaml",
+          "line": 8,
+          "endLine": 16,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/View/BoardView.xaml#L8-L16"
+        }
+      ]
+    },
+    {
+      "text": "Archived local coursework code, not production authentication: passwords are stored/read as strings and compared directly; DTO SQL embeds string input rather than parameterizing it.",
+      "citations": [
+        {
+          "file": "Backend/BusinessLayer/UserController.cs",
+          "line": 106,
+          "endLine": 126,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/UserController.cs#L106-L126"
+        },
+        {
+          "file": "Backend/DataAccessLayer/Mappers/UserMapper.cs",
+          "line": 25,
+          "endLine": 35,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/DataAccessLayer/Mappers/UserMapper.cs#L25-L35"
+        },
+        {
+          "file": "Backend/DataAccessLayer/DTOS/TaskDTO.cs",
+          "line": 118,
+          "endLine": 132,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/DataAccessLayer/DTOS/TaskDTO.cs#L118-L132"
+        }
+      ]
+    },
+    {
+      "text": "Frontend startup inserts sample boards/tasks with fixed 2025 due dates, which are now in the past. Current startup/demo data has not been run or repaired.",
+      "citations": [
+        {
+          "file": "Frontend/Model/BackendController.cs",
+          "line": 20,
+          "endLine": 32,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/Model/BackendController.cs#L20-L32"
+        },
+        {
+          "file": "Backend/ServiceLayer/BoardService.cs",
+          "line": 113,
+          "endLine": 116,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/BoardService.cs#L113-L116"
+        }
+      ]
+    },
+    {
+      "text": "The Email setter recursively assigns itself; the UI is not certified functional end to end.",
+      "citations": [
+        {
+          "file": "Frontend/ViewModel/MainViewModel.cs",
+          "line": 15,
+          "endLine": 23,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/ViewModel/MainViewModel.cs#L15-L23"
+        }
+      ]
+    },
+    {
+      "text": "Tests are console scenario programs, including resets and printed responses, rather than an asserted xUnit/NUnit suite. No current test pass is claimed.",
+      "citations": [
+        {
+          "file": "BackendTests/BackendTests.csproj",
+          "line": 1,
+          "endLine": 22,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/BackendTests/BackendTests.csproj#L1-L22"
+        },
+        {
+          "file": "BackendTests/TaskServiceTest.cs",
+          "line": 17,
+          "endLine": 57,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/BackendTests/TaskServiceTest.cs#L17-L57"
+        }
+      ]
+    }
+  ],
+  "visualConcept": {
+    "title": "The rules behind a three-column board",
+    "description": "A code-native implementation diagram shows backlog → in progress → done. A small capacity rail stops an incoming card at a full middle column; a member/assignee badge explains who can reassign it. Place the actual service method names in optional technical detail. Mark sample task text as illustrative and do not imply it is a screenshot of the partial WPF UI.",
+    "labels": [
+      "Backlog",
+      "In progress",
+      "Done",
+      "Column capacity",
+      "Board owner",
+      "Task assignee",
+      "SQLite record"
+    ],
+    "avoid": [
+      "Modern SaaS mock dashboard",
+      "Drag-and-drop claims",
+      "Realtime collaboration claims",
+      "Secure production identity claims"
+    ]
+  },
+  "coverage": {
+    "inventory": "Kanban-inventory.json",
+    "method": "All61 tracked files inventoried and classified; all text read structurally. Focused manual reads cover business rules, service validation, DTO persistence, WPF models/view models/views and console test approach. No execution was performed.",
+    "counts": {
+      "config/metadata": {
+        "files": 6,
+        "lines": 625
+      },
+      "authored-source": {
+        "files": 46,
+        "lines": 5503
+      },
+      "test": {
+        "files": 6,
+        "lines": 737
+      },
+      "documentation": {
+        "files": 1,
+        "lines": 7
+      },
+      "binary/documentation-or-data": {
+        "files": 2,
+        "lines": 0
+      }
+    }
+  }
+}

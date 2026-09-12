@@ -1,0 +1,586 @@
+{
+  "title": "The Coalition Race",
+  "revision": "a6906502405ee77406460f1e5225f67f80becbb6",
+  "repo": "https://github.com/tnaydnov/The_Coalition_Race",
+  "status": "Archived university coursework; source reviewed, not executed during this audit.",
+  "ownership": {
+    "verified": "Public archived coursework repository under tnaydnov.",
+    "boundary": "This review describes repository behavior; it does not attribute all supplied framework code or team work exclusively to Tomer."
+  },
+  "auditScope": {
+    "trackedFiles": 35,
+    "method": "Complete review of authored source, tests, build configuration and project documentation in a fresh source-only clone. Vendor code, image assets and IDE metadata were inventoried rather than treated as authored implementation.",
+    "execution": "No fresh build, runtime or test pass is claimed.",
+    "inventory": "The_Coalition_Race-source-inventory.json",
+    "reviewedTextFiles": 25
+  },
+  "oneLiner": "A policy-driven C++ simulation of agents, offers and coalition formation.",
+  "summary": "A coursework simulation represents a 120-mandate parliament as a weighted graph. Agents choose neighboring parties to approach, parties collect and evaluate offers, and each joining party extends a coalition and creates a new agent. JSON snapshots make every simulation step inspectable.",
+  "stack": [
+    "C++11",
+    "Strategy interfaces",
+    "Rule of Five",
+    "nlohmann JSON",
+    "Make / g++",
+    "Python",
+    "NetworkX / Matplotlib"
+  ],
+  "capabilityGroups": [
+    {
+      "title": "Separate whom to approach from whom to join",
+      "summary": "Agent selection policies consider edge weight or party mandates. Party join policies choose the last offer or the offering coalition with the largest mandate total.",
+      "details": [
+        "Policies are selected from JSON configuration.",
+        "Parties progress through Waiting, CollectingOffers and Joined states."
+      ],
+      "citations": [
+        {
+          "file": "src/Parser.cpp",
+          "line": 12,
+          "endLine": 43,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L12-L43"
+        },
+        {
+          "file": "src/EdgeWeightSelectionPolicy.cpp",
+          "line": 1,
+          "endLine": 45,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/EdgeWeightSelectionPolicy.cpp#L1-L45"
+        },
+        {
+          "file": "src/MandatesSelectionPolicy.cpp",
+          "line": 1,
+          "endLine": 32,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/MandatesSelectionPolicy.cpp#L1-L32"
+        },
+        {
+          "file": "src/LastOfferJoinPolicy.cpp",
+          "line": 1,
+          "endLine": 12,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/LastOfferJoinPolicy.cpp#L1-L12"
+        },
+        {
+          "file": "src/MandatesJoinPolicy.cpp",
+          "line": 1,
+          "endLine": 20,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/MandatesJoinPolicy.cpp#L1-L20"
+        },
+        {
+          "file": "include/Party.h",
+          "line": 1,
+          "endLine": 53,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/include/Party.h#L1-L53"
+        }
+      ]
+    },
+    {
+      "title": "Grow a coalition through local decisions",
+      "summary": "Each simulation step advances agents and then parties. After a delayed offer-collection period, a joining party adds mandates to its selected coalition and gains a cloned agent.",
+      "details": [
+        "A new agent immediately takes a step after being cloned.",
+        "Execution ends when a coalition reaches at least 61 mandates or all parties have joined."
+      ],
+      "citations": [
+        {
+          "file": "src/Simulation.cpp",
+          "line": 72,
+          "endLine": 104,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Simulation.cpp#L72-L104"
+        },
+        {
+          "file": "src/Party.cpp",
+          "line": 96,
+          "endLine": 111,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Party.cpp#L96-L111"
+        },
+        {
+          "file": "src/Agent.cpp",
+          "line": 42,
+          "endLine": 53,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Agent.cpp#L42-L53"
+        }
+      ]
+    },
+    {
+      "title": "Inspect the trace, including unsuccessful majorities",
+      "summary": "The CLI writes the initial state and every subsequent state as JSON. A separate Python script renders graph snapshots with party, mandate, state and coalition labels.",
+      "details": [
+        "Three committed input/output fixture pairs show concrete traces; these were parsed, not rerun.",
+        "Fixture 03 ends with two 60-mandate coalitions: all parties joined, but neither reached a majority."
+      ],
+      "citations": [
+        {
+          "file": "src/main.cpp",
+          "line": 20,
+          "endLine": 31,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/main.cpp#L20-L31"
+        },
+        {
+          "file": "src/Parser.cpp",
+          "line": 119,
+          "endLine": 185,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L119-L185"
+        },
+        {
+          "file": "visualization.py",
+          "line": 1,
+          "endLine": 65,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/visualization.py#L1-L65"
+        },
+        {
+          "file": "tests/03.json",
+          "line": 1,
+          "endLine": 41,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.json#L1-L41"
+        },
+        {
+          "file": "tests/03.out",
+          "line": 477,
+          "endLine": 493,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.out#L477-L493"
+        },
+        {
+          "file": "tests/03.out",
+          "line": 555,
+          "endLine": 579,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.out#L555-L579"
+        }
+      ]
+    }
+  ],
+  "architecture": {
+    "nodes": [
+      {
+        "id": "config",
+        "label": "JSON configuration",
+        "detail": "Parties, agents, policies and graph"
+      },
+      {
+        "id": "parser",
+        "label": "Parser + validation",
+        "detail": "120 mandates and symmetric matrix"
+      },
+      {
+        "id": "simulation",
+        "label": "Simulation",
+        "detail": "Agent step, party step, termination"
+      },
+      {
+        "id": "policies",
+        "label": "Selection / join policies",
+        "detail": "Independent virtual strategies"
+      },
+      {
+        "id": "domain",
+        "label": "Graph + Party + Coalition",
+        "detail": "Offers, states and mandate totals"
+      },
+      {
+        "id": "trace",
+        "label": "JSON snapshots",
+        "detail": "Recorded state after each step"
+      },
+      {
+        "id": "viewer",
+        "label": "Python graph viewer",
+        "detail": "NetworkX / Matplotlib plots"
+      }
+    ],
+    "edges": [
+      {
+        "from": "config",
+        "to": "parser",
+        "label": "Load and validate"
+      },
+      {
+        "from": "parser",
+        "to": "simulation",
+        "label": "Construct state"
+      },
+      {
+        "from": "simulation",
+        "to": "policies",
+        "label": "Select and join"
+      },
+      {
+        "from": "policies",
+        "to": "domain",
+        "label": "Offers and coalition decisions"
+      },
+      {
+        "from": "simulation",
+        "to": "domain",
+        "label": "Update / clone / stop"
+      },
+      {
+        "from": "simulation",
+        "to": "trace",
+        "label": "Export every state"
+      },
+      {
+        "from": "trace",
+        "to": "viewer",
+        "label": "Plot recorded iterations"
+      }
+    ],
+    "citations": [
+      {
+        "file": "src/Parser.cpp",
+        "line": 12,
+        "endLine": 102,
+        "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L12-L102"
+      },
+      {
+        "file": "src/Simulation.cpp",
+        "line": 72,
+        "endLine": 104,
+        "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Simulation.cpp#L72-L104"
+      },
+      {
+        "file": "src/main.cpp",
+        "line": 20,
+        "endLine": 31,
+        "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/main.cpp#L20-L31"
+      },
+      {
+        "file": "visualization.py",
+        "line": 1,
+        "endLine": 65,
+        "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/visualization.py#L1-L65"
+      }
+    ]
+  },
+  "decisions": [
+    {
+      "title": "Two strategy boundaries for two decisions",
+      "implementation": "SelectionPolicy chooses which neighboring party an agent approaches; JoinPolicy decides which offer a party accepts. Parser constructs the requested concrete strategies.",
+      "whyItMatters": "The two choices can vary independently while the simulation lifecycle stays the same. This design rationale is inferred from source.",
+      "citations": [
+        {
+          "file": "include/SelectionPolicy.h",
+          "line": 1,
+          "endLine": 31,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/include/SelectionPolicy.h#L1-L31"
+        },
+        {
+          "file": "include/JoinPolicy.h",
+          "line": 1,
+          "endLine": 28,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/include/JoinPolicy.h#L1-L28"
+        },
+        {
+          "file": "src/Parser.cpp",
+          "line": 12,
+          "endLine": 43,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L12-L43"
+        }
+      ]
+    },
+    {
+      "title": "Make polymorphic ownership explicit",
+      "implementation": "Agent and Party implement destructors, copy and move operations for their owned policy pointers. Copying clones the virtual policy; moves transfer ownership and clear the source pointer.",
+      "whyItMatters": "Agent cloning and container operations exercise C++ resource-management mechanics instead of relying on shallow copies of owned pointers.",
+      "citations": [
+        {
+          "file": "src/Agent.cpp",
+          "line": 57,
+          "endLine": 96,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Agent.cpp#L57-L96"
+        },
+        {
+          "file": "src/Party.cpp",
+          "line": 1,
+          "endLine": 95,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Party.cpp#L1-L95"
+        }
+      ]
+    },
+    {
+      "title": "Record intermediate states instead of only a winner",
+      "implementation": "Main saves the initial state and each simulation step; Parser includes parties, agents, coalition membership, mandates and graph edges in the trace.",
+      "whyItMatters": "A reviewer can see why a coalition grew and distinguish a majority from the all-parties-joined stopping condition.",
+      "citations": [
+        {
+          "file": "src/main.cpp",
+          "line": 20,
+          "endLine": 31,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/main.cpp#L20-L31"
+        },
+        {
+          "file": "src/Parser.cpp",
+          "line": 119,
+          "endLine": 185,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L119-L185"
+        },
+        {
+          "file": "src/Simulation.cpp",
+          "line": 80,
+          "endLine": 104,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Simulation.cpp#L80-L104"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    {
+      "text": "Termination does not guarantee a majority: the committed third fixture ends at 60 versus 60 because every party has joined. This is not a general coalition impossibility solver.",
+      "citations": [
+        {
+          "file": "src/Simulation.cpp",
+          "line": 80,
+          "endLine": 104,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Simulation.cpp#L80-L104"
+        },
+        {
+          "file": "tests/03.out",
+          "line": 477,
+          "endLine": 493,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.out#L477-L493"
+        },
+        {
+          "file": "tests/03.out",
+          "line": 555,
+          "endLine": 579,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.out#L555-L579"
+        }
+      ]
+    },
+    {
+      "text": "There is no separate no-progress termination condition. A disconnected configuration can leave unjoined parties without further offers while no coalition reaches 61; this is a source-derived risk, not an executed reproduction.",
+      "citations": [
+        {
+          "file": "src/Simulation.cpp",
+          "line": 72,
+          "endLine": 104,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Simulation.cpp#L72-L104"
+        },
+        {
+          "file": "src/EdgeWeightSelectionPolicy.cpp",
+          "line": 1,
+          "endLine": 31,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/EdgeWeightSelectionPolicy.cpp#L1-L31"
+        }
+      ]
+    },
+    {
+      "text": "Mandates selection initializes its candidate using a different eligibility condition from the later loop. That can retain an ineligible initial candidate, so optimal or universally correct selection is not established.",
+      "citations": [
+        {
+          "file": "src/MandatesSelectionPolicy.cpp",
+          "line": 4,
+          "endLine": 32,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/MandatesSelectionPolicy.cpp#L4-L32"
+        }
+      ]
+    },
+    {
+      "text": "Validation consists of source review and inspection of three committed traces, not a new compile or asserted test run. The Python viewer opens graph plots; it is not an interactive web simulator.",
+      "citations": [
+        {
+          "file": "makefile",
+          "line": 1,
+          "endLine": 42,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/makefile#L1-L42"
+        },
+        {
+          "file": "visualization.py",
+          "line": 1,
+          "endLine": 65,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/visualization.py#L1-L65"
+        }
+      ],
+      "inventoryEvidence": "The_Coalition_Race-source-inventory.json"
+    }
+  ],
+  "visualConcept": {
+    "title": "A majority is not the only ending",
+    "description": "Render the four-node weighted graph from a committed fixture and step through its recorded states. Show two coalition meters against the 61-mandate threshold. Fixture 01 reaches 70; fixture 03 ends at 60/60 with all parties joined. Let the visitor switch between those two traces to understand the stopping rule. Label the visual as a recorded coursework fixture trace, not a live political prediction.",
+    "labels": [
+      "Waiting",
+      "Collecting offers",
+      "Joined",
+      "Mandates",
+      "Majority: 61",
+      "All parties joined"
+    ],
+    "avoid": [
+      "A majority guaranteed in every run",
+      "A general optimizer or prediction engine",
+      "Invented realtime negotiation",
+      "Calling static Matplotlib output a browser application"
+    ]
+  },
+  "fixtureEvidence": [
+    {
+      "file": "tests/01.out",
+      "snapshots": 6,
+      "finalCoalitionMandates": [
+        50,
+        70
+      ],
+      "outcome": "One coalition reaches 70; all parties have also joined."
+    },
+    {
+      "file": "tests/02.out",
+      "snapshots": 8,
+      "finalCoalitionMandates": [
+        75
+      ],
+      "outcome": "A 75-mandate majority ends the run while the last party is still collecting offers."
+    },
+    {
+      "file": "tests/03.out",
+      "snapshots": 5,
+      "finalCoalitionMandates": [
+        60,
+        60
+      ],
+      "outcome": "All parties have joined; neither coalition reaches 61."
+    }
+  ],
+  "citations": [
+    {
+      "file": "src/Parser.cpp",
+      "line": 12,
+      "endLine": 43,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L12-L43"
+    },
+    {
+      "file": "src/EdgeWeightSelectionPolicy.cpp",
+      "line": 1,
+      "endLine": 45,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/EdgeWeightSelectionPolicy.cpp#L1-L45"
+    },
+    {
+      "file": "src/MandatesSelectionPolicy.cpp",
+      "line": 1,
+      "endLine": 32,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/MandatesSelectionPolicy.cpp#L1-L32"
+    },
+    {
+      "file": "src/LastOfferJoinPolicy.cpp",
+      "line": 1,
+      "endLine": 12,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/LastOfferJoinPolicy.cpp#L1-L12"
+    },
+    {
+      "file": "src/MandatesJoinPolicy.cpp",
+      "line": 1,
+      "endLine": 20,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/MandatesJoinPolicy.cpp#L1-L20"
+    },
+    {
+      "file": "include/Party.h",
+      "line": 1,
+      "endLine": 53,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/include/Party.h#L1-L53"
+    },
+    {
+      "file": "src/Simulation.cpp",
+      "line": 72,
+      "endLine": 104,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Simulation.cpp#L72-L104"
+    },
+    {
+      "file": "src/Party.cpp",
+      "line": 96,
+      "endLine": 111,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Party.cpp#L96-L111"
+    },
+    {
+      "file": "src/Agent.cpp",
+      "line": 42,
+      "endLine": 53,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Agent.cpp#L42-L53"
+    },
+    {
+      "file": "src/main.cpp",
+      "line": 20,
+      "endLine": 31,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/main.cpp#L20-L31"
+    },
+    {
+      "file": "src/Parser.cpp",
+      "line": 119,
+      "endLine": 185,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L119-L185"
+    },
+    {
+      "file": "visualization.py",
+      "line": 1,
+      "endLine": 65,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/visualization.py#L1-L65"
+    },
+    {
+      "file": "tests/03.json",
+      "line": 1,
+      "endLine": 41,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.json#L1-L41"
+    },
+    {
+      "file": "tests/03.out",
+      "line": 477,
+      "endLine": 493,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.out#L477-L493"
+    },
+    {
+      "file": "tests/03.out",
+      "line": 555,
+      "endLine": 579,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.out#L555-L579"
+    },
+    {
+      "file": "src/Parser.cpp",
+      "line": 12,
+      "endLine": 102,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L12-L102"
+    },
+    {
+      "file": "include/SelectionPolicy.h",
+      "line": 1,
+      "endLine": 31,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/include/SelectionPolicy.h#L1-L31"
+    },
+    {
+      "file": "include/JoinPolicy.h",
+      "line": 1,
+      "endLine": 28,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/include/JoinPolicy.h#L1-L28"
+    },
+    {
+      "file": "src/Agent.cpp",
+      "line": 57,
+      "endLine": 96,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Agent.cpp#L57-L96"
+    },
+    {
+      "file": "src/Party.cpp",
+      "line": 1,
+      "endLine": 95,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Party.cpp#L1-L95"
+    },
+    {
+      "file": "src/Simulation.cpp",
+      "line": 80,
+      "endLine": 104,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Simulation.cpp#L80-L104"
+    },
+    {
+      "file": "src/EdgeWeightSelectionPolicy.cpp",
+      "line": 1,
+      "endLine": 31,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/EdgeWeightSelectionPolicy.cpp#L1-L31"
+    },
+    {
+      "file": "src/MandatesSelectionPolicy.cpp",
+      "line": 4,
+      "endLine": 32,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/MandatesSelectionPolicy.cpp#L4-L32"
+    },
+    {
+      "file": "makefile",
+      "line": 1,
+      "endLine": 42,
+      "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/makefile#L1-L42"
+    }
+  ]
+}

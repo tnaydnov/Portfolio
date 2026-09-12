@@ -22,8 +22,8 @@ export const arc: Project = {
   statusDetail: "The latest audited work is merged into development. Production and development have separate releases.",
   evidenceNote: "Refreshed September 12, 2026 from the repository, product demo, workflow results and portal availability. The product tour runs development source with fictional classroom data in an isolated local database. Private source and learner records remain private; production has a separate release.",
   metrics: [
-    { label: "Product scope", value: "Five workspaces", note: "Students, teaching, school, program, and system teams" },
-    { label: "Activity catalog", value: "21 task types", note: "From writing and coding to collaborative activities" },
+    { label: "Student experience", value: "Five themes", note: "Aurora, Aurora Light, Neon Hacker, Magic Forest and Space" },
+    { label: "Activity catalog", value: "21 registered kinds", note: "Individual work, live sessions and external integrations have different handlers" },
     { label: "Curriculum", value: "Rule-based drafts", note: "Reusable activities, editable before publishing" },
     { label: "Delivery", value: "Gated CI", note: "Checks precede deployment of the tested commit" },
   ],
@@ -50,7 +50,7 @@ export const arc: Project = {
       stage: "plan",
       heading: "Support the classroom and the wider program",
       body: [
-        "Arc provides five role-specific workspaces for students, instructors, school managers, program management, and system administrators. Its task catalog contains 21 types spanning writing, coding, drawing, questionnaires, and collaborative activities.",
+        "Arc provides role-specific experiences for students, instructors, content authors, school and program teams, and system administrators. Its canonical task registry contains 21 kinds with different handling paths, including individual work, instructor-led sessions and external integrations.",
         "Reporting keeps participation, drafts, submissions, reviews, and revisions distinct, with reporting periods and permission boundaries. This gives program teams context beyond a single completion count while instructors retain the individual work behind it.",
       ],
     },

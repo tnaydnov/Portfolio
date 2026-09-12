@@ -1,0 +1,493 @@
+{
+  "title": "Set Card Game",
+  "revision": "cf44b52616b0b8862338e134e05b029f5de9d7b4",
+  "repo": "https://github.com/tnaydnov/Set_Card_Game",
+  "status": "Archived university coursework; source reviewed, not executed during this audit.",
+  "ownership": {
+    "verified": "Public archived coursework repository under tnaydnov.",
+    "boundary": "This review describes repository behavior; it does not attribute all supplied framework code or team work exclusively to Tomer."
+  },
+  "auditScope": {
+    "trackedFiles": 107,
+    "method": "Complete review of authored source, tests, build configuration and project documentation in a fresh source-only clone. Vendor code, image assets and IDE metadata were inventoried rather than treated as authored implementation.",
+    "execution": "No fresh build, runtime or test pass is claimed.",
+    "inventory": "Set_Card_Game-source-inventory.json",
+    "reviewedTextFiles": 21
+  },
+  "oneLiner": "A concurrent Set game where independent player threads share a dealer-controlled table.",
+  "summary": "A Java concurrency assignment turns the card game into a coordination problem: keyboard and computer players submit selections while a dealer validates sets, awards points, replaces cards and manages the round timer. The engineering story is the boundary between independent input, shared table state and centralized validation.",
+  "stack": [
+    "Java 8",
+    "Threads, monitors and semaphores",
+    "Swing / AWT",
+    "Maven",
+    "JUnit 5",
+    "Mockito"
+  ],
+  "capabilityGroups": [
+    {
+      "title": "Independent players, one shared table",
+      "summary": "Each player runs on a separate thread. Bounded input and candidate queues connect player actions to the dealer, while synchronized table operations maintain card and token state.",
+      "details": [
+        "Human input maps configured keys to player and slot.",
+        "Computer players generate random key presses; they are not strategic solvers.",
+        "The checked-in configuration starts four computer players and zero human players."
+      ],
+      "citations": [
+        {
+          "file": "src/main/java/bguspl/set/ex/Dealer.java",
+          "line": 60,
+          "endLine": 90,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L60-L90"
+        },
+        {
+          "file": "src/main/java/bguspl/set/ex/Player.java",
+          "line": 109,
+          "endLine": 188,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L109-L188"
+        },
+        {
+          "file": "src/main/java/bguspl/set/ex/Table.java",
+          "line": 29,
+          "endLine": 50,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L29-L50"
+        },
+        {
+          "file": "src/main/resources/config.properties",
+          "line": 1,
+          "endLine": 63,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/resources/config.properties#L1-L63"
+        }
+      ]
+    },
+    {
+      "title": "Validate, score and refill",
+      "summary": "The dealer converts a three-token selection into cards, validates the Set rule, removes a winning triple and associated tokens, then communicates a point or penalty to the waiting player.",
+      "details": [
+        "A valid set has each feature either equal across all three cards or different across all three.",
+        "Point and penalty freezes temporarily suppress player input.",
+        "Card replacement and countdown management belong to the dealer."
+      ],
+      "citations": [
+        {
+          "file": "src/main/java/bguspl/set/ex/Dealer.java",
+          "line": 155,
+          "endLine": 215,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L155-L215"
+        },
+        {
+          "file": "src/main/java/bguspl/set/UtilImpl.java",
+          "line": 41,
+          "endLine": 92,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UtilImpl.java#L41-L92"
+        },
+        {
+          "file": "src/main/java/bguspl/set/ex/Player.java",
+          "line": 232,
+          "endLine": 275,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L232-L275"
+        }
+      ]
+    },
+    {
+      "title": "A playable desktop surface",
+      "summary": "The Swing interface shows cards, player tokens, countdown, scores, freeze indicators and final winners. Configuration controls player counts, key bindings and round timing.",
+      "details": [
+        "The table stores both slot-to-card and card-to-slot mappings.",
+        "The UI interface provides a seam for mocks used by the unit tests."
+      ],
+      "citations": [
+        {
+          "file": "src/main/java/bguspl/set/UserInterface.java",
+          "line": 1,
+          "endLine": 88,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UserInterface.java#L1-L88"
+        },
+        {
+          "file": "src/main/java/bguspl/set/UserInterfaceSwing.java",
+          "line": 1,
+          "endLine": 339,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UserInterfaceSwing.java#L1-L339"
+        },
+        {
+          "file": "src/main/java/bguspl/set/ex/Table.java",
+          "line": 96,
+          "endLine": 147,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L96-L147"
+        },
+        {
+          "file": "src/test/java/bguspl/set/ex/TableTest.java",
+          "line": 1,
+          "endLine": 170,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/TableTest.java#L1-L170"
+        }
+      ]
+    }
+  ],
+  "architecture": {
+    "nodes": [
+      {
+        "id": "input",
+        "label": "Keyboard / random computer input",
+        "detail": "Per-player input producer"
+      },
+      {
+        "id": "players",
+        "label": "Player threads",
+        "detail": "Token selection and freeze state"
+      },
+      {
+        "id": "queue",
+        "label": "Candidate queue",
+        "detail": "Bounded IDs awaiting validation"
+      },
+      {
+        "id": "dealer",
+        "label": "Dealer thread",
+        "detail": "Rules, timer and card lifecycle"
+      },
+      {
+        "id": "table",
+        "label": "Shared table",
+        "detail": "Cards, slots, tokens and synchronization"
+      },
+      {
+        "id": "ui",
+        "label": "Swing interface",
+        "detail": "Cards, score and countdown"
+      }
+    ],
+    "edges": [
+      {
+        "from": "input",
+        "to": "players",
+        "label": "Bounded key-press queue"
+      },
+      {
+        "from": "players",
+        "to": "queue",
+        "label": "Three selected slots"
+      },
+      {
+        "from": "queue",
+        "to": "dealer",
+        "label": "Validate candidate"
+      },
+      {
+        "from": "dealer",
+        "to": "players",
+        "label": "Point / penalty and wake-up"
+      },
+      {
+        "from": "players",
+        "to": "table",
+        "label": "Select / remove tokens"
+      },
+      {
+        "from": "dealer",
+        "to": "table",
+        "label": "Deal / remove cards"
+      },
+      {
+        "from": "table",
+        "to": "ui",
+        "label": "Render state"
+      }
+    ],
+    "citations": [
+      {
+        "file": "src/main/java/bguspl/set/ex/Dealer.java",
+        "line": 60,
+        "endLine": 90,
+        "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L60-L90"
+      },
+      {
+        "file": "src/main/java/bguspl/set/ex/Dealer.java",
+        "line": 155,
+        "endLine": 215,
+        "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L155-L215"
+      },
+      {
+        "file": "src/main/java/bguspl/set/ex/Player.java",
+        "line": 109,
+        "endLine": 188,
+        "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L109-L188"
+      },
+      {
+        "file": "src/main/java/bguspl/set/ex/Table.java",
+        "line": 96,
+        "endLine": 147,
+        "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L96-L147"
+      }
+    ]
+  },
+  "decisions": [
+    {
+      "title": "Separate selection from validation",
+      "implementation": "Player threads collect token selections and enqueue their ID; the dealer owns rule checking, card removal and the point/penalty response.",
+      "whyItMatters": "This makes the contention visible: multiple players can refer to the same cards, but validation must coordinate with card replacement. This explanation is inferred from the implementation.",
+      "citations": [
+        {
+          "file": "src/main/java/bguspl/set/ex/Player.java",
+          "line": 120,
+          "endLine": 188,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L120-L188"
+        },
+        {
+          "file": "src/main/java/bguspl/set/ex/Dealer.java",
+          "line": 155,
+          "endLine": 192,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L155-L192"
+        }
+      ]
+    },
+    {
+      "title": "Keep shared card mappings together",
+      "implementation": "Table methods update slot-to-card and card-to-slot mappings alongside UI operations; a fair semaphore and synchronized blocks coordinate access.",
+      "whyItMatters": "The case study can explain a concrete invariant instead of making an unverified claim that the entire game is race-free.",
+      "citations": [
+        {
+          "file": "src/main/java/bguspl/set/ex/Table.java",
+          "line": 29,
+          "endLine": 50,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L29-L50"
+        },
+        {
+          "file": "src/main/java/bguspl/set/ex/Table.java",
+          "line": 96,
+          "endLine": 147,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L96-L147"
+        }
+      ]
+    },
+    {
+      "title": "Make the interface replaceable in tests",
+      "implementation": "Game code receives an Env containing a UserInterface abstraction. Unit tests use Mockito doubles for UI and table dependencies.",
+      "whyItMatters": "Core score and table behavior can be exercised without opening the desktop window.",
+      "citations": [
+        {
+          "file": "src/main/java/bguspl/set/Env.java",
+          "line": 1,
+          "endLine": 19,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/Env.java#L1-L19"
+        },
+        {
+          "file": "src/test/java/bguspl/set/ex/PlayerTest.java",
+          "line": 1,
+          "endLine": 99,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/PlayerTest.java#L1-L99"
+        },
+        {
+          "file": "src/test/java/bguspl/set/ex/TableTest.java",
+          "line": 1,
+          "endLine": 170,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/TableTest.java#L1-L170"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    {
+      "text": "Computer behavior is random slot input, not a Set-playing AI. Idle player/computer loops also prevent a claim of demonstrated CPU efficiency.",
+      "citations": [
+        {
+          "file": "src/main/java/bguspl/set/ex/Player.java",
+          "line": 120,
+          "endLine": 215,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L120-L215"
+        }
+      ]
+    },
+    {
+      "text": "Some implementation paths assume 12 slots even though the framework exposes configurable dimensions.",
+      "citations": [
+        {
+          "file": "src/main/java/bguspl/set/ex/Dealer.java",
+          "line": 110,
+          "endLine": 121,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L110-L121"
+        },
+        {
+          "file": "src/main/java/bguspl/set/ex/Player.java",
+          "line": 197,
+          "endLine": 215,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L197-L215"
+        }
+      ]
+    },
+    {
+      "text": "The tests cover selected table, score and lifecycle methods; they do not establish correctness under adversarial thread schedules. Some dealer checks use dedicated helper methods instead of the full concurrent loop.",
+      "citations": [
+        {
+          "file": "src/test/java/bguspl/set/ex/DealerTest.java",
+          "line": 1,
+          "endLine": 87,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/DealerTest.java#L1-L87"
+        },
+        {
+          "file": "src/test/java/bguspl/set/ex/PlayerTest.java",
+          "line": 1,
+          "endLine": 99,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/PlayerTest.java#L1-L99"
+        },
+        {
+          "file": "src/test/java/bguspl/set/ex/TableTest.java",
+          "line": 1,
+          "endLine": 170,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/TableTest.java#L1-L170"
+        }
+      ]
+    },
+    {
+      "text": "This is a Swing desktop assignment, not a browser application. Bundled card assets were inventoried but are unnecessary for the proposed original vector explanation.",
+      "citations": [
+        {
+          "file": "src/main/java/bguspl/set/UserInterfaceSwing.java",
+          "line": 1,
+          "endLine": 80,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UserInterfaceSwing.java#L1-L80"
+        }
+      ]
+    }
+  ],
+  "visualConcept": {
+    "title": "Two players. One contested triple.",
+    "description": "Draw an original SVG 3-by-4 card table and show two colored token selections overlapping one card. A single candidate moves into the dealer queue; validation removes one triple, clears affected tokens and updates one score. A second frame exposes why the waiting player cannot validate against stale table state. Label this as an architectural illustration, not a recording of the Java program.",
+    "labels": [
+      "Player threads",
+      "Token selection",
+      "Candidate queue",
+      "Dealer validation",
+      "Shared table",
+      "Point / penalty"
+    ],
+    "avoid": [
+      "Claims of strategic AI",
+      "Claims of proven race freedom",
+      "Reusing downloaded card artwork unnecessarily",
+      "Pretending the illustration is the actual Swing UI"
+    ]
+  },
+  "citations": [
+    {
+      "file": "src/main/java/bguspl/set/ex/Dealer.java",
+      "line": 60,
+      "endLine": 90,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L60-L90"
+    },
+    {
+      "file": "src/main/java/bguspl/set/ex/Player.java",
+      "line": 109,
+      "endLine": 188,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L109-L188"
+    },
+    {
+      "file": "src/main/java/bguspl/set/ex/Table.java",
+      "line": 29,
+      "endLine": 50,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L29-L50"
+    },
+    {
+      "file": "src/main/resources/config.properties",
+      "line": 1,
+      "endLine": 63,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/resources/config.properties#L1-L63"
+    },
+    {
+      "file": "src/main/java/bguspl/set/ex/Dealer.java",
+      "line": 155,
+      "endLine": 215,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L155-L215"
+    },
+    {
+      "file": "src/main/java/bguspl/set/UtilImpl.java",
+      "line": 41,
+      "endLine": 92,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UtilImpl.java#L41-L92"
+    },
+    {
+      "file": "src/main/java/bguspl/set/ex/Player.java",
+      "line": 232,
+      "endLine": 275,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L232-L275"
+    },
+    {
+      "file": "src/main/java/bguspl/set/UserInterface.java",
+      "line": 1,
+      "endLine": 88,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UserInterface.java#L1-L88"
+    },
+    {
+      "file": "src/main/java/bguspl/set/UserInterfaceSwing.java",
+      "line": 1,
+      "endLine": 339,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UserInterfaceSwing.java#L1-L339"
+    },
+    {
+      "file": "src/main/java/bguspl/set/ex/Table.java",
+      "line": 96,
+      "endLine": 147,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L96-L147"
+    },
+    {
+      "file": "src/test/java/bguspl/set/ex/TableTest.java",
+      "line": 1,
+      "endLine": 170,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/TableTest.java#L1-L170"
+    },
+    {
+      "file": "src/main/java/bguspl/set/ex/Player.java",
+      "line": 120,
+      "endLine": 188,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L120-L188"
+    },
+    {
+      "file": "src/main/java/bguspl/set/ex/Dealer.java",
+      "line": 155,
+      "endLine": 192,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L155-L192"
+    },
+    {
+      "file": "src/main/java/bguspl/set/Env.java",
+      "line": 1,
+      "endLine": 19,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/Env.java#L1-L19"
+    },
+    {
+      "file": "src/test/java/bguspl/set/ex/PlayerTest.java",
+      "line": 1,
+      "endLine": 99,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/PlayerTest.java#L1-L99"
+    },
+    {
+      "file": "src/main/java/bguspl/set/ex/Player.java",
+      "line": 120,
+      "endLine": 215,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L120-L215"
+    },
+    {
+      "file": "src/main/java/bguspl/set/ex/Dealer.java",
+      "line": 110,
+      "endLine": 121,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L110-L121"
+    },
+    {
+      "file": "src/main/java/bguspl/set/ex/Player.java",
+      "line": 197,
+      "endLine": 215,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L197-L215"
+    },
+    {
+      "file": "src/test/java/bguspl/set/ex/DealerTest.java",
+      "line": 1,
+      "endLine": 87,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/DealerTest.java#L1-L87"
+    },
+    {
+      "file": "src/main/java/bguspl/set/UserInterfaceSwing.java",
+      "line": 1,
+      "endLine": 80,
+      "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UserInterfaceSwing.java#L1-L80"
+    }
+  ]
+}

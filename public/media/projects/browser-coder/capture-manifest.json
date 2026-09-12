@@ -144,5 +144,425 @@
     "Turtle output contains 271 recorded commands, replay controls and source-linked replay state.",
     "No browser page exceptions during selected captures."
   ],
-  "captureMethod": "Original app operated through Playwright. Screenshots at DPR 2; lossless Chromium compositor PNG frames preserve video text, then one H.264 encode with editorial title/caption bands. No UI reconstruction."
+  "captureMethod": "Original app operated through Playwright. Screenshots at DPR 2; lossless Chromium compositor PNG frames preserve video text, then one H.264 encode with editorial title/caption bands. No UI reconstruction.",
+  "depthReview": {
+    "project": "Browser Coder",
+    "sourceRevision": "7d3cae91ff9cc73001d7fcfa0aa3b315cebb2aeb",
+    "capturedAt": "2026-09-12",
+    "assets": [
+      {
+        "id": "error-explained",
+        "type": "image",
+        "title": "An error becomes a next step",
+        "description": "The original diagnostic includes the compiler message, a plain-English explanation, a common cause, an example and an explicit fix.",
+        "portal": "Learning support",
+        "src": "/media/projects/browser-coder/depth/error-explained.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 550,
+          "y": 850,
+          "width": 2300,
+          "height": 1020
+        }
+      },
+      {
+        "id": "checks-with-feedback",
+        "type": "image",
+        "title": "Two pass. One useful next step.",
+        "description": "The checks distinguish a working empty-list case from the remaining decimal error, with an expected value and an actual value.",
+        "portal": "Check my work",
+        "src": "/media/projects/browser-coder/depth/checks-with-feedback.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 550,
+          "y": 1040,
+          "width": 2250,
+          "height": 760
+        }
+      },
+      {
+        "id": "checks-passing",
+        "type": "image",
+        "title": "The same checks. A better result.",
+        "description": "After the student fixes the division operator, the original marking harness reports all three checks passing.",
+        "portal": "Check my work",
+        "src": "/media/projects/browser-coder/depth/checks-passing.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 560,
+          "y": 1120,
+          "width": 2200,
+          "height": 640
+        }
+      },
+      {
+        "id": "web-workspace",
+        "type": "image",
+        "title": "A whole project in the browser",
+        "description": "A fictional student page uses separate HTML and CSS documents, with the real editor, file tree and preview command.",
+        "portal": "Web projects",
+        "src": "/media/projects/browser-coder/depth/web-workspace.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 0,
+          "y": 100,
+          "width": 2800,
+          "height": 1460
+        }
+      },
+      {
+        "id": "web-preview",
+        "type": "image",
+        "title": "From separate files to one working page",
+        "description": "The actual preview service resolves the page’s relative stylesheet and publishes a separate, immutable snapshot URL. This is a sample student project, not a Browser Coder product screen.",
+        "portal": "Published preview",
+        "src": "/media/projects/browser-coder/depth/web-preview.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 120,
+          "y": 220,
+          "width": 2940,
+          "height": 1550
+        }
+      },
+      {
+        "id": "shared-workspace",
+        "type": "image",
+        "title": "A link carries the context",
+        "description": "A fresh browser context opens the shared HTML and CSS files. The recipient receives an editable local copy; the published snapshot stays unchanged.",
+        "portal": "Project sharing",
+        "src": "/media/projects/browser-coder/depth/shared-workspace.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 0,
+          "y": 90,
+          "width": 2860,
+          "height": 1430
+        }
+      },
+      {
+        "id": "learning-journey",
+        "title": "From a mistake to an explanation",
+        "description": "A real Python error, a visible repair and three teacher-defined checks. Follow the feedback all the way to a corrected result.",
+        "src": "/media/projects/browser-coder/depth/learning-journey.mp4",
+        "poster": "/media/projects/browser-coder/depth/learning-journey-poster.webp",
+        "captions": "/media/projects/browser-coder/depth/learning-journey.vtt",
+        "type": "video",
+        "width": 1920,
+        "height": 1280,
+        "duration": 30.400000000000002,
+        "chapters": [
+          {
+            "at": 0,
+            "title": "Understanding comes before the answer.",
+            "description": "BROWSER CODER / A REAL PYTHON LEARNING JOURNEY"
+          },
+          {
+            "at": 2.5,
+            "title": "01 / Start with the compiler",
+            "description": "A missing colon stops this program before it runs."
+          },
+          {
+            "at": 6.633333,
+            "title": "02 / Turn the error into a next step",
+            "description": "A plain-language explanation. A specific repair. The choice stays with the learner."
+          },
+          {
+            "at": 9.666666,
+            "title": "03 / Make the repair visible",
+            "description": "The original editor inserts the colon. The logic still belongs to the student."
+          },
+          {
+            "at": 13.566666,
+            "title": "04 / Test the reasoning",
+            "description": "Two cases pass. A fractional average reveals the remaining mistake."
+          },
+          {
+            "at": 18.966666,
+            "title": "05 / Keep the decimal",
+            "description": "Replace floor division with ordinary division, then run the same checks again."
+          },
+          {
+            "at": 22.733333000000002,
+            "title": "06 / See what changed",
+            "description": "The original harness now reports 3 of 3 checks passing."
+          },
+          {
+            "at": 27.900000000000002,
+            "title": "A better result. A clearer understanding.",
+            "description": "Real execution / Teacher-defined checks / Original app pixels"
+          }
+        ]
+      },
+      {
+        "id": "loop-first-value",
+        "type": "image",
+        "title": "One line. One visible change.",
+        "description": "Stepping over the addition updates total from 0 to 72 in the actual paused Python session.",
+        "portal": "Debugger",
+        "src": "/media/projects/browser-coder/depth/loop-first-value.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 540,
+          "y": 875,
+          "width": 2100,
+          "height": 700
+        }
+      },
+      {
+        "id": "loop-accumulated-value",
+        "type": "image",
+        "title": "The loop carries its history forward",
+        "description": "A later pause exposes the accumulated total after another score is added. Variable differences help connect the iteration to its state.",
+        "portal": "Debugger",
+        "src": "/media/projects/browser-coder/depth/loop-accumulated-value.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 540,
+          "y": 875,
+          "width": 2100,
+          "height": 700
+        }
+      },
+      {
+        "id": "geometry-result",
+        "type": "image",
+        "title": "Geometry from a short Python loop",
+        "description": "Ninety iterations generate a drawing through the original Python Turtle command path.",
+        "portal": "Graphics",
+        "src": "/media/projects/browser-coder/depth/geometry-result.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 1780,
+          "y": 180,
+          "width": 1340,
+          "height": 1550
+        }
+      },
+      {
+        "id": "geometry-step",
+        "type": "image",
+        "title": "A particular mark, a particular line",
+        "description": "The replay cursor selects an earlier state of the original drawing and points back to the source responsible for it.",
+        "portal": "Graphics",
+        "src": "/media/projects/browser-coder/depth/geometry-step.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 1420,
+          "y": 130,
+          "width": 1720,
+          "height": 1670
+        }
+      },
+      {
+        "id": "state-journey",
+        "title": "Watch the state change",
+        "description": "A loop, a breakpoint and the values between iterations. Inspect an earlier pause, then return to the live program.",
+        "src": "/media/projects/browser-coder/depth/state-journey.mp4",
+        "poster": "/media/projects/browser-coder/depth/state-journey-poster.webp",
+        "captions": "/media/projects/browser-coder/depth/state-journey.vtt",
+        "type": "video",
+        "width": 1920,
+        "height": 1280,
+        "duration": 27.599999,
+        "chapters": [
+          {
+            "at": 0,
+            "title": "The result has a history.",
+            "description": "BROWSER CODER / INSIDE A REAL PYTHON LOOP"
+          },
+          {
+            "at": 2.3,
+            "title": "01 / Pause before the addition",
+            "description": "A breakpoint stops the program inside the loop."
+          },
+          {
+            "at": 5.733333,
+            "title": "02 / One line changes a value",
+            "description": "Step over the addition. The original debugger shows total moving from 0 to 72."
+          },
+          {
+            "at": 9.733333,
+            "title": "03 / See the next iteration",
+            "description": "The next addition changes total from 72 to 160. The difference is explicit."
+          },
+          {
+            "at": 14.266666,
+            "title": "04 / Compare pause history",
+            "description": "Browse a recorded pause, then return to live. The Python process is not rewound."
+          },
+          {
+            "at": 19.266666,
+            "title": "05 / Finish the calculation",
+            "description": "Continue through the remaining pauses. The real program reports an average of 84.0."
+          },
+          {
+            "at": 25.399999,
+            "title": "Code. State. A reason for the result.",
+            "description": "Original Python process / Recorded pause history / No simulated debugger"
+          }
+        ]
+      },
+      {
+        "id": "graphics-journey",
+        "title": "A drawing you can think through",
+        "description": "A short Python loop creates geometry. Replay its commands and inspect the source behind a particular step.",
+        "src": "/media/projects/browser-coder/depth/graphics-journey.mp4",
+        "poster": "/media/projects/browser-coder/depth/graphics-journey-poster.webp",
+        "captions": "/media/projects/browser-coder/depth/graphics-journey.vtt",
+        "type": "video",
+        "width": 1920,
+        "height": 1280,
+        "duration": 22.1,
+        "chapters": [
+          {
+            "at": 0,
+            "title": "Make an idea visible.",
+            "description": "BROWSER CODER / PYTHON TURTLE, WITH MEMORY"
+          },
+          {
+            "at": 2.3,
+            "title": "01 / Run the drawing program",
+            "description": "Ninety loop iterations produce real Turtle commands and the finished geometry."
+          },
+          {
+            "at": 6.133333,
+            "title": "02 / Watch how it was made",
+            "description": "Replay the recorded drawing. Source highlights follow the selected command."
+          },
+          {
+            "at": 11.433333000000001,
+            "title": "03 / Choose a particular step",
+            "description": "Scrub back and inspect an earlier drawing state, without running Python again."
+          },
+          {
+            "at": 17.200000000000003,
+            "title": "04 / Return to the complete drawing",
+            "description": "The same recorded output can be explored at the learner’s own pace."
+          },
+          {
+            "at": 19.900000000000002,
+            "title": "A mark on the canvas. A line in the code.",
+            "description": "Real Python output / Original replay controls / Source-linked drawing commands"
+          }
+        ]
+      },
+      {
+        "id": "web-journey",
+        "title": "A small website, with its context intact",
+        "description": "Build a multi-file student project, open the real preview and share a stable snapshot that another person can explore.",
+        "src": "/media/projects/browser-coder/depth/web-journey.mp4",
+        "poster": "/media/projects/browser-coder/depth/web-journey-poster.webp",
+        "captions": "/media/projects/browser-coder/depth/web-journey.vtt",
+        "type": "video",
+        "width": 1920,
+        "height": 1280,
+        "duration": 20.7,
+        "chapters": [
+          {
+            "at": 0,
+            "title": "More than a single code snippet.",
+            "description": "BROWSER CODER / A REAL MULTI-FILE WEB PROJECT"
+          },
+          {
+            "at": 2.3,
+            "title": "01 / Keep the files together",
+            "description": "The fictional Orbit Club student project has separate HTML and CSS documents."
+          },
+          {
+            "at": 6.3999999999999995,
+            "title": "02 / Open the actual preview",
+            "description": "The original preview service resolves the relative stylesheet. This is sample student work."
+          },
+          {
+            "at": 10.899999999999999,
+            "title": "03 / Share the exact workspace",
+            "description": "The original command publishes a project snapshot through the real backend."
+          },
+          {
+            "at": 14.2,
+            "title": "04 / Give someone room to explore",
+            "description": "A fresh browser opens an editable local copy. Its edits leave the published snapshot unchanged."
+          },
+          {
+            "at": 18.4,
+            "title": "A stable reference. An independent copy.",
+            "description": "Actual preview + share services / Fictional student project / No live co-editing claim"
+          }
+        ]
+      }
+    ],
+    "verified": [
+      "Real Python preflight refused the missing colon on scorecard.py line2; no program execution occurred.",
+      "Actual hidden Python harness executed through the original command palette:2passed,1failed; expected8.5,actual8.",
+      "A real keyboard edit changed // to /; rerunning the same harness produced3passes and average8.5. The hidden harness is absent from the learner-facing tree.",
+      "Original Open Preview published HTML and relative CSS; rendered background verified from actual CSS.",
+      "Explorer rename input did not remain available in this local probe. No successful rename demonstration is claimed.",
+      "Fresh recipient context loaded original share and edited its local copy. GET original share remained unchanged.",
+      "Two loop additions were inspected in the original debugger (total72 then160), with explicit variable differences and recorded history. Real program completed with84.0.",
+      "Real Python Turtle commands rendered geometry; replay and scrub controls were exercised."
+    ],
+    "editorial": "Original DPR2 pixels; chapter slates, detail crops and slowed actions. No generated UI."
+  },
+  "presentationBoard": {
+    "src": "/media/projects/browser-coder/depth/presentation-board.webp",
+    "width": 3200,
+    "height": 2000,
+    "bytes": 349886,
+    "sources": [
+      {
+        "src": "/media/projects/browser-coder/depth/geometry-result.webp",
+        "crop": {
+          "x": 0,
+          "y": 0,
+          "width": 3200,
+          "height": 2000,
+          "sourceWidth": 3200
+        },
+        "displayWidth": 844,
+        "sourceWidth": 3200,
+        "sourceHeight": 2000,
+        "sha256": "df271b7a881d4703cfdede6912e06185623789481ce201c7bd7d7e06832333e8"
+      },
+      {
+        "src": "/media/projects/browser-coder/depth/error-explained.webp",
+        "crop": {
+          "x": 550,
+          "y": 1170,
+          "width": 1900,
+          "height": 660,
+          "sourceWidth": 3200
+        },
+        "displayWidth": 562,
+        "sourceWidth": 3200,
+        "sourceHeight": 2000,
+        "sha256": "afc1f3404059ba9bcb02755ce11f55d6cba85b87d1a8e4c3846fa999b1b78069"
+      },
+      {
+        "src": "/media/projects/browser-coder/depth/loop-first-value.webp",
+        "crop": {
+          "x": 550,
+          "y": 1180,
+          "width": 1250,
+          "height": 230,
+          "sourceWidth": 3200
+        },
+        "displayWidth": 562,
+        "sourceWidth": 3200,
+        "sourceHeight": 2000,
+        "sha256": "2d00fcffbd60087782a13db6992eaaaa483b05a5dcfaac5f7626b808cafd0e92"
+      }
+    ],
+    "editorial": "Authored HTML/CSS framing. Original screenshot pixels cropped uniformly, no fabricated UI. Captions outside source pixels."
+  }
 }

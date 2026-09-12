@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.500
+BROWSER CODER / A REAL PYTHON LEARNING JOURNEY
+
+00:00:02.500 --> 00:00:06.633
+A missing colon stops this program before it runs.
+
+00:00:06.633 --> 00:00:09.667
+A plain-language explanation. A specific repair. The choice stays with the learner.
+
+00:00:09.667 --> 00:00:13.567
+The original editor inserts the colon. The logic still belongs to the student.
+
+00:00:13.567 --> 00:00:18.967
+Two cases pass. A fractional average reveals the remaining mistake.
+
+00:00:18.967 --> 00:00:22.733
+Replace floor division with ordinary division, then run the same checks again.
+
+00:00:22.733 --> 00:00:27.900
+The original harness now reports 3 of 3 checks passing.
+
+00:00:27.900 --> 00:00:30.400
+Real execution / Teacher-defined checks / Original app pixels

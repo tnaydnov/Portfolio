@@ -164,5 +164,724 @@
       "arc-capture-0912",
       "arc-capture-proxy-0912"
     ]
+  },
+  "depthReview": {
+    "project": "arc",
+    "capturedAt": "2026-09-12T20:16:37.573Z",
+    "sourceRevision": "43dfaf6e0a548f9e382a96744aad12a8611aad43",
+    "auditedRevision": "5549bf960754130c6dfe06b0b7bab1fb6a756d7f",
+    "sourceBranch": "dev",
+    "sourceRepository": "ninasokolov8/step-up",
+    "sourceRepositoryVisibility": "private",
+    "publicProductUrl": "https://arcacademy.co/",
+    "publicLabel": "Development build · synthetic data",
+    "revisionEquivalence": "Ten files changed between captured runtime and final audited dev: deployment/CI/documentation plus browser-test wait timing. Product UI/domain source is unchanged. The original checkout advanced externally during this audit and was not edited by the capture agent.",
+    "assets": [
+      {
+        "id": "student-space",
+        "type": "image",
+        "title": "A learning world in Space",
+        "description": "The same student pathway, with a space-themed environment and a visible progress summary.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/student-space.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 514668,
+        "backend": "real",
+        "verifiedBehavior": "The same student pathway, with a space-themed environment and a visible progress summary.",
+        "focusRects": [
+          {
+            "id": "student-space-detail",
+            "label": "Learning pathway and progress",
+            "x": 490,
+            "y": 190,
+            "width": 2280,
+            "height": 1000
+          }
+        ]
+      },
+      {
+        "id": "student-magic-forest",
+        "type": "image",
+        "title": "A different world for the same learner",
+        "description": "Magic Forest changes the surrounding environment, navigation and progress treatment.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/student-magic-forest.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 517036,
+        "backend": "real",
+        "verifiedBehavior": "Magic Forest changes the surrounding environment, navigation and progress treatment.",
+        "focusRects": [
+          {
+            "id": "student-magic-forest-detail",
+            "label": "Forest navigation and progress",
+            "x": 430,
+            "y": 200,
+            "width": 2340,
+            "height": 1120
+          }
+        ]
+      },
+      {
+        "id": "student-neon-hacker",
+        "type": "image",
+        "title": "A technical style students can choose",
+        "description": "Neon Hacker is a persisted theme choice within the real student workspace.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/student-neon-hacker.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 230236,
+        "backend": "real",
+        "verifiedBehavior": "Neon Hacker is a persisted theme choice within the real student workspace.",
+        "focusRects": [
+          {
+            "id": "student-neon-hacker-detail",
+            "label": "Student workspace",
+            "x": 530,
+            "y": 280,
+            "width": 2140,
+            "height": 1040
+          }
+        ]
+      },
+      {
+        "id": "student-aurora",
+        "type": "image",
+        "title": "The Aurora learning workspace",
+        "description": "The default theme keeps lessons, student progress and reflection together.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/student-aurora.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 154936,
+        "backend": "real",
+        "verifiedBehavior": "The default theme keeps lessons, student progress and reflection together.",
+        "focusRects": [
+          {
+            "id": "student-aurora-detail",
+            "label": "Learning dashboard",
+            "x": 450,
+            "y": 200,
+            "width": 2300,
+            "height": 1080
+          }
+        ]
+      },
+      {
+        "id": "student-aurora-light",
+        "type": "image",
+        "title": "A lighter way into the lesson",
+        "description": "Aurora Light offers another complete student theme.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/student-aurora-light.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 169472,
+        "backend": "real",
+        "verifiedBehavior": "Aurora Light offers another complete student theme.",
+        "focusRects": [
+          {
+            "id": "student-aurora-light-detail",
+            "label": "Learning dashboard",
+            "x": 450,
+            "y": 200,
+            "width": 2300,
+            "height": 1080
+          }
+        ]
+      },
+      {
+        "id": "visual-flowchart",
+        "type": "image",
+        "title": "An idea becomes a visible plan",
+        "description": "A real diagram made with the native shape palette, editable labels and connected decision branches.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/visual-flowchart.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 157676,
+        "backend": "real",
+        "verifiedBehavior": "A real diagram made with the native shape palette, editable labels and connected decision branches.",
+        "focusRects": [
+          {
+            "id": "visual-flowchart-detail",
+            "label": "The complete five-node plan",
+            "x": 1060,
+            "y": 335,
+            "width": 1450,
+            "height": 1430
+          }
+        ]
+      },
+      {
+        "id": "matching-connections",
+        "type": "image",
+        "title": "Think through the connections",
+        "description": "Three matched pairs are visible in the native activity.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/matching-connections.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 137180,
+        "backend": "real",
+        "verifiedBehavior": "Three matched pairs are visible in the native activity.",
+        "focusRects": [
+          {
+            "id": "matching-connections-detail",
+            "label": "Matched pairs and remaining choices",
+            "x": 520,
+            "y": 755,
+            "width": 2160,
+            "height": 1030
+          }
+        ]
+      },
+      {
+        "id": "matching-saved",
+        "type": "image",
+        "title": "A submitted answer stays inspectable",
+        "description": "The locked version view preserves the six submitted pairs.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/matching-saved.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 147826,
+        "backend": "real",
+        "verifiedBehavior": "The locked version view preserves the six submitted pairs.",
+        "focusRects": [
+          {
+            "id": "matching-saved-detail",
+            "label": "The stored answer",
+            "x": 470,
+            "y": 660,
+            "width": 2260,
+            "height": 1270
+          }
+        ]
+      },
+      {
+        "id": "reflection-cards",
+        "type": "image",
+        "title": "End a lesson with reflection",
+        "description": "The student can choose a session-finale card, then explain how they showed up in the lesson.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/reflection-cards.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 137218,
+        "backend": "real",
+        "verifiedBehavior": "The student can choose a session-finale card, then explain how they showed up in the lesson.",
+        "focusRects": [
+          {
+            "id": "reflection-cards-detail",
+            "label": "Reflection choices",
+            "x": 515,
+            "y": 800,
+            "width": 2190,
+            "height": 650
+          }
+        ]
+      },
+      {
+        "id": "live-student-answer",
+        "type": "image",
+        "title": "A student commits an answer",
+        "description": "The choice is locked while the real shared question remains active.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/live-student-answer.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 71764,
+        "backend": "real",
+        "verifiedBehavior": "The choice is locked while the real shared question remains active.",
+        "focusRects": [
+          {
+            "id": "live-student-answer-detail",
+            "label": "The selected answer",
+            "x": 0,
+            "y": 735,
+            "width": 3200,
+            "height": 1160
+          }
+        ]
+      },
+      {
+        "id": "live-instructor-controls",
+        "type": "image",
+        "title": "The instructor sees the shared session",
+        "description": "Question controls and a two-participant leaderboard remain in the classroom view.",
+        "portal": "Instructor",
+        "src": "/media/projects/arc/depth/live-instructor-controls.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 65766,
+        "backend": "real",
+        "verifiedBehavior": "Question controls and a two-participant leaderboard remain in the classroom view.",
+        "focusRects": [
+          {
+            "id": "live-instructor-controls-detail",
+            "label": "Question controls and leaderboard",
+            "x": 0,
+            "y": 0,
+            "width": 3200,
+            "height": 780
+          }
+        ]
+      },
+      {
+        "id": "syllabus-direction",
+        "type": "image",
+        "title": "Start with a learning direction",
+        "description": "A goal, priorities and preferred activities guide selection from the existing content library.",
+        "portal": "Content author / Admin",
+        "src": "/media/projects/arc/depth/syllabus-direction.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 191214,
+        "backend": "real",
+        "verifiedBehavior": "A goal, priorities and preferred activities guide selection from the existing content library.",
+        "focusRects": [
+          {
+            "id": "syllabus-direction-detail",
+            "label": "Smart builder controls",
+            "x": 325,
+            "y": 235,
+            "width": 2510,
+            "height": 1470
+          }
+        ]
+      },
+      {
+        "id": "syllabus-preview",
+        "type": "image",
+        "title": "Review an editable learning sequence",
+        "description": "The draft keeps its activity mix and source context visible before publication.",
+        "portal": "Content author / Admin",
+        "src": "/media/projects/arc/depth/syllabus-preview.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 252124,
+        "backend": "real",
+        "verifiedBehavior": "The draft keeps its activity mix and source context visible before publication.",
+        "focusRects": [
+          {
+            "id": "syllabus-preview-detail",
+            "label": "Draft sequence and activity mix",
+            "x": 345,
+            "y": 580,
+            "width": 2490,
+            "height": 1290
+          }
+        ]
+      },
+      {
+        "id": "teaching-readiness",
+        "type": "image",
+        "title": "Make preparation gaps visible",
+        "description": "This sample draft is missing teaching materials. Arc lists the affected activities and recommends what to add.",
+        "portal": "Content author / Admin",
+        "src": "/media/projects/arc/depth/teaching-readiness.webp",
+        "width": 3200,
+        "height": 2000,
+        "bytes": 292450,
+        "backend": "real",
+        "verifiedBehavior": "This sample draft is missing teaching materials. Arc lists the affected activities and recommends what to add.",
+        "focusRects": [
+          {
+            "id": "teaching-readiness-detail",
+            "label": "Coverage and recommended preparation",
+            "x": 350,
+            "y": 465,
+            "width": 2490,
+            "height": 1280
+          }
+        ]
+      },
+      {
+        "id": "learning-worlds-and-making",
+        "type": "video",
+        "title": "A world to learn in.",
+        "description": "Three student themes lead into a matching activity, from visible connections to a submitted result.",
+        "src": "/media/projects/arc/depth/learning-worlds-and-making.mp4",
+        "poster": "/media/projects/arc/depth/learning-worlds-and-making-poster.webp",
+        "captions": "/media/projects/arc/depth/learning-worlds-and-making.vtt",
+        "width": 1920,
+        "height": 1080,
+        "duration": 33.5,
+        "chapters": [
+          {
+            "id": "learning-worlds-and-making-1",
+            "start": 2.5,
+            "title": "Choose a learning world",
+            "description": "Space, Magic Forest and Neon Hacker are real, persisted student preferences.",
+            "portal": "Student"
+          },
+          {
+            "id": "learning-worlds-and-making-2",
+            "start": 16,
+            "title": "Solve a visual activity",
+            "description": "The student completes the remaining three pairs using the native matching controls.",
+            "portal": "Student"
+          },
+          {
+            "id": "learning-worlds-and-making-3",
+            "start": 23,
+            "title": "Submit the result",
+            "description": "Arc accepts the matching submission and displays its submitted state. The stored score was checked separately.",
+            "portal": "Student"
+          },
+          {
+            "id": "learning-worlds-and-making-4",
+            "start": 29,
+            "title": "Review a saved version",
+            "description": "The native locked-version view displays the six stored pairs.",
+            "portal": "Student"
+          }
+        ],
+        "backend": "real",
+        "verifiedBehavior": "Three student themes lead into a matching activity, from visible connections to a submitted result.",
+        "portal": "Student",
+        "bytes": 3991694
+      },
+      {
+        "id": "live-classroom-two-sides",
+        "type": "video",
+        "title": "One classroom. Two views.",
+        "description": "Follow a real quiz session from the student answer to the instructor controls and classroom scores.",
+        "src": "/media/projects/arc/depth/live-classroom-two-sides.mp4",
+        "poster": "/media/projects/arc/depth/live-classroom-two-sides-poster.webp",
+        "captions": "/media/projects/arc/depth/live-classroom-two-sides.vtt",
+        "width": 1920,
+        "height": 1080,
+        "duration": 32.5,
+        "chapters": [
+          {
+            "id": "live-classroom-two-sides-1",
+            "start": 2.5,
+            "title": "Answer as a student",
+            "description": "The student chooses an answer. Arc locks the response while the round is active.",
+            "portal": "Student / Instructor"
+          },
+          {
+            "id": "live-classroom-two-sides-2",
+            "start": 8.5,
+            "title": "Read the classroom",
+            "description": "The instructor board receives the submitted answer and updates its leaderboard.",
+            "portal": "Student / Instructor"
+          },
+          {
+            "id": "live-classroom-two-sides-3",
+            "start": 14.5,
+            "title": "Advance the round",
+            "description": "The instructor uses the native close and next-question controls.",
+            "portal": "Student / Instructor"
+          },
+          {
+            "id": "live-classroom-two-sides-4",
+            "start": 19,
+            "title": "Continue together",
+            "description": "The student screen advances through Arc’s built-in polling fallback; both test students answer the second question.",
+            "portal": "Student / Instructor"
+          },
+          {
+            "id": "live-classroom-two-sides-5",
+            "start": 29.5,
+            "title": "Close the session",
+            "description": "The native end-session confirmation is accepted and the ended state is shown.",
+            "portal": "Student / Instructor"
+          }
+        ],
+        "backend": "real",
+        "verifiedBehavior": "Follow a real quiz session from the student answer to the instructor controls and classroom scores.",
+        "portal": "Student → Instructor",
+        "bytes": 418778
+      },
+      {
+        "id": "syllabus-from-intent-to-review",
+        "type": "video",
+        "title": "Build a syllabus with intent.",
+        "description": "Set a learning direction, assemble existing activities, then refine the sequence and inspect teaching readiness.",
+        "src": "/media/projects/arc/depth/syllabus-from-intent-to-review.mp4",
+        "poster": "/media/projects/arc/depth/syllabus-from-intent-to-review-poster.webp",
+        "captions": "/media/projects/arc/depth/syllabus-from-intent-to-review.vtt",
+        "width": 1920,
+        "height": 1080,
+        "duration": 32,
+        "chapters": [
+          {
+            "id": "syllabus-from-intent-to-review-1",
+            "start": 2.5,
+            "title": "Set the direction",
+            "description": "The author sets a goal and activity preferences for three lessons.",
+            "portal": "Content author / Admin"
+          },
+          {
+            "id": "syllabus-from-intent-to-review-2",
+            "start": 8.5,
+            "title": "Assemble existing activities",
+            "description": "Arc creates a three-lesson, nine-activity draft from tagged source activities. Preferences affect ranking; they are not strict type filters.",
+            "portal": "Content author / Admin"
+          },
+          {
+            "id": "syllabus-from-intent-to-review-3",
+            "start": 15.5,
+            "title": "Refine the sequence",
+            "description": "The author renames the opening lesson using the native draft editor.",
+            "portal": "Content author / Admin"
+          },
+          {
+            "id": "syllabus-from-intent-to-review-4",
+            "start": 20.5,
+            "title": "Review teaching readiness",
+            "description": "The readiness screen identifies activities without mini-lessons or general lesson materials. This is a sample gap, not a completed curriculum claim.",
+            "portal": "Content author / Admin"
+          },
+          {
+            "id": "syllabus-from-intent-to-review-5",
+            "start": 26.5,
+            "title": "Preview the syllabus",
+            "description": "The preview retains source provenance and activity mix. The capture does not publish or assign the draft.",
+            "portal": "Content author / Admin"
+          }
+        ],
+        "backend": "real",
+        "verifiedBehavior": "Set a learning direction, assemble existing activities, then refine the sequence and inspect teaching readiness.",
+        "portal": "Content author / Admin",
+        "bytes": 854634
+      }
+    ],
+    "capabilityGroups": [
+      {
+        "id": "worlds",
+        "title": "Your learning world",
+        "description": "Five real student themes. One consistent learning pathway.",
+        "assetIds": [
+          "student-space",
+          "student-magic-forest",
+          "student-neon-hacker",
+          "student-aurora",
+          "student-aurora-light",
+          "learning-worlds-and-making"
+        ]
+      },
+      {
+        "id": "activities",
+        "title": "Think by doing",
+        "description": "Make a visual plan, connect ideas and reflect on the lesson.",
+        "assetIds": [
+          "visual-flowchart",
+          "matching-connections",
+          "matching-saved",
+          "reflection-cards"
+        ]
+      },
+      {
+        "id": "classroom",
+        "title": "Run the room",
+        "description": "A shared activity with student answers and instructor control.",
+        "assetIds": [
+          "live-student-answer",
+          "live-instructor-controls",
+          "live-classroom-two-sides"
+        ]
+      },
+      {
+        "id": "curriculum",
+        "title": "Build the curriculum",
+        "description": "Set an intention, reuse activities, refine the sequence and check teaching preparation.",
+        "assetIds": [
+          "syllabus-direction",
+          "syllabus-preview",
+          "teaching-readiness",
+          "syllabus-from-intent-to-review"
+        ]
+      },
+      {
+        "id": "reporting",
+        "title": "See the work behind the numbers",
+        "description": "Scoped school and program views retain access to submitted work and published review context.",
+        "assetIds": [],
+        "existingAssets": [
+          "/media/projects/arc/school-overview.webp",
+          "/media/projects/arc/program-analytics.webp"
+        ],
+        "verification": "Source verified in this audit; use prior authentic tour captures for reporting."
+      }
+    ],
+    "architecture": {
+      "layers": [
+        {
+          "id": "experience",
+          "title": "Role-specific experiences",
+          "description": "Student themes and activities; instructor sessions; content builder; school and analytics views.",
+          "technologies": [
+            "Blade",
+            "Alpine.js",
+            "Tailwind CSS",
+            "React / TypeScript flowchart editor"
+          ]
+        },
+        {
+          "id": "domain",
+          "title": "Shared learning rules",
+          "description": "Typed actors and scopes, reusable curriculum, task handlers, session lifecycles and versioned submissions.",
+          "technologies": [
+            "Laravel",
+            "PHP",
+            "Domain services",
+            "Policies"
+          ]
+        },
+        {
+          "id": "records",
+          "title": "Records and integration boundaries",
+          "description": "SQLite and local storage in this capture; native polling; external Browser Coder and Arc Gaming adapters remain uncalled.",
+          "technologies": [
+            "SQLite capture database",
+            "File storage",
+            "Polling fallback",
+            "Optional Reverb / external adapters"
+          ]
+        }
+      ],
+      "nodes": [
+        {
+          "id": "student",
+          "label": "Student workspace"
+        },
+        {
+          "id": "teacher",
+          "label": "Instructor session"
+        },
+        {
+          "id": "builder",
+          "label": "Curriculum builder"
+        },
+        {
+          "id": "domain",
+          "label": "Learning domain"
+        },
+        {
+          "id": "records",
+          "label": "Versioned work and reviews"
+        },
+        {
+          "id": "reports",
+          "label": "Scoped reporting"
+        }
+      ],
+      "edges": [
+        {
+          "from": "student",
+          "to": "domain",
+          "label": "Work and responses"
+        },
+        {
+          "from": "teacher",
+          "to": "domain",
+          "label": "Release, conduct, review"
+        },
+        {
+          "from": "builder",
+          "to": "domain",
+          "label": "Reusable curriculum"
+        },
+        {
+          "from": "domain",
+          "to": "records",
+          "label": "Persist context"
+        },
+        {
+          "from": "records",
+          "to": "reports",
+          "label": "Inspect progress and work"
+        }
+      ]
+    },
+    "caveats": [
+      "All records are synthetic; 26 fixture activities were tagged to exercise real rule-based syllabus selection.",
+      "Captured runtime is 43dfaf6; final dev audit is 5549bf9. The intervening changes affect deployment and test timing, not product UI/domain code.",
+      "Live quiz uses built-in polling fallback. WebSocket transport was not exercised.",
+      "The authoring film uses an administrator in the actual builder. It does not test all content-manager permission combinations.",
+      "Smart Build ranks existing activities. It is not AI-generated pedagogy, and preferred types are not exclusive filters.",
+      "The sample draft has missing teaching materials; the film deliberately shows the readiness review and does not publish or assign it.",
+      "Five themes were exercised. The 21-value canonical task catalogue is not a claim that 21 equivalent editors were runtime-tested.",
+      "Starting a new diagram version opened a blank editor in the observed run; earlier submitted versions remained readable.",
+      "No external service calls, production data, generated UI or UI text replacement are included."
+    ],
+    "verification": {
+      "summary": "Native theme changes, matching completion and version readback, diagram construction/submission, instructor-controlled two-student quiz, and smart-draft generation/rename/coverage/preview were exercised.",
+      "records": "verification.json records matching score 6 and submitted versions; quiz session status ended.",
+      "browser": "Browser skill unavailable (empty browser list); authorized standalone Playwright Chromium fallback.",
+      "capture": "1600×1000 CSS viewport, DPR 2 screenshots; lossless 1600×1000 CDP PNG frames edited to H.264 1920×1080.",
+      "audit": "See evidence-report.md, coverage-ledger.csv and source-structure.json for claim citations and coverage limitations."
+    },
+    "reproducibility": {
+      "scripts": [
+        "probe-pages.mjs",
+        "record-live.mjs",
+        "record-author.mjs",
+        "record-remaining.mjs",
+        "record-matching.mjs",
+        "readback-detail.mjs",
+        "edit-films.cjs",
+        "package-media.cjs"
+      ],
+      "source": "Original user checkout was read-only and preserved; existing isolated snapshot and synthetic SQLite data were reused."
+    },
+    "initialAuditedRevision": "511cf99992f559aed4bbfd10216f58ec80e3e2cc"
+  },
+  "presentationBoard": {
+    "src": "/media/projects/arc/depth/presentation-board.webp",
+    "width": 3200,
+    "height": 2000,
+    "bytes": 472982,
+    "sources": [
+      {
+        "src": "/media/projects/arc/depth/student-space.webp",
+        "crop": {
+          "x": 0,
+          "y": 0,
+          "width": 3200,
+          "height": 2000,
+          "sourceWidth": 3200
+        },
+        "displayWidth": 844,
+        "sourceWidth": 3200,
+        "sourceHeight": 2000,
+        "sha256": "f36468626ac0e781089c4772a5166ea585828f70ddc6a6447f7186adc29d04b8"
+      },
+      {
+        "src": "/media/projects/arc/depth/visual-flowchart.webp",
+        "crop": {
+          "x": 1040,
+          "y": 335,
+          "width": 1510,
+          "height": 1430,
+          "sourceWidth": 3200
+        },
+        "displayWidth": 320,
+        "sourceWidth": 3200,
+        "sourceHeight": 2000,
+        "sha256": "54e91f7eaf24b1478c786c137a2bd9ad6951a5a5dcb9b7800b92bd52bf6b7d4a"
+      },
+      {
+        "src": "/media/projects/arc/depth/syllabus-preview.webp",
+        "crop": {
+          "x": 350,
+          "y": 625,
+          "width": 2490,
+          "height": 650,
+          "sourceWidth": 3200
+        },
+        "displayWidth": 584,
+        "sourceWidth": 3200,
+        "sourceHeight": 2000,
+        "sha256": "48eb34e2b1b42cbcd755055b40fed4f78dd5405f9a1dd878458289bc3f3e04d0"
+      }
+    ],
+    "editorial": "Authored HTML/CSS framing. Original screenshot pixels cropped uniformly, no fabricated UI. Captions outside source pixels."
   }
 }

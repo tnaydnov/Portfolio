@@ -1,0 +1,2159 @@
+{
+  "license-plate-recognition": {
+    "slug": "license-plate-recognition",
+    "title": "License Plate Recognition",
+    "oneLiner": "A computer-vision pipeline that follows vehicles from motion detection to plate recognition and operator playback.",
+    "summary": "Movement becomes a tracked vehicle, a cropped plate and a refined reading. OpenCV, YOLO and PaddleOCR connect through Python services, Redis queues and a desktop viewer, so an operator can inspect the recognition path.",
+    "revision": "b597f76b0492ff4df05bafddd47eeb72714d3b37",
+    "repo": "BGU-LPR-Project/lpr_final_project",
+    "stack": [
+      "Python",
+      "OpenCV / Farneback optical flow",
+      "Ultralytics YOLO11",
+      "PaddleOCR2.10.0 / PaddlePaddle2.6.2",
+      "NumPy / SciPy",
+      "FastAPI",
+      "Redis",
+      "Docker Compose",
+      "PyQt5"
+    ],
+    "groups": [
+      {
+        "title": "Find the movement. Keep the identity.",
+        "summary": "Optical flow, vehicle detection and centroid tracking turn consecutive frames into persistent vehicle tracks.",
+        "details": [
+          "Farneback flow with magnitude/area filtering",
+          "Vehicle detections filtered by motion overlap and class",
+          "Centroid association and disappearance handling"
+        ],
+        "sources": [
+          {
+            "label": "edge.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L29"
+          },
+          {
+            "label": "edge.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L126"
+          },
+          {
+            "label": "utils.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/utils.py#L134"
+          },
+          {
+            "label": "tracking.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/tracking.py#L61"
+          }
+        ]
+      },
+      {
+        "title": "Give each plate a second look.",
+        "summary": "Associate a plate with its vehicle, prepare the crop for OCR, then retain stronger repeated readings.",
+        "details": [
+          "Spatial plate-to-vehicle association",
+          "CPU PaddleOCR with image preprocessing",
+          "Format checks and look-alike character correction",
+          "Repeated equal-or-better-confidence readings mark a track stable"
+        ],
+        "sources": [
+          {
+            "label": "edge.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L164"
+          },
+          {
+            "label": "cloud.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/cloud_service/cloud.py#L14"
+          },
+          {
+            "label": "cloud.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/cloud_service/cloud.py#L64"
+          },
+          {
+            "label": "formats.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/cloud_service/formats.py#L4"
+          },
+          {
+            "label": "edge.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L246"
+          }
+        ]
+      },
+      {
+        "title": "Let the stages run at different speeds.",
+        "summary": "Video acquisition, edge inference, OCR and desktop display communicate through queues and HTTP.",
+        "details": [
+          "Redis input/output queues",
+          "Bounded in-process worker queue with frame dropping",
+          "Separate OCR service receiving a cropped image",
+          "PyQt operator playback controls"
+        ],
+        "sources": [
+          {
+            "label": "app.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/video_service/app.py#L74"
+          },
+          {
+            "label": "app.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/app.py#L20"
+          },
+          {
+            "label": "app.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/app.py#L167"
+          },
+          {
+            "label": "app.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/app.py#L63"
+          },
+          {
+            "label": "app.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/app.py#L85"
+          },
+          {
+            "label": "ui.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/ui.py#L40"
+          },
+          {
+            "label": "docker-compose.yml",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/docker-compose.yml#L1"
+          }
+        ]
+      },
+      {
+        "title": "Inspect the whole recognition path.",
+        "summary": "The repository preserves annotated frames and evaluation scripts for component detections and complete plate results.",
+        "details": [
+          "Ground-truth bounding-box annotations",
+          "Precision/recall/F1 computation",
+          "Exact and explicitly thresholded partial plate matching"
+        ],
+        "sources": [
+          {
+            "label": "pipelineTester_newArchitecture.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/tests/pipelineTester_newArchitecture.py#L68"
+          },
+          {
+            "label": "pipelineTester_newArchitecture.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/tests/pipelineTester_newArchitecture.py#L51"
+          },
+          {
+            "label": "model_evaluation.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/tests/model_evaluation.py#L11"
+          }
+        ]
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "input",
+          "label": "File / RTSP input",
+          "detail": "User-supplied video; OpenCV acquisition."
+        },
+        {
+          "id": "video",
+          "label": "Video service",
+          "detail": "FastAPI controls and nominal4fps frame acceptance."
+        },
+        {
+          "id": "frames",
+          "label": "Redis frame_queue",
+          "detail": "Pickled frames; queue itself has no configured bound."
+        },
+        {
+          "id": "edge",
+          "label": "Edge worker queue",
+          "detail": "30 in-process slots and four workers."
+        },
+        {
+          "id": "motion",
+          "label": "Motion + vehicle tracks",
+          "detail": "Farneback motion, YOLO vehicle filtering, centroid matching."
+        },
+        {
+          "id": "plate",
+          "label": "Plate association",
+          "detail": "YOLO plate candidates aligned to tracked vehicles."
+        },
+        {
+          "id": "ocr",
+          "label": "OCR service",
+          "detail": "JPEG crop over HTTP → preprocessing → PaddleOCR → format validation."
+        },
+        {
+          "id": "track",
+          "label": "Recognition state",
+          "detail": "Equal-or-higher-confidence text and repeated observations."
+        },
+        {
+          "id": "visual",
+          "label": "Redis visual_frame_queue",
+          "detail": "Annotated800×600 output frames."
+        },
+        {
+          "id": "desktop",
+          "label": "PyQt viewer",
+          "detail": "Playback controls and annotated video display."
+        }
+      ],
+      "edges": [
+        {
+          "from": "input",
+          "to": "video",
+          "label": "Decode"
+        },
+        {
+          "from": "video",
+          "to": "frames",
+          "label": "Push frame"
+        },
+        {
+          "from": "frames",
+          "to": "edge",
+          "label": "Pop / enqueue or drop"
+        },
+        {
+          "from": "edge",
+          "to": "motion",
+          "label": "Process"
+        },
+        {
+          "from": "motion",
+          "to": "plate",
+          "label": "Candidate vehicles"
+        },
+        {
+          "from": "plate",
+          "to": "ocr",
+          "label": "Cropped image"
+        },
+        {
+          "from": "ocr",
+          "to": "track",
+          "label": "Text + model confidence"
+        },
+        {
+          "from": "track",
+          "to": "visual",
+          "label": "Annotate frame"
+        },
+        {
+          "from": "visual",
+          "to": "desktop",
+          "label": "Display"
+        },
+        {
+          "from": "desktop",
+          "to": "video",
+          "label": "Start / pause / resume / restart / skip"
+        }
+      ],
+      "sourceIds": [
+        "video",
+        "video-control",
+        "queue",
+        "workers",
+        "motion",
+        "plates",
+        "ocr-http",
+        "ocr",
+        "stability",
+        "display",
+        "pyqt",
+        "compose"
+      ],
+      "excludedFromActiveGraph": [
+        "AuthManager whitelist/blacklist",
+        "ROI entrance/exit classification",
+        "tracked_plates evaluation export",
+        "experimental OCR fusion/voting"
+      ],
+      "note": "Redis provides queue boundaries. OCR uses blocking HTTP inside the worker; callback names do not make that call asynchronous. CloudService is a local Docker CPU service, not a paid cloud inference provider."
+    },
+    "decisions": [
+      {
+        "title": "Use motion as a gate before new vehicle inference.",
+        "implementation": "The active path skips new YOLO vehicle inference when it has no motion candidates.",
+        "rationale": "A missed motion region can suppress a useful vehicle candidate. Existing tracks can still lead to plate inference while they age out.",
+        "sources": [
+          {
+            "label": "edge.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L29"
+          },
+          {
+            "label": "edge.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L126"
+          }
+        ]
+      },
+      {
+        "title": "Preserve vehicle identity across frames.",
+        "implementation": "Centroid tracking lets repeated plate crops contribute to one vehicle record instead of treating each frame independently.",
+        "rationale": "Distance/disappearance thresholds can confuse occlusion or nearby vehicles; no tracking-quality benchmark is published.",
+        "sources": [
+          {
+            "label": "tracking.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/tracking.py#L61"
+          },
+          {
+            "label": "edge.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L246"
+          }
+        ]
+      },
+      {
+        "title": "Split inference and display into service boundaries.",
+        "implementation": "Acquisition, edge processing, OCR and desktop rendering have different costs and control needs.",
+        "rationale": "Serialization, queue backlog and synchronous OCR requests introduce extra failure and latency points; no end-to-end latency results were measured.",
+        "sources": [
+          {
+            "label": "docker-compose.yml",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/docker-compose.yml#L1"
+          },
+          {
+            "label": "app.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/app.py#L20"
+          },
+          {
+            "label": "app.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/app.py#L63"
+          },
+          {
+            "label": "ui.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/ui.py#L40"
+          }
+        ]
+      },
+      {
+        "title": "Check likely plate formats after OCR.",
+        "implementation": "Pattern checks and look-alike substitutions reject or correct some raw OCR strings.",
+        "rationale": "A valid format is not proof of the correct plate; generic patterns and correction order can bias ambiguous results.",
+        "sources": [
+          {
+            "label": "formats.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/cloud_service/formats.py#L4"
+          },
+          {
+            "label": "cloud.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/cloud_service/cloud.py#L14"
+          }
+        ]
+      },
+      {
+        "title": "Expose operator controls around the pipeline.",
+        "implementation": "Loading, pausing, resuming and skipping footage support inspection of recognition behavior.",
+        "rationale": "The current file picker and container paths need coordination; the UI updates status even when API errors are only logged.",
+        "sources": [
+          {
+            "label": "ui.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/ui.py#L40"
+          },
+          {
+            "label": "ui.py",
+            "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/ui.py#L158"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "No runtime or accuracy claim from this audit. Source-only review; models were not loaded, services were not started and evaluation scripts were not executed. No source-published model/end-to-end accuracy result found.",
+      "Unauthorized-vehicle alerts are not wired into the current service path. The current edge endpoint always calls visualize(frame, True). List authorization exists in a stale legacy path. Describe the current system as plate recognition and operator visualization, with authorization as earlier prototype logic.",
+      "ROI, direction classification and fusion helpers are historical/experimental. RegionAdjuster is unused by current prediction; image fusion, multiple-threshold preprocessing and weighted majority voting are defined but not called by the current OCR path.",
+      "Four workers share sequential model/tracker state. All workers receive one EdgeService; its prev_frame and tracker state can be touched across frames. Tracker methods lock portions of state, but EdgeService.lock is not used around prediction. Ordering and concurrency behavior need runtime evaluation.",
+      "Queue and network behavior are prototype-grade. The Python queue is bounded, but Redis input/output lists are not; the poller busy-loops and OCR HTTP calls have no timeout. Do not describe the complete system as fully bounded or fault tolerant.",
+      "Startup clears Redis globally. Both video startup and the new-architecture tester call flushall. Any future local execution must use an isolated Redis container and ports.",
+      "Evaluation contracts need reconciliation. New tester expects tracked_plates, but no active production caller invokes log_results; older tests import missing classes or call superseded signatures. Syntax parsing passed but does not prove tests pass.",
+      "Videos and reproducible training history are absent. Full videos are ignored, model weights are tracked, and this revision has no training script/configuration or held-out benchmark report. Existing user-stated training/data contribution remains valid as self-described team work; this snapshot cannot independently attribute it.",
+      "Desktop paths and container mounts differ. A path picked on Windows is sent directly to the service, while Compose mounts only ./recordings at /app/recordings. A future run must map/copy only authorized local fixtures."
+    ],
+    "visualTitle": "One frame, four decisions",
+    "visualLabels": []
+  },
+  "trading-system": {
+    "slug": "trading-system",
+    "title": "Trading System — Multi-store Marketplace",
+    "oneLiner": "A multi-store marketplace with delegated permissions, composable basket rules and checkout recovery.",
+    "summary": "A purchase crosses several kinds of rules: who may manage a store, which baskets are allowed, how discounts combine, and what happens if payment or supply fails. This Java team project models those boundaries with explicit domain objects and service contracts.",
+    "revision": "048e46bf2ac9191e241ce52cda1c9c05d672d4ee",
+    "repo": "https://github.com/tnaydnov/Trading_System",
+    "stack": [
+      "Java 17",
+      "Spring Boot 3.3.1",
+      "Vaadin 24.3 / server-driven UI",
+      "In-memory domain repositories",
+      "BCrypt + JJWT",
+      "Vaadin Push",
+      "Maven",
+      "JUnit 4 / JUnit 5",
+      "Mockito"
+    ],
+    "groups": [
+      {
+        "title": "Browse and buy across stores",
+        "summary": "Guests and registered subscribers search a shared marketplace and keep one cart containing separate store baskets.",
+        "details": [
+          "Search combines exact case-insensitive product-name matches with category matches across active stores.",
+          "The storefront offers an inclusive minimum/maximum price filter; store pages expose product details and add-to-cart actions.",
+          "Cart quantities are validated, zero removes an item, and successful checkout groups the resulting order records by store."
+        ],
+        "sources": [
+          {
+            "label": "UserFacade.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/UserFacade.java#L28-L50"
+          },
+          {
+            "label": "StoreFacade.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/StoreFacade.java#L528-L550"
+          },
+          {
+            "label": "MainLayoutPresenter.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Presenter/MainLayoutPresenter.java#L158-L190"
+          },
+          {
+            "label": "MainLayoutView.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/MainLayoutView.java#L828-L878"
+          },
+          {
+            "label": "Basket.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Users/Subscriber/Cart/Basket.java#L41-L79"
+          },
+          {
+            "label": "OrderFacade.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/OrderFacade.java#L91-L108"
+          }
+        ]
+      },
+      {
+        "title": "Delegate authority, then revoke its consequences",
+        "summary": "A store creator can nominate owners; owners and creators can send manager nominations with selected permissions. The nominee responds through the message center.",
+        "details": [
+          "Owner and manager nominations are explicit messages with accept/decline responses, rather than an immediate role dropdown update.",
+          "Eight named permissions cover inventory, discounts/policies, manager permissions, history, products, staff information and subscription removal; enforcement differs by operation.",
+          "The store keeps forward and reverse nomination relationships. Ownership withdrawal walks the nomination graph and removes the owner and descendant appointments.",
+          "Only the creator can close or reopen a store; staff receive corresponding messages and live notifications."
+        ],
+        "sources": [
+          {
+            "label": "UserService.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/UserService.java#L115-L225"
+          },
+          {
+            "label": "Permissions.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/StoreData/Permissions.java#L9-L17"
+          },
+          {
+            "label": "Store.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L105-L176"
+          },
+          {
+            "label": "Store.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L241-L305"
+          },
+          {
+            "label": "StoreFacade.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/StoreFacade.java#L104-L122"
+          },
+          {
+            "label": "StoreFacade.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/StoreFacade.java#L829-L849"
+          },
+          {
+            "label": "MessagesList.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/MessagesList.java#L55-L90"
+          }
+        ]
+      },
+      {
+        "title": "Compose purchase rules and discounts",
+        "summary": "Store managers with the relevant permission can build rules around product quantities, categories and basket price, then combine them into larger expressions.",
+        "details": [
+          "Simple conditions evaluate product/category quantities or basket value against minimum and maximum bounds.",
+          "AND, OR and XOR conditions combine two existing conditions; a conditional policy class implements implication.",
+          "Percentage discounts apply to a product, category or basket. MAX chooses the larger discount; PLUS adds two discounts.",
+          "Recursive DTOs and nested policy/discount boxes let the Vaadin interface display the resulting expression structure. The visible Exactly option is not actually enforced by SimpleCondition and is excluded from the verified feature claim."
+        ],
+        "sources": [
+          {
+            "label": "SimpleCondition.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/SimpleCondition.java#L77-L89"
+          },
+          {
+            "label": "AndCondition.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/AndCondition.java#L20-L22"
+          },
+          {
+            "label": "OrCondition.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/OrCondition.java#L19-L20"
+          },
+          {
+            "label": "XorCondition.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/XorCondition.java#L19-L21"
+          },
+          {
+            "label": "PolicyCondition.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/PolicyCondition.java#L19-L28"
+          },
+          {
+            "label": "SimpleDiscount.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Discounts/SimpleDiscount.java#L29-L36"
+          },
+          {
+            "label": "MaxDiscount.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Discounts/MaxDiscount.java#L32-L40"
+          },
+          {
+            "label": "PlusDiscount.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Discounts/PlusDiscount.java#L30-L38"
+          },
+          {
+            "label": "Store.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L636-L665"
+          },
+          {
+            "label": "CreateDiscountDialog.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/Store/CreateDiscountDialog.java#L39-L87"
+          }
+        ]
+      },
+      {
+        "title": "Treat checkout failure as part of the workflow",
+        "summary": "The domain reserves stock before purchase, validates store policies and coordinates payment with supply adapters. Failure paths restore stock and attempt compensating cancellations.",
+        "details": [
+          "Per-inventory synchronized reservation reduces available quantities and tracks reserved quantities separately.",
+          "A later store failure triggers release of earlier store reservations; policy rejection releases that store reservation.",
+          "Payment and supply have separate handshake, action and cancellation interfaces. Supply failure attempts cancellation of the completed payment and any earlier supply transactions.",
+          "Source tests use mocks to assert two store-specific orders after success and restored stock/no orders after payment or supply failure. No fresh passing-test or live-provider claim is made.",
+          "Purchase history, read/unread messages, targeted Vaadin push notifications and dated account suspension support the surrounding operations."
+        ],
+        "sources": [
+          {
+            "label": "Inventory.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Inventory/Inventory.java#L638-L716"
+          },
+          {
+            "label": "StoreFacade.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/StoreFacade.java#L552-L582"
+          },
+          {
+            "label": "Store.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L523-L537"
+          },
+          {
+            "label": "OrderService.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L57-L106"
+          },
+          {
+            "label": "OrderService.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L127-L145"
+          },
+          {
+            "label": "PurchaseCartUnitTest.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/UnitTests/PurchaseCartUnitTest.java#L70-L108"
+          },
+          {
+            "label": "PurchaseCartUnitTest.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/UnitTests/PurchaseCartUnitTest.java#L226-L293"
+          },
+          {
+            "label": "AdminFacade.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/AdminFacade.java#L58-L74"
+          },
+          {
+            "label": "Broadcaster.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/UtilitiesView/Broadcaster.java#L9-L27"
+          }
+        ]
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "ui",
+          "label": "Vaadin views + presenters",
+          "detail": "Storefront, store management, cart, messages and administration"
+        },
+        {
+          "id": "services",
+          "label": "Application services",
+          "detail": "UserService / StoreService / OrderService / AdminService"
+        },
+        {
+          "id": "domain",
+          "label": "Marketplace domain",
+          "detail": "Facades, role graph, inventory reservation and composite rules"
+        },
+        {
+          "id": "memory",
+          "label": "In-memory repositories",
+          "detail": "Users, active/deactivated stores, orders and suspensions"
+        },
+        {
+          "id": "adapters",
+          "label": "Payment + supply interfaces",
+          "detail": "HTTP adapters and local validating stand-ins; mocks in tests"
+        },
+        {
+          "id": "push",
+          "label": "Targeted notification broadcaster",
+          "detail": "One registered listener per username; Vaadin @Push"
+        },
+        {
+          "id": "identity",
+          "label": "BCrypt + JWT helpers",
+          "detail": "Service-level identity checks, with documented deployment gaps"
+        }
+      ],
+      "edges": [
+        {
+          "from": "ui",
+          "to": "services",
+          "label": "Presenter calls / Response objects"
+        },
+        {
+          "from": "services",
+          "to": "domain",
+          "label": "Orchestrate authority, cart and purchases"
+        },
+        {
+          "from": "domain",
+          "to": "memory",
+          "label": "Read and mutate Java collections"
+        },
+        {
+          "from": "services",
+          "to": "adapters",
+          "label": "Handshake / pay or supply / cancel"
+        },
+        {
+          "from": "domain",
+          "to": "push",
+          "label": "Nomination and store events"
+        },
+        {
+          "from": "push",
+          "to": "ui",
+          "label": "Notification / unread count refresh"
+        },
+        {
+          "from": "services",
+          "to": "identity",
+          "label": "Validate token subject and signature"
+        }
+      ],
+      "citations": [
+        {
+          "file": "src/main/java/Presentation/application/Presenter/ShoppingCartPresenter.java",
+          "line": 26,
+          "endLine": 34,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Presenter/ShoppingCartPresenter.java#L26-L34"
+        },
+        {
+          "file": "src/main/java/Configuration/ServiceWiringConfig.java",
+          "line": 13,
+          "endLine": 28,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Configuration/ServiceWiringConfig.java#L13-L28"
+        },
+        {
+          "file": "src/main/java/Facades/StoreFacade.java",
+          "line": 151,
+          "endLine": 158,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/StoreFacade.java#L151-L158"
+        },
+        {
+          "file": "src/main/java/Service/OrderService.java",
+          "line": 57,
+          "endLine": 106,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L57-L106"
+        },
+        {
+          "file": "src/main/java/Domain/Repo/UserRepository.java",
+          "line": 16,
+          "endLine": 28,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Repo/UserRepository.java#L16-L28"
+        },
+        {
+          "file": "src/main/java/Presentation/application/Application.java",
+          "line": 18,
+          "endLine": 23,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Application.java#L18-L23"
+        },
+        {
+          "file": "src/main/java/Presentation/application/View/UtilitiesView/Broadcaster.java",
+          "line": 9,
+          "endLine": 27,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/UtilitiesView/Broadcaster.java#L9-L27"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "title": "Represent delegated authority as a graph",
+        "implementation": "Store records nominationGraph and reverseNominationMap alongside per-store subscriber states and manager permissions. waiveOwnership performs a breadth-first traversal and removes all collected appointments.",
+        "rationale": "Revocation has consequences beyond the selected person. Explicit relationships make that cascade visible and give the team a common domain rule. This benefit is inferred from the code, not an author quotation. The graph, role map, permission map and user-facing store-role map must remain consistent. The audit found stale graph-link and declined-nomination bookkeeping edges; this is a modeling decision, not proof of complete authorization correctness.",
+        "sources": [
+          {
+            "label": "Store.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L31-L34"
+          },
+          {
+            "label": "Store.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L141-L176"
+          },
+          {
+            "label": "Store.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L241-L269"
+          },
+          {
+            "label": "UserService.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/UserService.java#L234-L248"
+          }
+        ]
+      },
+      {
+        "title": "Build policy expressions from reusable components",
+        "implementation": "Condition and Discount interfaces have simple and composite implementations. Store composition methods replace two top-level components with a composite; recursive DTO conversion feeds nested UI boxes.",
+        "rationale": "Product-specific requirements can be expressed using the same evaluation machinery instead of one bespoke checkout branch per promotion. The structure also gives the UI something concrete to explain. Expression semantics, labels and numeric edge cases must agree. Exact-value and conditional-policy wording gaps are documented; no claim of a complete production promotion engine.",
+        "sources": [
+          {
+            "label": "Condition.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/Condition.java#L1-L22"
+          },
+          {
+            "label": "Discount.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Discounts/Discount.java#L1-L34"
+          },
+          {
+            "label": "Store.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L636-L665"
+          },
+          {
+            "label": "Store.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L676-L717"
+          },
+          {
+            "label": "Store.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L765-L811"
+          },
+          {
+            "label": "StoreManagementPresenter.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Presenter/Store/StoreManagementPresenter.java#L84-L98"
+          }
+        ]
+      },
+      {
+        "title": "Separate external actions and make compensation explicit",
+        "implementation": "OrderService depends on PaymentGateway and SupplySystem interfaces. It checks availability, performs payment, requests supply, records per-store orders, and attempts payment/supply cancellation on a later supply failure. Unit tests substitute Mockito adapters and inspect inventory and order state.",
+        "rationale": "The interesting boundary is what happens after the first external step succeeds and the next fails. The implementation addresses that path directly. This is best-effort compensation, not an atomic distributed transaction: cancellation return values are ignored, no durable retry/outbox is present, and the current application startup does not wire the adapters. The test-injected domain path and deployable checkout are separate evidence levels.",
+        "sources": [
+          {
+            "label": "PaymentGateway.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Externals/Payment/PaymentGateway.java#L3-L6"
+          },
+          {
+            "label": "SupplySystem.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Externals/Suppliers/SupplySystem.java#L8-L11"
+          },
+          {
+            "label": "OrderService.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L57-L106"
+          },
+          {
+            "label": "PurchaseCartUnitTest.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/UnitTests/PurchaseCartUnitTest.java#L38-L52"
+          },
+          {
+            "label": "PurchaseCartUnitTest.java",
+            "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/UnitTests/PurchaseCartUnitTest.java#L226-L259"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Source-only audit at the pinned revision. No application startup, current build/test result, deployed usage, real transaction or performance measurement was demonstrated.",
+      "Runtime user, store, order and admin repositories are in-memory collections. JPA annotations and H2/MySQL dependencies exist, but UserRepository implements JpaRepository with empty/null/no-op methods, and facades instantiate these repositories directly. Do not claim durable MySQL storage.",
+      "Payment and supply adapters are implemented, but the current Spring startup does not populate OrderService.paymentGateway/supplySystem. The only source calls to their setters are in tests. The JSON initialization utility constructs a separate service graph and does not install its parsed adapters either. Do not present current default startup as working end-to-end checkout.",
+      "The payment page parses its total from a URL parameter and OrderService accepts the supplied purchasePrice without recomputing it from a trusted reservation. External cancellation results are ignored, and HttpUtils has no configured connection/read timeout. This is an academic integration design, not production payment integrity or durable transaction recovery.",
+      "Security is partial: BCrypt registration and signed expiring JWTs are real, but Spring HTTP security permits all paths and disables CSRF. JWT validation checks the signature, expiry and subject without consulting current login/token state; logout clears stored state but does not revoke an issued token. Cookies are explicitly non-Secure. Avoid production-secure authentication claims.",
+      "Several presenters are ordinary singleton Spring components holding mutable view, product-list, total or store fields, and MessagesList keeps a static message list. The source does not establish isolated simultaneous user interfaces. The broadcaster also retains one listener per username, with no stored/removable registration in MainLayoutView.",
+      "Policy and reservation edges remain: SimpleCondition ignores its exact amount field, PolicyCondition text reverses its implemented implication, conditional discounts return an error when their condition is false, and reservation expiry is scheduled for 60 minutes despite its 10-minute message. These prevent claiming every visible rule or timing guarantee works as labeled.",
+      "The repository contains substantial unit, acceptance and parallel-test source, but presence is not a passing result or concurrency guarantee. One parallel purchase test submits mismatched username/token pairs and accepts zero successful reservations, and some test files are entirely commented out."
+    ],
+    "visualTitle": "The rules behind a purchase",
+    "visualLabels": [
+      "Store creator",
+      "Accepted nomination",
+      "Manager permissions",
+      "Product / category / price rule",
+      "Reserved stock",
+      "Payment adapter",
+      "Supply adapter",
+      "Compensating cancellation",
+      "Per-store orders"
+    ]
+  },
+  "hr-organization": {
+    "slug": "hr-organization",
+    "title": "HR & Delivery Coordination",
+    "oneLiner": "Connect staff availability and driver qualifications to store delivery planning.",
+    "summary": "An academic Java desktop system joins employee administration and weekly shift scheduling with deliveries, truck selection and driver assignment. Its most useful engineering story is the boundary between two business areas: HR provides availability, while delivery planning checks driver qualifications and reports assignments back.",
+    "revision": "1c7044d3a563fd705c87bf775d1b4ee215f4d100",
+    "repo": "https://github.com/tnaydnov/HR_Organization",
+    "stack": [
+      "Java 17",
+      "Swing",
+      "CLI",
+      "SQLite / JDBC",
+      "Maven configuration",
+      "JUnit 5",
+      "Mockito"
+    ],
+    "groups": [
+      {
+        "title": "Schedule around actual constraints",
+        "summary": "Employees submit availability; HR assigns qualified staff to stores and roles, confirms shifts and manages weekly schedules.",
+        "details": [
+          "Role/store certification checks before shift assignment.",
+          "No two shifts on a day and a six-shift weekly limit in the controller.",
+          "Shift confirmation requires a shift manager.",
+          "Employee removal is refused when future shifts remain."
+        ],
+        "sources": [
+          {
+            "label": "Facade.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/BusinessLayer/Facade.java#L65-L77"
+          },
+          {
+            "label": "Facade.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/BusinessLayer/Facade.java#L131-L174"
+          },
+          {
+            "label": "ShiftController.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/BusinessLayer/ShiftController.java#L207-L222"
+          },
+          {
+            "label": "Shift.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/BusinessLayer/Shift.java#L86-L99"
+          }
+        ]
+      },
+      {
+        "title": "Find a driver and truck that fit",
+        "summary": "Delivery planning selects available regular or refrigerated trucks, checks license weight/type permissions and asks HR for drivers available over the trip interval.",
+        "details": [
+          "Truck selection reserves an available matching vehicle.",
+          "Driver selection combines HR time availability with local busy state and license compatibility.",
+          "Successful driver assignment is reported back through HRIntegrator."
+        ],
+        "sources": [
+          {
+            "label": "TruckController.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/TruckController.java#L30-L54"
+          },
+          {
+            "label": "DriverController.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DriverController.java#L70-L104"
+          },
+          {
+            "label": "License.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/License.java#L38-L41"
+          }
+        ]
+      },
+      {
+        "title": "Handle changes during a delivery",
+        "summary": "Delivery stops are grouped by origin and delivery zone. A journey tracks visited stops and invokes replanning when a measured load exceeds the truck limit.",
+        "details": [
+          "Replanning can try a replacement truck/driver, remove a stop, cancel the form or reweigh.",
+          "Cancelled undelivered stops return to the pending set.",
+          "Origin/zone grouping is implemented; route-distance optimization is not established."
+        ],
+        "sources": [
+          {
+            "label": "DeliveryManagerImpl.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryManagerImpl.java#L63-L120"
+          },
+          {
+            "label": "DeliveryManagerImpl.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryManagerImpl.java#L122-L166"
+          },
+          {
+            "label": "DeliveryForm.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryForm.java#L101-L124"
+          },
+          {
+            "label": "DeliveryForm.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryForm.java#L183-L229"
+          }
+        ]
+      },
+      {
+        "title": "One business system, two interfaces",
+        "summary": "CLI and Swing screens use shared service/business layers, backed by SQLite data-access classes for employees, shifts, trucks and delivery records.",
+        "details": [],
+        "sources": [
+          {
+            "label": "Deliveries_HR_Main.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries_HR_Main.java#L15-L34"
+          },
+          {
+            "label": "EmployeeService.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/ServiceLayer/EmployeeService.java#L1"
+          },
+          {
+            "label": "DeliveryManagerService.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/PresentationLayer/DeliveryManagerService.java#L1"
+          },
+          {
+            "label": "Connect.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/DataAccessLayer/Connect.java#L248-L274"
+          }
+        ]
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "ui",
+          "label": "Swing + CLI",
+          "detail": "Separate presentation paths"
+        },
+        {
+          "id": "hr",
+          "label": "HR facade + scheduling",
+          "detail": "Employees, roles, stores, weekly shifts"
+        },
+        {
+          "id": "contracts",
+          "label": "Integration contracts",
+          "detail": "HRIntegrator · DeliveryIntegrator · DriverSaver"
+        },
+        {
+          "id": "delivery",
+          "label": "Delivery planning",
+          "detail": "Stops, forms, drivers, trucks"
+        },
+        {
+          "id": "storage",
+          "label": "SQLite data access",
+          "detail": "HR and delivery DAOs"
+        }
+      ],
+      "edges": [
+        {
+          "from": "ui",
+          "to": "hr",
+          "label": "EmployeeService"
+        },
+        {
+          "from": "ui",
+          "to": "delivery",
+          "label": "DeliveryManagerService"
+        },
+        {
+          "from": "hr",
+          "to": "contracts",
+          "label": "Availability / driver certification"
+        },
+        {
+          "from": "delivery",
+          "to": "contracts",
+          "label": "Driver assignment / scheduled arrivals"
+        },
+        {
+          "from": "hr",
+          "to": "storage",
+          "label": "Employee and shift records"
+        },
+        {
+          "from": "delivery",
+          "to": "storage",
+          "label": "Fleet and delivery records"
+        }
+      ],
+      "citations": [
+        {
+          "file": "dev/src/HR_Deliveries_Interface/HRIntegrator.java",
+          "line": 6,
+          "endLine": 9,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR_Deliveries_Interface/HRIntegrator.java#L6-L9"
+        },
+        {
+          "file": "dev/src/HR_Deliveries_Interface/DeliveryIntegrator.java",
+          "line": 7,
+          "endLine": 8,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR_Deliveries_Interface/DeliveryIntegrator.java#L7-L8"
+        },
+        {
+          "file": "dev/src/HR_Deliveries_Interface/DriverSaver.java",
+          "line": 2,
+          "endLine": 5,
+          "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR_Deliveries_Interface/DriverSaver.java#L2-L5"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "title": "Use explicit contracts between staffing and delivery",
+        "implementation": "Three small interfaces expose availability, assignment, scheduled arrivals and driver registration without requiring the caller to own the other subsystem’s data structures.",
+        "rationale": "A delivery’s staffing dependency is visible and testable. This benefit is inferred from the implementation, not a quote from the author.",
+        "sources": [
+          {
+            "label": "HRIntegrator.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR_Deliveries_Interface/HRIntegrator.java#L6-L9"
+          },
+          {
+            "label": "DriverController.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DriverController.java#L70-L104"
+          },
+          {
+            "label": "HR_Del_IntegrationTests.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/DeliveriesTests/HR_Del_IntegrationTests.java#L22-L65"
+          }
+        ]
+      },
+      {
+        "title": "Make overload handling a domain operation",
+        "implementation": "WeightMeasurer and TripReplanner interfaces feed DeliveryForm’s load checks, with explicit remove-stop, cancel and reweigh actions.",
+        "rationale": "The exceptional case is modeled alongside the normal trip, rather than reduced to an unstructured UI error.",
+        "sources": [
+          {
+            "label": "DeliveryForm.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryForm.java#L116-L128"
+          },
+          {
+            "label": "DeliveryManagerImpl.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/DeliveryManagerImpl.java#L89-L120"
+          },
+          {
+            "label": "TripReplanner.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries/BusinessLayer/Enums_and_Interfaces/TripReplanner.java#L1"
+          }
+        ]
+      },
+      {
+        "title": "Keep presentation separate from stored business records",
+        "implementation": "Swing/CLI choices share HR and delivery services; DAOs use a SQLite connector, whose query/update helpers bind supplied parameters.",
+        "rationale": "Business behavior can serve multiple presentation paths and persist beyond the in-memory objects. Some controllers remain singletons and coupled to concrete classes, so this is layered design, not a perfectly isolated domain.",
+        "sources": [
+          {
+            "label": "Deliveries_HR_Main.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/Deliveries_HR_Main.java#L15-L34"
+          },
+          {
+            "label": "Connect.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/DataAccessLayer/Connect.java#L248-L274"
+          },
+          {
+            "label": "Facade.java",
+            "url": "https://github.com/tnaydnov/HR_Organization/blob/1c7044d3a563fd705c87bf775d1b4ee215f4d100/dev/src/HR/BusinessLayer/Facade.java#L13-L18"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Source-only evidence. No fresh execution, deployment or current test-pass claim.",
+      "The startup loader resets HR tables and loads example records; the executable should be treated as an archived academic demonstration, not an operated HR database.",
+      "Destination staff availability is queried but its rejection branch remains TODO; do not claim unstaffed destinations are prevented automatically.",
+      "Default startup accesses args[0] and args[1] before checking argument count. Build/source layout and packaged artifacts are archival, not verified current instructions.",
+      "Tests include meaningful driver/HR integration cases alongside some empty test methods. Presence of tests is not proof of full coverage or passing behavior."
+    ],
+    "visualTitle": "The dispatch handshake",
+    "visualLabels": [
+      "Staff availability",
+      "Role / store qualification",
+      "Driver license",
+      "Truck type + capacity",
+      "Delivery form",
+      "Load check"
+    ]
+  },
+  "kanban": {
+    "slug": "kanban",
+    "title": "Kanban",
+    "oneLiner": "A task-board domain built around ownership, capacity limits and persistent state.",
+    "summary": "Three-column boards connect membership, ownership transfer and task assignment to SQLite storage. Capacity limits and task transitions live in the C# domain and service layers. A partial WPF frontend exposes that work through a desktop interface.",
+    "revision": "3ff1364574cad3c1980df267e64b9c46f3a0f16b",
+    "repo": "https://github.com/tnaydnov/Kanban",
+    "stack": [
+      "C#",
+      ".NET 6",
+      "SQLite",
+      "WPF / XAML",
+      "Newtonsoft.Json",
+      "log4net"
+    ],
+    "groups": [
+      {
+        "title": "Model a clear task lifecycle",
+        "summary": "Tasks move from backlog to in progress to done. The domain rejects further advancement from done and prevents editing completed tasks.",
+        "details": [
+          "New tasks enter the backlog with board-local IDs.",
+          "Titles, descriptions and due dates are validated by services.",
+          "Column capacity applies to new and advancing tasks."
+        ],
+        "sources": [
+          {
+            "label": "Board.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L49-L57"
+          },
+          {
+            "label": "Board.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L227-L278"
+          },
+          {
+            "label": "Board.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L479-L544"
+          },
+          {
+            "label": "BoardService.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/BoardService.cs#L113-L140"
+          },
+          {
+            "label": "Column.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Column.cs#L216-L239"
+          }
+        ]
+      },
+      {
+        "title": "Make ownership and membership explicit",
+        "summary": "Boards support joining, leaving, assignment and ownership transfer. Leaving a board unassigns that member’s unfinished work; an owner cannot simply leave without transferring ownership.",
+        "details": [
+          "Deleting a board requires its owner.",
+          "Task reassignment is controlled by the existing assignee when present.",
+          "An unassigned task may be advanced by a valid member; do not claim only explicitly assigned users can move every task."
+        ],
+        "sources": [
+          {
+            "label": "Board.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L154-L165"
+          },
+          {
+            "label": "Board.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L331-L398"
+          },
+          {
+            "label": "Task.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Task.cs#L173-L199"
+          },
+          {
+            "label": "ServiceController.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/ServiceController.cs#L184-L226"
+          }
+        ]
+      },
+      {
+        "title": "Keep a personal view across shared boards",
+        "summary": "The backend aggregates in-progress tasks assigned to a user across owned and shared boards, and separates board identity from display name.",
+        "details": [],
+        "sources": [
+          {
+            "label": "User.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/User.cs#L221-L232"
+          },
+          {
+            "label": "Board.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L423-L433"
+          },
+          {
+            "label": "UserController.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/UserController.cs#L205-L234"
+          }
+        ]
+      },
+      {
+        "title": "Persist the model behind the interface",
+        "summary": "DTOs and mappers serialize board/task state into SQLite. A JSON response boundary connects the backend to the partial WPF view models.",
+        "details": [],
+        "sources": [
+          {
+            "label": "DBConnector.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/DataAccessLayer/DBConnector.cs#L78-L128"
+          },
+          {
+            "label": "TaskDTO.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/DataAccessLayer/DTOS/TaskDTO.cs#L118-L173"
+          },
+          {
+            "label": "BackendController.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/Model/BackendController.cs#L49-L95"
+          },
+          {
+            "label": "BoardView.xaml",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/View/BoardView.xaml#L8-L16"
+          }
+        ]
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "view",
+          "label": "WPF views + view models",
+          "detail": "Partial desktop frontend"
+        },
+        {
+          "id": "service",
+          "label": "ServiceController",
+          "detail": "Login checks + JSON responses"
+        },
+        {
+          "id": "domain",
+          "label": "Board / Column / Task / User",
+          "detail": "Membership, limits, transitions"
+        },
+        {
+          "id": "mapping",
+          "label": "DTOs + mappers",
+          "detail": "Stored state and reconstruction"
+        },
+        {
+          "id": "db",
+          "label": "SQLite",
+          "detail": "Users · boards · columns · tasks"
+        }
+      ],
+      "edges": [
+        {
+          "from": "view",
+          "to": "service",
+          "label": "In-process calls, not HTTP"
+        },
+        {
+          "from": "service",
+          "to": "domain",
+          "label": "Validated operations"
+        },
+        {
+          "from": "domain",
+          "to": "mapping",
+          "label": "State changes"
+        },
+        {
+          "from": "mapping",
+          "to": "db",
+          "label": "SQL reads / writes"
+        }
+      ],
+      "citations": [
+        {
+          "file": "Frontend/Model/BackendController.cs",
+          "line": 20,
+          "endLine": 32,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/Model/BackendController.cs#L20-L32"
+        },
+        {
+          "file": "Backend/ServiceLayer/ServiceController.cs",
+          "line": 21,
+          "endLine": 40,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/ServiceController.cs#L21-L40"
+        },
+        {
+          "file": "Backend/DataAccessLayer/DBConnector.cs",
+          "line": 78,
+          "endLine": 128,
+          "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/DataAccessLayer/DBConnector.cs#L78-L128"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "title": "Treat capacity as a rule of the column",
+        "implementation": "Column rejects additions and incoming tasks when full and refuses a new capacity smaller than its existing task count.",
+        "rationale": "The same workload limit follows all callers; it does not depend on whether a UI button is disabled. This is a rationale inferred from the code.",
+        "sources": [
+          {
+            "label": "Column.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Column.cs#L119-L137"
+          },
+          {
+            "label": "Column.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Column.cs#L216-L239"
+          }
+        ]
+      },
+      {
+        "title": "Separate membership from task responsibility",
+        "implementation": "Board handles members and ownership; Task handles assignment/reassignment, while leaving a board removes unfinished assignments.",
+        "rationale": "A shared board can distinguish access to the board from responsibility for a particular item.",
+        "sources": [
+          {
+            "label": "Board.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Board.cs#L331-L398"
+          },
+          {
+            "label": "Task.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/BusinessLayer/Task.cs#L173-L207"
+          }
+        ]
+      },
+      {
+        "title": "Put a response boundary between presentation and core",
+        "implementation": "ServiceController performs common user/login validation and returns JSON error/value responses. The WPF adapter deserializes those responses into frontend models.",
+        "rationale": "The partial frontend and grading/test harness call the same backend behavior. The backend is an in-process library/executable, not a remote API.",
+        "sources": [
+          {
+            "label": "ServiceController.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/ServiceController.cs#L29-L40"
+          },
+          {
+            "label": "ServiceController.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Backend/ServiceLayer/ServiceController.cs#L168-L171"
+          },
+          {
+            "label": "BackendController.cs",
+            "url": "https://github.com/tnaydnov/Kanban/blob/3ff1364574cad3c1980df267e64b9c46f3a0f16b/Frontend/Model/BackendController.cs#L49-L95"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "README explicitly says partial frontend. BoardView shows three list boxes and a Back button; no complete drag-and-drop editing UI is supported by these views.",
+      "Archived local coursework code, not production authentication: passwords are stored/read as strings and compared directly; DTO SQL embeds string input rather than parameterizing it.",
+      "Frontend startup inserts sample boards/tasks with fixed 2025 due dates, which are now in the past. Current startup/demo data has not been run or repaired.",
+      "The Email setter recursively assigns itself; the UI is not certified functional end to end.",
+      "Tests are console scenario programs, including resets and printed responses, rather than an asserted xUnit/NUnit suite. No current test pass is claimed."
+    ],
+    "visualTitle": "The rules behind a three-column board",
+    "visualLabels": [
+      "Backlog",
+      "In progress",
+      "Done",
+      "Column capacity",
+      "Board owner",
+      "Task assignee",
+      "SQLite record"
+    ]
+  },
+  "set-card-game": {
+    "slug": "set-card-game",
+    "title": "Set Card Game",
+    "oneLiner": "A concurrent Set game where independent player threads share a dealer-controlled table.",
+    "summary": "A Java concurrency assignment turns the card game into a coordination problem: keyboard and computer players submit selections while a dealer validates sets, awards points, replaces cards and manages the round timer. The engineering story is the boundary between independent input, shared table state and centralized validation.",
+    "revision": "cf44b52616b0b8862338e134e05b029f5de9d7b4",
+    "repo": "https://github.com/tnaydnov/Set_Card_Game",
+    "stack": [
+      "Java 8",
+      "Threads, monitors and semaphores",
+      "Swing / AWT",
+      "Maven",
+      "JUnit 5",
+      "Mockito"
+    ],
+    "groups": [
+      {
+        "title": "Independent players, one shared table",
+        "summary": "Each player runs on a separate thread. Bounded input and candidate queues connect player actions to the dealer, while synchronized table operations maintain card and token state.",
+        "details": [
+          "Human input maps configured keys to player and slot.",
+          "Computer players generate random key presses; they are not strategic solvers.",
+          "The checked-in configuration starts four computer players and zero human players."
+        ],
+        "sources": [
+          {
+            "label": "Dealer.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L60-L90"
+          },
+          {
+            "label": "Player.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L109-L188"
+          },
+          {
+            "label": "Table.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L29-L50"
+          },
+          {
+            "label": "config.properties",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/resources/config.properties#L1-L63"
+          }
+        ]
+      },
+      {
+        "title": "Validate, score and refill",
+        "summary": "The dealer converts a three-token selection into cards, validates the Set rule, removes a winning triple and associated tokens, then communicates a point or penalty to the waiting player.",
+        "details": [
+          "A valid set has each feature either equal across all three cards or different across all three.",
+          "Point and penalty freezes temporarily suppress player input.",
+          "Card replacement and countdown management belong to the dealer."
+        ],
+        "sources": [
+          {
+            "label": "Dealer.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L155-L215"
+          },
+          {
+            "label": "UtilImpl.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UtilImpl.java#L41-L92"
+          },
+          {
+            "label": "Player.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L232-L275"
+          }
+        ]
+      },
+      {
+        "title": "A playable desktop surface",
+        "summary": "The Swing interface shows cards, player tokens, countdown, scores, freeze indicators and final winners. Configuration controls player counts, key bindings and round timing.",
+        "details": [
+          "The table stores both slot-to-card and card-to-slot mappings.",
+          "The UI interface provides a seam for mocks used by the unit tests."
+        ],
+        "sources": [
+          {
+            "label": "UserInterface.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UserInterface.java#L1-L88"
+          },
+          {
+            "label": "UserInterfaceSwing.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/UserInterfaceSwing.java#L1-L339"
+          },
+          {
+            "label": "Table.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L96-L147"
+          },
+          {
+            "label": "TableTest.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/TableTest.java#L1-L170"
+          }
+        ]
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "input",
+          "label": "Keyboard / random computer input",
+          "detail": "Per-player input producer"
+        },
+        {
+          "id": "players",
+          "label": "Player threads",
+          "detail": "Token selection and freeze state"
+        },
+        {
+          "id": "queue",
+          "label": "Candidate queue",
+          "detail": "Bounded IDs awaiting validation"
+        },
+        {
+          "id": "dealer",
+          "label": "Dealer thread",
+          "detail": "Rules, timer and card lifecycle"
+        },
+        {
+          "id": "table",
+          "label": "Shared table",
+          "detail": "Cards, slots, tokens and synchronization"
+        },
+        {
+          "id": "ui",
+          "label": "Swing interface",
+          "detail": "Cards, score and countdown"
+        }
+      ],
+      "edges": [
+        {
+          "from": "input",
+          "to": "players",
+          "label": "Bounded key-press queue"
+        },
+        {
+          "from": "players",
+          "to": "queue",
+          "label": "Three selected slots"
+        },
+        {
+          "from": "queue",
+          "to": "dealer",
+          "label": "Validate candidate"
+        },
+        {
+          "from": "dealer",
+          "to": "players",
+          "label": "Point / penalty and wake-up"
+        },
+        {
+          "from": "players",
+          "to": "table",
+          "label": "Select / remove tokens"
+        },
+        {
+          "from": "dealer",
+          "to": "table",
+          "label": "Deal / remove cards"
+        },
+        {
+          "from": "table",
+          "to": "ui",
+          "label": "Render state"
+        }
+      ],
+      "citations": [
+        {
+          "file": "src/main/java/bguspl/set/ex/Dealer.java",
+          "line": 60,
+          "endLine": 90,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L60-L90"
+        },
+        {
+          "file": "src/main/java/bguspl/set/ex/Dealer.java",
+          "line": 155,
+          "endLine": 215,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L155-L215"
+        },
+        {
+          "file": "src/main/java/bguspl/set/ex/Player.java",
+          "line": 109,
+          "endLine": 188,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L109-L188"
+        },
+        {
+          "file": "src/main/java/bguspl/set/ex/Table.java",
+          "line": 96,
+          "endLine": 147,
+          "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L96-L147"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "title": "Separate selection from validation",
+        "implementation": "Player threads collect token selections and enqueue their ID; the dealer owns rule checking, card removal and the point/penalty response.",
+        "rationale": "This makes the contention visible: multiple players can refer to the same cards, but validation must coordinate with card replacement. This explanation is inferred from the implementation.",
+        "sources": [
+          {
+            "label": "Player.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Player.java#L120-L188"
+          },
+          {
+            "label": "Dealer.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Dealer.java#L155-L192"
+          }
+        ]
+      },
+      {
+        "title": "Keep shared card mappings together",
+        "implementation": "Table methods update slot-to-card and card-to-slot mappings alongside UI operations; a fair semaphore and synchronized blocks coordinate access.",
+        "rationale": "The case study can explain a concrete invariant instead of making an unverified claim that the entire game is race-free.",
+        "sources": [
+          {
+            "label": "Table.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L29-L50"
+          },
+          {
+            "label": "Table.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/ex/Table.java#L96-L147"
+          }
+        ]
+      },
+      {
+        "title": "Make the interface replaceable in tests",
+        "implementation": "Game code receives an Env containing a UserInterface abstraction. Unit tests use Mockito doubles for UI and table dependencies.",
+        "rationale": "Core score and table behavior can be exercised without opening the desktop window.",
+        "sources": [
+          {
+            "label": "Env.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/main/java/bguspl/set/Env.java#L1-L19"
+          },
+          {
+            "label": "PlayerTest.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/PlayerTest.java#L1-L99"
+          },
+          {
+            "label": "TableTest.java",
+            "url": "https://github.com/tnaydnov/Set_Card_Game/blob/cf44b52616b0b8862338e134e05b029f5de9d7b4/src/test/java/bguspl/set/ex/TableTest.java#L1-L170"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Computer behavior is random slot input, not a Set-playing AI. Idle player/computer loops also prevent a claim of demonstrated CPU efficiency.",
+      "Some implementation paths assume 12 slots even though the framework exposes configurable dimensions.",
+      "The tests cover selected table, score and lifecycle methods; they do not establish correctness under adversarial thread schedules. Some dealer checks use dedicated helper methods instead of the full concurrent loop.",
+      "This is a Swing desktop assignment, not a browser application. Bundled card assets were inventoried but are unnecessary for the proposed original vector explanation."
+    ],
+    "visualTitle": "Two players. One contested triple.",
+    "visualLabels": [
+      "Player threads",
+      "Token selection",
+      "Candidate queue",
+      "Dealer validation",
+      "Shared table",
+      "Point / penalty"
+    ]
+  },
+  "dungeons-and-dragons": {
+    "slug": "dungeons-and-dragons",
+    "title": "Dungeons and Dragons",
+    "oneLiner": "A turn-based Java dungeon engine separating board interactions, character abilities and enemy behavior.",
+    "summary": "A command-line dungeon assignment models movement, combat and progression through an object hierarchy. Four character classes use different ability resources, while monsters, bosses and traps react on game ticks. Visitor-style dispatch connects an attempted move with the behavior of the tile it reaches.",
+    "revision": "6f044b2bb42ef51f0920c06c8e5c807a4b87c509",
+    "repo": "https://github.com/tnaydnov/Dungeons_and_Dragons",
+    "stack": [
+      "Java",
+      "Object-oriented design",
+      "Visitor-style dispatch",
+      "Command-line interface",
+      "JUnit 5 test source"
+    ],
+    "groups": [
+      {
+        "title": "One move, different outcomes",
+        "summary": "Moving into empty ground swaps tile positions; a wall blocks movement; reaching an opposing unit starts combat. Dispatch separates these outcomes from the directional movement commands.",
+        "details": [
+          "The board stores a tile grid and synchronizes positions during swaps.",
+          "The manager processes player input, enemy ticks and player resource updates."
+        ],
+        "sources": [
+          {
+            "label": "Tile.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Tile.java#L1-L71"
+          },
+          {
+            "label": "Unit.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L90-L108"
+          },
+          {
+            "label": "Player.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Player.java#L74-L92"
+          },
+          {
+            "label": "Manager.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L38-L51"
+          }
+        ]
+      },
+      {
+        "title": "Four ways to spend an ability",
+        "summary": "Warriors use cooldowns, mages spend and regenerate mana, rogues manage energy, and hunters replenish and spend arrows. Preset heroes share progression rules while specializing their attacks.",
+        "details": [
+          "The character menu defines seven presets across four classes.",
+          "Experience can trigger level-ups, stat increases and resource changes."
+        ],
+        "sources": [
+          {
+            "label": "Warrior.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Warrior.java#L16-L58"
+          },
+          {
+            "label": "Mage.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Mage.java#L23-L68"
+          },
+          {
+            "label": "Rogue.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Rogue.java#L14-L49"
+          },
+          {
+            "label": "Hunter.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Hunter.java#L16-L68"
+          },
+          {
+            "label": "Player.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Player.java#L21-L36"
+          },
+          {
+            "label": "Manager.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L140-L185"
+          }
+        ]
+      },
+      {
+        "title": "Different threats on the same board",
+        "summary": "Monsters chase within vision range and otherwise choose random moves. Bosses add timed special attacks, while traps cycle between visible and concealed glyphs and attack nearby players.",
+        "details": [
+          "Chasing uses a simple dominant-axis choice, not a general pathfinding algorithm.",
+          "Defeating the remaining enemies loads the next level from an external map directory."
+        ],
+        "sources": [
+          {
+            "label": "Monster.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Monster.java#L16-L49"
+          },
+          {
+            "label": "Boss.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Boss.java#L15-L44"
+          },
+          {
+            "label": "Trap.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Trap.java#L24-L42"
+          },
+          {
+            "label": "Manager.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L60-L73"
+          },
+          {
+            "label": "Manager.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L245-L252"
+          }
+        ]
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "cli",
+          "label": "CLI input",
+          "detail": "Movement and ability commands"
+        },
+        {
+          "id": "manager",
+          "label": "Manager",
+          "detail": "Turn order, maps and progression"
+        },
+        {
+          "id": "board",
+          "label": "Board + Tile",
+          "detail": "Grid coordinates and tile swaps"
+        },
+        {
+          "id": "dispatch",
+          "label": "Visitor-style interactions",
+          "detail": "Empty / wall / opposing unit"
+        },
+        {
+          "id": "players",
+          "label": "Player classes",
+          "detail": "Cooldown, mana, energy and arrows"
+        },
+        {
+          "id": "enemies",
+          "label": "Enemy classes",
+          "detail": "Monster, boss and trap ticks"
+        }
+      ],
+      "edges": [
+        {
+          "from": "cli",
+          "to": "manager",
+          "label": "One command"
+        },
+        {
+          "from": "manager",
+          "to": "players",
+          "label": "Act and update resources"
+        },
+        {
+          "from": "manager",
+          "to": "enemies",
+          "label": "Enemy ticks"
+        },
+        {
+          "from": "players",
+          "to": "board",
+          "label": "Choose target tile"
+        },
+        {
+          "from": "board",
+          "to": "dispatch",
+          "label": "Accept visitor"
+        },
+        {
+          "from": "dispatch",
+          "to": "board",
+          "label": "Move or remain"
+        },
+        {
+          "from": "dispatch",
+          "to": "enemies",
+          "label": "Resolve combat"
+        }
+      ],
+      "citations": [
+        {
+          "file": "src/Manager.java",
+          "line": 38,
+          "endLine": 96,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L38-L96"
+        },
+        {
+          "file": "src/Tile.java",
+          "line": 1,
+          "endLine": 71,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Tile.java#L1-L71"
+        },
+        {
+          "file": "src/Unit.java",
+          "line": 90,
+          "endLine": 108,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L90-L108"
+        },
+        {
+          "file": "src/Player.java",
+          "line": 74,
+          "endLine": 92,
+          "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Player.java#L74-L92"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "title": "Put interaction behavior on the types involved",
+        "implementation": "Tiles implement Visitor and Visited; accept and overloaded interact methods route movement into empty, wall, player or enemy behavior.",
+        "rationale": "A small three-outcome diagram can explain how polymorphism replaces a single large movement conditional. This design rationale is inferred from source.",
+        "sources": [
+          {
+            "label": "Visitor.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Visitor.java#L1-L7"
+          },
+          {
+            "label": "Visited.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Visited.java#L1-L4"
+          },
+          {
+            "label": "Tile.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Tile.java#L63-L65"
+          },
+          {
+            "label": "Unit.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Unit.java#L90-L108"
+          }
+        ]
+      },
+      {
+        "title": "Share progression, specialize ability economics",
+        "implementation": "Player implements experience and level progression; Warrior, Mage, Rogue and Hunter override ability and tick behavior using different resources.",
+        "rationale": "The same game loop supports four distinct play styles without requiring a different board engine for each.",
+        "sources": [
+          {
+            "label": "Player.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Player.java#L21-L36"
+          },
+          {
+            "label": "Warrior.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Warrior.java#L16-L58"
+          },
+          {
+            "label": "Mage.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Mage.java#L23-L68"
+          },
+          {
+            "label": "Rogue.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Rogue.java#L14-L49"
+          },
+          {
+            "label": "Hunter.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Hunter.java#L16-L68"
+          }
+        ]
+      },
+      {
+        "title": "Drive enemies through a common tick",
+        "implementation": "Manager advances each enemy, allowing monster pursuit, boss ability timing and trap visibility to run through the same turn sequence.",
+        "rationale": "Different behavior can be compared at the shared lifecycle boundary instead of described as a generic enemy AI system.",
+        "sources": [
+          {
+            "label": "Manager.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Manager.java#L38-L51"
+          },
+          {
+            "label": "Monster.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Monster.java#L16-L49"
+          },
+          {
+            "label": "Boss.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Boss.java#L15-L44"
+          },
+          {
+            "label": "Trap.java",
+            "url": "https://github.com/tnaydnov/Dungeons_and_Dragons/blob/6f044b2bb42ef51f0920c06c8e5c807a4b87c509/src/Trap.java#L24-L42"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "The tracked repository has no level text assets or Maven/Gradle build configuration. Main requires a map-directory argument, so an out-of-the-box playable run is not established.",
+      "Map loading uses a Windows path separator and treats a missing level file as victory, including a missing initial map. Do not show that outcome as evidence of a completed campaign.",
+      "Shared static board, manager and enemy state couples instances. The implementation is a local coursework engine, not an isolated multi-session service.",
+      "Combat uses unseeded random rolls, and some tests assert outcomes affected by those rolls. The test source was reviewed but not rerun or certified deterministic."
+    ],
+    "visualTitle": "What happens when a move meets a tile?",
+    "visualLabels": [
+      "Attempted move",
+      "Empty: swap",
+      "Wall: remain",
+      "Enemy: combat",
+      "Cooldown",
+      "Mana",
+      "Energy",
+      "Arrows"
+    ]
+  },
+  "the-coalition-race": {
+    "slug": "the-coalition-race",
+    "title": "The Coalition Race",
+    "oneLiner": "A policy-driven C++ simulation of agents, offers and coalition formation.",
+    "summary": "A coursework simulation represents a 120-mandate parliament as a weighted graph. Agents choose neighboring parties to approach, parties collect and evaluate offers, and each joining party extends a coalition and creates a new agent. JSON snapshots make every simulation step inspectable.",
+    "revision": "a6906502405ee77406460f1e5225f67f80becbb6",
+    "repo": "https://github.com/tnaydnov/The_Coalition_Race",
+    "stack": [
+      "C++11",
+      "Strategy interfaces",
+      "Rule of Five",
+      "nlohmann JSON",
+      "Make / g++",
+      "Python",
+      "NetworkX / Matplotlib"
+    ],
+    "groups": [
+      {
+        "title": "Separate whom to approach from whom to join",
+        "summary": "Agent selection policies consider edge weight or party mandates. Party join policies choose the last offer or the offering coalition with the largest mandate total.",
+        "details": [
+          "Policies are selected from JSON configuration.",
+          "Parties progress through Waiting, CollectingOffers and Joined states."
+        ],
+        "sources": [
+          {
+            "label": "Parser.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L12-L43"
+          },
+          {
+            "label": "EdgeWeightSelectionPolicy.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/EdgeWeightSelectionPolicy.cpp#L1-L45"
+          },
+          {
+            "label": "MandatesSelectionPolicy.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/MandatesSelectionPolicy.cpp#L1-L32"
+          },
+          {
+            "label": "LastOfferJoinPolicy.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/LastOfferJoinPolicy.cpp#L1-L12"
+          },
+          {
+            "label": "MandatesJoinPolicy.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/MandatesJoinPolicy.cpp#L1-L20"
+          },
+          {
+            "label": "Party.h",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/include/Party.h#L1-L53"
+          }
+        ]
+      },
+      {
+        "title": "Grow a coalition through local decisions",
+        "summary": "Each simulation step advances agents and then parties. After a delayed offer-collection period, a joining party adds mandates to its selected coalition and gains a cloned agent.",
+        "details": [
+          "A new agent immediately takes a step after being cloned.",
+          "Execution ends when a coalition reaches at least 61 mandates or all parties have joined."
+        ],
+        "sources": [
+          {
+            "label": "Simulation.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Simulation.cpp#L72-L104"
+          },
+          {
+            "label": "Party.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Party.cpp#L96-L111"
+          },
+          {
+            "label": "Agent.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Agent.cpp#L42-L53"
+          }
+        ]
+      },
+      {
+        "title": "Inspect the trace, including unsuccessful majorities",
+        "summary": "The CLI writes the initial state and every subsequent state as JSON. A separate Python script renders graph snapshots with party, mandate, state and coalition labels.",
+        "details": [
+          "Three committed input/output fixture pairs show concrete traces; these were parsed, not rerun.",
+          "Fixture 03 ends with two 60-mandate coalitions: all parties joined, but neither reached a majority."
+        ],
+        "sources": [
+          {
+            "label": "main.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/main.cpp#L20-L31"
+          },
+          {
+            "label": "Parser.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L119-L185"
+          },
+          {
+            "label": "visualization.py",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/visualization.py#L1-L65"
+          },
+          {
+            "label": "03.json",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.json#L1-L41"
+          },
+          {
+            "label": "03.out",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.out#L477-L493"
+          },
+          {
+            "label": "03.out",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/tests/03.out#L555-L579"
+          }
+        ]
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "config",
+          "label": "JSON configuration",
+          "detail": "Parties, agents, policies and graph"
+        },
+        {
+          "id": "parser",
+          "label": "Parser + validation",
+          "detail": "120 mandates and symmetric matrix"
+        },
+        {
+          "id": "simulation",
+          "label": "Simulation",
+          "detail": "Agent step, party step, termination"
+        },
+        {
+          "id": "policies",
+          "label": "Selection / join policies",
+          "detail": "Independent virtual strategies"
+        },
+        {
+          "id": "domain",
+          "label": "Graph + Party + Coalition",
+          "detail": "Offers, states and mandate totals"
+        },
+        {
+          "id": "trace",
+          "label": "JSON snapshots",
+          "detail": "Recorded state after each step"
+        },
+        {
+          "id": "viewer",
+          "label": "Python graph viewer",
+          "detail": "NetworkX / Matplotlib plots"
+        }
+      ],
+      "edges": [
+        {
+          "from": "config",
+          "to": "parser",
+          "label": "Load and validate"
+        },
+        {
+          "from": "parser",
+          "to": "simulation",
+          "label": "Construct state"
+        },
+        {
+          "from": "simulation",
+          "to": "policies",
+          "label": "Select and join"
+        },
+        {
+          "from": "policies",
+          "to": "domain",
+          "label": "Offers and coalition decisions"
+        },
+        {
+          "from": "simulation",
+          "to": "domain",
+          "label": "Update / clone / stop"
+        },
+        {
+          "from": "simulation",
+          "to": "trace",
+          "label": "Export every state"
+        },
+        {
+          "from": "trace",
+          "to": "viewer",
+          "label": "Plot recorded iterations"
+        }
+      ],
+      "citations": [
+        {
+          "file": "src/Parser.cpp",
+          "line": 12,
+          "endLine": 102,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L12-L102"
+        },
+        {
+          "file": "src/Simulation.cpp",
+          "line": 72,
+          "endLine": 104,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Simulation.cpp#L72-L104"
+        },
+        {
+          "file": "src/main.cpp",
+          "line": 20,
+          "endLine": 31,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/main.cpp#L20-L31"
+        },
+        {
+          "file": "visualization.py",
+          "line": 1,
+          "endLine": 65,
+          "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/visualization.py#L1-L65"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "title": "Two strategy boundaries for two decisions",
+        "implementation": "SelectionPolicy chooses which neighboring party an agent approaches; JoinPolicy decides which offer a party accepts. Parser constructs the requested concrete strategies.",
+        "rationale": "The two choices can vary independently while the simulation lifecycle stays the same. This design rationale is inferred from source.",
+        "sources": [
+          {
+            "label": "SelectionPolicy.h",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/include/SelectionPolicy.h#L1-L31"
+          },
+          {
+            "label": "JoinPolicy.h",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/include/JoinPolicy.h#L1-L28"
+          },
+          {
+            "label": "Parser.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L12-L43"
+          }
+        ]
+      },
+      {
+        "title": "Make polymorphic ownership explicit",
+        "implementation": "Agent and Party implement destructors, copy and move operations for their owned policy pointers. Copying clones the virtual policy; moves transfer ownership and clear the source pointer.",
+        "rationale": "Agent cloning and container operations exercise C++ resource-management mechanics instead of relying on shallow copies of owned pointers.",
+        "sources": [
+          {
+            "label": "Agent.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Agent.cpp#L57-L96"
+          },
+          {
+            "label": "Party.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Party.cpp#L1-L95"
+          }
+        ]
+      },
+      {
+        "title": "Record intermediate states instead of only a winner",
+        "implementation": "Main saves the initial state and each simulation step; Parser includes parties, agents, coalition membership, mandates and graph edges in the trace.",
+        "rationale": "A reviewer can see why a coalition grew and distinguish a majority from the all-parties-joined stopping condition.",
+        "sources": [
+          {
+            "label": "main.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/main.cpp#L20-L31"
+          },
+          {
+            "label": "Parser.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Parser.cpp#L119-L185"
+          },
+          {
+            "label": "Simulation.cpp",
+            "url": "https://github.com/tnaydnov/The_Coalition_Race/blob/a6906502405ee77406460f1e5225f67f80becbb6/src/Simulation.cpp#L80-L104"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Termination does not guarantee a majority: the committed third fixture ends at 60 versus 60 because every party has joined. This is not a general coalition impossibility solver.",
+      "There is no separate no-progress termination condition. A disconnected configuration can leave unjoined parties without further offers while no coalition reaches 61; this is a source-derived risk, not an executed reproduction.",
+      "Mandates selection initializes its candidate using a different eligibility condition from the later loop. That can retain an ineligible initial candidate, so optimal or universally correct selection is not established.",
+      "Validation consists of source review and inspection of three committed traces, not a new compile or asserted test run. The Python viewer opens graph plots; it is not an interactive web simulator."
+    ],
+    "visualTitle": "A majority is not the only ending",
+    "visualLabels": [
+      "Waiting",
+      "Collecting offers",
+      "Joined",
+      "Mandates",
+      "Majority: 61",
+      "All parties joined"
+    ]
+  }
+}

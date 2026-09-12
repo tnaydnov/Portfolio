@@ -13,7 +13,7 @@ function PlayIcon() {
   return <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7 4 9 6-9 6V4Z" fill="currentColor"/></svg>;
 }
 
-export function ScreenshotGallery({ screens, project }: { screens: TourScreen[]; project: string }) {
+export function ScreenshotGallery({ screens, project, editorial = false }: { screens: TourScreen[]; project: string; editorial?: boolean }) {
   const [selected, setSelected] = useState<number | null>(null);
   const [zoomed, setZoomed] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -46,13 +46,16 @@ export function ScreenshotGallery({ screens, project }: { screens: TourScreen[];
   };
 
   return <>
-    <div className={styles.screenGrid} data-testid="product-screens">
+    <div className={styles.screenGrid} data-testid="product-screens" data-editorial={editorial || undefined} data-count={screens.length}>
       {screens.map((item, index) => <figure className={styles.screenCard} key={item.id} id={`screen-${item.id}`} data-mobile={item.mobile || undefined}>
         <a className={styles.screenLink} href={item.src} aria-label={`Expand: ${item.title}`} onClick={event => {
           event.preventDefault(); lastTrigger.current = event.currentTarget; setZoomed(false); setSelected(index);
         }}>
-          <div className={styles.screenCanvas}>
+          <div className={styles.screenCanvas} data-focused={editorial && Boolean(item.focus) || undefined}>
+            {editorial && item.focus ? <div className={styles.focusCrop} style={{aspectRatio: `${item.focus.width} / ${item.focus.height}`}}><Image src={item.src} alt={`${project}: detail of ${item.title}`} width={item.width} height={item.height} sizes="(max-width: 700px) 180vw, 1600px" quality={95} style={{width: `${item.width/item.focus.width*100}%`, maxWidth: "none", left: `${-item.focus.x/item.focus.width*100}%`, top: `${-item.focus.y/item.focus.height*100}%`}}/></div> :
             <Image src={item.src} alt={`${project}: ${item.title}`} width={item.width} height={item.height} sizes="(max-width: 700px) 92vw, (max-width: 1200px) 44vw, 560px" quality={90}/>
+            }
+            {editorial && item.focus && <span className={styles.detailTag}>DETAIL / ORIGINAL SCREEN</span>}
           </div>
           <span className={styles.expand}><ExpandIcon/><span>View screen</span></span>
         </a>
@@ -93,19 +96,25 @@ export function ScreenshotGallery({ screens, project }: { screens: TourScreen[];
 export function TourVideo({ film }: { film: TourFilm }) {
   const portrait = film.height > film.width;
   const video = useRef<HTMLVideoElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [failed, setFailed] = useState(false);
   const [activeChapter, setActiveChapter] = useState(0);
   const pendingSeek = useRef<number | null>(null);
   const focusOnStart = useRef(false);
-  const begin = (at = 0, focus = false) => {
+  const begin = (at = 0, focus = false, reveal = false) => {
     focusOnStart.current = focus;
     pendingSeek.current = at;
     if (!started) setStarted(true);
     else if (video.current) {
       video.current.currentTime = at;
+      if (focus) video.current.focus({ preventScroll: true });
       void video.current.play().catch(() => {});
     }
+    if (reveal) stage.current?.scrollIntoView({
+      block: "start",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    });
   };
   useEffect(() => {
     if (!started || !video.current) return;
@@ -125,12 +134,22 @@ export function TourVideo({ film }: { film: TourFilm }) {
   }, [film.id]);
 
   return <figure className={styles.film} data-testid="product-film">
-    <div className={styles.filmStage} data-portrait={portrait || undefined} style={{aspectRatio: portrait ? undefined : `${film.width} / ${film.height}`}}>
+    <div ref={stage} className={styles.filmStage} data-portrait={portrait || undefined} style={{aspectRatio: portrait ? undefined : `${film.width} / ${film.height}`}}>
       <div className={styles.filmViewport} style={portrait ? {aspectRatio: `${film.width} / ${film.height}`, maxWidth: `min(100%, 410px, calc(min(700px, 82svh) * ${film.width / film.height}))`} : undefined}>
       {!started ? <button type="button" className={styles.filmPoster} onClick={() => begin(0, true)} aria-label={`Play: ${film.title}`}>
         <Image src={film.poster} alt="" width={film.width} height={film.height} sizes="(max-width: 700px) 92vw, 1120px" quality={90}/>
         <span className={styles.playLabel}><span className={styles.playIcon}><PlayIcon/></span><span><strong>Watch the walkthrough</strong><span>{Math.round(film.duration)} seconds · Original app</span></span></span>
-      </button> : <video ref={video} controls playsInline tabIndex={0} preload="metadata" poster={film.poster} aria-label={film.title} onError={() => setFailed(true)} onPlay={() => window.dispatchEvent(new CustomEvent("portfolio:play-film", { detail: film.id }))} onLoadedMetadata={() => {
+      </button> : <video ref={video} controls playsInline tabIndex={0} preload="metadata" poster={film.poster} aria-label={film.title} onKeyDown={event => {
+        if (event.key !== " " || event.altKey || event.ctrlKey || event.metaKey || event.target !== event.currentTarget) return;
+        event.preventDefault();
+        if (event.repeat) return;
+        if (event.currentTarget.paused) void event.currentTarget.play().catch(() => {});
+        else event.currentTarget.pause();
+      }} onKeyUpCapture={event => {
+        if (event.key !== " " || event.altKey || event.ctrlKey || event.metaKey || event.target !== event.currentTarget) return;
+        // Chromium's native controls otherwise toggle again on key release.
+        event.preventDefault();
+      }} onError={() => setFailed(true)} onPlay={() => window.dispatchEvent(new CustomEvent("portfolio:play-film", { detail: film.id }))} onLoadedMetadata={() => {
         if (video.current && pendingSeek.current !== null) {video.current.currentTime = pendingSeek.current;pendingSeek.current = null;}
       }} onTimeUpdate={() => {
         const current = video.current?.currentTime ?? 0;
@@ -147,7 +166,7 @@ export function TourVideo({ film }: { film: TourFilm }) {
       <a href={film.src} download className={styles.downloadFilm}>Download video <span aria-hidden="true">↓</span></a>
     </figcaption>
     {failed && <p className={styles.mediaError} role="status">The video could not load. You can still explore the screenshots below or download the recording.</p>}
-    {film.chapters.length > 1 && <div className={styles.filmChapters} aria-label="Video chapters">{film.chapters.map((chapter, index) => <button key={chapter.title} type="button" onClick={() => begin(chapter.at)} aria-pressed={started && activeChapter === index}>
+    {film.chapters.length > 1 && <div className={styles.filmChapters} aria-label="Video chapters">{film.chapters.map((chapter, index) => <button key={chapter.title} type="button" onClick={() => begin(chapter.at, true, true)} aria-pressed={started && activeChapter === index}>
       <span>{String(Math.floor(chapter.at / 60)).padStart(2,"0")}:{String(Math.floor(chapter.at % 60)).padStart(2,"0")}</span>{chapter.title}
     </button>)}</div>}
     {film.chapters.some(chapter => chapter.description) && <details className={styles.transcript}><summary>Read the walkthrough</summary><ol>{film.chapters.map(chapter => <li key={chapter.title}><strong>{chapter.title}</strong><p>{chapter.description}</p></li>)}</ol></details>}

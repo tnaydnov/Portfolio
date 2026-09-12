@@ -115,5 +115,375 @@
     "Paid AI, Google OAuth/Calendar, outbound email and background workers were disabled or absent. Their visible controls were not exercised. The backend was isolated on an internal Docker network; the only browser-facing gateway and frontend were bound to loopback.",
     "The original dashboard has status-mapping and weekly-metric inconsistencies, so it is omitted. Mixed historical status labels can appear as separate summary chips even when the Kanban column combines them; the original UI was preserved.",
     "The film contains real lossless Chromium compositor frames, trimmed before setup, slowed to 62.5% playback for reading, and encoded once to H.264. The dark chapter band is editorial; the application pixels were not recreated."
-  ]
+  ],
+  "depthReview": {
+    "project": "Applytide",
+    "repo": "https://github.com/tnaydnov/Applytide",
+    "sourceRevision": "a040d14d5c45491e3db1651c0d4daa67a218c32f",
+    "sourceCompared": "HEAD and fetched origin/main unchanged from previous capture revision",
+    "capturedAt": "2026-09-12",
+    "backend": "real",
+    "assets": [
+      {
+        "id": "extension-ready",
+        "title": "Capture without leaving the posting",
+        "description": "The actual installed extension is ready to capture the active fictional job page.",
+        "portal": "Personal job-search workspace",
+        "type": "image",
+        "src": "/media/projects/applytide/depth/extension-ready.webp",
+        "width": 760,
+        "height": 960,
+        "backend": "real",
+        "verifiedBehavior": "The actual installed extension is ready to capture the active fictional job page.",
+        "focusRegions": [
+          {
+            "label": "Original extension result",
+            "x": 40,
+            "y": 155,
+            "width": 680,
+            "height": 550
+          }
+        ]
+      },
+      {
+        "id": "extension-saved",
+        "title": "A saved opportunity, not another bookmark",
+        "description": "The original extension confirms the real backend record, including Product Engineer, Northstar Studio and London.",
+        "portal": "Personal job-search workspace",
+        "type": "image",
+        "src": "/media/projects/applytide/depth/extension-saved.webp",
+        "width": 760,
+        "height": 960,
+        "backend": "real",
+        "verifiedBehavior": "The original extension confirms the real backend record, including Product Engineer, Northstar Studio and London.",
+        "focusRegions": [
+          {
+            "label": "Original extension result",
+            "x": 40,
+            "y": 155,
+            "width": 680,
+            "height": 550
+          }
+        ]
+      },
+      {
+        "id": "captured-job-details",
+        "title": "Keep the original posting in context",
+        "description": "The opportunity opens inside Alex’s personal workspace, retaining the captured role, location and description.",
+        "portal": "Personal job-search workspace",
+        "type": "image",
+        "src": "/media/projects/applytide/depth/captured-job-details.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The opportunity opens inside Alex’s personal workspace, retaining the captured role, location and description.",
+        "focusRegions": [
+          {
+            "label": "Original document or job dialog",
+            "x": 704,
+            "y": 100,
+            "width": 1792,
+            "height": 1800
+          }
+        ]
+      },
+      {
+        "id": "resume-preview",
+        "title": "Keep the source document close",
+        "description": "The original document viewer opens Alex’s uploaded fictional sample PDF.",
+        "portal": "Personal job-search workspace",
+        "type": "image",
+        "src": "/media/projects/applytide/depth/resume-preview.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The original document viewer opens Alex’s uploaded fictional sample PDF.",
+        "focusRegions": [
+          {
+            "label": "Original document or job dialog",
+            "x": 560,
+            "y": 100,
+            "width": 2080,
+            "height": 1800
+          }
+        ]
+      },
+      {
+        "id": "resume-job-context",
+        "title": "Choose the role you are applying for",
+        "description": "The original analysis dialog selects Fieldnote’s saved Frontend Engineer role before running the review.",
+        "portal": "Personal job-search workspace",
+        "type": "image",
+        "src": "/media/projects/applytide/depth/resume-job-context.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The original analysis dialog selects Fieldnote’s saved Frontend Engineer role before running the review.",
+        "focusRegions": [
+          {
+            "label": "Original document or job dialog",
+            "x": 704,
+            "y": 100,
+            "width": 1792,
+            "height": 1800
+          }
+        ]
+      },
+      {
+        "id": "resume-analysis-score",
+        "title": "A local review result",
+        "description": "The backend’s rule-based fallback returns 64/100 for this fictional resume and role. This is an internal heuristic, not an employer ATS assessment.",
+        "portal": "Personal job-search workspace",
+        "type": "image",
+        "src": "/media/projects/applytide/depth/resume-analysis-score.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The backend’s rule-based fallback returns 64/100 for this fictional resume and role. This is an internal heuristic, not an employer ATS assessment.",
+        "focusRegions": [
+          {
+            "label": "Original document or job dialog",
+            "x": 704,
+            "y": 100,
+            "width": 1792,
+            "height": 1800
+          }
+        ]
+      },
+      {
+        "id": "resume-analysis-breakdown",
+        "title": "Look beyond the headline score",
+        "description": "The original local result separates keyword coverage, readability, technical skills and soft skills. These category values provide review prompts.",
+        "portal": "Personal job-search workspace",
+        "type": "image",
+        "src": "/media/projects/applytide/depth/resume-analysis-breakdown.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The original local result separates keyword coverage, readability, technical skills and soft skills. These category values provide review prompts.",
+        "focusRegions": [
+          {
+            "label": "Category-by-category feedback",
+            "x": 765,
+            "y": 490,
+            "width": 1675,
+            "height": 1380
+          }
+        ]
+      },
+      {
+        "id": "resume-keywords",
+        "title": "See the wording behind the result",
+        "description": "The original result separates found and missing terms and reports role-specific matches. All results here come from the local heuristic fallback; no model was called.",
+        "portal": "Personal job-search workspace",
+        "type": "image",
+        "src": "/media/projects/applytide/depth/resume-keywords.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The original result separates found and missing terms and reports role-specific matches. All results here come from the local heuristic fallback; no model was called.",
+        "focusRegions": [
+          {
+            "label": "Role match and original keyword lists",
+            "x": 755,
+            "y": 675,
+            "width": 1690,
+            "height": 850
+          }
+        ]
+      },
+      {
+        "id": "extension-intake",
+        "duration": 25.7,
+        "width": 1600,
+        "height": 1128,
+        "chapters": [
+          {
+            "start": 0,
+            "title": "Capture the opportunity",
+            "description": "An installed browser extension is connected to a real isolated Applytide backend."
+          },
+          {
+            "start": 2.2,
+            "title": "Capture the posting in your browser",
+            "description": "The real installed extension captures a clearly labeled fictional local job page. The wait is condensed to 1.25×."
+          },
+          {
+            "start": 11.3568,
+            "title": "Keep a structured opportunity",
+            "description": "The original popup confirms that the backend saved the extracted role, company and location."
+          },
+          {
+            "start": 14.2928,
+            "title": "Find it in the same personal workspace",
+            "description": "The opportunity appears in Alex’s authenticated jobs list."
+          },
+          {
+            "start": 17.1148,
+            "title": "Read the saved context before applying",
+            "description": "The original detail view retains the posting text and location, with its existing Apply to Job action."
+          }
+        ],
+        "editing": "2.2s introduction; actual job-page screenshot and installed extension pixels composed side by side; extension at 1.25x; cut to original workspace; 2s final hold.",
+        "type": "video",
+        "title": "From a posting to a personal opportunity",
+        "description": "An installed extension captures a fictional posting, saves it through the actual backend, and opens the result in the same account.",
+        "portal": "Personal job-search workspace",
+        "src": "/media/projects/applytide/depth/extension-intake.mp4",
+        "poster": "/media/projects/applytide/depth/extension-intake-poster.webp",
+        "captions": "/media/projects/applytide/depth/extension-intake.vtt",
+        "bytes": 1420993,
+        "backend": "real",
+        "verifiedBehavior": "Original installed MV3 extension → /ai/extract HTML fallback → /jobs/extension → saved record in original web UI."
+      },
+      {
+        "id": "role-aware-document-review",
+        "duration": 30.5,
+        "width": 1600,
+        "height": 1128,
+        "chapters": [
+          {
+            "start": 0,
+            "title": "A role-aware review",
+            "description": "A real uploaded fictional resume and a saved role provide the review context."
+          },
+          {
+            "start": 2.2,
+            "title": "Start with the original document",
+            "description": "Alex opens the uploaded sample resume inside the original document viewer."
+          },
+          {
+            "start": 7.9670000000000005,
+            "title": "Choose the role, not a generic score",
+            "description": "The original analysis dialog selects the saved Fieldnote Frontend Engineer role as context."
+          },
+          {
+            "start": 12.751000000000001,
+            "title": "Run the local checks",
+            "description": "With no model configured, the real backend returns its rule-based scoring fallback. These scores are not an employer ATS assessment."
+          },
+          {
+            "start": 18.465999999999998,
+            "title": "Read the reasons behind the result",
+            "description": "Category scores identify strong technical coverage alongside weaker role wording."
+          },
+          {
+            "start": 23.329,
+            "title": "Turn the result into a revision list",
+            "description": "The original result shows found and missing keywords, with a reminder to mirror wording only where truthful."
+          }
+        ],
+        "editing": "2.2s introduction; original capture with focused crops into context, score, category and keyword regions; 2s final result hold.",
+        "type": "video",
+        "title": "Review a resume in the context of one role",
+        "description": "Alex previews the uploaded resume, selects a saved Fieldnote role, and inspects the real local heuristic result by category and keyword.",
+        "portal": "Personal job-search workspace",
+        "src": "/media/projects/applytide/depth/role-aware-document-review.mp4",
+        "poster": "/media/projects/applytide/depth/role-aware-document-review-poster.webp",
+        "captions": "/media/projects/applytide/depth/role-aware-document-review.vtt",
+        "bytes": 1793683,
+        "backend": "real",
+        "verifiedBehavior": "Original document analysis dialog sends selected job_id; actual backend returns heuristic result with overall64,technical100,requirements40,keywords34."
+      }
+    ],
+    "capabilityGroups": [
+      {
+        "title": "Capture an opportunity where you find it",
+        "summary": "An installed browser extension turns an open job posting into a saved opportunity with context.",
+        "assetIds": [
+          "extension-intake",
+          "extension-saved",
+          "captured-job-details"
+        ]
+      },
+      {
+        "title": "Review the document for a specific role",
+        "summary": "Keep the original resume, select a saved job, and inspect local category and keyword feedback.",
+        "assetIds": [
+          "role-aware-document-review",
+          "resume-job-context",
+          "resume-analysis-breakdown",
+          "resume-keywords"
+        ]
+      },
+      {
+        "title": "Keep the application history together",
+        "summary": "Use the already captured pipeline, attached document, stage note and reminder flows as one supporting chapter rather than repeating CRUD scenes.",
+        "assetIds": [],
+        "existingMedia": "/media/projects/applytide/application-workflow.mp4"
+      },
+      {
+        "title": "Build for account boundaries and operating costs",
+        "summary": "Use a clearly labeled source-backed architecture diagram for ownership checks, single-use WebSocket tickets, layered extraction, analysis caching and optional provider accounting.",
+        "assetIds": [],
+        "evidence": "source only; provider calls and delivery were not demonstrated"
+      }
+    ],
+    "caveats": [
+      "Fictional account, employers, postings and uploaded PDF contents; no personal customer data.",
+      "Original app UI and backend behavior were retained. Only loopback URLs/permissions, capture environment and previously documented isolated migration prerequisites differ.",
+      "No model provider configured or called. The original dialog says Advanced AI Analysis, but these recorded results are the implemented local heuristic fallback. They are not external ATS or hiring predictions.",
+      "Extension extraction preserves useful fields but is not proven universal; this HTML fallback leaves skills empty and may include repeated description text.",
+      "The film is edited: opening slates, chapter captions, original-pixel crops, final holds, and 1.25x extension pacing. No generated or reconstructed app interface.",
+      "Remote filter, notification preference save and analytics probes are excluded because this local run revealed mismatches; no working-delivery or complete-settings claim is supported."
+    ],
+    "verifiedArchitecture": {
+      "frontend": "React + TypeScript + Vite; original web UI",
+      "extension": "Manifest V3 background worker, DOM/readability/structured capture and authenticated save",
+      "backend": "FastAPI + SQLAlchemy + PostgreSQL, Redis limiters/tickets and document sidecars",
+      "analysis": "Original local heuristic fallback with selected job context; optional provider path inspected only",
+      "isolation": "Retained dedicated Docker project and fictional data; loopback preview/API; no paid providers or outbound notification workers"
+    }
+  },
+  "presentationBoard": {
+    "src": "/media/projects/applytide/depth/presentation-board.webp",
+    "width": 3200,
+    "height": 2000,
+    "bytes": 339346,
+    "sources": [
+      {
+        "src": "/media/projects/applytide/depth/captured-job-details.webp",
+        "crop": {
+          "x": 704,
+          "y": 100,
+          "width": 1792,
+          "height": 1800,
+          "sourceWidth": 3200
+        },
+        "displayWidth": 550,
+        "sourceWidth": 3200,
+        "sourceHeight": 2000,
+        "sha256": "47b5d98e2c0e49d399913d8844d099863cdf445d075b2f8207d7ea2eacc07e0e"
+      },
+      {
+        "src": "/media/projects/applytide/depth/extension-saved.webp",
+        "crop": {
+          "x": 40,
+          "y": 155,
+          "width": 680,
+          "height": 550,
+          "sourceWidth": 760
+        },
+        "displayWidth": 322,
+        "sourceWidth": 760,
+        "sourceHeight": 960,
+        "sha256": "d489d9a08078c827f419af657edeb7c69879b92605dcb8317ab847403bd20cf0"
+      },
+      {
+        "src": "/media/projects/applytide/depth/resume-analysis-breakdown.webp",
+        "crop": {
+          "x": 775,
+          "y": 500,
+          "width": 1650,
+          "height": 340,
+          "sourceWidth": 3200
+        },
+        "displayWidth": 760,
+        "sourceWidth": 3200,
+        "sourceHeight": 2000,
+        "sha256": "eb5eb5d6c9448e794de0e1938c6ed9b7ec8dbbba4d04da53d5159d8dabae2f8f"
+      }
+    ],
+    "editorial": "Authored HTML/CSS framing. Original screenshot pixels cropped uniformly, no fabricated UI. Captions outside source pixels."
+  }
 }

@@ -1,5 +1,6 @@
 import captures from "./media.json";
 import type { ProductTour, TourFilm, TourScreen } from "./types";
+import { worlds } from "./worlds";
 
 interface Capture {
   revision: string;
@@ -16,7 +17,7 @@ const framing: Record<string, Framing> = {
   arc: {
     eyebrow: "ARC / A CONNECTED LEARNING PLATFORM",
     title: "Keep the learning connected.",
-    intro: "One platform, different responsibilities. Follow the work from a student's activity to classroom feedback and the wider program.",
+    intro: "Learning feels connected when the material, the classroom moment and the student’s work stay together. Arc gives each person a purposeful view of that same learning process.",
     audience: "Students, instructors & education teams",
     capabilities: [
       { title: "Learn & revise", description: "Activities, saved work and feedback stay together in the student's lesson." },
@@ -45,7 +46,7 @@ const framing: Record<string, Framing> = {
       { layer: "Execution", tools: "Node.js · Express · Language adapters", purpose: "A shared pipeline validates requests, manages language processes and streams execution state." },
       { layer: "Learning context", tools: "Host messaging · Canvas · Replay", purpose: "Arc can embed a bounded coding activity. Recorded Turtle commands connect visual output to source." },
     ],
-    note: "Recorded from the original source and a real local Python execution service, using two sample programs. Run, debugging, pause history and Turtle replay were exercised. The repository includes other language adapters; this tour demonstrates Python.",
+    note: "Recorded from the original source with real local Python execution and fictional sample projects. Edited chapters use original pixels, purposeful close-ups and reading holds. Error repair, teacher-defined checks, debugging, Turtle replay, web preview and snapshot sharing were exercised. Other language adapters are source-reviewed.",
   },
   applytide: {
     eyebrow: "APPLYTIDE / A PERSONAL JOB-SEARCH WORKSPACE",
@@ -60,14 +61,14 @@ const framing: Record<string, Framing> = {
     technology: [
       { layer: "Product surfaces", tools: "React · TypeScript · Chrome MV3", purpose: "An authenticated workspace manages the search. A browser extension provides a separate capture entry point." },
       { layer: "Application services", tools: "FastAPI · PostgreSQL · Redis", purpose: "API and domain layers handle user records, documents, sessions and usage controls." },
-      { layer: "Background work", tools: "Scheduler · React Email · AI budget", purpose: "Scheduled tasks and email rendering are separate from requests. Model usage has explicit cost controls." },
+      { layer: "Background work", tools: "Scheduler · React Email · AI budget", purpose: "Email rendering and scheduled infrastructure are separate from requests. Optional model usage has accounting and configurable controls; delivery is not demonstrated." },
     ],
-    note: "The archived app was run locally with a fresh database and a fictional account. The tour uses actual application changes and uploaded sample PDFs. Browser-extension capture, external email delivery and paid AI calls were not part of this recording.",
+    note: "The archived app runs locally with a fictional account and uploaded sample PDFs. The installed extension, application updates and selected-role document analysis use the real backend. Films use original pixels with edited focus, pacing and chapter captions. Document review uses the local rule-based fallback; external email and paid model calls were not exercised.",
   },
   eventa: {
     eyebrow: "EVENTA / FROM A CELEBRATION TO A CONVERSATION",
     title: "Meet within the moment.",
-    intro: "There are two sides to the experience: an organizer sets up the event, then guests discover and meet each other inside it.",
+    intro: "A connected event experience has different responsibilities: customers shape the celebration, organizers prepare their guests, attendees meet in the mobile app, and operators oversee the service.",
     audience: "Wedding organizers & their guests",
     capabilities: [
       { title: "Set the scene", description: "The customer website introduces the product and guides organizers through event setup." },
@@ -75,7 +76,7 @@ const framing: Record<string, Framing> = {
       { title: "Start talking", description: "Reciprocal interest opens a connection; conversations stay within the event context." },
     ],
     technology: [
-      { layer: "Product surfaces", tools: "Next.js · React · TypeScript", purpose: "The customer website, mobile guest experience and organizer tools share one application." },
+      { layer: "Product surfaces", tools: "Next.js · React · TypeScript", purpose: "Customer setup, token-protected organizer portals, mobile guest routes and operator tools share one application." },
       { layer: "Data & boundaries", tools: "Supabase · PostgreSQL", purpose: "Event, profile, like and conversation data support the product's visibility and access rules." },
       { layer: "Operation & quality", tools: "Server routes · Playwright · Vitest", purpose: "Server workflows connect event setup and operation, backed by unit and browser-test infrastructure." },
     ],
@@ -89,15 +90,16 @@ export function getProductTour(slug: string): ProductTour | undefined {
   const capture = media[slug];
   const copy = framing[slug];
   if (!capture || !copy) return undefined;
-  const hero = capture.screens.find(screen => screen.id === capture.hero);
+  const world = worlds[slug];
+  const hero = capture.screens.find(screen => screen.id === (world?.hero ?? capture.hero));
   if (!hero) throw new Error(`Missing product-tour hero for ${slug}`);
   const { note, ...description } = copy;
   return {
     ...description,
     hero,
-    companion: capture.screens.find(screen => screen.id === capture.companion),
+    companion: capture.screens.find(screen => screen.id === (world?.companion ?? capture.companion)),
     screens: capture.screens,
-    films: capture.films,
+    films: world ? capture.films.filter(film => world.stories.some(story => story.film === film.id)) : capture.films,
     evidence: { captured: capture.captured, revision: capture.revision, note, manifest: `/media/projects/${slug}/capture-manifest.json` },
   };
 }

@@ -8,6 +8,8 @@ export interface TourScreen {
   height: number;
   /** A portrait/mobile capture is displayed in a phone-sized frame. */
   mobile?: boolean;
+  /** Source-pixel detail area. The full screenshot remains available in the viewer. */
+  focus?: { x: number; y: number; width: number; height: number };
 }
 
 export interface TourFilm {

@@ -48,6 +48,156 @@
         "src": "/media/projects/browser-coder/turtle-replay.webp",
         "width": 3200,
         "height": 2000
+      },
+      {
+        "id": "error-explained",
+        "title": "An error becomes a next step",
+        "description": "The original diagnostic includes the compiler message, a plain-English explanation, a common cause, an example and an explicit fix.",
+        "portal": "Learning support",
+        "src": "/media/projects/browser-coder/depth/error-explained.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 550,
+          "y": 850,
+          "width": 2300,
+          "height": 1020
+        }
+      },
+      {
+        "id": "checks-with-feedback",
+        "title": "Two pass. One useful next step.",
+        "description": "The checks distinguish a working empty-list case from the remaining decimal error, with an expected value and an actual value.",
+        "portal": "Check my work",
+        "src": "/media/projects/browser-coder/depth/checks-with-feedback.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 550,
+          "y": 1040,
+          "width": 2250,
+          "height": 760
+        }
+      },
+      {
+        "id": "checks-passing",
+        "title": "The same checks. A better result.",
+        "description": "After the student fixes the division operator, the original marking harness reports all three checks passing.",
+        "portal": "Check my work",
+        "src": "/media/projects/browser-coder/depth/checks-passing.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 560,
+          "y": 1120,
+          "width": 2200,
+          "height": 640
+        }
+      },
+      {
+        "id": "web-workspace",
+        "title": "A whole project in the browser",
+        "description": "A fictional student page uses separate HTML and CSS documents, with the real editor, file tree and preview command.",
+        "portal": "Web projects",
+        "src": "/media/projects/browser-coder/depth/web-workspace.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 0,
+          "y": 100,
+          "width": 2800,
+          "height": 1460
+        }
+      },
+      {
+        "id": "web-preview",
+        "title": "From separate files to one working page",
+        "description": "The actual preview service resolves the page’s relative stylesheet and publishes a separate, immutable snapshot URL. This is a sample student project, not a Browser Coder product screen.",
+        "portal": "Published preview",
+        "src": "/media/projects/browser-coder/depth/web-preview.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 120,
+          "y": 220,
+          "width": 2940,
+          "height": 1550
+        }
+      },
+      {
+        "id": "shared-workspace",
+        "title": "A link carries the context",
+        "description": "A fresh browser context opens the shared HTML and CSS files. The recipient receives an editable local copy; the published snapshot stays unchanged.",
+        "portal": "Project sharing",
+        "src": "/media/projects/browser-coder/depth/shared-workspace.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 0,
+          "y": 90,
+          "width": 2860,
+          "height": 1430
+        }
+      },
+      {
+        "id": "loop-first-value",
+        "title": "One line. One visible change.",
+        "description": "Stepping over the addition updates total from 0 to 72 in the actual paused Python session.",
+        "portal": "Debugger",
+        "src": "/media/projects/browser-coder/depth/loop-first-value.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 540,
+          "y": 875,
+          "width": 2100,
+          "height": 700
+        }
+      },
+      {
+        "id": "loop-accumulated-value",
+        "title": "The loop carries its history forward",
+        "description": "A later pause exposes the accumulated total after another score is added. Variable differences help connect the iteration to its state.",
+        "portal": "Debugger",
+        "src": "/media/projects/browser-coder/depth/loop-accumulated-value.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 540,
+          "y": 875,
+          "width": 2100,
+          "height": 700
+        }
+      },
+      {
+        "id": "geometry-result",
+        "title": "Geometry from a short Python loop",
+        "description": "Ninety iterations generate a drawing through the original Python Turtle command path.",
+        "portal": "Graphics",
+        "src": "/media/projects/browser-coder/depth/geometry-result.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 1780,
+          "y": 180,
+          "width": 1340,
+          "height": 1550
+        }
+      },
+      {
+        "id": "geometry-step",
+        "title": "A particular mark, a particular line",
+        "description": "The replay cursor selects an earlier state of the original drawing and points back to the source responsible for it.",
+        "portal": "Graphics",
+        "src": "/media/projects/browser-coder/depth/geometry-step.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "x": 1420,
+          "y": 130,
+          "width": 1720,
+          "height": 1670
+        }
       }
     ],
     "films": [
@@ -118,6 +268,193 @@
             "description": "Scrub the replay to inspect an earlier drawing state. This replays output; it does not rerun Python."
           }
         ]
+      },
+      {
+        "id": "learning-journey",
+        "title": "From a mistake to an explanation",
+        "description": "A real Python error, a visible repair and three teacher-defined checks. Follow the feedback all the way to a corrected result.",
+        "src": "/media/projects/browser-coder/depth/learning-journey.mp4",
+        "poster": "/media/projects/browser-coder/depth/learning-journey-poster.webp",
+        "width": 1920,
+        "height": 1280,
+        "duration": 30.400000000000002,
+        "captions": "/media/projects/browser-coder/depth/learning-journey.vtt",
+        "chapters": [
+          {
+            "at": 0,
+            "title": "Understanding comes before the answer.",
+            "description": "BROWSER CODER / A REAL PYTHON LEARNING JOURNEY"
+          },
+          {
+            "at": 2.5,
+            "title": "01 / Start with the compiler",
+            "description": "A missing colon stops this program before it runs."
+          },
+          {
+            "at": 6.633333,
+            "title": "02 / Turn the error into a next step",
+            "description": "A plain-language explanation. A specific repair. The choice stays with the learner."
+          },
+          {
+            "at": 9.666666,
+            "title": "03 / Make the repair visible",
+            "description": "The original editor inserts the colon. The logic still belongs to the student."
+          },
+          {
+            "at": 13.566666,
+            "title": "04 / Test the reasoning",
+            "description": "Two cases pass. A fractional average reveals the remaining mistake."
+          },
+          {
+            "at": 18.966666,
+            "title": "05 / Keep the decimal",
+            "description": "Replace floor division with ordinary division, then run the same checks again."
+          },
+          {
+            "at": 22.733333000000002,
+            "title": "06 / See what changed",
+            "description": "The original harness now reports 3 of 3 checks passing."
+          },
+          {
+            "at": 27.900000000000002,
+            "title": "A better result. A clearer understanding.",
+            "description": "Real execution / Teacher-defined checks / Original app pixels"
+          }
+        ]
+      },
+      {
+        "id": "state-journey",
+        "title": "Watch the state change",
+        "description": "A loop, a breakpoint and the values between iterations. Inspect an earlier pause, then return to the live program.",
+        "src": "/media/projects/browser-coder/depth/state-journey.mp4",
+        "poster": "/media/projects/browser-coder/depth/state-journey-poster.webp",
+        "width": 1920,
+        "height": 1280,
+        "duration": 27.599999,
+        "captions": "/media/projects/browser-coder/depth/state-journey.vtt",
+        "chapters": [
+          {
+            "at": 0,
+            "title": "The result has a history.",
+            "description": "BROWSER CODER / INSIDE A REAL PYTHON LOOP"
+          },
+          {
+            "at": 2.3,
+            "title": "01 / Pause before the addition",
+            "description": "A breakpoint stops the program inside the loop."
+          },
+          {
+            "at": 5.733333,
+            "title": "02 / One line changes a value",
+            "description": "Step over the addition. The original debugger shows total moving from 0 to 72."
+          },
+          {
+            "at": 9.733333,
+            "title": "03 / See the next iteration",
+            "description": "The next addition changes total from 72 to 160. The difference is explicit."
+          },
+          {
+            "at": 14.266666,
+            "title": "04 / Compare pause history",
+            "description": "Browse a recorded pause, then return to live. The Python process is not rewound."
+          },
+          {
+            "at": 19.266666,
+            "title": "05 / Finish the calculation",
+            "description": "Continue through the remaining pauses. The real program reports an average of 84.0."
+          },
+          {
+            "at": 25.399999,
+            "title": "Code. State. A reason for the result.",
+            "description": "Original Python process / Recorded pause history / No simulated debugger"
+          }
+        ]
+      },
+      {
+        "id": "graphics-journey",
+        "title": "A drawing you can think through",
+        "description": "A short Python loop creates geometry. Replay its commands and inspect the source behind a particular step.",
+        "src": "/media/projects/browser-coder/depth/graphics-journey.mp4",
+        "poster": "/media/projects/browser-coder/depth/graphics-journey-poster.webp",
+        "width": 1920,
+        "height": 1280,
+        "duration": 22.1,
+        "captions": "/media/projects/browser-coder/depth/graphics-journey.vtt",
+        "chapters": [
+          {
+            "at": 0,
+            "title": "Make an idea visible.",
+            "description": "BROWSER CODER / PYTHON TURTLE, WITH MEMORY"
+          },
+          {
+            "at": 2.3,
+            "title": "01 / Run the drawing program",
+            "description": "Ninety loop iterations produce real Turtle commands and the finished geometry."
+          },
+          {
+            "at": 6.133333,
+            "title": "02 / Watch how it was made",
+            "description": "Replay the recorded drawing. Source highlights follow the selected command."
+          },
+          {
+            "at": 11.433333000000001,
+            "title": "03 / Choose a particular step",
+            "description": "Scrub back and inspect an earlier drawing state, without running Python again."
+          },
+          {
+            "at": 17.200000000000003,
+            "title": "04 / Return to the complete drawing",
+            "description": "The same recorded output can be explored at the learner’s own pace."
+          },
+          {
+            "at": 19.900000000000002,
+            "title": "A mark on the canvas. A line in the code.",
+            "description": "Real Python output / Original replay controls / Source-linked drawing commands"
+          }
+        ]
+      },
+      {
+        "id": "web-journey",
+        "title": "A small website, with its context intact",
+        "description": "Build a multi-file student project, open the real preview and share a stable snapshot that another person can explore.",
+        "src": "/media/projects/browser-coder/depth/web-journey.mp4",
+        "poster": "/media/projects/browser-coder/depth/web-journey-poster.webp",
+        "width": 1920,
+        "height": 1280,
+        "duration": 20.7,
+        "captions": "/media/projects/browser-coder/depth/web-journey.vtt",
+        "chapters": [
+          {
+            "at": 0,
+            "title": "More than a single code snippet.",
+            "description": "BROWSER CODER / A REAL MULTI-FILE WEB PROJECT"
+          },
+          {
+            "at": 2.3,
+            "title": "01 / Keep the files together",
+            "description": "The fictional Orbit Club student project has separate HTML and CSS documents."
+          },
+          {
+            "at": 6.3999999999999995,
+            "title": "02 / Open the actual preview",
+            "description": "The original preview service resolves the relative stylesheet. This is sample student work."
+          },
+          {
+            "at": 10.899999999999999,
+            "title": "03 / Share the exact workspace",
+            "description": "The original command publishes a project snapshot through the real backend."
+          },
+          {
+            "at": 14.2,
+            "title": "04 / Give someone room to explore",
+            "description": "A fresh browser opens an editable local copy. Its edits leave the published snapshot unchanged."
+          },
+          {
+            "at": 18.4,
+            "title": "A stable reference. An independent copy.",
+            "description": "Actual preview + share services / Fictional student project / No live co-editing claim"
+          }
+        ]
       }
     ]
   },
@@ -170,6 +507,134 @@
         "src": "/media/projects/applytide/reminders.webp",
         "width": 3200,
         "height": 2000
+      },
+      {
+        "id": "extension-ready",
+        "title": "Capture without leaving the posting",
+        "description": "The actual installed extension is ready to capture the active fictional job page.",
+        "portal": "Personal job-search workspace",
+        "src": "/media/projects/applytide/depth/extension-ready.webp",
+        "width": 760,
+        "height": 960,
+        "focus": {
+          "label": "Original extension result",
+          "x": 40,
+          "y": 155,
+          "width": 680,
+          "height": 550
+        }
+      },
+      {
+        "id": "extension-saved",
+        "title": "A saved opportunity, not another bookmark",
+        "description": "The original extension confirms the real backend record, including Product Engineer, Northstar Studio and London.",
+        "portal": "Personal job-search workspace",
+        "src": "/media/projects/applytide/depth/extension-saved.webp",
+        "width": 760,
+        "height": 960,
+        "focus": {
+          "label": "Original extension result",
+          "x": 40,
+          "y": 155,
+          "width": 680,
+          "height": 550
+        }
+      },
+      {
+        "id": "captured-job-details",
+        "title": "Keep the original posting in context",
+        "description": "The opportunity opens inside Alex’s personal workspace, retaining the captured role, location and description.",
+        "portal": "Personal job-search workspace",
+        "src": "/media/projects/applytide/depth/captured-job-details.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "label": "Original document or job dialog",
+          "x": 704,
+          "y": 100,
+          "width": 1792,
+          "height": 1800
+        }
+      },
+      {
+        "id": "resume-preview",
+        "title": "Keep the source document close",
+        "description": "The original document viewer opens Alex’s uploaded fictional sample PDF.",
+        "portal": "Personal job-search workspace",
+        "src": "/media/projects/applytide/depth/resume-preview.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "label": "Original document or job dialog",
+          "x": 560,
+          "y": 100,
+          "width": 2080,
+          "height": 1800
+        }
+      },
+      {
+        "id": "resume-job-context",
+        "title": "Choose the role you are applying for",
+        "description": "The original analysis dialog selects Fieldnote’s saved Frontend Engineer role before running the review.",
+        "portal": "Personal job-search workspace",
+        "src": "/media/projects/applytide/depth/resume-job-context.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "label": "Original document or job dialog",
+          "x": 704,
+          "y": 100,
+          "width": 1792,
+          "height": 1800
+        }
+      },
+      {
+        "id": "resume-analysis-score",
+        "title": "A local review result",
+        "description": "The backend’s rule-based fallback returns 64/100 for this fictional resume and role. This is an internal heuristic, not an employer ATS assessment.",
+        "portal": "Personal job-search workspace",
+        "src": "/media/projects/applytide/depth/resume-analysis-score.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "label": "Original document or job dialog",
+          "x": 704,
+          "y": 100,
+          "width": 1792,
+          "height": 1800
+        }
+      },
+      {
+        "id": "resume-analysis-breakdown",
+        "title": "Look beyond the headline score",
+        "description": "The original local result separates keyword coverage, readability, technical skills and soft skills. These category values provide review prompts.",
+        "portal": "Personal job-search workspace",
+        "src": "/media/projects/applytide/depth/resume-analysis-breakdown.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "label": "Category-by-category feedback",
+          "x": 765,
+          "y": 490,
+          "width": 1675,
+          "height": 1380
+        }
+      },
+      {
+        "id": "resume-keywords",
+        "title": "See the wording behind the result",
+        "description": "The original result separates found and missing terms and reports role-specific matches. All results here come from the local heuristic fallback; no model was called.",
+        "portal": "Personal job-search workspace",
+        "src": "/media/projects/applytide/depth/resume-keywords.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "label": "Role match and original keyword lists",
+          "x": 755,
+          "y": 675,
+          "width": 1690,
+          "height": 850
+        }
       }
     ],
     "films": [
@@ -214,6 +679,87 @@
             "at": 22.846,
             "title": "Return to your follow-ups",
             "description": "Open the reminder list and see the saved follow-up in the same account."
+          }
+        ]
+      },
+      {
+        "id": "extension-intake",
+        "title": "From a posting to a personal opportunity",
+        "description": "An installed extension captures a fictional posting, saves it through the actual backend, and opens the result in the same account.",
+        "src": "/media/projects/applytide/depth/extension-intake.mp4",
+        "poster": "/media/projects/applytide/depth/extension-intake-poster.webp",
+        "width": 1600,
+        "height": 1128,
+        "duration": 25.7,
+        "captions": "/media/projects/applytide/depth/extension-intake.vtt",
+        "chapters": [
+          {
+            "at": 0,
+            "title": "Capture the opportunity",
+            "description": "An installed browser extension is connected to a real isolated Applytide backend."
+          },
+          {
+            "at": 2.2,
+            "title": "Capture the posting in your browser",
+            "description": "The real installed extension captures a clearly labeled fictional local job page. The wait is condensed to 1.25×."
+          },
+          {
+            "at": 11.3568,
+            "title": "Keep a structured opportunity",
+            "description": "The original popup confirms that the backend saved the extracted role, company and location."
+          },
+          {
+            "at": 14.2928,
+            "title": "Find it in the same personal workspace",
+            "description": "The opportunity appears in Alex’s authenticated jobs list."
+          },
+          {
+            "at": 17.1148,
+            "title": "Read the saved context before applying",
+            "description": "The original detail view retains the posting text and location, with its existing Apply to Job action."
+          }
+        ]
+      },
+      {
+        "id": "role-aware-document-review",
+        "title": "Review a resume in the context of one role",
+        "description": "Alex previews the uploaded resume, selects a saved Fieldnote role, and inspects the real local heuristic result by category and keyword.",
+        "src": "/media/projects/applytide/depth/role-aware-document-review.mp4",
+        "poster": "/media/projects/applytide/depth/role-aware-document-review-poster.webp",
+        "width": 1600,
+        "height": 1128,
+        "duration": 30.5,
+        "captions": "/media/projects/applytide/depth/role-aware-document-review.vtt",
+        "chapters": [
+          {
+            "at": 0,
+            "title": "A role-aware review",
+            "description": "A real uploaded fictional resume and a saved role provide the review context."
+          },
+          {
+            "at": 2.2,
+            "title": "Start with the original document",
+            "description": "Alex opens the uploaded sample resume inside the original document viewer."
+          },
+          {
+            "at": 7.9670000000000005,
+            "title": "Choose the role, not a generic score",
+            "description": "The original analysis dialog selects the saved Fieldnote Frontend Engineer role as context."
+          },
+          {
+            "at": 12.751000000000001,
+            "title": "Run the local checks",
+            "description": "With no model configured, the real backend returns its rule-based scoring fallback. These scores are not an employer ATS assessment."
+          },
+          {
+            "at": 18.465999999999998,
+            "title": "Read the reasons behind the result",
+            "description": "Category scores identify strong technical coverage alongside weaker role wording."
+          },
+          {
+            "at": 23.329,
+            "title": "Turn the result into a revision list",
+            "description": "The original result shows found and missing keywords, with a reminder to mirror wording only where truthful."
           }
         ]
       }
@@ -277,6 +823,244 @@
         "src": "/media/projects/arc/program-analytics.webp",
         "width": 3200,
         "height": 2000
+      },
+      {
+        "id": "student-space",
+        "title": "A learning world in Space",
+        "description": "The same student pathway, with a space-themed environment and a visible progress summary.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/student-space.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "student-space-detail",
+          "label": "Learning pathway and progress",
+          "x": 490,
+          "y": 190,
+          "width": 2280,
+          "height": 1000
+        }
+      },
+      {
+        "id": "student-magic-forest",
+        "title": "A different world for the same learner",
+        "description": "Magic Forest changes the surrounding environment, navigation and progress treatment.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/student-magic-forest.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "student-magic-forest-detail",
+          "label": "Forest navigation and progress",
+          "x": 430,
+          "y": 200,
+          "width": 2340,
+          "height": 1120
+        }
+      },
+      {
+        "id": "student-neon-hacker",
+        "title": "A technical style students can choose",
+        "description": "Neon Hacker is a persisted theme choice within the real student workspace.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/student-neon-hacker.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "student-neon-hacker-detail",
+          "label": "Student workspace",
+          "x": 530,
+          "y": 280,
+          "width": 2140,
+          "height": 1040
+        }
+      },
+      {
+        "id": "student-aurora",
+        "title": "The Aurora learning workspace",
+        "description": "The default theme keeps lessons, student progress and reflection together.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/student-aurora.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "student-aurora-detail",
+          "label": "Learning dashboard",
+          "x": 450,
+          "y": 200,
+          "width": 2300,
+          "height": 1080
+        }
+      },
+      {
+        "id": "student-aurora-light",
+        "title": "A lighter way into the lesson",
+        "description": "Aurora Light offers another complete student theme.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/student-aurora-light.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "student-aurora-light-detail",
+          "label": "Learning dashboard",
+          "x": 450,
+          "y": 200,
+          "width": 2300,
+          "height": 1080
+        }
+      },
+      {
+        "id": "visual-flowchart",
+        "title": "An idea becomes a visible plan",
+        "description": "A real diagram made with the native shape palette, editable labels and connected decision branches.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/visual-flowchart.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "visual-flowchart-detail",
+          "label": "The complete five-node plan",
+          "x": 1060,
+          "y": 335,
+          "width": 1450,
+          "height": 1430
+        }
+      },
+      {
+        "id": "matching-connections",
+        "title": "Think through the connections",
+        "description": "Three matched pairs are visible in the native activity.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/matching-connections.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "matching-connections-detail",
+          "label": "Matched pairs and remaining choices",
+          "x": 520,
+          "y": 755,
+          "width": 2160,
+          "height": 1030
+        }
+      },
+      {
+        "id": "matching-saved",
+        "title": "A submitted answer stays inspectable",
+        "description": "The locked version view preserves the six submitted pairs.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/matching-saved.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "matching-saved-detail",
+          "label": "The stored answer",
+          "x": 470,
+          "y": 660,
+          "width": 2260,
+          "height": 1270
+        }
+      },
+      {
+        "id": "reflection-cards",
+        "title": "End a lesson with reflection",
+        "description": "The student can choose a session-finale card, then explain how they showed up in the lesson.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/reflection-cards.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "reflection-cards-detail",
+          "label": "Reflection choices",
+          "x": 515,
+          "y": 800,
+          "width": 2190,
+          "height": 650
+        }
+      },
+      {
+        "id": "live-student-answer",
+        "title": "A student commits an answer",
+        "description": "The choice is locked while the real shared question remains active.",
+        "portal": "Student",
+        "src": "/media/projects/arc/depth/live-student-answer.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "live-student-answer-detail",
+          "label": "The selected answer",
+          "x": 0,
+          "y": 735,
+          "width": 3200,
+          "height": 1160
+        }
+      },
+      {
+        "id": "live-instructor-controls",
+        "title": "The instructor sees the shared session",
+        "description": "Question controls and a two-participant leaderboard remain in the classroom view.",
+        "portal": "Instructor",
+        "src": "/media/projects/arc/depth/live-instructor-controls.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "live-instructor-controls-detail",
+          "label": "Question controls and leaderboard",
+          "x": 0,
+          "y": 0,
+          "width": 3200,
+          "height": 780
+        }
+      },
+      {
+        "id": "syllabus-direction",
+        "title": "Start with a learning direction",
+        "description": "A goal, priorities and preferred activities guide selection from the existing content library.",
+        "portal": "Content author / Admin",
+        "src": "/media/projects/arc/depth/syllabus-direction.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "syllabus-direction-detail",
+          "label": "Smart builder controls",
+          "x": 325,
+          "y": 235,
+          "width": 2510,
+          "height": 1470
+        }
+      },
+      {
+        "id": "syllabus-preview",
+        "title": "Review an editable learning sequence",
+        "description": "The draft keeps its activity mix and source context visible before publication.",
+        "portal": "Content author / Admin",
+        "src": "/media/projects/arc/depth/syllabus-preview.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "syllabus-preview-detail",
+          "label": "Draft sequence and activity mix",
+          "x": 345,
+          "y": 580,
+          "width": 2490,
+          "height": 1290
+        }
+      },
+      {
+        "id": "teaching-readiness",
+        "title": "Make preparation gaps visible",
+        "description": "This sample draft is missing teaching materials. Arc lists the affected activities and recommends what to add.",
+        "portal": "Content author / Admin",
+        "src": "/media/projects/arc/depth/teaching-readiness.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "teaching-readiness-detail",
+          "label": "Coverage and recommended preparation",
+          "x": 350,
+          "y": 465,
+          "width": 2490,
+          "height": 1280
+        }
       }
     ],
     "films": [
@@ -305,6 +1089,115 @@
             "at": 20.067,
             "title": "Improve the work. Keep both versions.",
             "description": "The student reads the feedback and submits an improved version 2, preserving the first submission."
+          }
+        ]
+      },
+      {
+        "id": "learning-worlds-and-making",
+        "title": "A world to learn in.",
+        "description": "Three student themes lead into a matching activity, from visible connections to a submitted result.",
+        "src": "/media/projects/arc/depth/learning-worlds-and-making.mp4",
+        "poster": "/media/projects/arc/depth/learning-worlds-and-making-poster.webp",
+        "width": 1920,
+        "height": 1080,
+        "duration": 33.5,
+        "captions": "/media/projects/arc/depth/learning-worlds-and-making.vtt",
+        "chapters": [
+          {
+            "at": 2.5,
+            "title": "Choose a learning world",
+            "description": "Space, Magic Forest and Neon Hacker are real, persisted student preferences."
+          },
+          {
+            "at": 16,
+            "title": "Solve a visual activity",
+            "description": "The student completes the remaining three pairs using the native matching controls."
+          },
+          {
+            "at": 23,
+            "title": "Submit the result",
+            "description": "Arc accepts the matching submission and displays its submitted state. The stored score was checked separately."
+          },
+          {
+            "at": 29,
+            "title": "Review a saved version",
+            "description": "The native locked-version view displays the six stored pairs."
+          }
+        ]
+      },
+      {
+        "id": "live-classroom-two-sides",
+        "title": "One classroom. Two views.",
+        "description": "Follow a real quiz session from the student answer to the instructor controls and classroom scores.",
+        "src": "/media/projects/arc/depth/live-classroom-two-sides.mp4",
+        "poster": "/media/projects/arc/depth/live-classroom-two-sides-poster.webp",
+        "width": 1920,
+        "height": 1080,
+        "duration": 32.5,
+        "captions": "/media/projects/arc/depth/live-classroom-two-sides.vtt",
+        "chapters": [
+          {
+            "at": 2.5,
+            "title": "Answer as a student",
+            "description": "The student chooses an answer. Arc locks the response while the round is active."
+          },
+          {
+            "at": 8.5,
+            "title": "Read the classroom",
+            "description": "The instructor board receives the submitted answer and updates its leaderboard."
+          },
+          {
+            "at": 14.5,
+            "title": "Advance the round",
+            "description": "The instructor uses the native close and next-question controls."
+          },
+          {
+            "at": 19,
+            "title": "Continue together",
+            "description": "The student screen advances through Arc’s built-in polling fallback; both test students answer the second question."
+          },
+          {
+            "at": 29.5,
+            "title": "Close the session",
+            "description": "The native end-session confirmation is accepted and the ended state is shown."
+          }
+        ]
+      },
+      {
+        "id": "syllabus-from-intent-to-review",
+        "title": "Build a syllabus with intent.",
+        "description": "Set a learning direction, assemble existing activities, then refine the sequence and inspect teaching readiness.",
+        "src": "/media/projects/arc/depth/syllabus-from-intent-to-review.mp4",
+        "poster": "/media/projects/arc/depth/syllabus-from-intent-to-review-poster.webp",
+        "width": 1920,
+        "height": 1080,
+        "duration": 32,
+        "captions": "/media/projects/arc/depth/syllabus-from-intent-to-review.vtt",
+        "chapters": [
+          {
+            "at": 2.5,
+            "title": "Set the direction",
+            "description": "The author sets a goal and activity preferences for three lessons."
+          },
+          {
+            "at": 8.5,
+            "title": "Assemble existing activities",
+            "description": "Arc creates a three-lesson, nine-activity draft from tagged source activities. Preferences affect ranking; they are not strict type filters."
+          },
+          {
+            "at": 15.5,
+            "title": "Refine the sequence",
+            "description": "The author renames the opening lesson using the native draft editor."
+          },
+          {
+            "at": 20.5,
+            "title": "Review teaching readiness",
+            "description": "The readiness screen identifies activities without mini-lessons or general lesson materials. This is a sample gap, not a completed curriculum claim."
+          },
+          {
+            "at": 26.5,
+            "title": "Preview the syllabus",
+            "description": "The preview retains source provenance and activity mix. The capture does not publish or assign the draft."
           }
         ]
       }
@@ -401,6 +1294,233 @@
         "src": "/media/projects/eventa/organizer-event.webp",
         "width": 3200,
         "height": 2000
+      },
+      {
+        "id": "website-organizer-story",
+        "title": "A website that explains both sides",
+        "description": "The original how-it-works page lets customers follow the organizer journey. Its phone screens are authored marketing illustrations.",
+        "portal": "Customer website",
+        "src": "/media/projects/eventa/depth/website-organizer-story.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 820,
+          "y": 280,
+          "width": 1580,
+          "height": 1530
+        }
+      },
+      {
+        "id": "customer-background-crop",
+        "title": "A personal first impression",
+        "description": "The original cropper prepares a portrait background before it enters the event preview.",
+        "portal": "Customer website",
+        "src": "/media/projects/eventa/depth/customer-background-crop.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 1080,
+          "y": 350,
+          "width": 1040,
+          "height": 1450
+        }
+      },
+      {
+        "id": "customer-poster-choice",
+        "title": "From screen to venue",
+        "description": "Select an original QR-poster template and attach specific design instructions.",
+        "portal": "Customer website",
+        "src": "/media/projects/eventa/depth/customer-poster-choice.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 930,
+          "y": 310,
+          "width": 1340,
+          "height": 1300
+        }
+      },
+      {
+        "id": "customer-order-summary",
+        "title": "An editable event configuration",
+        "description": "Date, background, poster and included services remain reviewable before an order is submitted.",
+        "portal": "Customer website",
+        "src": "/media/projects/eventa/depth/customer-order-summary.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 940,
+          "y": 350,
+          "width": 1320,
+          "height": 1210
+        }
+      },
+      {
+        "id": "organizer-consent",
+        "title": "Permission before preparation",
+        "description": "The organizer confirms permission to provide guest contacts before the upload tools appear.",
+        "portal": "Organizer portal",
+        "src": "/media/projects/eventa/depth/organizer-consent.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 1030,
+          "y": 910,
+          "width": 1140,
+          "height": 450
+        }
+      },
+      {
+        "id": "organizer-validation",
+        "title": "A messy spreadsheet, a clear result",
+        "description": "The real import accepts twelve fictional contacts, skips one in-file duplicate and explains one invalid row.",
+        "portal": "Organizer portal",
+        "src": "/media/projects/eventa/depth/organizer-validation.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 1030,
+          "y": 910,
+          "width": 1140,
+          "height": 405
+        }
+      },
+      {
+        "id": "organizer-guest-list",
+        "title": "A list the organizer can manage",
+        "description": "The saved contacts appear in the original portal with pending invitation statuses. No invitations are delivered.",
+        "portal": "Organizer portal",
+        "src": "/media/projects/eventa/depth/organizer-guest-list.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 1030,
+          "y": 945,
+          "width": 1140,
+          "height": 1050
+        }
+      },
+      {
+        "id": "organizer-invitation",
+        "title": "Review the invitation wording",
+        "description": "The original portal includes an illustrative message preview and event-relative timing. This is a preview, not proof of SMS delivery or end-to-end encryption.",
+        "portal": "Organizer portal",
+        "src": "/media/projects/eventa/depth/organizer-invitation.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 1030,
+          "y": 920,
+          "width": 1140,
+          "height": 1080
+        }
+      },
+      {
+        "id": "organizer-report",
+        "title": "A report from event activity",
+        "description": "The original analytics backend generates and persists a report for a separate fictional ended event. All shown counts are synthetic, including seeded funnel stages.",
+        "portal": "Organizer portal",
+        "src": "/media/projects/eventa/depth/organizer-report.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 955,
+          "y": 265,
+          "width": 1290,
+          "height": 1470
+        }
+      },
+      {
+        "id": "guest-swipe",
+        "title": "Discovery in the room",
+        "description": "The actual attendee app presents event-scoped profiles in its native swipe view. All people are fictional demo profiles.",
+        "portal": "Attendee app",
+        "src": "/media/projects/eventa/depth/guest-swipe.webp",
+        "width": 1170,
+        "height": 2532,
+        "mobile": true,
+        "focus": {
+          "id": "detail",
+          "x": 0,
+          "y": 170,
+          "width": 1170,
+          "height": 2140
+        }
+      },
+      {
+        "id": "guest-offline-outbox",
+        "title": "The connection drops. The message stays.",
+        "description": "A real offline send preserves the message and exposes the original retry control. The product offline banner is shown; development tooling is omitted.",
+        "portal": "Attendee app",
+        "src": "/media/projects/eventa/depth/guest-offline-outbox.webp",
+        "width": 780,
+        "height": 1688,
+        "mobile": true,
+        "focus": {
+          "id": "detail",
+          "x": 0,
+          "y": 0,
+          "width": 780,
+          "height": 600
+        }
+      },
+      {
+        "id": "guest-block-confirmation",
+        "title": "A clear personal boundary",
+        "description": "The native confirmation explains the block. Runtime verification confirms the pair’s conversation and message rows are removed.",
+        "portal": "Attendee app",
+        "src": "/media/projects/eventa/depth/guest-block-confirmation.webp",
+        "width": 780,
+        "height": 1688,
+        "mobile": true,
+        "focus": {
+          "id": "detail",
+          "x": 0,
+          "y": 420,
+          "width": 780,
+          "height": 840
+        }
+      },
+      {
+        "id": "operator-conversion",
+        "title": "A different workspace for the operator",
+        "description": "The administrator can inspect the progression from joining through matching and conversation. These are local synthetic event analytics.",
+        "portal": "Platform operator",
+        "src": "/media/projects/eventa/depth/operator-conversion.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 50,
+          "y": 990,
+          "width": 2620,
+          "height": 535
+        }
+      },
+      {
+        "id": "operator-safety-analytics",
+        "title": "Safety has operational context",
+        "description": "The operator dashboard derives blocking and interaction context from the actual local data. It is separate from the organizer’s limited portal.",
+        "portal": "Platform operator",
+        "src": "/media/projects/eventa/depth/operator-safety-analytics.webp",
+        "width": 3200,
+        "height": 2000,
+        "focus": {
+          "id": "detail",
+          "x": 40,
+          "y": 600,
+          "width": 2630,
+          "height": 1300
+        }
       }
     ],
     "films": [
@@ -489,6 +1609,140 @@
             "at": 19.185,
             "title": "Messages arrive in the other session",
             "description": "A second authenticated guest receives the message without reloading and replies. Both messages are saved."
+          }
+        ]
+      },
+      {
+        "id": "customer-personalization",
+        "title": "A welcome that belongs to the event.",
+        "description": "A crafted sequence of actual original UI interactions, with detail cuts and full-view context. All event data is fictional.",
+        "src": "/media/projects/eventa/depth/customer-personalization.mp4",
+        "poster": "/media/projects/eventa/depth/customer-personalization-poster.webp",
+        "width": 1600,
+        "height": 1000,
+        "duration": 21.433333,
+        "captions": "/media/projects/eventa/depth/customer-personalization.vtt",
+        "chapters": [
+          {
+            "at": 0,
+            "title": "Make the welcome yours",
+            "description": "A personal background begins with the original local upload flow."
+          },
+          {
+            "at": 2.893,
+            "title": "Compose the first impression",
+            "description": "The native cropper produces the portrait image used by the guest preview."
+          },
+          {
+            "at": 7.123,
+            "title": "See the choice in context",
+            "description": "The original phone preview now carries the uploaded image."
+          },
+          {
+            "at": 11.088,
+            "title": "Carry it into the room",
+            "description": "Choose an original QR-poster template and add a specific design request."
+          },
+          {
+            "at": 14.45,
+            "title": "Look closely before ordering",
+            "description": "The full-size template preview is part of the original website."
+          },
+          {
+            "at": 17.789,
+            "title": "One editable summary",
+            "description": "Dates, background, poster and services remain reviewable. No order is submitted."
+          }
+        ]
+      },
+      {
+        "id": "organizer-journey",
+        "title": "Preparing the room. Understanding the night.",
+        "description": "A crafted sequence of actual original UI interactions, with detail cuts and full-view context. All event data is fictional.",
+        "src": "/media/projects/eventa/depth/organizer-journey.mp4",
+        "poster": "/media/projects/eventa/depth/organizer-journey-poster.webp",
+        "width": 1600,
+        "height": 1000,
+        "duration": 29.466667,
+        "captions": "/media/projects/eventa/depth/organizer-journey.vtt",
+        "chapters": [
+          {
+            "at": 0,
+            "title": "Permission comes first",
+            "description": "The organizer records permission before the list tools appear."
+          },
+          {
+            "at": 4.011,
+            "title": "A useful answer to a messy list",
+            "description": "Twelve fictional contacts saved. One duplicate and one invalid row explained."
+          },
+          {
+            "at": 9.184,
+            "title": "A list you can manage",
+            "description": "Saved contacts retain their pending-invitation status."
+          },
+          {
+            "at": 13.53,
+            "title": "Review the invitation",
+            "description": "The built-in message illustration previews the event wording. No messages are sent."
+          },
+          {
+            "at": 16.943,
+            "title": "After the night: a real report",
+            "description": "The original analytics backend calculates a separate fictional event report."
+          },
+          {
+            "at": 21.7,
+            "title": "Follow the whole journey",
+            "description": "Seeded event records become a real step-by-step conversion funnel."
+          },
+          {
+            "at": 26.279,
+            "title": "Understand the room",
+            "description": "Audience breakdowns give the organizer more context about the room."
+          }
+        ]
+      },
+      {
+        "id": "guest-connections",
+        "title": "Connection, recovery, and personal boundaries.",
+        "description": "A crafted sequence of actual original UI interactions, with detail cuts and full-view context. All event data is fictional.",
+        "src": "/media/projects/eventa/depth/guest-connections.mp4",
+        "poster": "/media/projects/eventa/depth/guest-connections-poster.webp",
+        "width": 1600,
+        "height": 1000,
+        "duration": 22.166667,
+        "captions": "/media/projects/eventa/depth/guest-connections.vtt",
+        "chapters": [
+          {
+            "at": 0,
+            "title": "A message worth keeping",
+            "description": "The original attendee chat, connected to the isolated real backend."
+          },
+          {
+            "at": 2.509,
+            "title": "Even when connection drops",
+            "description": "The app keeps outgoing text instead of losing it."
+          },
+          {
+            "at": 4.348,
+            "title": "Still here. Ready to retry.",
+            "description": "The failed-send state and retry control belong to the original app."
+          },
+          {
+            "at": 9.148,
+            "title": "Back online. Sent once.",
+            "description": "Reconnection flushes the same message; a second real browser receives it."
+          },
+          {
+            "at": 13.111,
+            "title": "A clear personal boundary",
+            "description": "Blocking explains that likes and the shared conversation will be removed."
+          },
+          {
+            "at": 19.126,
+            "title": "The connection is removed",
+            "description": "The real block endpoint removes the pair’s conversation and message rows."
           }
         ]
       }

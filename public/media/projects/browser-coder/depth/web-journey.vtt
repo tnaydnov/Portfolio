@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.300
+BROWSER CODER / A REAL MULTI-FILE WEB PROJECT
+
+00:00:02.300 --> 00:00:06.400
+The fictional Orbit Club student project has separate HTML and CSS documents.
+
+00:00:06.400 --> 00:00:10.900
+The original preview service resolves the relative stylesheet. This is sample student work.
+
+00:00:10.900 --> 00:00:14.200
+The original command publishes a project snapshot through the real backend.
+
+00:00:14.200 --> 00:00:18.400
+A fresh browser opens an editable local copy. Its edits leave the published snapshot unchanged.
+
+00:00:18.400 --> 00:00:20.700
+Actual preview + share services / Fictional student project / No live co-editing claim

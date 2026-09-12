@@ -1,0 +1,847 @@
+{
+  "title": "Trading System — Multi-store Marketplace",
+  "revision": "048e46bf2ac9191e241ce52cda1c9c05d672d4ee",
+  "repo": "https://github.com/tnaydnov/Trading_System",
+  "oneLiner": "Model who may run a store, which baskets may be purchased, and how checkout responds when an external step fails.",
+  "summary": "A university team built this Java/Spring marketplace around store ownership, delegated permissions, shopping carts, composite discounts and purchase policies. The distinctive engineering work is in the rules between those features: consent-based nominations, cascading revocation, stock reservation and compensating external actions. The archived source includes a Vaadin interface and substantial tests, while its current runtime repositories and several integration boundaries remain academic rather than production-ready.",
+  "stack": [
+    "Java 17",
+    "Spring Boot 3.3.1",
+    "Vaadin 24.3 / server-driven UI",
+    "In-memory domain repositories",
+    "BCrypt + JJWT",
+    "Vaadin Push",
+    "Maven",
+    "JUnit 4 / JUnit 5",
+    "Mockito"
+  ],
+  "configuredButNotVerifiedRuntime": [
+    "Spring Data JPA annotations and dependency",
+    "H2 and MySQL JDBC dependencies",
+    "Java-WebSocket dependency"
+  ],
+  "status": "Archived university team implementation; source-only audit, not run.",
+  "ownership": {
+    "verified": "The user identifies this as a university team contribution. This public mirror has five commits: initial import and README in August 2024, plus startup/configuration/presenter maintenance in August 2025; authors are recorded as tomernay and tnaydnov.",
+    "boundary": "Retain the existing contribution wording: contributor on a large university team, participating in implementation, specification and integration decisions. Imported repository history does not establish individual authorship of all domain, UI or test code.",
+    "history": [
+      {
+        "revision": "1109fd3a5ed9f561dbe3e6655c18c01820b0ac6f",
+        "date": "2024-08-28",
+        "subject": "initial",
+        "url": "https://github.com/tnaydnov/Trading_System/commit/1109fd3a5ed9f561dbe3e6655c18c01820b0ac6f"
+      },
+      {
+        "revision": "136713d81a894cf2666aa0069b4cdf79b9c0a6e1",
+        "date": "2025-08-25",
+        "subject": "fixed issues found in checkup",
+        "url": "https://github.com/tnaydnov/Trading_System/commit/136713d81a894cf2666aa0069b4cdf79b9c0a6e1"
+      }
+    ]
+  },
+  "capabilityGroups": [
+    {
+      "title": "Browse and buy across stores",
+      "summary": "Guests and registered subscribers search a shared marketplace and keep one cart containing separate store baskets.",
+      "details": [
+        "Search combines exact case-insensitive product-name matches with category matches across active stores.",
+        "The storefront offers an inclusive minimum/maximum price filter; store pages expose product details and add-to-cart actions.",
+        "Cart quantities are validated, zero removes an item, and successful checkout groups the resulting order records by store."
+      ],
+      "citations": [
+        {
+          "file": "src/main/java/Facades/UserFacade.java",
+          "line": 28,
+          "endLine": 50,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/UserFacade.java#L28-L50"
+        },
+        {
+          "file": "src/main/java/Facades/StoreFacade.java",
+          "line": 528,
+          "endLine": 550,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/StoreFacade.java#L528-L550"
+        },
+        {
+          "file": "src/main/java/Presentation/application/Presenter/MainLayoutPresenter.java",
+          "line": 158,
+          "endLine": 190,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Presenter/MainLayoutPresenter.java#L158-L190"
+        },
+        {
+          "file": "src/main/java/Presentation/application/View/MainLayoutView.java",
+          "line": 828,
+          "endLine": 878,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/MainLayoutView.java#L828-L878"
+        },
+        {
+          "file": "src/main/java/Domain/Users/Subscriber/Cart/Basket.java",
+          "line": 41,
+          "endLine": 79,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Users/Subscriber/Cart/Basket.java#L41-L79"
+        },
+        {
+          "file": "src/main/java/Facades/OrderFacade.java",
+          "line": 91,
+          "endLine": 108,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/OrderFacade.java#L91-L108"
+        }
+      ]
+    },
+    {
+      "title": "Delegate authority, then revoke its consequences",
+      "summary": "A store creator can nominate owners; owners and creators can send manager nominations with selected permissions. The nominee responds through the message center.",
+      "details": [
+        "Owner and manager nominations are explicit messages with accept/decline responses, rather than an immediate role dropdown update.",
+        "Eight named permissions cover inventory, discounts/policies, manager permissions, history, products, staff information and subscription removal; enforcement differs by operation.",
+        "The store keeps forward and reverse nomination relationships. Ownership withdrawal walks the nomination graph and removes the owner and descendant appointments.",
+        "Only the creator can close or reopen a store; staff receive corresponding messages and live notifications."
+      ],
+      "citations": [
+        {
+          "file": "src/main/java/Service/UserService.java",
+          "line": 115,
+          "endLine": 225,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/UserService.java#L115-L225"
+        },
+        {
+          "file": "src/main/java/Domain/Store/StoreData/Permissions.java",
+          "line": 9,
+          "endLine": 17,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/StoreData/Permissions.java#L9-L17"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Store.java",
+          "line": 105,
+          "endLine": 176,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L105-L176"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Store.java",
+          "line": 241,
+          "endLine": 305,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L241-L305"
+        },
+        {
+          "file": "src/main/java/Facades/StoreFacade.java",
+          "line": 104,
+          "endLine": 122,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/StoreFacade.java#L104-L122"
+        },
+        {
+          "file": "src/main/java/Facades/StoreFacade.java",
+          "line": 829,
+          "endLine": 849,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/StoreFacade.java#L829-L849"
+        },
+        {
+          "file": "src/main/java/Presentation/application/View/MessagesList.java",
+          "line": 55,
+          "endLine": 90,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/MessagesList.java#L55-L90"
+        }
+      ]
+    },
+    {
+      "title": "Compose purchase rules and discounts",
+      "summary": "Store managers with the relevant permission can build rules around product quantities, categories and basket price, then combine them into larger expressions.",
+      "details": [
+        "Simple conditions evaluate product/category quantities or basket value against minimum and maximum bounds.",
+        "AND, OR and XOR conditions combine two existing conditions; a conditional policy class implements implication.",
+        "Percentage discounts apply to a product, category or basket. MAX chooses the larger discount; PLUS adds two discounts.",
+        "Recursive DTOs and nested policy/discount boxes let the Vaadin interface display the resulting expression structure. The visible Exactly option is not actually enforced by SimpleCondition and is excluded from the verified feature claim."
+      ],
+      "citations": [
+        {
+          "file": "src/main/java/Domain/Store/Conditions/SimpleCondition.java",
+          "line": 77,
+          "endLine": 89,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/SimpleCondition.java#L77-L89"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Conditions/AndCondition.java",
+          "line": 20,
+          "endLine": 22,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/AndCondition.java#L20-L22"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Conditions/OrCondition.java",
+          "line": 19,
+          "endLine": 20,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/OrCondition.java#L19-L20"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Conditions/XorCondition.java",
+          "line": 19,
+          "endLine": 21,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/XorCondition.java#L19-L21"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Conditions/PolicyCondition.java",
+          "line": 19,
+          "endLine": 28,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/PolicyCondition.java#L19-L28"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Discounts/SimpleDiscount.java",
+          "line": 29,
+          "endLine": 36,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Discounts/SimpleDiscount.java#L29-L36"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Discounts/MaxDiscount.java",
+          "line": 32,
+          "endLine": 40,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Discounts/MaxDiscount.java#L32-L40"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Discounts/PlusDiscount.java",
+          "line": 30,
+          "endLine": 38,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Discounts/PlusDiscount.java#L30-L38"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Store.java",
+          "line": 636,
+          "endLine": 665,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L636-L665"
+        },
+        {
+          "file": "src/main/java/Presentation/application/View/Store/CreateDiscountDialog.java",
+          "line": 39,
+          "endLine": 87,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/Store/CreateDiscountDialog.java#L39-L87"
+        }
+      ]
+    },
+    {
+      "title": "Treat checkout failure as part of the workflow",
+      "summary": "The domain reserves stock before purchase, validates store policies and coordinates payment with supply adapters. Failure paths restore stock and attempt compensating cancellations.",
+      "details": [
+        "Per-inventory synchronized reservation reduces available quantities and tracks reserved quantities separately.",
+        "A later store failure triggers release of earlier store reservations; policy rejection releases that store reservation.",
+        "Payment and supply have separate handshake, action and cancellation interfaces. Supply failure attempts cancellation of the completed payment and any earlier supply transactions.",
+        "Source tests use mocks to assert two store-specific orders after success and restored stock/no orders after payment or supply failure. No fresh passing-test or live-provider claim is made.",
+        "Purchase history, read/unread messages, targeted Vaadin push notifications and dated account suspension support the surrounding operations."
+      ],
+      "citations": [
+        {
+          "file": "src/main/java/Domain/Store/Inventory/Inventory.java",
+          "line": 638,
+          "endLine": 716,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Inventory/Inventory.java#L638-L716"
+        },
+        {
+          "file": "src/main/java/Facades/StoreFacade.java",
+          "line": 552,
+          "endLine": 582,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/StoreFacade.java#L552-L582"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Store.java",
+          "line": 523,
+          "endLine": 537,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L523-L537"
+        },
+        {
+          "file": "src/main/java/Service/OrderService.java",
+          "line": 57,
+          "endLine": 106,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L57-L106"
+        },
+        {
+          "file": "src/main/java/Service/OrderService.java",
+          "line": 127,
+          "endLine": 145,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L127-L145"
+        },
+        {
+          "file": "src/test/java/UnitTests/PurchaseCartUnitTest.java",
+          "line": 70,
+          "endLine": 108,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/UnitTests/PurchaseCartUnitTest.java#L70-L108"
+        },
+        {
+          "file": "src/test/java/UnitTests/PurchaseCartUnitTest.java",
+          "line": 226,
+          "endLine": 293,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/UnitTests/PurchaseCartUnitTest.java#L226-L293"
+        },
+        {
+          "file": "src/main/java/Facades/AdminFacade.java",
+          "line": 58,
+          "endLine": 74,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/AdminFacade.java#L58-L74"
+        },
+        {
+          "file": "src/main/java/Presentation/application/View/UtilitiesView/Broadcaster.java",
+          "line": 9,
+          "endLine": 27,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/UtilitiesView/Broadcaster.java#L9-L27"
+        }
+      ]
+    }
+  ],
+  "architecture": {
+    "nodes": [
+      {
+        "id": "ui",
+        "label": "Vaadin views + presenters",
+        "detail": "Storefront, store management, cart, messages and administration"
+      },
+      {
+        "id": "services",
+        "label": "Application services",
+        "detail": "UserService / StoreService / OrderService / AdminService"
+      },
+      {
+        "id": "domain",
+        "label": "Marketplace domain",
+        "detail": "Facades, role graph, inventory reservation and composite rules"
+      },
+      {
+        "id": "memory",
+        "label": "In-memory repositories",
+        "detail": "Users, active/deactivated stores, orders and suspensions"
+      },
+      {
+        "id": "adapters",
+        "label": "Payment + supply interfaces",
+        "detail": "HTTP adapters and local validating stand-ins; mocks in tests"
+      },
+      {
+        "id": "push",
+        "label": "Targeted notification broadcaster",
+        "detail": "One registered listener per username; Vaadin @Push"
+      },
+      {
+        "id": "identity",
+        "label": "BCrypt + JWT helpers",
+        "detail": "Service-level identity checks, with documented deployment gaps"
+      }
+    ],
+    "edges": [
+      {
+        "from": "ui",
+        "to": "services",
+        "label": "Presenter calls / Response objects"
+      },
+      {
+        "from": "services",
+        "to": "domain",
+        "label": "Orchestrate authority, cart and purchases"
+      },
+      {
+        "from": "domain",
+        "to": "memory",
+        "label": "Read and mutate Java collections"
+      },
+      {
+        "from": "services",
+        "to": "adapters",
+        "label": "Handshake / pay or supply / cancel"
+      },
+      {
+        "from": "domain",
+        "to": "push",
+        "label": "Nomination and store events"
+      },
+      {
+        "from": "push",
+        "to": "ui",
+        "label": "Notification / unread count refresh"
+      },
+      {
+        "from": "services",
+        "to": "identity",
+        "label": "Validate token subject and signature"
+      }
+    ],
+    "citations": [
+      {
+        "file": "src/main/java/Presentation/application/Presenter/ShoppingCartPresenter.java",
+        "line": 26,
+        "endLine": 34,
+        "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Presenter/ShoppingCartPresenter.java#L26-L34"
+      },
+      {
+        "file": "src/main/java/Configuration/ServiceWiringConfig.java",
+        "line": 13,
+        "endLine": 28,
+        "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Configuration/ServiceWiringConfig.java#L13-L28"
+      },
+      {
+        "file": "src/main/java/Facades/StoreFacade.java",
+        "line": 151,
+        "endLine": 158,
+        "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/StoreFacade.java#L151-L158"
+      },
+      {
+        "file": "src/main/java/Service/OrderService.java",
+        "line": 57,
+        "endLine": 106,
+        "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L57-L106"
+      },
+      {
+        "file": "src/main/java/Domain/Repo/UserRepository.java",
+        "line": 16,
+        "endLine": 28,
+        "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Repo/UserRepository.java#L16-L28"
+      },
+      {
+        "file": "src/main/java/Presentation/application/Application.java",
+        "line": 18,
+        "endLine": 23,
+        "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Application.java#L18-L23"
+      },
+      {
+        "file": "src/main/java/Presentation/application/View/UtilitiesView/Broadcaster.java",
+        "line": 9,
+        "endLine": 27,
+        "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/UtilitiesView/Broadcaster.java#L9-L27"
+      }
+    ]
+  },
+  "decisions": [
+    {
+      "title": "Represent delegated authority as a graph",
+      "implementation": "Store records nominationGraph and reverseNominationMap alongside per-store subscriber states and manager permissions. waiveOwnership performs a breadth-first traversal and removes all collected appointments.",
+      "whyItMatters": "Revocation has consequences beyond the selected person. Explicit relationships make that cascade visible and give the team a common domain rule. This benefit is inferred from the code, not an author quotation.",
+      "tradeoff": "The graph, role map, permission map and user-facing store-role map must remain consistent. The audit found stale graph-link and declined-nomination bookkeeping edges; this is a modeling decision, not proof of complete authorization correctness.",
+      "citations": [
+        {
+          "file": "src/main/java/Domain/Store/Store.java",
+          "line": 31,
+          "endLine": 34,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L31-L34"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Store.java",
+          "line": 141,
+          "endLine": 176,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L141-L176"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Store.java",
+          "line": 241,
+          "endLine": 269,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L241-L269"
+        },
+        {
+          "file": "src/main/java/Service/UserService.java",
+          "line": 234,
+          "endLine": 248,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/UserService.java#L234-L248"
+        }
+      ]
+    },
+    {
+      "title": "Build policy expressions from reusable components",
+      "implementation": "Condition and Discount interfaces have simple and composite implementations. Store composition methods replace two top-level components with a composite; recursive DTO conversion feeds nested UI boxes.",
+      "whyItMatters": "Product-specific requirements can be expressed using the same evaluation machinery instead of one bespoke checkout branch per promotion. The structure also gives the UI something concrete to explain.",
+      "tradeoff": "Expression semantics, labels and numeric edge cases must agree. Exact-value and conditional-policy wording gaps are documented; no claim of a complete production promotion engine.",
+      "citations": [
+        {
+          "file": "src/main/java/Domain/Store/Conditions/Condition.java",
+          "line": 1,
+          "endLine": 22,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/Condition.java#L1-L22"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Discounts/Discount.java",
+          "line": 1,
+          "endLine": 34,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Discounts/Discount.java#L1-L34"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Store.java",
+          "line": 636,
+          "endLine": 665,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L636-L665"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Store.java",
+          "line": 676,
+          "endLine": 717,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L676-L717"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Store.java",
+          "line": 765,
+          "endLine": 811,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L765-L811"
+        },
+        {
+          "file": "src/main/java/Presentation/application/Presenter/Store/StoreManagementPresenter.java",
+          "line": 84,
+          "endLine": 98,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Presenter/Store/StoreManagementPresenter.java#L84-L98"
+        }
+      ]
+    },
+    {
+      "title": "Separate external actions and make compensation explicit",
+      "implementation": "OrderService depends on PaymentGateway and SupplySystem interfaces. It checks availability, performs payment, requests supply, records per-store orders, and attempts payment/supply cancellation on a later supply failure. Unit tests substitute Mockito adapters and inspect inventory and order state.",
+      "whyItMatters": "The interesting boundary is what happens after the first external step succeeds and the next fails. The implementation addresses that path directly.",
+      "tradeoff": "This is best-effort compensation, not an atomic distributed transaction: cancellation return values are ignored, no durable retry/outbox is present, and the current application startup does not wire the adapters. The test-injected domain path and deployable checkout are separate evidence levels.",
+      "citations": [
+        {
+          "file": "src/main/java/Domain/Externals/Payment/PaymentGateway.java",
+          "line": 3,
+          "endLine": 6,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Externals/Payment/PaymentGateway.java#L3-L6"
+        },
+        {
+          "file": "src/main/java/Domain/Externals/Suppliers/SupplySystem.java",
+          "line": 8,
+          "endLine": 11,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Externals/Suppliers/SupplySystem.java#L8-L11"
+        },
+        {
+          "file": "src/main/java/Service/OrderService.java",
+          "line": 57,
+          "endLine": 106,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L57-L106"
+        },
+        {
+          "file": "src/test/java/UnitTests/PurchaseCartUnitTest.java",
+          "line": 38,
+          "endLine": 52,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/UnitTests/PurchaseCartUnitTest.java#L38-L52"
+        },
+        {
+          "file": "src/test/java/UnitTests/PurchaseCartUnitTest.java",
+          "line": 226,
+          "endLine": 259,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/UnitTests/PurchaseCartUnitTest.java#L226-L259"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    {
+      "text": "Source-only audit at the pinned revision. No application startup, current build/test result, deployed usage, real transaction or performance measurement was demonstrated.",
+      "citations": []
+    },
+    {
+      "text": "Runtime user, store, order and admin repositories are in-memory collections. JPA annotations and H2/MySQL dependencies exist, but UserRepository implements JpaRepository with empty/null/no-op methods, and facades instantiate these repositories directly. Do not claim durable MySQL storage.",
+      "citations": [
+        {
+          "file": "src/main/java/Domain/Repo/UserRepository.java",
+          "line": 16,
+          "endLine": 28,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Repo/UserRepository.java#L16-L28"
+        },
+        {
+          "file": "src/main/java/Domain/Repo/UserRepository.java",
+          "line": 112,
+          "endLine": 259,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Repo/UserRepository.java#L112-L259"
+        },
+        {
+          "file": "src/main/java/Domain/Repo/StoreRepository.java",
+          "line": 11,
+          "endLine": 20,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Repo/StoreRepository.java#L11-L20"
+        },
+        {
+          "file": "src/main/java/Domain/Repo/OrderRepository.java",
+          "line": 10,
+          "endLine": 19,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Repo/OrderRepository.java#L10-L19"
+        },
+        {
+          "file": "src/main/java/Facades/UserFacade.java",
+          "line": 20,
+          "endLine": 25,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/UserFacade.java#L20-L25"
+        }
+      ]
+    },
+    {
+      "text": "Payment and supply adapters are implemented, but the current Spring startup does not populate OrderService.paymentGateway/supplySystem. The only source calls to their setters are in tests. The JSON initialization utility constructs a separate service graph and does not install its parsed adapters either. Do not present current default startup as working end-to-end checkout.",
+      "citations": [
+        {
+          "file": "src/main/java/Service/OrderService.java",
+          "line": 21,
+          "endLine": 29,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L21-L29"
+        },
+        {
+          "file": "src/main/java/Service/OrderService.java",
+          "line": 49,
+          "endLine": 65,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L49-L65"
+        },
+        {
+          "file": "src/main/java/Configuration/ServiceWiringConfig.java",
+          "line": 13,
+          "endLine": 28,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Configuration/ServiceWiringConfig.java#L13-L28"
+        },
+        {
+          "file": "src/main/java/Domain/Externals/InitFile/Configuration.java",
+          "line": 100,
+          "endLine": 115,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Externals/InitFile/Configuration.java#L100-L115"
+        },
+        {
+          "file": "src/test/java/UnitTests/PurchaseCartUnitTest.java",
+          "line": 44,
+          "endLine": 52,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/UnitTests/PurchaseCartUnitTest.java#L44-L52"
+        }
+      ]
+    },
+    {
+      "text": "The payment page parses its total from a URL parameter and OrderService accepts the supplied purchasePrice without recomputing it from a trusted reservation. External cancellation results are ignored, and HttpUtils has no configured connection/read timeout. This is an academic integration design, not production payment integrity or durable transaction recovery.",
+      "citations": [
+        {
+          "file": "src/main/java/Presentation/application/View/PaymentView.java",
+          "line": 181,
+          "endLine": 200,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/PaymentView.java#L181-L200"
+        },
+        {
+          "file": "src/main/java/Presentation/application/Presenter/PaymentPresenter.java",
+          "line": 36,
+          "endLine": 37,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Presenter/PaymentPresenter.java#L36-L37"
+        },
+        {
+          "file": "src/main/java/Service/OrderService.java",
+          "line": 82,
+          "endLine": 101,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L82-L101"
+        },
+        {
+          "file": "src/main/java/Domain/Externals/HttpUtils.java",
+          "line": 18,
+          "endLine": 53,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Externals/HttpUtils.java#L18-L53"
+        }
+      ]
+    },
+    {
+      "text": "Security is partial: BCrypt registration and signed expiring JWTs are real, but Spring HTTP security permits all paths and disables CSRF. JWT validation checks the signature, expiry and subject without consulting current login/token state; logout clears stored state but does not revoke an issued token. Cookies are explicitly non-Secure. Avoid production-secure authentication claims.",
+      "citations": [
+        {
+          "file": "src/main/java/Domain/Externals/Security/PasswordEncoderUtil.java",
+          "line": 6,
+          "endLine": 25,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Externals/Security/PasswordEncoderUtil.java#L6-L25"
+        },
+        {
+          "file": "src/main/java/Domain/Externals/Security/TokenHandler.java",
+          "line": 16,
+          "endLine": 37,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Externals/Security/TokenHandler.java#L16-L37"
+        },
+        {
+          "file": "src/main/java/Facades/UserFacade.java",
+          "line": 87,
+          "endLine": 98,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/UserFacade.java#L87-L98"
+        },
+        {
+          "file": "src/main/java/Facades/UserFacade.java",
+          "line": 242,
+          "endLine": 244,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Facades/UserFacade.java#L242-L244"
+        },
+        {
+          "file": "src/main/java/Configuration/SecurityConfig.java",
+          "line": 10,
+          "endLine": 21,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Configuration/SecurityConfig.java#L10-L21"
+        },
+        {
+          "file": "src/main/java/Presentation/application/CookiesHandler.java",
+          "line": 10,
+          "endLine": 19,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/CookiesHandler.java#L10-L19"
+        }
+      ]
+    },
+    {
+      "text": "Several presenters are ordinary singleton Spring components holding mutable view, product-list, total or store fields, and MessagesList keeps a static message list. The source does not establish isolated simultaneous user interfaces. The broadcaster also retains one listener per username, with no stored/removable registration in MainLayoutView.",
+      "citations": [
+        {
+          "file": "src/main/java/Presentation/application/Presenter/ShoppingCartPresenter.java",
+          "line": 16,
+          "endLine": 34,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Presenter/ShoppingCartPresenter.java#L16-L34"
+        },
+        {
+          "file": "src/main/java/Presentation/application/Presenter/Store/RolesManagementPresenter.java",
+          "line": 15,
+          "endLine": 34,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/Presenter/Store/RolesManagementPresenter.java#L15-L34"
+        },
+        {
+          "file": "src/main/java/Presentation/application/View/MessagesList.java",
+          "line": 34,
+          "endLine": 49,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/MessagesList.java#L34-L49"
+        },
+        {
+          "file": "src/main/java/Presentation/application/View/UtilitiesView/Broadcaster.java",
+          "line": 9,
+          "endLine": 27,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/UtilitiesView/Broadcaster.java#L9-L27"
+        },
+        {
+          "file": "src/main/java/Presentation/application/View/MainLayoutView.java",
+          "line": 96,
+          "endLine": 101,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Presentation/application/View/MainLayoutView.java#L96-L101"
+        }
+      ]
+    },
+    {
+      "text": "Policy and reservation edges remain: SimpleCondition ignores its exact amount field, PolicyCondition text reverses its implemented implication, conditional discounts return an error when their condition is false, and reservation expiry is scheduled for 60 minutes despite its 10-minute message. These prevent claiming every visible rule or timing guarantee works as labeled.",
+      "citations": [
+        {
+          "file": "src/main/java/Domain/Store/Conditions/SimpleCondition.java",
+          "line": 77,
+          "endLine": 89,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/SimpleCondition.java#L77-L89"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Conditions/PolicyCondition.java",
+          "line": 19,
+          "endLine": 28,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Conditions/PolicyCondition.java#L19-L28"
+        },
+        {
+          "file": "src/main/java/Domain/Store/Discounts/DiscountCondition.java",
+          "line": 25,
+          "endLine": 29,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Discounts/DiscountCondition.java#L25-L29"
+        },
+        {
+          "file": "src/main/java/Domain/Users/Subscriber/Cart/ShoppingCart.java",
+          "line": 95,
+          "endLine": 108,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Users/Subscriber/Cart/ShoppingCart.java#L95-L108"
+        }
+      ]
+    },
+    {
+      "text": "The repository contains substantial unit, acceptance and parallel-test source, but presence is not a passing result or concurrency guarantee. One parallel purchase test submits mismatched username/token pairs and accepts zero successful reservations, and some test files are entirely commented out.",
+      "citations": [
+        {
+          "file": "src/test/java/ParallelTests/purchaseCart.java",
+          "line": 65,
+          "endLine": 96,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/ParallelTests/purchaseCart.java#L65-L96"
+        },
+        {
+          "file": "src/test/java/UnitTests/DiscountAndCalculationPriceTest.java",
+          "line": 1,
+          "endLine": 111,
+          "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/test/java/UnitTests/DiscountAndCalculationPriceTest.java#L1-L111"
+        }
+      ]
+    }
+  ],
+  "visualConcept": {
+    "title": "The rules behind a purchase",
+    "description": "Use a code-native three-part diagram, clearly labeled as an implementation model. First show a creator → owner → manager nomination tree with permission chips; removing the owner dims its descendant branch. Then show a compact AND/OR/MAX rule expression over a fictional basket. Finish with reserve → payment → supply → per-store orders and a visible reverse cancellation path from a supply failure. These diagrams explain actual source structures; they are neither fabricated screenshots nor a claim that the archived app is running.",
+    "labels": [
+      "Store creator",
+      "Accepted nomination",
+      "Manager permissions",
+      "Product / category / price rule",
+      "Reserved stock",
+      "Payment adapter",
+      "Supply adapter",
+      "Compensating cancellation",
+      "Per-store orders"
+    ],
+    "avoid": [
+      "Financial-market charts, candlesticks, stocks or crypto",
+      "Live transaction success or real payment-provider claims",
+      "A MySQL database drawn as the active runtime repository",
+      "Exactly-value policies shown as verified",
+      "Sole-author or production-secure claims",
+      "Guaranteed atomic checkout or distributed transaction claims"
+    ]
+  },
+  "coverage": {
+    "inventory": "Trading_System-inventory.json",
+    "method": "All 324 tracked paths classified; authored source and tests fully scanned for declarations/control entry points. Manual implementation review spans configuration, all external adapters/security helpers and repositories, store authority/rules, cart/reservation/checkout, user services/facades, notification delivery, key Vaadin presenters/views and selected unit/acceptance/parallel tests. Generated Vaadin vendor assets, runtime logs and binary artwork were inventoried without semantic review. This is broad subsystem coverage with explicit focused ranges, not a claim that every UI styling line or every test assertion was manually read.",
+    "counts": {
+      "config/metadata": {
+        "files": 33,
+        "lines": 1514
+      },
+      "documentation": {
+        "files": 1,
+        "lines": 212
+      },
+      "generated/vendor": {
+        "files": 132,
+        "lines": 8228
+      },
+      "authored-source": {
+        "files": 106,
+        "lines": 17274
+      },
+      "runtime-log": {
+        "files": 1,
+        "lines": 494
+      },
+      "binary": {
+        "files": 6,
+        "lines": 0
+      },
+      "test": {
+        "files": 45,
+        "lines": 6441
+      }
+    },
+    "manualControlLogicFiles": 50,
+    "focusedFiles": 17,
+    "manualTestFiles": 4,
+    "execution": "No build, tests, app startup, HTTP adapter calls, or database mutation performed.",
+    "classificationNotes": [
+      "132 generated/vendor paths are Vaadin-generated frontend resources, not original marketplace implementation.",
+      "106 authored-source paths contain 101 Java files plus authored theme/static resources.",
+      "45 test paths include test support and some commented-out test classes; this count is not an executable test count.",
+      "The JSON configuration guide is the only tracked Markdown document; it is not a full product specification.",
+      "A tracked runtime log was inventoried only; no credentials or log payloads are copied into the report."
+    ]
+  },
+  "citations": [
+    {
+      "file": "pom.xml",
+      "line": 7,
+      "endLine": 20,
+      "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/pom.xml#L7-L20"
+    },
+    {
+      "file": "pom.xml",
+      "line": 31,
+      "endLine": 43,
+      "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/pom.xml#L31-L43"
+    },
+    {
+      "file": "src/main/java/Domain/Repo/UserRepository.java",
+      "line": 16,
+      "endLine": 28,
+      "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Repo/UserRepository.java#L16-L28"
+    },
+    {
+      "file": "src/main/java/Domain/Store/Store.java",
+      "line": 31,
+      "endLine": 36,
+      "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Domain/Store/Store.java#L31-L36"
+    },
+    {
+      "file": "src/main/java/Service/OrderService.java",
+      "line": 57,
+      "endLine": 106,
+      "url": "https://github.com/tnaydnov/Trading_System/blob/048e46bf2ac9191e241ce52cda1c9c05d672d4ee/src/main/java/Service/OrderService.java#L57-L106"
+    }
+  ]
+}

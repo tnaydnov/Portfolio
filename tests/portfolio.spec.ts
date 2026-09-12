@@ -1,6 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
+import { ALL_PROJECTS } from "../src/content/work";
+import { engineeringStudies } from "../src/content/engineering";
 
-const cases = ["arc", "browser-coder", "applytide", "eventa", "license-plate-recognition", "trading-system"];
+const cases = ALL_PROJECTS.map(project => project.slug);
 const publicPaths = ["/", "/work", "/about", "/contact", ...cases.map((slug) => `/work/${slug}`)];
 
 async function expectEnglishPage(page: Page, path: string) {
@@ -18,18 +20,29 @@ async function expectEnglishPage(page: Page, path: string) {
 }
 
 for (const width of [320, 390, 768, 1366, 2560]) {
-  test(`${width}px: public pages are readable, English and canonical`, async ({ page }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (error) => errors.push(error.message));
-    await page.setViewportSize({ width, height: 900 });
+  test(`${width}px: public pages are readable, English and canonical`, async ({ context }, testInfo) => {
+    test.setTimeout(90_000);
     for (const path of publicPaths) {
-      const response = await page.goto(path);
-      expect(response?.status(), path).toBe(200);
-      await page.evaluate(() => document.fonts.ready);
-      await expectEnglishPage(page, path);
-      if (path === "/") await expect(page.locator("main h1")).toHaveAccessibleName("Hey, I'm Tomer.");
+      // Each direct-route audit gets its own document. Rapid full navigations on
+      // one WebKit page can surface canceled prefetch errors from the old page.
+      const page = await context.newPage();
+      const errors: string[] = [];
+      page.on("pageerror", error => errors.push(error.message));
+      await page.setViewportSize({ width, height: 900 });
+      try {
+        const response = await page.goto(path);
+        expect(response?.status(), path).toBe(200);
+        await page.evaluate(() => document.fonts.ready);
+        await expectEnglishPage(page, path);
+        if (path === "/") await expect(page.locator("main h1")).toHaveAccessibleName("Hey, I'm Tomer.");
+        expect(errors, path).toEqual([]);
+      } catch (error) {
+        await testInfo.attach(`${width}px-${path.replaceAll("/", "_")}`, { body: await page.screenshot({ fullPage: true }), contentType: "image/png" });
+        throw error;
+      } finally {
+        await page.close();
+      }
     }
-    expect(errors).toEqual([]);
   });
 }
 
@@ -71,7 +84,8 @@ test("identity and direct links are available without waiting for the portrait",
   await expect(page).toHaveURL(/\/work$/);
 });
 
-test("touching the portrait hero permits ordinary vertical page scrolling", async ({ browser, baseURL }) => {
+test("touching the portrait hero permits ordinary vertical page scrolling", async ({ browser, browserName, baseURL }) => {
+  test.skip(browserName !== "chromium", "Native touch injection uses Chromium's CDP; responsive navigation is checked in both engines.");
   const context = await browser.newContext({ baseURL, viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const page = await context.newPage();
   try {
@@ -224,7 +238,8 @@ test("portrait depth follows a mouse and returns to rest when animation is pause
   expect(await offset()).toBe(0);
 });
 
-test("email copying confirms the action and keeps the direct email link", async ({ context, page }) => {
+test("email copying confirms the action and keeps the direct email link", async ({ context, page, browserName }) => {
+  test.skip(browserName !== "chromium", "Clipboard permission grants are not supported by Playwright's WebKit engine.");
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.goto("/contact");
   await page.getByRole("button", { name: "Copy email" }).click();
@@ -246,30 +261,56 @@ test("identity and project links work without JavaScript", async ({ browser, bas
   } finally { await context.close(); }
 });
 
-test("case disclosures retain technical detail and adjustable decisions", async ({ page }) => {
-  await page.goto("/work/arc");
-  const chapter = page.locator("details#story");
-  await chapter.locator("summary").click();
-  await expect(chapter).toHaveAttribute("open", "");
-  await expect(chapter.locator("p").first()).toBeVisible();
-  const architecture = page.locator("#deep-dive details").filter({ hasText: "System & architecture" }).first();
-  await architecture.locator("summary").click();
-  await expect(architecture).toHaveAttribute("open", "");
-  await expect(architecture.getByText("Technology", { exact: true })).toBeVisible();
-  await page.goto("/work/applytide");
-  const constraints = page.locator("#deep-dive details").filter({ has: page.locator("summary", { hasText: "Constraint study" }) });
-  await constraints.locator("summary").focus();
-  await page.keyboard.press("Enter");
-  const time = constraints.getByRole("slider", { name: "Time", exact: true });
-  await expect(time).toHaveValue("1");
-  await time.focus();
-  await page.keyboard.press("ArrowLeft");
-  await expect(time).toHaveValue("0");
-  await expect(constraints).toContainText("JSON-LD with an LLM fallback.");
-  await constraints.getByRole("button", { name: "Back to the actual decision" }).click();
-  await expect(time).toBeFocused();
-  await expect(time).toHaveValue("1");
-  await expect(constraints.getByRole("slider", { name: "Scope", exact: true })).toHaveValue("1");
+test("all eleven projects are discoverable from Work", async ({ page }) => {
+  await page.goto("/work");
+  expect(cases).toHaveLength(11);
+  for (const slug of cases) {
+    await expect(page.locator(`main a[href="/work/${slug}"]`).first()).toBeVisible();
+  }
+});
+
+test("product disclosures expose contribution, source decisions and evidence boundaries with a keyboard", async ({ page }) => {
+  for (const slug of ["arc", "browser-coder", "applytide", "eventa"]) {
+    await page.goto(`/work/${slug}`);
+    const contribution = page.locator("#overview details");
+    await contribution.locator("summary").focus();
+    await page.keyboard.press("Enter");
+    await expect(contribution.locator("p")).toBeVisible();
+    const decisions = page.locator("#deep-dive details");
+    expect(await decisions.count()).toBeGreaterThan(1);
+    for (const disclosure of await decisions.all()) {
+      const summary = disclosure.locator("summary");
+      await summary.focus();
+      await page.keyboard.press("Enter");
+      await expect(disclosure).toHaveAttribute("open", "");
+      await expect(disclosure.locator("p, li").first()).toBeVisible();
+      await page.keyboard.press("Enter");
+      await expect(disclosure).not.toHaveAttribute("open");
+    }
+  }
+});
+
+test("earlier engineering studies expose their source-backed capabilities and limitations", async ({ page, request }) => {
+  for (const [slug, study] of Object.entries(engineeringStudies)) {
+    await page.goto(`/work/${slug}`);
+    const article = page.getByTestId("engineering-study");
+    await expect(article).toBeVisible();
+    await expect(article.locator('#capabilities h3')).toHaveCount(study.groups.length);
+    await article.getByRole("link", { name: /Explore the system/ }).click();
+    await expect(page).toHaveURL(new RegExp(`/work/${slug}#capabilities$`));
+    const contribution = article.locator("details").filter({ has: page.locator("summary", { hasText: "My contribution" }) });
+    await contribution.locator("summary").click();
+    await expect(contribution.locator("p")).toBeVisible();
+    const scope = article.locator("#deep-dive details").last();
+    await scope.locator("summary").focus();
+    await page.keyboard.press("Enter");
+    await expect(scope.locator("li")).toHaveCount(study.limitations.length);
+    await expect(scope.locator("li").first()).toBeVisible();
+    const source = await article.getByRole("link", { name: /Full source review/ }).getAttribute("href");
+    const response = await request.get(source!);
+    expect(response.status(), source!).toBe(200);
+    expect(response.headers()["content-type"]).toContain("application/json");
+  }
 });
 
 test("legacy prefixes and the former system page permanently redirect", async ({ request }) => {
@@ -288,7 +329,7 @@ test("CV, social image, icon, sitemap and missing routes have correct metadata",
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.status()).toBe(200);
   const sitemapText = await sitemap.text();
-  expect(sitemapText).toContain("https://tomer-naydnov.com/work/arc");
+  for (const path of publicPaths) expect(sitemapText).toContain(new URL(path, "https://tomer-naydnov.com").href);
   expect(sitemapText).not.toMatch(/tomer-naydnov\.com\/(?:en|he)(?:\/|<)/);
   await page.goto("/");
   await expect(page.locator('header a[href="/Tomer Naydnov.pdf"]:visible')).toBeVisible();

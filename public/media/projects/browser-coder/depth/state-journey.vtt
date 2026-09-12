@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.300
+BROWSER CODER / INSIDE A REAL PYTHON LOOP
+
+00:00:02.300 --> 00:00:05.733
+A breakpoint stops the program inside the loop.
+
+00:00:05.733 --> 00:00:09.733
+Step over the addition. The original debugger shows total moving from 0 to 72.
+
+00:00:09.733 --> 00:00:14.267
+The next addition changes total from 72 to 160. The difference is explicit.
+
+00:00:14.267 --> 00:00:19.267
+Browse a recorded pause, then return to live. The Python process is not rewound.
+
+00:00:19.267 --> 00:00:25.400
+Continue through the remaining pauses. The real program reports an average of 84.0.
+
+00:00:25.400 --> 00:00:27.600
+Original Python process / Recorded pause history / No simulated debugger

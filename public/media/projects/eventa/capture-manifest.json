@@ -222,5 +222,867 @@
     "A profile like creates a reciprocal match through the real API.",
     "The original chat UI sends a message; a separate authenticated browser receives it without reload and replies. Both messages survive reload and are present in local Postgres."
   ],
-  "captureMethod": "Original app operated through Playwright. Desktop screenshots use DPR 2; phone screenshots use DPR 3. The customer film uses lossless Chromium compositor PNG frames and the attendee film uses retina PNG frame capture. Final H.264 recordings have editorial English chapter bands outside the app pixels; the attendee recording preserves portrait orientation."
+  "captureMethod": "Original app operated through Playwright. Desktop screenshots use DPR 2; phone screenshots use DPR 3. The customer film uses lossless Chromium compositor PNG frames and the attendee film uses retina PNG frame capture. Final H.264 recordings have editorial English chapter bands outside the app pixels; the attendee recording preserves portrait orientation.",
+  "depthReview": {
+    "project": "eventa",
+    "capturedAt": "2026-09-12",
+    "sourceRevision": "103f9daeb56d30db13c7277a7d8259f2ed9d287c",
+    "sourceBranch": "main",
+    "sourceRepository": "tnaydnov/eventa",
+    "comparisonToPreviousCapture": "Identical revision; original working tree clean.",
+    "backend": "real",
+    "publicLabel": "Original UI · Local backend · Fictional event data",
+    "scenario": "The actual Hebrew product with synthetic events, contacts, profiles and activity. Organizer preparation and later reporting use separate stage fixtures; guest messaging is exercised through two real browsers. Original public demo portraits/templates are reused.",
+    "assets": [
+      {
+        "id": "website-organizer-story",
+        "title": "A website that explains both sides",
+        "description": "The original how-it-works page lets customers follow the organizer journey. Its phone screens are authored marketing illustrations.",
+        "portal": "Customer website",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/website-organizer-story.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The original how-it-works page lets customers follow the organizer journey. Its phone screens are authored marketing illustrations.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/how-it-works/page.tsx#L19"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 820,
+            "y": 280,
+            "width": 1580,
+            "height": 1530
+          }
+        ],
+        "bytes": 109016
+      },
+      {
+        "id": "customer-background-crop",
+        "title": "A personal first impression",
+        "description": "The original cropper prepares a portrait background before it enters the event preview.",
+        "portal": "Customer website",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/customer-background-crop.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The original cropper prepares a portrait background before it enters the event preview.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/_components/wizard/steps/StepBackground.tsx#L152"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 1080,
+            "y": 350,
+            "width": 1040,
+            "height": 1450
+          }
+        ],
+        "bytes": 130418,
+        "sourceRecording": "customer-personalize-clean",
+        "sourceFrame": "frame-000015.png",
+        "sourceTime": 3.955
+      },
+      {
+        "id": "customer-poster-choice",
+        "title": "From screen to venue",
+        "description": "Select an original QR-poster template and attach specific design instructions.",
+        "portal": "Customer website",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/customer-poster-choice.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "Select an original QR-poster template and attach specific design instructions.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/_components/wizard/steps/StepPoster.tsx#L80"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 930,
+            "y": 310,
+            "width": 1340,
+            "height": 1300
+          }
+        ],
+        "bytes": 233404,
+        "sourceRecording": "customer-personalize-clean",
+        "sourceFrame": "frame-000054.png",
+        "sourceTime": 12.321
+      },
+      {
+        "id": "customer-order-summary",
+        "title": "An editable event configuration",
+        "description": "Date, background, poster and included services remain reviewable before an order is submitted.",
+        "portal": "Customer website",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/customer-order-summary.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "Date, background, poster and included services remain reviewable before an order is submitted.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/_components/wizard/steps/StepSummary.tsx#L39"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 940,
+            "y": 350,
+            "width": 1320,
+            "height": 1210
+          }
+        ],
+        "bytes": 92544,
+        "sourceRecording": "customer-personalize-clean",
+        "sourceFrame": "frame-000086.png",
+        "sourceTime": 20.068
+      },
+      {
+        "id": "organizer-consent",
+        "title": "Permission before preparation",
+        "description": "The organizer confirms permission to provide guest contacts before the upload tools appear.",
+        "portal": "Organizer portal",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/organizer-consent.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The organizer confirms permission to provide guest contacts before the upload tools appear.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/guest-upload/[slug]/_components/GuestConsentGate.tsx#L15"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 1030,
+            "y": 910,
+            "width": 1140,
+            "height": 450
+          }
+        ],
+        "bytes": 107698
+      },
+      {
+        "id": "organizer-validation",
+        "title": "A messy spreadsheet, a clear result",
+        "description": "The real import accepts twelve fictional contacts, skips one in-file duplicate and explains one invalid row.",
+        "portal": "Organizer portal",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/organizer-validation.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The real import accepts twelve fictional contacts, skips one in-file duplicate and explains one invalid row.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/lib/guest-upload.ts#L181"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 1030,
+            "y": 910,
+            "width": 1140,
+            "height": 405
+          }
+        ],
+        "bytes": 117026
+      },
+      {
+        "id": "organizer-guest-list",
+        "title": "A list the organizer can manage",
+        "description": "The saved contacts appear in the original portal with pending invitation statuses. No invitations are delivered.",
+        "portal": "Organizer portal",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/organizer-guest-list.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The saved contacts appear in the original portal with pending invitation statuses. No invitations are delivered.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/guest-upload/[slug]/_components/GuestListTable.tsx#L80"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 1030,
+            "y": 945,
+            "width": 1140,
+            "height": 1050
+          }
+        ],
+        "bytes": 105230
+      },
+      {
+        "id": "organizer-invitation",
+        "title": "Review the invitation wording",
+        "description": "The original portal includes an illustrative message preview and event-relative timing. This is a preview, not proof of SMS delivery or end-to-end encryption.",
+        "portal": "Organizer portal",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/organizer-invitation.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The original portal includes an illustrative message preview and event-relative timing. This is a preview, not proof of SMS delivery or end-to-end encryption.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/guest-upload/[slug]/_components/MessagePreview.tsx#L11"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 1030,
+            "y": 920,
+            "width": 1140,
+            "height": 1080
+          }
+        ],
+        "bytes": 139330
+      },
+      {
+        "id": "organizer-report",
+        "title": "A report from event activity",
+        "description": "The original analytics backend generates and persists a report for a separate fictional ended event. All shown counts are synthetic, including seeded funnel stages.",
+        "portal": "Organizer portal",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/organizer-report.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The original analytics backend generates and persists a report for a separate fictional ended event. All shown counts are synthetic, including seeded funnel stages.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/lib/report/curate.ts#L28"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 955,
+            "y": 265,
+            "width": 1290,
+            "height": 1470
+          }
+        ],
+        "bytes": 84396
+      },
+      {
+        "id": "guest-swipe",
+        "title": "Discovery in the room",
+        "description": "The actual attendee app presents event-scoped profiles in its native swipe view. All people are fictional demo profiles.",
+        "portal": "Attendee app",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/guest-swipe.webp",
+        "width": 1170,
+        "height": 2532,
+        "backend": "real",
+        "verifiedBehavior": "The actual attendee app presents event-scoped profiles in its native swipe view. All people are fictional demo profiles.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/[eventSlug]/_components/SwipeView.tsx#L30"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 0,
+            "y": 170,
+            "width": 1170,
+            "height": 2140
+          }
+        ],
+        "bytes": 102154
+      },
+      {
+        "id": "guest-offline-outbox",
+        "title": "The connection drops. The message stays.",
+        "description": "A real offline send preserves the message and exposes the original retry control. The product offline banner is shown; development tooling is omitted.",
+        "portal": "Attendee app",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/guest-offline-outbox.webp",
+        "width": 780,
+        "height": 1688,
+        "backend": "real",
+        "verifiedBehavior": "A real offline send preserves the message and exposes the original retry control. The product offline banner is shown; development tooling is omitted.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/[eventSlug]/chat/[conversationId]/page.tsx#L282"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 0,
+            "y": 0,
+            "width": 780,
+            "height": 600
+          }
+        ],
+        "bytes": 27142,
+        "sourceRecording": "guest-connections-clean",
+        "sourceFrame": "frame-000078.png",
+        "sourceTime": 5.41
+      },
+      {
+        "id": "guest-block-confirmation",
+        "title": "A clear personal boundary",
+        "description": "The native confirmation explains the block. Runtime verification confirms the pair’s conversation and message rows are removed.",
+        "portal": "Attendee app",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/guest-block-confirmation.webp",
+        "width": 780,
+        "height": 1688,
+        "backend": "real",
+        "verifiedBehavior": "The native confirmation explains the block. Runtime verification confirms the pair’s conversation and message rows are removed.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/api/secure/blocks/route.ts#L35"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 0,
+            "y": 420,
+            "width": 780,
+            "height": 840
+          }
+        ],
+        "bytes": 27348,
+        "sourceRecording": "guest-connections-clean",
+        "sourceFrame": "frame-000214.png",
+        "sourceTime": 15.015
+      },
+      {
+        "id": "operator-conversion",
+        "title": "A different workspace for the operator",
+        "description": "The administrator can inspect the progression from joining through matching and conversation. These are local synthetic event analytics.",
+        "portal": "Platform operator",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/operator-conversion.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The administrator can inspect the progression from joining through matching and conversation. These are local synthetic event analytics.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/admin/_components/analytics/AnalyticsDashboard.tsx#L419"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 50,
+            "y": 990,
+            "width": 2620,
+            "height": 535
+          }
+        ],
+        "bytes": 116250
+      },
+      {
+        "id": "operator-safety-analytics",
+        "title": "Safety has operational context",
+        "description": "The operator dashboard derives blocking and interaction context from the actual local data. It is separate from the organizer’s limited portal.",
+        "portal": "Platform operator",
+        "type": "image",
+        "src": "/media/projects/eventa/depth/operator-safety-analytics.webp",
+        "width": 3200,
+        "height": 2000,
+        "backend": "real",
+        "verifiedBehavior": "The operator dashboard derives blocking and interaction context from the actual local data. It is separate from the organizer’s limited portal.",
+        "sourceReferences": [
+          "https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/admin/_components/analytics/AnalyticsDashboard.tsx#L545"
+        ],
+        "focusRectangles": [
+          {
+            "id": "detail",
+            "x": 40,
+            "y": 600,
+            "width": 2630,
+            "height": 1300
+          }
+        ],
+        "bytes": 118176
+      },
+      {
+        "id": "customer-personalization",
+        "title": "A welcome that belongs to the event.",
+        "description": "A crafted sequence of actual original UI interactions, with detail cuts and full-view context. All event data is fictional.",
+        "portal": "Customer website",
+        "type": "video",
+        "src": "/media/projects/eventa/depth/customer-personalization.mp4",
+        "poster": "/media/projects/eventa/depth/customer-personalization-poster.webp",
+        "width": 1600,
+        "height": 1000,
+        "duration": 21.433333,
+        "backend": "real",
+        "chapters": [
+          {
+            "title": "Make the welcome yours",
+            "description": "A personal background begins with the original local upload flow.",
+            "start": 0,
+            "source": "customer-personalize-clean",
+            "sourceStart": 0,
+            "sourceEnd": 2.893,
+            "focusRectangle": {
+              "x": 900,
+              "y": 0,
+              "width": 1400,
+              "height": 2000
+            }
+          },
+          {
+            "title": "Compose the first impression",
+            "description": "The native cropper produces the portrait image used by the guest preview.",
+            "start": 2.893,
+            "source": "customer-personalize-clean",
+            "sourceStart": 2.893,
+            "sourceEnd": 7.123,
+            "focusRectangle": {
+              "x": 1080,
+              "y": 350,
+              "width": 1040,
+              "height": 1450
+            }
+          },
+          {
+            "title": "See the choice in context",
+            "description": "The original phone preview now carries the uploaded image.",
+            "start": 7.123,
+            "source": "customer-personalize-clean",
+            "sourceStart": 7.123,
+            "sourceEnd": 11.088,
+            "focusRectangle": {
+              "x": 1280,
+              "y": 860,
+              "width": 640,
+              "height": 1050
+            }
+          },
+          {
+            "title": "Carry it into the room",
+            "description": "Choose an original QR-poster template and add a specific design request.",
+            "start": 11.088,
+            "source": "customer-personalize-clean",
+            "sourceStart": 11.088,
+            "sourceEnd": 14.45,
+            "focusRectangle": {
+              "x": 900,
+              "y": 80,
+              "width": 1400,
+              "height": 1630
+            }
+          },
+          {
+            "title": "Look closely before ordering",
+            "description": "The full-size template preview is part of the original website.",
+            "start": 14.45,
+            "source": "customer-personalize-clean",
+            "sourceStart": 14.45,
+            "sourceEnd": 17.789,
+            "focusRectangle": {
+              "x": 1020,
+              "y": 0,
+              "width": 1160,
+              "height": 2000
+            }
+          },
+          {
+            "title": "One editable summary",
+            "description": "Dates, background, poster and services remain reviewable. No order is submitted.",
+            "start": 17.789,
+            "source": "customer-personalize-clean",
+            "sourceStart": 18.957,
+            "sourceEnd": 22.773,
+            "focusRectangle": {
+              "x": 900,
+              "y": 180,
+              "width": 1400,
+              "height": 1550
+            }
+          }
+        ],
+        "chaptersSrc": "/media/projects/eventa/depth/customer-personalization.vtt",
+        "verifiedBehavior": "Original browser wizard: local image crop, changed preview, poster choice, design request, editable summary. No order/payment submitted.",
+        "bytes": 685691
+      },
+      {
+        "id": "organizer-journey",
+        "title": "Preparing the room. Understanding the night.",
+        "description": "A crafted sequence of actual original UI interactions, with detail cuts and full-view context. All event data is fictional.",
+        "portal": "Organizer portal",
+        "type": "video",
+        "src": "/media/projects/eventa/depth/organizer-journey.mp4",
+        "poster": "/media/projects/eventa/depth/organizer-journey-poster.webp",
+        "width": 1600,
+        "height": 1000,
+        "duration": 29.466667,
+        "backend": "real",
+        "chapters": [
+          {
+            "title": "Permission comes first",
+            "description": "The organizer records permission before the list tools appear.",
+            "start": 0,
+            "source": "organizer-prepare-clean",
+            "sourceStart": 0,
+            "sourceEnd": 4.011,
+            "focusRectangle": {
+              "x": 990,
+              "y": 0,
+              "width": 1220,
+              "height": 1500
+            }
+          },
+          {
+            "title": "A useful answer to a messy list",
+            "description": "Twelve fictional contacts saved. One duplicate and one invalid row explained.",
+            "start": 4.011,
+            "source": "organizer-prepare-clean",
+            "sourceStart": 4.011,
+            "sourceEnd": 9.184,
+            "focusRectangle": {
+              "x": 1000,
+              "y": 810,
+              "width": 1200,
+              "height": 760
+            }
+          },
+          {
+            "title": "A list you can manage",
+            "description": "Saved contacts retain their pending-invitation status.",
+            "start": 9.184,
+            "source": "organizer-prepare-clean",
+            "sourceStart": 9.184,
+            "sourceEnd": 13.53,
+            "focusRectangle": {
+              "x": 1000,
+              "y": 900,
+              "width": 1200,
+              "height": 1080
+            }
+          },
+          {
+            "title": "Review the invitation",
+            "description": "The built-in message illustration previews the event wording. No messages are sent.",
+            "start": 13.53,
+            "source": "organizer-prepare-clean",
+            "sourceStart": 13.53,
+            "sourceEnd": 16.943,
+            "focusRectangle": {
+              "x": 1000,
+              "y": 880,
+              "width": 1200,
+              "height": 1120
+            }
+          },
+          {
+            "title": "After the night: a real report",
+            "description": "The original analytics backend calculates a separate fictional event report.",
+            "start": 16.943,
+            "source": "organizer-report-clean",
+            "sourceStart": 0,
+            "sourceEnd": 4.757,
+            "focusRectangle": {
+              "x": 935,
+              "y": 210,
+              "width": 1330,
+              "height": 1300
+            }
+          },
+          {
+            "title": "Follow the whole journey",
+            "description": "Seeded event records become a real step-by-step conversion funnel.",
+            "start": 21.7,
+            "source": "organizer-report-clean",
+            "sourceStart": 4.757,
+            "sourceEnd": 9.336,
+            "focusRectangle": {
+              "x": 935,
+              "y": 220,
+              "width": 1330,
+              "height": 680
+            }
+          },
+          {
+            "title": "Understand the room",
+            "description": "Audience breakdowns give the organizer more context about the room.",
+            "start": 26.279,
+            "source": "organizer-report-clean",
+            "sourceStart": 9.336,
+            "sourceEnd": 12.846,
+            "focusRectangle": {
+              "x": 935,
+              "y": 1010,
+              "width": 1330,
+              "height": 900
+            }
+          }
+        ],
+        "chaptersSrc": "/media/projects/eventa/depth/organizer-journey.vtt",
+        "verifiedBehavior": "Real token-protected portal, recorded consent, CSV parsing/validation and encrypted persistence, illustrative message preview, real report generation from separate seeded records. No outbound messages or AI calls.",
+        "bytes": 616007
+      },
+      {
+        "id": "guest-connections",
+        "title": "Connection, recovery, and personal boundaries.",
+        "description": "A crafted sequence of actual original UI interactions, with detail cuts and full-view context. All event data is fictional.",
+        "portal": "Attendee app",
+        "type": "video",
+        "src": "/media/projects/eventa/depth/guest-connections.mp4",
+        "poster": "/media/projects/eventa/depth/guest-connections-poster.webp",
+        "width": 1600,
+        "height": 1000,
+        "duration": 22.166667,
+        "backend": "real",
+        "chapters": [
+          {
+            "title": "A message worth keeping",
+            "description": "The original attendee chat, connected to the isolated real backend.",
+            "start": 0,
+            "source": "guest-connections-clean",
+            "sourceStart": 0,
+            "sourceEnd": 2.509,
+            "focusRectangle": {
+              "x": 0,
+              "y": 0,
+              "width": 780,
+              "height": 1688
+            }
+          },
+          {
+            "title": "Even when connection drops",
+            "description": "The app keeps outgoing text instead of losing it.",
+            "start": 2.509,
+            "source": "guest-connections-clean",
+            "sourceStart": 2.509,
+            "sourceEnd": 4.348,
+            "focusRectangle": {
+              "x": 0,
+              "y": 0,
+              "width": 780,
+              "height": 1688
+            }
+          },
+          {
+            "title": "Still here. Ready to retry.",
+            "description": "The failed-send state and retry control belong to the original app.",
+            "start": 4.348,
+            "source": "guest-connections-clean",
+            "sourceStart": 4.348,
+            "sourceEnd": 9.148,
+            "focusRectangle": {
+              "x": 0,
+              "y": 0,
+              "width": 780,
+              "height": 680
+            }
+          },
+          {
+            "title": "Back online. Sent once.",
+            "description": "Reconnection flushes the same message; a second real browser receives it.",
+            "start": 9.148,
+            "source": "guest-connections-clean",
+            "sourceStart": 10.044,
+            "sourceEnd": 14.007,
+            "focusRectangle": {
+              "x": 0,
+              "y": 0,
+              "width": 780,
+              "height": 680
+            }
+          },
+          {
+            "title": "A clear personal boundary",
+            "description": "Blocking explains that likes and the shared conversation will be removed.",
+            "start": 13.111,
+            "source": "guest-connections-clean",
+            "sourceStart": 14.007,
+            "sourceEnd": 20.022,
+            "focusRectangle": {
+              "x": 0,
+              "y": 420,
+              "width": 780,
+              "height": 840
+            }
+          },
+          {
+            "title": "The connection is removed",
+            "description": "The real block endpoint removes the pair’s conversation and message rows.",
+            "start": 19.126,
+            "source": "guest-connections-clean",
+            "sourceStart": 20.022,
+            "sourceEnd": 23.126,
+            "focusRectangle": {
+              "x": 0,
+              "y": 0,
+              "width": 780,
+              "height": 1688
+            }
+          }
+        ],
+        "chaptersSrc": "/media/projects/eventa/depth/guest-connections.vtt",
+        "verifiedBehavior": "Real text outbox, an actual offline send, reconnection, one persisted message and second-browser receipt, then block with conversation/message removal verified in Postgres.",
+        "bytes": 392068
+      }
+    ],
+    "capabilityGroups": [
+      {
+        "id": "make-it-yours",
+        "title": "Make it your event",
+        "summary": "Explain the experience, personalize the background and printed welcome, then review the configuration.",
+        "assetIds": [
+          "website-organizer-story",
+          "customer-background-crop",
+          "customer-poster-choice",
+          "customer-order-summary",
+          "customer-personalization"
+        ]
+      },
+      {
+        "id": "prepare-the-room",
+        "title": "Prepare the room",
+        "summary": "A private organizer portal turns an uploaded guest list into a manageable, validated set of contacts.",
+        "assetIds": [
+          "organizer-consent",
+          "organizer-validation",
+          "organizer-guest-list",
+          "organizer-invitation",
+          "organizer-journey"
+        ]
+      },
+      {
+        "id": "meet-on-your-terms",
+        "title": "Meet on your terms",
+        "summary": "Event-scoped discovery, resilient conversation and explicit controls over a connection.",
+        "assetIds": [
+          "guest-swipe",
+          "guest-offline-outbox",
+          "guest-block-confirmation",
+          "guest-connections"
+        ]
+      },
+      {
+        "id": "understand-the-night",
+        "title": "Understand the night",
+        "summary": "Event activity becomes a client report, while the operator has a deeper conversion and safety view.",
+        "assetIds": [
+          "organizer-report",
+          "operator-conversion",
+          "operator-safety-analytics"
+        ]
+      }
+    ],
+    "audiences": [
+      {
+        "name": "Prospective customer / event owner",
+        "surface": "Website and order wizard",
+        "job": "Understand and configure an event."
+      },
+      {
+        "name": "Organizer / client",
+        "surface": "/portal/[token] and /portal/[token]/report",
+        "job": "Prepare a guest list and inspect the event report; does not receive admin access."
+      },
+      {
+        "name": "Event guest",
+        "surface": "/[eventSlug] mobile app",
+        "job": "Create a profile, discover, connect and manage personal boundaries."
+      },
+      {
+        "name": "Platform operator",
+        "surface": "/admin",
+        "job": "Run events, inspect analytics and control provider-dependent operational workflows."
+      }
+    ],
+    "architecture": {
+      "layers": [
+        {
+          "title": "Four interfaces",
+          "description": "Public customer site and wizard; event-link organizer portal; mobile attendee app; separate admin console."
+        },
+        {
+          "title": "Application boundaries",
+          "description": "Next.js routes validate event/session scope, consent records and input; matching/chat/blocking writes pass through secure routes. Client outbox and realtime listeners manage recovery."
+        },
+        {
+          "title": "Persistent state and providers",
+          "description": "Supabase Postgres, Storage and Realtime hold event-scoped data. SMS, SMTP, Invoice4U and optional image moderation/report AI are external boundaries and remain disabled here."
+        }
+      ]
+    },
+    "caveats": [
+      "All numbers, people and contacts are fictional fixtures, not adoption or production performance evidence.",
+      "Marketing phone scenes and the organizer message preview are original authored illustrations, distinct from the real attendee app.",
+      "No order, payment, SMS, email or paid AI request was submitted. OTP funnel counts in the report are seeded stage data, not proof of delivered codes.",
+      "The client report PDF button did not download in the local browser. Its existing server PDF endpoint returned a document with missing numeric glyphs. The defective PDF is kept only in ignored QA evidence.",
+      "The client report hourly chart did not visibly render bars locally. Numerical report generation, funnel and audience breakdowns were verified; no repaired chart is presented.",
+      "CalendarView and AdminReliabilityView exist in source but are not imported by the current admin surface. They are source-only, not demonstrated navigation.",
+      "Guest self-deletion anonymizes personal fields but retains messages and other interactions for analytics; it is not immediate total erasure.",
+      "The organizer preview includes a misleading encryption badge despite an SMS disclaimer; the portfolio must not repeat it as an E2EE claim.",
+      "Prior local capture compatibility fixes are retained only in the isolated snapshot: local Storage image/CSP allowances, signed-original image fallback, fixed fetchPriority casing, deterministic particle rounding and dev StrictMode disabled to match production mounting. No product behavior was rewritten for these depth captures.",
+      "A Next.js development issue badge caused by the intentional offline test is hidden in final guest footage; the original product offline banner and retry/error states remain visible."
+    ],
+    "evidenceFiles": [
+      "file-coverage-ledger.md",
+      "capability-report.md",
+      "organizer-clean-verification.json",
+      "customer-clean-verification.json",
+      "guest-clean-verification.json",
+      "operator-assets.json",
+      "report-verification.json"
+    ],
+    "excludedArtifact": "organizer-report.pdf (ignored diagnostic only; missing numerical glyphs)"
+  },
+  "presentationBoard": {
+    "src": "/media/projects/eventa/depth/presentation-board.webp",
+    "width": 3200,
+    "height": 2000,
+    "bytes": 364700,
+    "sources": [
+      {
+        "src": "/media/projects/eventa/depth/guest-swipe.webp",
+        "crop": {
+          "x": 0,
+          "y": 0,
+          "width": 1170,
+          "height": 2532,
+          "sourceWidth": 1170
+        },
+        "displayWidth": 286,
+        "sourceWidth": 1170,
+        "sourceHeight": 2532,
+        "sha256": "caeb3dff8ad92b0b75fce997830fa12c270be1078df32f80ee2ee2b3f4ad21c7"
+      },
+      {
+        "src": "/media/projects/eventa/depth/customer-poster-choice.webp",
+        "crop": {
+          "x": 960,
+          "y": 490,
+          "width": 1275,
+          "height": 410,
+          "sourceWidth": 3200
+        },
+        "displayWidth": 520,
+        "sourceWidth": 3200,
+        "sourceHeight": 2000,
+        "sha256": "8c1811af7d27939cf0be20bcafd4d3897871b5f367dbbd713092e70a9696064f"
+      },
+      {
+        "src": "/media/projects/eventa/depth/organizer-report.webp",
+        "crop": {
+          "x": 950,
+          "y": 350,
+          "width": 1300,
+          "height": 650,
+          "sourceWidth": 3200
+        },
+        "displayWidth": 520,
+        "sourceWidth": 3200,
+        "sourceHeight": 2000,
+        "sha256": "7dd28064132acc3c2b3362ed3f8f94e5ca9c172667a6dedbae4850e42e9793ee"
+      }
+    ],
+    "editorial": "Authored HTML/CSS framing. Original screenshot pixels cropped uniformly, no fabricated UI. Captions outside source pixels."
+  },
+  "additionalOriginalScreens": [
+    {
+      "src": "/media/projects/eventa/depth/organizer-report-full.webp",
+      "note": "Original report viewport retained with its empty hourly chart. Working report details are featured separately; no successful PDF export is claimed."
+    }
+  ]
 }

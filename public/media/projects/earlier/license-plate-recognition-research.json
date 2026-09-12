@@ -1,0 +1,611 @@
+{
+  "project": "license-plate-recognition",
+  "repo": "BGU-LPR-Project/lpr_final_project",
+  "repository": "https://github.com/BGU-LPR-Project/lpr_final_project",
+  "revision": "b597f76b0492ff4df05bafddd47eeb72714d3b37",
+  "commitDate": "2025-06-04T10:04:05+03:00",
+  "auditedAt": "2026-09-12",
+  "auditType": "source-only",
+  "oneLiner": "A university computer-vision prototype that follows movement through vehicle tracking, plate recognition and operator visualization.",
+  "summary": "A five-person team project connecting OpenCV motion detection, YOLO vehicle/plate models and PaddleOCR through Python services, Redis queues and a PyQt desktop viewer. Tomer’s existing contribution statement focuses on motion detection, data preparation, model training/fine-tuning and pipeline integration. The current source supports the recognition and visualization architecture; older authorization logic and evaluation runners need separate qualification.",
+  "contribution": {
+    "scope": "Five-person university team",
+    "statement": "On a five-person team, I focused on motion detection, gathering and preparing data, training and fine-tuning the recognition models, and pipeline integration.",
+    "basis": "Preserved from src/content/work/systems.ts snapshot.contribution and frame/build sections; not inferred from whole-repository ownership.",
+    "independentSourceLimit": "This shallow pinned revision demonstrates the team implementation but contains no training scripts or contribution map. Do not attribute every module, service, UI or model to Tomer.",
+    "dates": "Portfolio records2024-11–2025-07. HEAD commit date is not a replacement for those project dates."
+  },
+  "stack": [
+    "Python",
+    "OpenCV / Farneback optical flow",
+    "Ultralytics YOLO11",
+    "PaddleOCR2.10.0 / PaddlePaddle2.6.2",
+    "NumPy / SciPy",
+    "FastAPI",
+    "Redis",
+    "Docker Compose",
+    "PyQt5"
+  ],
+  "capabilityGroups": [
+    {
+      "id": "motion-to-tracks",
+      "title": "Find the movement. Keep the identity.",
+      "summary": "Optical flow, vehicle detection and centroid tracking turn consecutive frames into persistent vehicle tracks.",
+      "features": [
+        "Farneback flow with magnitude/area filtering",
+        "Vehicle detections filtered by motion overlap and class",
+        "Centroid association and disappearance handling"
+      ],
+      "evidence": "source",
+      "citations": [
+        "motion",
+        "gating",
+        "motion-filter",
+        "tracking"
+      ]
+    },
+    {
+      "id": "track-to-text",
+      "title": "Give each plate a second look.",
+      "summary": "Associate a plate with its vehicle, prepare the crop for OCR, then retain stronger repeated readings.",
+      "features": [
+        "Spatial plate-to-vehicle association",
+        "CPU PaddleOCR with image preprocessing",
+        "Format checks and look-alike character correction",
+        "Repeated equal-or-better-confidence readings mark a track stable"
+      ],
+      "evidence": "source",
+      "citations": [
+        "plates",
+        "ocr",
+        "ocr-preprocess",
+        "formats",
+        "stability"
+      ]
+    },
+    {
+      "id": "service-boundaries",
+      "title": "Let the stages run at different speeds.",
+      "summary": "Video acquisition, edge inference, OCR and desktop display communicate through queues and HTTP.",
+      "features": [
+        "Redis input/output queues",
+        "Bounded in-process worker queue with frame dropping",
+        "Separate OCR service receiving a cropped image",
+        "PyQt operator playback controls"
+      ],
+      "evidence": "source",
+      "citations": [
+        "video-control",
+        "queue",
+        "workers",
+        "ocr-http",
+        "display",
+        "pyqt",
+        "compose"
+      ]
+    },
+    {
+      "id": "evaluation",
+      "title": "Inspect the whole recognition path.",
+      "summary": "The repository preserves annotated frames and evaluation scripts for component detections and complete plate results.",
+      "features": [
+        "Ground-truth bounding-box annotations",
+        "Precision/recall/F1 computation",
+        "Exact and explicitly thresholded partial plate matching"
+      ],
+      "evidence": "source-only; stale runner contracts require repair before benchmark claims",
+      "citations": [
+        "evaluation",
+        "evaluation-contract",
+        "evaluation-stale"
+      ]
+    }
+  ],
+  "architecture": {
+    "nodes": [
+      {
+        "id": "input",
+        "label": "File / RTSP input",
+        "detail": "User-supplied video; OpenCV acquisition."
+      },
+      {
+        "id": "video",
+        "label": "Video service",
+        "detail": "FastAPI controls and nominal4fps frame acceptance."
+      },
+      {
+        "id": "frames",
+        "label": "Redis frame_queue",
+        "detail": "Pickled frames; queue itself has no configured bound."
+      },
+      {
+        "id": "edge",
+        "label": "Edge worker queue",
+        "detail": "30 in-process slots and four workers."
+      },
+      {
+        "id": "motion",
+        "label": "Motion + vehicle tracks",
+        "detail": "Farneback motion, YOLO vehicle filtering, centroid matching."
+      },
+      {
+        "id": "plate",
+        "label": "Plate association",
+        "detail": "YOLO plate candidates aligned to tracked vehicles."
+      },
+      {
+        "id": "ocr",
+        "label": "OCR service",
+        "detail": "JPEG crop over HTTP → preprocessing → PaddleOCR → format validation."
+      },
+      {
+        "id": "track",
+        "label": "Recognition state",
+        "detail": "Equal-or-higher-confidence text and repeated observations."
+      },
+      {
+        "id": "visual",
+        "label": "Redis visual_frame_queue",
+        "detail": "Annotated800×600 output frames."
+      },
+      {
+        "id": "desktop",
+        "label": "PyQt viewer",
+        "detail": "Playback controls and annotated video display."
+      }
+    ],
+    "edges": [
+      {
+        "from": "input",
+        "to": "video",
+        "label": "Decode"
+      },
+      {
+        "from": "video",
+        "to": "frames",
+        "label": "Push frame"
+      },
+      {
+        "from": "frames",
+        "to": "edge",
+        "label": "Pop / enqueue or drop"
+      },
+      {
+        "from": "edge",
+        "to": "motion",
+        "label": "Process"
+      },
+      {
+        "from": "motion",
+        "to": "plate",
+        "label": "Candidate vehicles"
+      },
+      {
+        "from": "plate",
+        "to": "ocr",
+        "label": "Cropped image"
+      },
+      {
+        "from": "ocr",
+        "to": "track",
+        "label": "Text + model confidence"
+      },
+      {
+        "from": "track",
+        "to": "visual",
+        "label": "Annotate frame"
+      },
+      {
+        "from": "visual",
+        "to": "desktop",
+        "label": "Display"
+      },
+      {
+        "from": "desktop",
+        "to": "video",
+        "label": "Start / pause / resume / restart / skip"
+      }
+    ],
+    "sourceIds": [
+      "video",
+      "video-control",
+      "queue",
+      "workers",
+      "motion",
+      "plates",
+      "ocr-http",
+      "ocr",
+      "stability",
+      "display",
+      "pyqt",
+      "compose"
+    ],
+    "excludedFromActiveGraph": [
+      "AuthManager whitelist/blacklist",
+      "ROI entrance/exit classification",
+      "tracked_plates evaluation export",
+      "experimental OCR fusion/voting"
+    ],
+    "note": "Redis provides queue boundaries. OCR uses blocking HTTP inside the worker; callback names do not make that call asynchronous. CloudService is a local Docker CPU service, not a paid cloud inference provider."
+  },
+  "decisions": [
+    {
+      "title": "Use motion as a gate before new vehicle inference.",
+      "why": "The active path skips new YOLO vehicle inference when it has no motion candidates.",
+      "tradeoff": "A missed motion region can suppress a useful vehicle candidate. Existing tracks can still lead to plate inference while they age out.",
+      "citations": [
+        "motion",
+        "gating"
+      ]
+    },
+    {
+      "title": "Preserve vehicle identity across frames.",
+      "why": "Centroid tracking lets repeated plate crops contribute to one vehicle record instead of treating each frame independently.",
+      "tradeoff": "Distance/disappearance thresholds can confuse occlusion or nearby vehicles; no tracking-quality benchmark is published.",
+      "citations": [
+        "tracking",
+        "stability"
+      ]
+    },
+    {
+      "title": "Split inference and display into service boundaries.",
+      "why": "Acquisition, edge processing, OCR and desktop rendering have different costs and control needs.",
+      "tradeoff": "Serialization, queue backlog and synchronous OCR requests introduce extra failure and latency points; no end-to-end latency results were measured.",
+      "citations": [
+        "compose",
+        "queue",
+        "ocr-http",
+        "pyqt"
+      ]
+    },
+    {
+      "title": "Check likely plate formats after OCR.",
+      "why": "Pattern checks and look-alike substitutions reject or correct some raw OCR strings.",
+      "tradeoff": "A valid format is not proof of the correct plate; generic patterns and correction order can bias ambiguous results.",
+      "citations": [
+        "formats",
+        "ocr"
+      ]
+    },
+    {
+      "title": "Expose operator controls around the pipeline.",
+      "why": "Loading, pausing, resuming and skipping footage support inspection of recognition behavior.",
+      "tradeoff": "The current file picker and container paths need coordination; the UI updates status even when API errors are only logged.",
+      "citations": [
+        "pyqt",
+        "ui-path"
+      ]
+    }
+  ],
+  "limitations": [
+    {
+      "severity": "claim-boundary",
+      "title": "No runtime or accuracy claim from this audit.",
+      "detail": "Source-only review; models were not loaded, services were not started and evaluation scripts were not executed. No source-published model/end-to-end accuracy result found.",
+      "citations": [
+        "evaluation",
+        "evaluation-stale"
+      ]
+    },
+    {
+      "severity": "claim-correction",
+      "title": "Unauthorized-vehicle alerts are not wired into the current service path.",
+      "detail": "The current edge endpoint always calls visualize(frame, True). List authorization exists in a stale legacy path. Describe the current system as plate recognition and operator visualization, with authorization as earlier prototype logic.",
+      "citations": [
+        "display",
+        "auth-legacy",
+        "legacy-main"
+      ]
+    },
+    {
+      "severity": "claim-correction",
+      "title": "ROI, direction classification and fusion helpers are historical/experimental.",
+      "detail": "RegionAdjuster is unused by current prediction; image fusion, multiple-threshold preprocessing and weighted majority voting are defined but not called by the current OCR path.",
+      "citations": [
+        "roi-legacy",
+        "ocr-preprocess"
+      ]
+    },
+    {
+      "severity": "implementation",
+      "title": "Four workers share sequential model/tracker state.",
+      "detail": "All workers receive one EdgeService; its prev_frame and tracker state can be touched across frames. Tracker methods lock portions of state, but EdgeService.lock is not used around prediction. Ordering and concurrency behavior need runtime evaluation.",
+      "citations": [
+        "workers",
+        "motion",
+        "tracking"
+      ]
+    },
+    {
+      "severity": "implementation",
+      "title": "Queue and network behavior are prototype-grade.",
+      "detail": "The Python queue is bounded, but Redis input/output lists are not; the poller busy-loops and OCR HTTP calls have no timeout. Do not describe the complete system as fully bounded or fault tolerant.",
+      "citations": [
+        "queue",
+        "ocr-http",
+        "display"
+      ]
+    },
+    {
+      "severity": "setup",
+      "title": "Startup clears Redis globally.",
+      "detail": "Both video startup and the new-architecture tester call flushall. Any future local execution must use an isolated Redis container and ports.",
+      "citations": [
+        "redis-reset",
+        "evaluation-contract"
+      ]
+    },
+    {
+      "severity": "evaluation",
+      "title": "Evaluation contracts need reconciliation.",
+      "detail": "New tester expects tracked_plates, but no active production caller invokes log_results; older tests import missing classes or call superseded signatures. Syntax parsing passed but does not prove tests pass.",
+      "citations": [
+        "evaluation-contract",
+        "evaluation-stale",
+        "legacy-main"
+      ]
+    },
+    {
+      "severity": "setup",
+      "title": "Videos and reproducible training history are absent.",
+      "detail": "Full videos are ignored, model weights are tracked, and this revision has no training script/configuration or held-out benchmark report. Existing user-stated training/data contribution remains valid as self-described team work; this snapshot cannot independently attribute it.",
+      "citations": [
+        "ignored-video",
+        "ocr-versions"
+      ]
+    },
+    {
+      "severity": "setup",
+      "title": "Desktop paths and container mounts differ.",
+      "detail": "A path picked on Windows is sent directly to the service, while Compose mounts only ./recordings at /app/recordings. A future run must map/copy only authorized local fixtures.",
+      "citations": [
+        "ui-path",
+        "compose"
+      ]
+    }
+  ],
+  "visualConcept": {
+    "title": "One frame, four decisions",
+    "medium": "Code-native SVG/CSS storyboard and architecture diagram",
+    "composition": "A wide technical strip shows the same explicitly illustrative vehicle frame through motion contours, tracked box + ID, plate crop, and normalized character string. The strip sits above the actual service graph; a small context rail marks which stage is being explained.",
+    "interaction": "Optional four-step buttons reveal each stage instantly; show all labels without interaction and provide a static mobile stack.",
+    "details": [
+      "Use a simple authored vehicle silhouette, two offset motion contours, bounding-box coordinates and one persistent track ID.",
+      "Use a clearly fictional example plate without numerical confidence scores; label the entire strip “Pipeline illustration”.",
+      "Mark repeated observations as candidate → repeated → stable, explaining the exact higher-confidence/repetition rule in adjacent text.",
+      "Represent queue boundaries as small buffers; distinguish the HTTP crop transfer from Redis frame transport.",
+      "Do not fabricate a photographed parking scene, screenshots, real inference output, benchmark values or an operational alert."
+    ],
+    "suggestedCaption": "Motion, tracking and character recognition form one connected path. Diagram based on the team source; no inference is running."
+  },
+  "recommendedCorrections": [
+    {
+      "field": "oneLiner / hook / metrics",
+      "change": "Replace unqualified operator alerts with operator visualization. Keep authorization as historical prototype logic only."
+    },
+    {
+      "field": "stack",
+      "change": "Use Ultralytics YOLO / YOLO11 from actual model loading; README’s flow paragraph still says YOLOv8."
+    },
+    {
+      "field": "queue claims",
+      "change": "Say queued services, with synchronous OCR requests inside workers. Only the in-process queue is bounded."
+    },
+    {
+      "field": "proof",
+      "change": "Source and evaluation tooling are preserved; no published accuracy numbers or current passing-test assertion."
+    }
+  ],
+  "inventory": {
+    "trackedFiles": 429,
+    "authoredProductionPython": 15,
+    "authoredEvaluationPython": 4,
+    "configuration": 8,
+    "documentation": 1,
+    "groundTruthText": 1,
+    "annotations": 166,
+    "imageData": 213,
+    "binaryIcons": 8,
+    "modelOrBinaryAssets": 13,
+    "fullSemanticFiles": 28,
+    "pythonSyntaxParseFiles": 19,
+    "testsExecuted": false,
+    "modelsLoaded": false,
+    "servicesStarted": false,
+    "ledger": "lpr-coverage-ledger.md",
+    "files": "lpr-files.json",
+    "staticParse": "lpr-static-parse.json",
+    "note": "All tracked paths and object hashes inventoried; authored Python/config/docs fully read. Data/model/icon payloads were not semantically reviewed. Initial git object-size enumeration incidentally fetched some model objects before it was stopped; no models were checked out, loaded or executed."
+  },
+  "citations": [
+    {
+      "id": "video",
+      "file": "video_service/video_handler.py",
+      "line": 20,
+      "claim": "OpenCV accepts a file/RTSP string; decoding targets four accepted frames per second with wall-clock throttling.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/video_service/video_handler.py#L20"
+    },
+    {
+      "id": "video-control",
+      "file": "video_service/app.py",
+      "line": 74,
+      "claim": "FastAPI video controls start, pause, resume, stop, restart and skip; worker pushes pickled frames into Redis.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/video_service/app.py#L74"
+    },
+    {
+      "id": "motion",
+      "file": "edge_service/edge.py",
+      "line": 29,
+      "claim": "Farneback optical flow produces a magnitude mask; area filtering and box merging identify motion regions.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L29"
+    },
+    {
+      "id": "gating",
+      "file": "edge_service/edge.py",
+      "line": 126,
+      "claim": "Without new motion, vehicle inference is skipped and existing tracks age; otherwise vehicle classes, confidence, motion overlap and NMS filter detections.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L126"
+    },
+    {
+      "id": "motion-filter",
+      "file": "edge_service/utils.py",
+      "line": 134,
+      "claim": "Motion/vehicle matching checks an aspect-ratio range and minimum IoU.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/utils.py#L134"
+    },
+    {
+      "id": "plates",
+      "file": "edge_service/edge.py",
+      "line": 164,
+      "claim": "Plate detector candidates are assigned to spatially aligned tracked vehicles, with one plate per assigned vehicle.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L164"
+    },
+    {
+      "id": "tracking",
+      "file": "edge_service/tracking.py",
+      "line": 61,
+      "claim": "Centroid distance matching, disappearance counters and persistent object metadata associate detections over time.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/tracking.py#L61"
+    },
+    {
+      "id": "stability",
+      "file": "edge_service/edge.py",
+      "line": 246,
+      "claim": "Equal-or-higher-confidence repeated text updates a track; two subsequent same-text occurrences mark it done.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L246"
+    },
+    {
+      "id": "queue",
+      "file": "edge_service/app.py",
+      "line": 20,
+      "claim": "An in-process queue has maxsize30; the Redis poller drops frames when it cannot enqueue in0.1 seconds.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/app.py#L20"
+    },
+    {
+      "id": "workers",
+      "file": "edge_service/app.py",
+      "line": 167,
+      "claim": "Four threads share the same EdgeService and motion/tracking/model state.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/app.py#L167"
+    },
+    {
+      "id": "ocr-http",
+      "file": "edge_service/app.py",
+      "line": 63,
+      "claim": "Plate crops are JPEG/base64 encoded and sent to a separate OCR HTTP service; response updates the track.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/app.py#L63"
+    },
+    {
+      "id": "ocr",
+      "file": "cloud_service/cloud.py",
+      "line": 14,
+      "claim": "PaddleOCR loads local model directories on CPU; preprocessing resizes, grayscales, blurs and sharpens before selecting high-confidence text.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/cloud_service/cloud.py#L14"
+    },
+    {
+      "id": "ocr-preprocess",
+      "file": "cloud_service/cloud.py",
+      "line": 64,
+      "claim": "OCR pipeline uses resize_plate and sharpenHBF, not the other experimental fusion/thresholding/voting utilities.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/cloud_service/cloud.py#L64"
+    },
+    {
+      "id": "formats",
+      "file": "cloud_service/formats.py",
+      "line": 4,
+      "claim": "Six format patterns and visually similar character mappings validate or attempt to correct plate text.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/cloud_service/formats.py#L4"
+    },
+    {
+      "id": "display",
+      "file": "edge_service/app.py",
+      "line": 85,
+      "claim": "Annotated frames go to Redis visual_frame_queue; visualization is called with authorized=True unconditionally.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/app.py#L85"
+    },
+    {
+      "id": "pyqt",
+      "file": "ui.py",
+      "line": 40,
+      "claim": "PyQt provides load/start/pause/resume/restart/skip controls and consumes annotated frames on a100ms timer.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/ui.py#L40"
+    },
+    {
+      "id": "compose",
+      "file": "docker-compose.yml",
+      "line": 1,
+      "claim": "Three Python services plus Redis run in Docker Compose; models and recordings are mounted from the host.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/docker-compose.yml#L1"
+    },
+    {
+      "id": "ocr-versions",
+      "file": "cloud_service/requirements.txt",
+      "line": 1,
+      "claim": "PaddleOCR2.10.0 and PaddlePaddle2.6.2 are pinned; most other dependency versions are not.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/cloud_service/requirements.txt#L1"
+    },
+    {
+      "id": "auth-legacy",
+      "file": "edge_service/auth_manager.py",
+      "line": 52,
+      "claim": "List-based authorization is implemented as a helper, not called by the current service path.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/auth_manager.py#L52"
+    },
+    {
+      "id": "legacy-main",
+      "file": "main.py",
+      "line": 23,
+      "claim": "Legacy main references CarDetector/LicensePlateDetector absent from current modules and calls superseded method signatures.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/main.py#L23"
+    },
+    {
+      "id": "roi-legacy",
+      "file": "edge_service/edge.py",
+      "line": 89,
+      "claim": "RegionAdjuster is instantiated but explicitly unused in current prediction; ROI/entrance/exit helpers belong to older work.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/edge_service/edge.py#L89"
+    },
+    {
+      "id": "evaluation",
+      "file": "tests/pipelineTester_newArchitecture.py",
+      "line": 68,
+      "claim": "New-architecture evaluator counts exact and optional similarity-threshold matches, then computes precision/recall/F1.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/tests/pipelineTester_newArchitecture.py#L68"
+    },
+    {
+      "id": "evaluation-contract",
+      "file": "tests/pipelineTester_newArchitecture.py",
+      "line": 51,
+      "claim": "Evaluator waits for tracked_plates; EdgeService.log_results can publish that key but is not called by current production code.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/tests/pipelineTester_newArchitecture.py#L51"
+    },
+    {
+      "id": "evaluation-stale",
+      "file": "tests/model_evaluation.py",
+      "line": 11,
+      "claim": "Component evaluation imports a missing CarDetector and uses an old MotionDetector signature.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/tests/model_evaluation.py#L11"
+    },
+    {
+      "id": "redis-reset",
+      "file": "video_service/app.py",
+      "line": 26,
+      "claim": "Video startup calls Redis flushall; this is unsafe against a shared Redis instance.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/video_service/app.py#L26"
+    },
+    {
+      "id": "ui-path",
+      "file": "ui.py",
+      "line": 158,
+      "claim": "Desktop file picker sends its local path directly; containers only mount the recordings directory.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/ui.py#L158"
+    },
+    {
+      "id": "ignored-video",
+      "file": ".gitignore",
+      "line": 43,
+      "claim": "Full recordings are ignored; the README requires the user to supply a video.",
+      "url": "https://github.com/BGU-LPR-Project/lpr_final_project/blob/b597f76b0492ff4df05bafddd47eeb72714d3b37/.gitignore#L43"
+    }
+  ]
+}
