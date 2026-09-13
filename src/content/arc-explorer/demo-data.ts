@@ -1,0 +1,100 @@
+/** Fictional portfolio fixtures. Never substitute these for platform analytics. */
+export const demoProgram = {
+  name: "Northstar Learning",
+  term: "Autumn term",
+  asOf: "September 2026",
+};
+export const demoInstructor = { name: "Maya Reed", initials: "MR" };
+export const demoStudent = {
+  name: "Jordan Lee",
+  initials: "JL",
+  classroom: "Python Lab",
+};
+export const demoClassrooms = [
+  {
+    id: "python-lab",
+    name: "Python Lab",
+    school: "Northstar School",
+    instructor: "Maya Reed",
+    learners: 24,
+    submitted: 18,
+    reviewed: 14,
+    completion: 75,
+  },
+  {
+    id: "web-studio",
+    name: "Web Studio",
+    school: "Northstar School",
+    instructor: "Eli Stone",
+    learners: 22,
+    submitted: 16,
+    reviewed: 12,
+    completion: 73,
+  },
+  {
+    id: "idea-lab",
+    name: "Idea Lab",
+    school: "Cedar School",
+    instructor: "Sam Park",
+    learners: 20,
+    submitted: 13,
+    reviewed: 11,
+    completion: 65,
+  },
+];
+export const demoLearners = [
+  {
+    name: "Jordan Lee",
+    initials: "JL",
+    classroom: "Python Lab",
+    progress: 78,
+    status: "Revision submitted",
+    submitted: 7,
+    reviewed: 6,
+  },
+  {
+    name: "Liam Chen",
+    initials: "LC",
+    classroom: "Python Lab",
+    progress: 89,
+    status: "Ready for review",
+    submitted: 8,
+    reviewed: 7,
+  },
+  {
+    name: "Avery Morgan",
+    initials: "AM",
+    classroom: "Python Lab",
+    progress: 67,
+    status: "Working on a draft",
+    submitted: 6,
+    reviewed: 6,
+  },
+  {
+    name: "Noah Rivera",
+    initials: "NR",
+    classroom: "Web Studio",
+    progress: 82,
+    status: "Feedback published",
+    submitted: 8,
+    reviewed: 8,
+  },
+  {
+    name: "Riley Brooks",
+    initials: "RB",
+    classroom: "Web Studio",
+    progress: 71,
+    status: "Ready for review",
+    submitted: 7,
+    reviewed: 5,
+  },
+  {
+    name: "Alex Kim",
+    initials: "AK",
+    classroom: "Idea Lab",
+    progress: 64,
+    status: "Revision requested",
+    submitted: 5,
+    reviewed: 5,
+  },
+];

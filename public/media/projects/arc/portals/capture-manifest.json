@@ -1,0 +1,343 @@
+{
+  "project": "Arc",
+  "capturedAt": "2026-09-13",
+  "environment": "Original Arc application, running locally in an isolated development environment with a real backend and synthetic records.",
+  "sourceRevision": "43dfaf6e0a548f9e382a96744aad12a8611aad43",
+  "reviewedRevision": "5549bf960754130c6dfe06b0b7bab1fb6a756d7f",
+  "revisionNote": "The intervening changes concern delivery, CI, documentation and test timing. The reviewed product UI and domain implementation are equivalent.",
+  "fictionalData": true,
+  "datasets": {
+    "portfolioExplorer": "Northstar Learning: two schools, three classes and 66 fictional learners. Named learner views show a six-person sample.",
+    "originalBiCaptures": "A separate synthetic reporting cohort: three schools, five classes, five instructors, 66 learners, 25 completed lesson runs and 892 submission versions (800 submitted and 92 drafts). This normal-data-path cohort exists only in the isolated SQLite capture database.",
+    "originalLearningCaptures": "Earlier synthetic learning/classroom accounts remain separate from the new BI cohort. They demonstrate themes, task work, feedback and instructor panels.",
+    "comparison": "The 30-day BI view includes five eligible peers; the separately captured seven-day view does not. The native comparison gate and absolute values remain visible."
+  },
+  "boundaries": [
+    "These are original application pixels with fictional records, not a recording of the portfolio explorer.",
+    "Sample counts are not production analytics. The 3,000+ audience claim elsewhere refers to Arc and Browser Coder combined.",
+    "Some learning-friction denominators count learner-run pairs rather than unique people.",
+    "VRI includes a fixed 0.8 stability assumption. Operational indices are modeled signals, not causal educational outcomes or measured financial return.",
+    "No production accounts, private learner records or credentials are included."
+  ],
+  "screens": [
+    {
+      "id": "bi-overview",
+      "title": "Inventory and activity, in context",
+      "description": "The admin overview separates population inventory, period activity and lesson-run states.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-overview.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 173976,
+      "sha256": "188143606d0fb41087bfaaf71653ce3fdb6c709b6260ccef2862d7f09732e609",
+      "originalPngSha256": "33ec91d00b0bae1426155da0ce5faf863b08a3db846dfb92af8e4802231919da",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "bi-geography",
+      "title": "The program across regions and schools",
+      "description": "Regional and school breakdowns retain group, learner and teaching context.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-geography.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 149116,
+      "sha256": "8e6b8ce64f21c3c479db5fb805ac42bacf1e0c599a40c88e4f3c75e88645294f",
+      "originalPngSha256": "5dc01f92e356cdd9779507a3a5c9ddc73aa574a397257c5b9672988129b51897",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "bi-lessons",
+      "title": "Lesson delivery becomes inspectable",
+      "description": "Run statistics, duration and the actual lesson-run list appear together.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-lessons.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 245332,
+      "sha256": "c0aecfb73319c416632b7403d76648f7d0f6b4a2113d56581f9d2b27084da56d",
+      "originalPngSha256": "67b52678754a0ad0906330f5776db1de4ec8db845b6feccbe508db683f397393",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "bi-students",
+      "title": "See participation and work separately",
+      "description": "The native view distinguishes submitted versions, drafts and repeat submissions before listing learner activity.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-students.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 221528,
+      "sha256": "0249e17ad7fa5cbd35d349c3a795e600a899e3b9632341ed9b162bbf5ae9b7cc",
+      "originalPngSha256": "7b29e3a3b01d0f695191170c7ecec27360938b51bd098600d93933bf03945800",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "bi-friction",
+      "title": "Nine ways to notice friction",
+      "description": "The native lens cards show signals, denominators and calculation disclosures. Some denominators count learner-run pairs rather than unique learners.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-friction.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 263314,
+      "sha256": "dbc3fc41d44ee110bcc9c27de116c629e844fd123986f4a2f0ea7cb6177ece77",
+      "originalPngSha256": "9e498cf441ce65b7d3d136f6f8496fb26a8db7f781114670afbbdaf12691cb3c",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "bi-calculation",
+      "title": "Open the reasoning behind a number",
+      "description": "A native calculation dialog explains the no-show definition, threshold, formula and substituted values.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-calculation.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 163072,
+      "sha256": "71c5528ec38c71158946b843c8c08b13d202ca11d914f84954d4cc142f97c26d",
+      "originalPngSha256": "9dcb365406e2e1e07f8010832603c120f370e8f22896ec4d68b015ed170c1b60",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "bi-impact",
+      "title": "Inputs and peers beside the indices",
+      "description": "The broader fictional cohort meets the comparison gates. VRI includes a fixed 0.8 stability assumption; these are modeled operational indices.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-impact.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 245568,
+      "sha256": "32ac4ab30161528a2d77c5e3ed15de21248e12906b6f519cfd24e99d172074b1",
+      "originalPngSha256": "aa0e2ef6364f65e3019c5941a19566052a2b11c49ee7e6a2321ff8a78e2c951c",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "bi-comparison-gate",
+      "title": "A narrower scope changes what can be concluded",
+      "description": "The seven-day view has insufficient eligible peers and displays absolute values instead of a peer comparison.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-comparison-gate.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 262544,
+      "sha256": "79ed47e8aa1cddd3416df29108604ee1d0b5e32a842d85c06c39b6b70ec40e45",
+      "originalPngSha256": "0402e061f6803dcbc9f13e107fdbe375dd18f771361a188470ffcf7561bc8de9",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "scoped-grading",
+      "title": "Understand the review workload",
+      "description": "Queue age, grade distribution and a class-by-lesson heatmap show different parts of the feedback pipeline.",
+      "portal": "Scoped analytics",
+      "src": "/media/projects/arc/portals/scoped-grading.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 186472,
+      "sha256": "49877f86e49541a3ba1df3eb36e2cc95380b31a63ecff8ed1be5ddb6012e09c5",
+      "originalPngSha256": "553ca5ecc38bcdc5046e697eea8cf6d55b0615dfe98c2630bd2944d6cd4694ec",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "scoped-progress",
+      "title": "Follow the lesson through the work",
+      "description": "Started, submitted and reviewed activity remains distinct in the lesson progression and weekly reporting views.",
+      "portal": "Scoped analytics",
+      "src": "/media/projects/arc/portals/scoped-progress.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 196782,
+      "sha256": "82255eccbd078f5489bca589d24cf9ba4962f49a3f8d10a9282ead42a087cf97",
+      "originalPngSha256": "b2c1f98aea297328865e67fac4d0242b10d43179e6006789fbfa345f2d5f3b6c",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "instructor-workspace",
+      "title": "A teacher’s starting point",
+      "description": "The original instructor home opens the assigned classrooms and shows their school and content-pack context.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/portals/instructor-workspace.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 159508,
+      "sha256": "a340c36dabada6ebe8450d555c473da8d3fc6fdc83a56a88f476533c97cfb099",
+      "originalPngSha256": "88473b815db0e3ff7b320d2d43bc236250c2259fc55a9a36829308e004188f33",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "instructor-classroom",
+      "title": "A classroom hub with a lesson tree",
+      "description": "The sidebar keeps classroom context, learners, grades, questionnaires and statistics beside the selected lesson panel.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/portals/instructor-classroom.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 225414,
+      "sha256": "3152f725d281343467cf91bc59c944509bb5e656037d261ababb97af84c828ed",
+      "originalPngSha256": "50a8da0c0ede047a0058a90ad1afec0e7141c03c2283792a249dfda3cadd1b04",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "instructor-learners",
+      "title": "The people inside the classroom",
+      "description": "The learner panel sits inside the classroom hub. All names and records in this capture are fictional.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/portals/instructor-learners.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 389034,
+      "sha256": "ee827fb2ae3a51e80cbf68b3c209c42a1c473f88a52bbdd521f582870aed5f3e",
+      "originalPngSha256": "2a4c02597e6c855460db740d5ea716f0856dc4f2ce304b83d08ffcb131e6622d",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "instructor-gradebook",
+      "title": "A grade matrix with different work states",
+      "description": "Scores, feedback-only work, work awaiting review and unfinished activity have distinct treatments in the native matrix.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/portals/instructor-gradebook.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 507444,
+      "sha256": "a99929ad6e1664b96b0bfc2f01480776488fe3bbf7db2ffc3fa87da606e91d9f",
+      "originalPngSha256": "7a3c8de1f8f1c905155985a829155f9aa2191d670b5598e7a03617ea7106a494",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    },
+    {
+      "id": "instructor-statistics",
+      "title": "Learning activity with multiple perspectives",
+      "description": "Data lenses and filters connect participation, submitted work, feedback and revision patterns over time.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/portals/instructor-statistics.webp",
+      "width": 3200,
+      "height": 2000,
+      "type": "image",
+      "bytes": 436662,
+      "sha256": "c53f48f6cf4abec6bba8dad947266f60d2094518bef0abba2bbcbe67b8b83bd3",
+      "originalPngSha256": "4d9ddb96b57af16b1e15e205c3f5afa1b6f8c4643691e311364f071424bf8931",
+      "capturedApplication": "Original Arc development build",
+      "fictionalData": true,
+      "processing": "Original lossless PNG capture at 3200 x 2000 exported to WebP at quality 95. No UI text or chart replacement."
+    }
+  ],
+  "films": [
+    {
+      "id": "admin-bi-exploration",
+      "title": "The program behind the classroom.",
+      "description": "Explore the original admin and scoped school analytics: inventory, nine friction lenses, an open calculation, modeled indices, a comparison gate and the work behind the numbers.",
+      "src": "/media/projects/arc/portals/admin-bi-exploration.mp4",
+      "poster": "/media/projects/arc/portals/admin-bi-exploration-poster.webp",
+      "captions": "/media/projects/arc/portals/admin-bi-exploration.vtt",
+      "width": 1920,
+      "height": 1080,
+      "duration": 45.5,
+      "chapters": [
+        {
+          "at": 0,
+          "title": "Inventory and activity",
+          "description": "The original BI view separates all-time inventory from activity within the selected period. Every figure comes from fictional local fixtures."
+        },
+        {
+          "at": 6,
+          "title": "Nine friction lenses",
+          "description": "Nine distinct lenses show different participation and workflow patterns. Labels and calculation controls remain visible in the original interface."
+        },
+        {
+          "at": 12,
+          "title": "Open the calculation",
+          "description": "The native No-Show explanation opens. A close-up retains its formula, variables and concrete substitution: one qualifying run out of 25 gives 4%."
+        },
+        {
+          "at": 20,
+          "title": "Read modeled indices carefully",
+          "description": "The 30-day modeled-index view includes five eligible peers. Its VRI calculation includes a fixed 0.8 assumption; these indices are not validated causal measurements of teaching quality."
+        },
+        {
+          "at": 25,
+          "title": "Respect the comparison gate",
+          "description": "A separately loaded seven-day slice has no eligible peers. Arc retains absolute values and explicitly withholds a fair peer comparison; this differs from the 30-day view shown before it."
+        },
+        {
+          "at": 31.5,
+          "title": "Review queues and grade context",
+          "description": "The scoped school analytics view displays review age, score distribution and a class-by-lesson grade matrix. A detail insert makes the matrix values readable."
+        },
+        {
+          "at": 38.5,
+          "title": "Follow lesson progression",
+          "description": "Started, submitted and reviewed counts stay separate along the lesson sequence, followed by a weekly trend view. This is fictional history, not reported live program impact."
+        }
+      ],
+      "bytes": 2230034,
+      "sha256": "f29e57217013286b8336a120de52178a45f69867f1b290b2c37f51807df14f5f",
+      "posterFile": {
+        "src": "/media/projects/arc/portals/admin-bi-exploration-poster.webp",
+        "bytes": 142224,
+        "sha256": "5636d545690d061bc6edd14b4332078cb37fb5a6734218a136335201a17e8219"
+      },
+      "captionsFile": {
+        "src": "/media/projects/arc/portals/admin-bi-exploration.vtt",
+        "bytes": 1424,
+        "sha256": "61c25d0f68d18f040538fa60bccbe5051771f180baa97d995d1e61a28438d8e9"
+      },
+      "edit": "Uniform source-pixel crops and Lanczos scaling, calm hard cuts, frame holds/time stretching, two detail inserts, and editorial captions outside the original UI. Every frame contains original interface pixels. No generated replacement UI, invented provider result, synthetic interaction or audio.",
+      "caveats": [
+        "Different date windows are separate original views, not a filmed filter-change interaction.",
+        "Modeled indices contain assumptions and should not be treated as validated causal measurements.",
+        "Original fixture inventory is distinct from the code-native explorer fixture.",
+        "Native interface wording and incidental source display limitations are preserved."
+      ],
+      "codec": "H.264",
+      "pixelFormat": "yuv420p",
+      "fps": 30,
+      "fastStart": true
+    }
+  ],
+  "earlierCaptureManifests": [
+    "/media/projects/arc/capture-manifest.json"
+  ],
+  "earlierCaptureReview": "/media/projects/arc/depth/research.md",
+  "review": "/media/projects/arc/portals/research.md",
+  "capabilityMap": "/media/projects/arc/portals/capability-map.json"
+}

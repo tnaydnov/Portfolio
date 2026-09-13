@@ -1,0 +1,189 @@
+{
+  "screens": [
+    {
+      "id": "bi-overview",
+      "title": "Inventory and activity, in context",
+      "description": "The admin overview separates population inventory, period activity and lesson-run states.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-overview.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "bi-geography",
+      "title": "The program across regions and schools",
+      "description": "Regional and school breakdowns retain group, learner and teaching context.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-geography.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "bi-lessons",
+      "title": "Lesson delivery becomes inspectable",
+      "description": "Run statistics, duration and the actual lesson-run list appear together.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-lessons.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "bi-students",
+      "title": "See participation and work separately",
+      "description": "The native view distinguishes submitted versions, drafts and repeat submissions before listing learner activity.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-students.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "bi-friction",
+      "title": "Nine ways to notice friction",
+      "description": "The native lens cards show signals, denominators and calculation disclosures. Some denominators count learner-run pairs rather than unique learners.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-friction.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "bi-calculation",
+      "title": "Open the reasoning behind a number",
+      "description": "A native calculation dialog explains the no-show definition, threshold, formula and substituted values.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-calculation.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "bi-impact",
+      "title": "Inputs and peers beside the indices",
+      "description": "The broader fictional cohort meets the comparison gates. VRI includes a fixed 0.8 stability assumption; these are modeled operational indices.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-impact.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "bi-comparison-gate",
+      "title": "A narrower scope changes what can be concluded",
+      "description": "The seven-day view has insufficient eligible peers and displays absolute values instead of a peer comparison.",
+      "portal": "Admin BI",
+      "src": "/media/projects/arc/portals/bi-comparison-gate.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "scoped-grading",
+      "title": "Understand the review workload",
+      "description": "Queue age, grade distribution and a class-by-lesson heatmap show different parts of the feedback pipeline.",
+      "portal": "Scoped analytics",
+      "src": "/media/projects/arc/portals/scoped-grading.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "scoped-progress",
+      "title": "Follow the lesson through the work",
+      "description": "Started, submitted and reviewed activity remains distinct in the lesson progression and weekly reporting views.",
+      "portal": "Scoped analytics",
+      "src": "/media/projects/arc/portals/scoped-progress.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "instructor-workspace",
+      "title": "A teacher’s starting point",
+      "description": "The original instructor home opens the assigned classrooms and shows their school and content-pack context.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/portals/instructor-workspace.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "instructor-classroom",
+      "title": "A classroom hub with a lesson tree",
+      "description": "The sidebar keeps classroom context, learners, grades, questionnaires and statistics beside the selected lesson panel.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/portals/instructor-classroom.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "instructor-learners",
+      "title": "The people inside the classroom",
+      "description": "The learner panel sits inside the classroom hub. All names and records in this capture are fictional.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/portals/instructor-learners.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "instructor-gradebook",
+      "title": "A grade matrix with different work states",
+      "description": "Scores, feedback-only work, work awaiting review and unfinished activity have distinct treatments in the native matrix.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/portals/instructor-gradebook.webp",
+      "width": 3200,
+      "height": 2000
+    },
+    {
+      "id": "instructor-statistics",
+      "title": "Learning activity with multiple perspectives",
+      "description": "Data lenses and filters connect participation, submitted work, feedback and revision patterns over time.",
+      "portal": "Instructor",
+      "src": "/media/projects/arc/portals/instructor-statistics.webp",
+      "width": 3200,
+      "height": 2000
+    }
+  ],
+  "films": [
+    {
+      "id": "admin-bi-exploration",
+      "title": "The program behind the classroom.",
+      "description": "Explore the original admin and scoped school analytics: inventory, nine friction lenses, an open calculation, modeled indices, a comparison gate and the work behind the numbers.",
+      "src": "/media/projects/arc/portals/admin-bi-exploration.mp4",
+      "poster": "/media/projects/arc/portals/admin-bi-exploration-poster.webp",
+      "captions": "/media/projects/arc/portals/admin-bi-exploration.vtt",
+      "width": 1920,
+      "height": 1080,
+      "duration": 45.5,
+      "chapters": [
+        {
+          "at": 0,
+          "title": "Inventory and activity",
+          "description": "The original BI view separates all-time inventory from activity within the selected period. Every figure comes from fictional local fixtures."
+        },
+        {
+          "at": 6,
+          "title": "Nine friction lenses",
+          "description": "Nine distinct lenses show different participation and workflow patterns. Labels and calculation controls remain visible in the original interface."
+        },
+        {
+          "at": 12,
+          "title": "Open the calculation",
+          "description": "The native No-Show explanation opens. A close-up retains its formula, variables and concrete substitution: one qualifying run out of 25 gives 4%."
+        },
+        {
+          "at": 20,
+          "title": "Read modeled indices carefully",
+          "description": "The 30-day modeled-index view includes five eligible peers. Its VRI calculation includes a fixed 0.8 assumption; these indices are not validated causal measurements of teaching quality."
+        },
+        {
+          "at": 25,
+          "title": "Respect the comparison gate",
+          "description": "A separately loaded seven-day slice has no eligible peers. Arc retains absolute values and explicitly withholds a fair peer comparison; this differs from the 30-day view shown before it."
+        },
+        {
+          "at": 31.5,
+          "title": "Review queues and grade context",
+          "description": "The scoped school analytics view displays review age, score distribution and a class-by-lesson grade matrix. A detail insert makes the matrix values readable."
+        },
+        {
+          "at": 38.5,
+          "title": "Follow lesson progression",
+          "description": "Started, submitted and reviewed counts stay separate along the lesson sequence, followed by a weekly trend view. This is fictional history, not reported live program impact."
+        }
+      ]
+    }
+  ]
+}

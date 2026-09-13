@@ -1,0 +1,2085 @@
+{
+  "project": "Arc",
+  "type": "Read-only portfolio interpretation; not a production client",
+  "sourceRevision": "5549bf960754130c6dfe06b0b7bab1fb6a756d7f",
+  "reviewedAt": "2026-09-13",
+  "fictionalData": true,
+  "views": 88,
+  "portals": [
+    {
+      "id": "admin",
+      "label": "Administration",
+      "views": 33
+    },
+    {
+      "id": "instructor",
+      "label": "Instructor",
+      "views": 24
+    },
+    {
+      "id": "student",
+      "label": "Student",
+      "views": 31
+    }
+  ],
+  "pages": [
+    {
+      "portal": "admin",
+      "id": "overview",
+      "label": "Overview",
+      "group": "Management",
+      "title": "A program, with its people in view.",
+      "description": "An operational starting point for classrooms, learners, submitted work and the content that supports them.",
+      "features": [
+        "Dashboard cards for active classrooms, students, today's submissions and submitted versions",
+        "Direct access to classrooms, submissions and the content catalog",
+        "Separate management, content, data and system navigation"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/ViewModels/AdminDashboardViewModel.php",
+        "src/app/Platform/Portals/Admin/ViewModels/AdminNavigationViewModel.php"
+      ],
+      "screenIds": [
+        "bi-overview"
+      ],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/overview"
+    },
+    {
+      "portal": "admin",
+      "id": "classrooms",
+      "label": "Classrooms",
+      "group": "Management",
+      "title": "Give each classroom the right context.",
+      "description": "Search groups by school and instructor, see their learners, and inspect the content assigned to them.",
+      "features": [
+        "Search and filter by status, school, region, instructor, pack, learner count and creation date",
+        "Classroom details, active state and entry-code rotation",
+        "Assign instructors and content packs, individually or in bulk"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminClassroomController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminClassroomContentController.php"
+      ],
+      "screenIds": [
+        "school-overview"
+      ],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/classrooms"
+    },
+    {
+      "portal": "admin",
+      "id": "classrooms/python-lab",
+      "label": "Python Lab",
+      "group": "Management",
+      "title": "Inside a classroom.",
+      "description": "Learners, teaching responsibility and assigned material stay connected to the same group.",
+      "features": [
+        "Instructor and content-pack assignments",
+        "Learner roster and submitted-work context",
+        "School-manager access is independently scoped"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminClassroomController.php",
+        "src/app/Platform/Portals/SchoolManager/Services/SchoolManagerClassroomPage.php"
+      ],
+      "screenIds": [
+        "school-overview"
+      ],
+      "filmIds": [],
+      "parentId": "classrooms",
+      "href": "/work/arc/explore/admin/classrooms/python-lab"
+    },
+    {
+      "portal": "admin",
+      "id": "classrooms/web-studio",
+      "label": "Web Studio",
+      "group": "Management",
+      "title": "Inside a classroom.",
+      "description": "Learners, teaching responsibility and assigned material stay connected to the same group.",
+      "features": [
+        "Instructor and content-pack assignments",
+        "Learner roster and submitted-work context",
+        "School-manager access is independently scoped"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminClassroomController.php",
+        "src/app/Platform/Portals/SchoolManager/Services/SchoolManagerClassroomPage.php"
+      ],
+      "screenIds": [
+        "school-overview"
+      ],
+      "filmIds": [],
+      "parentId": "classrooms",
+      "href": "/work/arc/explore/admin/classrooms/web-studio"
+    },
+    {
+      "portal": "admin",
+      "id": "classrooms/idea-lab",
+      "label": "Idea Lab",
+      "group": "Management",
+      "title": "Inside a classroom.",
+      "description": "Learners, teaching responsibility and assigned material stay connected to the same group.",
+      "features": [
+        "Instructor and content-pack assignments",
+        "Learner roster and submitted-work context",
+        "School-manager access is independently scoped"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminClassroomController.php",
+        "src/app/Platform/Portals/SchoolManager/Services/SchoolManagerClassroomPage.php"
+      ],
+      "screenIds": [
+        "school-overview"
+      ],
+      "filmIds": [],
+      "parentId": "classrooms",
+      "href": "/work/arc/explore/admin/classrooms/idea-lab"
+    },
+    {
+      "portal": "admin",
+      "id": "instructors",
+      "label": "Instructors",
+      "group": "Management",
+      "title": "Teaching responsibility, clearly assigned.",
+      "description": "Find an instructor and understand which classrooms they guide.",
+      "features": [
+        "Search by name or username; filter active state, school, classroom count and password-reset state",
+        "Create and edit instructor records",
+        "Manage classroom assignments and account access"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminInstructorController.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/instructors"
+    },
+    {
+      "portal": "admin",
+      "id": "access",
+      "label": "People & access",
+      "group": "Management",
+      "title": "The right workspace for each person.",
+      "description": "Analytics staff, school managers and content managers receive explicit permissions and scopes.",
+      "features": [
+        "Role-specific permissions and landing pages",
+        "Scope by region, school, school code and selected classrooms",
+        "Separate student-summary and student-detail permissions",
+        "Content-pack/questionnaire scope and independent builder-library access"
+      ],
+      "sourcePaths": [
+        "src/config/system_users.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminSystemUsersController.php",
+        "src/app/Platform/Domain/Analytics/V3/ActorScopeRestrictions.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/access"
+    },
+    {
+      "portal": "admin",
+      "id": "imports",
+      "label": "Import preparation",
+      "group": "Management",
+      "title": "Catch a bad row before it becomes an account.",
+      "description": "Arc separates uploaded spreadsheet validation, preview and commit for classroom, instructor and student records.",
+      "features": [
+        "Download a template for each supported record type",
+        "Preview parsed records and validation errors",
+        "Commit a reviewed import or cancel it"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminImportController.php",
+        "src/app/Platform/Domain/Imports/StudentImportService.php",
+        "src/app/Platform/Domain/Imports/ClassroomImportService.php",
+        "src/app/Platform/Domain/Imports/InstructorImportService.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/imports"
+    },
+    {
+      "portal": "admin",
+      "id": "account-merge",
+      "label": "Account reconciliation",
+      "group": "Management",
+      "title": "Keep the learning history when records overlap.",
+      "description": "Duplicate-account handling includes target selection, collision review and an audit record. This example stops at review.",
+      "features": [
+        "Find possible duplicate students and choose a target",
+        "Inspect a merge plan and resolve data collisions",
+        "Transactional execution with preserved history and absorbed-account records",
+        "Review previous merges and reference coverage"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminAccountMergeController.php",
+        "src/app/Platform/Domain/AccountMerge/MergePlanner.php",
+        "src/app/Platform/Domain/AccountMerge/MergeExecutor.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/account-merge"
+    },
+    {
+      "portal": "admin",
+      "id": "content-packs",
+      "label": "Content packs",
+      "group": "Curriculum",
+      "title": "A curriculum has more than a list of tasks.",
+      "description": "Lessons carry activities, teaching materials and separate coding resources for students and instructors.",
+      "features": [
+        "Build, duplicate, version, import and export content packs",
+        "Arrange lessons and tasks; preview the student experience",
+        "Add reusable material as independent copies or linked mirrors",
+        "Keep publication, classroom assignment and lesson release separate"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminContentPackController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminContentPackStructureController.php",
+        "src/app/Platform/Domain/ContentPack/ContentPackAssignmentService.php"
+      ],
+      "screenIds": [
+        "content-authoring",
+        "syllabus-preview"
+      ],
+      "filmIds": [
+        "syllabus-from-intent-to-review"
+      ],
+      "href": "/work/arc/explore/admin/content-packs"
+    },
+    {
+      "portal": "admin",
+      "id": "content-packs/lesson",
+      "label": "Lesson materials",
+      "group": "Curriculum",
+      "title": "Prepare the explanation as well as the activity.",
+      "description": "A lesson can hold slides, a teaching plan, notes and attachments alongside its tasks.",
+      "features": [
+        "Lesson presentation, plan, notes and media",
+        "Separate student and instructor sandbox master archives",
+        "Portable lesson/task bundles and JSON editing",
+        "Task-specific instructions, review configuration and mini-lessons"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminContentPackLessonController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminContentPackTaskController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminLessonPresentationController.php"
+      ],
+      "screenIds": [
+        "content-authoring",
+        "teaching-readiness"
+      ],
+      "filmIds": [],
+      "parentId": "content-packs",
+      "href": "/work/arc/explore/admin/content-packs/lesson"
+    },
+    {
+      "portal": "admin",
+      "id": "builder",
+      "label": "Curriculum builder",
+      "group": "Curriculum",
+      "title": "Build from reusable pieces. Keep your judgment.",
+      "description": "Browse existing lessons and activity templates, assemble a draft and inspect its teaching coverage.",
+      "features": [
+        "Filter the lesson/task library by search, type, pack, state, required status and tags",
+        "Reusable activity templates include duration, solution, review settings and teaching material",
+        "Smart Build ranks existing activities from a goal and preferences",
+        "Edit the draft, inspect teaching coverage and publish a new pack"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/ContentBuilder/SmartDraftGeneratorService.php",
+        "src/app/Platform/Domain/ContentBuilder/ContentPackDraftPublishingService.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminContentBuilderController.php"
+      ],
+      "screenIds": [
+        "syllabus-direction",
+        "syllabus-preview",
+        "teaching-readiness"
+      ],
+      "filmIds": [
+        "syllabus-from-intent-to-review"
+      ],
+      "href": "/work/arc/explore/admin/builder"
+    },
+    {
+      "portal": "admin",
+      "id": "builder/coverage",
+      "label": "Teaching coverage",
+      "group": "Curriculum",
+      "title": "See what is ready to teach.",
+      "description": "Coverage distinguishes an activity's mini-lesson, inherited lesson material and missing preparation.",
+      "features": [
+        "Task-level mini-lessons and lesson-level teaching resources",
+        "Advisory gaps that remain visible before publishing",
+        "Drafts preserve their source context without changing the reusable original"
+      ],
+      "sourcePaths": [
+        "src/resources/views/admin/content-builder/drafts/coverage/lesson.blade.php",
+        "src/app/Platform/Domain/ContentBuilder/ContentPackDraftPublishingService.php"
+      ],
+      "screenIds": [
+        "teaching-readiness"
+      ],
+      "filmIds": [
+        "syllabus-from-intent-to-review"
+      ],
+      "parentId": "builder",
+      "href": "/work/arc/explore/admin/builder/coverage"
+    },
+    {
+      "portal": "admin",
+      "id": "questionnaires",
+      "label": "Questionnaires",
+      "group": "Curriculum",
+      "title": "Ask, interpret and keep the context.",
+      "description": "Questionnaire definitions, scoring and wording connect to classroom use, external audiences and response analysis.",
+      "features": [
+        "Question and option editing with configurable scoring and result presentation",
+        "Alternative phrasings, scoring profiles and version activation",
+        "Classroom/lesson assignments and external access groups",
+        "Definition and response import/export"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminQuestionnaireController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminQuestionnaireEditorController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminQuestionnaireScoringController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminQuestionnaireVersionsController.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/questionnaires"
+    },
+    {
+      "portal": "admin",
+      "id": "questionnaires/results",
+      "label": "Response analysis",
+      "group": "Curriculum",
+      "title": "A response is more useful with context.",
+      "description": "Explore example distributions and individual responses, with classroom and phrasing context retained.",
+      "features": [
+        "Response counts, completion time, score distributions and profile breakdowns",
+        "Filters for person, role, group, profile, lesson, school, region, instructor, pack, phrasing and date",
+        "Repeated-response trends and cross-questionnaire comparisons",
+        "Response details and configurable exports"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminQuestionnaireAnswersController.php",
+        "src/app/Platform/Domain/Questionnaire/QuestionnaireAnswersAnalyticsService.php"
+      ],
+      "screenIds": [
+        "reflection-cards"
+      ],
+      "filmIds": [],
+      "parentId": "questionnaires",
+      "href": "/work/arc/explore/admin/questionnaires/results"
+    },
+    {
+      "portal": "admin",
+      "id": "questionnaires/access",
+      "label": "External groups",
+      "group": "Curriculum",
+      "title": "Include an audience beyond the classroom roster.",
+      "description": "Separate access groups can receive questionnaire links and retain their own response context.",
+      "features": [
+        "Access codes and configurable response limits",
+        "External group links, enabled state and response assignment",
+        "Separate group-manager access and group comparisons",
+        "No messages or invitations are sent by this explorer"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminQuestionnaireAccessController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminQuestionnaireExternalGroupController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminQuestionnaireExternalGroupAnalyticsController.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "parentId": "questionnaires",
+      "href": "/work/arc/explore/admin/questionnaires/access"
+    },
+    {
+      "portal": "admin",
+      "id": "questionnaires/reflection",
+      "label": "Reflection timelines",
+      "group": "Curriculum",
+      "title": "Notice a pattern across reflections.",
+      "description": "Profile distributions and lesson-linked timelines describe submitted answers, without treating them as a validated diagnosis.",
+      "features": [
+        "Reflection counts, type distributions and profile pairs",
+        "Breakdowns by lesson and program",
+        "Individual student timelines and repeated reflections"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminReflectionAnalyticsController.php",
+        "src/app/Platform/Domain/Questionnaire/ReflectionAnalyticsService.php"
+      ],
+      "screenIds": [
+        "reflection-cards"
+      ],
+      "filmIds": [],
+      "parentId": "questionnaires",
+      "href": "/work/arc/explore/admin/questionnaires/reflection"
+    },
+    {
+      "portal": "admin",
+      "id": "submissions",
+      "label": "Submitted work",
+      "group": "Learning data",
+      "title": "The work behind the count.",
+      "description": "Inspect example learner records, with drafts, submitted versions and published reviews kept distinct.",
+      "features": [
+        "Classroom and status filters; supported format tabs",
+        "Grouped work with format-specific presentation",
+        "CSV format exports and a full Excel export",
+        "Version and review context is preserved separately"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminSubmissionsController.php",
+        "src/app/Platform/Portals/Admin/ViewModels/AdminSubmissionsViewModel.php",
+        "src/app/Platform/Portals/Admin/ViewModels/AdminSubmissionGroupPresenter.php"
+      ],
+      "screenIds": [
+        "instructor-review",
+        "student-revision"
+      ],
+      "filmIds": [
+        "learning-loop"
+      ],
+      "href": "/work/arc/explore/admin/submissions"
+    },
+    {
+      "portal": "admin",
+      "id": "analytics/overview",
+      "label": "Overview",
+      "group": "Admin BI",
+      "title": "Understand the program before the exceptions.",
+      "description": "Inventory, period activity, lesson-run states and operational health appear together.",
+      "features": [
+        "Population inventory is separate from date-dependent activity",
+        "Started, ended, open and stuck lesson runs",
+        "Classrooms without instructors, unassigned instructors and capacity warnings"
+      ],
+      "sourcePaths": [
+        "src/routes/platform/admin.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminAnalyticsV2Controller.php",
+        "src/app/Platform/Domain/Analytics/AnalyticsQueryService.php"
+      ],
+      "screenIds": [
+        "bi-overview",
+        "bi-students"
+      ],
+      "filmIds": [
+        "admin-bi-exploration"
+      ],
+      "href": "/work/arc/explore/admin/analytics/overview"
+    },
+    {
+      "portal": "admin",
+      "id": "analytics/geography",
+      "label": "Geography",
+      "group": "Admin BI",
+      "title": "Compare schools in their regional context.",
+      "description": "Move between regional and school breakdowns while keeping the selected population visible.",
+      "features": [
+        "Region and school breakdowns",
+        "Classroom, learner and instructor counts",
+        "Average learners per group and groups per instructor"
+      ],
+      "sourcePaths": [
+        "src/routes/platform/admin.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminAnalyticsV2Controller.php",
+        "src/app/Platform/Domain/Analytics/AnalyticsQueryService.php"
+      ],
+      "screenIds": [
+        "bi-geography"
+      ],
+      "filmIds": [
+        "admin-bi-exploration"
+      ],
+      "href": "/work/arc/explore/admin/analytics/geography"
+    },
+    {
+      "portal": "admin",
+      "id": "analytics/lessons",
+      "label": "Lessons",
+      "group": "Admin BI",
+      "title": "A scheduled lesson and a recorded run are different.",
+      "description": "Run states, durations and timing help explain what happened during delivery.",
+      "features": [
+        "Lesson-run statistics and duration analysis",
+        "Recent run list with class, lesson, instructor, start and status",
+        "Scoped date filters"
+      ],
+      "sourcePaths": [
+        "src/routes/platform/admin.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminAnalyticsV2Controller.php",
+        "src/app/Platform/Domain/Analytics/AnalyticsQueryService.php"
+      ],
+      "screenIds": [
+        "bi-lessons"
+      ],
+      "filmIds": [
+        "admin-bi-exploration"
+      ],
+      "href": "/work/arc/explore/admin/analytics/lessons"
+    },
+    {
+      "portal": "admin",
+      "id": "analytics/students",
+      "label": "Students",
+      "group": "Admin BI",
+      "title": "Participation is a sequence of actions.",
+      "description": "Review activity, submitted work, inactive learners and return patterns.",
+      "features": [
+        "Population, active learners and submissions",
+        "Top and inactive learner lists",
+        "Retention and after-hours activity"
+      ],
+      "sourcePaths": [
+        "src/routes/platform/admin.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminAnalyticsV2Controller.php",
+        "src/app/Platform/Domain/Analytics/AnalyticsQueryService.php"
+      ],
+      "screenIds": [
+        "bi-students"
+      ],
+      "filmIds": [
+        "admin-bi-exploration"
+      ],
+      "href": "/work/arc/explore/admin/analytics/students"
+    },
+    {
+      "portal": "admin",
+      "id": "analytics/learning-friction",
+      "label": "Learning friction",
+      "group": "Admin BI",
+      "title": "Find where the learning flow slows down.",
+      "description": "Nine analysis lenses make different kinds of incomplete, late or unusual work visible.",
+      "features": [
+        "No-show runs; started without finishing; late completion",
+        "Stuck tasks, unusual timing, skipped work and repeated retries",
+        "Excellence and early-help signals",
+        "Calculation and input disclosures"
+      ],
+      "sourcePaths": [
+        "src/routes/platform/admin.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminAnalyticsV2Controller.php",
+        "src/app/Platform/Domain/Analytics/AnalyticsQueryService.php",
+        "src/app/Platform/Domain/Analytics/Presenters/LearningFrictionLensPresenter.php"
+      ],
+      "screenIds": [
+        "bi-friction",
+        "bi-calculation"
+      ],
+      "filmIds": [
+        "admin-bi-exploration"
+      ],
+      "href": "/work/arc/explore/admin/analytics/learning-friction"
+    },
+    {
+      "portal": "admin",
+      "id": "analytics/business-impact",
+      "label": "Business impact",
+      "group": "Admin BI",
+      "title": "Show the inputs before making a comparison.",
+      "description": "Operational indices compare activity with peers only when the source's minimum-data gates pass.",
+      "features": [
+        "Program selection with actual input counts",
+        "VRI, IER, MIS and Cost of Friction definitions",
+        "VRI uses a fixed 0.8 engagement-stability factor in the current calculation, not a measured stability outcome",
+        "Peer comparison needs five eligible instructors, each with three instruction hours and ten meaningful submissions; the selected scope also has minimum-data gates",
+        "Raw values, formula detail and opportunity-hour estimates; no measured financial return"
+      ],
+      "sourcePaths": [
+        "src/routes/platform/admin.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminAnalyticsV2Controller.php",
+        "src/app/Platform/Domain/Analytics/AnalyticsQueryService.php",
+        "src/app/Platform/Domain/Analytics/V2/Services/BusinessImpactServiceV3.php"
+      ],
+      "screenIds": [
+        "bi-impact",
+        "bi-comparison-gate"
+      ],
+      "filmIds": [
+        "admin-bi-exploration"
+      ],
+      "href": "/work/arc/explore/admin/analytics/business-impact"
+    },
+    {
+      "portal": "admin",
+      "id": "reports",
+      "label": "Scoped reporting",
+      "group": "Scoped workspaces",
+      "title": "A useful report starts with the right scope.",
+      "description": "The separate analytics portal gives permitted staff Overview, Grading and Progress tabs.",
+      "features": [
+        "Program and classroom picker with single-class and aggregate views",
+        "Statistics and Questionnaire panels reuse the instructor reporting surface",
+        "Excel statistics/questionnaire exports and a combined ZIP",
+        "Scope and tab permissions remain distinct from admin access"
+      ],
+      "sourcePaths": [
+        "src/routes/platform/system-portals.php",
+        "src/app/Platform/Portals/Analytics/Services/AnalyticsV3OverviewPage.php",
+        "src/app/Platform/Portals/Analytics/Controllers/AnalyticsExportController.php"
+      ],
+      "screenIds": [
+        "program-analytics"
+      ],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/reports"
+    },
+    {
+      "portal": "admin",
+      "id": "reports/grading",
+      "label": "Grading",
+      "group": "Scoped workspaces",
+      "title": "See the queue, not just the average.",
+      "description": "Published feedback, review age and task-level grade patterns describe different parts of the review workload.",
+      "features": [
+        "Pending, graded, feedback coverage, review time, overdue and revision metrics",
+        "Queue-age buckets and grade distribution",
+        "Class-by-lesson heatmap, task-type grades and review priority queue",
+        "Program, school, class, instructor, lesson, task type and period filters"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Analytics/Services/AnalyticsV3GradingPresenter.php",
+        "src/app/Platform/Domain/Analytics/V3/AnalyticsV3Service.php"
+      ],
+      "screenIds": [
+        "scoped-grading"
+      ],
+      "filmIds": [
+        "admin-bi-exploration"
+      ],
+      "parentId": "reports",
+      "href": "/work/arc/explore/admin/reports/grading"
+    },
+    {
+      "portal": "admin",
+      "id": "reports/progress",
+      "label": "Progress",
+      "group": "Scoped workspaces",
+      "title": "Follow participation through submitted work.",
+      "description": "Lesson progression, activity trends and class comparisons describe movement through the material.",
+      "features": [
+        "Active learners, participation, completion, improving grades, unfinished drafts and inactivity",
+        "Lesson progression and weekly trends",
+        "Student segments, class comparison and task-type progress",
+        "Date filters describe submission activity; they are not a learning-outcome measure"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Analytics/Services/AnalyticsV3ProgressPresenter.php",
+        "src/app/Platform/Domain/Analytics/V3/AnalyticsV3Service.php"
+      ],
+      "screenIds": [
+        "scoped-progress"
+      ],
+      "filmIds": [
+        "admin-bi-exploration"
+      ],
+      "parentId": "reports",
+      "href": "/work/arc/explore/admin/reports/progress"
+    },
+    {
+      "portal": "admin",
+      "id": "school-manager",
+      "label": "School manager",
+      "group": "Scoped workspaces",
+      "title": "From a school to the original work.",
+      "description": "Managers can inspect their assigned classrooms, with deeper learner access controlled separately.",
+      "features": [
+        "School and region filters with classroom groups",
+        "Learner roster, submitted/draft totals and latest activity",
+        "Optional learner detail with lesson/task status and published feedback",
+        "Format-specific submission preview when detail permission is granted"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/SchoolManager/Controllers/SchoolManagerPortalController.php",
+        "src/app/Platform/Portals/SchoolManager/Services/SchoolManagerDashboardPage.php",
+        "src/app/Platform/Portals/SchoolManager/Services/SchoolManagerStudentDetailPage.php"
+      ],
+      "screenIds": [
+        "school-overview",
+        "student-revision"
+      ],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/school-manager"
+    },
+    {
+      "portal": "admin",
+      "id": "school-manager/learner",
+      "label": "Learner detail",
+      "group": "Scoped workspaces",
+      "title": "A report can lead back to a learner's work.",
+      "description": "This example represents a manager with the additional student-detail permission.",
+      "features": [
+        "Student detail is not included in the default school-manager permission set",
+        "Task and lesson context with submitted versions",
+        "Published review and original work previews"
+      ],
+      "sourcePaths": [
+        "src/config/system_users.php",
+        "src/app/Platform/Portals/SchoolManager/Services/SchoolManagerStudentDetailPresenter.php",
+        "src/app/Platform/Portals/SchoolManager/Services/SchoolManagerSubmissionPreviewPage.php"
+      ],
+      "screenIds": [
+        "student-revision"
+      ],
+      "filmIds": [
+        "learning-loop"
+      ],
+      "parentId": "school-manager",
+      "href": "/work/arc/explore/admin/school-manager/learner"
+    },
+    {
+      "portal": "admin",
+      "id": "security",
+      "label": "Security & API",
+      "group": "System",
+      "title": "Operational visibility with explicit controls.",
+      "description": "Arc's admin console separates event review, API activity, tests, address management and settings.",
+      "features": [
+        "Eight tabs: Overview, Insights, Attacks, Timeline, Developer, Tests, IPs and Settings",
+        "Period/type/severity filters and event details",
+        "API token scopes, expiry, binding and usage records",
+        "Block/allow lists, rate limits and detection configuration; displayed read-only here"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminSecurityDashboardController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminSecurityConfigController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminApiTokenController.php",
+        "src/resources/views/admin/security/index.blade.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/security"
+    },
+    {
+      "portal": "admin",
+      "id": "integrations",
+      "label": "Connected tools",
+      "group": "System",
+      "title": "Specialist tools, connected to learning context.",
+      "description": "Programming, gaming and API access have their own explicit integration boundaries.",
+      "features": [
+        "Browser Coder learning-platform integration",
+        "Arc Gaming connection settings, assignments and directory access",
+        "OpenAPI reference and scoped API tokens",
+        "No external runtime, credentials or service calls are used by this explorer"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminArcGamingSettingsController.php",
+        "src/app/Platform/Domain/ArcGaming/ArcGameLaunchService.php",
+        "src/routes/api.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/integrations"
+    },
+    {
+      "portal": "admin",
+      "id": "quality",
+      "label": "Quality & demo tools",
+      "group": "System",
+      "title": "Prepare a demonstration and inspect a test run.",
+      "description": "Separate admin tools generate demo fixtures and show queued test execution and reporting.",
+      "features": [
+        "Demo provisioning, link refresh and account-summary exports",
+        "QA run selection, status, output, cancellation and history",
+        "Security-suite and portal-health views",
+        "This explorer neither runs tests nor provisions or deletes accounts"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Admin/Controllers/AdminDemoControlController.php",
+        "src/app/Platform/Portals/Admin/Controllers/AdminQaStatusController.php",
+        "src/app/Platform/Domain/Testing/TestRunExecutorService.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/quality"
+    },
+    {
+      "portal": "admin",
+      "id": "documentation",
+      "label": "Platform documentation",
+      "group": "System",
+      "title": "The map behind the platform.",
+      "description": "Arc includes a documentation hub covering its portals, curriculum, questionnaires, analytics, security and integrations.",
+      "features": [
+        "All-platform architecture and feature reports",
+        "Admin, instructor, student and content guides",
+        "Analytics, security, questionnaire, deployment and API reports",
+        "Some older counts and claims are superseded by the current source"
+      ],
+      "sourcePaths": [
+        "src/routes/platform/public.php",
+        "src/app/Platform/Domain/Documentation/DocumentationCatalog.php",
+        "src/resources/views/documentation/index.blade.php",
+        "src/resources/lang/en/documentation.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/admin/documentation"
+    },
+    {
+      "portal": "instructor",
+      "id": "overview",
+      "label": "Teaching desk",
+      "group": "Classroom",
+      "title": "A clear view before class.",
+      "description": "Maya’s fictional teaching desk connects the current lesson, pending work and the people who need a closer look.",
+      "features": [
+        "Assigned classrooms",
+        "Active and completed lessons",
+        "Pending review",
+        "Instructor questionnaires"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorDashboardController.php",
+        "src/app/Platform/Portals/Instructor/Services/InstructorDashboardService.php"
+      ],
+      "filmIds": [],
+      "screenIds": [
+        "instructor-workspace"
+      ],
+      "href": "/work/arc/explore/instructor/overview"
+    },
+    {
+      "portal": "instructor",
+      "id": "classroom",
+      "label": "Classroom hub",
+      "group": "Classroom",
+      "title": "One classroom. The full context.",
+      "description": "A lesson tree keeps activities, visibility and student work together. Inspect a lesson or activity without changing its state.",
+      "features": [
+        "Current content pack",
+        "Lesson and activity visibility",
+        "Entry code and rotation",
+        "Student and submission counts",
+        "Finished lesson archive"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorClassroomController.php",
+        "src/app/Platform/Portals/Instructor/Services/InstructorClassroomSidebarPresenter.php",
+        "src/app/Platform/Domain/Lesson/LessonReleaseService.php"
+      ],
+      "filmIds": [],
+      "screenIds": [
+        "instructor-classroom"
+      ],
+      "href": "/work/arc/explore/instructor/classroom"
+    },
+    {
+      "portal": "instructor",
+      "id": "classroom/lesson",
+      "label": "Decisions & loops",
+      "group": "Classroom",
+      "title": "Prepare the lesson, then teach it.",
+      "description": "The lesson brings its plan, presentation, instructor notes, shared files and programming workspace into one place.",
+      "features": [
+        "Lesson plan",
+        "Presentation slides",
+        "Instructor notes",
+        "Shared and instructor-only materials",
+        "Separate activity release"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorClassroomController.php",
+        "src/app/Platform/Portals/Instructor/ViewModels/InstructorLessonPanelPresenter.php",
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorLessonReleaseController.php"
+      ],
+      "filmIds": [],
+      "parentId": "classroom",
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/classroom/lesson"
+    },
+    {
+      "portal": "instructor",
+      "id": "classroom/activity",
+      "label": "Activity & student states",
+      "group": "Classroom",
+      "title": "Who is drafting, submitting or trying again?",
+      "description": "The same activity can contain an unfinished draft, a first submission and a later revision. The instructor sees those differences.",
+      "features": [
+        "Latest submitted version",
+        "Draft-only work",
+        "Version history",
+        "Independent solution visibility",
+        "Task-specific previews",
+        "Programming and game context"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Services/InstructorTaskPanelService.php",
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorTaskReleaseController.php"
+      ],
+      "filmIds": [],
+      "parentId": "classroom",
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/classroom/activity"
+    },
+    {
+      "portal": "instructor",
+      "id": "learners",
+      "label": "Learners",
+      "group": "Classroom",
+      "title": "Names before numbers.",
+      "description": "Find a learner within the instructor’s assigned classrooms, then inspect their activity and feedback history.",
+      "features": [
+        "Classroom-scoped search",
+        "Individual progress",
+        "Student work history",
+        "Classroom membership",
+        "Scoped student account management in the product"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorStudentController.php",
+        "src/app/Platform/Portals/Instructor/Services/InstructorClassroomPanelService.php"
+      ],
+      "filmIds": [],
+      "screenIds": [
+        "instructor-learners"
+      ],
+      "href": "/work/arc/explore/instructor/learners"
+    },
+    {
+      "portal": "instructor",
+      "id": "learners/jordan",
+      "label": "Jordan’s learning history",
+      "group": "Classroom",
+      "title": "Jordan’s next step has context.",
+      "description": "A fictional learner profile connects submitted work, published feedback and the revision that followed it.",
+      "features": [
+        "Student detail",
+        "Submission versions",
+        "Review state",
+        "Work across lessons"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Services/InstructorClassroomPanelService.php",
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorSubmissionController.php"
+      ],
+      "filmIds": [],
+      "parentId": "learners",
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/learners/jordan"
+    },
+    {
+      "portal": "instructor",
+      "id": "reviews",
+      "label": "Review queue",
+      "group": "Learning & feedback",
+      "title": "Give the next useful response.",
+      "description": "The review queue starts from the latest submitted work. Draft-only work remains a different state.",
+      "features": [
+        "Pending published reviews",
+        "Submission filters",
+        "Version selection",
+        "Task-specific work viewers",
+        "Scoped CSV export in the product"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorSubmissionController.php",
+        "src/app/Platform/Portals/Instructor/Services/InstructorClassroomPanelService.php"
+      ],
+      "filmIds": [],
+      "screenIds": [
+        "instructor-review"
+      ],
+      "href": "/work/arc/explore/instructor/reviews"
+    },
+    {
+      "portal": "instructor",
+      "id": "reviews/submission",
+      "label": "A revision, side by side",
+      "group": "Learning & feedback",
+      "title": "Feedback stays beside the work.",
+      "description": "Inspect Jordan’s two versions, the requested change and a sample rubric. This read-only example does not submit a grade or publish feedback.",
+      "features": [
+        "Draft versus published feedback",
+        "Revision requests",
+        "Rubric criteria and subcriteria",
+        "Optional 1–10 star criteria",
+        "Empty-work grading guard",
+        "Optional AI feedback refinement"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorReviewController.php",
+        "src/app/Platform/Portals/Instructor/Services/InstructorReviewService.php",
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorAiFeedbackController.php"
+      ],
+      "filmIds": [],
+      "parentId": "reviews",
+      "screenIds": [
+        "instructor-review",
+        "student-revision"
+      ],
+      "href": "/work/arc/explore/instructor/reviews/submission"
+    },
+    {
+      "portal": "instructor",
+      "id": "grades",
+      "label": "Gradebook",
+      "group": "Learning & feedback",
+      "title": "A grade is more useful with its state.",
+      "description": "A classroom matrix connects a score to the underlying submission, publication state and request for another attempt.",
+      "features": [
+        "Students × activities",
+        "Latest submitted work",
+        "Published review states",
+        "Revision indicators",
+        "Task and learner averages"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorReviewController.php",
+        "src/app/Platform/Portals/Instructor/ViewModels/InstructorGradeMatrixViewModel.php"
+      ],
+      "filmIds": [],
+      "screenIds": [
+        "instructor-gradebook"
+      ],
+      "href": "/work/arc/explore/instructor/grades"
+    },
+    {
+      "portal": "instructor",
+      "id": "insights",
+      "label": "Learning insights",
+      "group": "Learning & feedback",
+      "title": "Find the pattern. Keep the context.",
+      "description": "Participation, submitted work and reviewed work describe different parts of a lesson. These sample figures are not platform analytics.",
+      "features": [
+        "Lesson or month grouping",
+        "Date, learner and activity filters",
+        "Completion and participation",
+        "Revision follow-through",
+        "Activity-type breakdown",
+        "Student-level drilldown"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Services/InstructorStatisticsPanelService.php"
+      ],
+      "filmIds": [],
+      "screenIds": [
+        "instructor-statistics"
+      ],
+      "href": "/work/arc/explore/instructor/insights"
+    },
+    {
+      "portal": "instructor",
+      "id": "materials",
+      "label": "Lesson materials",
+      "group": "Teaching tools",
+      "title": "The right material for each audience.",
+      "description": "Explore a sample lesson plan, teaching notes and student handout. In Arc, shared visibility is controlled separately from instructor-only resources.",
+      "features": [
+        "Lesson and task attachments",
+        "Audience labels",
+        "Per-classroom visibility",
+        "Native file previews",
+        "External document viewers where needed"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorAttachmentController.php",
+        "src/app/Platform/Portals/Instructor/ViewModels/InstructorLessonPanelPresenter.php"
+      ],
+      "filmIds": [],
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/materials"
+    },
+    {
+      "portal": "instructor",
+      "id": "workspace",
+      "label": "Personal code",
+      "group": "Teaching tools",
+      "title": "Lesson code, with room for your own.",
+      "description": "Lesson materials and the instructor’s personal files coexist. Personal files follow the instructor across lessons; restoring lesson materials preserves them.",
+      "features": [
+        "Browser Coder integration",
+        "Lesson-specific master files",
+        "Global personal files",
+        "Owner-scoped database persistence",
+        "Material-only restore",
+        "Student and instructor master ZIPs"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorSandboxController.php",
+        "src/app/Platform/Domain/Sandbox/InstructorSandboxService.php"
+      ],
+      "filmIds": [],
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/workspace"
+    },
+    {
+      "portal": "instructor",
+      "id": "sessions",
+      "label": "Live activities",
+      "group": "Teaching tools",
+      "title": "Six ways to think together.",
+      "description": "Each session family has its own teaching rhythm and live board. Open a sample board to see the differences.",
+      "features": [
+        "Quiz Battle",
+        "Live Cloud",
+        "Class heatmap",
+        "Structured debate",
+        "Team escape room",
+        "Branching scenario"
+      ],
+      "sourcePaths": [
+        "src/routes/platform/instructor.php"
+      ],
+      "filmIds": [
+        "live-classroom-two-sides"
+      ],
+      "screenIds": [
+        "live-instructor-controls"
+      ],
+      "href": "/work/arc/explore/instructor/sessions"
+    },
+    {
+      "portal": "instructor",
+      "id": "sessions/quiz",
+      "label": "Quiz Battle",
+      "group": "Teaching tools",
+      "title": "A question, a timer, a shared reveal.",
+      "description": "The instructor controls question progression and sees participation before the class moves on.",
+      "features": [
+        "Waiting room",
+        "Question timer",
+        "Answer counts",
+        "Close and advance states",
+        "Leaderboard",
+        "Persisted session results"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorQuizBattleController.php",
+        "src/app/Platform/Domain/QuizBattle/QuizBattleSessionService.php"
+      ],
+      "filmIds": [
+        "live-classroom-two-sides"
+      ],
+      "parentId": "sessions",
+      "screenIds": [
+        "live-instructor-controls",
+        "live-student-answer"
+      ],
+      "href": "/work/arc/explore/instructor/sessions/quiz"
+    },
+    {
+      "portal": "instructor",
+      "id": "sessions/cloud",
+      "label": "Live Cloud",
+      "group": "Teaching tools",
+      "title": "Make the class’s ideas visible.",
+      "description": "Short contributions gather around a prompt. The instructor’s board can move between prompts and moderate individual answers.",
+      "features": [
+        "Prompt progression",
+        "Incoming answers",
+        "Answer moderation",
+        "Saved cloud layout at session end"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorLiveCloudController.php"
+      ],
+      "filmIds": [],
+      "parentId": "sessions",
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/sessions/cloud"
+    },
+    {
+      "portal": "instructor",
+      "id": "sessions/heatmap",
+      "label": "Class heatmap",
+      "group": "Teaching tools",
+      "title": "An image becomes a shared question.",
+      "description": "Learners place responses on an image. The board gathers their positions to reveal where the class is looking.",
+      "features": [
+        "Image pages",
+        "Position-based responses",
+        "Page progression",
+        "Aggregate live board"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorHeatmapController.php"
+      ],
+      "filmIds": [],
+      "parentId": "sessions",
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/sessions/heatmap"
+    },
+    {
+      "portal": "instructor",
+      "id": "sessions/debate",
+      "label": "Structured debate",
+      "group": "Teaching tools",
+      "title": "Give each side space to reason.",
+      "description": "A round-based board organizes arguments around two positions, with the instructor controlling the sequence.",
+      "features": [
+        "Two-sided contributions",
+        "Rounds",
+        "Live contribution updates",
+        "Instructor-led progression"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorDebateController.php"
+      ],
+      "filmIds": [],
+      "parentId": "sessions",
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/sessions/debate"
+    },
+    {
+      "portal": "instructor",
+      "id": "sessions/escape",
+      "label": "Team escape room",
+      "group": "Teaching tools",
+      "title": "Different teams. A shared challenge.",
+      "description": "The instructor can inspect each team’s progress, room state and attempts while the activity unfolds.",
+      "features": [
+        "Automatic or manual teams",
+        "Room and node progression",
+        "Pause and resume states",
+        "Lockout recovery",
+        "Team results"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorEscapeRoomController.php",
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorEscapeRoomSessionController.php",
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorEscapeRoomDashboardController.php"
+      ],
+      "filmIds": [],
+      "parentId": "sessions",
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/sessions/escape"
+    },
+    {
+      "portal": "instructor",
+      "id": "sessions/branching",
+      "label": "Branching scenario",
+      "group": "Teaching tools",
+      "title": "Let a decision shape the lesson.",
+      "description": "The class votes on a choice. The instructor selects the next branch and can trace the route to its outcome.",
+      "features": [
+        "Decision nodes",
+        "Class votes",
+        "Instructor-selected branch",
+        "Traversed path",
+        "Leaf outcomes"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorBranchingController.php"
+      ],
+      "filmIds": [],
+      "parentId": "sessions",
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/sessions/branching"
+    },
+    {
+      "portal": "instructor",
+      "id": "presentation",
+      "label": "Shared presentation",
+      "group": "Teaching tools",
+      "title": "Keep the lesson on the same page.",
+      "description": "A presentation belongs to the active classroom lesson. This sample lets you inspect slides without broadcasting to students.",
+      "features": [
+        "Active lesson context",
+        "Shared slide index",
+        "Start and stop broadcast in the product",
+        "Next, previous and direct slide navigation"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorPresentationController.php",
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorLiveLessonController.php"
+      ],
+      "filmIds": [],
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/presentation"
+    },
+    {
+      "portal": "instructor",
+      "id": "peer-review",
+      "label": "Peer review",
+      "group": "Learning together",
+      "title": "Peer feedback with an instructor in the loop.",
+      "description": "Assignments connect reviewers to classmates. Responses remain unpublished until the instructor moderates and releases them.",
+      "features": [
+        "Circular assignment without self-review",
+        "1–5 assigned reviews",
+        "Manual assignment",
+        "Review and closed phases",
+        "Response moderation",
+        "Individual or batch publication"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorPeerReviewController.php",
+        "src/app/Platform/Domain/PeerReview/PeerReviewDistributionService.php",
+        "src/app/Platform/Domain/PeerReview/PeerReviewResponseService.php"
+      ],
+      "filmIds": [],
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/peer-review"
+    },
+    {
+      "portal": "instructor",
+      "id": "sharing",
+      "label": "Vision-board sharing",
+      "group": "Learning together",
+      "title": "A window into another classroom, by agreement.",
+      "description": "Cross-class vision-board sharing uses a request and approval workflow between instructors, with incoming and outgoing states.",
+      "features": [
+        "Eligible vision-board activities",
+        "Incoming and outgoing requests",
+        "Pending, approved, denied and revoked states",
+        "Classroom-scoped visibility"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorVisionBoardShareController.php",
+        "src/app/Platform/Domain/VisionBoard/VisionBoardShareService.php"
+      ],
+      "filmIds": [],
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/sharing"
+    },
+    {
+      "portal": "instructor",
+      "id": "questionnaires",
+      "label": "Questionnaires",
+      "group": "Learning together",
+      "title": "Two kinds of questionnaire context.",
+      "description": "The instructor’s own assigned questionnaires are separate from classroom participation and student result summaries.",
+      "features": [
+        "Instructor assignments",
+        "Own response history",
+        "Pending and completed states",
+        "Classroom assignment groups",
+        "Participation",
+        "Configured scoring categories"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Services/InstructorDashboardService.php",
+        "src/app/Platform/Portals/Instructor/Services/InstructorClassroomService.php",
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorQuestionnaireController.php"
+      ],
+      "filmIds": [],
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/questionnaires"
+    },
+    {
+      "portal": "instructor",
+      "id": "support",
+      "label": "Session support",
+      "group": "Classroom",
+      "title": "Small signals during a busy lesson.",
+      "description": "Help requests, recent student activity and the active lesson give the instructor a practical view of what needs attention.",
+      "features": [
+        "Unresolved help requests",
+        "Student and activity context",
+        "Recent-activity student list",
+        "Active lesson return link",
+        "Classroom entry code"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorHelpController.php",
+        "src/app/Platform/Domain/Help/HelpService.php",
+        "src/app/Platform/Portals/Instructor/Controllers/InstructorDashboardController.php"
+      ],
+      "filmIds": [],
+      "screenIds": [],
+      "href": "/work/arc/explore/instructor/support"
+    },
+    {
+      "portal": "student",
+      "id": "overview",
+      "label": "My learning world",
+      "group": "Learning",
+      "title": "Your learning world",
+      "description": "A classroom, a personal pathway, and room to make it your own.",
+      "features": [
+        "A real theme system across five environments",
+        "Visible lesson and task progress",
+        "Direct routes to feedback, reflections and resources"
+      ],
+      "sourcePaths": [
+        "src/resources/views/student/dashboard/index.blade.php",
+        "src/app/Platform/Portals/Student/ViewModels/StudentDashboardViewModel.php"
+      ],
+      "screenIds": [
+        "student-space",
+        "student-magic-forest",
+        "student-neon-hacker",
+        "student-aurora",
+        "student-aurora-light"
+      ],
+      "filmIds": [
+        "learning-worlds-and-making"
+      ],
+      "href": "/work/arc/explore/student/overview"
+    },
+    {
+      "portal": "student",
+      "id": "lessons",
+      "label": "Lessons",
+      "group": "Learning",
+      "title": "A path through the classroom",
+      "description": "Move from a lesson’s purpose to its activities, materials and saved work.",
+      "features": [
+        "Lesson availability and visible task states",
+        "Theme-specific task navigation",
+        "Lesson sandbox and materials"
+      ],
+      "sourcePaths": [
+        "src/resources/views/student/lessons/partials/flat-tasks.blade.php",
+        "src/resources/views/student/lessons/partials/task-ring.blade.php",
+        "src/resources/views/student/lessons/partials/sandbox.blade.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/lessons"
+    },
+    {
+      "portal": "student",
+      "id": "tasks",
+      "label": "Activity library",
+      "group": "Learning",
+      "title": "Twenty-one ways to take part",
+      "description": "Explore individual work, shared classroom activities and connected tools.",
+      "features": [
+        "All canonical task types remain directly accessible",
+        "Three distinct programming formats",
+        "Individual, shared and external boundaries are visible"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/TaskType.php",
+        "src/resources/views/components/task-types/editor.blade.php"
+      ],
+      "screenIds": [
+        "visual-flowchart",
+        "matching-connections",
+        "reflection-cards"
+      ],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks"
+    },
+    {
+      "portal": "student",
+      "id": "backpack",
+      "label": "Backpack",
+      "group": "My workspace",
+      "title": "Everything within reach",
+      "description": "Lesson resources, reference material and a personal image library.",
+      "features": [
+        "Program, lesson and task attachments",
+        "Reusable images uploaded for canvas work",
+        "Source-derived resource grouping for this explorer"
+      ],
+      "sourcePaths": [
+        "src/resources/views/components/student/materials-disclosure.blade.php",
+        "src/app/Platform/Portals/Student/Controllers/TaskAssetController.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/backpack"
+    },
+    {
+      "portal": "student",
+      "id": "sandbox",
+      "label": "Code sandbox",
+      "group": "My workspace",
+      "title": "A workspace of your own",
+      "description": "Read the lesson files, inspect the program, and see how its pieces fit.",
+      "features": [
+        "Private workspace for each lesson and learner",
+        "Browser Coder integration",
+        "Restore lesson material while keeping personal files"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Student/Controllers/StudentSandboxController.php",
+        "src/resources/js/sandbox.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/sandbox"
+    },
+    {
+      "portal": "student",
+      "id": "submissions",
+      "label": "My submissions",
+      "group": "My workspace",
+      "title": "The work, and the work before it",
+      "description": "An original attempt stays visible as the next version develops.",
+      "features": [
+        "Per-lesson submission list",
+        "Draft and submitted versions",
+        "Explicitly start a newer version"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Student/Controllers/StudentSubmissionController.php",
+        "src/app/Platform/Domain/Submission/SubmissionVersionService.php"
+      ],
+      "screenIds": [
+        "matching-saved"
+      ],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/submissions"
+    },
+    {
+      "portal": "student",
+      "id": "feedback",
+      "label": "Feedback",
+      "group": "My workspace",
+      "title": "Feedback that leads somewhere",
+      "description": "See the response, understand the next step, and follow the revision.",
+      "features": [
+        "Latest published feedback per task",
+        "Revision-request badges",
+        "Published peer reviews with a rubric"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Student/Services/StudentFeedbackPageService.php",
+        "src/app/Platform/Portals/Student/Controllers/StudentPeerReviewController.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/feedback"
+    },
+    {
+      "portal": "student",
+      "id": "reflections",
+      "label": "My reflections",
+      "group": "My perspective",
+      "title": "A little more self-understanding",
+      "description": "Reflection questions and assigned questionnaire results sit alongside the learning journey.",
+      "features": [
+        "Assigned questionnaire and response profiles",
+        "Completed responses and pending assignments",
+        "Separate from inline questionnaire task answers"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Student/Controllers/StudentQuestionnaireController.php",
+        "src/app/Platform/Portals/Student/Services/StudentQuestionnaireProfileService.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/reflections"
+    },
+    {
+      "portal": "student",
+      "id": "vision-board",
+      "label": "My vision board",
+      "group": "My perspective",
+      "title": "Make the board feel like you",
+      "description": "Chosen images become a personal composition, with controlled ways to share it.",
+      "features": [
+        "Editable board styling and card placement",
+        "Configured gallery scopes",
+        "Cross-device pairing and teacher-approved sharing"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Student/Controllers/StudentVisionBoardController.php",
+        "src/app/Platform/Portals/Student/Services/StudentVisionBoardService.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/vision-board"
+    },
+    {
+      "portal": "student",
+      "id": "live-classroom",
+      "label": "Live classroom",
+      "group": "Together",
+      "title": "A different kind of class participation",
+      "description": "A cloud of ideas, a shared decision, a team challenge or a fast question.",
+      "features": [
+        "Six distinct shared-session experiences",
+        "Teacher-controlled question and session lifecycle",
+        "Participation becomes part of the learning record"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Portals/Student/Controllers/StudentQuizBattleController.php",
+        "src/app/Platform/Portals/Student/Controllers/StudentLiveCloudController.php",
+        "src/app/Platform/Portals/Student/Controllers/StudentEscapeRoomController.php"
+      ],
+      "screenIds": [
+        "live-student-answer",
+        "live-instructor-controls"
+      ],
+      "filmIds": [
+        "live-classroom-two-sides"
+      ],
+      "href": "/work/arc/explore/student/live-classroom"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/text",
+      "label": "Write",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Write",
+      "description": "A thoughtful answer, with space to develop it.",
+      "features": [
+        "Plain-text response with character count and minimum/maximum length",
+        "Debounced draft saving with visible status",
+        "A submitted version and published feedback"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/TextTaskHandler.php",
+        "src/resources/views/components/task-types/editors/text.blade.php",
+        "src/resources/js/text-task-editor.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/text"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/table",
+      "label": "Fill a structure",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Fill a structure",
+      "description": "Turn observations into a useful structure.",
+      "features": [
+        "Editable cells alongside teacher-provided locked values",
+        "Configurable columns and additional rows",
+        "Filled-cell progress and draft/submitted states"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/TableTaskHandler.php",
+        "src/resources/views/components/task-types/editors/table.blade.php",
+        "src/resources/js/table-task-editor.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/table"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/canvas",
+      "label": "Drawing canvas",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Drawing canvas",
+      "description": "Explain an idea in shapes, marks and images.",
+      "features": [
+        "Drawing, text, stickers and image composition",
+        "Fullscreen canvas with JSON state and image preview",
+        "Personal image library and mobile capture pathway"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/CanvasTaskHandler.php",
+        "src/resources/views/components/task-types/editors/canvas.blade.php",
+        "src/resources/js/canvas-task-editor.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/canvas"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/vision_board",
+      "label": "Inspiration boards",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Inspiration boards",
+      "description": "A sequence of boards that connects past, present and possibility.",
+      "features": [
+        "Two to eight configurable canvas panels",
+        "Reference material and independent panel drafts",
+        "A final sharing caption alongside the visual work"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/VisionBoardTaskHandler.php",
+        "src/resources/views/components/task-types/editors/vision-board.blade.php",
+        "src/resources/js/vision-board/editor.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/vision_board"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/questionnaire",
+      "label": "Reflection questions",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Reflection questions",
+      "description": "Different question formats make room for different answers.",
+      "features": [
+        "One question at a time with progress and previous/next navigation",
+        "Short/long text, scale, single-choice and multiple-choice inputs",
+        "Saved answers and a submitted version"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/QuestionnaireTaskHandler.php",
+        "src/resources/views/components/task-types/editors/questionnaire.blade.php",
+        "src/resources/js/questionnaire-task-editor.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/questionnaire"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/image_vision_board",
+      "label": "Image vision board",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Image vision board",
+      "description": "Choose images, then make the result your own.",
+      "features": [
+        "One or several images per configured question",
+        "Personal board with backgrounds, card positions, stickers and a note",
+        "Class, school, region, national and approved shared gallery scopes"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/ImageVisionBoardTaskHandler.php",
+        "src/resources/views/components/task-types/editors/image-vision-board.blade.php",
+        "src/resources/js/image-vision-board-task-editor.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/image_vision_board"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/file",
+      "label": "File submission",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "File submission",
+      "description": "Bring work from another tool into the learning record.",
+      "features": [
+        "Drag/drop or file selection with a named file preview",
+        "Replace or remove a draft attachment",
+        "Uploaded work is associated with its submission version"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/FileTaskHandler.php",
+        "src/resources/views/components/task-types/editors/file.blade.php",
+        "src/resources/js/file-task-editor.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/file"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/programming",
+      "label": "Programming studio",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Programming studio",
+      "description": "Read it. Complete it. Build something of your own.",
+      "features": [
+        "Code reading with written explanations",
+        "Fill-in-the-blanks with a stitched program",
+        "Free code, snippet/project workspaces and Browser Coder integration"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/ProgrammingTaskHandler.php",
+        "src/resources/views/components/task-types/editors/programming-parts.blade.php",
+        "src/resources/js/programming-parts/ide-bridge.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/programming"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/external",
+      "label": "External activity",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "External activity",
+      "description": "A clear handoff to a resource beyond Arc.",
+      "features": [
+        "A validated external URL and descriptive launch control",
+        "Opens the resource in a separate browsing context",
+        "First visit is recorded as a submission/visited state"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/ExternalTaskHandler.php",
+        "src/resources/views/components/task-types/editors/external.blade.php",
+        "src/app/Platform/Domain/ExternalActivity/ExternalActivityLaunchService.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/external"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/arc_game",
+      "label": "Arc Gaming Center",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Arc Gaming Center",
+      "description": "An assigned game, connected to the classroom.",
+      "features": [
+        "Configured game releases in the activity",
+        "Server-issued passwordless single-use launch",
+        "Classroom synchronization and time-limit/deadline settings"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/ArcGameTaskHandler.php",
+        "src/resources/views/components/task-types/editors/arc-game.blade.php",
+        "src/app/Platform/Portals/Student/Controllers/StudentArcGameController.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/arc_game"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/recording",
+      "label": "Audio & video",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Audio & video",
+      "description": "Let a learner explain an idea in their own voice.",
+      "features": [
+        "Audio or video recorder with duration and playback",
+        "Permission/error handling and a phone continuation QR flow",
+        "Stored recording becomes part of the submitted work"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/RecordingTaskHandler.php",
+        "src/resources/views/components/task-types/editors/recording.blade.php",
+        "src/resources/js/recording/manager.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/recording"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/escape_room",
+      "label": "Team escape room",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Team escape room",
+      "description": "A shared puzzle, a sequence of discoveries.",
+      "features": [
+        "Teams progress through configured rooms",
+        "Answer checks, clue gates and timed lockouts",
+        "Team-shared clue-master conversation and victory state"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/EscapeRoomTaskHandler.php",
+        "src/resources/views/components/task-types/editors/live-activity.blade.php",
+        "src/app/Platform/Portals/Student/Controllers/StudentEscapeRoomController.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/escape_room"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/live_cloud",
+      "label": "Live word cloud",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Live word cloud",
+      "description": "A roomful of ideas, visible together.",
+      "features": [
+        "Student answers contribute to the shared cloud",
+        "Own answers can be removed while permitted",
+        "Teacher moderation and end-of-session participation records"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/LiveCloudTaskHandler.php",
+        "src/resources/views/components/task-types/editors/live-cloud.blade.php",
+        "src/app/Platform/Portals/Student/Controllers/StudentLiveCloudController.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/live_cloud"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/sorting_ranking",
+      "label": "Sort & rank",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Sort & rank",
+      "description": "Make relationships clear by moving ideas into place.",
+      "features": [
+        "Rank items in sequence or sort them into categories",
+        "Multiple sections within one activity",
+        "Configured correct arrangements can receive a server-computed score"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/SortingRankingTaskHandler.php",
+        "src/resources/views/components/task-types/editors/sorting-ranking.blade.php",
+        "src/resources/js/sorting-ranking/editor.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/sorting_ranking"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/matching",
+      "label": "Matching pairs",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Matching pairs",
+      "description": "Connect the pieces and see the pattern.",
+      "features": [
+        "Pair items across two columns with visible connections",
+        "Multi-section activity with independent pairs",
+        "Submitted result and configured automatic scoring"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/MatchingTaskHandler.php",
+        "src/resources/views/components/task-types/editors/matching.blade.php",
+        "src/resources/js/matching/interactions.js"
+      ],
+      "screenIds": [
+        "matching-connections",
+        "matching-saved"
+      ],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/matching"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/class_heatmap",
+      "label": "Class heatmap",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Class heatmap",
+      "description": "See where a class places its thinking.",
+      "features": [
+        "Point or region selection on configured pages/images",
+        "Normalized coordinates shared with the class session",
+        "Teacher-controlled session and stored participation on finish"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/ClassHeatmapTaskHandler.php",
+        "src/resources/views/components/task-types/editors/live-activity.blade.php",
+        "src/resources/js/student-heatmap/interaction.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/class_heatmap"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/quiz_battle",
+      "label": "Quiz Battle",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Quiz Battle",
+      "description": "A fast question, an immediate learning moment.",
+      "features": [
+        "Question timer with one/multiple correct answer modes",
+        "Student answer feedback, score and class leaderboard",
+        "Teacher closes questions, advances and ends the session"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/QuizBattleTaskHandler.php",
+        "src/resources/views/components/task-types/editors/quiz-battle.blade.php",
+        "src/resources/js/student-quiz-battle/answers.js"
+      ],
+      "screenIds": [
+        "live-student-answer",
+        "live-instructor-controls"
+      ],
+      "filmIds": [
+        "live-classroom-two-sides"
+      ],
+      "href": "/work/arc/explore/student/tasks/quiz_battle"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/branching_scenario",
+      "label": "Choose a path",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Choose a path",
+      "description": "Choices carry the story in a different direction.",
+      "features": [
+        "Self-paced choices with path history and an outcome",
+        "Alternative class-vote mode with shared counts",
+        "The selected path progresses through configured story nodes"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/BranchingScenarioTaskHandler.php",
+        "src/resources/views/components/task-types/editors/live-activity.blade.php",
+        "src/app/Platform/Portals/Student/Controllers/StudentBranchingController.php"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/branching_scenario"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/flowchart",
+      "label": "Flowchart builder",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Flowchart builder",
+      "description": "Give a process a shape people can follow.",
+      "features": [
+        "Shapes, labeled edges, node palette and a minimap",
+        "Grid, snapping, starter graphs and configurable node limits",
+        "Optional classroom collaboration and PNG submission preview"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/FlowchartTaskHandler.php",
+        "src/resources/views/components/task-types/editors/flowchart.blade.php",
+        "src/app/Platform/Shared/ViewModels/FlowchartTaskEditorViewModel.php"
+      ],
+      "screenIds": [
+        "visual-flowchart"
+      ],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/flowchart"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/session_finale",
+      "label": "Session finale",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Session finale",
+      "description": "Finish with a reflection worth keeping.",
+      "features": [
+        "Select a configured identity/reflection card",
+        "Add a short action reflection",
+        "Submitted state shows a completion seal and chosen card"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/SessionFinaleTaskHandler.php",
+        "src/resources/views/components/task-types/editors/session-finale.blade.php",
+        "src/resources/js/session-finale-task-editor.js"
+      ],
+      "screenIds": [
+        "reflection-cards"
+      ],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/session_finale"
+    },
+    {
+      "portal": "student",
+      "id": "tasks/debate",
+      "label": "Structured debate",
+      "group": "Activity details",
+      "parentId": "tasks",
+      "title": "Structured debate",
+      "description": "Take a position, then build an argument.",
+      "features": [
+        "Choose a side and contribute an argument",
+        "Instructor-controlled rounds and contribution limits",
+        "Shared argument board and final participation record"
+      ],
+      "sourcePaths": [
+        "src/app/Platform/Domain/Task/Handlers/DebateTaskHandler.php",
+        "src/resources/views/components/task-types/editors/live-activity.blade.php",
+        "src/resources/js/student-debate/submission.js"
+      ],
+      "screenIds": [],
+      "filmIds": [],
+      "href": "/work/arc/explore/student/tasks/debate"
+    }
+  ]
+}

@@ -7,6 +7,7 @@ import { worlds } from "@/content/tours/worlds";
 import { getProductTour } from "@/content/tours";
 import { CASE_STUDIES } from "@/content/work";
 import { pageMetadata } from "@/lib/metadata";
+import { ArcCasePage } from "@/components/arc/ArcCasePage";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -30,6 +31,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   const index = CASE_STUDIES.findIndex((candidate) => candidate.slug === project.slug);
   const next = CASE_STUDIES[(index + 1) % CASE_STUDIES.length];
+  if (project.slug === "arc") return <ArcCasePage/>;
   if (engineeringStudies[project.slug]) return <EngineeringStudyPage project={project} study={engineeringStudies[project.slug]} next={next}/>;
   const tour = getProductTour(project.slug);
   if (tour && worlds[project.slug]) return <ProjectWorldPage project={project} tour={tour} world={worlds[project.slug]} next={next}/>;

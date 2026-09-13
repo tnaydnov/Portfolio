@@ -1,8 +1,10 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 import { getProductTour } from "../src/content/tours";
 import { worlds } from "../src/content/tours/worlds";
+import { arcRecordingsWorld, getArcRecordingsTour } from "../src/content/arc-explorer/recordings";
 
 const products = Object.keys(worlds);
+const tourPath = (slug: string) => slug === "arc" ? "/work/arc/recordings" : `/work/${slug}`;
 
 function filmByTitle(page: Page, title: string) {
   return page.getByTestId("product-film").filter({ has: page.getByRole("heading", { level: 3, name: title, exact: true }) });
@@ -32,8 +34,8 @@ async function expectBelowNavigation(page: Page, target: Locator) {
 }
 
 for (const slug of products) {
-  const world = worlds[slug];
-  const tour = getProductTour(slug)!;
+  const world = slug === "arc" ? arcRecordingsWorld : worlds[slug];
+  const tour = slug === "arc" ? getArcRecordingsTour() : getProductTour(slug)!;
 
   test(`${slug}: configured screens, crops, films and captions have intact source assets`, async ({ request }) => {
     const ids = tour.screens.map(screen => screen.id);
@@ -81,7 +83,7 @@ for (const slug of products) {
     test(`${slug} at ${width}px: all story anchors expose their headings below navigation`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
       await page.emulateMedia({ reducedMotion: "reduce" });
-      await page.goto(`/work/${slug}`);
+      await page.goto(tourPath(slug));
       const navigation = page.getByRole("navigation", { name: "Inside this project", exact: true });
       for (const story of world.stories) {
         const target = page.locator(`[id="${story.id}"]`);
@@ -105,7 +107,7 @@ for (const slug of products) {
     const errors: string[] = [];
     page.on("pageerror", error => errors.push(error.message));
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto(`/work/${slug}`);
+    await page.goto(tourPath(slug));
     await expect(page.getByTestId("product-film")).toHaveCount(tour.films.length);
     for (const story of world.stories) {
       await expect(page.locator(`[id="${story.id}"]`).getByTestId("product-screens").locator("figure")).toHaveCount(story.screens.length);
@@ -146,7 +148,7 @@ for (const slug of products) {
 
   test(`${slug}: hero and companion links reach their full original screen`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto(`/work/${slug}`);
+    await page.goto(tourPath(slug));
     const overview = page.getByRole("link", { name: /^Download visual overview/ });
     await expect(overview).toHaveAttribute("href", `/media/projects/${slug}/depth/presentation-board.webp`);
     await expect(overview).toHaveAttribute("download", "");
@@ -168,7 +170,7 @@ for (const slug of products) {
   test(`${slug}: real product media loads on demand and the recording plays`, async ({ page, request, browserName }) => {
     const videoRequests: string[] = [];
     page.on("request", request => { if (/\.mp4(?:\?|$)/.test(request.url())) videoRequests.push(request.url()); });
-    await page.goto(`/work/${slug}`);
+    await page.goto(tourPath(slug));
     await expect(page.getByTestId("product-case-study")).toBeVisible();
     const screens = page.getByTestId("product-screens").locator("figure");
     expect(await screens.count()).toBeGreaterThanOrEqual(4);
