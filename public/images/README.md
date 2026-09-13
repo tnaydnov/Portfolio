@@ -22,7 +22,7 @@ The initial generated background did not provide usable transparency. A subseque
 
 The homepage uses a **2.5D layered portrait**. The portrait is not a rigged or rotatable 3D model. CSS clips matched body, wrist and hand layers from the same artwork. The Web Animations API supplies a brief wrist wave; a masked eye layer supplies the blink. Hand pivots and eye masks were remapped to the regenerated pose.
 
-An SVG color matrix keys the white background at render time. The surrounding mist-and-teal window, depth layers, lighting shapes and all motion are code. Mouse parallax uses a small eased angle.
+An SVG color matrix keys the white background at render time. It is attached to each image before the surrounding layer is clipped or animated; an animated child can bypass a filter on its ancestor in WebKit. The September 13 rendering fix changes this compositing boundary without regenerating, resizing or retouching the portrait assets. The surrounding mist-and-teal window, depth layers, lighting shapes and all motion are code. Mouse parallax uses a small eased angle.
 
 - Introduction, navigation and work content are server-rendered.
 - The initial wave waits for the portrait to load and enter view. Visitors can replay it.

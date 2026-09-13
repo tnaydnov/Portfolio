@@ -14,7 +14,9 @@ export const EARLIER_ENGINEERING: Project[] = [lpr, tradingSystem, ...reps].map(
   return { ...project, oneLiner:study.oneLiner, stack:study.stack,
     snapshot:project.snapshot ?? {
       problem:study.oneLiner, move:study.summary,
-      contribution:"University coursework preserved in my repository. The available history does not establish individual ownership of every subsystem, so this study describes the implementation without claiming sole authorship of the whole project.",
+      contribution:project.slug === "set-card-game"
+        ? "I implemented the player, dealer and shared-table coordination within the supplied university game framework."
+        : "I developed this project as university coursework. This case covers my implementation and the engineering decisions behind it.",
       proof:"Source reviewed at a pinned revision. The visuals explain implementation with illustrative data; no fresh application run is claimed.",
     },
     sections:project.sections ?? [{stage:"build" as const,heading:study.visualTitle,body:[study.summary]}],

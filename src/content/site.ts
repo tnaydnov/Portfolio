@@ -12,12 +12,13 @@ export const experienceTimeline: {
     span: "Nitzanim tenure · 2023 — present",
     title: "EdTech Project Leader & Content Developer",
     org: "Nitzanim",
-    summary: "Lead educational projects, develop learning content and help turn field needs into digital products. Earlier work at Nitzanim included programming instruction.",
+    summary: "Lead educational projects, develop learning content and build software around the needs of students and staff. Earlier work at Nitzanim included programming instruction.",
     details: [
       "Work with clients and educational stakeholders to clarify needs, define requirements and deliverables, and keep expectations aligned.",
       "Develop syllabuses, presentations, lesson plans, instructor guides and programming exercises for different audiences and starting points.",
       "Build project timelines and Gantt plans, break initiatives into tasks and coordinate work through testing and delivery.",
-      "Co-develop Arc Academy with another engineer: translate field needs into product requirements, prioritise improvements, test workflows and coordinate rollout with instructors and relevant teams.",
+      "Co-develop Arc and Browser Coder with one coworker, from user needs and product decisions to implementation, rollout and ongoing support.",
+      "Both products are live, serving a combined learning community of 3,000+ students, instructors and managers. We continue to support and expand them.",
     ],
     current: true,
   },
@@ -69,7 +70,7 @@ export const brief: {
   },
   {
     term: "The work",
-    def: "Follow a problem from discovery and planning through implementation and revision.",
+    def: "Build a useful product from scratch: understand a need, explore ideas, write the software and keep improving it.",
   },
   {
     term: "The distance to users",
@@ -77,7 +78,7 @@ export const brief: {
   },
   {
     term: "What I bring",
-    def: "Requirements, delivery planning and hands-on engineering, with clear communication throughout.",
+    def: "Software engineering, product thinking and the drive to turn a good idea into something people can use.",
   },
 ];
 export const now: {
@@ -87,7 +88,7 @@ export const now: {
   label: "Now",
   items: [
     "Leading EdTech projects and developing learning content at Nitzanim.",
-    "Co-developing Arc Academy and contributing to Browser Coder.",
+    "Building, supporting and expanding Arc and Browser Coder with one coworker.",
     "Studying Industrial Engineering & Management at Shenkar.",
   ],
 };

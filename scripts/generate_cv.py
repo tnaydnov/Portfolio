@@ -61,12 +61,12 @@ def build_cv(contact_source: Path, output: Path, font_dir: Path) -> None:
         story.append(HRFlowable(width="100%", thickness=.5, color=RULE, spaceAfter=5))
 
     p("Tomer Naydnov", "name")
-    p("Software engineer | EdTech project leader &amp; content developer", "role")
+    p("Software engineer | Product builder", "role")
     p(f'{escape(phone)} &nbsp; | &nbsp; <link href="mailto:{escape(email)}" color="#50676a">{escape(email)}</link> &nbsp; | &nbsp; <link href="https://tomer-naydnov.com" color="#50676a">tomer-naydnov.com</link>', "contact")
     p('<link href="https://www.linkedin.com/in/tomer-naydnov/" color="#50676a">linkedin.com/in/tomer-naydnov</link> &nbsp; | &nbsp; <link href="https://github.com/tnaydnov" color="#50676a">github.com/tnaydnov</link>', "contact")
 
     section("Profile")
-    p("Software engineer and EdTech project leader working across stakeholder requirements, learning content, delivery planning and hands-on product development. Currently studying toward an M.Sc. in Industrial Engineering &amp; Management.")
+    p("Software engineer who loves creating products, from understanding user needs and shaping ideas to implementation, launch and continued improvement. Currently studying toward an M.Sc. in Industrial Engineering &amp; Management.")
 
     section("Experience")
     p("EdTech Project Leader &amp; Content Developer | Nitzanim", "entry")
@@ -88,10 +88,11 @@ def build_cv(contact_source: Path, output: Path, font_dir: Path) -> None:
     p("Ben-Gurion University of the Negev", "body")
 
     section("Selected products & engineering")
+    p("With one coworker, I co-develop Arc and Browser Coder. Both are live, continually supported and expanded, serving 3,000+ students, instructors and managers across the combined platform.")
     p('<link href="https://tomer-naydnov.com/work/arc" color="#172f35">Arc Academy</link> | Co-developer | 2026-present', "project")
-    p("Co-develop a learning platform connecting curriculum, classroom delivery, student work, feedback and reporting. Contribute to product workflows, architecture, testing and rollout with another engineer.")
-    p('<link href="https://github.com/ninasokolov8/browser-coder" color="#172f35">Browser Coder</link> | Collaborating engineer | Since April 2026', "project")
-    p("Contribute to a browser coding environment: classroom embedding, debugging, execution feedback and Python Turtle graphics, alongside architecture and reliability improvements.")
+    p("Build a learning platform connecting curriculum, classroom delivery, student work, feedback and reporting, with continued work on product workflows, architecture, testing and rollout.")
+    p('<link href="https://github.com/ninasokolov8/browser-coder" color="#172f35">Browser Coder</link> | Co-developer | Since April 2026', "project")
+    p("Build and improve a browser coding environment: classroom embedding, debugging, execution feedback and Python Turtle graphics.")
     p('<link href="https://github.com/tnaydnov/Applytide" color="#172f35">Applytide</link> | Independent full-stack project | Source archived', "project")
     p("Designed and built job-application workflows, document tools, reminders and interview preparation using React, TypeScript, FastAPI, PostgreSQL, Redis, Docker and the OpenAI API.")
     p('<link href="https://github.com/tnaydnov/eventa" color="#172f35">Eventa</link> | Independent product | Discontinued; source public', "project")

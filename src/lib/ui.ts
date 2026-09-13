@@ -54,11 +54,11 @@ export const ui = {
   },
   "home": {
     "heroWord": "Build",
-    "heroPron": "Software · Learning · Delivery",
+    "heroPron": "Software · Products · Iteration",
     "heroDefinition": "Useful products start with a clear understanding of the people using them.",
     "heroStatementLead": "Understand the need.",
     "heroStatementBold": "Build something useful.",
-    "heroStatementRest": "I work across requirements, learning content, project delivery and software.",
+    "heroStatementRest": "I love creating products, from understanding people's needs to writing the code and improving what comes next.",
     "seeTheLoop": "See the loop",
     "theEvidence": "The evidence",
     "skipTheLoop": "Skip the loop ↓",
@@ -76,13 +76,13 @@ export const ui = {
     "classroomHeading": "Teaching changed how I explain things.",
     "classroomBody": [
       "Earlier programming instruction taught me to notice where an explanation stopped making sense. I adapted the sequence, examples and level of detail to different learners.",
-      "That experience now informs the learning content and digital products I develop. Clear requirements start with understanding the audience."
+      "That experience shapes how I build products: understand the people using them, make the next step clear and listen when something needs to change."
     ],
     "classroomRule": "Make the next step understandable."
   },
   "work": {
     "title": "Work",
-    "intro": "Educational platforms, independent products and earlier engineering work. Explore the problem, my role and the details behind each project.",
+    "intro": "Products I developed independently and two live products I build with one coworker. Explore the needs, decisions and details behind the software.",
     "selectedTitle": "Selected work",
     "selectedIntro": "A closer look at what I built, how it works and what I contributed.",
     "filterNote": "Explore projects by the stage of work you are interested in.",
@@ -90,7 +90,7 @@ export const ui = {
     "repsTitle": "Earlier engineering work",
     "repsSpan": "University projects",
     "repsHeading": "Earlier engineering work.",
-    "repsIntro": "Team and university projects that developed my engineering practice.",
+    "repsIntro": "Independently developed university projects that shaped my engineering practice.",
     "colProject": "Project",
     "colSpan": "Span",
     "colStack": "Stack",
@@ -115,16 +115,16 @@ export const ui = {
   },
   "about": {
     "title": "About",
-    "lede": "I'm a software engineer working across educational projects, learning content and digital products.",
+    "lede": "I'm a software engineer who loves creating products from scratch. Understanding what people need, exploring ideas, writing the code and seeing it come to life—that's the part that excites me.",
     "thesisLabel": "Approach",
     "thesisBody": [
-      "I start by understanding the workflow and the people using it. Then I turn that into clear requirements, a delivery plan and working software.",
+      "I start with the people who will use a product. I explore ideas, make the requirements clear and build the software, then stay involved through support and the next improvement.",
       "Earlier work in technical support and programming instruction taught me to look past the first symptom and make complicated ideas easier to understand."
     ],
     "teachingLabel": "What teaching taught me",
     "wantLabel": "The work I'm interested in",
     "wantBody": [
-      "Technical product and engineering work with clear ownership, direct user feedback and room to build."
+      "Software engineering work where I can help shape a product, build it and keep improving it with the people who use it."
     ],
     "getInTouch": "Get in touch",
     "experienceTitle": "Experience",
@@ -139,17 +139,17 @@ export const ui = {
   },
   "contact": {
     "title": "Contact",
-    "lede": "An interesting role, a product question or an idea worth exploring. I'd be glad to hear about it.",
+    "lede": "A product to build, an idea to explore or an engineering role worth talking about. I'd be glad to hear from you.",
     "based": "Based",
     "basedValue": "Israel time",
     "lookingFor": "Interested in",
-    "lookingForValue": "Technical product, software engineering and educational technology. Work that connects a real need to a useful product.",
+    "lookingForValue": "Software engineering and product development, from understanding the need to building, supporting and improving the result.",
     "cv": "CV",
     "downloadPdf": "Download PDF ↓",
     "briefTitle": "The brief",
     "briefHeading": "A few lines are enough.",
     "briefIntro": "Tell me what you're working on and where I could help.",
-    "footerNote": "Get in touch about technical product, software engineering and EdTech projects."
+    "footerNote": "Get in touch about software engineering, product development or an idea worth building."
   },
   "notFound": {
     "label": "No route",

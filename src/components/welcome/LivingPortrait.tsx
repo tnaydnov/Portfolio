@@ -10,6 +10,9 @@ const waveFrames = [0, -8, 6, -6, 3, 0].map((degrees) => ({ transform: `rotate($
 
 export function LivingPortrait() {
   const matteId = `portrait-matte-${useId().replaceAll(":", "")}`;
+  // Key each image before its wrapper is clipped or animated. WebKit can
+  // composite a moving child without an SVG filter on its ancestor.
+  const matte = { filter: `url(#${matteId})` };
   const stage = useRef<HTMLDivElement>(null);
   const hand = useRef<HTMLDivElement>(null);
   const animation = useRef<Animation | null>(null);
@@ -137,14 +140,14 @@ export function LivingPortrait() {
       <div className={styles.orbit} aria-hidden="true" />
       <div className={styles.hello} aria-hidden="true"><span>&lt;hello /&gt;</span><svg viewBox="0 0 60 45" fill="none"><path d="M5 4c25-4 44 8 42 28m-9-5 9 9 7-12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg></div>
       <div className={styles.portraitWindow}>
-        <div className={styles.person} style={{ filter: `url(#${matteId})` }}>
+        <div className={styles.person}>
           <div className={styles.body}>
-            <Image src={portrait} width={1024} height={1536} sizes={sizes} quality={95} priority alt="Tomer Naydnov smiling and raising a hand in welcome" onLoad={() => setLoaded(true)} onError={() => setFailed(true)} />
+            <Image src={portrait} width={1024} height={1536} sizes={sizes} quality={95} style={matte} priority alt="Tomer Naydnov smiling and raising a hand in welcome" onLoad={() => setLoaded(true)} onError={() => setFailed(true)} />
           </div>
           {!failed && <>
-            <div className={styles.wrist} aria-hidden="true"><Image src={portrait} width={1024} height={1536} sizes={sizes} quality={95} alt="" /></div>
-            <div ref={hand} className={styles.hand} aria-hidden="true"><Image src={portrait} width={1024} height={1536} sizes={sizes} quality={95} alt="" /></div>
-            <div className={styles.blink} aria-hidden="true"><Image src="/images/tomer-blink.webp?v=3" width={1024} height={1536} sizes={sizes} quality={95} alt="" loading="eager" /></div>
+            <div className={styles.wrist} aria-hidden="true"><Image src={portrait} width={1024} height={1536} sizes={sizes} quality={95} style={matte} alt="" /></div>
+            <div ref={hand} className={styles.hand} aria-hidden="true"><Image src={portrait} width={1024} height={1536} sizes={sizes} quality={95} style={matte} alt="" /></div>
+            <div className={styles.blink} aria-hidden="true"><Image src="/images/tomer-blink.webp?v=3" width={1024} height={1536} sizes={sizes} quality={95} style={matte} alt="" loading="eager" /></div>
           </>}
         </div>
       </div>

@@ -361,7 +361,7 @@
       "Queue and network behavior are prototype-grade. The Python queue is bounded, but Redis input/output lists are not; the poller busy-loops and OCR HTTP calls have no timeout. Do not describe the complete system as fully bounded or fault tolerant.",
       "Startup clears Redis globally. Both video startup and the new-architecture tester call flushall. Any future local execution must use an isolated Redis container and ports.",
       "Evaluation contracts need reconciliation. New tester expects tracked_plates, but no active production caller invokes log_results; older tests import missing classes or call superseded signatures. Syntax parsing passed but does not prove tests pass.",
-      "Videos and reproducible training history are absent. Full videos are ignored, model weights are tracked, and this revision has no training script/configuration or held-out benchmark report. Existing user-stated training/data contribution remains valid as self-described team work; this snapshot cannot independently attribute it.",
+      "Videos and reproducible training history are absent. Full videos are ignored, model weights are tracked, and this revision has no training script/configuration or held-out benchmark report. My development, data preparation and training work are described above; this source snapshot does not provide a reproducible training record.",
       "Desktop paths and container mounts differ. A path picked on Windows is sent directly to the service, while Compose mounts only ./recordings at /app/recordings. A future run must map/copy only authorized local fixtures."
     ],
     "visualTitle": "One frame, four decisions",
@@ -371,7 +371,7 @@
     "slug": "trading-system",
     "title": "Trading System — Multi-store Marketplace",
     "oneLiner": "A multi-store marketplace with delegated permissions, composable basket rules and checkout recovery.",
-    "summary": "A purchase crosses several kinds of rules: who may manage a store, which baskets are allowed, how discounts combine, and what happens if payment or supply fails. This Java team project models those boundaries with explicit domain objects and service contracts.",
+    "summary": "A purchase crosses several kinds of rules: who may manage a store, which baskets are allowed, how discounts combine, and what happens if payment or supply fails. I built this university Java project around explicit domain objects and service contracts for those boundaries.",
     "revision": "048e46bf2ac9191e241ce52cda1c9c05d672d4ee",
     "repo": "https://github.com/tnaydnov/Trading_System",
     "stack": [
@@ -687,7 +687,7 @@
       {
         "title": "Represent delegated authority as a graph",
         "implementation": "Store records nominationGraph and reverseNominationMap alongside per-store subscriber states and manager permissions. waiveOwnership performs a breadth-first traversal and removes all collected appointments.",
-        "rationale": "Revocation has consequences beyond the selected person. Explicit relationships make that cascade visible and give the team a common domain rule. This benefit is inferred from the code, not an author quotation. The graph, role map, permission map and user-facing store-role map must remain consistent. The audit found stale graph-link and declined-nomination bookkeeping edges; this is a modeling decision, not proof of complete authorization correctness.",
+        "rationale": "Revocation has consequences beyond the selected person. Explicit relationships make that cascade visible through a common domain rule. This benefit is inferred from the code, not an author quotation. The graph, role map, permission map and user-facing store-role map must remain consistent. The audit found stale graph-link and declined-nomination bookkeeping edges; this is a modeling decision, not proof of complete authorization correctness.",
         "sources": [
           {
             "label": "Store.java",

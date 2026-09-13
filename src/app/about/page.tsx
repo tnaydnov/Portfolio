@@ -10,9 +10,9 @@ export const metadata = pageMetadata({ path: "/about", title: ui.about.title, de
 
 const workflow = [
   { title: "Understand", body: "Talk to the people involved. Find the need behind the first request." },
-  { title: "Define", body: "Make the requirements, priorities and next steps clear." },
-  { title: "Build", body: "Connect content, workflows and software into something usable." },
-  { title: "Review", body: "Test the result, listen to feedback and improve the next version." },
+  { title: "Shape", body: "Explore ideas, make choices and define what the product needs to do." },
+  { title: "Build", body: "Work through the design, code and details that make it usable." },
+  { title: "Improve", body: "Support it after launch, listen to feedback and build the next version." },
 ];
 
 export default function AboutPage() {
@@ -31,9 +31,10 @@ export default function AboutPage() {
         <section id="current" className={styles.currentWork} aria-labelledby="current-work-title">
           <p className={styles.kicker}><span className={styles.statusDot} aria-hidden="true" />Current work / Nitzanim</p>
           <h2 id="current-work-title">{site.role}</h2>
-          <p>I lead educational projects, develop learning content and co-develop Arc Academy with another engineer.</p>
-          <div className={styles.currentScope}><span>Requirements</span><span>Content</span><span>Delivery</span></div>
-          <Link href="/work/arc">Explore Arc Academy <span aria-hidden="true">↗</span></Link>
+          <p>I lead educational projects and develop learning content. One coworker and I also develop and support Arc and Browser Coder.</p>
+          <p>Both products are live and continually expanded, serving 3,000+ students, instructors and managers across the combined platform.</p>
+          <div className={styles.currentScope}><span>Product development</span><span>Support</span><span>Iteration</span></div>
+          <Link href="/work">Explore the products <span aria-hidden="true">↗</span></Link>
         </section>
       </header>
 
@@ -47,8 +48,8 @@ export default function AboutPage() {
       <section id="experience" className={styles.splitSection} aria-labelledby="experience-title">
         <div className={styles.sectionHeading}>
           <p className={styles.kicker}>02 / Experience</p>
-          <h2 id="experience-title">From support to EdTech.</h2>
-          <p>Technical support and earlier teaching work shaped how I investigate problems and explain decisions.</p>
+          <h2 id="experience-title">What shaped how I build.</h2>
+          <p>Technical support and earlier teaching work shaped how I investigate problems, explain decisions and understand the people using my software.</p>
         </div>
         <ExperienceTimeline entries={experienceTimeline} labels={{ current: ui.about.currentRole, roleDetails: ui.about.roleDetails, closeDetails: ui.about.closeDetails, responsibilities: ui.about.responsibilities }} />
       </section>
@@ -64,8 +65,8 @@ export default function AboutPage() {
 
       <section id="approach" className={styles.approach} aria-labelledby="approach-title">
         <div className={styles.approachHeading}>
-          <div><p className={styles.kicker}>04 / Approach</p><h2 id="approach-title">Keep the work connected.</h2></div>
-          <p>Stay close to the people using the result, from the first conversation through the next improvement.</p>
+          <div><p className={styles.kicker}>04 / Approach</p><h2 id="approach-title">I enjoy the whole process.</h2></div>
+          <p>Understanding the need, exploring an idea, writing the code and seeing what needs to change once people use it.</p>
         </div>
         <ol className={styles.process}>
           {workflow.map((step, index) => (

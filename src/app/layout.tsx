@@ -16,14 +16,14 @@ export const viewport: Viewport = { themeColor: "#e7eeee" };
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: `${site.name} — ${site.role}`, template: `%s — ${site.name}` },
+  title: { default: `${site.name} — ${site.positioning}`, template: `%s — ${site.name}` },
   description: site.description,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — ${site.role}`,
+    title: `${site.name} — ${site.positioning}`,
     description: site.description,
   },
   twitter: { card: "summary_large_image" },

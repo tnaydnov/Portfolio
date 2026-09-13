@@ -1,7 +1,7 @@
 import type { ProjectWorld } from "./worlds";
 export const browserWorld: ProjectWorld = {
   headline: "Make the next line make sense.",
-  description: "A browser-based programming workbench for learning by doing. Write code, understand a mistake, inspect a running program and watch an idea become a drawing.",
+  description: "A programming workbench for learning by doing: write, debug and watch an idea become a drawing. Together, Arc and Browser Coder serve 3,000+ students, instructors and managers.",
   motif: "THE PROGRAMMING WORKBENCH",
   roles: ["Programming learners", "Teachers", "Learning platforms"],
   hero: "geometry-result", companion: "checks-passing",

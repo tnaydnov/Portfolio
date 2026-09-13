@@ -129,6 +129,93 @@ test("the portrait loads and its greeting can be replayed with the keyboard", as
   expect(errors).toEqual([]);
 });
 
+test("animated portrait layers preserve transparency and a visible waving hand", async ({ browser, baseURL }, testInfo) => {
+  test.setTimeout(90_000);
+  for (const width of [320, 390, 768, 1440]) {
+    const context = await browser.newContext({
+      baseURL,
+      viewport: { width, height: width < 600 ? 844 : 1000 },
+      deviceScaleFactor: 2,
+      isMobile: width < 600,
+      hasTouch: width < 600,
+      reducedMotion: "no-preference",
+    });
+    const page = await context.newPage();
+    const errors: string[] = [];
+    page.on("pageerror", error => errors.push(error.message));
+    try {
+      await page.goto("/");
+      const portrait = page.getByTestId("living-portrait");
+      await portrait.scrollIntoViewIfNeeded();
+      await expect(portrait).toHaveAttribute("data-moving", "true");
+      await portrait.locator("img").evaluateAll(images => Promise.all(images.map(image => (image as HTMLImageElement).decode())));
+      await expect(portrait.getByRole("button", { name: "Hey there!", exact: true })).toBeDisabled();
+      const wave = portrait.getByRole("button", { name: "Wave hello", exact: true });
+      await expect(wave).toBeEnabled();
+
+      // An animated child can bypass its ancestor's SVG filter on iOS Safari.
+      // Every independently composited image must key its own white background.
+      const boundaries = await portrait.locator("img").evaluateAll(images => images.map(image => {
+        const filter = getComputedStyle(image).filter;
+        const filterId = filter.match(/#([^)"]+)/)?.[1];
+        return { keyed: Boolean(filterId && document.getElementById(filterId)), ancestorFilter: getComputedStyle(image.parentElement!.parentElement!).filter };
+      }));
+      expect(boundaries).toHaveLength(4);
+      expect(boundaries.every(layer => layer.keyed && layer.ancestorFilter === "none")).toBe(true);
+
+      // Stabilize breathing/blinking, while retaining the real running wave.
+      await portrait.evaluate(element => element.getAnimations({ subtree: true }).forEach(animation => {
+        if (animation instanceof CSSAnimation) { animation.pause(); animation.currentTime = 0; }
+      }));
+      await wave.click();
+      await expect(portrait.getByRole("button", { name: "Hey there!", exact: true })).toBeDisabled();
+      const hand = portrait.locator('[class*="hand"]');
+      const animation = await hand.evaluateHandle(element => element.getAnimations().find(item => !(item instanceof CSSAnimation) && !(item instanceof CSSTransition))!);
+      const poses: string[] = [];
+      for (const at of [380, 760, 1140]) {
+        const pose = await animation.evaluate((item, time) => {
+          item.playbackRate = 0;
+          item.currentTime = time;
+          return { state: item.playState, transform: getComputedStyle((item.effect as KeyframeEffect).target!).transform };
+        }, at);
+        expect(pose.state).toBe("running");
+        poses.push(pose.transform);
+        const stage = (await portrait.boundingBox())!;
+        const body = (await portrait.locator("img").first().boundingBox())!;
+        const screenshot = await portrait.screenshot({ scale: "css", animations: "allow" });
+        const pixels = await page.evaluate(async ({ png, crop }) => {
+          const image = new Image();
+          image.src = `data:image/png;base64,${png}`;
+          await image.decode();
+          const canvas = document.createElement("canvas");
+          canvas.width = image.width;
+          canvas.height = image.height;
+          const context = canvas.getContext("2d")!;
+          context.drawImage(image, 0, 0);
+          const { data } = context.getImageData(0, 0, canvas.width, canvas.height);
+          let white = 0, skin = 0, handArea = 0;
+          for (let y = 0; y < canvas.height; y++) for (let x = 0; x < canvas.width; x++) {
+            const index = (y * canvas.width + x) * 4;
+            const [r, g, b] = [data[index], data[index + 1], data[index + 2]];
+            if (r >= 247 && g >= 247 && b >= 247) white++;
+            if (x >= crop.x && x < crop.x + crop.width && y >= crop.y && y < crop.y + crop.height) {
+              handArea++;
+              if (r > 115 && g > 60 && b > 35 && r > g + 12 && g > b + 6) skin++;
+            }
+          }
+          return { whiteRatio: white / (canvas.width * canvas.height), visibleHandRatio: skin / handArea };
+        }, { png: screenshot.toString("base64"), crop: { x: body.x - stage.x, y: body.y - stage.y + body.height * .07, width: body.width * .32, height: body.height * .275 } });
+        await testInfo.attach(`${width}px-wave-${at}ms`, { body: screenshot, contentType: "image/png" });
+        expect(pixels.whiteRatio, `${width}px at ${at}ms must not expose the white studio rectangle`).toBeLessThan(.0005);
+        expect(pixels.visibleHandRatio, `${width}px at ${at}ms must retain the waving hand`).toBeGreaterThan(.15);
+      }
+      expect(new Set(poses).size).toBe(3);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+      expect(errors).toEqual([]);
+    } finally { await context.close(); }
+  }
+});
+
 test("portrait motion can be paused and resumed without disabling the greeting", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");

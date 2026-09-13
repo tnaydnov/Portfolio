@@ -17,19 +17,19 @@ export function WelcomeHome() {
         </div>
         <LivingPortrait />
         <div className={styles.intro}>
-          <p className={styles.lead}><span>Good learning needs</span>{" "}<span>good building.</span></p>
-          <p className={styles.description}>I lead educational projects, develop learning content, and build the software that connects them.</p>
+          <p className={styles.lead}><span>I love turning ideas</span>{" "}<span>into useful products.</span></p>
+          <p className={styles.description}>I&apos;m a software engineer who loves building from scratch: understanding people&apos;s needs, shaping ideas, and making them work.</p>
           <div className={styles.roles} aria-label="What I do">
-            <span>Software engineer</span><span>EdTech project leader</span><span>Content developer</span>
+            <span>Software engineer</span><span>Product builder</span>
           </div>
           <div className={styles.actions}>
             <Link className={styles.primary} href="/work">Explore my work<Arrow /></Link>
             <Link className={styles.about} href="/about">A little about me<Arrow diagonal /></Link>
           </div>
-          <p className={styles.current}><span aria-hidden="true" />At Nitzanim. Building with the <Link href="/work/arc">Arc</Link> &amp; <Link href="/work/browser-coder">Browser Coder</Link> teams.</p>
+          <p className={styles.current}><span aria-hidden="true" />At Nitzanim. Building and supporting <Link href="/work/arc">Arc</Link> &amp; <Link href="/work/browser-coder">Browser Coder</Link> with one coworker.</p>
         </div>
         <div className={styles.footnote}>
-          <p><span className={styles.footLabel}>My kind of work</span>People → ideas → useful software.</p>
+          <p><span className={styles.footLabel}>My kind of work</span>Understand. Create. Keep improving.</p>
           <a href="#home-context-title">A closer look<Arrow /></a>
         </div>
       </div>

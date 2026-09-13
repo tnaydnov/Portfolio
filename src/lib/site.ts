@@ -1,8 +1,9 @@
 export const site = {
   name: "Tomer Naydnov",
   role: "EdTech Project Leader & Content Developer",
+  positioning: "Software Engineer & Product Builder",
   url: "https://tomer-naydnov.com",
-  description: "Software engineer and EdTech project leader. I develop learning content, lead educational projects and build useful digital products.",
+  description: "I'm Tomer, a software engineer who loves building products from scratch: understanding people's needs, shaping ideas and turning them into useful apps.",
   email: "tnaydnov@gmail.com",
   location: "Israel time",
   links: {

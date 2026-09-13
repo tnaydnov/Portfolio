@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
-export const alt = "Hey, I'm Tomer. Software engineer, EdTech project leader and content developer.";
+export const alt = "Hey, I'm Tomer. Software engineer and product builder. From understanding people to bringing ideas to life.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -32,11 +32,11 @@ export default async function OpengraphImage() {
           Hey, I&apos;m Tomer.
         </div>
         <div style={{ display: "flex", flexDirection: "column", marginTop: 29, gap: 7, color: "#067c68", fontSize: 24, lineHeight: 1.35 }}>
-          <div>Software engineer · EdTech project leader</div>
-          <div>Content developer</div>
+          <div>Software engineer · Product builder</div>
+          <div>Curious about people. Excited to build.</div>
         </div>
         <div style={{ display: "flex", maxWidth: 570, marginTop: 28, color: "#50676a", fontSize: 25, lineHeight: 1.5 }}>
-          I lead educational projects, develop learning content, and build the software that connects them.
+          I love building products from scratch. Understanding people, shaping ideas, and making them work.
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: "auto", color: "#067c68", fontSize: 20 }}>
           {new URL(site.url).hostname}

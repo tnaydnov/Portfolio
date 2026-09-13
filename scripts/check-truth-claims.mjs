@@ -10,8 +10,12 @@ const globalBlocks = [
   { id: "english-only-publication", pattern: /[\u0590-\u05ff\ufb1d-\ufb4f]/u },
   { id: "arc-650", pattern: /650\+|650\s+students?/i },
   { id: "arc-uncleared-scale", pattern: /1,?300\+|50\+\s+instructors?|80\+\s+schools?/i },
-  { id: "arc-three-years", pattern: /three years of classroom|3\s*yrs?|arc in production/i },
-  { id: "arc-current-use", pattern: /still in use|continuous use across|organisation-wide|organization-wide/i },
+  { id: "arc-three-years", pattern: /three years of classroom|3\s*yrs?/i },
+  // The owner confirmed both products are live on 2026-09-13. The 3,000+
+  // audience is combined across Arc and Browser Coder and includes staff.
+  { id: "unsupported-organization-coverage", pattern: /continuous use across|organisation-wide|organization-wide/i },
+  { id: "combined-audience-not-students-only", pattern: /3,?000\+?\s+(?:active\s+)?students?\b(?!,?\s+instructors)/i },
+  { id: "combined-audience-not-per-product", pattern: /\b(?:each|per (?:app|product|platform))\b.{0,24}3,?000\+?/i },
   { id: "arc-sole-creator", pattern: /\bI (created|built) Arc\b|\bsole (creator|developer) of Arc\b/i },
   { id: "unsupported-classroom-count", pattern: /hundreds of live explanations|thirty faces/i },
   { id: "seasonal-timezone", pattern: /GMT\+3/i },

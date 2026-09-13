@@ -8,18 +8,18 @@ export const lpr: Project = {
   snapshot: {
     problem: "Distance, angle, lighting, and motion blur change the input at every stage of continuous plate recognition.",
     move: "Find moving vehicles, track them across frames, associate plate crops with those tracks, and display the recognition results.",
-    contribution: "On a five-person team, I focused on motion detection, gathering and preparing data, training and fine-tuning the recognition models, and pipeline integration.",
-    proof: "The upstream team repository preserves the Python services, model weights, annotated evaluation data, and PyQt viewer. This review establishes source behavior, without a fresh inference run or benchmark.",
+    contribution: "My development work covered motion detection, data preparation, model training and fine-tuning, and recognition-pipeline integration.",
+    proof: "The upstream repository preserves the Python services, model weights, annotated evaluation data, and PyQt viewer. This review establishes source behavior, without a fresh inference run or benchmark.",
   },
   tier: "system",
   stages: ["frame", "build", "prove"],
   domain: ["applied-ai", "platform"],
-  role: "Motion detection · model training · plate analysis",
-  team: "Five-person university team",
+  role: "Developer · computer vision & pipeline integration",
+  team: "University capstone",
   started: "2024-11",
   ended: "2025-07",
   status: "archived",
-  statusLabel: "Completed team project",
+  statusLabel: "Completed university project",
   statusDetail: "University project with source preserved in the upstream repository and an archived personal mirror.",
   evidenceNote: "Upstream source reviewed in September 2026. The current path recognizes and visualizes plates; older authorization logic is not connected to it. No published accuracy result or fresh inference run is claimed.",
   metrics: [
@@ -92,18 +92,18 @@ export const tradingSystem: Project = {
   snapshot: {
     problem: "Store ownership, delegated permissions, purchases, and external integrations all depend on precise shared rules.",
     move: "Model nomination and revocation as a graph, compose basket rules, and separate stock reservation from payment and supply actions.",
-    contribution: "I contributed to the university team's implementation, working through specification and integration decisions across the shared system.",
+    contribution: "I developed marketplace behavior from the university specification, working across permissions, purchase rules, checkout and application integration.",
     proof: "The Java/Spring repository preserves the Vaadin interface, domain rules, and tests that use mocked payment and supply adapters to inspect order and stock changes.",
   },
   tier: "rep",
   stages: ["frame", "plan", "build"],
   domain: ["platform"],
-  role: "Contributor on a large team",
-  team: "University team project",
+  role: "Developer · domain modeling & application architecture",
+  team: "University coursework",
   started: "2024-05",
   ended: "2024-07",
   status: "archived",
-  statusLabel: "Completed team project",
+  statusLabel: "Completed university project",
   statusDetail: "The completed university project is preserved in an archived public repository.",
   evidenceNote: "Source reviewed in September 2026; no fresh runtime or test-pass claim. Active repositories are in memory, and current startup does not wire the payment and supply adapters.",
   metrics: [
@@ -117,8 +117,8 @@ export const tradingSystem: Project = {
   sections: [
     {
       stage: "frame",
-      heading: "Turn the specification into shared decisions",
-      body: ["This team project followed a detailed formal specification. Resolving ambiguous requirements together mattered because different interpretations could remain hidden until independently built components met."],
+      heading: "Turn the specification into consistent rules",
+      body: ["I built this project from a detailed formal specification. Resolving ambiguous requirements early mattered because different interpretations could remain hidden until the service, domain and interface layers met."],
     },
     {
       stage: "plan",
@@ -130,9 +130,9 @@ export const tradingSystem: Project = {
     },
     {
       stage: "build",
-      heading: "Keep parallel work compatible",
+      heading: "Keep the system boundaries consistent",
       body: [
-        "Separate service and domain layers gave the team shared boundaries for implementation and testing. Checkout reserves stock, calls payment and supply adapters, and attempts to cancel completed external actions if supply fails. Mock-based tests inspect the resulting inventory and per-store orders.",
+        "I separated service and domain layers to make their responsibilities explicit in implementation and testing. Checkout reserves stock, calls payment and supply adapters, and attempts to cancel completed external actions if supply fails. Mock-based tests inspect the resulting inventory and per-store orders.",
         "This is an academic implementation with in-memory repositories and unfinished deployment boundaries. The experience influenced how I later organized application behavior in Applytide.",
       ],
     },
@@ -158,7 +158,7 @@ export const tradingSystem: Project = {
     },
   ],
   rebuild: [
-    "Record ambiguous requirements and the team's agreed interpretation before implementation.",
+    "Record ambiguous requirements and their intended interpretation before implementation.",
     "Validate permission changes and revocation paths early in the integration plan.",
     "Persist reservations and orders, and recalculate the payable amount from trusted checkout state.",
     "Complete adapter wiring, user-interface state isolation, and durable compensation before deployment.",

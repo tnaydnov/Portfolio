@@ -8,20 +8,21 @@ export const arc: Project = {
   snapshot: {
     problem: "Curriculum planning, classroom delivery, and program reporting can lose context when the material, student work, and feedback live in separate tools.",
     move: "Give students, instructors, and program teams connected workspaces, preserving the relationship between reusable content, classroom activity, and reviewed work.",
-    contribution: "I co-develop the platform across typed application boundaries, permissions, realtime workflows, touch-friendly editors, and automated delivery checks.",
+    contribution: "I build, support, and continually expand Arc with one coworker. My work spans typed application boundaries, permissions, realtime workflows, touch-friendly editors, and automated delivery checks.",
     proof: "A live portal, dated contribution history, automated delivery checks, and real local captures of the development build across its learning and management portals.",
   },
   tier: "flagship",
   stages: ["signal", "frame", "plan", "build", "prove", "field"],
   domain: ["product", "education", "platform"],
   role: "Co-developer · platform & product engineering",
-  team: "Two engineers",
+  team: "Two developers · my coworker and me",
   started: "2026-01",
   status: "live",
-  statusLabel: "Live portal · Active development",
-  statusDetail: "The latest audited work is merged into development. Production and development have separate releases.",
+  statusLabel: "Live · Continuously supported",
+  statusDetail: "Actively supported and expanded by two developers. Together, Arc and Browser Coder serve 3,000+ students, instructors and managers.",
   evidenceNote: "Refreshed September 12, 2026 from the repository, product demo, workflow results and portal availability. The product tour runs development source with fictional classroom data in an isolated local database. Private source and learner records remain private; production has a separate release.",
   metrics: [
+    { label: "Shared platform reach", value: "3,000+ people", note: "Arc and Browser Coder combined: students, instructors and managers" },
     { label: "Student experience", value: "Five themes", note: "Aurora, Aurora Light, Neon Hacker, Magic Forest and Space" },
     { label: "Activity catalog", value: "21 registered kinds", note: "Individual work, live sessions and external integrations have different handlers" },
     { label: "Curriculum", value: "Rule-based drafts", note: "Reusable activities, editable before publishing" },
@@ -58,7 +59,7 @@ export const arc: Project = {
       stage: "build",
       heading: "Follow the workflow across technical boundaries",
       body: [
-        "I work on Arc with another engineer. My contributions include typed view models, portal and service refactors, authorization wiring, password handling, and a shared WebSocket-first update strategy with polling fallback.",
+        "One coworker and I develop and support Arc. My work includes typed view models, portal and service refactors, authorization wiring, password handling, and a shared WebSocket-first update strategy with polling fallback.",
         "Interaction work matters just as much: I added touch and pointer support to the collaborative flowchart editor, including tap-to-place for new shapes. Later work simplified shared frontend components and repaired keyboard, layout, and localization behavior across the portals.",
       ],
     },
@@ -75,7 +76,7 @@ export const arc: Project = {
       heading: "An evolving classroom platform",
       body: [
         "Arc connects to Browser Coder for programming tasks and Arc Gaming Center for game-based activities. The platform keeps the classroom, lesson, assignment, and progress context around those specialist experiences.",
-        "The public portal is online, and the latest audited contributions are merged into the shared development branch. The engineering challenge is keeping that growing product understandable for its users and maintainable across its portals.",
+        "Arc and Browser Coder are live products that we continually support and expand. Together they serve 3,000+ students, instructors and managers. The engineering challenge is keeping that growing platform understandable for its users and maintainable across its portals.",
       ],
     },
   ],
@@ -134,6 +135,6 @@ export const arc: Project = {
   rebuild: [
     "Make the relationship between development builds and production releases easier to inspect.",
     "Keep consolidating shared portal behavior as the number of activity types grows.",
-    "Define useful product measures before making claims about adoption or classroom outcomes.",
+    "Measure classroom outcomes separately from platform reach.",
   ],
 };
