@@ -10,7 +10,6 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   path: "/work/arc/recordings",
-  title: "Arc · Original application recordings",
   description:
     "Real Arc workflows recorded from the original application, with fictional data. Themes, live classrooms, curriculum and the feedback loop.",
 });

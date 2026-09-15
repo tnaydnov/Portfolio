@@ -47,6 +47,16 @@ The private, ignored `TRUTH_SOURCE.md` is the factual ledger. The September 2026
 
 `public/Tomer Naydnov.pdf` is the refreshed one-page CV. `scripts/generate_cv.py` reproduces its layout from verified portfolio facts. Canonical metadata and the sitemap use `https://tomer-naydnov.com`.
 
+## Identity and link previews
+
+Every page uses **Tomer Naydnov** as its browser tab, Open Graph and Twitter/X title. `src/lib/metadata.ts` supplies complete metadata per route, including its own canonical URL and description, the site name, English locale, and an absolute HTTPS preview image with dimensions, type and alternative text.
+
+`src/app/opengraph-image.tsx` renders the 1200 x 630 social card from the existing local portrait. Update the image version in `src/lib/site.ts` when changing the design. Sharing services cache previews independently, so existing messages may retain an older preview after deployment.
+
+The existing SVG TN mark has a multi-size ICO fallback, PNG browser/device icons, an opaque Apple touch icon and an Android maskable icon. Run `node scripts/generate-icons.mjs` to rebuild these from `src/app/icon.svg`. The web manifest uses the same name, description and colors.
+
+Publication text uses ordinary ASCII hyphens. The prebuild publication check also rejects long dashes and their escaped forms in application sources.
+
 ## Development
 
 Next.js 15, React 19, TypeScript and Tailwind CSS 4. Next/font serves Space Grotesk, Manrope and JetBrains Mono. Vercel enables analytics.

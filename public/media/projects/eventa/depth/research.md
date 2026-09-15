@@ -1,6 +1,6 @@
 # Eventa: four product worlds, one event lifecycle
 
-Audited 2026-09-12. Source repository `tnaydnov/eventa`, clean `main`, revision `103f9daeb56d30db13c7277a7d8259f2ed9d287c` — unchanged from the earlier capture. Original checkout was read only. Runtime evidence comes from an isolated snapshot, local Supabase and fictional people/events. No external order, payment, SMS, email or paid model request was submitted.
+Audited 2026-09-12. Source repository `tnaydnov/eventa`, clean `main`, revision `103f9daeb56d30db13c7277a7d8259f2ed9d287c` - unchanged from the earlier capture. Original checkout was read only. Runtime evidence comes from an isolated snapshot, local Supabase and fictional people/events. No external order, payment, SMS, email or paid model request was submitted.
 
 ## Coverage and confidence
 
@@ -21,7 +21,7 @@ Evidence: [customer explanation](https://github.com/tnaydnov/eventa/blob/103f9da
 
 ## The most useful portfolio stories
 
-### 1. Make it your event — customer website
+### 1. Make it your event - customer website
 
 The strongest customer story is personalization that carries from screen to venue. The original wizard accepts a background image, opens a portrait cropper, previews the result on a phone, offers distinct QR-poster templates and supports a design note before an editable order summary. This is more concrete than a generic landing-page scroll. The native how-it-works page supplies context but its embedded phones must remain labelled as the marketing-site demo.
 
@@ -29,7 +29,7 @@ Verified: actual original upload/crop controls, background preview, template sel
 
 Source: [StepBackground](https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/_components/wizard/steps/StepBackground.tsx#L152), [StepPoster](https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/_components/wizard/steps/StepPoster.tsx#L80), [StepSummary](https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/_components/wizard/steps/StepSummary.tsx), [ImageCropper](https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/components/ImageCropper.tsx#L90).
 
-### 2. Prepare the room — real organizer portal
+### 2. Prepare the room - real organizer portal
 
 The portal has its own event identity, contact consent gate, template/upload UI, actionable validation result, paginated guest list, timing explanation and built-in invitation preview. Source enforces a five-hour preparation lock before the event, plus archived-event restrictions. Contact fields are encrypted with searchable phone blind indexes. The isolated planning fixture has messaging-enabled access because the route currently requires that flag; outbound delivery remains disabled.
 
@@ -39,7 +39,7 @@ Source: [consent UI](https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c
 
 Important limits: the consent acknowledgement is stored, but the upload branch does not visibly enforce a prior consent record. Cross-file deduplication still queries removed plaintext `phone`, with the query error ignored; only within-upload deduplication was verified. The single-contact branch similarly writes stale `guest_name`; it was not presented as working. Name search is deliberately skipped after encryption although the placeholder still implies it. The invitation has an encryption badge despite an SMS disclaimer; do not repeat this as an end-to-end encryption claim.
 
-### 3. Meet on your terms — actual attendee app
+### 3. Meet on your terms - actual attendee app
 
 The guest surface supports event-scoped identity, profile photos/preferences, discovery, likes, mutual connections and conversation. The deeper story is that connection and personal control share the same product: a text draft survives an interruption, reconnecting persists it once, and a deliberate block removes the relationship and its conversation.
 
@@ -49,7 +49,7 @@ Source: [durable text outbox and stable idempotency key](https://github.com/tnay
 
 Privacy distinction: self-deletion is not the same operation as blocking. Despite stale comments/docs describing total deletion, the account route intentionally retains likes, blocks, conversations, messages and activity for analytics, deletes photos/notifications and anonymizes the participant's personal fields. Do not claim immediate total erasure. The text outbox has a 50-entry bound; image recovery has narrower session persistence and was not generalized from this successful text test. [Actual account deletion](https://github.com/tnaydnov/eventa/blob/103f9daeb56d30db13c7277a7d8259f2ed9d287c/src/app/api/account/delete/route.ts#L64).
 
-### 4. Understand the night — client reporting and operator oversight
+### 4. Understand the night - client reporting and operator oversight
 
 Six analytic modules produce event engagement, conversion, timing, demographic/crosstab, connection-network and safety information. A curated subset becomes a persisted client report. The operator retains the broader dashboard and safety/conversion views. These are separate audiences, not a single interchangeable admin screenshot.
 

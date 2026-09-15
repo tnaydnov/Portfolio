@@ -7,7 +7,7 @@ const NUMERIC = /^(\D*?)(\d[\d,]*)([\s\S]*)$/;
 
 /**
  * Counts a metric up when it scrolls into view. Non-numeric values (and reduced
- * motion) render as-is — the number is the content, the animation is not.
+ * motion) render as-is - the number is the content, the animation is not.
  */
 export function CountUp({
   value,

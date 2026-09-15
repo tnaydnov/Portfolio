@@ -1,5 +1,5 @@
 {
-  "title": "Trading System — Multi-store Marketplace",
+  "title": "Trading System - Multi-store Marketplace",
   "revision": "048e46bf2ac9191e241ce52cda1c9c05d672d4ee",
   "repo": "https://github.com/tnaydnov/Trading_System",
   "oneLiner": "Model who may run a store, which baskets may be purchased, and how checkout responds when an external step fails.",

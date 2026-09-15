@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 import { ui } from "@/lib/ui";
 import styles from "@/components/about/editorial-pages.module.css";
 
-export const metadata = pageMetadata({ path: "/contact", title: ui.contact.title, description: ui.contact.footerNote });
+export const metadata = pageMetadata({ path: "/contact", description: "Contact Tomer Naydnov about software engineering, product development or an idea worth building. Find his email, CV, GitHub and LinkedIn." });
 
 export default function ContactPage() {
   return (

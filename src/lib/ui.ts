@@ -49,7 +49,7 @@ export const ui = {
     "casePlural": "cases",
     "atThisStage": "at this stage",
     "all": "All",
-    "backTo01": "back to 01 — Signal",
+    "backTo01": "back to 01 - Signal",
     "performanceBudget": "Performance budget"
   },
   "home": {
@@ -115,7 +115,7 @@ export const ui = {
   },
   "about": {
     "title": "About",
-    "lede": "I'm a software engineer who loves creating products from scratch. Understanding what people need, exploring ideas, writing the code and seeing it come to life—that's the part that excites me.",
+    "lede": "I'm a software engineer who loves creating products from scratch. Understanding what people need, exploring ideas, writing the code and seeing it come to life - that's the part that excites me.",
     "thesisLabel": "Approach",
     "thesisBody": [
       "I start with the people who will use a product. I explore ideas, make the requirements clear and build the software, then stay involved through support and the next improvement.",

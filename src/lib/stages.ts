@@ -18,7 +18,7 @@ export const STAGES: Stage[] = [
     index: "01",
     name: "Signal",
     kicker: "Notice the real need",
-    line: "Most work starts from a request. The good work starts one level earlier — from the thing people keep working around.",
+    line: "Most work starts from a request. The good work starts one level earlier - from the thing people keep working around.",
     detail: [
       "A request is already a solution in disguise. Someone has diagnosed their own problem and handed you the prescription. My first job is to put the prescription down and go find the symptom.",
       "In practice that means watching how work actually gets done rather than how it is described. The signal is often a workaround: a spreadsheet that exists because a system does not, instructors independently rebuilding similar material, a step people quietly repeat because the tool forgot it.",
@@ -37,7 +37,7 @@ export const STAGES: Stage[] = [
     kicker: "Define the shape and the constraints",
     line: "Scope is decided by what you refuse to build. I write the “not doing” list before the requirements.",
     detail: [
-      "Framing is where most projects are actually won or lost, and it happens before a line of code exists. The output is not a feature list — it is a boundary.",
+      "Framing is where most projects are actually won or lost, and it happens before a line of code exists. The output is not a feature list - it is a boundary.",
       "I write three things: what done looks like, what is explicitly out of scope for this pass, and which constraints are real versus which are habits. That third distinction matters more than it sounds. Teams routinely treat preferences as physics.",
       "I run this with the people who will live with the result, not just the people paying for it. Aligning expectations here is cheaper than renegotiating them in the build.",
     ],
@@ -90,7 +90,7 @@ export const STAGES: Stage[] = [
     detail: [
       "Unit tests are table stakes. What I actually care about is whether the end-to-end path holds when a user does something reasonable that I did not anticipate.",
       "So I test at the level of the job to be done: can a new instructor complete their first session without help, can a user recover from a failed upload, does the thing degrade gracefully when the network does.",
-      "I also decide, before launch, what number would tell me this worked — and what number would tell me it did not. Choosing the disconfirming metric in advance is the only way to avoid grading your own homework later.",
+      "I also decide, before launch, what number would tell me this worked - and what number would tell me it did not. Choosing the disconfirming metric in advance is the only way to avoid grading your own homework later.",
     ],
     artifacts: [
       "Workflow QA checklist",
@@ -106,7 +106,7 @@ export const STAGES: Stage[] = [
     line: "The field always disagrees with the plan. The job is to be there when it does, and to change the thing rather than the story.",
     detail: [
       "This is the stage most portfolios skip, and it is the one that separates a project from a product. Launch is where you start learning, not where you stop.",
-      "I keep a direct line to the people using the thing — instructors, coordinators, users — and I treat their complaints as unfiled bug reports rather than as noise. Every piece of feedback gets traced to either a change or an explicit decision not to change.",
+      "I keep a direct line to the people using the thing - instructors, coordinators, users - and I treat their complaints as unfiled bug reports rather than as noise. Every piece of feedback gets traced to either a change or an explicit decision not to change.",
       "Then the loop closes: the friction the field reports becomes the next signal, and it starts again.",
     ],
     artifacts: [

@@ -7,6 +7,7 @@ const textExtensions = new Set([".ts", ".tsx", ".html", ".json", ".py"]);
 const scanTargets = ["src"];
 
 const globalBlocks = [
+  { id: "normal-dashes-only", pattern: /(?!-)\p{Dash_Punctuation}|[\u00ad\u00af\u203e\u2212]|&(?:m|n)dash;|&#(?:0*821[0-5]|x0*201[0-5]);|\\u(?:201[0-5]|2212)/iu },
   { id: "english-only-publication", pattern: /[\u0590-\u05ff\ufb1d-\ufb4f]/u },
   { id: "arc-650", pattern: /650\+|650\s+students?/i },
   { id: "arc-uncleared-scale", pattern: /1,?300\+|50\+\s+instructors?|80\+\s+schools?/i },

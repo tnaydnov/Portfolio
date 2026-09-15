@@ -8,7 +8,7 @@ const LABELS = {
     timeTerm: "Time",
     scopeTerm: "Scope",
     dial: "Constraint dial",
-    intro: "Move the constraints and see which answer they point at. The decision was never about the best technology — it was about which one survives these two numbers.",
+    intro: "Move the constraints and see which answer they point at. The decision was never about the best technology - it was about which one survives these two numbers.",
     actual: "What I actually built",
     under: "Under these constraints",
     none: "No documented answer for this combination."

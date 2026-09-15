@@ -3,7 +3,13 @@ export const site = {
   role: "EdTech Project Leader & Content Developer",
   positioning: "Software Engineer & Product Builder",
   url: "https://tomer-naydnov.com",
-  description: "I'm Tomer, a software engineer who loves building products from scratch: understanding people's needs, shaping ideas and turning them into useful apps.",
+  description: "Tomer Naydnov is a software engineer and product builder turning ideas into useful products. Explore his work, experience and approach to building software.",
+  socialImage: {
+    path: "/opengraph-image?v=20260915",
+    width: 1200,
+    height: 630,
+    alt: "Tomer Naydnov, software engineer and product builder, with his portrait and portfolio website.",
+  },
   email: "tnaydnov@gmail.com",
   location: "Israel time",
   links: {

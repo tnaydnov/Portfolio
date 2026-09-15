@@ -1,5 +1,5 @@
 import type { Project } from "@/lib/types";
-/** Archived university coursework, 2022–2023. */
+/** Archived university coursework, 2022-2023. */
 export const reps: Project[] = [
   {
     slug: "hr-organization",

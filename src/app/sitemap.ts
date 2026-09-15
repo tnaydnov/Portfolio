@@ -5,7 +5,7 @@ import { arcPortals } from "@/content/arc-explorer";
 import { arcExplorerHref } from "@/content/arc-explorer/types";
 
 const ROUTES = ["", "/work", "/about", "/contact"];
-const LAST_CONTENT_UPDATE = new Date("2026-09-13T00:00:00.000Z");
+const LAST_CONTENT_UPDATE = new Date("2026-09-15T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entry = (path: string, priority: number) => ({

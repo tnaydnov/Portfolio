@@ -186,7 +186,7 @@ export const instructorPortal: ArcPortalDefinition = {
         "Draft versus published feedback",
         "Revision requests",
         "Rubric criteria and subcriteria",
-        "Optional 1–10 star criteria",
+        "Optional 1-10 star criteria",
         "Empty-work grading guard",
         "Optional AI feedback refinement",
       ],
@@ -421,7 +421,7 @@ export const instructorPortal: ArcPortalDefinition = {
       "Assignments connect reviewers to classmates. Responses remain unpublished until the instructor moderates and releases them.",
       [
         "Circular assignment without self-review",
-        "1–5 assigned reviews",
+        "1-5 assigned reviews",
         "Manual assignment",
         "Review and closed phases",
         "Response moderation",

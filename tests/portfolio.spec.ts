@@ -6,6 +6,18 @@ const cases = ALL_PROJECTS.map(project => project.slug);
 const publicPaths = ["/", "/work", "/about", "/contact", ...cases.map((slug) => `/work/${slug}`)];
 
 async function expectEnglishPage(page: Page, path: string) {
+  await expect(page).toHaveTitle("Tomer Naydnov");
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "Tomer Naydnov");
+  await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute("content", "Tomer Naydnov");
+  await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", "Tomer Naydnov");
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
+  const description = await page.locator('meta[name="description"]').getAttribute("content");
+  expect(description?.length).toBeGreaterThan(40);
+  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", description!);
+  await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute("content", description!);
+  const socialImage = await page.locator('meta[property="og:image"]').getAttribute("content");
+  expect(socialImage).toMatch(/^https:\/\/tomer-naydnov\.com\//);
+  await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute("content", socialImage!);
   await expect(page.locator("main h1")).toHaveCount(1);
   await expect(page.locator("main h1")).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
@@ -15,6 +27,7 @@ async function expectEnglishPage(page: Page, path: string) {
   await expect(page.locator("a[hreflang], link[hreflang]")).toHaveCount(0);
   await expect(page.locator('a[href="/en"], a[href^="/en/"], a[href="/he"], a[href^="/he/"]')).toHaveCount(0);
   expect(await page.locator("body").innerText()).not.toMatch(/[\u0590-\u05ff]/u);
+  expect(await page.locator("body").innerText()).not.toMatch(/(?!-)\p{Dash_Punctuation}|[\u00ad\u00af\u203e\u2212]/u);
   await expect(page.getByRole("group", { name: "Site language", exact: true })).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), path).toBeTruthy();
 }
@@ -78,7 +91,7 @@ test("identity and direct links are available without waiting for the portrait",
   expect(await about.isVisible()).toBeTruthy();
   await expect(work).toHaveAttribute("href", "/work");
   await expect(about).toHaveAttribute("href", "/about");
-  await expect(page.locator("header").getByRole("link", { name: "Tomer Naydnov \u2014 Home", exact: true })).toBeVisible();
+  await expect(page.locator("header").getByRole("link", { name: "Tomer Naydnov - Home", exact: true })).toBeVisible();
   await work.focus();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/work$/);
@@ -303,7 +316,7 @@ test("all pages share the same mist and teal palette through navigation", async 
     await page.goto(path);
     expect(await palette()).toEqual(homePalette);
   }
-  await page.locator("header").getByRole("link", { name: "Tomer Naydnov \u2014 Home", exact: true }).click();
+  await page.locator("header").getByRole("link", { name: "Tomer Naydnov - Home", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByTestId("welcome-hero")).toBeVisible();
   await expect.poll(palette).toEqual(homePalette);
@@ -413,6 +426,29 @@ test("CV, social image, icon, sitemap and missing routes have correct metadata",
   expect(cv.status()).toBe(200);
   expect(cv.headers()["content-type"]).toContain("application/pdf");
   expect((await request.get("/icon.svg")).status()).toBe(200);
+  const favicon = await request.get("/favicon.ico");
+  expect(favicon.status()).toBe(200);
+  const ico = await favicon.body();
+  expect(ico.readUInt16LE(2)).toBe(1);
+  expect(ico.readUInt16LE(4)).toBe(3);
+  for (const [path, size] of [["/apple-icon.png", 180], ["/icons/icon-32.png", 32], ["/icons/icon-192.png", 192], ["/icons/icon-512.png", 512], ["/icons/icon-maskable-512.png", 512]] as const) {
+    const response = await request.get(path);
+    expect(response.status(), path).toBe(200);
+    expect(response.headers()["content-type"]).toContain("image/png");
+    const png = await response.body();
+    expect(png.readUInt32BE(16)).toBe(size);
+    expect(png.readUInt32BE(20)).toBe(size);
+  }
+  const manifestResponse = await request.get("/manifest.webmanifest");
+  expect(manifestResponse.status()).toBe(200);
+  const manifest = await manifestResponse.json();
+  expect(manifest.name).toBe("Tomer Naydnov");
+  expect(manifest.short_name).toBe("Tomer Naydnov");
+  expect(manifest.icons).toHaveLength(3);
+  expect(manifest.icons.some((icon: { purpose: string }) => icon.purpose === "maskable")).toBe(true);
+  const robots = await request.get("/robots.txt");
+  expect(robots.status()).toBe(200);
+  expect(await robots.text()).toContain("Sitemap: https://tomer-naydnov.com/sitemap.xml");
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.status()).toBe(200);
   const sitemapText = await sitemap.text();
@@ -420,15 +456,44 @@ test("CV, social image, icon, sitemap and missing routes have correct metadata",
   expect(sitemapText).not.toMatch(/tomer-naydnov\.com\/(?:en|he)(?:\/|<)/);
   await page.goto("/");
   await expect(page.locator('header a[href="/Tomer Naydnov.pdf"]:visible')).toBeVisible();
+  await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveAttribute("sizes", "180x180");
+  await expect(page.locator('link[rel="manifest"]')).toHaveAttribute("href", "/manifest.webmanifest");
+  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute("content", "1200");
+  await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute("content", "630");
+  await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute("content", /Tomer Naydnov/);
   const imageUrl = await page.locator('meta[property="og:image"]').getAttribute("content");
   expect(imageUrl).toBeTruthy();
   const localImage = new URL(imageUrl!);
   const image = await request.get(`${localImage.pathname}${localImage.search}`);
   expect(image.status()).toBe(200);
   expect(image.headers()["content-type"]).toContain("image/png");
+  const png = await image.body();
+  expect(png.readUInt32BE(16)).toBe(1200);
+  expect(png.readUInt32BE(20)).toBe(630);
+  expect(png.length).toBeLessThan(1_000_000);
   const missing = await page.goto("/work/does-not-exist");
   expect(missing?.status()).toBe(404);
   await expect(page.locator("main h1")).toBeVisible();
   await expect(page.locator('meta[name="robots"][content*="noindex"]').first()).toHaveAttribute("content", /noindex/);
   expect(await page.locator("body").innerText()).not.toMatch(/[\u0590-\u05ff]/u);
+});
+
+test("sharing crawlers receive complete previews in the initial HTML head", async ({ request }) => {
+  for (const userAgent of ["WhatsApp/2.26", "facebookexternalhit/1.1", "Twitterbot/1.0", "LinkedInBot/1.0", "Slackbot-LinkExpanding 1.0", "Discordbot/2.0"]) {
+    for (const path of ["/", "/work/browser-coder", "/work/arc/explore/instructor/overview", "/contact"]) {
+      const response = await request.get(path, { headers: { "User-Agent": userAgent } });
+      expect(response.status(), `${userAgent}: ${path}`).toBe(200);
+      const head = (await response.text()).split("</head>")[0];
+      expect(head).toContain("<title>Tomer Naydnov</title>");
+      expect(head).toContain('<meta property="og:title" content="Tomer Naydnov"');
+      expect(head).toContain('<meta property="og:site_name" content="Tomer Naydnov"');
+      expect(head).toContain('<meta name="twitter:title" content="Tomer Naydnov"');
+      expect(head).toContain('<meta name="twitter:card" content="summary_large_image"');
+      const canonical = head.match(/<meta property="og:url" content="([^"]+)"/)?.[1];
+      expect(new URL(canonical!).href).toBe(new URL(path, "https://tomer-naydnov.com").href);
+      expect(head).toMatch(/<meta property="og:image" content="https:\/\/tomer-naydnov\.com\/opengraph-image[^\"]*"/);
+      expect(head).toMatch(/<meta property="og:description" content="[^\"]{40,}"/);
+      expect(head).toMatch(/<meta name="twitter:description" content="[^\"]{40,}"/);
+    }
+  }
 });

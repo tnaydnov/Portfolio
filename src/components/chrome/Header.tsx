@@ -61,7 +61,7 @@ export function Header() {
     }
     return <header className={styles.header}>
     <div className={`shell ${styles.headerInner}`}>
-      <Link href={href("/")} className={styles.brand} aria-label={`${site.name} — Home`}>
+      <Link href={href("/")} className={styles.brand} aria-label={`${site.name} - Home`}>
         <svg className={styles.brandMark} viewBox="0 0 40 40" fill="none" aria-hidden="true">
           <path d="M2 12V2h10m16 0h10v10M2 28v10h10m16 0h10V28" stroke="currentColor" strokeWidth="1" opacity=".4"/>
           <path d="M8 12h16m-8 0v17m7 0V15l9 14V12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter"/>

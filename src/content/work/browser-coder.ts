@@ -20,7 +20,7 @@ export const browserCoder: Project = {
   status: "live",
   statusLabel: "Live · Continuously supported",
   statusDetail: "Actively supported and expanded by two developers. Together, Arc and Browser Coder serve 3,000+ students, instructors and managers.",
-  evidenceNote: "Public code and merged pull requests document my contributions from April–August 2026. The September 2026 tour runs sample programs against a real local Python execution service. Capture source revisions are recorded alongside the media.",
+  evidenceNote: "Public code and merged pull requests document my contributions from April-August 2026. The September 2026 tour runs sample programs against a real local Python execution service. Capture source revisions are recorded alongside the media.",
   metrics: [
     { label: "Shared platform reach", value: "3,000+ people", note: "Arc and Browser Coder combined: students, instructors and managers" },
     { label: "Language adapters", value: "6", note: "JavaScript, TypeScript, Python, Java, PHP and C#" },
@@ -70,7 +70,7 @@ export const browserCoder: Project = {
       heading: "Show output only when it means something",
       body: [
         "Another small-looking issue opened a blank Turtle window when ordinary Python reached its first breakpoint. An empty graphics payload was being treated as evidence of a drawing.",
-        "I moved that decision to the shared rendering boundary: a program must produce drawable content before the window appears. Run, Debug and embedded delivery now use the same rule. It is a useful example of the work I enjoy—following a confusing product behavior back to the state and boundaries that caused it.",
+        "I moved that decision to the shared rendering boundary: a program must produce drawable content before the window appears. Run, Debug and embedded delivery now use the same rule. It is a useful example of the work I enjoy - following a confusing product behavior back to the state and boundaries that caused it.",
       ],
     },
   ],

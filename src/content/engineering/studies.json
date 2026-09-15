@@ -369,7 +369,7 @@
   },
   "trading-system": {
     "slug": "trading-system",
-    "title": "Trading System — Multi-store Marketplace",
+    "title": "Trading System - Multi-store Marketplace",
     "oneLiner": "A multi-store marketplace with delegated permissions, composable basket rules and checkout recovery.",
     "summary": "A purchase crosses several kinds of rules: who may manage a store, which baskets are allowed, how discounts combine, and what happens if payment or supply fails. I built this university Java project around explicit domain objects and service contracts for those boundaries.",
     "revision": "048e46bf2ac9191e241ce52cda1c9c05d672d4ee",

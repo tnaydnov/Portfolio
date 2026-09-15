@@ -26,8 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!portal || !page) return {};
   return pageMetadata({
     path: arcExplorerHref(portal.id, page.id),
-    title: `Arc ${portal.label} · ${page.label}`,
-    description: `${page.description} Explore a read-only portfolio demo with fictional data.`,
+    description: `Arc ${portal.label}: ${page.label}. ${page.description} Explore a read-only portfolio demo with fictional data.`,
   });
 }
 export default async function ArcExplorerPage({ params }: Props) {

@@ -9,7 +9,7 @@ export const experienceTimeline: {
 }[] = [
   {
     id: "nitzanim",
-    span: "Nitzanim tenure · 2023 — present",
+    span: "Nitzanim tenure · 2023 - present",
     title: "EdTech Project Leader & Content Developer",
     org: "Nitzanim",
     summary: "Lead educational projects, develop learning content and build software around the needs of students and staff. Earlier work at Nitzanim included programming instruction.",
@@ -24,14 +24,14 @@ export const experienceTimeline: {
   },
   {
     id: "technical-support",
-    span: "2020 — 2023",
+    span: "2020 - 2023",
     title: "Technical Support Roles · Tier 2",
     org: "IDF · Israel Electric Corporation · Isracard",
     summary: "Diagnosed user and system problems across three large organisations, learning to separate reported symptoms from underlying causes.",
     details: [
       "Provided Tier 2 support involving Active Directory, Citrix, remote access, hardware, software and connectivity.",
       "Investigated user-reported symptoms and the system issues behind them, documented solutions and communicated next steps to users and technical teams.",
-      "That work formed the habit of treating the first report as evidence—not necessarily as the root cause.",
+      "That work formed the habit of treating the first report as evidence - not necessarily as the root cause.",
     ],
   },
 ];
@@ -45,7 +45,7 @@ export const educationTimeline: {
 }[] = [
   {
     id: "shenkar",
-    span: "2026 — expected 2028",
+    span: "2026 - expected 2028",
     title: "M.Sc. Industrial Engineering & Management",
     org: "Shenkar College of Engineering, Design and Art",
     summary: "Current studies in the design, measurement and improvement of systems and processes.",
@@ -53,7 +53,7 @@ export const educationTimeline: {
   },
   {
     id: "bgu",
-    span: "2021 — 2025",
+    span: "2021 - 2025",
     title: "B.Sc. Software Engineering",
     org: "Ben-Gurion University of the Negev",
     summary: "Completed in 2025. The software engineering foundation behind the products and systems in this portfolio.",

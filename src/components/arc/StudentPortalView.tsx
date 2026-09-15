@@ -1826,7 +1826,7 @@ function SubmissionHistory({ feedback = false }: { feedback?: boolean }) {
             <p>
               Your loop is easy to follow. For 60 minutes, check the total time
               in the returned list. Can the last block use only the minutes
-              left? Test 0, −5 and 60 minutes, then explain your choices.
+              left? Test 0, -5 and 60 minutes, then explain your choices.
             </p>
           </div>
         </div>

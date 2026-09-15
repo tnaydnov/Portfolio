@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const project = CASE_STUDIES.find((candidate) => candidate.slug === slug);
   if (!project) return {};
-  return pageMetadata({ path: `/work/${slug}`, title: project.title, description: project.oneLiner });
+  return pageMetadata({ path: `/work/${slug}`, description: `${project.title}: ${project.oneLiner}` });
 }
 
 export default async function CaseStudyPage({ params }: PageProps) {

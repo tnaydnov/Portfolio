@@ -3,11 +3,10 @@ import { ProjectCard } from "@/components/work/ProjectCard";
 import { EarlierWorkLedger } from "@/components/work/RepsLedger";
 import { EARLIER_ENGINEERING, SELECTED_WORK } from "@/content/work";
 import { pageMetadata } from "@/lib/metadata";
-import { ui } from "@/lib/ui";
 import styles from "@/components/work/work.module.css";
 
 export function generateMetadata(): Metadata {
-  return pageMetadata({ path: "/work", title: ui.work.title, description: ui.work.intro });
+  return pageMetadata({ path: "/work", description: "Explore Tomer Naydnov's software projects, including Arc, Browser Coder, Applytide and Eventa, with product walkthroughs and engineering case studies." });
 }
 
 export default function WorkPage() {

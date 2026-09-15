@@ -74,7 +74,7 @@ export interface Project {
   slug: string;
   title: string;
   oneLiner: string;
-  /** The angle — the sentence that frames the whole case study. */
+  /** The angle - the sentence that frames the whole case study. */
   hook: string;
   /** A recruiter-readable version of the case before the long-form material. */
   snapshot?: ProjectSnapshot;
@@ -143,6 +143,6 @@ export function formatSpan(p: Pick<Project, "started" | "ended">): string {
   if (p.ended && fmt(p.started) === fmt(p.ended))
     return fmt(p.started);
   return p.ended
-    ? `${fmt(p.started)} — ${fmt(p.ended)}`
-    : `${fmt(p.started)} — now`;
+    ? `${fmt(p.started)} - ${fmt(p.ended)}`
+    : `${fmt(p.started)} - now`;
 }

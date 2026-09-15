@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 import { ui } from "@/lib/ui";
 import styles from "@/components/about/editorial-pages.module.css";
 
-export const metadata = pageMetadata({ path: "/about", title: ui.about.title, description: ui.about.lede });
+export const metadata = pageMetadata({ path: "/about", description: "Meet Tomer Naydnov, a software engineer and product builder. Explore his experience, education and approach to creating useful software." });
 
 const workflow = [
   { title: "Understand", body: "Talk to the people involved. Find the need behind the first request." },

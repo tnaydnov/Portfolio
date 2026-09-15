@@ -13,7 +13,7 @@
     "statement": "On a five-person team, I focused on motion detection, gathering and preparing data, training and fine-tuning the recognition models, and pipeline integration.",
     "basis": "Preserved from src/content/work/systems.ts snapshot.contribution and frame/build sections; not inferred from whole-repository ownership.",
     "independentSourceLimit": "This shallow pinned revision demonstrates the team implementation but contains no training scripts or contribution map. Do not attribute every module, service, UI or model to Tomer.",
-    "dates": "Portfolio records2024-11–2025-07. HEAD commit date is not a replacement for those project dates."
+    "dates": "Portfolio records2024-11-2025-07. HEAD commit date is not a replacement for those project dates."
   },
   "stack": [
     "Python",

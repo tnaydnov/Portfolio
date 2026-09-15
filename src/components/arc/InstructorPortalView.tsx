@@ -810,7 +810,7 @@ function SubmissionReview() {
               <div className={styles.callout}>
                 <strong>Revision note</strong>
                 <p>
-                  Keep every block within the remaining time. Test 0, −5 and 60
+                  Keep every block within the remaining time. Test 0, -5 and 60
                   minutes, then explain your choices.
                 </p>
               </div>
@@ -877,7 +877,7 @@ function SubmissionReview() {
                 ))}
               </div>
               <Note>
-                Optional 1–10 criteria are separate from the numeric or rubric
+                Optional 1-10 criteria are separate from the numeric or rubric
                 grade. These example ratings belong to the earlier review.
               </Note>
             </>
@@ -902,17 +902,17 @@ function Grades() {
   const rows = [
     {
       name: "Jordan Lee",
-      scores: ["88", "92", "—"],
+      scores: ["88", "92", "-"],
       states: ["Published", "Published", "Version 2 awaiting review"],
     },
     {
       name: "Liam Chen",
-      scores: ["91", "86", "—"],
+      scores: ["91", "86", "-"],
       states: ["Published", "Published", "Awaiting review"],
     },
     {
       name: "Avery Morgan",
-      scores: ["84", "79", "—"],
+      scores: ["84", "79", "-"],
       states: ["Published", "Published", "Draft only"],
     },
   ];
@@ -1186,7 +1186,7 @@ function Materials() {
               <div className={styles.callout}>
                 <strong>Try these inputs</strong>
                 <p>
-                  <code>0 &nbsp; −5 &nbsp; 25 &nbsp; 60</code>
+                  <code>0 &nbsp; -5 &nbsp; 25 &nbsp; 60</code>
                 </p>
               </div>
             </>
@@ -2039,7 +2039,7 @@ function PeerReview() {
           </div>
           <Note>
             This three-person example assigns one review each. The product
-            supports 1–5, avoids self-review and duplicate assignments, and also
+            supports 1-5, avoids self-review and duplicate assignments, and also
             allows scoped manual assignment.
           </Note>
         </Panel>
